@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { CgClose } from "react-icons/cg";
+import { motion } from "framer-motion";
 import { 
   FiChevronDown, 
   FiArrowRight, 
@@ -67,6 +68,13 @@ const Header = () => {
   // Custom interactive search / language triggers
   const [searchOpen, setSearchOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  const [forceClose, setForceClose] = useState(false);
+
+  const closeMenus = () => {
+    setForceClose(true);
+    setShowMenu(false);
+    setTimeout(() => setForceClose(false), 300);
+  };
 
   const pathname = usePathname();
   const { logo } = config.site;
@@ -117,41 +125,41 @@ const Header = () => {
         {/* =========================================================
             LAYER 1: TOP UTILITY BAR (Inspired by KnowBe4 Enterprise Layout)
             ========================================================= */}
-        <div className="hidden lg:block w-full border-b border-orange-500/5 bg-transparent py-1.5 transition-all duration-300">
-          <div className="container-xl flex items-center justify-between text-[11px] font-bold text-slate-500">
+        <div className="hidden lg:block w-full bg-primary h-[40px] transition-all duration-300">
+          <div className="container-xl h-full flex items-center justify-between text-[11px] font-bold text-white/90">
             
             {/* Left Info Headline Link */}
             <div className="flex items-center gap-3">
-              <span className="bg-primary/10 text-primary font-extrabold px-2 py-0.5 rounded text-[9px] uppercase tracking-wider">NEW</span>
-              <Link href="#" className="hover:text-primary transition-colors flex items-center gap-1">
+              <span className="bg-white/20 text-white font-extrabold px-2 py-0.5 rounded text-[9px] uppercase tracking-wider">NEW</span>
+              <Link href="#" className="hover:text-white transition-colors flex items-center gap-1">
                 InSAT Platform Release 2026: Human Behavior Analytics <FiArrowRight className="text-[10px]" />
               </Link>
             </div>
 
             {/* Right Side Utility Actions */}
             <div className="flex items-center gap-5">
-              <Link href="#" className="hover:text-primary transition-colors flex items-center gap-1">
-                <FiPhone /> +1 (800) 555-0199
+              <Link href="#" className="hover:text-white transition-colors flex items-center gap-1">
+                <FiSearch /> Search
               </Link>
-              <Link href="#" className="hover:text-primary transition-colors flex items-center gap-1">
+              <Link href="#" className="hover:text-white transition-colors flex items-center gap-1">
                 <FiHelpCircle /> Support
               </Link>
-              <Link href="#" className="hover:text-primary transition-colors">
-                Contact Sales
-              </Link>
-              <span className="h-3 w-[1px] bg-slate-200"></span>
+              <span className="h-3 w-[1px] bg-white/20"></span>
               
-              {/* Language Switcher Dropdown */}
+              <Link href="#" className="text-white hover:opacity-80 transition-opacity font-extrabold flex items-center gap-1">
+                <FiUsers /> Login
+              </Link>
+
               <div className="relative">
                 <button 
                   onClick={() => setLangOpen(!langOpen)}
                   onBlur={() => setTimeout(() => setLangOpen(false), 200)}
-                  className="hover:text-primary transition-colors flex items-center gap-1 focus:outline-none"
+                  className="hover:text-white transition-colors flex items-center gap-1 focus:outline-none"
                 >
                   <FiGlobe /> English <FiChevronDown className="text-[9px]" />
                 </button>
                 {langOpen && (
-                  <div className="absolute right-0 top-full mt-1.5 w-[140px] bg-white border border-slate-100 rounded-lg shadow-xl py-1 z-50 animate-float-up">
+                  <div className="absolute right-0 top-full mt-1.5 w-[140px] bg-white border border-slate-100 rounded-lg shadow-xl py-1 z-50 animate-float-up text-slate-600">
                     {["English (US)", "Deutsch", "Français", "Español", "日本語"].map((lang, idx) => (
                       <button key={idx} className="w-full text-left px-3 py-1.5 hover:bg-slate-50 hover:text-primary text-slate-600 font-semibold block transition-colors">
                         {lang}
@@ -160,21 +168,15 @@ const Header = () => {
                   </div>
                 )}
               </div>
-
-              <span className="h-3 w-[1px] bg-slate-200"></span>
-              <Link href="#" className="text-slate-700 hover:text-primary transition-colors font-extrabold">
-                Customer Login
-              </Link>
             </div>
-
           </div>
         </div>
 
         {/* =========================================================
             LAYER 2: MAIN NAVIGATION BAR (Contains Logo & Submenus)
             ========================================================= */}
-        <div className="w-full py-3 lg:py-5 transition-all duration-300">
-          <div className="container-xl flex items-center justify-between relative">
+        <div className="w-full transition-all duration-300 bg-white h-[80px]">
+          <div className="container-xl h-full flex items-center justify-between">
             
             {/* LOGO */}
             <div className="z-50">
@@ -188,192 +190,210 @@ const Header = () => {
             </div>
 
             {/* DESKTOP CORE NAVIGATION (Rich Columns and original content preserved) */}
-            <ul className="hidden lg:flex items-center gap-1 xl:gap-1.5 ml-auto mr-3">
+            <ul className="hidden lg:flex items-center gap-1 xl:gap-1.5 ml-auto mr-3 h-full">
               
               {/* PLATFORM MEGA MENU */}
-              <li className="group py-2">
-                <span className="nav-link text-[15px] font-extrabold text-slate-800 hover:text-primary tracking-tight">
+              <li className="group h-full flex items-center">
+                <span className="nav-link h-full flex items-center text-[15px] font-extrabold text-slate-800 hover:text-primary tracking-tight cursor-pointer">
                   Platform <FiChevronDown className="group-hover:rotate-180 duration-300 transition-transform text-xs text-slate-500 group-hover:text-primary" />
                 </span>
                 
-                {/* PLATFORM DROPDOWN (4 columns) */}
-                <div className="absolute left-6 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-3 group-hover:translate-y-0 transition-all duration-300 ease-out z-50 pointer-events-none group-hover:pointer-events-auto">
-                  <div className="w-[1200px] glass-dropdown p-8 grid grid-cols-4 gap-8">
-                    
-                    {/* Column 1 - Core Platform */}
-                    <div className="flex flex-col justify-between group/col">
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="p-2 rounded-lg bg-orange-500/10 text-orange-600"><FiCpu className="text-lg animate-pulse group-hover/col:rotate-90 duration-500 transition-transform" /></div>
-                          <h4 className="text-slate-900 text-base font-bold whitespace-nowrap">InSAT Platform</h4>
+                {/* PLATFORM MEGA MENU (Full-Width Viewport Style) */}
+                <div className={`fixed left-0 right-0 top-[120px] pt-5 -mt-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 pointer-events-none group-hover:pointer-events-auto ${forceClose ? "opacity-0 invisible !pointer-events-none" : ""}`}>
+                  <div className="w-screen bg-white border-t border-slate-100 shadow-[0_40px_60px_-15px_rgba(0,0,0,0.1)]">
+                    <div className="container-xl grid grid-cols-12">
+                      
+                      {/* Column 1 - InSAT Platform */}
+                      <div className="col-span-3 p-10 border-r border-slate-100">
+                        <div className="flex items-center gap-3 mb-6">
+                          <div className="p-2.5 rounded-xl bg-orange-500/10 text-primary">
+                            <FiCpu className="text-xl" />
+                          </div>
+                          <div>
+                            <h4 className="text-lg font-black text-slate-900 leading-none mb-1">InSAT Platform</h4>
+                          </div>
                         </div>
-                        <p className="text-slate-500 text-xs leading-relaxed mb-4">
+                        <p className="text-xs text-slate-500 leading-relaxed mb-8">
                           AI-powered security awareness platform that transforms employee behavior.
                         </p>
-                        <ul className="space-y-2">
+                        <ul className="space-y-4 mb-10">
                           {[
                             { name: "Security Awareness Training", icon: FiShield, href: "/security-awareness-training" },
-                            { name: "Phishing Simulations", icon: FiMail, href: "#" },
-                            { name: "Human Risk Dashboard", icon: FiActivity, href: "#" },
-                            { name: "AI Adaptive Learning", icon: FiCpu, href: "#" },
-                            { name: "Gamified Learning", icon: FiSmile, href: "#" },
-                            { name: "Executive Reporting", icon: FiBarChart2, href: "#" },
-                            { name: "Compliance Training", icon: FiCheckCircle, href: "#" }
+                            { name: "Phishing Simulations", icon: FiMail },
+                            { name: "Human Risk Dashboard", icon: FiActivity },
+                            { name: "AI Adaptive Learning", icon: FiZap },
+                            { name: "Gamified Learning", icon: FiPlay },
+                            { name: "Executive Reporting", icon: FiBarChart2 },
+                            { name: "Compliance Training", icon: FiCheckCircle }
                           ].map((link, idx) => (
-                            <li key={idx} className="group/sublink">
-                              <Link href={link.href} className="flex items-center gap-2 text-slate-600 hover:text-primary text-xs font-semibold whitespace-nowrap transition-colors duration-150">
-                                <link.icon className="shrink-0 text-[10px] text-primary group-hover/sublink:text-primary group-hover/sublink:scale-110 group-hover/sublink:rotate-3 transition-all duration-300" />
-                                <span className="group-hover/sublink:translate-x-1 transition-transform duration-300">{link.name}</span>
+                            <li key={idx}>
+                              <Link 
+                                href={link.href || "#"} 
+                                onClick={closeMenus}
+                                className="flex items-center gap-2.5 text-[14px] font-bold text-slate-700 hover:text-primary transition-colors group/item"
+                              >
+                                <link.icon className="text-primary/40 group-hover/item:text-primary transition-colors text-xs" />
+                                {link.name}
                               </Link>
                             </li>
                           ))}
                         </ul>
-                      </div>
-                      <div className="pt-4 border-t border-slate-100 mt-4">
-                        <Link href="#" className="group/cta text-primary text-xs font-bold flex items-center gap-1.5 hover:text-orange-600 transition-colors">
-                          See Platform Demo <FiArrowRight className="group-hover/cta:translate-x-1 duration-200 transition-transform" />
+                        <Link 
+                          href="#" 
+                          onClick={closeMenus}
+                          className="text-primary font-black text-xs flex items-center gap-2 hover:gap-3 transition-all uppercase tracking-widest"
+                        >
+                          See Platform Demo <FiArrowRight />
                         </Link>
                       </div>
-                    </div>
 
-                    {/* Column 2 - AI & Intelligence */}
-                    <div className="flex flex-col justify-between group/col">
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="p-2 rounded-lg bg-orange-500/10 text-orange-600"><FiShield className="text-lg group-hover/col:scale-110 duration-300 transition-transform" /></div>
-                          <h4 className="text-slate-900 text-base font-bold whitespace-nowrap">Human Risk Intelligence</h4>
+                      {/* Column 2 - Human Risk Intelligence */}
+                      <div className="col-span-3 p-10 border-r border-slate-100">
+                        <div className="flex items-center gap-3 mb-6">
+                          <div className="p-2.5 rounded-xl bg-orange-500/10 text-primary">
+                            <FiShield className="text-xl" />
+                          </div>
+                          <div>
+                            <h4 className="text-lg font-black text-slate-900 leading-none mb-1">Human Risk Intelligence</h4>
+                          </div>
                         </div>
-                        <p className="text-slate-500 text-xs leading-relaxed mb-4">
+                        <p className="text-xs text-slate-500 leading-relaxed mb-8">
                           Real-time visibility into employee cyber risk and behavior maps.
                         </p>
-                        <ul className="space-y-2">
+                        <ul className="space-y-4 mb-10">
                           {[
                             { name: "Risk Scoring", icon: FiTarget },
-                            { name: "Behavioral Analytics", icon: FiPieChart },
+                            { name: "Behavioral Analytics", icon: FiActivity },
                             { name: "Department Heatmaps", icon: FiMap },
                             { name: "Board Reports", icon: FiFileText },
-                            { name: "Threat Intelligence", icon: FiAlertTriangle },
-                            { name: "Risk Benchmarking", icon: FiCrosshair }
+                            { name: "Threat Intelligence", icon: FiZap },
+                            { name: "Risk Benchmarking", icon: FiTrendingUp }
                           ].map((link, idx) => (
-                            <li key={idx} className="group/sublink">
-                              <Link href="#" className="flex items-center gap-2 text-slate-600 hover:text-primary text-xs font-semibold whitespace-nowrap transition-colors duration-150">
-                                <link.icon className="shrink-0 text-[10px] text-primary group-hover/sublink:text-primary group-hover/sublink:scale-110 group-hover/sublink:rotate-3 transition-all duration-300" />
-                                <span className="group-hover/sublink:translate-x-1 transition-transform duration-300">{link.name}</span>
+                            <li key={idx}>
+                              <Link href="#" className="flex items-center gap-2.5 text-[14px] font-bold text-slate-700 hover:text-primary transition-colors group/item">
+                                <link.icon className="text-primary/40 group-hover/item:text-primary transition-colors text-xs" />
+                                {link.name}
                               </Link>
                             </li>
                           ))}
                         </ul>
-                      </div>
-                      <div className="pt-4 border-t border-slate-100 mt-4">
-                        <Link href="#" className="group/cta text-primary text-xs font-bold flex items-center gap-1.5 hover:text-orange-400 transition-colors">
-                          Explore Dashboard <FiArrowRight className="group-hover/cta:translate-x-1 duration-200 transition-transform" />
+                        <Link href="#" className="text-primary font-black text-xs flex items-center gap-2 hover:gap-3 transition-all uppercase tracking-widest">
+                          Explore Dashboard <FiArrowRight />
                         </Link>
                       </div>
-                    </div>
 
-                    {/* Column 3 - Engagement & Learning */}
-                    <div className="flex flex-col justify-between group/col">
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="p-2 rounded-lg bg-orange-500/10 text-orange-600"><FiLayers className="text-lg group-hover/col:-translate-y-0.5 duration-300 transition-transform" /></div>
-                          <h4 className="text-slate-900 text-base font-bold whitespace-nowrap">Employee Experience</h4>
+                      {/* Column 3 - Employee Experience */}
+                      <div className="col-span-3 p-10 border-r border-slate-100">
+                        <div className="flex items-center gap-3 mb-6">
+                          <div className="p-2.5 rounded-xl bg-orange-500/10 text-primary">
+                            <FiLayers className="text-xl" />
+                          </div>
+                          <div>
+                            <h4 className="text-lg font-black text-slate-900 leading-none mb-1">Employee Experience</h4>
+                          </div>
                         </div>
-                        <p className="text-slate-500 text-xs leading-relaxed mb-4">
+                        <p className="text-xs text-slate-500 leading-relaxed mb-8">
                           Interactive training employees actually enjoy and participate in.
                         </p>
-                        <ul className="space-y-2">
+                        <ul className="space-y-4 mb-10">
                           {[
                             { name: "Cybersecurity Arcade", icon: FiPlay },
                             { name: "Microlearning", icon: FiVideo },
                             { name: "Badges & XP System", icon: FiAward },
                             { name: "Leaderboards", icon: FiStar },
                             { name: "Adaptive Learning Paths", icon: FiCompass },
-                            { name: "Story-Based Simulations", icon: FiBook }
+                            { name: "Story-Based Simulations", icon: FiBookOpen }
                           ].map((link, idx) => (
-                            <li key={idx} className="group/sublink">
-                              <Link href="#" className="flex items-center gap-2 text-slate-600 hover:text-primary text-xs font-semibold whitespace-nowrap transition-colors duration-150">
-                                <link.icon className="shrink-0 text-[10px] text-primary group-hover/sublink:text-primary group-hover/sublink:scale-110 group-hover/sublink:rotate-3 transition-all duration-300" />
-                                <span className="group-hover/sublink:translate-x-1 transition-transform duration-300">{link.name}</span>
+                            <li key={idx}>
+                              <Link href="#" className="flex items-center gap-2.5 text-[14px] font-bold text-slate-700 hover:text-primary transition-colors group/item">
+                                <link.icon className="text-primary/40 group-hover/item:text-primary transition-colors text-xs" />
+                                {link.name}
                               </Link>
                             </li>
                           ))}
                         </ul>
-                      </div>
-                      <div className="pt-4 border-t border-slate-100 mt-4">
-                        <Link href="#" className="group/cta text-primary text-xs font-bold flex items-center gap-1.5 hover:text-orange-400 transition-colors">
-                          View Learning Experience <FiArrowRight className="group-hover/cta:translate-x-1 duration-200 transition-transform" />
+                        <Link href="#" className="text-primary font-black text-xs flex items-center gap-2 hover:gap-3 transition-all uppercase tracking-widest">
+                          View Learning Experience <FiArrowRight />
                         </Link>
                       </div>
-                    </div>
 
-                    {/* Column 4 - Product Visual / Dashboard Preview */}
-                    <div className="bg-slate-50/80 border border-slate-100 rounded-xl p-5 flex flex-col justify-between relative overflow-hidden group/card shadow-inner">
-                      <div className="absolute top-0 right-0 w-24 h-24 bg-orange-500/5 rounded-full blur-2xl group-hover/card:bg-orange-500/10 transition-all duration-500"></div>
-                      
-                      <div>
-                        <div className="flex items-center justify-between mb-4">
-                          <span className="text-[10px] uppercase font-bold tracking-widest text-primary bg-orange-500/10 px-2 py-0.5 rounded-full">AI Live Dashboard</span>
-                          <div className="flex items-center gap-1">
-                            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-ping"></span>
-                            <span className="text-[10px] text-slate-500 font-semibold">Simulation Active</span>
-                          </div>
-                        </div>
-
-                        <div className="space-y-3 bg-white p-4 border border-slate-100 rounded-lg mb-4 shadow-md">
-                          <div className="flex items-center justify-between">
-                            <span className="text-[10px] text-slate-500 font-semibold">Risk Score Trend</span>
-                            <span className="text-[10px] text-emerald-600 font-bold">-24% Safe</span>
-                          </div>
-                          <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-                            <div className="h-full bg-primary w-[78%]"></div>
-                          </div>
-                          <div className="grid grid-cols-2 gap-2 text-center pt-1">
-                            <div className="bg-slate-50 p-1.5 rounded border border-slate-100">
-                              <div className="text-slate-400 text-[8px] uppercase font-bold">Active Users</div>
-                              <div className="text-slate-800 text-xs font-bold">1,482</div>
+                      {/* Column 4 - AI Live Dashboard Feature */}
+                      <div className="col-span-3 p-10 bg-slate-50/50">
+                        <div className="bg-white rounded-3xl p-6 shadow-2xl shadow-slate-200 border border-slate-100 relative overflow-hidden group/card">
+                          {/* Live Indicator */}
+                          <div className="flex items-center justify-between mb-8">
+                            <div className="bg-orange-500/5 px-3 py-1 rounded-full border border-orange-500/10 flex items-center gap-2">
+                              <span className="text-[10px] font-black text-primary tracking-tighter uppercase">AI Live Dashboard</span>
                             </div>
-                            <div className="bg-slate-50 p-1.5 rounded border border-slate-100">
-                              <div className="text-slate-400 text-[8px] uppercase font-bold">Simulations</div>
-                              <div className="text-slate-800 text-xs font-bold">14.8k</div>
+                            <div className="flex items-center gap-1.5">
+                              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                              <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Simulation Active</span>
                             </div>
                           </div>
+
+                          {/* Risk Trend Widget */}
+                          <div className="mb-6">
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Risk Score Trend</span>
+                              <span className="text-xs font-black text-green-500">-24% Safe</span>
+                            </div>
+                            <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                              <motion.div 
+                                initial={{ width: 0 }}
+                                whileInView={{ width: "65%" }}
+                                className="h-full bg-primary rounded-full"
+                              />
+                            </div>
+                          </div>
+
+                          {/* Stats Grid */}
+                          <div className="grid grid-cols-2 gap-4 mb-8">
+                            <div className="bg-slate-50/80 p-3 rounded-2xl border border-slate-100">
+                              <span className="text-[8px] font-bold text-slate-400 uppercase block mb-1">Active Users</span>
+                              <span className="text-lg font-black text-slate-900 tracking-tight">1,482</span>
+                            </div>
+                            <div className="bg-slate-50/80 p-3 rounded-2xl border border-slate-100">
+                              <span className="text-[8px] font-bold text-slate-400 uppercase block mb-1">Simulations</span>
+                              <span className="text-lg font-black text-slate-900 tracking-tight">14.8k</span>
+                            </div>
+                          </div>
+
+                          <h5 className="text-sm font-black text-slate-900 mb-2">Human Security Insights</h5>
+                          <p className="text-[11px] text-slate-500 leading-relaxed mb-6">
+                            Deploy real-time phishing tests and monitor individual security behavior trends instantly.
+                          </p>
+
+                          <Link href="#" className="w-full justify-center py-3 text-[11px] font-black text-slate-900 bg-white border border-slate-200 hover:border-slate-400 rounded-xl transition-all flex items-center gap-2 group-hover/card:bg-slate-50">
+                            Launch Sandbox Demo <FiArrowRight className="text-xs" />
+                          </Link>
                         </div>
-
-                        <h5 className="text-slate-800 text-sm font-bold mb-1">Human Security Insights</h5>
-                        <p className="text-slate-500 text-[11px] leading-relaxed">
-                          Deploy real-time phishing tests and monitor individual security behavior trends instantly.
-                        </p>
                       </div>
 
-                      <div className="pt-3 border-t border-slate-100 mt-3">
-                        <Link href="#" className="text-xs text-slate-800 hover:text-primary font-bold flex items-center gap-1 transition-colors">
-                          Launch Sandbox Demo <FiArrowRight className="text-xs" />
-                        </Link>
-                      </div>
                     </div>
-
                   </div>
                 </div>
               </li>
 
               {/* SOLUTIONS MEGA MENU */}
-              <li className="group py-2">
-                <span className="nav-link text-[15px] font-extrabold text-slate-800 hover:text-primary tracking-tight">
+              <li className="group h-full flex items-center">
+                <span className="nav-link h-full flex items-center text-[15px] font-extrabold text-slate-800 hover:text-primary tracking-tight cursor-pointer">
                   Solutions <FiChevronDown className="group-hover:rotate-180 duration-300 transition-transform text-xs text-slate-500 group-hover:text-primary" />
                 </span>
                 
-                {/* SOLUTIONS DROPDOWN (Balanced columns: Columns 1 & 2 standard, Column 3 Featured spans 2 columns) */}
-                <div className="absolute left-6 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-3 group-hover:translate-y-0 transition-all duration-300 ease-out z-50 pointer-events-none group-hover:pointer-events-auto">
-                  <div className="w-[1000px] glass-dropdown p-8 grid grid-cols-4 gap-8">
-                    
-                    {/* Column 1 - By Industry */}
-                    <div className="flex flex-col justify-between col-span-1 group/col">
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="p-2 rounded-lg bg-orange-500/10 text-orange-600"><FiGlobe className="text-lg group-hover/col:animate-spin" /></div>
-                          <h4 className="text-slate-900 text-base font-bold whitespace-nowrap">By Industry</h4>
+                {/* SOLUTIONS MEGA MENU */}
+                <div className={`fixed left-0 right-0 top-[120px] pt-5 -mt-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 pointer-events-none group-hover:pointer-events-auto ${forceClose ? "opacity-0 invisible !pointer-events-none" : ""}`}>
+                  <div className="w-screen bg-white border-t border-slate-100 shadow-[0_40px_60px_-15px_rgba(0,0,0,0.1)]">
+                    <div className="container-xl grid grid-cols-12">
+                      
+                      {/* Column 1 - By Industry */}
+                      <div className="col-span-3 p-10 border-r border-slate-100">
+                        <div className="flex items-center gap-3 mb-8">
+                          <div className="p-2.5 rounded-xl bg-orange-500/10 text-primary">
+                            <FiGlobe className="text-xl" />
+                          </div>
+                          <h4 className="text-lg font-black text-slate-900 leading-none">By Industry</h4>
                         </div>
-                        <ul className="space-y-2">
+                        <ul className="space-y-4 mb-8">
                           {[
                             { name: "BFSI", icon: FiShield },
                             { name: "Healthcare", icon: FiHeart },
@@ -383,30 +403,28 @@ const Header = () => {
                             { name: "Manufacturing", icon: FiSettings },
                             { name: "Education", icon: FiBookOpen }
                           ].map((link, idx) => (
-                            <li key={idx} className="group/sublink">
-                              <Link href="#" className="flex items-center gap-2 text-slate-600 hover:text-primary text-xs font-semibold whitespace-nowrap transition-colors duration-150">
-                                <link.icon className="shrink-0 text-[10px] text-primary group-hover/sublink:text-primary group-hover/sublink:scale-110 group-hover/sublink:rotate-3 transition-all duration-300" />
-                                <span className="group-hover/sublink:translate-x-1 transition-transform duration-300">{link.name}</span>
+                            <li key={idx}>
+                              <Link href="#" className="flex items-center gap-2.5 text-[14px] font-bold text-slate-700 hover:text-primary transition-colors group/item">
+                                <link.icon className="text-primary/40 group-hover/item:text-primary transition-colors text-xs" />
+                                {link.name}
                               </Link>
                             </li>
                           ))}
                         </ul>
-                      </div>
-                      <div className="pt-4 border-t border-slate-100 mt-4">
-                        <Link href="#" className="group/cta text-primary text-xs font-bold flex items-center gap-1.5 hover:text-orange-400 transition-colors">
-                          View All Industries <FiArrowRight className="group-hover/cta:translate-x-1 duration-200 transition-transform" />
+                        <Link href="#" className="text-primary font-black text-xs flex items-center gap-2 hover:gap-3 transition-all uppercase tracking-widest">
+                          View All Industries <FiArrowRight />
                         </Link>
                       </div>
-                    </div>
 
-                    {/* Column 2 - By Need */}
-                    <div className="flex flex-col justify-between col-span-1 group/col">
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="p-2 rounded-lg bg-orange-500/10 text-orange-600"><FiTrendingUp className="text-lg group-hover/col:translate-x-0.5 group-hover/col:-translate-y-0.5 duration-300 transition-all" /></div>
-                          <h4 className="text-slate-900 text-base font-bold whitespace-nowrap">Use Cases</h4>
+                      {/* Column 2 - Use Cases */}
+                      <div className="col-span-3 p-10 border-r border-slate-100">
+                        <div className="flex items-center gap-3 mb-8">
+                          <div className="p-2.5 rounded-xl bg-orange-500/10 text-primary">
+                            <FiTrendingUp className="text-xl" />
+                          </div>
+                          <h4 className="text-lg font-black text-slate-900 leading-none">Use Cases</h4>
                         </div>
-                        <ul className="space-y-2">
+                        <ul className="space-y-4 mb-8">
                           {[
                             { name: "Phishing Prevention", icon: FiLock },
                             { name: "Human Risk Management", icon: FiActivity },
@@ -415,186 +433,97 @@ const Header = () => {
                             { name: "Remote Workforce Security", icon: FiGlobe },
                             { name: "Executive Risk Reporting", icon: FiBarChart2 }
                           ].map((link, idx) => (
-                            <li key={idx} className="group/sublink">
-                              <Link href="#" className="flex items-center gap-2 text-slate-600 hover:text-primary text-xs font-semibold whitespace-nowrap transition-colors duration-150">
-                                <link.icon className="shrink-0 text-[10px] text-primary group-hover/sublink:text-primary group-hover/sublink:scale-110 group-hover/sublink:rotate-3 transition-all duration-300" />
-                                <span className="group-hover/sublink:translate-x-1 transition-transform duration-300">{link.name}</span>
+                            <li key={idx}>
+                              <Link href="#" className="flex items-center gap-2.5 text-[14px] font-bold text-slate-700 hover:text-primary transition-colors group/item">
+                                <link.icon className="text-primary/40 group-hover/item:text-primary transition-colors text-xs" />
+                                {link.name}
                               </Link>
                             </li>
                           ))}
                         </ul>
-                      </div>
-                      <div className="pt-4 border-t border-slate-100 mt-4">
-                        <Link href="#" className="group/cta text-primary text-xs font-bold flex items-center gap-1.5 hover:text-orange-400 transition-colors">
-                          Explore Use Cases <FiArrowRight className="group-hover/cta:translate-x-1 duration-200 transition-transform" />
+                        <Link href="#" className="text-primary font-black text-xs flex items-center gap-2 hover:gap-3 transition-all uppercase tracking-widest">
+                          Explore Use Cases <FiArrowRight />
                         </Link>
                       </div>
-                    </div>
 
-                    {/* Column 3 - Featured card */}
-                    <div className="col-span-2 bg-gradient-to-br from-slate-50 to-slate-100/50 border border-slate-100 rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden group/featured shadow-inner">
-                      <div className="absolute top-0 right-0 w-40 h-40 bg-orange-500/5 rounded-full blur-3xl group-hover/featured:bg-orange-500/10 transition-all duration-500"></div>
-                      
-                      <div>
-                        <div className="flex items-center gap-2 mb-3 text-primary">
-                          <FiZap className="text-lg animate-bounce" />
-                          <span className="text-[10px] font-bold uppercase tracking-widest bg-orange-500/10 px-2 py-0.5 rounded-full">Featured Highlight</span>
+                      {/* Column 3 - Featured Highlight */}
+                      <div className="col-span-6 p-10 bg-slate-50/50 flex items-center justify-center">
+                        <div className="bg-white rounded-3xl p-10 shadow-2xl shadow-slate-200 border border-slate-100 w-full max-w-2xl relative overflow-hidden group/featured">
+                          <div className="relative z-10">
+                            <div className="flex items-center gap-3 mb-6">
+                              <FiZap className="text-primary text-2xl animate-pulse" />
+                              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/60 bg-orange-500/5 px-3 py-1 rounded-full">Featured Highlight</span>
+                            </div>
+                            <h4 className="text-3xl font-black text-slate-900 mb-4 leading-tight">Turn Human Risk Into Human Strength</h4>
+                            <p className="text-sm text-slate-500 leading-relaxed mb-10 max-w-lg">
+                              AI-native security awareness training with phishing simulations, adaptive learning paths, and real-time behavioral intelligence dashboards.
+                            </p>
+                            <Link href="#" className="bg-primary hover:bg-orange-600 text-white font-black px-8 py-4 rounded-xl transition-all shadow-xl shadow-orange-500/30 flex items-center gap-3 inline-flex">
+                              Book a Demo <FiArrowRight />
+                            </Link>
+                          </div>
+                          
+                          {/* Background Decoration */}
+                          <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-orange-500/5 rounded-full blur-3xl"></div>
                         </div>
-                        <h4 className="text-slate-900 text-xl font-bold mb-2">Turn Human Risk Into Human Strength</h4>
-                        <p className="text-slate-500 text-xs leading-relaxed mb-6">
-                          AI-native security awareness training with phishing simulations, adaptive learning paths, and real-time behavioral intelligence dashboards.
-                        </p>
                       </div>
 
-                      <div className="flex items-center gap-3 mt-auto">
-                        <Link href="#" className="px-5 py-2.5 text-xs font-bold text-white bg-primary hover:bg-orange-600 rounded-lg transition-all shadow-lg shadow-orange-500/20 whitespace-nowrap flex items-center gap-1">
-                          Book a Demo <FiArrowRight className="text-xs" />
-                        </Link>
-                      </div>
                     </div>
-
                   </div>
                 </div>
               </li>
 
-              {/* INNVIKTA ARCADE MEGA MENU */}
-              <li className="group py-2">
-                <span className="nav-link text-[15px] font-extrabold text-slate-800 hover:text-primary tracking-tight">
-                  Innvikta Arcade <FiChevronDown className="group-hover:rotate-180 duration-300 transition-transform text-xs text-slate-500 group-hover:text-primary" />
-                </span>
-                
-                <div className="absolute left-6 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-3 group-hover:translate-y-0 transition-all duration-300 ease-out z-50 pointer-events-none group-hover:pointer-events-auto">
-                  <div className="w-[850px] glass-dropdown p-8 grid grid-cols-3 gap-8">
-                    
-                    {/* Left sub-column */}
-                    <div className="flex flex-col justify-between group/col">
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="p-2 rounded-lg bg-orange-500/10 text-orange-600"><FiAward className="text-lg group-hover/col:scale-110 duration-300 transition-transform" /></div>
-                          <h4 className="text-slate-900 text-base font-bold whitespace-nowrap">Cyber Arcade</h4>
-                        </div>
-                        <ul className="space-y-2">
-                          {[
-                            { name: "Cybersecurity Arcade", icon: FiPlay },
-                            { name: "Microlearning", icon: FiVideo },
-                            { name: "Badges & XP System", icon: FiAward }
-                          ].map((link, idx) => (
-                            <li key={idx} className="group/sublink">
-                              <Link href="#" className="flex items-center gap-2 text-slate-600 hover:text-primary text-xs font-semibold whitespace-nowrap transition-colors duration-150">
-                                <link.icon className="shrink-0 text-[10px] text-primary group-hover/sublink:text-primary group-hover/sublink:scale-110 group-hover/sublink:rotate-3 transition-all duration-300" />
-                                <span className="group-hover/sublink:translate-x-1 transition-transform duration-300">{link.name}</span>
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className="pt-4 border-t border-slate-100 mt-4">
-                        <span className="text-primary text-[10px] font-bold uppercase tracking-wider">Level Up Skills</span>
-                      </div>
-                    </div>
-
-                    {/* Right sub-column */}
-                    <div className="flex flex-col justify-between group/col">
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="p-2 rounded-lg bg-orange-500/10 text-orange-600"><FiSmile className="text-lg group-hover/col:rotate-12 duration-200 transition-transform" /></div>
-                          <h4 className="text-slate-900 text-base font-bold whitespace-nowrap">Interactive Hub</h4>
-                        </div>
-                        <ul className="space-y-2">
-                          {[
-                            { name: "Leaderboards", icon: FiStar },
-                            { name: "Adaptive Learning Paths", icon: FiCompass },
-                            { name: "Story-Based Simulations", icon: FiBook }
-                          ].map((link, idx) => (
-                            <li key={idx} className="group/sublink">
-                              <Link href="#" className="flex items-center gap-2 text-slate-600 hover:text-primary text-xs font-semibold whitespace-nowrap transition-colors duration-150">
-                                <link.icon className="shrink-0 text-[10px] text-primary group-hover/sublink:text-primary group-hover/sublink:scale-110 group-hover/sublink:rotate-3 transition-all duration-300" />
-                                <span className="group-hover/sublink:translate-x-1 transition-transform duration-300">{link.name}</span>
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className="pt-4 border-t border-slate-100 mt-4">
-                        <Link href="#" className="group/cta text-primary text-xs font-bold flex items-center gap-1.5 hover:text-orange-400 transition-colors">
-                          View Learning Experience <FiArrowRight className="group-hover/cta:translate-x-1 duration-200 transition-transform" />
-                        </Link>
-                      </div>
-                    </div>
-
-                    {/* Column 3 - Arcade Highlight */}
-                    <div className="bg-slate-50 border border-slate-100 rounded-xl p-5 flex flex-col justify-between relative overflow-hidden group/arcade-card shadow-inner text-center">
-                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-orange-500/5 rounded-full blur-2xl group-hover/arcade-card:bg-orange-500/10 transition-all duration-500"></div>
-                      
-                      <div className="my-auto py-2">
-                        <div className="text-3xl text-primary mb-2 flex justify-center animate-bounce"><FiPlay /></div>
-                        <h5 className="text-slate-800 text-sm font-bold mb-1">Play & Learn Arcade</h5>
-                        <p className="text-slate-500 text-[10px] leading-relaxed max-w-[180px] mx-auto">
-                          High-engagement gamified simulations employees actually compete to complete.
-                        </p>
-                      </div>
-
-                      <div className="pt-3 border-t border-slate-100 mt-3">
-                        <Link href="#" className="text-[10px] text-primary hover:text-orange-600 font-bold tracking-wider uppercase transition-colors">
-                          Join Leaderboard →
-                        </Link>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </li>
 
               {/* RESOURCES MEGA MENU */}
-              <li className="group py-2">
-                <span className="nav-link text-[15px] font-extrabold text-slate-800 hover:text-primary tracking-tight">
+              <li className="group h-full flex items-center">
+                <span className="nav-link h-full flex items-center text-[15px] font-extrabold text-slate-800 hover:text-primary tracking-tight cursor-pointer">
                   Resources <FiChevronDown className="group-hover:rotate-180 duration-300 transition-transform text-xs text-slate-500 group-hover:text-primary" />
                 </span>
                 
-                {/* RESOURCES DROPDOWN */}
-                <div className="absolute left-6 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-3 group-hover:translate-y-0 transition-all duration-300 ease-out z-50 pointer-events-none group-hover:pointer-events-auto">
-                  <div className="w-[1100px] glass-dropdown p-8 grid grid-cols-4 gap-8">
-                    
-                    {/* Column 1 - Learn */}
-                    <div className="flex flex-col justify-between group/col">
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="p-2 rounded-lg bg-orange-500/10 text-orange-600"><FiBookOpen className="text-lg group-hover/col:scale-105 duration-300 transition-transform" /></div>
-                          <h4 className="text-slate-900 text-base font-bold whitespace-nowrap">Learning Center</h4>
+                {/* RESOURCES MEGA MENU */}
+                <div className={`fixed left-0 right-0 top-[120px] pt-5 -mt-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 pointer-events-none group-hover:pointer-events-auto ${forceClose ? "opacity-0 invisible !pointer-events-none" : ""}`}>
+                  <div className="w-screen bg-white border-t border-slate-100 shadow-[0_40px_60px_-15px_rgba(0,0,0,0.1)]">
+                    <div className="container-xl grid grid-cols-12">
+                      
+                      {/* Column 1 - Learning Center */}
+                      <div className="col-span-3 p-10 border-r border-slate-100">
+                        <div className="flex items-center gap-3 mb-8">
+                          <div className="p-2.5 rounded-xl bg-orange-500/10 text-primary">
+                            <FiBookOpen className="text-xl" />
+                          </div>
+                          <h4 className="text-lg font-black text-slate-900 leading-none">Learning Center</h4>
                         </div>
-                        <ul className="space-y-2">
+                        <ul className="space-y-4 mb-8">
                           {[
-                            { name: "Blog", icon: FiPenTool },
-                            { name: "Cybersecurity Guides", icon: FiBook },
+                            { name: "Blog", icon: FiZap },
+                            { name: "Cybersecurity Guides", icon: FiMonitor },
                             { name: "Security Awareness Playbooks", icon: FiFileText },
                             { name: "Phishing Examples 2026", icon: FiMail },
                             { name: "Human Risk Research", icon: FiActivity },
                             { name: "Compliance Guides", icon: FiShield }
                           ].map((link, idx) => (
-                            <li key={idx} className="group/sublink">
-                              <Link href="#" className="flex items-center gap-2 text-slate-600 hover:text-primary text-xs font-semibold whitespace-nowrap transition-colors duration-150">
-                                <link.icon className="shrink-0 text-[10px] text-primary group-hover/sublink:text-primary group-hover/sublink:scale-110 group-hover/sublink:rotate-3 transition-all duration-300" />
-                                <span className="group-hover/sublink:translate-x-1 transition-transform duration-300">{link.name}</span>
+                            <li key={idx}>
+                              <Link href="#" className="flex items-center gap-2.5 text-[14px] font-bold text-slate-700 hover:text-primary transition-colors group/item">
+                                <link.icon className="text-primary/40 group-hover/item:text-primary transition-colors text-xs" />
+                                {link.name}
                               </Link>
                             </li>
                           ))}
                         </ul>
-                      </div>
-                      <div className="pt-4 border-t border-slate-100 mt-4">
-                        <Link href="#" className="group/cta text-primary text-xs font-bold flex items-center gap-1.5 hover:text-orange-400 transition-colors">
-                          Visit Blog <FiArrowRight className="group-hover/cta:translate-x-1 duration-200 transition-transform" />
+                        <Link href="#" className="text-primary font-black text-xs flex items-center gap-2 hover:gap-3 transition-all uppercase tracking-widest">
+                          Visit Blog <FiArrowRight />
                         </Link>
                       </div>
-                    </div>
 
-                    {/* Column 2 - Research */}
-                    <div className="flex flex-col justify-between group/col">
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="p-2 rounded-lg bg-orange-500/10 text-orange-600"><FiFileText className="text-lg group-hover/col:-translate-y-0.5 duration-300 transition-all" /></div>
-                          <h4 className="text-slate-900 text-base font-bold whitespace-nowrap">Research Hub</h4>
+                      {/* Column 2 - Research Hub */}
+                      <div className="col-span-3 p-10 border-r border-slate-100">
+                        <div className="flex items-center gap-3 mb-8">
+                          <div className="p-2.5 rounded-xl bg-orange-500/10 text-primary">
+                            <FiFileText className="text-xl" />
+                          </div>
+                          <h4 className="text-lg font-black text-slate-900 leading-none">Research Hub</h4>
                         </div>
-                        <ul className="space-y-2">
+                        <ul className="space-y-4 mb-8">
                           {[
                             { name: "Security Benchmark Report", icon: FiBarChart2 },
                             { name: "ROI Reports", icon: FiTrendingUp },
@@ -603,30 +532,28 @@ const Header = () => {
                             { name: "Case Studies", icon: FiFolder },
                             { name: "Whitepapers", icon: FiFileText }
                           ].map((link, idx) => (
-                            <li key={idx} className="group/sublink">
-                              <Link href="#" className="flex items-center gap-2 text-slate-600 hover:text-primary text-xs font-semibold whitespace-nowrap transition-colors duration-150">
-                                <link.icon className="shrink-0 text-[10px] text-primary group-hover/sublink:text-primary group-hover/sublink:scale-110 group-hover/sublink:rotate-3 transition-all duration-300" />
-                                <span className="group-hover/sublink:translate-x-1 transition-transform duration-300">{link.name}</span>
+                            <li key={idx}>
+                              <Link href="#" className="flex items-center gap-2.5 text-[14px] font-bold text-slate-700 hover:text-primary transition-colors group/item">
+                                <link.icon className="text-primary/40 group-hover/item:text-primary transition-colors text-xs" />
+                                {link.name}
                               </Link>
                             </li>
                           ))}
                         </ul>
-                      </div>
-                      <div className="pt-4 border-t border-slate-100 mt-4">
-                        <Link href="#" className="group/cta text-primary text-xs font-bold flex items-center gap-1.5 hover:text-orange-400 transition-colors">
-                          Download Reports <FiArrowRight className="group-hover/cta:translate-x-1 duration-200 transition-transform" />
+                        <Link href="#" className="text-primary font-black text-xs flex items-center gap-2 hover:gap-3 transition-all uppercase tracking-widest">
+                          Download Reports <FiArrowRight />
                         </Link>
                       </div>
-                    </div>
 
-                    {/* Column 3 - Community */}
-                    <div className="flex flex-col justify-between group/col">
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="p-2 rounded-lg bg-orange-500/10 text-orange-600"><FiCalendar className="text-lg group-hover/col:-rotate-6 duration-200 transition-transform" /></div>
-                          <h4 className="text-slate-900 text-base font-bold whitespace-nowrap">Community</h4>
+                      {/* Column 3 - Community */}
+                      <div className="col-span-3 p-10 border-r border-slate-100">
+                        <div className="flex items-center gap-3 mb-8">
+                          <div className="p-2.5 rounded-xl bg-orange-500/10 text-primary">
+                            <FiCalendar className="text-xl" />
+                          </div>
+                          <h4 className="text-lg font-black text-slate-900 leading-none">Community</h4>
                         </div>
-                        <ul className="space-y-2">
+                        <ul className="space-y-4 mb-8">
                           {[
                             { name: "Webinars", icon: FiVideo },
                             { name: "Workshops", icon: FiUsers },
@@ -635,30 +562,28 @@ const Header = () => {
                             { name: "Newsletter", icon: FiMail },
                             { name: "Security Awareness Events", icon: FiCalendar }
                           ].map((link, idx) => (
-                            <li key={idx} className="group/sublink">
-                              <Link href="#" className="flex items-center gap-2 text-slate-600 hover:text-primary text-xs font-semibold whitespace-nowrap transition-colors duration-150">
-                                <link.icon className="shrink-0 text-[10px] text-primary group-hover/sublink:text-primary group-hover/sublink:scale-110 group-hover/sublink:rotate-3 transition-all duration-300" />
-                                <span className="group-hover/sublink:translate-x-1 transition-transform duration-300">{link.name}</span>
+                            <li key={idx}>
+                              <Link href="#" className="flex items-center gap-2.5 text-[14px] font-bold text-slate-700 hover:text-primary transition-colors group/item">
+                                <link.icon className="text-primary/40 group-hover/item:text-primary transition-colors text-xs" />
+                                {link.name}
                               </Link>
                             </li>
                           ))}
                         </ul>
-                      </div>
-                      <div className="pt-4 border-t border-slate-100 mt-4">
-                        <Link href="#" className="group/cta text-primary text-xs font-bold flex items-center gap-1.5 hover:text-orange-400 transition-colors">
-                          Join Webinar <FiArrowRight className="group-hover/cta:translate-x-1 duration-200 transition-transform" />
+                        <Link href="#" className="text-primary font-black text-xs flex items-center gap-2 hover:gap-3 transition-all uppercase tracking-widest">
+                          Join Webinar <FiArrowRight />
                         </Link>
                       </div>
-                    </div>
 
-                    {/* Column 4 - Proof */}
-                    <div className="flex flex-col justify-between group/col">
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="p-2 rounded-lg bg-orange-500/10 text-orange-600"><FiUsers className="text-lg group-hover/col:scale-105 duration-300 transition-transform" /></div>
-                          <h4 className="text-slate-900 text-base font-bold whitespace-nowrap">Proof & Trust</h4>
+                      {/* Column 4 - Proof & Trust */}
+                      <div className="col-span-3 p-10">
+                        <div className="flex items-center gap-3 mb-8">
+                          <div className="p-2.5 rounded-xl bg-orange-500/10 text-primary">
+                            <FiUsers className="text-xl" />
+                          </div>
+                          <h4 className="text-lg font-black text-slate-900 leading-none">Proof & Trust</h4>
                         </div>
-                        <ul className="space-y-2">
+                        <ul className="space-y-4 mb-8">
                           {[
                             { name: "Customer Stories", icon: FiHeart },
                             { name: "Testimonials", icon: FiThumbsUp },
@@ -666,150 +591,147 @@ const Header = () => {
                             { name: "Partner Network", icon: FiGlobe },
                             { name: "Success Metrics", icon: FiActivity }
                           ].map((link, idx) => (
-                            <li key={idx} className="group/sublink">
-                              <Link href="#" className="flex items-center gap-2 text-slate-600 hover:text-primary text-xs font-semibold whitespace-nowrap transition-colors duration-150">
-                                <link.icon className="shrink-0 text-[10px] text-primary group-hover/sublink:text-primary group-hover/sublink:scale-110 group-hover/sublink:rotate-3 transition-all duration-300" />
-                                <span className="group-hover/sublink:translate-x-1 transition-transform duration-300">{link.name}</span>
+                            <li key={idx}>
+                              <Link href="#" className="flex items-center gap-2.5 text-[14px] font-bold text-slate-700 hover:text-primary transition-colors group/item">
+                                <link.icon className="text-primary/40 group-hover/item:text-primary transition-colors text-xs" />
+                                {link.name}
                               </Link>
                             </li>
                           ))}
                         </ul>
-                      </div>
-                      <div className="pt-4 border-t border-slate-100 mt-4">
-                        <Link href="#" className="group/cta text-primary text-xs font-bold flex items-center gap-1.5 hover:text-orange-400 transition-colors">
-                          See Success Stories <FiArrowRight className="group-hover/cta:translate-x-1 duration-200 transition-transform" />
+                        <Link href="#" className="text-primary font-black text-xs flex items-center gap-2 hover:gap-3 transition-all uppercase tracking-widest">
+                          See Success Stories <FiArrowRight />
                         </Link>
                       </div>
-                    </div>
 
+                    </div>
                   </div>
                 </div>
               </li>
 
               {/* FREE TOOLS MEGA MENU */}
-              <li className="group py-2">
-                <span className="nav-link text-[15px] font-extrabold text-slate-800 hover:text-primary tracking-tight">
+              <li className="group h-full flex items-center">
+                <span className="nav-link h-full flex items-center text-[15px] font-extrabold text-slate-800 hover:text-primary tracking-tight cursor-pointer">
                   Free Tools <FiChevronDown className="group-hover:rotate-180 duration-300 transition-transform text-xs text-slate-500 group-hover:text-primary" />
                 </span>
                 
-                {/* FREE TOOLS DROPDOWN */}
-                <div className="absolute left-6 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-3 group-hover:translate-y-0 transition-all duration-300 ease-out z-50 pointer-events-none group-hover:pointer-events-auto">
-                  <div className="w-[1150px] glass-dropdown p-8 grid grid-cols-4 gap-8">
-                    
-                    {/* Column 1 - Risk Assessments */}
-                    <div className="flex flex-col justify-between group/col">
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="p-2 rounded-lg bg-orange-500/10 text-orange-600"><FiActivity className="text-lg group-hover/col:animate-[pulse_1s_infinite]" /></div>
-                          <h4 className="text-slate-900 text-base font-bold whitespace-nowrap">Security Assessments</h4>
+                {/* FREE TOOLS MEGA MENU */}
+                <div className={`fixed left-0 right-0 top-[120px] pt-5 -mt-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 pointer-events-none group-hover:pointer-events-auto ${forceClose ? "opacity-0 invisible !pointer-events-none" : ""}`}>
+                  <div className="w-screen bg-white border-t border-slate-100 shadow-[0_40px_60px_-15px_rgba(0,0,0,0.1)]">
+                    <div className="container-xl grid grid-cols-12">
+                      
+                      {/* Column 1 - Security Assessments */}
+                      <div className="col-span-3 p-10 border-r border-slate-100">
+                        <div className="flex items-center gap-3 mb-8">
+                          <div className="p-2.5 rounded-xl bg-orange-500/10 text-primary">
+                            <FiActivity className="text-xl" />
+                          </div>
+                          <h4 className="text-lg font-black text-slate-900 leading-none">Security Assessments</h4>
                         </div>
-                        <ul className="space-y-2">
+                        <ul className="space-y-4 mb-8">
                           {[
                             { name: "Security Awareness Maturity Calculator", icon: FiActivity },
                             { name: "Phishing Risk Assessment", icon: FiMail },
                             { name: "Human Risk Score Tool", icon: FiTarget },
                             { name: "Security Culture Benchmark", icon: FiUsers }
                           ].map((link, idx) => (
-                            <li key={idx} className="group/sublink">
-                              <Link href="#" className="flex items-center gap-2 text-slate-600 hover:text-primary text-xs font-semibold whitespace-nowrap transition-colors duration-150">
-                                <link.icon className="shrink-0 text-[10px] text-primary group-hover/sublink:text-primary group-hover/sublink:scale-110 group-hover/sublink:rotate-3 transition-all duration-300" />
-                                <span className="group-hover/sublink:translate-x-1 transition-transform duration-300">{link.name}</span>
+                            <li key={idx}>
+                              <Link href="#" className="flex items-center gap-2.5 text-[14px] font-bold text-slate-700 hover:text-primary transition-colors group/item">
+                                <link.icon className="text-primary/40 group-hover/item:text-primary transition-colors text-xs" />
+                                {link.name}
                               </Link>
                             </li>
                           ))}
                         </ul>
-                      </div>
-                      <div className="pt-4 border-t border-slate-100 mt-4">
-                        <Link href="#" className="group/cta text-primary text-xs font-bold flex items-center gap-1.5 hover:text-orange-400 transition-colors">
-                          Run Free Assessment <FiArrowRight className="group-hover/cta:translate-x-1 duration-200 transition-transform" />
+                        <Link href="#" className="text-primary font-black text-xs flex items-center gap-2 hover:gap-3 transition-all uppercase tracking-widest">
+                          Run Free Assessment <FiArrowRight />
                         </Link>
                       </div>
-                    </div>
 
-                    {/* Column 2 - Utilities */}
-                    <div className="flex flex-col justify-between group/col">
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="p-2 rounded-lg bg-orange-500/10 text-orange-600"><FiMonitor className="text-lg group-hover/col:scale-105 duration-300 transition-transform" /></div>
-                          <h4 className="text-slate-900 text-base font-bold whitespace-nowrap">Free Cyber Tools</h4>
+                      {/* Column 2 - Free Cyber Tools */}
+                      <div className="col-span-3 p-10 border-r border-slate-100">
+                        <div className="flex items-center gap-3 mb-8">
+                          <div className="p-2.5 rounded-xl bg-orange-500/10 text-primary">
+                            <FiMonitor className="text-xl" />
+                          </div>
+                          <h4 className="text-lg font-black text-slate-900 leading-none">Free Cyber Tools</h4>
                         </div>
-                        <ul className="space-y-2">
+                        <ul className="space-y-4 mb-8">
                           {[
                             { name: "Password Exposure Checker", icon: FiKey },
                             { name: "Email Security Analyzer", icon: FiMail },
                             { name: "Compliance Readiness Checker", icon: FiCheckCircle },
-                            { name: "Security ROI Calculator", icon: FiPieChart }
+                            { name: "Security ROI Calculator", icon: FiTrendingUp }
                           ].map((link, idx) => (
-                            <li key={idx} className="group/sublink">
-                              <Link href="#" className="flex items-center gap-2 text-slate-600 hover:text-primary text-xs font-semibold whitespace-nowrap transition-colors duration-150">
-                                <link.icon className="shrink-0 text-[10px] text-primary group-hover/sublink:text-primary group-hover/sublink:scale-110 group-hover/sublink:rotate-3 transition-all duration-300" />
-                                <span className="group-hover/sublink:translate-x-1 transition-transform duration-300">{link.name}</span>
+                            <li key={idx}>
+                              <Link href="#" className="flex items-center gap-2.5 text-[14px] font-bold text-slate-700 hover:text-primary transition-colors group/item">
+                                <link.icon className="text-primary/40 group-hover/item:text-primary transition-colors text-xs" />
+                                {link.name}
                               </Link>
                             </li>
                           ))}
                         </ul>
-                      </div>
-                      <div className="pt-4 border-t border-slate-100 mt-4">
-                        <Link href="#" className="group/cta text-primary text-xs font-bold flex items-center gap-1.5 hover:text-orange-400 transition-colors">
-                          Try Free Tools <FiArrowRight className="group-hover/cta:translate-x-1 duration-200 transition-transform" />
+                        <Link href="#" className="text-primary font-black text-xs flex items-center gap-2 hover:gap-3 transition-all uppercase tracking-widest">
+                          Try Free Tools <FiArrowRight />
                         </Link>
                       </div>
-                    </div>
 
-                    {/* Column 3 - Templates */}
-                    <div className="flex flex-col justify-between group/col">
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="p-2 rounded-lg bg-orange-500/10 text-orange-600"><FiFileText className="text-lg group-hover/col:-translate-y-0.5 duration-300 transition-transform" /></div>
-                          <h4 className="text-slate-900 text-base font-bold whitespace-nowrap">Templates</h4>
+                      {/* Column 3 - Templates */}
+                      <div className="col-span-3 p-10 border-r border-slate-100">
+                        <div className="flex items-center gap-3 mb-8">
+                          <div className="p-2.5 rounded-xl bg-orange-500/10 text-primary">
+                            <FiFileText className="text-xl" />
+                          </div>
+                          <h4 className="text-lg font-black text-slate-900 leading-none">Templates</h4>
                         </div>
-                        <ul className="space-y-2">
+                        <ul className="space-y-4 mb-8">
                           {[
                             { name: "Phishing Templates", icon: FiMail },
                             { name: "Security Policies", icon: FiShield },
                             { name: "Incident Response Checklists", icon: FiFileText },
                             { name: "Awareness Campaign Planner", icon: FiCalendar }
                           ].map((link, idx) => (
-                            <li key={idx} className="group/sublink">
-                              <Link href="#" className="flex items-center gap-2 text-slate-600 hover:text-primary text-xs font-semibold whitespace-nowrap transition-colors duration-150">
-                                <link.icon className="shrink-0 text-[10px] text-primary group-hover/sublink:text-primary group-hover/sublink:scale-110 group-hover/sublink:rotate-3 transition-all duration-300" />
-                                <span className="group-hover/sublink:translate-x-1 transition-transform duration-300">{link.name}</span>
+                            <li key={idx}>
+                              <Link href="#" className="flex items-center gap-2.5 text-[14px] font-bold text-slate-700 hover:text-primary transition-colors group/item">
+                                <link.icon className="text-primary/40 group-hover/item:text-primary transition-colors text-xs" />
+                                {link.name}
                               </Link>
                             </li>
                           ))}
                         </ul>
-                      </div>
-                      <div className="pt-4 border-t border-slate-100 mt-4">
-                        <Link href="#" className="group/cta text-primary text-xs font-bold flex items-center gap-1.5 hover:text-orange-400 transition-colors">
-                          Download Templates <FiArrowRight className="group-hover/cta:translate-x-1 duration-200 transition-transform" />
+                        <Link href="#" className="text-primary font-black text-xs flex items-center gap-2 hover:gap-3 transition-all uppercase tracking-widest">
+                          Download Templates <FiArrowRight />
                         </Link>
                       </div>
+
+                      {/* Column 4 - Trial Feature */}
+                      <div className="col-span-3 p-10 bg-slate-50/50">
+                        <div className="bg-orange-500/5 rounded-3xl p-8 border border-orange-500/10 h-full flex flex-col justify-center">
+                          <h4 className="text-lg font-black text-slate-900 mb-2">Try InSAT up to 50 Users</h4>
+                          <p className="text-sm text-slate-500 leading-relaxed mb-8">
+                            Generate reports, benchmark risk, and improve employee security awareness instantly.
+                          </p>
+                          <div className="space-y-3">
+                            <Link href="#" className="w-full justify-center py-3.5 text-xs font-black text-white bg-primary hover:bg-orange-600 rounded-xl transition-all shadow-xl shadow-orange-500/20 flex items-center gap-2 uppercase tracking-widest">
+                              Book a Demo
+                            </Link>
+                            <Link href="#" className="w-full justify-center py-3.5 text-xs font-black text-slate-700 bg-white border border-slate-200 hover:border-slate-400 rounded-xl transition-all flex items-center gap-2 uppercase tracking-widest">
+                              Explore Tools
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
-
-                    {/* Column 4 - Lead Acquisition Hero Card */}
-                    <div className="bg-gradient-to-br from-orange-500/10 to-slate-50/50 border border-orange-200 rounded-xl p-5 flex flex-col justify-between relative overflow-hidden group/tools shadow-inner">
-                      <div className="absolute -top-10 -right-10 w-24 h-24 bg-orange-500/5 rounded-full blur-xl group-hover/tools:bg-orange-500/10 transition-all duration-300"></div>
-                      
-                      <div>
-                        
-                        <h4 className="text-slate-900 text-base font-bold mb-1">Try InSAT up to 50 Users</h4>
-                        <p className="text-slate-500 text-xs leading-relaxed mb-4">
-                          Generate reports, benchmark risk, and improve employee security awareness instantly.
-                        </p>
-                      </div>
-
-                      <div className="flex flex-col gap-2 pt-3 border-t border-slate-100">
-                        <Link href="#" className="w-full text-center py-2 text-xs font-bold text-white bg-primary hover:bg-orange-600 rounded-lg transition-colors whitespace-nowrap">
-                          Book a Demo
-                        </Link>
-                        <Link href="#" className="w-full text-center py-2 text-xs font-bold text-slate-700 border border-slate-200 hover:border-slate-300 hover:text-slate-900 rounded-lg bg-white transition-colors whitespace-nowrap">
-                          Explore Tools
-                        </Link>
-                      </div>
-                    </div>
-
                   </div>
                 </div>
+              </li>
+
+              {/* INNVIKTA ARCADE */}
+              <li className="py-2">
+                <Link href="/arcade" className="nav-link text-[15px] font-extrabold text-slate-800 hover:text-primary tracking-tight flex items-center gap-2 group/arcade">
+                  <FiPlay className="text-primary group-hover/arcade:scale-110 transition-transform" /> Innvikta Arcade
+                </Link>
               </li>
 
               {/* PRICING LINK */}
@@ -820,23 +742,25 @@ const Header = () => {
               </li>
 
               {/* COMPANY MEGA MENU */}
-              <li className="group py-2">
-                <span className="nav-link text-[15px] font-extrabold text-slate-800 hover:text-primary tracking-tight">
+              <li className="group h-full flex items-center">
+                <span className="nav-link h-full flex items-center text-[15px] font-extrabold text-slate-800 hover:text-primary tracking-tight cursor-pointer">
                   Company <FiChevronDown className="group-hover:rotate-180 duration-300 transition-transform text-xs text-slate-500 group-hover:text-primary" />
                 </span>
                 
-                {/* COMPANY DROPDOWN */}
-                <div className="absolute right-6 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-3 group-hover:translate-y-0 transition-all duration-300 ease-out z-50 pointer-events-none group-hover:pointer-events-auto">
-                  <div className="w-[850px] glass-dropdown p-8 grid grid-cols-3 gap-8">
-                    
-                    {/* Column 1 - About */}
-                    <div className="flex flex-col justify-between group/col">
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="p-2 rounded-lg bg-orange-500/10 text-orange-600"><FiBriefcase className="text-lg group-hover/col:-rotate-12 duration-300 transition-transform" /></div>
-                          <h4 className="text-slate-900 text-base font-bold whitespace-nowrap">About Us</h4>
+                {/* COMPANY MEGA MENU */}
+                <div className={`fixed left-0 right-0 top-[120px] pt-5 -mt-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 pointer-events-none group-hover:pointer-events-auto ${forceClose ? "opacity-0 invisible !pointer-events-none" : ""}`}>
+                  <div className="w-screen bg-white border-t border-slate-100 shadow-[0_40px_60px_-15px_rgba(0,0,0,0.1)]">
+                    <div className="container-xl grid grid-cols-12">
+                      
+                      {/* Column 1 - About Us */}
+                      <div className="col-span-3 p-10 border-r border-slate-100">
+                        <div className="flex items-center gap-3 mb-8">
+                          <div className="p-2.5 rounded-xl bg-orange-500/10 text-primary">
+                            <FiBriefcase className="text-xl" />
+                          </div>
+                          <h4 className="text-lg font-black text-slate-900 leading-none">About Us</h4>
                         </div>
-                        <ul className="space-y-2">
+                        <ul className="space-y-4 mb-8">
                           {[
                             { name: "About Innvikta", icon: FiBriefcase },
                             { name: "Our Mission", icon: FiHeart },
@@ -844,76 +768,67 @@ const Header = () => {
                             { name: "Careers", icon: FiSmile },
                             { name: "Press & Media", icon: FiFileText }
                           ].map((link, idx) => (
-                            <li key={idx} className="group/sublink">
-                              <Link href="#" className="flex items-center gap-2 text-slate-600 hover:text-primary text-xs font-semibold whitespace-nowrap transition-colors duration-150">
-                                <link.icon className="shrink-0 text-[10px] text-primary group-hover/sublink:text-primary group-hover/sublink:scale-110 group-hover/sublink:rotate-3 transition-all duration-300" />
-                                <span className="group-hover/sublink:translate-x-1 transition-transform duration-300">{link.name}</span>
+                            <li key={idx}>
+                              <Link href="#" className="flex items-center gap-2.5 text-[14px] font-bold text-slate-700 hover:text-primary transition-colors group/item">
+                                <link.icon className="text-primary/40 group-hover/item:text-primary transition-colors text-xs" />
+                                {link.name}
                               </Link>
                             </li>
                           ))}
                         </ul>
-                      </div>
-                      <div className="pt-4 border-t border-slate-100 mt-4">
-                        <Link href="#" className="group/cta text-primary text-xs font-bold flex items-center gap-1.5 hover:text-orange-400 transition-colors">
-                          Learn About Us <FiArrowRight className="group-hover/cta:translate-x-1 duration-200 transition-transform" />
+                        <Link href="#" className="text-primary font-black text-xs flex items-center gap-2 hover:gap-3 transition-all uppercase tracking-widest">
+                          Learn About Us <FiArrowRight />
                         </Link>
                       </div>
-                    </div>
 
-                    {/* Column 2 - Partners */}
-                    <div className="flex flex-col justify-between group/col">
-                      <div>
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="p-2 rounded-lg bg-orange-500/10 text-orange-600"><FiLayers className="text-lg group-hover/col:scale-110 duration-300 transition-transform" /></div>
-                          <h4 className="text-slate-900 text-base font-bold whitespace-nowrap">Ecosystem</h4>
+                      {/* Column 2 - Ecosystem */}
+                      <div className="col-span-3 p-10 border-r border-slate-100">
+                        <div className="flex items-center gap-3 mb-8">
+                          <div className="p-2.5 rounded-xl bg-orange-500/10 text-primary">
+                            <FiLayers className="text-xl" />
+                          </div>
+                          <h4 className="text-lg font-black text-slate-900 leading-none">Ecosystem</h4>
                         </div>
-                        <ul className="space-y-2">
+                        <ul className="space-y-4 mb-8">
                           {[
                             { name: "Technology Partners", icon: FiCpu },
                             { name: "MSSP Program", icon: FiShield },
                             { name: "Channel Partners", icon: FiGlobe }
                           ].map((link, idx) => (
-                            <li key={idx} className="group/sublink">
-                              <Link href="#" className="flex items-center gap-2 text-slate-600 hover:text-primary text-xs font-semibold whitespace-nowrap transition-colors duration-150">
-                                <link.icon className="shrink-0 text-[10px] text-primary group-hover/sublink:text-primary group-hover/sublink:scale-110 group-hover/sublink:rotate-3 transition-all duration-300" />
-                                <span className="group-hover/sublink:translate-x-1 transition-transform duration-300">{link.name}</span>
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className="pt-4 border-t border-slate-100 mt-4">
-                        <Link href="#" className="group/cta text-primary text-xs font-bold flex items-center gap-1.5 hover:text-orange-400 transition-colors">
-                          Become a Partner <FiArrowRight className="group-hover/cta:translate-x-1 duration-200 transition-transform" />
-                        </Link>
-                      </div>
-                    </div>
-
-                    {/* Column 3 - Contact Highlights */}
-                    <div className="bg-slate-50/80 border border-slate-100 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden group/contact shadow-inner">
-                      <div>
-                        <div className="flex items-center gap-2 mb-3 text-primary">
-                          <FiMail className="text-lg" />
-                          <span className="text-[10px] font-bold uppercase tracking-widest bg-orange-500/10 px-2 py-0.5 rounded-full">Get In Touch</span>
-                        </div>
-                        <ul className="space-y-2 mb-4">
-                          {["Contact Sales", "Book Demo"].map((link, idx) => (
                             <li key={idx}>
-                              <Link href="#" className="text-slate-600 hover:text-primary text-xs font-semibold block whitespace-nowrap transition-colors duration-150">
-                                {link}
+                              <Link href="#" className="flex items-center gap-2.5 text-[14px] font-bold text-slate-700 hover:text-primary transition-colors group/item">
+                                <link.icon className="text-primary/40 group-hover/item:text-primary transition-colors text-xs" />
+                                {link.name}
                               </Link>
                             </li>
                           ))}
                         </ul>
-                      </div>
-
-                      <div className="flex flex-col gap-2 mt-auto">
-                        <Link href="#" className="w-full text-center py-2 text-xs font-bold text-white bg-primary hover:bg-orange-600 rounded-lg transition-colors whitespace-nowrap">
-                          Talk to Sales
+                        <Link href="#" className="text-primary font-black text-xs flex items-center gap-2 hover:gap-3 transition-all uppercase tracking-widest">
+                          Become a Partner <FiArrowRight />
                         </Link>
                       </div>
-                    </div>
 
+                      {/* Column 3 - Buffer/Empty spacing */}
+                      <div className="col-span-3 border-r border-slate-100"></div>
+
+                      {/* Column 4 - Get In Touch side-card */}
+                      <div className="col-span-3 p-10 bg-slate-50/50">
+                        <div className="bg-white rounded-3xl p-8 border border-slate-100 shadow-xl shadow-slate-200/50 h-full flex flex-col justify-center">
+                          <div className="flex items-center gap-2 mb-6">
+                            <FiMail className="text-primary" />
+                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary bg-orange-500/5 px-2 py-1 rounded">Get In Touch</span>
+                          </div>
+                          <div className="space-y-4 mb-8">
+                            <Link href="#" className="block text-[15px] font-bold text-slate-700 hover:text-primary transition-colors">Contact Sales</Link>
+                            <Link href="#" className="block text-[15px] font-bold text-slate-700 hover:text-primary transition-colors">Book Demo</Link>
+                          </div>
+                          <Link href="#" className="w-full justify-center py-3.5 text-xs font-black text-white bg-primary hover:bg-orange-600 rounded-xl transition-all shadow-xl shadow-orange-500/20 flex items-center gap-2 uppercase tracking-widest">
+                            Talk to Sales
+                          </Link>
+                        </div>
+                      </div>
+
+                    </div>
                   </div>
                 </div>
               </li>

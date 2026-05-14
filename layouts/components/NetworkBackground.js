@@ -30,7 +30,6 @@ const NetworkBackground = () => {
           events: {
             onClick: {
               enable: false,
-              mode: "push",
             },
             onHover: {
               enable: true,
@@ -40,9 +39,9 @@ const NetworkBackground = () => {
           },
           modes: {
             grab: {
-              distance: 140,
+              distance: 120,
               links: {
-                opacity: 0.8,
+                opacity: 0.6,
                 color: "#fe6019"
               }
             },
@@ -50,14 +49,14 @@ const NetworkBackground = () => {
         },
         particles: {
           color: {
-            value: ["#fe6019", "#cbd5e1"], // Primary orange and slate-300
+            value: ["#fe6019", "#cbd5e1"],
           },
           links: {
-            color: "#e2e8f0", // slate-200
-            distance: 150,
+            color: "#e2e8f0",
+            distance: 130,
             enable: true,
-            opacity: 0.6,
-            width: 1.5,
+            opacity: 0.4,
+            width: 1,
           },
           collisions: {
             enable: false,
@@ -69,27 +68,27 @@ const NetworkBackground = () => {
               default: "bounce",
             },
             random: true,
-            speed: 0.8,
+            speed: 0.6,
             straight: false,
           },
           number: {
             density: {
               enable: true,
-              area: 800,
+              area: 1000,
             },
-            value: 50,
+            value: 40,
           },
           opacity: {
-            value: 0.7,
+            value: 0.6,
           },
           shape: {
             type: "circle",
           },
           size: {
-            value: { min: 1, max: 3 },
+            value: { min: 1, max: 2 },
           },
         },
-        detectRetina: true,
+        detectRetina: false,
       }}
     />
   );
