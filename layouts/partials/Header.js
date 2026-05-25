@@ -688,10 +688,9 @@ const menuData = {
         icon: FiGlobe,
         headline: "Grow your business with the leading human risk platform.",
         cells: [
-          { name: "Join the Program", desc: "Apply to become a certified Innvikta channel partner.", href: "#" },
-          { name: "Margin & Benefits", desc: "Access tier pricing, deal registration, and MDF funds.", href: "#" },
-          { name: "Co-Selling Support", desc: "Sales engineering, custom demos, and asset support.", href: "#" },
-          { name: "Partner Enablement", desc: "Training resources and dedicated partner manager access.", href: "#" }
+          { name: "Become a Partner", desc: "Apply to become a certified Innvikta channel partner.", href: "#" },
+          { name: "Partner Benefits", desc: "Access tier pricing, deal registration, and MDF funds.", href: "#" },
+          { name: "Co-Selling Support", desc: "Sales engineering, custom demos, and asset support.", href: "#" }
         ],
         cta: {
           title: "Join our partner network",
@@ -707,10 +706,9 @@ const menuData = {
         icon: FiShield,
         headline: "Empower your sales and white-label service operations.",
         cells: [
-          { name: "MSSP Program", desc: "Manage multiple client dashboards from a single partner console.", href: "#" },
-          { name: "White-Label Portal", desc: "Deploy customized, branded interfaces for your clients.", href: "#" },
-          { name: "Co-Branded Assets", desc: "Download brochures, presentations, and product data sheets.", href: "#" },
-          { name: "Deal Registration", desc: "Register and protect your pipeline with priority partner pricing.", href: "#" }
+          { name: "Reseller Enablement", desc: "Manage multiple client dashboards from a single partner console.", href: "#" },
+          { name: "White-Label Support", desc: "Deploy customized, branded interfaces for your clients.", href: "#" },
+          { name: "Sales Assets", desc: "Download brochures, presentations, and product data sheets.", href: "#" }
         ],
         cta: {
           title: "Access white-label reseller tools",
@@ -726,14 +724,13 @@ const menuData = {
         icon: FiCpu,
         headline: "Extend platform integration and directory deployment support.",
         cells: [
-          { name: "API Documentation", desc: "Build custom integrations using our secure developer API.", href: "#" },
-          { name: "Directory Sync", desc: "Automate user lists via Okta, Active Directory, and Azure AD.", href: "#" },
-          { name: "SIEM/SOAR Feeds", desc: "Sync user risk scores and alerts with Splunk or Palo Alto.", href: "#" },
-          { name: "Integration Directory", desc: "Browse pre-built integrations for your security stack.", href: "#" }
+          { name: "Integrations", desc: "Seamlessly connect with your existing security ecosystem.", href: "#" },
+          { name: "Deployment Support", desc: "Expert guidance to ensure smooth implementation.", href: "#" },
+          { name: "Platform Collaboration", desc: "Build joint solutions that enhance security capabilities for our mutual customers.", href: "#" }
         ],
         cta: {
-          title: "Integrate with Innvikta APIs",
-          desc: "Sync user list data and risk profiles directly into your central security dashboard.",
+          title: "Partner with our Technology Ecosystem",
+          desc: "Build integrations, co-develop joint solutions, and streamline deployments for our mutual customers.",
           label: "Talk to Partnerships",
           href: "#",
           svgType: "partners"
