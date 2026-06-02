@@ -3,9 +3,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import "../../../styles/insat.scss";
+import GSAPWrapper from "@layouts/components/GSAPWrapper";
+import { gsap } from "@lib/gsap";
 
 const InsatPage = () => {
   const [activeFaq, setActiveFaq] = useState(null);
+  const heroRef = useRef(null);
   
   // Testimonials Slider state & refs
   const sliderWrapperRef = useRef(null);
@@ -42,10 +45,33 @@ const InsatPage = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [currentIndex]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline();
+      tl.fromTo(
+        ".hero-content > *",
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, stagger: 0.15, ease: "power3.out" }
+      ).fromTo(
+        ".hero-visual",
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+        ">-0.4"
+      ).fromTo(
+        ".hero-bg-decor",
+        { opacity: 0, scale: 0.95 },
+        { opacity: 1, scale: 1, duration: 1, ease: "power2.out" },
+        "<"
+      );
+    }, heroRef);
+    return () => ctx.revert();
+  }, []);
   
   return (
-    <div className="insat-page">
-      <main>
+    <GSAPWrapper>
+      <div className="insat-page" ref={heroRef}>
+        <div className="main-content">
         
 
         
@@ -264,7 +290,7 @@ const InsatPage = () => {
         
         <section className="bg-white">
             <div className="container two-col-grid">
-                <div className="two-col-content-block">
+                <div className="two-col-content-block animate from-left">
                     <h2 className="text-52-heading">Because Awareness Training Does Not End at Completion</h2>
 
                     <div style={{marginTop: "1.5rem", opacity: "0.7"}}>
@@ -323,7 +349,7 @@ const InsatPage = () => {
                 </div>
 
                 
-                <div className="two-col-visual-block aspect-square">
+                <div className="two-col-visual-block aspect-square animate from-right">
                     <img alt="InSAT training platform overview" loading="lazy" src="/insat/images/section2.png" />
                 </div>
             </div>
@@ -332,14 +358,14 @@ const InsatPage = () => {
         
         <section className="bg-grey-5">
             <div className="container">
-                <div className="section-intro">
+                <div className="section-intro animate">
                     <span className="text-subheading">Features</span>
                     <h2 className="text-52-heading">Powerful Security Training</h2>
                 </div>
 
                 <div className="features-grid">
                     
-                    <div className="feature-card">
+                    <div className="feature-card animate">
                         <div className="feature-visual">
                             <img alt="Security Awareness Training" loading="lazy" src="/insat/images/awareness-section3.png" />
                         </div>
@@ -353,7 +379,7 @@ const InsatPage = () => {
                     </div>
 
                     
-                    <div className="feature-card">
+                    <div className="feature-card animate">
                         <div className="feature-visual bg-grey-30">
                             <img alt="Phishing simulations mockup" loading="lazy"
                                 src="/insat/images/Risk-Scoring-1.jpg" />
@@ -368,7 +394,7 @@ const InsatPage = () => {
                     </div>
 
                     
-                    <div className="feature-card">
+                    <div className="feature-card animate">
                         <div className="feature-visual bg-aquamarine">
                             <img alt="Microlearning modules mockup" loading="lazy"
                                 src="/insat/images/api-new-static.jpg" />
@@ -387,13 +413,13 @@ const InsatPage = () => {
         
         <section className="bg-white">
             <div className="container">
-                <div className="section-intro" style={{textAlign: "center"}}>
+                <div className="section-intro animate" style={{textAlign: "center"}}>
                     <h2 className="text-64-heading">Build Security Awareness Across Your Organization</h2>
                 </div>
 
                 
                 <div className="two-col-grid" style={{marginTop: "4rem"}}>
-                    <div className="two-col-content-block">
+                    <div className="two-col-content-block animate from-left">
                         <h2 className="text-40-heading">AI Adaptive Learning</h2>
                         <div style={{marginTop: "1.5rem", opacity: "0.7"}}>
                             <p className="text-18-content">
@@ -414,14 +440,14 @@ const InsatPage = () => {
                             <span>Explore Adaptive Learning</span>
                         </a>
                     </div>
-                    <div className="two-col-visual-block aspect-628-517 bg-grey">
+                    <div className="two-col-visual-block aspect-628-517 bg-grey animate from-right">
                         <img alt="AI adaptive learning routes" loading="lazy" src="/insat/images/Transfers.jpg" />
                     </div>
                 </div>
 
                 
                 <div className="two-col-grid reverse" style={{marginTop: "6rem"}}>
-                    <div className="two-col-content-block">
+                    <div className="two-col-content-block animate from-right">
                         <h2 className="text-40-heading">Reporting & Human Risk Evidence</h2>
                         <div style={{marginTop: "1.5rem", opacity: "0.7"}}>
                             <p className="text-18-content">
@@ -442,7 +468,7 @@ const InsatPage = () => {
                             <span>View Reporting Features</span>
                         </a>
                     </div>
-                    <div className="two-col-visual-block aspect-628-517 bg-midnight">
+                    <div className="two-col-visual-block aspect-628-517 bg-midnight animate from-left">
                         <img alt="Monitor training and assessments" loading="lazy"
                             src="/insat/images/Monitor-Paymentsmidnight.jpg" />
                     </div>
@@ -450,7 +476,7 @@ const InsatPage = () => {
 
                 
                 <div className="two-col-grid" style={{marginTop: "6rem"}}>
-                    <div className="two-col-content-block">
+                    <div className="two-col-content-block animate from-left">
                         <h2 className="text-40-heading">Gamified Engagement</h2>
                         <div style={{marginTop: "1.5rem", opacity: "0.7"}}>
                             <p className="text-18-content">
@@ -471,14 +497,14 @@ const InsatPage = () => {
                             <span>Explore Gamified Training</span>
                         </a>
                     </div>
-                    <div className="two-col-visual-block aspect-628-517 bg-plum">
+                    <div className="two-col-visual-block aspect-628-517 bg-plum animate from-right">
                         <img alt="Gamified engagement" loading="lazy" src="/insat/images/Protection-1.jpg" />
                     </div>
                 </div>
 
                 
                 <div className="two-col-grid reverse" style={{marginTop: "6rem"}}>
-                    <div className="two-col-content-block">
+                    <div className="two-col-content-block animate from-right">
                         <h2 className="text-40-heading">Continuous Reinforcement</h2>
                         <div style={{marginTop: "1.5rem", opacity: "0.7"}}>
                             <p className="text-18-content">
@@ -499,7 +525,7 @@ const InsatPage = () => {
                             <span>Explore InSAT Platform</span>
                         </a>
                     </div>
-                    <div className="two-col-visual-block aspect-628-517 bg-midnight">
+                    <div className="two-col-visual-block aspect-628-517 bg-midnight animate from-left">
                         <img alt="Continuous reinforcement" loading="lazy" src="/insat/images/Risk-Scoring-1.jpg" />
                     </div>
                 </div>
@@ -509,7 +535,7 @@ const InsatPage = () => {
         
         <section className="bg-white">
             <div className="container">
-                <div className="slider-container" id="testimonialsSlider">
+                <div className="slider-container animate" id="testimonialsSlider">
                     <div className="slider-wrapper" ref={sliderWrapperRef}>
 
                         
@@ -676,7 +702,7 @@ const InsatPage = () => {
                     </div>
 
                     
-                    <div className="rounded-card-content">
+                    <div className="rounded-card-content animate">
                         <h2>Build Security Awareness Across Your Organization</h2>
                         <p className="text-20-content rounded-card-desc">
                             Deliver continuous awareness training, phishing simulations, behavioural analytics, and
@@ -702,7 +728,7 @@ const InsatPage = () => {
         
         <section className="bg-white" style={{paddingBottom: "0"}}>
             <div className="container">
-                <div style={{textAlign: "center"}}>
+                <div style={{textAlign: "center"}} className="animate">
                     <h2 className="text-40-heading">Integrate with Your IT & Security Stack</h2>
                     <p className="text-18-content opacity-70"
                         style={{marginTop: "0.75rem", maxWidth: "523px", marginLeft: "auto", marginRight: "auto"}}>
@@ -713,7 +739,7 @@ const InsatPage = () => {
             </div>
 
             
-            <div className="ticker-container">
+            <div className="ticker-container animate">
                 
                 <div className="ticker-track ticker-forward">
                     
@@ -827,7 +853,7 @@ const InsatPage = () => {
         
         <section className="bg-white">
             <div className="container">
-                <div className="section-intro" style={{maxWidth: "740px"}}>
+                <div className="section-intro animate" style={{maxWidth: "740px"}}>
                     <h2 className="text-52-heading">Training That Matches Real Employee Risk</h2>
                     <p className="text-20-content opacity-70" style={{marginTop: "1rem"}}>
                         Different departments face different threats. InSAT delivers relevant learning based on role,
@@ -838,7 +864,7 @@ const InsatPage = () => {
                 
                 <div className="grid-sticky-layout">
                     
-                    <div className="sticky-col">
+                    <div className="sticky-col animate from-left">
                         <div className="sticky-inner-box">
                             <div className="sticky-text-wrapper">
                                 <span className="text-subheading"
@@ -865,7 +891,7 @@ const InsatPage = () => {
                     </div>
 
                     
-                    <div className="side-grid-col">
+                    <div className="side-grid-col animate from-right">
                         
                         <div className="side-card">
                             <div className="side-card-text-wrapper">
@@ -929,7 +955,7 @@ const InsatPage = () => {
         
         <section className="bg-grey-5">
             <div className="container faq-grid">
-                <div className="faq-title-col">
+                <div className="faq-title-col animate from-left">
                     <h2 className="text-40-heading">We’re here to help</h2>
                     <a className="arrow-link" href="https://docs.insat.training/docs/getting-started" target="_blank" rel="noopener noreferrer"
                         style={{marginTop: "1.25rem"}}>
@@ -944,7 +970,7 @@ const InsatPage = () => {
                     </a>
                 </div>
 
-                <div className="faq-list-col">
+                <div className="faq-list-col animate from-right">
                     
                     <div className={`faq-item ${activeFaq === 0 ? 'active' : ''}`}>
                         <button type="button" className="faq-trigger" aria-expanded={activeFaq === 0} onClick={() => setActiveFaq(activeFaq === 0 ? null : 0)}>
@@ -1052,8 +1078,9 @@ const InsatPage = () => {
         </section>
 
     
-      </main>
-    </div>
+        </div>
+      </div>
+    </GSAPWrapper>
   );
 };
 
