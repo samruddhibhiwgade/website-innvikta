@@ -128,7 +128,7 @@ ul {
 .text-96-heading {
     font-size: clamp(2.5rem, 6vw, 5.5rem);
     line-height: 0.95;
-    font-weight: 500;
+    font-weight: 400;
     letter-spacing: -0.02em;
     font-family: var(--font-heading);
 }
@@ -136,7 +136,7 @@ ul {
 .text-64-heading {
     font-size: clamp(2.2rem, 5vw, 4rem);
     line-height: 1.05;
-    font-weight: 500;
+    font-weight: 400;
     letter-spacing: -0.02em;
     font-family: var(--font-heading);
 }
@@ -144,7 +144,7 @@ ul {
 .text-52-heading {
     font-size: clamp(2rem, 4vw, 3.25rem);
     line-height: 1.1;
-    font-weight: 500;
+    font-weight: 400;
     letter-spacing: -0.02em;
     font-family: var(--font-heading);
 }
@@ -152,7 +152,7 @@ ul {
 .text-40-heading {
     font-size: clamp(1.75rem, 3vw, 2.5rem);
     line-height: 1.15;
-    font-weight: 500;
+    font-weight: 400;
     letter-spacing: -0.01em;
     font-family: var(--font-heading);
 }
@@ -160,7 +160,7 @@ ul {
 .text-32-heading {
     font-size: clamp(1.5rem, 2.5vw, 2rem);
     line-height: 1.2;
-    font-weight: 450;
+    font-weight: 400;
     letter-spacing: -0.01em;
     font-family: var(--font-heading);
 }
@@ -168,14 +168,14 @@ ul {
 .text-28-heading {
     font-size: clamp(1.35rem, 2vw, 1.75rem);
     line-height: 1.25;
-    font-weight: 500;
+    font-weight: 400;
     font-family: var(--font-heading);
 }
 
 .text-22-heading {
     font-size: clamp(1.2rem, 1.5vw, 1.375rem);
     line-height: 1.3;
-    font-weight: 500;
+    font-weight: 400;
     font-family: var(--font-heading);
 }
 
@@ -564,13 +564,13 @@ section {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    border-radius: 9999px;
+    border-radius: 6px;
     font-family: var(--font-body);
-    font-weight: 500;
-    font-size: 1rem;
+    font-weight: 700;
+    font-size: 15px;
     white-space: nowrap;
     overflow: hidden;
-    transition: var(--transition-smooth);
+    transition: all 0.3s ease;
     user-select: none;
     z-index: 1;
     height: auto !important;
@@ -578,77 +578,57 @@ section {
 
 /* Standard Button */
 .btn-primary {
-    background-color: var(--color-forest);
-    color: var(--color-aquamarine);
-    border: 1px solid var(--color-forest-15);
-    padding: 18px 24px 18px 28px;
+    background-color: #f15a24;
+    color: #ffffff;
+    border: 1px solid #f15a24;
+    padding: 12px 20px;
+}
+
+.btn-primary:hover {
+    background-color: #ea501a;
+    border-color: #ea501a;
+    color: #ffffff;
 }
 
 .btn-secondary {
-    background-color: transparent;
-    color: var(--color-night);
-    border: 1px solid var(--color-forest-15);
+    background-color: rgba(241, 90, 36, 0.05);
+    color: #f15a24;
+    border: 1px solid rgba(241, 90, 36, 0.3);
     padding: 12px 20px;
 }
 
 .btn-secondary:hover {
-    background-color: var(--color-forest);
-    color: var(--color-white);
-    border-color: var(--color-forest);
+    background-color: #f15a24;
+    color: #ffffff;
+    border-color: #f15a24;
 }
 
-/* Premium Sweep Hover Container */
-.hover-sweep {
-    position: absolute;
-    inset: 0;
-    transform: translateX(-105%);
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    pointer-events: none;
-    z-index: -1;
-    display: flex;
-}
-
-.sweep-part {
-    height: 100%;
-    flex-grow: 1;
-}
-
-/* Sweep colors configured via classes */
-.btn-primary .hover-sweep {
-    background-color: var(--color-aquamarine);
-}
-
-.btn-primary:hover {
-    color: var(--color-night);
-}
-
-.btn-primary:hover .hover-sweep {
-    transform: translateX(0);
+/* Premium Sweep Hover Container - Disabled for navbar style */
+.hover-sweep, .sweep-part {
+    display: none;
 }
 
 /* Header Get a Demo button special styling */
 .header-btn {
-    border-color: var(--color-forest-15);
+    border-color: rgba(241, 90, 36, 0.3);
 }
 .header-btn:hover {
-    background-color: var(--color-forest) !important;
+    background-color: #f15a24 !important;
     color: var(--color-white) !important;
 }
 
 /* Speak to sales CTA button inside forest */
 .btn-cta {
-    background-color: var(--color-aquamarine);
-    color: var(--color-forest);
-    padding: 18px 24px 18px 28px;
+    background-color: #f15a24;
+    color: #ffffff;
+    border: 1px solid #f15a24;
+    padding: 12px 20px;
 }
-.btn-cta .hover-sweep {
-    background-color: var(--color-white);
-}
+
 .btn-cta:hover {
-    color: var(--color-forest);
-}
-.btn-cta:hover .hover-sweep {
-    transform: translateX(0);
+    background-color: #ea501a;
+    border-color: #ea501a;
+    color: #ffffff;
 }
 
 /* Arrow Hover animation */
@@ -2091,6 +2071,497 @@ section {
     color: var(--color-aquamarine);
 }
 
+    /* ==========================================================================
+       MODERN ATTACK SIMULATIONS ACCORDION
+       ========================================================================== */
+    .modern-simulations-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        
+        @media (min-width: 1024px) {
+            grid-template-columns: 1.15fr 1fr;
+        }
+    }
 
+    .simulation-accordion-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .simulation-accordion-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.25rem;
+        padding: 1rem 1.25rem;
+        background-color: transparent !important;
+        border: none !important;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        text-align: left;
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 30%;
+            bottom: 30%;
+            width: 3px;
+            background-color: transparent;
+            border-radius: 4px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        &:focus-visible {
+            outline: 2px solid #F15A24;
+            outline-offset: -2px;
+        }
+
+        &:hover, &:focus-visible {
+            background-color: rgba(241, 90, 36, 0.06) !important;
+            transform: translateX(6px);
+        }
+
+        &.active {
+            background-color: rgba(241, 90, 36, 0.04) !important;
+            box-shadow: 0 4px 12px rgba(241, 90, 36, 0.05);
+            transform: translateX(6px);
+
+            &::before {
+                background: linear-gradient(to bottom, #ff9f43, #f15a24);
+                top: 15%;
+                bottom: 15%;
+            }
+
+            .sim-title {
+                color: #f15a24;
+                font-weight: 600;
+            }
+        }
+    }
+
+    .sim-icon-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background-color: rgba(241, 90, 36, 0.08);
+        color: #f15a24;
+        flex-shrink: 0;
+        transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        position: relative;
+        overflow: visible;
+
+        svg {
+            opacity: 1 !important;
+            color: #f15a24;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .simulation-accordion-item:hover &, .simulation-accordion-item:focus-visible & {
+            background-color: #f15a24;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(241, 90, 36, 0.3);
+            transform: scale(1.08);
+
+            svg {
+                color: #ffffff !important;
+            }
+        }
+
+        .simulation-accordion-item.active & {
+            background-color: #f15a24;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(241, 90, 36, 0.3);
+
+            svg {
+                color: #ffffff !important;
+            }
+        }
+    }
+
+    .sim-text-content {
+        flex-grow: 1;
+    }
+
+    .sim-title {
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: #0f172a;
+        margin-bottom: 0.25rem;
+        transition: color 0.3s ease;
+    }
+
+    .sim-desc-wrapper {
+        overflow: hidden;
+        transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    }
+
+    .sim-desc {
+        font-size: 0.95rem;
+        line-height: 1.55;
+        color: #334155;
+        padding-top: 0.35rem;
+        padding-bottom: 0.5rem;
+    }
+
+    /* Clean, borderless image container replacing the device frame mockup bezel */
+    .platform-bezel-frame {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(255, 122, 0, 0.15);
+        padding: 0;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        
+        .frame-inner {
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+        }
+
+        &:hover {
+            box-shadow: 0 15px 35px rgba(255, 122, 0, 0.12);
+            transform: translateY(-2px);
+            border-color: rgba(255, 122, 0, 0.35);
+        }
+    }
+
+    @keyframes imageFadeIn {
+        from {
+            opacity: 0;
+            transform: scale(1.03);
+            filter: blur(8px);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+            filter: blur(0);
+        }
+    }
+
+    @keyframes imageFadeOut {
+        from {
+            opacity: 1;
+            transform: scale(1);
+            filter: blur(0);
+        }
+        to {
+            opacity: 0;
+            transform: scale(0.97);
+            filter: blur(4px);
+        }
+    }
+
+    .animate-image-fade-in {
+        animation: imageFadeIn 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        z-index: 2;
+    }
+
+    .animate-image-fade-out {
+        animation: imageFadeOut 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        z-index: 1;
+    }
+
+    /* Vector Icon Keyframes & Selectors matching premium design requirements */
+    
+    /* 1. Phishing / Envelope Flap */
+    @keyframes flapOpenClose {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-3px) scaleY(0.7); }
+    }
+    @keyframes popNotify {
+        0% { opacity: 0; transform: scale(0); }
+        50% { opacity: 1; transform: scale(1.3); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+    .envelope-flap {
+        transform-origin: top center;
+        transition: transform 0.3s ease;
+    }
+    .notification-dot {
+        transform-origin: 19px 7px;
+        opacity: 0;
+        transform: scale(0);
+        transition: opacity 0.3s, transform 0.3s;
+    }
+    .simulation-accordion-item:hover, .simulation-accordion-item:focus-visible {
+        .envelope-flap {
+            animation: flapOpenClose 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .notification-dot {
+            animation: popNotify 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.1s;
+        }
+    }
+
+    /* 2. Smishing & WhatsApp / Chat Bubble Pulse */
+    @keyframes ringPulse {
+        0% { opacity: 0.85; transform: scale(0.7); }
+        100% { opacity: 0; transform: scale(1.4); }
+    }
+    @keyframes bubbleSlide {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-4px); }
+        100% { transform: translateY(-2px); }
+    }
+    .pulse-ring {
+        transform-origin: 12px 12px;
+        opacity: 0;
+        transform: scale(0.8);
+        transition: all 0.3s ease;
+    }
+    .chat-bubble {
+        transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .simulation-accordion-item:hover, .simulation-accordion-item:focus-visible {
+        .pulse-ring {
+            animation: ringPulse 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .chat-bubble {
+            animation: bubbleSlide 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+    }
+
+    /* 3. QR Traps / Sequential block and Scanning line */
+    @keyframes qrBlockAnim {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.25); fill: #F15A24; }
+    }
+    @keyframes qrScan {
+        0% { opacity: 0; transform: translateY(-8px); }
+        35%, 65% { opacity: 1; }
+        100% { opacity: 0; transform: translateY(8px); }
+    }
+    @keyframes qrRotate {
+        0% { transform: rotate(0); }
+        100% { transform: rotate(3deg); }
+    }
+    .qr-block {
+        transform-origin: center;
+        transition: transform 0.3s ease, fill 0.3s ease;
+    }
+    .qr-block-1 { transform-origin: 6px 6px; }
+    .qr-block-2 { transform-origin: 18px 6px; }
+    .qr-block-3 { transform-origin: 6px 18px; }
+    .qr-block-4 { transform-origin: 18px 18px; }
+    
+    .beam-line {
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: all 0.3s ease;
+    }
+    .simulation-accordion-item:hover, .simulation-accordion-item:focus-visible {
+        svg.active-vector-qr {
+            animation: qrRotate 0.35s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        .qr-block-1 { animation: qrBlockAnim 0.35s ease forwards 0.05s; }
+        .qr-block-2 { animation: qrBlockAnim 0.35s ease forwards 0.12s; }
+        .qr-block-3 { animation: qrBlockAnim 0.35s ease forwards 0.18s; }
+        .qr-block-4 { animation: qrBlockAnim 0.35s ease forwards 0.24s; }
+        .beam-line {
+            animation: qrScan 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    }
+
+    /* 4. Vishing Tests / Phone ring and outward waves */
+    @keyframes phoneRing {
+        0%, 100% { transform: rotate(0); }
+        25% { transform: rotate(-8deg); }
+        50% { transform: rotate(8deg); }
+        75% { transform: rotate(-4deg); }
+    }
+    @keyframes waveOscillate {
+        0% { opacity: 0; transform: scale(0.95); }
+        50% { opacity: 1; }
+        100% { opacity: 0; transform: scale(1.2); }
+    }
+    .phone-receiver {
+        transform-origin: 12px 12px;
+        transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .phone-wave {
+        opacity: 0;
+        transform: scale(0.9);
+        transform-origin: 12px 12px;
+        transition: all 0.3s ease;
+    }
+    .simulation-accordion-item:hover, .simulation-accordion-item:focus-visible {
+        .phone-receiver {
+            animation: phoneRing 0.45s ease-in-out;
+        }
+        .wave-1 {
+            animation: waveOscillate 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .wave-2 {
+            animation: waveOscillate 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.18s;
+        }
+    }
+
+    /* 5. AI Scenario Variants / Rotate rays */
+    @keyframes aiRotate {
+        0% { transform: rotate(0); }
+        100% { transform: rotate(45deg); }
+    }
+    .spark-rays {
+        transform-origin: 12px 12px;
+        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .simulation-accordion-item:hover, .simulation-accordion-item:focus-visible {
+        .spark-rays {
+            animation: aiRotate 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    }
+
+    /* 6. Attachment Simulations / Paperclip rotation and arrow drop */
+    .paperclip {
+        transform-origin: 12px 12px;
+        stroke-dasharray: 60;
+        stroke-dashoffset: 0;
+        transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), stroke-dashoffset 0.35s ease;
+    }
+    .attach-arrow {
+        transform: translateY(-4px);
+        opacity: 0;
+        transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+    }
+    .simulation-accordion-item:hover, .simulation-accordion-item:focus-visible {
+        .paperclip {
+            transform: rotate(12deg);
+            stroke-dashoffset: 8;
+        }
+        .attach-arrow {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    /* Active State Static Styles (Always overrides animations when active is set on load) */
+    .simulation-accordion-item.active {
+        .notification-dot {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .beam-line {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .attach-arrow {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Accessibility prefers-reduced-motion override */
+    @media (prefers-reduced-motion: reduce) {
+        .simulation-accordion-item,
+        .sim-icon-container,
+        .pulse-ring,
+        .chat-bubble,
+        .qr-block,
+        .envelope-flap,
+        .beam-line,
+        .phone-receiver,
+        .phone-wave,
+        .spark-rays,
+        .paperclip,
+        .attach-arrow {
+            animation: none !important;
+            transition: none !important;
+            transform: none !important;
+        }
+    }
+
+    /* Reports & Insights SaaS-style Cards */
+    .reports-insight-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 0.85rem;
+        margin-bottom: 2.5rem;
+        
+        @media (min-width: 640px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .reports-insight-card {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        background-color: #ffffff;
+        border: 1px solid #E5E7EB;
+        border-radius: 16px;
+        box-shadow: none;
+        transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        cursor: default;
+        position: relative;
+        overflow: hidden;
+        gap: 0.75rem;
+        height: 100%;
+        min-width: 0;
+
+        &:hover {
+            border-color: rgba(241, 90, 36, 0.4);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(241, 90, 36, 0.05);
+        }
+    }
+
+    .reports-insight-icon-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        border: 1.5px solid rgba(241, 90, 36, 0.25);
+        background-color: transparent;
+        color: #F15A24;
+        flex-shrink: 0;
+        transition: border-color 0.25s ease, background-color 0.25s ease;
+
+        svg {
+            width: 1.05rem;
+            height: 1.05rem;
+            stroke: #F15A24 !important;
+            transition: stroke 0.25s ease;
+        }
+
+        .reports-insight-card:hover & {
+            border-color: #F15A24;
+            background-color: rgba(241, 90, 36, 0.02);
+        }
+    }
+
+    .reports-insight-text-wrapper {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        min-width: 0;
+    }
+
+    .reports-insight-title {
+        margin: 0;
+        font-size: 1.125rem; /* 18px */
+        font-weight: 500;
+        color: #0F172A;
+        white-space: nowrap;
+    }
+
+    .reports-insight-desc {
+        margin: 0;
+        font-size: 0.875rem; /* 14px */
+        color: #64748B;
+        margin-top: 0.1rem;
+        line-height: 1.35;
+    }
 
 }

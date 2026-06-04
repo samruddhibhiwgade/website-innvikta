@@ -15,5 +15,11 @@
 }
 
 .btn-outline-primary {
-  @apply border-primary border bg-transparent hover:bg-primary hover:text-white;
+  @apply border-primary border bg-transparent hover:bg-primary hover:text-white rounded-[6px] h-12;
 }
+
+/* Override the wildcard reset inside .insat-page to preserve button styling */
+.insat-page .btn {
+  @apply inline-flex items-center justify-center px-5 h-12 rounded-[6px] transition font-primary text-base font-medium;
+}
+

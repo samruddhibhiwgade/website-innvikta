@@ -269,7 +269,7 @@ const InsatPage = () => {
                                     </svg>
                                 </div>
                             </a>
-                            <a className="btn btn-secondary" href="/demo" style={{padding: "18px 24px"}}>
+                            <a className="btn btn-secondary" href="/demo">
                                 <span>Explore Platform</span>
                             </a>
                         </div>
