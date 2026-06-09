@@ -383,7 +383,7 @@ const menuData = {
         headline: "Meet regulatory mandates and reinforce critical privacy policies.",
         cells: [
           { 
-            name: "DPDP Awareness", 
+            name: "Compliance Learning Suite", 
             desc: "Satisfy GDPR, HIPAA, PCI-DSS, and India's DPDP Act requirements.", 
             href: "#",
             chips: [{ label: "GDPR Awareness" }, { label: "HIPAA Awareness" }]
@@ -396,12 +396,12 @@ const menuData = {
           },
           { 
             name: "Refresher Campaigns", 
-            desc: "Automatically deploy compliance courses to specific policy violators.", 
+            desc: "Automatically deploy compliance courses to specific high-risk user groups.", 
             href: "#",
             chips: [{ label: "Governance Reinforcement" }, { label: "Ongoing Compliance Education" }]
           },
           { 
-            name: "Audit Logs", 
+            name: "Audit-Ready Evidence", 
             desc: "Generate automated training completion records to satisfy security framework audits.", 
             href: "#",
             chips: [{ label: "Automated Records" }, { label: "Auditor Reports" }]
