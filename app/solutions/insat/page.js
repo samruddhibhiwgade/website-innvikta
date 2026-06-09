@@ -302,7 +302,7 @@ const InsatPage = () => {
 
                         <div className="stats-subheading">
                             <p className="text-18-content" style={{ opacity: "0.8" }}>
-                                InSAT's realistic simulations uncover human risk across email, AI tools, and data handling—so you can reduce exposure, strengthen behavior, and prove the value of your security program.
+                                InSAT&apos;s realistic simulations uncover human risk across email, AI tools, and data handling—so you can reduce exposure, strengthen behavior, and prove the value of your security program.
                             </p>
                         </div>
 
