@@ -934,7 +934,7 @@ const Header = () => {
                 <img 
                   src="/images/logo-main.png" 
                   alt="Innvikta" 
-                  className="h-[44px] w-auto object-contain"
+                  className="h-10 w-auto object-contain"
                 />
               </Link>
             </div>
@@ -1004,26 +1004,26 @@ const Header = () => {
               >
                 <div className="w-full mx-auto flex min-h-[480px] w-full">
                   {/* 1. LEFT TAB RAIL (Persistent skeleton anchor) */}
-                  <div className="w-[320px] bg-slate-50 border-r border-slate-100 pt-6 pb-12 px-6 flex flex-col gap-4 shrink-0">
+                  <div className="w-[320px] bg-slate-50 border-r border-slate-100 pt-6 pb-12 px-6 flex flex-col gap-2 shrink-0">
                     {menuData[activeMegaMenu].tabs.map((tab) => {
                       const isActive = activeTabs[activeMegaMenu] === tab.id;
                       const isPlaceholder = !tab.href || tab.href === "#";
                       const tabContent = (
                         <>
-                          <div className="flex items-center gap-4">
+                          <div className="flex items-center gap-3">
                             {/* Absolute indicator for active state */}
                             {isActive && (
                               <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-[16px] bg-[#f15a24] rounded-r-full" />
                             )}
                             <div className="w-5 h-5 flex items-center justify-center shrink-0">
-                              <tab.icon className="text-[20px] shrink-0 text-[#f15a24]" />
+                              <tab.icon className="text-[17px] shrink-0 text-[#f15a24]" />
                             </div>
                             <span className="whitespace-nowrap transition-colors">{tab.label}</span>
                           </div>
-                          <FiArrowRight className={`text-[15px] shrink-0 transition-all duration-200 ${isActive ? "opacity-100 translate-x-0 text-[#f15a24]" : "opacity-0 -translate-x-1 group-hover/tab:opacity-100 group-hover/tab:translate-x-0 group-hover/tab:text-[#f15a24]"}`} />
+                          <FiArrowRight className={`text-xs shrink-0 transition-all duration-200 ${isActive ? "opacity-100 translate-x-0 text-[#f15a24]" : "opacity-0 -translate-x-1 group-hover/tab:opacity-100 group-hover/tab:translate-x-0 group-hover/tab:text-[#f15a24]"}`} />
                         </>
                       );
-                      const baseClass = `relative w-full flex items-center justify-between text-left pl-6 pr-4 py-3 rounded-xl text-[16px] font-bold transition-all duration-200 group/tab ${
+                      const baseClass = `relative w-full flex items-center justify-between text-left pl-6 pr-4 py-2.5 rounded-lg text-[14px] font-semibold transition-all duration-200 group/tab ${
                         isActive
                           ? "active-tab-rail"
                           : "inactive-tab-rail"

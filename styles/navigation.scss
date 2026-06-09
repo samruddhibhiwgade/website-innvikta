@@ -94,9 +94,9 @@
 
 /* Custom Left Tab Rail active/hover states */
 .active-tab-rail {
-  background-color: #FBECE5 !important;
+  background-color: #FFEFEA !important;
   color: #f15a24 !important;
-  font-weight: 700 !important;
+  font-weight: 600 !important;
   
   svg {
     color: #f15a24 !important;
@@ -105,12 +105,12 @@
 
 .inactive-tab-rail {
   background-color: transparent !important;
-  color: #334155 !important;
-  font-weight: 700 !important;
+  color: #475569 !important;
+  font-weight: 600 !important;
   transition: all 0.2s ease;
   
   &:hover {
-    background-color: #FBECE5 !important;
+    background-color: #FFEFEA !important;
     color: #f15a24 !important;
     
     svg {
