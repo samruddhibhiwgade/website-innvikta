@@ -419,13 +419,14 @@ const menuData = {
       {
         id: "customized_solutions",
         label: "Customized Solutions",
+        href: "/solutions/customized-solutions",
         icon: FiLayers,
         headline: "Tailored training for your people, risks, and industry with customized learning paths.",
         cells: [
           { 
             name: "Industry-Specific Portals", 
             desc: "Custom simulations and rules for BFSI, Healthcare, IT, and Manufacturing.", 
-            href: "#",
+            href: "/solutions/customized-solutions",
             chips: [
               { label: "BFSI", icon: FiShield },
               { label: "Healthcare", icon: FiHeart },
@@ -437,7 +438,7 @@ const menuData = {
           { 
             name: "Departmental Learning Paths", 
             desc: "Custom training tracks designed for unique team exposures and duties.", 
-            href: "#",
+            href: "/solutions/customized-solutions",
             chips: [
               { label: "Remote Workforce Security", icon: FiCloud },
               { label: "Human Risk Management", icon: FiActivity }
@@ -446,7 +447,7 @@ const menuData = {
           { 
             name: "Executive Risk Management", 
             desc: "Deploy specialized campaigns to high-target C-suite and finance teams.", 
-            href: "#",
+            href: "/solutions/customized-solutions",
             chips: [
               { label: "Executive Risk Reporting", icon: FiBarChart2 },
               { label: "Phishing Prevention", icon: FiLock }
@@ -455,7 +456,7 @@ const menuData = {
           { 
             name: "Culture Benchmark Studies", 
             desc: "Assess and compare security culture indexes across remote workforces.", 
-            href: "#",
+            href: "/solutions/customized-solutions",
             chips: [
               { label: "Security Culture Building", icon: FiUsers },
               { label: "Compliance Training", icon: FiCheckCircle }
@@ -466,7 +467,7 @@ const menuData = {
           title: "Tailor simulations to specific industries",
           desc: "Build customized learning paths based on the unique regulatory and operational risks of your sector.",
           label: "View Customized Solutions",
-          href: "#",
+          href: "/solutions/customized-solutions",
           svgType: "network"
         }
       }

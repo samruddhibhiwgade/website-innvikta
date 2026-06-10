@@ -2486,6 +2486,79 @@ section {
         }
     }
 
+    /* Policy-Aligned Program custom micro-animations */
+    @keyframes shackleUnlock {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-3px); }
+    }
+    @keyframes shieldPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.12); }
+    }
+    @keyframes alertShake {
+        0%, 100% { transform: rotate(0); }
+        25% { transform: rotate(-6deg); }
+        75% { transform: rotate(6deg); }
+    }
+    @keyframes deviceTilt {
+        0%, 100% { transform: translateY(0) rotate(0); }
+        50% { transform: translateY(-1px) rotate(3deg); }
+    }
+    @keyframes userBounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-3px); }
+    }
+    @keyframes dollarScale {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.15); }
+    }
+
+    .lock-shackle {
+        transform-origin: bottom center;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .privacy-shield {
+        transform-origin: center;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .alert-triangle {
+        transform-origin: bottom center;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .device-screen {
+        transform-origin: bottom center;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hr-user-head {
+        transform-origin: center;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .finance-dollar {
+        transform-origin: center;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .simulation-accordion-item:hover, .simulation-accordion-item:focus-visible {
+        .lock-shackle {
+            animation: shackleUnlock 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .privacy-shield {
+            animation: shieldPulse 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .alert-triangle {
+            animation: alertShake 0.45s ease-in-out;
+        }
+        .device-screen {
+            animation: deviceTilt 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .hr-user-head {
+            animation: userBounce 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .finance-dollar {
+            animation: dollarScale 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+    }
+
     /* Reports & Insights SaaS-style Cards */
     .reports-insight-grid {
         display: grid;
@@ -3434,6 +3507,72 @@ section {
                 color: #475569;
                 margin: 0;
             }
+        }
+    }
+}
+
+/* Customized Solutions Stats Cards Hover Highlight */
+.customized-stats-card {
+    background: #FFFBF7 !important;
+    border: 1px solid #FFEAD4 !important;
+    border-radius: 24px !important;
+    padding: 2rem 1.5rem 1.5rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    text-align: left !important;
+    position: relative !important;
+    height: 100% !important;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+    box-shadow: 0 10px 30px rgba(241, 90, 36, 0.02) !important;
+
+    .card-icon-container {
+        position: absolute;
+        top: -28px;
+        left: 24px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 1.5px solid #FFEAD4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(241, 90, 36, 0.1);
+        transition: border-color 0.3s/ease, background 0.3s ease, border-color 0.3s ease;
+    }
+
+    h3.card-title-custom {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #0f172a;
+        margin-top: 1rem;
+        margin-bottom: 0.25rem;
+        text-align: left;
+        transition: color 0.3s ease;
+    }
+
+    .card-divider {
+        width: 36px;
+        height: 3px;
+        background-color: #f15a24;
+        border-radius: 2px;
+        margin: 0.75rem 0 1.25rem 0;
+    }
+
+    /* Hover styles */
+    &:hover {
+        transform: translateY(-8px);
+        border-color: #f15a24 !important;
+        box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.05) !important;
+
+        .card-icon-container {
+            border-color: #f15a24 !important;
+            background: #FFEFEA !important;
+        }
+
+        h3.card-title-custom {
+            color: #f15a24 !important;
         }
     }
 }
