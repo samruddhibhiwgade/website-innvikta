@@ -2,7 +2,6 @@
 title: "Cybersecurity awareness training"
 meta_title: "Security Awareness Training | Protect Your Business"
 description: "Cultivate a secure culture with our personalized micro-learning approach to security awareness training."
-image: "/images/banner-app.png"
 layout: "product"
 
 hero:
