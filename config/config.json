@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "Innvikta | Human-Led Cyber Security Training",
-    "base_url": "/",
+    "base_url": "https://website-innvikta.vercel.app",
     "favicon": "/images/favicon.png",
     "logo": "/images/logo-main.png",
     "logo_width": "240",
