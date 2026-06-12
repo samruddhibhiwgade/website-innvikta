@@ -140,6 +140,64 @@ const policyCards = [
   }
 ];
 
+const cardStyle = {
+  background: "#FFFBF7",
+  border: "1px solid #FFEAD4",
+  borderRadius: "16px",
+  padding: "1.25rem",
+  display: "flex",
+  height: "100%",
+  transition: "transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
+  textAlign: "center"
+};
+
+const iconWrapperStyle = {
+  background: "#FFEFEA",
+  display: "inline-flex",
+  padding: "0.5rem",
+  borderRadius: "50%",
+  width: "40px",
+  height: "40px",
+  minWidth: "40px",
+  minHeight: "40px",
+  alignItems: "center",
+  justifyContent: "center",
+  marginBottom: "0.5rem"
+};
+
+const titleStyle = {
+  marginTop: "0px",
+  marginBottom: "0.25rem",
+  fontSize: "1.05rem",
+  fontWeight: "600",
+  color: "#1E293B",
+  minHeight: "0px",
+  display: "block",
+  textAlign: "center",
+  lineHeight: "1.2"
+};
+
+const descStyle = {
+  fontSize: "0.85rem",
+  color: "#334155",
+  marginTop: "0px",
+  marginBottom: "0px",
+  lineHeight: "1.4",
+  minHeight: "0px",
+  display: "block",
+  textAlign: "center"
+};
+
+const sourceStyle = {
+  fontSize: "0.6rem",
+  fontWeight: "700",
+  color: "#94A3B8",
+  marginTop: "0.5rem",
+  marginBottom: "0px",
+  display: "block",
+  textAlign: "center"
+};
+
 const CustomizedSolutionsPage = () => {
   const [activeFaq, setActiveFaq] = useState(null);
   const [activePolicy, setActivePolicy] = useState(0);
@@ -498,107 +556,245 @@ const CustomizedSolutionsPage = () => {
               </div>
 
               {/* Row 1: Industry Tracks */}
-              <div className="two-col-grid" style={{ marginTop: "4rem" }}>
-                <div className="two-col-content-block animate from-left">
-                  <h2 className="text-40-heading">Industry Tracks</h2>
-                  <p className="text-18-content" style={{ marginTop: "1rem", opacity: "0.7" }}>
+              <div className="two-col-grid" style={{ marginTop: "4rem", alignItems: "start" }}>
+                {/* Left Column: Heading and Subheading */}
+                <div className="two-col-content-block animate from-left" style={{ maxWidth: "450px" }}>
+                  <h2 className="text-52-heading" style={{ marginTop: "0px", marginBottom: "1rem" }}><span style={{ color: "#f15a24" }}>Industry</span> Tracks</h2>
+                  <p className="text-22-heading" style={{ color: "#475569", fontWeight: "500" }}>Customized paths for key sectors</p>
+                </div>
+                {/* Right Column: Description & Bullet Points */}
+                <div className="two-col-content-block animate from-right" style={{ maxWidth: "680px" }}>
+                  <p className="text-18-content" style={{ opacity: "0.8", marginBottom: "2rem", lineHeight: "1.6", paddingTop: "0.75rem" }}>
                     Create focused learning paths for key industries, addressing specific risks and regulatory requirements.
                   </p>
                   
-                  <div style={{ marginTop: "2rem" }}>
-                    <ul style={{ padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-                      {[
-                        { title: "BFSI", desc: "Payment fraud, KYC risks, customer data, phishing, regulatory awareness." },
-                        { title: "Healthcare", desc: "Patient data, privacy, unauthorized access, device security." },
-                        { title: "Manufacturing", desc: "Vendor fraud, plant access, OT awareness, device usage." },
-                        { title: "IT/ITES", desc: "Cloud access, client data, credentials, remote work, privileged users." },
-                        { title: "Government / Public Sector", desc: "Citizen data, DPDP, document handling, impersonation, email security." },
-                        { title: "Education", desc: "Student data, email safety, device use, access control." }
-                      ].map((item, idx) => (
-                        <li key={idx} style={{ display: "flex", gap: "0.5rem" }}>
-                          <span style={{ color: "#f15a24", fontWeight: "700" }}>✓</span>
-                          <span><strong>{item.title}</strong>: {item.desc}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-                <div className="two-col-visual-block aspect-628-517 bg-grey animate from-right">
-                  <img alt="Industry tracks learning paths" loading="lazy" src="/insat/images/Transfers.jpg" />
+                  <ul style={{ padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+                    {[
+                      {
+                        title: "BFSI",
+                        desc: "Payment fraud, KYC risks, customer data, phishing, regulatory awareness.",
+                        icon: (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                            <line x1="3" y1="21" x2="21" y2="21" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
+                            <polyline points="12 2 20 10 4 10 12 2" />
+                            <line x1="6" y1="10" x2="6" y2="21" />
+                            <line x1="10" y1="10" x2="10" y2="21" />
+                            <line x1="14" y1="10" x2="14" y2="21" />
+                            <line x1="18" y1="10" x2="18" y2="21" />
+                          </svg>
+                        )
+                      },
+                      {
+                        title: "Healthcare",
+                        desc: "Patient data, privacy, unauthorized access, device security.",
+                        icon: (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                          </svg>
+                        )
+                      },
+                      {
+                        title: "Manufacturing",
+                        desc: "Vendor fraud, plant access, OT awareness, device usage.",
+                        icon: (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                            <circle cx="12" cy="12" r="3" />
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                          </svg>
+                        )
+                      },
+                      {
+                        title: "IT/ITES",
+                        desc: "Cloud access, client data, credentials, remote work, privileged users.",
+                        icon: (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                            <line x1="8" y1="21" x2="16" y2="21" />
+                            <line x1="12" y1="17" x2="12" y2="21" />
+                          </svg>
+                        )
+                      },
+                      {
+                        title: "Government / Public Sector",
+                        desc: "Citizen data, DPDP, document handling, impersonation, email security.",
+                        icon: (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+                            <line x1="4" y1="22" x2="4" y2="15" />
+                          </svg>
+                        )
+                      },
+                      {
+                        title: "Education",
+                        desc: "Student data, email safety, device use, access control.",
+                        icon: (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                            <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5" />
+                          </svg>
+                        )
+                      }
+                    ].map((item, idx) => (
+                      <li key={idx} className="group flex gap-3 items-start transition-all duration-300 hover:translate-x-1.5 cursor-pointer">
+                        <div className="transition-transform duration-300 group-hover:scale-110">
+                          {item.icon}
+                        </div>
+                        <span><strong className="transition-colors duration-300 group-hover:text-[#f15a24]" style={{ color: "#0f172a" }}>{item.title}</strong>: <span style={{ color: "#475569" }}>{item.desc}</span></span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
 
               {/* Row 2: Role Tracks */}
-              <div className="two-col-grid reverse" style={{ marginTop: "6rem" }}>
-                <div className="two-col-content-block animate from-right">
-                  <h2 className="text-40-heading">Role Tracks</h2>
-                  <p className="text-18-content" style={{ marginTop: "1rem", opacity: "0.7" }}>
+              <div className="two-col-grid" style={{ marginTop: "6rem", alignItems: "start" }}>
+                {/* Left Column: Heading and Subheading */}
+                <div className="two-col-content-block animate from-left" style={{ maxWidth: "450px" }}>
+                  <h2 className="text-52-heading" style={{ marginTop: "0px", marginBottom: "1rem" }}><span style={{ color: "#f15a24" }}>Role</span> Tracks</h2>
+                  <p className="text-22-heading" style={{ color: "#475569", fontWeight: "500" }}>Tailored tracks for departments</p>
+                </div>
+                {/* Right Column: Description & Bullet Points */}
+                <div className="two-col-content-block animate from-right" style={{ maxWidth: "680px" }}>
+                  <p className="text-18-content" style={{ opacity: "0.8", marginBottom: "2rem", lineHeight: "1.6", paddingTop: "0.75rem" }}>
                     Address unique threats and responsibilities across key operational departments.
                   </p>
                   
-                  <div style={{ marginTop: "2rem" }}>
-                    <ul style={{ padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-                      {[
-                        { title: "Finance", desc: "Invoice fraud, fake vendors, payment approvals." },
-                        { title: "HR", desc: "Employee data, social engineering, document handling." },
-                        { title: "Sales", desc: "Customer data, CRM usage, impersonation risks." },
-                        { title: "Leadership", desc: "CEO fraud, breach escalation, reputational risk." }
-                      ].map((item, idx) => (
-                        <li key={idx} style={{ display: "flex", gap: "0.5rem" }}>
-                          <span style={{ color: "#f15a24", fontWeight: "700" }}>✓</span>
-                          <span><strong>{item.title}</strong>: {item.desc}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-                <div className="two-col-visual-block aspect-628-517 bg-midnight animate from-left">
-                  <img alt="Role tracks learning paths" loading="lazy" src="/insat/images/Monitor-Paymentsmidnight.jpg" />
+                  <ul style={{ padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+                    {[
+                      {
+                        title: "Finance",
+                        desc: "Invoice fraud, fake vendors, payment approvals.",
+                        icon: (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                            <line x1="1" y1="10" x2="23" y2="10" />
+                          </svg>
+                        )
+                      },
+                      {
+                        title: "HR",
+                        desc: "Employee data, social engineering, document handling.",
+                        icon: (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                          </svg>
+                        )
+                      },
+                      {
+                        title: "Sales",
+                        desc: "Customer data, CRM usage, impersonation risks.",
+                        icon: (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                            <circle cx="12" cy="12" r="10" />
+                            <circle cx="12" cy="12" r="6" />
+                            <circle cx="12" cy="12" r="2" />
+                          </svg>
+                        )
+                      },
+                      {
+                        title: "Leadership",
+                        desc: "CEO fraud, breach escalation, reputational risk.",
+                        icon: (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "2px" }}>
+                            <circle cx="12" cy="8" r="7" />
+                            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+                          </svg>
+                        )
+                      }
+                    ].map((item, idx) => (
+                      <li key={idx} className="group flex gap-3 items-start transition-all duration-300 hover:translate-x-1.5 cursor-pointer">
+                        <div className="transition-transform duration-300 group-hover:scale-110">
+                          {item.icon}
+                        </div>
+                        <span><strong className="transition-colors duration-300 group-hover:text-[#f15a24]" style={{ color: "#0f172a" }}>{item.title}</strong>: <span style={{ color: "#475569" }}>{item.desc}</span></span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>
           </section>
 
-          {/* 5. EXECUTIVE & HIGH-RISK USER PROGRAMS (Side Grid Layout) */}
-          <section className="bg-grey-5" style={{ paddingTop: "5rem", paddingBottom: "5rem" }}>
+          {/* 5. EXECUTIVE & HIGH-RISK USER PROGRAMS (Two Column Grid Layout) */}
+          <section className="bg-white" style={{ paddingTop: "5rem", paddingBottom: "5rem" }}>
             <div className="container">
-              <div className="two-col-grid">
-                <div className="sticky-grid-col animate from-left">
+              <div className="two-col-grid" style={{ alignItems: "center" }}>
+                
+                {/* Left Column: Heading, Description & Bullet Points */}
+                <div className="two-col-content-block animate from-left" style={{ maxWidth: "620px" }}>
                   <span className="text-subheading">EXECUTIVE & HIGH-RISK</span>
-                  <h2 className="text-52-heading" style={{ marginTop: "0.5rem" }}>Focused Journeys for People Attackers Target First</h2>
-                  <div style={{ marginTop: "1.5rem", opacity: "0.8" }}>
-                    <p className="text-18-content">
-                      Build specialized campaigns for CXOs, finance teams, privileged users, customer-facing teams, and employees who need reinforcement.
-                    </p>
-                  </div>
-                  <div className="sticky-visual" style={{ marginTop: "2rem" }}>
-                    <img alt="High-risk scenarios monitoring" loading="lazy" src="/insat/images/api-new-static.jpg" />
+                  <h2 className="text-64-heading" style={{ marginTop: "0.5rem", lineHeight: "1.1" }}>
+                    Focused Journeys for <br />
+                    <span style={{ color: "#f15a24" }}>People Attackers Target First</span>
+                  </h2>
+                  <p className="text-18-content" style={{ marginTop: "1.5rem", opacity: "0.8" }}>
+                    Build specialized campaigns for CXOs, finance teams, privileged users, customer-facing teams, and employees who need reinforcement.
+                  </p>
+                  
+                  <div style={{ marginTop: "2rem" }}>
+                    <ul style={{ padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+                      {[
+                        {
+                          title: "Leadership Risk",
+                          desc: "CXO impersonation, urgent approvals, and reputation impact protection.",
+                          icon: (
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "4px" }}>
+                              <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                              <circle cx="9" cy="7" r="4" />
+                              <polyline points="16 11 18 13 22 9" />
+                            </svg>
+                          )
+                        },
+                        {
+                          title: "Finance Risk",
+                          desc: "Defense against fake vendors, invoice manipulation, and payment fraud.",
+                          icon: (
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "4px" }}>
+                              <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                              <line x1="1" y1="10" x2="23" y2="10" />
+                            </svg>
+                          )
+                        },
+                        {
+                          title: "Privileged Access",
+                          desc: "Security controls for admin credentials, MFA fatigue, and access misuse.",
+                          icon: (
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "4px" }}>
+                              <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" />
+                            </svg>
+                          )
+                        },
+                        {
+                          title: "Repeat-Risk Users",
+                          desc: "Targeted nudges, microlearning, and follow-up simulation campaigns.",
+                          icon: (
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: "4px" }}>
+                              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                            </svg>
+                          )
+                        }
+                      ].map((item, idx) => (
+                        <li key={idx} style={{ display: "flex", gap: "1rem", alignItems: "start" }}>
+                          {item.icon}
+                          <span>
+                            <strong style={{ fontSize: "1.1rem", color: "#0f172a", display: "block", marginBottom: "0.25rem" }}>{item.title}</strong>
+                            <span style={{ color: "#475569", fontSize: "0.95rem" }}>{item.desc}</span>
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
 
-                <div className="side-grid-col animate from-right">
-                  {/* Card 1 */}
-                  <div className="side-card" style={{ marginBottom: "2rem", padding: "2rem", backgroundColor: "#fff", borderRadius: "16px", border: "1px solid rgba(0,0,0,0.05)" }}>
-                    <div className="side-card-text-wrapper" style={{ padding: 0 }}>
-                      <h3 className="side-card-title" style={{ fontSize: "1.35rem", fontWeight: "600", color: "#0f172a", marginBottom: "1rem" }}>Leadership & Finance Risk</h3>
-                      <p className="side-card-desc" style={{ fontSize: "0.95rem", lineHeight: "1.6", color: "#475569", opacity: 0.9 }}>
-                        <strong>Leadership Risk:</strong> CXO impersonation, urgent approvals, reputation impact.
-                        <br /><strong>Finance Risk:</strong> Fake vendors, invoice manipulation, payment fraud.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Card 2 */}
-                  <div className="side-card" style={{ padding: "2rem", backgroundColor: "#fff", borderRadius: "16px", border: "1px solid rgba(0,0,0,0.05)" }}>
-                    <div className="side-card-text-wrapper" style={{ padding: 0 }}>
-                      <h3 className="side-card-title" style={{ fontSize: "1.35rem", fontWeight: "600", color: "#0f172a", marginBottom: "1rem" }}>Privileged Access & Repeat Risk</h3>
-                      <p className="side-card-desc" style={{ fontSize: "0.95rem", lineHeight: "1.6", color: "#475569", opacity: 0.9 }}>
-                        <strong>Privileged Access Risk:</strong> Admin credentials, MFA fatigue, access misuse.
-                        <br /><strong>Repeat-Risk Users:</strong> Targeted nudges, microlearning, follow-up simulations.
-                      </p>
-                    </div>
-                  </div>
+                {/* Right Column: Image */}
+                <div className="two-col-visual-block aspect-628-517 bg-grey animate from-right" style={{ marginTop: "3rem" }}>
+                  <img alt="High-risk scenarios monitoring" loading="lazy" src="/insat/images/api-new-static.jpg" />
                 </div>
+
               </div>
             </div>
           </section>
@@ -606,36 +802,150 @@ const CustomizedSolutionsPage = () => {
           {/* 6. CULTURE & BEHAVIOUR CAMPAIGNS */}
           <section className="bg-white" style={{ paddingTop: "5rem", paddingBottom: "5rem" }}>
             <div className="container">
-              <div className="section-intro animate" style={{ textAlign: "center", marginBottom: "3.5rem" }}>
-                <span className="text-subheading">CULTURE & BEHAVIOUR CAMPAIGNS</span>
-                <h2 className="text-52-heading">Keep Awareness Visible All Year</h2>
-                <p className="text-18-content" style={{ opacity: "0.8", marginTop: "1rem", maxWidth: "800px", marginLeft: "auto", marginRight: "auto" }}>
-                  Run themed campaigns using nudges, posters, quizzes, games, simulations, and microlearning — aligned to your internal communication style.
-                </p>
-              </div>
-
-              <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "1.5rem", marginTop: "2rem" }}>
-                {[
-                  "Cybersecurity Month",
-                  "Data Privacy Week",
-                  "Phishing Readiness",
-                  "Password & MFA",
-                  "Report Suspicious Activity"
-                ].map((item, index) => (
-                  <div key={index} style={{
-                    padding: "1.25rem 2.5rem",
-                    backgroundColor: "#FFEFEA",
-                    border: "1px solid #FFEAD4",
-                    borderRadius: "50px",
-                    color: "#f15a24",
-                    fontWeight: "600",
-                    fontSize: "1.1rem",
-                    textAlign: "center",
-                    boxShadow: "0 4px 6px -1px rgba(241, 90, 36, 0.05)"
-                  }}>
-                    {item}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                {/* Left Column: Text Content */}
+                <div className="lg:col-span-5 animate from-left">
+                  <span className="text-subheading">CULTURE & BEHAVIOUR CAMPAIGNS</span>
+                  <h2 className="text-52-heading" style={{ lineHeight: "1.2", marginBottom: "1.5rem" }}>
+                    Keep Awareness <br/>
+                    Visible <span className="text-orange">All Year</span>
+                  </h2>
+                  <p className="text-18-content" style={{ opacity: "0.8", color: "#475569", lineHeight: "1.6" }}>
+                    Run themed campaigns using nudges, posters, quizzes, games, simulations, and microlearning — aligned to your internal communication style.
+                  </p>
+                  <div style={{ marginTop: "2rem" }}>
+                    <Link className="btn btn-primary btn-cta" href="/demo">
+                      <span className="hover-sweep"></span>
+                      <span>Book a Demo</span>
+                      <div className="arrow-wrapper">
+                        <svg className="arrow-icon" width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3.29985 4.50047L0 1.20062L0.942813 0.257812L5.18545 4.50047L0.942813 8.74306L0 7.80027L3.29985 4.50047Z" fill="currentColor" />
+                        </svg>
+                      </div>
+                    </Link>
                   </div>
-                ))}
+                </div>
+
+                {/* Right Column: Bento Grid of 5 Cards */}
+                <div className="lg:col-span-7 animate from-right">
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem", width: "100%" }}>
+                    {[
+                      {
+                        title: "Cybersecurity Month",
+                        desc: "Annual organization-wide security awareness drive.",
+                        span: "span 2",
+                        icon: (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
+                          </svg>
+                        )
+                      },
+                      {
+                        title: "Data Privacy Week",
+                        desc: "Focus on privacy and compliance.",
+                        span: "span 1",
+                        icon: (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                          </svg>
+                        )
+                      },
+                      {
+                        title: "Phishing Readiness",
+                        desc: "Simulation campaigns & safety drills.",
+                        span: "span 1",
+                        icon: (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                          </svg>
+                        )
+                      },
+                      {
+                        title: "Password & MFA",
+                        desc: "Refresher training on credentials.",
+                        span: "span 1",
+                        icon: (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                          </svg>
+                        )
+                      },
+                      {
+                        title: "Report Suspicious Activity",
+                        desc: "Empowering teams to report active threats.",
+                        span: "span 1",
+                        icon: (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                            <line x1="12" y1="9" x2="12" y2="13" />
+                            <line x1="12" y1="17" x2="12.01" y2="17" />
+                          </svg>
+                        )
+                      }
+                    ].map((card, idx) => (
+                      <div
+                        key={idx}
+                        className="stats-card transition-all duration-300 hover:-translate-y-1 hover:shadow-sm"
+                        style={{
+                          background: "#FFFBF7",
+                          border: "1px solid #FFEAD4",
+                          borderRadius: "14px",
+                          padding: "1.25rem",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "0.25rem",
+                          gridColumn: card.span,
+                          justifyContent: "center"
+                        }}
+                      >
+                        <div
+                          style={{
+                            background: "#FFEFEA",
+                            display: "inline-flex",
+                            padding: "0.45rem",
+                            borderRadius: "50%",
+                            width: "36px",
+                            height: "36px",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            marginBottom: "0.25rem"
+                          }}
+                        >
+                          {card.icon}
+                        </div>
+                        <h3
+                          style={{
+                            marginTop: "0px",
+                            marginBottom: "0.25rem",
+                            fontSize: "1.05rem",
+                            fontWeight: "600",
+                            color: "#1E293B",
+                            lineHeight: "1.2"
+                          }}
+                        >
+                          {card.title}
+                        </h3>
+                        <p
+                          style={{
+                            fontSize: "0.85rem",
+                            color: "#334155",
+                            marginTop: "0px",
+                            marginBottom: "0px",
+                            lineHeight: "1.4"
+                          }}
+                        >
+                          {card.desc}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
               </div>
             </div>
           </section>
@@ -709,9 +1019,18 @@ const CustomizedSolutionsPage = () => {
                   <p className="mt-10 font-primary text-base text-slate-600 leading-relaxed" style={{ marginTop: "2.5rem" }}>
                     Let’s create a program aligned to your policies, people, risks, and priorities.
                   </p>
-                  <div className="flex flex-wrap justify-center gap-4 mt-10" style={{ marginTop: "2.5rem" }}>
-                    <Link href="/demo" className="btn btn-primary">
-                      Book a Demo
+                  <div className="flex flex-wrap justify-center gap-4 mt-10 animate-fade-in" style={{ marginTop: "2.5rem" }}>
+                    <Link href="/demo" className="btn btn-secondary">
+                      Start Free
+                    </Link>
+                    <Link href="/demo" className="btn btn-primary btn-cta">
+                      <span className="hover-sweep"></span>
+                      <span>Book a Demo</span>
+                      <div className="arrow-wrapper">
+                        <svg className="arrow-icon" width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3.29985 4.50047L0 1.20062L0.942813 0.257812L5.18545 4.50047L0.942813 8.74306L0 7.80027L3.29985 4.50047Z" fill="currentColor" />
+                        </svg>
+                      </div>
                     </Link>
                   </div>
                 </div>

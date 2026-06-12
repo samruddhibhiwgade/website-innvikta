@@ -753,52 +753,14 @@ const menuData = {
         headline: "We help enterprises build everyday secure employee behavior.",
         cells: [
           { name: "Our Story", desc: "Who we are, our team, and our human security mission.", href: "#" },
-          { name: "The Mission", desc: "Transforming workforce vulnerability into defense strength.", href: "#" },
-          { name: "Press & Media", desc: "Latest corporate news features, press kits, and releases.", href: "#" },
-          { name: "Company Values", desc: "Read about our commitment to privacy, clarity, and trust.", href: "#" }
+          { name: "Our Mission", desc: "Transforming workforce vulnerability into defense strength.", href: "#" },
+          { name: "Leadership & Team", desc: "Meet the executive team driving security awareness innovation.", href: "#" },
+          { name: "Impact & Approach", desc: "Read about our commitment to privacy, clarity, and trust.", href: "#" }
         ],
         cta: {
           title: "Discover our mission",
           desc: "Read about our commitment to secure employee work habits and mitigate social engineering vectors.",
           label: "Read About Us",
-          href: "#",
-          svgType: "company"
-        }
-      },
-      {
-        id: "leadership",
-        label: "Leadership Team",
-        icon: FiUsers,
-        headline: "Meet the executive team driving security awareness innovation.",
-        cells: [
-          { name: "Executive Team", desc: "Profiles of the leaders behind our platform strategy.", href: "#" },
-          { name: "Board of Directors", desc: "Our governance, guidance, and security advisors.", href: "#" },
-          { name: "Advisory Board", desc: "CISO advisors steering our product and simulator roadmap.", href: "#" },
-          { name: "Office Locations", desc: "Global offices and contact points for executive meetings.", href: "#" }
-        ],
-        cta: {
-          title: "Contact corporate leadership",
-          desc: "Get in touch with our operations team or request executive board briefings.",
-          label: "Get in Touch",
-          href: "#",
-          svgType: "company"
-        }
-      },
-      {
-        id: "careers",
-        label: "Careers",
-        icon: FiSmile,
-        headline: "Join us in transforming security culture worldwide.",
-        cells: [
-          { name: "Work With Us", desc: "Explore our remote-first corporate culture and global perks.", href: "#" },
-          { name: "Open Positions", desc: "Browse open engineering, sales, marketing, and CS jobs.", href: "#" },
-          { name: "Our Culture", desc: "Read about diversity, mentorship, and growth at Innvikta.", href: "#" },
-          { name: "Internship Program", desc: "Graduate paths for aspiring security developers and designers.", href: "#" }
-        ],
-        cta: {
-          title: "We are hiring worldwide!",
-          desc: "Help us build the next generation of gamified security training and human risk analytics.",
-          label: "View Open Positions",
           href: "#",
           svgType: "company"
         }
@@ -1165,21 +1127,13 @@ const Header = () => {
                                   </h5>
                                   {/* Description removed to reduce text as requested */}
                                 </div>
-                                {!currentTab.cta.href || currentTab.cta.href === "#" ? (
-                                  <div 
-                                    className="w-full justify-center text-center py-3 bg-[#f15a24]/80 text-white font-extrabold rounded-lg text-xs flex items-center gap-1.5 uppercase tracking-wider cursor-default"
-                                  >
-                                    {currentTab.cta.label}
-                                  </div>
-                                ) : (
-                                  <Link 
-                                    href={currentTab.cta.href}
-                                    onClick={handleMenuLeave}
-                                    className="w-full justify-center text-center py-3 bg-[#f15a24] hover:bg-orange-600 text-white font-extrabold rounded-lg text-xs transition-colors flex items-center gap-1.5 uppercase tracking-wider shadow-md shadow-orange-500/10"
-                                  >
-                                    {currentTab.cta.label} <FiArrowRight className="text-xs" />
-                                  </Link>
-                                )}
+                                <Link 
+                                  href={currentTab.cta.href || "#"}
+                                  onClick={handleMenuLeave}
+                                  className="w-full justify-center text-center py-3 bg-[#f15a24] hover:bg-orange-600 text-white font-extrabold rounded-lg text-xs transition-colors flex items-center gap-1.5 uppercase tracking-wider shadow-md shadow-orange-500/10"
+                                >
+                                  {currentTab.cta.label} <FiArrowRight className="text-xs" />
+                                </Link>
                               </div>
                             </div>
                           )}
