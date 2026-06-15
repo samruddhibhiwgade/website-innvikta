@@ -749,19 +749,20 @@ const menuData = {
       {
         id: "about",
         label: "About Innvikta",
+        href: "/about",
         icon: FiBriefcase,
         headline: "We help enterprises build everyday secure employee behavior.",
         cells: [
-          { name: "Our Story", desc: "Who we are, our team, and our human security mission.", href: "#" },
-          { name: "Our Mission", desc: "Transforming workforce vulnerability into defense strength.", href: "#" },
-          { name: "Leadership & Team", desc: "Meet the executive team driving security awareness innovation.", href: "#" },
-          { name: "Impact & Approach", desc: "Read about our commitment to privacy, clarity, and trust.", href: "#" }
+          { name: "Our Story", desc: "Who we are, our team, and our human security mission.", href: "/about#our-story" },
+          { name: "Our Mission", desc: "Transforming workforce vulnerability into defense strength.", href: "/about#our-mission" },
+          { name: "Leadership & Team", desc: "Meet the executive team driving security awareness innovation.", href: "/about#leadership-team" },
+          { name: "Impact & Approach", desc: "Read about our commitment to privacy, clarity, and trust.", href: "/about#impact-approach" }
         ],
         cta: {
           title: "Discover our mission",
           desc: "Read about our commitment to secure employee work habits and mitigate social engineering vectors.",
           label: "Read About Us",
-          href: "#",
+          href: "/about",
           svgType: "company"
         }
       }

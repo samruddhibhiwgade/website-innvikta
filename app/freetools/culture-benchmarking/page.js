@@ -695,7 +695,7 @@ const CultureBenchmarkingPage = () => {
           </section>
 
           {/* SECTION 2: WHAT IS SECURITY CULTURE BENCHMARKING */}
-          <section style={{ background: "#F8F6F1", paddingTop: "6rem", paddingBottom: "6rem", borderTop: "1px solid #E7E7E7" }}>
+          <section style={{ paddingTop: "6rem", paddingBottom: "6rem", borderTop: "1px solid #E7E7E7" }}>
             <div className="container">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                 
