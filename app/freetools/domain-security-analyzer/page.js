@@ -915,7 +915,7 @@ export default function DomainSecurityAnalyzer() {
                     Analyze SPF, DKIM, and DMARC record vulnerabilities, and prevent email spoofing attacks on your brand.
                   </p>
                   <div className="flex flex-wrap justify-center gap-4 mt-10" style={{ marginTop: "2.5rem" }}>
-                    <Link href="/demo" className="btn btn-primary">
+                    <Link href="/book-demo" className="btn btn-primary">
                       Book a Demo
                     </Link>
                     <Link href="/contact" className="btn btn-outline-primary">

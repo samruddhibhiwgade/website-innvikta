@@ -691,11 +691,11 @@ const menuData = {
         id: "partner_prog",
         label: "Partner Program",
         icon: FiGlobe,
-        headline: "Grow your business with the leading human risk platform.",
+        headline: "Grow with a modern security awareness and human risk platform built for enterprises.",
         cells: [
-          { name: "Become a Partner", desc: "Apply to become a certified Innvikta channel partner.", href: "#" },
-          { name: "Partner Benefits", desc: "Access tier pricing, deal registration, and MDF funds.", href: "#" },
-          { name: "Co-Selling Support", desc: "Sales engineering, custom demos, and asset support.", href: "#" }
+          { name: "Partner Program", desc: "Collaborate with Innvikta to deliver modern security awareness solutions.", href: "#" },
+          { name: "Co-Selling", desc: "Partner with our sales experts to close deals and drive mutual revenue.", href: "#" },
+          { name: "Growth Support", desc: "Access tier pricing, marketing assets, and co-marketing funds.", href: "#" }
         ],
         cta: {
           title: "Join our partner network",
@@ -709,34 +709,16 @@ const menuData = {
         id: "reseller",
         label: "Channel & Reseller",
         icon: FiShield,
-        headline: "Empower your sales and white-label service operations.",
+        headline: "Offer Innvikta’s awareness, simulation, compliance, and human risk solutions to your clients.",
         cells: [
-          { name: "Reseller Enablement", desc: "Manage multiple client dashboards from a single partner console.", href: "#" },
-          { name: "White-Label Support", desc: "Deploy customized, branded interfaces for your clients.", href: "#" },
-          { name: "Sales Assets", desc: "Download brochures, presentations, and product data sheets.", href: "#" }
+          { name: "Resellers", desc: "Offer Innvikta's training and human risk solutions to your clients.", href: "#" },
+          { name: "Consultants", desc: "Integrate human risk intelligence into your security consulting services.", href: "#" },
+          { name: "IT Partners", desc: "Equip your IT offerings with easy-to-manage training and phishing tools.", href: "#" }
         ],
         cta: {
           title: "Access white-label reseller tools",
           desc: "Rebrand the training experience and deliver human risk visibility as a managed service.",
           label: "Explore Reseller Program",
-          href: "#",
-          svgType: "partners"
-        }
-      },
-      {
-        id: "tech_partners",
-        label: "Technology Partners",
-        icon: FiCpu,
-        headline: "Extend platform integration and directory deployment support.",
-        cells: [
-          { name: "Integrations", desc: "Seamlessly connect with your existing security ecosystem.", href: "#" },
-          { name: "Deployment Support", desc: "Expert guidance to ensure smooth implementation.", href: "#" },
-          { name: "Platform Collaboration", desc: "Build joint solutions that enhance security capabilities for our mutual customers.", href: "#" }
-        ],
-        cta: {
-          title: "Partner with our Technology Ecosystem",
-          desc: "Build integrations, co-develop joint solutions, and streamline deployments for our mutual customers.",
-          label: "Talk to Partnerships",
           href: "#",
           svgType: "partners"
         }
@@ -934,10 +916,10 @@ const Header = () => {
                 Start Free
               </Link>
               <Link 
-                href="#" 
+                href="/book-demo" 
                 className="px-5 py-2 bg-[#f15a24] hover:bg-orange-600 text-white rounded-lg text-[13px] font-bold transition-all duration-300 flex items-center gap-1"
               >
-                Book Demo <FiArrowRight className="text-xs" />
+                Book a Demo <FiArrowRight className="text-xs" />
               </Link>
             </div>
 
@@ -1028,22 +1010,22 @@ const Header = () => {
                         >
                           {/* 2. CENTER WORKSPACE (Strict 2x2 grid, visually populated) */}
                           <div className="flex-1 pt-6 pb-12 px-12 flex flex-col justify-start">
-                            {currentTab.headline && (
-                              <div className={`mb-6 max-w-4xl border-b border-slate-100 pb-6 ${currentTab.headlineCta && currentTab.headlineCta.href !== "#" ? 'flex flex-col items-start gap-4' : ''}`}>
-                                <h3 className="text-[20px] font-semibold text-slate-800 tracking-tight leading-snug">
-                                  {currentTab.headline}
-                                </h3>
-                                {currentTab.headlineCta && currentTab.headlineCta.href !== "#" && (
-                                  <Link 
-                                    href={currentTab.headlineCta.href}
-                                    onClick={handleMenuLeave}
-                                    className="group px-6 py-2.5 bg-[#f15a24] hover:bg-orange-600 text-white font-extrabold rounded-full text-[13px] transition-colors flex items-center gap-1.5 mt-1 hover:shadow-none"
-                                  >
-                                    {currentTab.headlineCta.label} <FiArrowRight className="text-[13px] transition-transform duration-200 group-hover:translate-x-1" />
-                                  </Link>
-                                )}
-                              </div>
-                            )}
+                             {currentTab.headline && (
+                               <div className={`mb-6 max-w-4xl border-b border-slate-100 pb-6 ${currentTab.headlineCta && currentTab.headlineCta.href !== "#" ? 'flex flex-col items-start gap-4' : ''}`}>
+                                 <h3 className="text-[20px] font-semibold text-slate-800 tracking-tight leading-snug">
+                                   {currentTab.headline}
+                                 </h3>
+                                 {currentTab.headlineCta && currentTab.headlineCta.href !== "#" && (
+                                   <Link 
+                                     href={currentTab.headlineCta.href}
+                                     onClick={handleMenuLeave}
+                                     className="group px-6 py-2.5 bg-[#f15a24] hover:bg-orange-600 text-white font-extrabold rounded-full text-[13px] transition-colors flex items-center gap-1.5 mt-1 hover:shadow-none"
+                                   >
+                                     {currentTab.headlineCta.label} <FiArrowRight className="text-[13px] transition-transform duration-200 group-hover:translate-x-1" />
+                                   </Link>
+                                 )}
+                               </div>
+                             )}
 
                             {/* Strictly 2-column or 3-column layout based on tab config */}
                             <div className={`grid ${currentTab.layout === 'three-column' ? 'grid-cols-3' : 'grid-cols-2'} gap-x-10 gap-y-6 items-start content-start w-full mt-1`}>
@@ -1245,11 +1227,11 @@ const Header = () => {
           {/* Bottom Mobile Sticky CTAs */}
           <div className="flex flex-col gap-3 border-t border-slate-100 pt-6 mt-6">
             <Link 
-              href="#" 
+              href="/book-demo" 
               onClick={() => setShowMenu(false)}
               className="w-full text-center py-3 bg-[#f15a24] text-white font-extrabold rounded-lg text-sm shadow-md shadow-orange-500/10"
             >
-              Book Demo
+              Book a Demo
             </Link>
           </div>
         </div>
@@ -1259,3 +1241,4 @@ const Header = () => {
 };
 
 export default Header;
+

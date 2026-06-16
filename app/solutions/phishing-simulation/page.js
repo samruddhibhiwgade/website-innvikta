@@ -361,7 +361,7 @@ const PhishingSimulationPage = () => {
                                     </svg>
                                 </div>
                             </a>
-                            <a className="btn btn-secondary" href="/demo">
+                            <a className="btn btn-secondary" href="/book-demo">
                                 <span>Book a Demo</span>
                             </a>
                         </div>
@@ -396,7 +396,7 @@ const PhishingSimulationPage = () => {
                         </div>
 
                         <div style={{ marginTop: "2rem" }}>
-                            <Link className="btn btn-primary btn-cta" href="/demo">
+                            <Link className="btn btn-primary btn-cta" href="/book-demo">
                                 <span className="hover-sweep"></span>
                                 <span>Book a Demo</span>
                                 <div className="arrow-wrapper">
@@ -1087,7 +1087,7 @@ const PhishingSimulationPage = () => {
                             Run safe simulations and turn risky behaviour into measurable learning.
                         </p>
                         <div className="flex flex-wrap justify-center gap-4 mt-10" style={{ marginTop: "2.5rem" }}>
-                            <Link href="/demo" className="btn btn-primary">
+                            <Link href="/book-demo" className="btn btn-primary">
                                 Book a Demo
                             </Link>
                             <Link href="/contact" className="btn btn-outline-primary">

@@ -287,7 +287,7 @@ const HumanRiskIntelligencePage = () => {
                                     </svg>
                                 </div>
                             </Link>
-                            <Link className="btn btn-secondary" href="/demo">
+                            <Link className="btn btn-secondary" href="/book-demo">
                                 <span>Book a Demo</span>
                             </Link>
                         </div>
@@ -317,7 +317,7 @@ const HumanRiskIntelligencePage = () => {
                         </div>
 
                         <div style={{ marginTop: "2rem" }}>
-                            <Link className="btn btn-primary btn-cta" href="/demo">
+                            <Link className="btn btn-primary btn-cta" href="/book-demo">
                                 <span>Book a Demo</span>
                                 <div className="arrow-wrapper">
                                     <svg className="arrow-icon" width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -996,7 +996,7 @@ const HumanRiskIntelligencePage = () => {
                     Use AI-assisted intelligence to uncover, prioritize, and reduce workforce risk.
                   </p>
                   <div className="flex flex-wrap justify-center gap-4 mt-10" style={{ marginTop: "2.5rem" }}>
-                    <Link href="/demo" className="btn btn-primary">
+                    <Link href="/book-demo" className="btn btn-primary">
                       Book a Demo
                     </Link>
                     <Link href="/contact" className="btn btn-outline-primary">

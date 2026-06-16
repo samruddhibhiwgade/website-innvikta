@@ -348,7 +348,7 @@ const ComplianceTrainingPage = () => {
                         </svg>
                       </div>
                     </a>
-                    <a className="btn btn-secondary" href="/demo">
+                    <a className="btn btn-secondary" href="/book-demo">
                       <span>Book a Demo</span>
                     </a>
                   </div>
@@ -386,7 +386,7 @@ const ComplianceTrainingPage = () => {
                   </div>
 
                   <div style={{ marginTop: "2rem" }}>
-                    <Link className="btn btn-primary btn-cta" href="/demo">
+                    <Link className="btn btn-primary btn-cta" href="/book-demo">
                       <span className="hover-sweep"></span>
                       <span>Explore Our Platform</span>
                       <div className="arrow-wrapper">
@@ -498,7 +498,7 @@ const ComplianceTrainingPage = () => {
                   </p>
                   
                   <div className="journey-btn-group">
-                    <Link className="btn btn-primary btn-cta" href="/demo">
+                    <Link className="btn btn-primary btn-cta" href="/book-demo">
                       <span className="hover-sweep"></span>
                       <span>Book a Demo</span>
                       <div className="arrow-wrapper">
@@ -926,7 +926,7 @@ const ComplianceTrainingPage = () => {
                     Deliver policy learning, reinforce expected behaviour, and maintain audit-ready evidence from one unified platform.
                   </p>
                   <div className="flex flex-wrap justify-center gap-4 mt-10" style={{ marginTop: "2.5rem" }}>
-                    <Link href="/demo" className="btn btn-primary">
+                    <Link href="/book-demo" className="btn btn-primary">
                       Start Free
                     </Link>
                     <Link href="/contact" className="btn btn-outline-primary">

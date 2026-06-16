@@ -269,7 +269,7 @@ const InsatPage = () => {
                                     </svg>
                                 </div>
                             </a>
-                            <a className="btn btn-secondary" href="/demo">
+                            <a className="btn btn-secondary" href="/book-demo">
                                 <span>Explore Platform</span>
                             </a>
                         </div>
@@ -307,7 +307,7 @@ const InsatPage = () => {
                         </div>
 
                         <div style={{ marginTop: "2rem" }}>
-                            <Link className="btn btn-primary btn-cta" href="/demo">
+                            <Link className="btn btn-primary btn-cta" href="/book-demo">
                                 <span className="hover-sweep"></span>
                                 <span>Book a Demo</span>
                                 <div className="arrow-wrapper">

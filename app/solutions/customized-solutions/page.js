@@ -391,7 +391,7 @@ const CustomizedSolutionsPage = () => {
                   </div>
 
                   <div className="hero-actions-row">
-                    <Link className="btn btn-primary btn-cta" href="/demo">
+                    <Link className="btn btn-primary btn-cta" href="/book-demo">
                       <span className="hover-sweep"></span>
                       <span>Book a Demo</span>
                       <div className="arrow-wrapper">
@@ -434,7 +434,7 @@ const CustomizedSolutionsPage = () => {
                   </div>
 
                   <div style={{ marginTop: "2rem" }}>
-                    <Link className="btn btn-primary btn-cta" href="/demo">
+                    <Link className="btn btn-primary btn-cta" href="/book-demo">
                       <span className="hover-sweep"></span>
                       <span>Book a Demo</span>
                       <div className="arrow-wrapper">
@@ -815,7 +815,7 @@ const CustomizedSolutionsPage = () => {
                     Run themed campaigns using nudges, posters, quizzes, games, simulations, and microlearning — aligned to your internal communication style.
                   </p>
                   <div style={{ marginTop: "2rem" }}>
-                    <Link className="btn btn-primary btn-cta" href="/demo">
+                    <Link className="btn btn-primary btn-cta" href="/book-demo">
                       <span className="hover-sweep"></span>
                       <span>Book a Demo</span>
                       <div className="arrow-wrapper">
@@ -1020,10 +1020,10 @@ const CustomizedSolutionsPage = () => {
                     Let’s create a program aligned to your policies, people, risks, and priorities.
                   </p>
                   <div className="flex flex-wrap justify-center gap-4 mt-10 animate-fade-in" style={{ marginTop: "2.5rem" }}>
-                    <Link href="/demo" className="btn btn-secondary">
+                    <Link href="/book-demo" className="btn btn-secondary">
                       Start Free
                     </Link>
-                    <Link href="/demo" className="btn btn-primary btn-cta">
+                    <Link href="/book-demo" className="btn btn-primary btn-cta">
                       <span className="hover-sweep"></span>
                       <span>Book a Demo</span>
                       <div className="arrow-wrapper">

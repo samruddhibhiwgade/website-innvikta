@@ -991,7 +991,7 @@ const BaselineScoreToolPage = () => {
                     >
                       Start Free
                     </button>
-                    <Link href="/demo" className="btn btn-primary btn-cta">
+                    <Link href="/book-demo" className="btn btn-primary btn-cta">
                       <span className="hover-sweep"></span>
                       <span>Book a Demo</span>
                       <div className="arrow-wrapper">

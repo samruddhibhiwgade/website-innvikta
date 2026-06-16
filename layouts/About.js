@@ -61,6 +61,7 @@ const leadershipTeam = [
 const About = () => {
   const heroRef = useRef(null);
   const [activeLeaderIndex, setActiveLeaderIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -155,11 +156,12 @@ const About = () => {
   }, []);
 
   useEffect(() => {
+    if (isHovered) return;
     const timer = setTimeout(() => {
       setActiveLeaderIndex((prevIndex) => (prevIndex + 1) % leadershipTeam.length);
     }, 2000);
     return () => clearTimeout(timer);
-  }, [activeLeaderIndex]);
+  }, [activeLeaderIndex, isHovered]);
 
 
   return (
@@ -195,7 +197,7 @@ const About = () => {
 
                     <div className="banner-btn flex flex-wrap items-center justify-center gap-4">
                       <Link 
-                        href="/demo"
+                        href="/book-demo"
                         className="btn btn-primary shadow-lg shadow-orange-500/15 w-44 h-12 flex items-center justify-center font-bold text-base gap-1.5"
                       >
                         Book Demo <FiArrowRight className="text-xs" />
@@ -425,7 +427,11 @@ const About = () => {
                           className="grid grid-cols-9 gap-8 items-start w-full"
                         >
                           {/* CENTER COLUMN: EDITORIAL CONTENT */}
-                          <div className="col-span-5 pr-8 text-left">
+                          <div 
+                            className="col-span-5 pr-8 text-left"
+                            onMouseEnter={() => setIsHovered(true)}
+                            onMouseLeave={() => setIsHovered(false)}
+                          >
                             <span style={{ fontSize: "1.1rem", fontWeight: "750", color: "#F15A24", textTransform: "uppercase", letterSpacing: "0.05em" }}>
                               {leader.role}
                             </span>
@@ -625,7 +631,7 @@ const About = () => {
                       <Link href="/contact" className="btn btn-primary">
                         Start Free
                       </Link>
-                      <Link href="/demo" className="btn btn-outline-primary">
+                      <Link href="/book-demo" className="btn btn-outline-primary">
                         Book a Demo
                       </Link>
                     </div>
@@ -690,3 +696,4 @@ const About = () => {
 };
 
 export default About;
+
