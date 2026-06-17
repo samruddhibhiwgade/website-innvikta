@@ -5,10 +5,10 @@ banner:
   image: /images/banner-app.png
   link:
     label: Book a Demo
-    href: "#"
+    href: "/book-demo"
   link_secondary:
     label: Start Free
-    href: "#"
+    href: "/start-free"
 
 ##brands
 brands:
@@ -63,35 +63,35 @@ speciality:
       description: Run realistic AI-powered phishing simulations that help employees recognize social engineering, credential theft, business email compromise, and phishing manipulation before it becomes a security incident.
       button:
         label: Explore Phishing Simulation
-        link: "#"
+        link: "/solutions/phishing-simulation"
       image: /images/features-01.png
     - subtitle: ADAPTIVE LEARNING
       title: 94% Training Engagement Rate
       description: Deliver adaptive security awareness training and role-based cybersecurity learning journeys personalized by employee risk level, behavior, department, and training performance.
       button:
         label: Explore Adaptive Learning
-        link: "#"
+        link: "/solutions/insat"
       image: /images/features-02.png
     - subtitle: HUMAN RISK DASHBOARD
       title: Real-Time Human Risk Visibility
       description: Give security leaders real-time human risk intelligence with behavioral analytics, workforce risk scoring, phishing susceptibility insights, executive reporting, and department-level security trends.
       button:
         label: Explore Dashboard
-        link: "#"
+        link: "/solutions/human-risk-intelligence"
       image: /images/features-01.png
     - subtitle: GAMIFICATION
       title: 3.4× Higher Learning Retention
       description: Increase employee participation and cybersecurity culture engagement through gamified learning experiences, leaderboards, challenges, rewards, progression systems, and interactive awareness activities.
       button:
         label: Explore Innvikta Arcade
-        link: "#"
+        link: "/solutions/insat"
       image: /images/features-02.png
     - subtitle: REPORTING & COMPLIANCE
       title: Audit-Ready Security Awareness Reporting
       description: Track awareness participation, phishing simulation performance, compliance readiness, employee engagement metrics, and audit evidence with reporting designed for enterprise governance and regulatory requirements.
       button:
         label: Explore Compliance Training
-        link: "#"
+        link: "/solutions/compliance-training"
       image: /images/features-01.png
 
 
