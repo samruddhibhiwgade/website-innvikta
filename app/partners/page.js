@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { gsap } from "@lib/gsap";
 import { FiArrowRight, FiShield, FiBriefcase, FiLayers, FiActivity, FiGlobe, FiCheckCircle, FiTrendingUp, FiSettings, FiAward, FiMail, FiMonitor, FiImage, FiUsers, FiPieChart } from "react-icons/fi";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
 
@@ -35,6 +36,70 @@ const PartnersPage = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
+
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Hero Content Entrance Animation
+      const tl = gsap.timeline();
+      tl.fromTo(
+        ".hero-content > *",
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, stagger: 0.15, ease: "power3.out" }
+      ).fromTo(
+        ".hero-visual",
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+        ">-0.4"
+      );
+
+      // Section Headings & Cards Scroll Animations
+      gsap.utils.toArray("section").forEach((section) => {
+        const headerElements = section.querySelectorAll("span, h2, p.text-18-content");
+        if (headerElements.length > 0) {
+          gsap.fromTo(
+            headerElements,
+            { y: 40, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: section,
+                start: "top 85%",
+                toggleActions: "play none none none"
+              }
+            }
+          );
+        }
+
+        const cards = section.querySelectorAll(".grid > div");
+        if (cards.length > 0) {
+          gsap.fromTo(
+            cards,
+            { y: 45, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              stagger: 0.15,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: cards[0],
+                start: "top 90%",
+                toggleActions: "play none none none"
+              }
+            }
+          );
+        }
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -171,7 +236,7 @@ const PartnersPage = () => {
 
   return (
     <GSAPWrapper>
-      <div className="min-h-screen bg-[#fafafa]">
+      <div ref={containerRef} className="min-h-screen bg-[#fafafa]">
         
         {/* HERO SECTION */}
         <section className="bg-[#111827] text-white py-20 md:py-24 border-b border-slate-800 relative overflow-hidden">
@@ -180,7 +245,7 @@ const PartnersPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               
               {/* Left Column: Text & CTAs */}
-              <div className="lg:col-span-8">
+              <div className="lg:col-span-8 hero-content">
                 <span style={{ color: '#FFFFFFB3', fontSize: '1.125rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '1.25rem', display: 'inline-block' }}>INNVIKTA PARTNER NETWORK</span>
                 <h1 style={{ fontSize: 'clamp(2.3rem, 5.5vw, 4.5rem)', lineHeight: '1.05', fontWeight: '400', letterSpacing: '-0.02em', fontFamily: "'Satoshi', sans-serif" }} className="text-white mb-6">
                   <span className="block md:whitespace-nowrap">Partner With Innvikta to</span>
@@ -209,7 +274,7 @@ const PartnersPage = () => {
               </div>
 
               {/* Right Column: Partnership Illustration */}
-              <div className="lg:col-span-4 relative w-full flex justify-center">
+              <div className="lg:col-span-4 relative w-full flex justify-center hero-visual">
                 <div className="absolute inset-0 bg-orange-500/10 blur-[50px] rounded-full pointer-events-none" />
                 <img 
                   src="/images/partnership_hero.png" 
