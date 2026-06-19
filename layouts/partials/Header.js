@@ -1250,7 +1250,7 @@ const Header = () => {
                         <>
                           <div className="flex items-center gap-2 xl:gap-3">
                             <div className="w-5 h-5 flex items-center justify-center shrink-0">
-                              <tab.icon className={`text-[17px] shrink-0 transition-colors ${isActive ? "text-[#f15a24]" : "text-slate-400 group-hover/tab:text-[#f15a24]"}`} />
+                              <tab.icon className="text-[17px] shrink-0 text-[#f15a24]" />
                             </div>
                             <span className="whitespace-nowrap transition-colors">{tab.label}</span>
                           </div>
