@@ -526,7 +526,7 @@ const menuData = {
         icon: FiFileText,
         headline: "Get data-driven security reports, ROI details, and behavior benchmarks.",
         cells: [
-          { name: "Maturity Benchmarks", desc: "Compare regional click and report rates against industry peers.", href: "#" },
+          { name: "Maturity Benchmarks", desc: "Compare regional click rates and reporting rates against industry peers.", href: "/maturity-benchmarks" },
           { name: "ROI Business Case", desc: "Calculate direct cost savings from human risk training reduction.", href: "#" },
           { name: "Threat Activity Reports", desc: "Stay ahead of emerging business email compromise threat vectors.", href: "#" },
           { name: "CISO Case Studies", desc: "Success stories from real enterprise security leadership teams.", href: "#" }

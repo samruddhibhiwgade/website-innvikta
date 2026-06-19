@@ -22,11 +22,11 @@ const Footer = () => {
       { name: "Simulation ROI Calculator", url: "#" }
     ],
     resources: [
+      { name: "Maturity Benchmarks", url: "/maturity-benchmarks" },
       { name: "Blog", url: "/posts" },
       { name: "Innvikta Cyberhelp", url: "#" },
       { name: "Cybersecurity Guides", url: "#" },
       { name: "Glossary", url: "/resources/glossary" },
-      { name: "Maturity Benchmarks", url: "#" },
       { name: "Customer Success Stories", url: "#" }
     ],
     company: [
