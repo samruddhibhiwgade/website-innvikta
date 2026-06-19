@@ -1154,25 +1154,25 @@ const Header = () => {
 
           <div className={`container-xl h-full flex items-center justify-between transition-opacity duration-200 ${isSearchOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
             {/* Logo */}
-            <div className="z-50">
+            <div className="z-50 shrink-0 flex items-center">
               <Link href="/">
                 <img 
                   src="/images/logo-main.png" 
                   alt="Innvikta" 
-                  className="h-10 w-auto object-contain"
+                  className="h-8 lg:h-7 xl:h-10 w-auto object-contain"
                 />
               </Link>
             </div>
 
             {/* Main Navigation Items */}
-            <ul className="hidden lg:flex items-center gap-5 ml-8 h-full">
+            <ul className="hidden lg:flex items-center lg:gap-1.5 xl:gap-5 lg:ml-3 xl:ml-8 h-full">
               {Object.keys(menuData).map((menuKey) => (
                 <li
                   key={menuKey}
                   className="h-full flex items-center"
                   onMouseEnter={() => handleMenuHover(menuKey)}
                 >
-                  <button className={`nav-link h-full flex items-center gap-1 text-[16.5px] font-bold text-slate-900 hover:text-[#f15a24] transition-colors focus:outline-none ${
+                  <button className={`nav-link h-full flex items-center gap-1 lg:text-[13px] xl:text-[16.5px] lg:px-1.5 xl:px-3 font-bold text-slate-900 hover:text-[#f15a24] transition-colors focus:outline-none whitespace-nowrap ${
                     activeMegaMenu === menuKey ? "text-[#f15a24]" : ""
                   }`}>
                     {menuKey === "arcade" && <IoGameControllerOutline className="text-lg text-[#f15a24]" />}
@@ -1191,23 +1191,23 @@ const Header = () => {
               <div className={`transition-all duration-300 flex items-center h-full ${pathname === "/partners" ? "opacity-100 pointer-events-auto translate-x-0" : "opacity-0 pointer-events-none translate-x-4 absolute right-0"}`}>
                 <Link 
                   href="#form" 
-                  className="mr-6 md:mr-10 px-6 py-2 bg-[#f15a24] hover:bg-orange-600 text-white rounded-lg text-[13px] font-bold transition-all duration-300 flex items-center gap-1 border border-[#f15a24] hover:border-orange-600"
+                  className="mr-4 xl:mr-10 px-4 xl:px-6 py-2 bg-[#f15a24] hover:bg-orange-600 text-white rounded-lg text-[12px] xl:text-[13px] font-bold transition-all duration-300 flex items-center gap-1 border border-[#f15a24] hover:border-orange-600 whitespace-nowrap"
                 >
                   Become a Partner <FiArrowRight className="text-xs" />
                 </Link>
               </div>
 
               {/* Standard CTAs */}
-              <div className={`transition-all duration-300 flex items-center gap-4 h-full ${pathname !== "/partners" ? "opacity-100 pointer-events-auto translate-x-0" : "opacity-0 pointer-events-none -translate-x-4 absolute right-0"}`}>
+              <div className={`transition-all duration-300 flex items-center lg:gap-1.5 xl:gap-4 h-full ${pathname !== "/partners" ? "opacity-100 pointer-events-auto translate-x-0" : "opacity-0 pointer-events-none -translate-x-4 absolute right-0"}`}>
                 <Link 
                   href="/start-free" 
-                  className="px-4 py-2 bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] text-[#f15a24] hover:text-white rounded-lg text-[13px] font-extrabold transition-all duration-300"
+                  className="px-2.5 py-1.5 xl:px-4 xl:py-2 bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] text-[#f15a24] hover:text-white rounded-lg text-[11px] xl:text-[13px] font-extrabold transition-all duration-300 whitespace-nowrap"
                 >
                   Start Free
                 </Link>
                 <Link 
                   href="/book-demo" 
-                  className="px-5 py-2 bg-[#f15a24] hover:bg-orange-600 text-white rounded-lg text-[13px] font-bold transition-all duration-300 flex items-center gap-1"
+                  className="px-3 py-1.5 xl:px-5 xl:py-2 bg-[#f15a24] hover:bg-orange-600 text-white rounded-lg text-[11px] xl:text-[13px] font-bold transition-all duration-300 flex items-center gap-1 whitespace-nowrap"
                 >
                   Book a Demo <FiArrowRight className="text-xs" />
                 </Link>
@@ -1236,28 +1236,28 @@ const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 8 }}
                 transition={{ duration: 0.15, ease: "easeOut" }}
-                className="absolute left-0 right-0 top-[80px] w-full bg-white border-t border-slate-100 shadow-[0_30px_50px_-10px_rgba(0,0,0,0.08)] z-50 pointer-events-auto"
+                className="absolute left-0 right-0 top-[80px] w-full bg-white border-t border-slate-100 shadow-[0_30px_50px_-10px_rgba(0,0,0,0.08)] z-50 pointer-events-auto max-h-[calc(100vh-120px)] overflow-y-auto"
                 onMouseEnter={() => handleMenuHover(activeMegaMenu)}
                 onMouseLeave={handleMenuLeave}
               >
-                <div className="w-full mx-auto flex min-h-[480px] w-full">
+                <div className="container-xl mx-auto flex min-h-[380px] lg:min-h-[420px] xl:min-h-[460px]">
                   {/* 1. LEFT TAB RAIL (Persistent skeleton anchor) */}
-                  <div className="w-[320px] bg-slate-50 border-r border-slate-100 pt-6 pb-12 px-6 flex flex-col gap-2 shrink-0">
+                  <div className="w-[240px] xl:w-[280px] 2xl:w-[320px] bg-slate-50 border-r border-slate-100 pt-4 pb-8 xl:pt-6 xl:pb-12 px-2 xl:px-4 flex flex-col gap-2 shrink-0">
                     {menuData[activeMegaMenu].tabs.map((tab) => {
                       const isActive = activeTabs[activeMegaMenu] === tab.id;
                       const isPlaceholder = !tab.href || tab.href === "#";
                       const tabContent = (
                         <>
-                          <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-2 xl:gap-3">
                             <div className="w-5 h-5 flex items-center justify-center shrink-0">
-                              <tab.icon className="text-[17px] shrink-0 text-[#f15a24]" />
+                              <tab.icon className={`text-[17px] shrink-0 transition-colors ${isActive ? "text-[#f15a24]" : "text-slate-400 group-hover/tab:text-[#f15a24]"}`} />
                             </div>
                             <span className="whitespace-nowrap transition-colors">{tab.label}</span>
                           </div>
                           <FiArrowRight className={`text-xs shrink-0 transition-all duration-200 ${isActive ? "opacity-100 translate-x-0 text-[#f15a24]" : "opacity-0 -translate-x-1 group-hover/tab:opacity-100 group-hover/tab:translate-x-0 group-hover/tab:text-[#f15a24]"}`} />
                         </>
                       );
-                      const baseClass = `relative w-full flex items-center justify-between text-left pl-6 pr-4 py-2.5 rounded-lg text-[14px] font-semibold transition-all duration-200 group/tab ${
+                      const baseClass = `relative w-full flex items-center justify-between text-left pl-3 xl:pl-5 pr-2 xl:pr-4 py-2.5 rounded-lg text-[13.5px] xl:text-[14px] font-semibold transition-all duration-200 group/tab ${
                         isActive
                           ? "active-tab-rail"
                           : "inactive-tab-rail"
@@ -1300,7 +1300,7 @@ const Header = () => {
                           className="flex flex-1 w-full"
                         >
                           {/* 2. CENTER WORKSPACE (Strict 2x2 grid, visually populated) */}
-                          <div className="flex-1 pt-6 pb-12 px-12 flex flex-col justify-start">
+                          <div className="flex-1 pt-4 pb-8 xl:pt-6 xl:pb-12 px-4 xl:px-12 flex flex-col justify-start">
                              {currentTab.headline && (
                                <div className={`mb-6 max-w-4xl border-b border-slate-100 pb-6 ${currentTab.headlineCta && currentTab.headlineCta.href !== "#" ? 'flex flex-col items-start gap-4' : ''}`}>
                                  <h3 className="text-[20px] font-semibold text-slate-800 tracking-tight leading-snug">
@@ -1315,25 +1315,46 @@ const Header = () => {
                                      {currentTab.headlineCta.label} <FiArrowRight className="text-[13px] transition-transform duration-200 group-hover:translate-x-1" />
                                    </Link>
                                  )}
-                               </div>
+                                </div>
                              )}
 
                             {/* Strictly 2-column or 3-column layout based on tab config */}
-                            <div className={`grid ${currentTab.layout === 'three-column' ? 'grid-cols-3' : 'grid-cols-2'} gap-x-10 gap-y-6 items-start content-start w-full mt-1`}>
+                            <div className={`grid ${currentTab.layout === 'three-column' ? 'grid-cols-3' : 'grid-cols-2'} lg:gap-x-4 xl:gap-x-10 gap-y-6 items-start content-start w-full mt-1`}>
                               {currentTab.cells && currentTab.cells.map((cell, idx) => {
                                 const isCellPlaceholder = !cell.href || cell.href === "#";
-                                const cellContent = (
-                                  <>
-                                    <span className={`text-[#f15a24] text-[16px] font-bold inline-flex items-center gap-1 ${!isCellPlaceholder ? "group-hover/item:text-orange-600 transition-colors" : ""}`}>
-                                      {cell.name}
-                                      {!isCellPlaceholder && <FiArrowRight className="text-[11px] opacity-100 translate-x-0.5 group-hover/item:translate-x-1.5 transition-transform text-[#f15a24] group-hover/item:text-orange-600" />}
-                                    </span>
-                                    {cell.desc && (
-                                      <p className={`text-[13px] text-slate-700 font-semibold leading-normal mt-1 ${!isCellPlaceholder ? "group-hover/item:text-slate-900 transition-colors" : ""}`}>
-                                        {cell.desc}
-                                      </p>
+                                return (
+                                  <div key={idx} className="group/item flex flex-col justify-start py-0.5">
+                                    {isCellPlaceholder ? (
+                                      <span className="text-[#f15a24] lg:text-[14px] xl:text-[16px] font-bold inline-flex items-center gap-1">
+                                        {cell.name}
+                                      </span>
+                                    ) : (
+                                      <Link 
+                                        href={cell.href}
+                                        onClick={handleMenuLeave}
+                                        className="text-[#f15a24] lg:text-[14px] xl:text-[16px] font-bold inline-flex items-center gap-1 group-hover/item:text-orange-600 transition-colors"
+                                      >
+                                        {cell.name}
+                                        <FiArrowRight className="text-[11px] opacity-100 translate-x-0.5 group-hover/item:translate-x-1.5 transition-transform text-[#f15a24] group-hover/item:text-orange-600" />
+                                      </Link>
                                     )}
-                                    
+
+                                    {cell.desc && (
+                                      isCellPlaceholder ? (
+                                        <p className="text-[12px] xl:text-[13px] text-slate-700 font-semibold leading-normal mt-1">
+                                          {cell.desc}
+                                        </p>
+                                      ) : (
+                                        <Link 
+                                          href={cell.href}
+                                          onClick={handleMenuLeave}
+                                          className="text-[12px] xl:text-[13px] text-slate-700 font-semibold leading-normal mt-1 group-hover/item:text-slate-950 transition-colors block"
+                                        >
+                                          {cell.desc}
+                                        </Link>
+                                      )
+                                    )}
+
                                     {/* Chips rendering */}
                                     {cell.chips && (
                                       <div className={`flex ${currentTab.id === 'customized_solutions' ? 'flex-wrap' : 'flex-col'} gap-2 mt-3.5 items-start`}>
@@ -1374,24 +1395,6 @@ const Header = () => {
                                         })}
                                       </div>
                                     )}
-                                  </>
-                                );
-
-                                return (
-                                  <div key={idx} className="group/item flex flex-col justify-start">
-                                    {isCellPlaceholder ? (
-                                      <div className="block py-0.5 cursor-default">
-                                        {cellContent}
-                                      </div>
-                                    ) : (
-                                      <Link 
-                                        href={cell.href}
-                                        onClick={handleMenuLeave}
-                                        className="block py-0.5"
-                                      >
-                                        {cellContent}
-                                      </Link>
-                                    )}
                                   </div>
                                 );
                               })}
@@ -1402,8 +1405,8 @@ const Header = () => {
 
                           {/* 3. FEATURED CARD (Integrated conversion card) */}
                           {currentTab.cta && (
-                            <div className="w-[360px] pt-6 pb-12 px-6 border-l border-slate-100 bg-transparent shrink-0 flex flex-col justify-start">
-                              <div className="bg-slate-50 rounded-2xl p-5 flex flex-col gap-5 shadow-sm border border-slate-100 relative">
+                            <div className="w-[220px] lg:w-[260px] xl:w-[320px] 2xl:w-[360px] pt-4 pb-8 xl:pt-6 xl:pb-12 px-3 xl:px-6 border-l border-slate-100 bg-transparent shrink-0 flex flex-col justify-start">
+                              <div className="bg-slate-50 rounded-2xl p-3 xl:p-5 flex flex-col gap-3 xl:gap-5 shadow-sm border border-slate-100 relative">
                                 <div className="flex flex-col gap-3">
                                   <div className="w-full bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden mb-2 relative group-hover/card:shadow-md transition-shadow">
                                     {currentTab.cta.image && (
@@ -1419,7 +1422,7 @@ const Header = () => {
                                       </div>
                                     )}
                                   </div>
-                                  <h5 className="text-[15px] font-medium text-slate-800 leading-snug">
+                                  <h5 className="text-[13px] xl:text-[15px] font-medium text-slate-800 leading-snug">
                                     {currentTab.cta.title}
                                   </h5>
                                   {/* Description removed to reduce text as requested */}
@@ -1427,7 +1430,7 @@ const Header = () => {
                                 <Link 
                                   href={currentTab.cta.href || "#"}
                                   onClick={handleMenuLeave}
-                                  className="w-full justify-center text-center py-3 bg-[#f15a24] hover:bg-orange-600 text-white font-extrabold rounded-lg text-xs transition-colors flex items-center gap-1.5 uppercase tracking-wider shadow-md shadow-orange-500/10"
+                                  className="w-full justify-center text-center py-2.5 xl:py-3 bg-[#f15a24] hover:bg-orange-600 text-white font-extrabold rounded-lg text-[10px] xl:text-xs transition-colors flex items-center gap-1.5 uppercase tracking-wider shadow-md shadow-orange-500/10"
                                 >
                                   {currentTab.cta.label} <FiArrowRight className="text-xs" />
                                 </Link>
@@ -1486,16 +1489,38 @@ const Header = () => {
                               <ul className="space-y-3 py-1 border-l border-slate-100 pl-3">
                                 {tab.cells && tab.cells.map((cell, idx) => {
                                   const isCellPlaceholder = !cell.href || cell.href === "#";
-                                  const cellContent = (
-                                    <>
-                                      <span className="text-slate-700 hover:text-[#f15a24] text-xs font-bold block">
-                                        {cell.name}
-                                      </span>
-                                      {cell.desc && (
-                                        <p className="text-[10px] text-slate-400 font-medium leading-tight">
-                                          {cell.desc}
-                                        </p>
+                                  return (
+                                    <li key={idx} className="block py-1">
+                                      {isCellPlaceholder ? (
+                                        <span className="text-slate-700 hover:text-[#f15a24] text-xs font-bold block">
+                                          {cell.name}
+                                        </span>
+                                      ) : (
+                                        <Link 
+                                          href={cell.href} 
+                                          onClick={() => setShowMenu(false)}
+                                          className="text-slate-700 hover:text-[#f15a24] text-xs font-bold block"
+                                        >
+                                          {cell.name}
+                                        </Link>
                                       )}
+                                      
+                                      {cell.desc && (
+                                        isCellPlaceholder ? (
+                                          <p className="text-[10px] text-slate-400 font-medium leading-tight">
+                                            {cell.desc}
+                                          </p>
+                                        ) : (
+                                          <Link
+                                            href={cell.href}
+                                            onClick={() => setShowMenu(false)}
+                                            className="text-[10px] text-slate-400 font-medium leading-tight block mt-0.5 hover:text-[#f15a24]"
+                                          >
+                                            {cell.desc}
+                                          </Link>
+                                        )
+                                      )}
+
                                       {cell.chips && (
                                         <div className="mt-2 flex flex-wrap gap-1.5">
                                           {cell.chips.map((chip, i) => {
@@ -1519,24 +1544,6 @@ const Header = () => {
                                             );
                                           })}
                                         </div>
-                                      )}
-                                    </>
-                                  );
-
-                                  return (
-                                    <li key={idx}>
-                                      {isCellPlaceholder ? (
-                                        <div className="block py-1 cursor-default">
-                                          {cellContent}
-                                        </div>
-                                      ) : (
-                                        <Link 
-                                          href={cell.href} 
-                                          onClick={() => setShowMenu(false)}
-                                          className="block py-1"
-                                        >
-                                          {cellContent}
-                                        </Link>
                                       )}
                                     </li>
                                   );
