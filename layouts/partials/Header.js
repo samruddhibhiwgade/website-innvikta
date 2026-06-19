@@ -307,13 +307,19 @@ const menuData = {
             name: "Multi Vector Attack", 
             desc: "Simulate and track phishing, attachment, and QR code attacks.", 
             href: "/solutions/phishing-simulation#multi-vector-attack",
-            chips: [{ label: "Smishing Simulation" }, { label: "WhatsApp Simulation" }]
+            chips: [
+              { label: "Smishing Simulation", href: "/solutions/phishing-simulation#smishing-whatsapp" },
+              { label: "WhatsApp Simulation", href: "/solutions/phishing-simulation#smishing-whatsapp" }
+            ]
           },
           { 
             name: "Vishing Simulation", 
             desc: "Automated phone tests simulating voice-based social engineering threats.", 
             href: "/solutions/phishing-simulation#vishing-simulation",
-            chips: [{ label: "Voice Attack Scenarios" }, { label: "AI-Led Variants" }]
+            chips: [
+              { label: "Voice Attack Scenarios", href: "/solutions/phishing-simulation#vishing-simulation" },
+              { label: "AI-Led Variants", href: "/solutions/phishing-simulation#ai-led-scenario-variants" }
+            ]
           },
           { 
             name: "Audience Segmentation", 
@@ -1331,18 +1337,41 @@ const Header = () => {
                                     {/* Chips rendering */}
                                     {cell.chips && (
                                       <div className={`flex ${currentTab.id === 'customized_solutions' ? 'flex-wrap' : 'flex-col'} gap-2 mt-3.5 items-start`}>
-                                        {cell.chips.map((chip, i) => (
-                                          <span key={i} className={`text-[12px] font-bold border rounded-md flex items-center gap-1.5 px-2 py-0.5 ${
+                                        {cell.chips.map((chip, i) => {
+                                          const chipClass = `text-[12px] font-bold border rounded-md flex items-center gap-1.5 px-2 py-0.5 ${
                                             isCellPlaceholder 
                                               ? 'bg-slate-50 text-slate-500 border-slate-100'
                                               : chip.isMore 
                                                 ? 'bg-transparent text-slate-400 border-transparent hover:text-[#f15a24] transition-colors' 
                                                 : 'bg-slate-50 text-slate-500 border-slate-100 hover:border-orange-200 hover:text-[#f15a24] hover:bg-orange-50/50 transition-colors'
-                                          }`}>
-                                            {chip.icon && <chip.icon className="text-[12px] opacity-60" />}
-                                            {chip.label}
-                                          </span>
-                                        ))}
+                                          }`;
+                                          
+                                          const chipContent = (
+                                            <>
+                                              {chip.icon && <chip.icon className="text-[12px] opacity-60" />}
+                                              {chip.label}
+                                            </>
+                                          );
+
+                                          if (chip.href) {
+                                            return (
+                                              <Link 
+                                                key={i} 
+                                                href={chip.href}
+                                                onClick={handleMenuLeave}
+                                                className={chipClass}
+                                              >
+                                                {chipContent}
+                                              </Link>
+                                            );
+                                          }
+
+                                          return (
+                                            <span key={i} className={chipClass}>
+                                              {chipContent}
+                                            </span>
+                                          );
+                                        })}
                                       </div>
                                     )}
                                   </>
@@ -1469,11 +1498,26 @@ const Header = () => {
                                       )}
                                       {cell.chips && (
                                         <div className="mt-2 flex flex-wrap gap-1.5">
-                                          {cell.chips.map((chip, i) => (
-                                            <span key={i} className="text-[10.5px] font-bold border rounded bg-slate-50 text-slate-500 border-slate-100 px-1.5 py-0.5">
-                                              {chip.label}
-                                            </span>
-                                          ))}
+                                          {cell.chips.map((chip, i) => {
+                                            const chipClass = "text-[10.5px] font-bold border rounded bg-slate-50 text-slate-500 border-slate-100 px-1.5 py-0.5";
+                                            if (chip.href) {
+                                              return (
+                                                <Link 
+                                                  key={i}
+                                                  href={chip.href}
+                                                  onClick={() => setShowMenu(false)}
+                                                  className={chipClass}
+                                                >
+                                                  {chip.label}
+                                                </Link>
+                                              );
+                                            }
+                                            return (
+                                              <span key={i} className={chipClass}>
+                                                {chip.label}
+                                              </span>
+                                            );
+                                          })}
                                         </div>
                                       )}
                                     </>

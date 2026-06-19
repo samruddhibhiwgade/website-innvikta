@@ -105,12 +105,39 @@ const PhishingSimulationPage = () => {
   useEffect(() => {
     const handleHash = () => {
       const hash = window.location.hash;
-      if (hash === "#vishing-simulation") {
-        setActiveVector(3);
+      let targetIndex = -1;
+      let targetId = "";
+      
+      if (hash === "#vishing-simulation" || hash === "#vishing-tests") {
+        targetIndex = 3;
+        targetId = "vishing-simulation";
       } else if (hash === "#ai-led-scenario-variants" || hash === "#ai-scenario-variants") {
-        setActiveVector(4);
+        targetIndex = 4;
+        targetId = "ai-led-scenario-variants";
       } else if (hash === "#multi-vector-attack") {
-        setActiveVector(0);
+        targetIndex = 0;
+        targetId = "multi-vector-attack";
+      } else if (hash === "#smishing-whatsapp" || hash === "#smishing-simulation") {
+        targetIndex = 1;
+        targetId = "smishing-whatsapp";
+      } else if (hash === "#qr-traps" || hash === "#qr-traps-simulation") {
+        targetIndex = 2;
+        targetId = "qr-traps";
+      } else if (hash === "#attachment-simulations" || hash === "#attachment-simulation") {
+        targetIndex = 5;
+        targetId = "attachment-simulations";
+      }
+
+      if (targetIndex !== -1) {
+        setActiveVector(targetIndex);
+        if (targetId) {
+          setTimeout(() => {
+            const el = document.getElementById(targetId);
+            if (el) {
+              el.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          }, 150);
+        }
       }
     };
     handleHash();
@@ -521,9 +548,16 @@ const PhishingSimulationPage = () => {
 
         
         <section id="multi-vector-attack" className="bg-white" style={{ paddingTop: "4rem", position: "relative" }}>
+            <div id="smishing-whatsapp" style={{ position: "absolute", top: "-80px" }}></div>
+            <div id="smishing-simulation" style={{ position: "absolute", top: "-80px" }}></div>
+            <div id="qr-traps" style={{ position: "absolute", top: "-80px" }}></div>
+            <div id="qr-traps-simulation" style={{ position: "absolute", top: "-80px" }}></div>
             <div id="vishing-simulation" style={{ position: "absolute", top: "-80px" }}></div>
+            <div id="vishing-tests" style={{ position: "absolute", top: "-80px" }}></div>
             <div id="ai-led-scenario-variants" style={{ position: "absolute", top: "-80px" }}></div>
             <div id="ai-scenario-variants" style={{ position: "absolute", top: "-80px" }}></div>
+            <div id="attachment-simulations" style={{ position: "absolute", top: "-80px" }}></div>
+            <div id="attachment-simulation" style={{ position: "absolute", top: "-80px" }}></div>
             <div className="container">
                 <div className="animate mb-12">
                     <span className="text-subheading" style={{ display: "block", marginBottom: "0.5rem" }}>INSAT MULTICHANNEL SIMULATION</span>
