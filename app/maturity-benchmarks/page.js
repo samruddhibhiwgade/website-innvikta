@@ -376,7 +376,7 @@ export default function MaturityBenchmarksPage() {
                       <line x1="6" y1="6" x2="18" y2="18" />
                     </svg>
                     <span>
-                      <strong>Ignoring Sample Sizes:</strong> Small division results shouldn't be compared directly to high-volume statistical averages.
+                      <strong>Ignoring Sample Sizes:</strong> Small division results shouldn&apos;t be compared directly to high-volume statistical averages.
                     </span>
                   </li>
                   <li className="flex gap-3 items-start">
