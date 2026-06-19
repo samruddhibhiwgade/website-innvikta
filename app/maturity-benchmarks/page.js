@@ -264,7 +264,9 @@ export default function MaturityBenchmarksPage() {
               <div className="container" style={{ display: "flex", justifyContent: "center", width: "100%" }}>
                 <div className="hero-content mx-auto" style={{ paddingBottom: "3rem", paddingTop: "2.5rem", maxWidth: "800px", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
                   <span className="text-subheading" style={{ color: "#FF7A00" }}>Benchmark Intelligence Resource</span>
-                  <h1 className="text-96-heading" style={{ minHeight: "auto", textAlign: "center" }}>Maturity Benchmarks</h1>
+                  <h1 className="text-96-heading" style={{ minHeight: "auto", textAlign: "center" }}>
+                    Maturity <span style={{ color: "#FF7A00" }}>Benchmarks</span>
+                  </h1>
                   
                   <div className="hero-text-wrapper" style={{ maxWidth: "720px", display: "flex", flexDirection: "column", alignItems: "center" }}>
                     <p className="text-20-content hero-paragraph text-slate-700" style={{ fontWeight: "500", opacity: 0.95, textAlign: "center", lineHeight: "1.6" }}>
@@ -291,7 +293,7 @@ export default function MaturityBenchmarksPage() {
           <div className="insat-page !bg-transparent" style={{ backgroundColor: "transparent" }}>
             <div className="max-w-3xl mb-12 text-left">
               <h2 className="text-52-heading mb-4" style={{ marginBottom: "1.5rem" }}>
-                Industry Phishing Benchmarks
+                Industry Phishing <span style={{ color: "#FF7A00" }}>Benchmarks</span>
               </h2>
               <p className="text-18-content" style={{ marginBottom: "3rem", lineHeight: "1.6" }}>
                 Different industries experience different levels of phishing susceptibility due to workforce size, employee exposure, training maturity, regulatory requirements, and threat landscape.
@@ -344,7 +346,7 @@ export default function MaturityBenchmarksPage() {
           <div className="insat-page !bg-transparent" style={{ backgroundColor: "transparent" }}>
             <div className="max-w-3xl mb-12 text-left">
               <h2 className="text-52-heading mb-4" style={{ marginBottom: "1.5rem" }}>
-                Regional Awareness Benchmarks
+                Regional Awareness <span style={{ color: "#FF7A00" }}>Benchmarks</span>
               </h2>
               <p className="text-18-content" style={{ marginBottom: "3rem", lineHeight: "1.6" }}>
                 Regional differences can be influenced by cybersecurity maturity, awareness investment, threat exposure, workforce behavior, reporting culture, and local regulations.
