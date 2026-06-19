@@ -1236,7 +1236,7 @@ const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 8 }}
                 transition={{ duration: 0.15, ease: "easeOut" }}
-                className="absolute left-0 right-0 top-[80px] w-full bg-white border-t border-slate-100 shadow-[0_30px_50px_-10px_rgba(0,0,0,0.08)] z-50 pointer-events-auto max-h-[calc(100vh-120px)] overflow-y-auto"
+                className="absolute left-0 right-0 top-[80px] w-full bg-white border-t border-slate-100 shadow-[0_30px_50px_-10px_rgba(0,0,0,0.08)] z-50 pointer-events-auto max-h-[calc(100vh-120px)] overflow-y-auto no-scrollbar"
                 onMouseEnter={() => handleMenuHover(activeMegaMenu)}
                 onMouseLeave={handleMenuLeave}
               >
