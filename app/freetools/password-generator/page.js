@@ -592,7 +592,7 @@ export default function PasswordGeneratorPage() {
                 {/* 1. PASSWORD GENERATOR VIEW */}
                 {activeTool === "generator" && (
                   <div>
-                    <h2 style={{ fontSize: "1.75rem", fontWeight: 800, color: "#111827", marginBottom: "0.5rem" }}>
+                    <h2 style={{ fontSize: "1.75rem", fontWeight: 700, color: "#111827", marginBottom: "0.5rem" }}>
                       Strong Password Generator
                     </h2>
                     <p style={{ color: "#6B7280", marginBottom: "2rem" }}>
@@ -721,7 +721,7 @@ export default function PasswordGeneratorPage() {
                 {/* 2. PASSPHRASE GENERATOR VIEW */}
                 {activeTool === "passphrase" && (
                   <div>
-                    <h2 style={{ fontSize: "1.75rem", fontWeight: 800, color: "#111827", marginBottom: "0.5rem" }}>
+                    <h2 style={{ fontSize: "1.75rem", fontWeight: 700, color: "#111827", marginBottom: "0.5rem" }}>
                       Secure Passphrase Generator
                     </h2>
                     <p style={{ color: "#6B7280", marginBottom: "2rem" }}>
@@ -905,7 +905,7 @@ export default function PasswordGeneratorPage() {
                 {/* 3. PASSWORD STRENGTH ANALYZER VIEW */}
                 {activeTool === "strength" && (
                   <div ref={strengthRef}>
-                    <h2 style={{ fontSize: "1.75rem", fontWeight: 800, color: "#111827", marginBottom: "0.5rem" }}>
+                    <h2 style={{ fontSize: "1.75rem", fontWeight: 700, color: "#111827", marginBottom: "0.5rem" }}>
                       Password Strength Analyzer
                     </h2>
                     <p style={{ color: "#6B7280", marginBottom: "2rem" }}>
