@@ -613,7 +613,7 @@ export default function PasswordGeneratorPage() {
                       <span style={{ 
                         fontSize: "clamp(1.1rem, 3.5vw, 1.5rem)", 
                         fontFamily: "monospace", 
-                        fontWeight: 600, 
+                        fontWeight: 500, 
                         color: "#111827",
                         wordBreak: "break-all",
                         letterSpacing: "0.05em",
@@ -742,7 +742,7 @@ export default function PasswordGeneratorPage() {
                       <span style={{ 
                         fontSize: "clamp(1.1rem, 3.5vw, 1.4rem)", 
                         fontFamily: "monospace", 
-                        fontWeight: 600, 
+                        fontWeight: 500, 
                         color: "#111827",
                         wordBreak: "break-all",
                         letterSpacing: "0.02em",
