@@ -599,16 +599,15 @@ export default function PasswordGeneratorPage() {
                       Generate secure, random, and unique passwords designed to resist brute-force attacks, credential stuffing, and account compromise.
                     </p>
 
-                    {/* Output Screen */}
                     <div style={{ 
-                      position: "relative",
                       backgroundColor: "#F9FAFB",
                       border: "1px solid #E5E7EB",
                       borderRadius: "12px",
-                      padding: "1.25rem 3.5rem 1.25rem 1.5rem",
+                      padding: "1.25rem 1.5rem",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
+                      gap: "1.5rem",
                       marginBottom: "2rem"
                     }}>
                       <span style={{ 
@@ -617,11 +616,12 @@ export default function PasswordGeneratorPage() {
                         fontWeight: 600, 
                         color: "#111827",
                         wordBreak: "break-all",
-                        letterSpacing: "0.05em"
+                        letterSpacing: "0.05em",
+                        flex: 1
                       }}>
                         {generatedPassword}
                       </span>
-                      <div style={{ display: "flex", gap: "8px", position: "absolute", right: "12px" }}>
+                      <div style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
                         <button 
                           onClick={generateRandomPassword}
                           title="Regenerate password"
@@ -728,16 +728,15 @@ export default function PasswordGeneratorPage() {
                       Generate easy-to-remember passphrases that provide strong security through length and randomness.
                     </p>
 
-                    {/* Output Screen */}
                     <div style={{ 
-                      position: "relative",
                       backgroundColor: "#F9FAFB",
                       border: "1px solid #E5E7EB",
                       borderRadius: "12px",
-                      padding: "1.25rem 3.5rem 1.25rem 1.5rem",
+                      padding: "1.25rem 1.5rem",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
+                      gap: "1.5rem",
                       marginBottom: "2rem"
                     }}>
                       <span style={{ 
@@ -746,11 +745,12 @@ export default function PasswordGeneratorPage() {
                         fontWeight: 600, 
                         color: "#111827",
                         wordBreak: "break-all",
-                        letterSpacing: "0.02em"
+                        letterSpacing: "0.02em",
+                        flex: 1
                       }}>
                         {generatedPassphrase}
                       </span>
-                      <div style={{ display: "flex", gap: "8px", position: "absolute", right: "12px" }}>
+                      <div style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
                         <button 
                           onClick={generateRandomPassphrase}
                           title="Regenerate passphrase"
