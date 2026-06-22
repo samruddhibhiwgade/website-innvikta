@@ -1,0 +1,458 @@
+[
+    {
+        "state": "Andhra Pradesh",
+        "efiling_link": "https://www.appolice.gov.in/",
+        "efir_available": true,
+        "citizen_portal": null,
+        "districts": [
+            {
+                "district": "Ongole (Prakasam)",
+                "cyber_cell_phone": "9121102100",
+                "cyber_cell_email": "sp-prakasam@ap.gov.in",
+                "address": "SP Office, Ongole, Prakasam District"
+            },
+            {
+                "district": "Srikakulam",
+                "cyber_cell_phone": "6309990837",
+                "cyber_cell_email": "petitions.spofficeskl@gmail.com",
+                "address": "SP Office, Srikakulam, Andhra Pradesh"
+            }
+        ]
+    },
+    {
+        "state": "Bihar",
+        "efiling_link": "https://biharpolice.bih.nic.in/",
+        "efir_available": true,
+        "citizen_portal": null,
+        "districts": [
+            {
+                "district": "Patna",
+                "cyber_cell_phone": "9031825857",
+                "cyber_cell_email": "patnacyberpps-bih@gov.in",
+                "address": "Cyber Crime PS, Patna (Dy.SP Cyber)"
+            },
+            {
+                "district": "Naugachia (Bhagalpur)",
+                "cyber_cell_phone": "9031828053",
+                "cyber_cell_email": "shonaugachiabgp-bih@gov.in",
+                "address": "Cyber PS, Naugachia, Bhagalpur"
+            },
+            {
+                "district": "Gaya",
+                "cyber_cell_phone": "9031826204",
+                "cyber_cell_email": "sp-gaya-bih@nic.in",
+                "address": "SSP Office, Gaya, Bihar"
+            },
+            {
+                "district": "Nalanda",
+                "cyber_cell_phone": "9031826038",
+                "cyber_cell_email": "sp-nalanda-bih@nic.in",
+                "address": "SP Office, Nalanda, Bihar"
+            },
+            {
+                "district": "Samastipur",
+                "cyber_cell_phone": "9031827502",
+                "cyber_cell_email": "sdposadar-smp-bih@gov.in",
+                "address": "SDPO Sadar, Samastipur, Bihar"
+            }
+        ]
+    },
+    {
+        "state": "Delhi",
+        "efiling_link": "https://delhipolice.gov.in/",
+        "efir_available": true,
+        "citizen_portal": null,
+        "districts": [
+            {
+                "district": "East",
+                "cyber_cell_phone": "6828401137",
+                "cyber_cell_email": "shocyber.east@delhipolice.gov.in",
+                "address": "Cyber Police Station East, Shakarpur, Delhi"
+            },
+            {
+                "district": "New Delhi",
+                "cyber_cell_phone": "011-23746694",
+                "cyber_cell_email": "shocyber.nd@delhipolice.gov.in",
+                "address": "Cyber Police Station, Mandir Marg, New Delhi"
+            },
+            {
+                "district": "South",
+                "cyber_cell_phone": "011-26165000",
+                "cyber_cell_email": "shocyber.south@delhipolice.gov.in",
+                "address": "Cyber Police Station South, Hauz Khas, Delhi"
+            },
+            {
+                "district": "North",
+                "cyber_cell_phone": "011-23818318",
+                "cyber_cell_email": "shocyber.north@delhipolice.gov.in",
+                "address": "Cyber Police Station North, Civil Lines, Delhi"
+            },
+            {
+                "district": "West",
+                "cyber_cell_phone": "011-25122400",
+                "cyber_cell_email": "shocyber.west@delhipolice.gov.in",
+                "address": "Cyber Police Station West, Janakpuri, Delhi"
+            }
+        ]
+    },
+    {
+        "state": "Gujarat",
+        "efiling_link": "https://citizen.gujhome.guj.nic.in/",
+        "efir_available": true,
+        "citizen_portal": null,
+        "districts": [
+            {
+                "district": "Ahmedabad City",
+                "cyber_cell_phone": "079-23250798",
+                "cyber_cell_email": "cc-cid@gujarat.gov.in",
+                "address": "CID Crime, Gandhinagar-Ahmedabad Highway, Gandhinagar"
+            },
+            {
+                "district": "Jamnagar",
+                "cyber_cell_phone": "0288-2554203",
+                "cyber_cell_email": "sp-jam@gujarat.gov.in",
+                "address": "SP Office, Jamnagar, Gujarat"
+            },
+            {
+                "district": "Surat City",
+                "cyber_cell_phone": "0261-2244744",
+                "cyber_cell_email": "cp-surat@gujarat.gov.in",
+                "address": "Commissioner of Police Office, Athwa, Surat"
+            },
+            {
+                "district": "Vadodara City",
+                "cyber_cell_phone": "0265-2426061",
+                "cyber_cell_email": "cp-vadodara@gujarat.gov.in",
+                "address": "Commissioner of Police Office, Vadodara"
+            }
+        ]
+    },
+    {
+        "state": "Haryana",
+        "efiling_link": "https://haryanapolice.gov.in/",
+        "efir_available": true,
+        "citizen_portal": null,
+        "districts": [
+            {
+                "district": "Faridabad NIT",
+                "cyber_cell_phone": "9582200125",
+                "cyber_cell_email": "shonitfbd-hry@nic.in",
+                "address": "SHO NIT, Faridabad, Haryana"
+            },
+            {
+                "district": "Gurugram East",
+                "cyber_cell_phone": "9999981825",
+                "cyber_cell_email": "shoggnsdr-hry@nic.in",
+                "address": "Cyber PS, Gurugram East, Haryana"
+            },
+            {
+                "district": "Gurugram West",
+                "cyber_cell_phone": "9205892117",
+                "cyber_cell_email": "shosec9aggm.pol-hry@gov.in",
+                "address": "Cyber PS, Sector 9A, Gurugram West, Haryana"
+            },
+            {
+                "district": "Sonipat",
+                "cyber_cell_phone": "7814641313",
+                "cyber_cell_email": "sp-cybercrimephq.pol@hry.gov.in",
+                "address": "SP Office, Sonipat, Haryana"
+            },
+            {
+                "district": "Ambala",
+                "cyber_cell_phone": "9729990001",
+                "cyber_cell_email": "spamb@hry.nic.in",
+                "address": "SP Office, Ambala, Haryana"
+            },
+            {
+                "district": "Sirsa",
+                "cyber_cell_phone": "9815251930",
+                "cyber_cell_email": "sp-cybercrimephq.pol@hry.gov.in",
+                "address": "SP Office, Sirsa, Haryana"
+            }
+        ]
+    },
+    {
+        "state": "Karnataka",
+        "efiling_link": "https://ksp.karnataka.gov.in/",
+        "efir_available": true,
+        "citizen_portal": "24x7 Cybercrime Incident Reporting - Dial 112 for CIR",
+        "districts": [
+            {
+                "district": "Bengaluru City",
+                "cyber_cell_phone": "080-22094498",
+                "cyber_cell_email": "ccps@kar.nic.in",
+                "address": "CID Annexe, Bengaluru"
+            },
+            {
+                "district": "Mysuru City",
+                "cyber_cell_phone": "0821-2418598",
+                "cyber_cell_email": "dcpcrimemyc@ksp.gov.in",
+                "address": "CEN PS, Mysuru City"
+            },
+            {
+                "district": "Chitradurga",
+                "cyber_cell_phone": "08194-221044",
+                "cyber_cell_email": "pie&lecta@ksp.gov.in",
+                "address": "CEN PS, Chitradurga"
+            },
+            {
+                "district": "Ramanagar",
+                "cyber_cell_phone": "080-27273700",
+                "cyber_cell_email": "spruralbngdist@vsnl.net",
+                "address": "SP Office, Ramanagar"
+            }
+        ]
+    },
+    {
+        "state": "Madhya Pradesh",
+        "efiling_link": "https://mppolice.gov.in/",
+        "efir_available": true,
+        "citizen_portal": null,
+        "districts": [
+            {
+                "district": "Bhopal",
+                "cyber_cell_phone": "0755-2770248",
+                "cyber_cell_email": "cybercrime.bhopal@mppolice.gov.in",
+                "address": "Cyber Crime Cell, Control Room, Bhopal"
+            },
+            {
+                "district": "Indore",
+                "cyber_cell_phone": "0731-2532200",
+                "cyber_cell_email": "cybercrime.indore@mppolice.gov.in",
+                "address": "Cyber Cell, Commissioner Office, Indore"
+            }
+        ]
+    },
+    {
+        "state": "Maharashtra",
+        "efiling_link": "https://mhcyber.gov.in/",
+        "efir_available": true,
+        "citizen_portal": "Maharashtra Cyber Portal - mhcyber.gov.in",
+        "districts": [
+            {
+                "district": "Pune City",
+                "cyber_cell_phone": "020-29710097",
+                "cyber_cell_email": "crimecyber.pune@nic.in",
+                "address": "Opp. Rahul Theater, Shivajinagar, Pune"
+            },
+            {
+                "district": "Pimpri-Chinchwad",
+                "cyber_cell_phone": "020-27350939",
+                "cyber_cell_email": "cybercell.pcmc-mh@mahapolice.gov.in",
+                "address": "Premlok Park, Chinchwad"
+            },
+            {
+                "district": "Pune Rural",
+                "cyber_cell_phone": "020-25654616",
+                "cyber_cell_email": "cybercell.pnr@mahapolice.gov.in",
+                "address": "Pashan Road, Pune"
+            },
+            {
+                "district": "Navi Mumbai",
+                "cyber_cell_phone": "022-27578309",
+                "cyber_cell_email": "cybercell.navimumbai@mahapolice.gov.in",
+                "address": "Sawali Bldg, Nerul, Navi Mumbai"
+            },
+            {
+                "district": "Thane City",
+                "cyber_cell_phone": "022-25429804",
+                "cyber_cell_email": "cp.thane.online@mahapolice.gov.in",
+                "address": "CP Office, Kalwa Bridge, Thane"
+            },
+            {
+                "district": "Nashik City",
+                "cyber_cell_phone": "0253-2305226",
+                "cyber_cell_email": "cyberpscp.nashik@mahapolice.gov.in",
+                "address": "Gangapur Road, Nashik"
+            },
+            {
+                "district": "Mumbai (BKC)",
+                "cyber_cell_phone": "022-26504008",
+                "cyber_cell_email": "cyberpst-mum@mahapolice.gov.in",
+                "address": "Bandra Kurla Complex, Mumbai"
+            },
+            {
+                "district": "Gadchiroli",
+                "cyber_cell_phone": "9422151001",
+                "cyber_cell_email": "compcellgad@mahapolice.gov.in",
+                "address": "SP Office, 1st Floor, Gadchiroli"
+            },
+            {
+                "district": "Nanded",
+                "cyber_cell_phone": "8308274100",
+                "cyber_cell_email": "cyberps.nanded@mahapolice.gov.in",
+                "address": "District Police Office, Nanded"
+            },
+            {
+                "district": "Nagpur",
+                "cyber_cell_phone": "0712-2564411",
+                "cyber_cell_email": "cybercell.nagpur@mahapolice.gov.in",
+                "address": "Cyber Cell, CP Office, Civil Lines, Nagpur"
+            }
+        ]
+    },
+    {
+        "state": "Odisha",
+        "efiling_link": "https://cawach.odisha.gov.in/",
+        "efir_available": false,
+        "citizen_portal": "Specialized portal for Cyber Crime & Economic Offenses",
+        "districts": [
+            {
+                "district": "Bhubaneswar",
+                "cyber_cell_phone": "8280405691",
+                "cyber_cell_email": "bbsrcceops.odpol@gov.in",
+                "address": "UPD, Bhubaneswar, Odisha"
+            },
+            {
+                "district": "Puri",
+                "cyber_cell_phone": "9439956581",
+                "cyber_cell_email": "cybercellpuri.odpol@gov.in",
+                "address": "Cyber Cell, SP Office, Puri"
+            }
+        ]
+    },
+    {
+        "state": "Punjab",
+        "efiling_link": "https://punjabpolice.gov.in/",
+        "efir_available": true,
+        "citizen_portal": "connect.punjab.gov.in - Citizen portal for cyber security incidents",
+        "districts": [
+            {
+                "district": "Ludhiana",
+                "cyber_cell_phone": "0161-2401266",
+                "cyber_cell_email": "cyber.ludhiana@punjabpolice.gov.in",
+                "address": "Cyber Crime Cell, CP Office, Ludhiana"
+            },
+            {
+                "district": "Amritsar",
+                "cyber_cell_phone": "0183-2565554",
+                "cyber_cell_email": "cyber.amritsar@punjabpolice.gov.in",
+                "address": "Cyber Cell, CP Office, Amritsar"
+            }
+        ]
+    },
+    {
+        "state": "Rajasthan",
+        "efiling_link": "https://police.rajasthan.gov.in/",
+        "efir_available": true,
+        "citizen_portal": null,
+        "districts": [
+            {
+                "district": "Jaipur City",
+                "cyber_cell_phone": "0141-2744090",
+                "cyber_cell_email": "cybercrime.jaipur@rajpolice.gov.in",
+                "address": "Cyber Crime PS, Commissioner of Police, Jaipur"
+            },
+            {
+                "district": "Jodhpur City",
+                "cyber_cell_phone": "0291-2650950",
+                "cyber_cell_email": "cybercrime.jodhpur@rajpolice.gov.in",
+                "address": "Cyber Cell, Police Commissioner Office, Jodhpur"
+            }
+        ]
+    },
+    {
+        "state": "Tamil Nadu",
+        "efiling_link": "https://eservices.tnpolice.gov.in/",
+        "efir_available": true,
+        "citizen_portal": "TN Police Citizen Portal - FIR/CSR status, online complaints",
+        "districts": [
+            {
+                "district": "Chennai City",
+                "cyber_cell_phone": "044-28512527",
+                "cyber_cell_email": "ccps@tnpolice.gov.in",
+                "address": "Cyber Crime Cell, Mylapore, Chennai"
+            },
+            {
+                "district": "Coimbatore City",
+                "cyber_cell_phone": "0422-2300106",
+                "cyber_cell_email": "cbecity@tnpolice.gov.in",
+                "address": "Cyber Cell, Commissioner Office, Coimbatore"
+            }
+        ]
+    },
+    {
+        "state": "Telangana",
+        "efiling_link": "https://www.tspolice.gov.in/",
+        "efir_available": true,
+        "citizen_portal": "Telangana Hawk Eye App - citizen complaint & evidence submission",
+        "districts": [
+            {
+                "district": "Hyderabad Urban",
+                "cyber_cell_phone": "040-23494709",
+                "cyber_cell_email": "anurag.ap@nic.in",
+                "address": "Cyber Crime PS, Abids, Hyderabad"
+            },
+            {
+                "district": "Cyberabad",
+                "cyber_cell_phone": "040-27854031",
+                "cyber_cell_email": "sho_cybercrimes@cyberabad.gov.in",
+                "address": "Cyberabad Commissionerate, Gachibowli"
+            },
+            {
+                "district": "Warangal",
+                "cyber_cell_phone": "9491089100",
+                "cyber_cell_email": "cp-warangal@tspolice.gov.in",
+                "address": "Commissioner of Police Office, Warangal"
+            }
+        ]
+    },
+    {
+        "state": "Uttar Pradesh",
+        "efiling_link": "https://uppolice.gov.in/",
+        "efir_available": true,
+        "citizen_portal": "UPCOP App - e-FIR for unknown accused, complaint registration",
+        "districts": [
+            {
+                "district": "Lucknow",
+                "cyber_cell_phone": "9454400581",
+                "cyber_cell_email": "sp-cyber.lu@up.gov.in",
+                "address": "Police HQ, Gomti Nagar Extension, Lucknow"
+            },
+            {
+                "district": "Noida (Gautam Buddh Nagar)",
+                "cyber_cell_phone": "0120-2425027",
+                "cyber_cell_email": "cyber.noida@up.gov.in",
+                "address": "Cyber Cell, Sector 6, Noida, U.P."
+            },
+            {
+                "district": "Varanasi",
+                "cyber_cell_phone": "0542-2507243",
+                "cyber_cell_email": "cyber.varanasi@up.gov.in",
+                "address": "Cyber Cell, Police Lines, Varanasi"
+            }
+        ]
+    },
+    {
+        "state": "West Bengal",
+        "efiling_link": "https://wbpolice.gov.in/",
+        "efir_available": false,
+        "citizen_portal": null,
+        "districts": [
+            {
+                "district": "Howrah",
+                "cyber_cell_phone": "033-26768007",
+                "cyber_cell_email": "cyberpshpc@policewb.gov.in",
+                "address": "Belilious Road, Howrah Police Commissionerate"
+            },
+            {
+                "district": "Siliguri",
+                "cyber_cell_phone": "9147889606",
+                "cyber_cell_email": "pscyber-smp@policewb.gov.in",
+                "address": "S.F. Road, Siliguri Metropolitan Police"
+            },
+            {
+                "district": "Darjeeling",
+                "cyber_cell_phone": "03542-255897",
+                "cyber_cell_email": "cybercrimeps-djg@policewb.gov.in",
+                "address": "Chauk Bazar, Darjeeling"
+            },
+            {
+                "district": "Kolkata",
+                "cyber_cell_phone": "033-22830000",
+                "cyber_cell_email": "cybercrime@kolkatapolice.gov.in",
+                "address": "Cyber Crime PS, Lalbazar, Kolkata Police HQ"
+            }
+        ]
+    }
+]

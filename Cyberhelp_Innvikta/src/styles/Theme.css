@@ -1,0 +1,463 @@
+/* ======================================================
+   Innvikta CyberHelp - Clean White + Orange Design System
+   ======================================================
+   Palette:
+   - Hero:     White (#FFFFFF), Black heading (#000000), Orange CTA (#F97316)
+   - Panic:    Light red (#FEE2E2), Red heading (#DC2626)
+   - Tools:    White cards, Steel blue icons (#4682B4), Orange buttons
+   - Footer:   Orange CTA band (#F97316) + Midnight Slate (#111827)
+   ====================================================== */
+
+/* === CSS Custom Properties === */
+:root {
+    /* --- Backgrounds --- */
+    --color-bg-primary: #FFFFFF;
+    --color-bg-secondary: #F5F5F5;
+    --color-bg-card: #FFFFFF;
+    --color-bg-card-hover: #FAFAFA;
+    --color-bg-glass: rgba(255, 255, 255, 0.92);
+    --color-bg-hero: #FFFFFF;
+    --color-bg-panic: #FEE2E2;
+    --color-bg-footer: #111827;
+
+    /* --- Accent Colors --- */
+    --color-accent-orange: #F97316;
+    --color-accent-orange-glow: rgba(249, 115, 22, 0.15);
+    --color-accent-emergency: #DC2626;
+    --color-accent-emergency-glow: rgba(220, 38, 38, 0.15);
+    --color-accent-teal: #0D9488;
+    --color-accent-teal-glow: rgba(13, 148, 136, 0.1);
+    --color-accent-blue: #4682B4;
+    --color-accent-blue-glow: rgba(70, 130, 180, 0.1);
+    --color-accent-amber: #D97706;
+    --color-accent-amber-glow: rgba(217, 119, 6, 0.1);
+    --color-accent-purple: #7C3AED;
+    --color-accent-purple-glow: rgba(124, 58, 237, 0.1);
+
+    /* --- Text --- */
+    --color-text-primary: #111111;
+    --color-text-secondary: #444444;
+    --color-text-muted: #888888;
+    --color-text-inverted: #FFFFFF;
+
+    /* --- Borders --- */
+    --color-border: #E5E7EB;
+    --color-border-focus: rgba(249, 115, 22, 0.5);
+
+    /* --- Typography --- */
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* --- Spacing --- */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+
+    /* --- Radii --- */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-full: 9999px;
+
+    /* --- Shadows --- */
+    --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.06);
+    --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.1);
+    --shadow-glow-orange: 0 4px 20px rgba(249, 115, 22, 0.2);
+    --shadow-glow-red: 0 4px 20px rgba(220, 38, 38, 0.15);
+
+    /* --- Transitions --- */
+    --transition-fast: 150ms ease;
+    --transition-base: 250ms ease;
+    --transition-slow: 400ms ease;
+
+    /* --- Register Button --- */
+    --color-register-bg: #000000;
+    --color-register-text: #FFFFFF;
+
+    /* --- Helpline Button --- */
+    --color-helpline-bg: #DC2626;
+    --color-helpline-hover: #B91C1C;
+
+    /* --- Image Background --- */
+    --color-image-bg: #FFFFFF;
+}
+
+/* === Dark Theme === */
+[data-theme="dark"] {
+    --color-bg-primary: #0F1117;
+    --color-bg-secondary: #1A1B23;
+    --color-bg-card: #1E1F2A;
+    --color-bg-card-hover: #262737;
+    --color-bg-glass: rgba(15, 17, 23, 0.92);
+    --color-bg-hero: #0F1117;
+    --color-bg-panic: #3B1111;
+    --color-bg-footer: #070809;
+
+    --color-text-primary: #F0F0F0;
+    --color-text-secondary: #B0B3BE;
+    --color-text-muted: #6B6F80;
+    --color-text-inverted: #0F1117;
+
+    --color-border: #2A2C3A;
+    --color-border-focus: rgba(249, 115, 22, 0.6);
+
+    --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.3);
+    --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-glow-orange: 0 4px 20px rgba(249, 115, 22, 0.25);
+    --shadow-glow-red: 0 4px 20px rgba(220, 38, 38, 0.2);
+
+    /* --- Register Button --- */
+    --color-register-bg: #FFFFFF;
+    --color-register-text: #000000;
+
+    /* --- Helpline Button --- */
+    --color-helpline-bg: #DC2626;
+    --color-helpline-hover: #B91C1C;
+
+    /* --- Image Background --- */
+    --color-image-bg: #1A1B23;
+}
+
+/* === Reset & Base === */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-primary);
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+#root {
+    position: relative;
+    z-index: 1;
+}
+
+a {
+    color: var(--color-accent-orange);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: #EA580C;
+}
+
+/* === Utility Classes === */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+}
+
+.section-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.section-subtitle {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-2xl);
+    max-width: 640px;
+}
+
+/* === Card System === */
+.card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--color-accent-orange);
+}
+
+/* Form elements dark mode */
+input,
+select,
+textarea,
+button {
+    color: inherit;
+    font-family: inherit;
+}
+
+/* === Glass Effect === */
+.glass {
+    background: var(--color-bg-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--color-border);
+}
+
+/* === Button System === */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 0.65rem 1.25rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-primary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background: var(--color-accent-orange);
+    color: white;
+    box-shadow: 0 2px 8px rgba(249, 115, 22, 0.2);
+}
+
+.btn-primary:hover {
+    background: #EA580C;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-glow-orange);
+    color: white;
+}
+
+.btn-emergency {
+    background: var(--color-accent-emergency);
+    color: white;
+    box-shadow: 0 2px 12px var(--color-accent-emergency-glow);
+    animation: emergencyPulse 2s ease-in-out infinite;
+}
+
+.btn-emergency:hover {
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: var(--shadow-glow-red);
+    color: white;
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+}
+
+.btn-outline:hover {
+    background: var(--color-bg-secondary);
+    border-color: var(--color-accent-orange);
+    color: var(--color-accent-orange);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--color-text-secondary);
+    padding: 0.5rem 0.75rem;
+}
+
+.btn-ghost:hover {
+    background: rgba(0, 0, 0, 0.04);
+    color: var(--color-text-primary);
+}
+
+/* === Chip/Tag === */
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.chip-teal {
+    background: var(--color-accent-teal-glow);
+    color: var(--color-accent-teal);
+    border: 1px solid rgba(13, 148, 136, 0.2);
+}
+
+.chip-red {
+    background: var(--color-accent-emergency-glow);
+    color: var(--color-accent-emergency);
+    border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+.chip-blue {
+    background: var(--color-accent-blue-glow);
+    color: var(--color-accent-blue);
+    border: 1px solid rgba(70, 130, 180, 0.2);
+}
+
+.chip-amber {
+    background: var(--color-accent-amber-glow);
+    color: var(--color-accent-amber);
+    border: 1px solid rgba(217, 119, 6, 0.2);
+}
+
+.chip-purple {
+    background: var(--color-accent-purple-glow);
+    color: var(--color-accent-purple);
+    border: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+/* === Grid Layouts === */
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-lg);
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-lg);
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-md);
+}
+
+/* === Animations === */
+@keyframes emergencyPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 2px 12px var(--color-accent-emergency-glow);
+    }
+
+    50% {
+        box-shadow: 0 4px 30px rgba(220, 38, 38, 0.35);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes floatBadge {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+.animate-fade-in {
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.animate-slide-in {
+    animation: slideInLeft 0.4s ease forwards;
+}
+
+/* === Scrollbar === */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #D1D5DB;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #9CA3AF;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 var(--space-md);
+    }
+
+    .section-title {
+        font-size: 1.35rem;
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+}

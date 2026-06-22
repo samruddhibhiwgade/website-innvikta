@@ -1,0 +1,234 @@
+{
+    "public_sector": [
+        {
+            "name": "State Bank of India",
+            "keywords": "SBI",
+            "fraud_helpline": "1800 11 1109",
+            "credit_card_helpline": "1860 180 1290 / 1800 180 1290",
+            "fraud_email": "report.phishing@sbi.co.in",
+            "website": "https://sbi.co.in",
+            "color": "#1a4b8c"
+        },
+        {
+            "name": "Punjab National Bank",
+            "keywords": "PNB",
+            "fraud_helpline": "1800 1800 / 1800 2021",
+            "credit_card_helpline": "1800 180 2345",
+            "fraud_email": "cybercrimecell@pnb.co.in",
+            "website": "https://pnb.bank.in",
+            "color": "#003d6b"
+        },
+        {
+            "name": "Bank of Baroda",
+            "keywords": "BOB",
+            "fraud_helpline": "1800 5700 / 1800 5000",
+            "credit_card_helpline": "1800 103 1006 / 1800 225 100",
+            "fraud_email": "bobsupport@cardbranch.com",
+            "website": "https://bankofbaroda.in",
+            "color": "#e35205"
+        },
+        {
+            "name": "Canara Bank",
+            "keywords": "Canara",
+            "fraud_helpline": "1800 425 0018",
+            "credit_card_helpline": "1800 1030",
+            "fraud_email": "hocss1@canarabank.com",
+            "website": "https://canarabank.com",
+            "color": "#004b91"
+        },
+        {
+            "name": "Union Bank of India",
+            "keywords": "UBI",
+            "fraud_helpline": "1800 22 2244",
+            "credit_card_helpline": "1800 208 2244",
+            "fraud_email": "phishing@unionbankofindia.com",
+            "website": "https://unionbankofindia.co.in",
+            "color": "#e31e24"
+        },
+        {
+            "name": "Bank of India",
+            "keywords": "BOI",
+            "fraud_helpline": "1800 220 229",
+            "credit_card_helpline": "1800 220 088",
+            "fraud_email": "BOI.Callcentre@bankofindia.bank.in",
+            "website": "https://bankofindia.co.in",
+            "color": "#051f50"
+        },
+        {
+            "name": "Central Bank of India",
+            "keywords": "CBI",
+            "fraud_helpline": "1800 202 1911",
+            "credit_card_helpline": "1800 22 1911",
+            "fraud_email": "customercare@centralbank.co.in",
+            "website": "https://centralbankofindia.co.in",
+            "color": "#c41230"
+        },
+        {
+            "name": "Indian Bank",
+            "keywords": "IB",
+            "fraud_helpline": "1800 425 00 000",
+            "credit_card_helpline": "1800 1700",
+            "fraud_email": "customercarecomplaints@indianbank.co.in",
+            "website": "https://indianbank.in",
+            "color": "#004a98"
+        },
+        {
+            "name": "UCO Bank",
+            "keywords": "UCO",
+            "fraud_helpline": "1800 103 0123",
+            "credit_card_helpline": "1800 8910",
+            "fraud_email": "hosp.cscell@uco.bank.in",
+            "website": "https://uco.bank.in",
+            "color": "#0076a0"
+        }
+    ],
+    "private_sector": [
+        {
+            "name": "HDFC Bank",
+            "keywords": "HDFC",
+            "fraud_helpline": "1800 202 6161",
+            "credit_card_helpline": "1860 267 6161",
+            "fraud_email": "report.phishingsite@hdfcbank.com",
+            "website": "https://hdfcbank.com",
+            "color": "#004c8f"
+        },
+        {
+            "name": "ICICI Bank",
+            "keywords": "ICICI",
+            "fraud_helpline": "1800 2662",
+            "credit_card_helpline": "1800 1080",
+            "fraud_email": "antiphishing@icicibank.com",
+            "website": "https://icicibank.com",
+            "color": "#f37920"
+        },
+        {
+            "name": "Axis Bank",
+            "keywords": "Axis",
+            "fraud_helpline": "1800 419 5577",
+            "credit_card_helpline": "1800 209 5577",
+            "fraud_email": "report.phishing@axisbank.com",
+            "website": "https://axisbank.com",
+            "color": "#97144d"
+        },
+        {
+            "name": "Kotak Mahindra Bank",
+            "keywords": "Kotak",
+            "fraud_helpline": "1800 209 0000",
+            "credit_card_helpline": "1860 266 2666",
+            "fraud_email": "itsecurity.bank@kotak.com",
+            "website": "https://kotak.com",
+            "color": "#e31e24"
+        },
+        {
+            "name": "IndusInd Bank",
+            "keywords": "IndusInd",
+            "fraud_helpline": "1860 267 7777",
+            "credit_card_helpline": "1800 266 0447",
+            "fraud_email": "reachus@indusind.com",
+            "website": "https://indusind.com",
+            "color": "#630001"
+        },
+        {
+            "name": "YES Bank",
+            "keywords": "YES",
+            "fraud_helpline": "1800 1200",
+            "credit_card_helpline": "1860 210 1200",
+            "fraud_email": "block@yes.bank.in",
+            "website": "https://yesbank.in",
+            "color": "#014c92"
+        },
+        {
+            "name": "IDFC First Bank",
+            "keywords": "IDFC",
+            "fraud_helpline": "1800 419 4332",
+            "credit_card_helpline": "1800 10 888",
+            "fraud_email": "reportphishing@idfcfirstbank.com",
+            "website": "https://idfcfirstbank.com",
+            "color": "#a11811"
+        },
+        {
+            "name": "RBL Bank",
+            "keywords": "RBL",
+            "fraud_helpline": "022 61156300",
+            "credit_card_helpline": "022 6232 7777",
+            "fraud_email": "reportfraud@rbl.bank.in",
+            "website": "https://rblbank.com",
+            "color": "#004085"
+        },
+        {
+            "name": "Federal Bank",
+            "keywords": "Federal",
+            "fraud_helpline": "1800 425 1199",
+            "credit_card_helpline": "1800 420 1199",
+            "fraud_email": "ehelp@federalbank.co.in",
+            "website": "https://federalbank.co.in",
+            "color": "#004b91"
+        }
+    ],
+    "specialized_banks": [
+        {
+            "name": "AU Small Finance Bank",
+            "keywords": "AU",
+            "fraud_helpline": "1800 1200 1200",
+            "fraud_email": "customercare@aubank.in",
+            "website": "https://ausfb.in",
+            "color": "#f15a22"
+        },
+        {
+            "name": "Ujjivan SFB",
+            "keywords": "Ujjivan",
+            "fraud_helpline": "1800 208 2121",
+            "fraud_email": "customercare@ujjivan.com",
+            "website": "https://ujjivansfb.in",
+            "color": "#0076a0"
+        },
+        {
+            "name": "Equitas SFB",
+            "keywords": "Equitas",
+            "fraud_helpline": "1800 103 1222",
+            "fraud_email": "customerservice@equitas.bank.in",
+            "website": "https://equitas.bank.in",
+            "color": "#004c8f"
+        },
+        {
+            "name": "Unity SFB",
+            "keywords": "Unity",
+            "fraud_helpline": "1800 209 1122",
+            "fraud_email": "customercare@unitybank.co.in",
+            "website": "https://unity.bank.in",
+            "color": "#6b2d7b"
+        },
+        {
+            "name": "Fino Payments Bank",
+            "keywords": "Fino",
+            "fraud_helpline": "1800 268 3930",
+            "fraud_email": "reportfraud@fino.bank.in",
+            "website": "https://fino.bank.in",
+            "color": "#f97316"
+        },
+        {
+            "name": "Airtel Payments Bank",
+            "keywords": "Airtel",
+            "fraud_helpline": "8800688006",
+            "fraud_email": "wecare@airtelbank.com",
+            "website": "https://airtel.in",
+            "color": "#e31e24"
+        },
+        {
+            "name": "Paytm Payments Bank",
+            "keywords": "Paytm",
+            "fraud_helpline": "0120 4456456",
+            "fraud_email": "helpdesk@paytmbank.com",
+            "website": "https://paytmbank.com",
+            "color": "#00b9f1"
+        },
+        {
+            "name": "India Post Payments Bank",
+            "keywords": "IPPB",
+            "fraud_helpline": "155299",
+            "fraud_email": "contact@ippbonline.in",
+            "website": "https://ippbonline.com",
+            "color": "#f37920"
+        }
+    ]
+}

@@ -123,7 +123,7 @@ faqs:
 cta:
   title: "See how security awareness training will work in your business"
   content: "Get a personalized walkthrough of the platform."
-  button_label: "Book a demo"
+  button_label: "Book A Demo"
   button_link: "/contact"
   image: "/images/video-popup.jpg"
 ---

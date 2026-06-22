@@ -77,3 +77,4 @@ module.exports = {
     require("tailwind-bootstrap-grid")({ generateContainer: false }),
   ],
 };
+// Force tailwind rebuild

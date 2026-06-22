@@ -288,7 +288,7 @@ const DemoPage = () => {
                       >
                         <div className="relative z-10 flex items-center gap-2">
                           <span className="uppercase tracking-wider text-sm">
-                            {isSubmitting ? "Submitting..." : "Book a Demo"}
+                            {isSubmitting ? "Submitting..." : "Book A Demo"}
                           </span>
                           {!isSubmitting && (
                             <FiArrowRight className="text-lg transition-transform group-hover:translate-x-1" />

@@ -8,6 +8,7 @@ const Footer = () => {
   const footerData = {
     solutions: [
       { name: "InSAT (Security Awareness)", url: "/solutions/insat" },
+      { name: "Innvikta Arcade", url: "/cyber-arcade" },
       { name: "Phishing Simulations", url: "/solutions/phishing-simulation" },
       { name: "Human Risk Intelligence", url: "/solutions/human-risk-intelligence" },
       { name: "Compliance Training", url: "/solutions/compliance-training" },
@@ -20,8 +21,7 @@ const Footer = () => {
       { name: "Baseline Score Tool", url: "/freetools/baseline-score-tool" },
       { name: "Culture Benchmarking", url: "/freetools/culture-benchmarking" },
       { name: "Maturity Calculator", url: "#" },
-      { name: "Risk Estimator", url: "#" },
-      { name: "Simulation ROI Calculator", url: "#" }
+      { name: "Risk Estimator", url: "#" }
     ],
     resources: [
       { name: "Maturity Benchmarks", url: "/maturity-benchmarks" },
@@ -126,7 +126,7 @@ const Footer = () => {
                 />
                 <button 
                   type="submit" 
-                  className="btn btn-primary absolute right-1.5 top-1.5 py-2.5 px-6 rounded-full text-xs font-bold uppercase tracking-wider"
+                  className="btn btn-primary absolute right-1.5 top-1.5 bottom-1.5 !h-auto !rounded-full py-2 px-6 text-xs font-bold uppercase tracking-wider"
                 >
                   Subscribe
                 </button>

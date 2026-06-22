@@ -4,7 +4,7 @@ banner:
   description: "Innvikta helps enterprises build safer employee behaviour through phishing simulations, gamified learning, AI-powered training journeys, and human risk visibility for security leaders."
   image: /images/banner-app.png
   link:
-    label: Book a Demo
+    label: Book A Demo
     href: "/book-demo"
   link_secondary:
     label: Start Free
@@ -82,7 +82,7 @@ speciality:
       description: "An immersive cybersecurity gaming platform built to drive repeat engagement, healthy competition, and stronger retention than traditional courses."
       button:
         label: "Explore Innvikta Arcade"
-        link: "/solutions/insat"
+        link: "/cyber-arcade"
       image: /images/features-02.png
     - subtitle: "Customized Solutions"
       description: "Tailored content, workflows and campaigns for your specific risks, regions and regulators—designed and managed by Innvikta’s team of security experts."

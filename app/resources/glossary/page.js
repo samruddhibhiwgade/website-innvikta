@@ -806,7 +806,7 @@ export default function GlossaryPage() {
                           </p>
                           <div className="flex flex-wrap justify-center gap-4 mt-10" style={{ marginTop: "2.5rem" }}>
                               <Link href="/book-demo" className="btn btn-primary text-white font-bold">
-                                  Book a Demo
+                                  Book A Demo
                               </Link>
                               <Link href="/contact" className="btn btn-outline-primary font-bold">
                                   Start Free

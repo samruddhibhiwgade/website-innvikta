@@ -1183,7 +1183,7 @@ export default function SpotThePhish() {
                   </p>
                   <div className="flex flex-wrap justify-center gap-4 mt-10" style={{ marginTop: "2.5rem" }}>
                     <Link href="/book-demo" className="btn btn-primary">
-                      Book a Demo
+                      Book A Demo
                     </Link>
                     <Link href="/contact" className="btn btn-outline-primary">
                       Start Free

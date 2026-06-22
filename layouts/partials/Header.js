@@ -616,31 +616,12 @@ const menuData = {
           { name: "Free Password Generator", desc: "Create secure passwords and check credential strength locally.", href: "/freetools/password-generator" },
           { name: "Domain Security Analyzer", desc: "Scan SPF, DKIM, and DMARC record vulnerabilities.", href: "/freetools/domain-security-analyzer" },
           { name: "Spot The Phish", desc: "Test your ability to detect phishing emails in an interactive simulator.", href: "/freetools/spot-the-phish" },
-          { name: "Simulation ROI Tool", desc: "Estimate potential cost savings from threat training campaigns.", href: "#" }
+          { name: "Simulation ROI Tool", desc: "Estimate potential cost savings from threat training campaigns.", href: "/resources/simulation-roi" }
         ],
         cta: {
           title: "Check password exposure logs",
           desc: "Analyze if employee credentials exist on public breach indexes securely.",
           label: "Run Tool",
-          href: "#",
-          svgType: "assessments"
-        }
-      },
-      {
-        id: "templates",
-        label: "Templates",
-        icon: FiFileText,
-        headline: "Ready-to-use security awareness campaign planning and templates.",
-        cells: [
-          { name: "Phishing Templates", desc: "Download high-fidelity email warning templates.", href: "#" },
-          { name: "Security Policy Drafts", desc: "Ready-to-use security and data policy templates.", href: "#" },
-          { name: "IT Incident Checklists", desc: "Standard check steps for immediate threat alert response.", href: "#" },
-          { name: "Campaign Calendars", desc: "Planning templates to schedule your annual training.", href: "#" }
-        ],
-        cta: {
-          title: "Download phishing templates",
-          desc: "Access ready-made email templates modeled after actual 2026 security threats.",
-          label: "Get Templates",
           href: "#",
           svgType: "assessments"
         }
@@ -656,16 +637,16 @@ const menuData = {
         icon: IoGameControllerOutline,
         headline: "Turn security awareness into engaging, game-based learning.",
         cells: [
-          { name: "Story-Based Learning", desc: "Cinematic, scenario-driven interactive modules.", href: "#" },
-          { name: "Missions & Quests", desc: "Simulated security assignments for active play.", href: "#" },
-          { name: "Topic-Based Modules", desc: "Mini-games targeting specific security topics.", href: "#" },
-          { name: "Free Arcade Challenges", desc: "Try arcade modules without a full workspace setup.", href: "#" }
+          { name: "Story-Based Learning", desc: "Cinematic, scenario-driven interactive modules.", href: "/cyber-arcade" },
+          { name: "Missions & Quests", desc: "Simulated security assignments for active play.", href: "/cyber-arcade" },
+          { name: "Topic-Based Modules", desc: "Mini-games targeting specific security topics.", href: "/cyber-arcade#section-games" },
+          { name: "Free Arcade Challenges", desc: "Try arcade modules without a full workspace setup.", href: "/cyber-arcade" }
         ],
         cta: {
           title: "Explore Innvikta Arcade",
           desc: "Utilize interactive gamified lessons that build defensive employee habits through story play.",
           label: "Launch a Free Challenge",
-          href: "#",
+          href: "/cyber-arcade",
           svgType: "arcade"
         }
       },
@@ -675,16 +656,16 @@ const menuData = {
         icon: FiAward,
         headline: "Keep employees motivated with progression, badges, and rewards.",
         cells: [
-          { name: "Badges & XP", desc: "Reward milestone achievements and daily login streaks.", href: "#" },
-          { name: "Leaderboards", desc: "Encourage friendly security culture competition.", href: "#" },
-          { name: "Progression Paths", desc: "Unlock corporate career stages as skills advance.", href: "#" },
-          { name: "Arcade Rewards Store", desc: "Redeem XP points for custom achievements and items.", href: "#" }
+          { name: "Badges & XP", desc: "Reward milestone achievements and daily login streaks.", href: "/cyber-arcade" },
+          { name: "Leaderboards", desc: "Encourage friendly security culture competition.", href: "/cyber-arcade" },
+          { name: "Progression Paths", desc: "Unlock corporate career stages as skills advance.", href: "/cyber-arcade" },
+          { name: "Arcade Rewards Store", desc: "Redeem XP points for custom achievements and items.", href: "/cyber-arcade" }
         ],
         cta: {
           title: "Increase employee participation rates",
           desc: "Leverage gamification mechanics to achieve up to 94% training engagement rates.",
           label: "See Arcade Benefits",
-          href: "#",
+          href: "/cyber-arcade",
           svgType: "arcade"
         }
       }
@@ -844,7 +825,7 @@ const searchIndex = [
     keywords: ["start free", "trial", "register", "free account"]
   },
   {
-    title: "Book a Demo",
+    title: "Book A Demo",
     description: "Schedule a live demo session with our product experts.",
     url: "/book-demo",
     category: "Get Started",
@@ -858,6 +839,32 @@ const searchIndex = [
     keywords: ["glossary", "dictionary", "terms", "definitions", "cybersecurity", "phishing", "bec"]
   }
 ];
+
+const languageMap = {
+  "English (US)": "en",
+  "Deutsch": "de",
+  "Français": "fr",
+  "Español": "es",
+  "日本語": "ja"
+};
+
+// Get current language from googtrans cookie
+const getLangFromCookie = () => {
+  if (typeof window === 'undefined' || typeof document === 'undefined') return 'English (US)';
+  const match = document.cookie.match(/googtrans=\/([^/]+)\/([^;]+)/);
+  if (match && match[2]) {
+    const code = match[2];
+    const reverseMap = {
+      'en': 'English (US)',
+      'de': 'Deutsch',
+      'fr': 'Français',
+      'es': 'Español',
+      'ja': '日本語'
+    };
+    return reverseMap[code] || 'English (US)';
+  }
+  return 'English (US)';
+};
 
 const Header = () => {
   const pathname = usePathname();
@@ -877,6 +884,22 @@ const Header = () => {
     setShowMenu(false);
     setIsSearchOpen(false);
     setSearchQuery("");
+  }, [pathname]);
+
+  // Re-apply translation on route change
+  useEffect(() => {
+    const currentLang = getLangFromCookie();
+    if (currentLang !== 'English (US)') {
+      const timer = setTimeout(() => {
+        const langCode = languageMap[currentLang] || 'en';
+        const selectEl = document.querySelector('#global_google_translate_element select.goog-te-combo');
+        if (selectEl) {
+          selectEl.value = langCode;
+          selectEl.dispatchEvent(new Event('change'));
+        }
+      }, 500);
+      return () => clearTimeout(timer);
+    }
   }, [pathname]);
 
   // Auto focus input when search overlay is opened
@@ -920,6 +943,63 @@ const Header = () => {
 
   // Language top strip state
   const [langOpen, setLangOpen] = useState(false);
+  const [selectedLang, setSelectedLang] = useState("English (US)");
+
+  // Initialize global Google Translate
+  useEffect(() => {
+    // Set initial display language from cookie if present
+    setSelectedLang(getLangFromCookie());
+
+    const initGlobalTranslate = () => {
+      if (window.google && window.google.translate) {
+        new window.google.translate.TranslateElement(
+          {
+            pageLanguage: 'en',
+            includedLanguages: 'en,de,fr,es,ja,hi,mr' // Support English, German, French, Spanish, Japanese, Hindi, Marathi
+          },
+          'global_google_translate_element'
+        );
+      }
+    };
+
+    window.globalGoogleTranslateElementInit = initGlobalTranslate;
+
+    // Load Google Translate script if not loaded
+    if (window.google && window.google.translate) {
+      initGlobalTranslate();
+    } else if (!document.querySelector('#global-google-translate-script')) {
+      const addScript = document.createElement('script');
+      addScript.id = 'global-google-translate-script';
+      addScript.src = 'https://translate.google.com/translate_a/element.js?cb=globalGoogleTranslateElementInit';
+      document.body.appendChild(addScript);
+    }
+  }, []);
+
+  const handleLanguageChange = (langName) => {
+    setSelectedLang(langName);
+    const langCode = languageMap[langName] || 'en';
+
+    const triggerChange = () => {
+      const selectEl = document.querySelector('#global_google_translate_element select.goog-te-combo');
+      if (selectEl) {
+        selectEl.value = langCode;
+        selectEl.dispatchEvent(new Event('change'));
+        return true;
+      }
+      return false;
+    };
+
+    if (!triggerChange()) {
+      // Retry for up to 2 seconds if the script is still loading
+      let attempts = 0;
+      const interval = setInterval(() => {
+        attempts++;
+        if (triggerChange() || attempts > 20) {
+          clearInterval(interval);
+        }
+      }, 100);
+    }
+  };
 
   // Scroll listener for sticky styles
   useEffect(() => {
@@ -1032,17 +1112,23 @@ const Header = () => {
                   onBlur={() => setTimeout(() => setLangOpen(false), 200)}
                   className="hover:text-white transition-colors flex items-center gap-1 focus:outline-none"
                 >
-                  <FiGlobe className="text-[14px]" /> English <FiChevronDown className="text-[11px]" />
+                  <FiGlobe className="text-[14px]" /> {selectedLang} <FiChevronDown className="text-[11px]" />
                 </button>
                 {langOpen && (
                   <div className="absolute right-0 top-full mt-1.5 w-[140px] bg-slate-900 border border-slate-800 rounded-lg shadow-xl py-1 z-50 text-slate-400">
                     {["English (US)", "Deutsch", "Français", "Español", "日本語"].map((lang, idx) => (
-                      <button key={idx} className="w-full text-left px-3 py-1.5 hover:bg-slate-800 hover:text-white text-slate-400 font-semibold block transition-colors text-xs">
+                      <button 
+                        key={idx} 
+                        onClick={() => handleLanguageChange(lang)}
+                        className="w-full text-left px-3 py-1.5 hover:bg-slate-800 hover:text-white text-slate-400 font-semibold block transition-colors text-xs"
+                      >
                         {lang}
                       </button>
                     ))}
                   </div>
                 )}
+                {/* Global Google Translate Element */}
+                <div id="global_google_translate_element" style={{ position: 'absolute', top: '-9999px', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}></div>
               </div>
             </div>
           </div>
@@ -1209,7 +1295,7 @@ const Header = () => {
                   href="/book-demo" 
                   className="px-3 py-1.5 xl:px-5 xl:py-2 bg-[#f15a24] hover:bg-orange-600 text-white rounded-lg text-[11px] xl:text-[13px] font-bold transition-all duration-300 flex items-center gap-1 whitespace-nowrap"
                 >
-                  Book a Demo <FiArrowRight className="text-xs" />
+                  Book A Demo <FiArrowRight className="text-xs" />
                 </Link>
               </div>
             </div>
@@ -1430,7 +1516,7 @@ const Header = () => {
                                 <Link 
                                   href={currentTab.cta.href || "#"}
                                   onClick={handleMenuLeave}
-                                  className="w-full justify-center text-center py-2.5 xl:py-3 bg-[#f15a24] hover:bg-orange-600 text-white font-extrabold rounded-lg text-[10px] xl:text-xs transition-colors flex items-center gap-1.5 uppercase tracking-wider shadow-md shadow-orange-500/10"
+                                  className="w-full justify-center text-center py-2.5 xl:py-3 bg-[#f15a24] hover:bg-orange-600 text-white font-semibold whitespace-nowrap rounded-lg text-[10px] xl:text-xs transition-colors flex items-center gap-1.5 uppercase tracking-wider shadow-md shadow-orange-500/10"
                                 >
                                   {currentTab.cta.label} <FiArrowRight className="text-xs" />
                                 </Link>
@@ -1587,7 +1673,7 @@ const Header = () => {
                 onClick={() => setShowMenu(false)}
                 className="w-full block text-center py-3 bg-[#f15a24] text-white font-extrabold rounded-lg text-sm shadow-md shadow-orange-500/10 flex items-center justify-center gap-1"
               >
-                Book a Demo <FiArrowRight className="text-xs" />
+                Book A Demo <FiArrowRight className="text-xs" />
               </Link>
             </div>
           </div>

@@ -1,0 +1,340 @@
+{
+    "form_title": "SELECT TYPE OF FRAUD",
+    "field_label": "Select the type of fraud: (Required)",
+    "source_images_folder": "images/",
+    "total_images_processed": 20,
+    "dropdown_options": [
+        "UPI Fraud",
+        "Debit / Credit Card / SIM Swap Fraud",
+        "Internet Banking Related Fraud",
+        "E-Wallet Related Fraud",
+        "Fraud Call / Vishing",
+        "Cyber Bullying / Stalking / Sexting",
+        "Fake / Impersonating Profile",
+        "Cheating by Impersonation",
+        "Profile Hacking / Identity Theft",
+        "Online Job Fraud",
+        "Demat / Depository Fraud / Other Cyber",
+        "Online Gambling",
+        "Provocative Speech for Unlawful Acts",
+        "Cryptocurrency Fraud",
+        "Email Phishing",
+        "Cyber Terrorism",
+        "Online Matrimonial Fraud",
+        "Other Cyber Crimes"
+    ],
+    "fraud_types": [
+        {
+            "id": 1,
+            "fraud_type": "UPI Fraud",
+            "source_image": "WhatsApp Image 2026-02-27 at 1.37.38 PM.jpeg",
+            "additional_questions": [
+                "Did you receive a fraudulent UPI request?",
+                "Did you share your UPI ID or PIN with someone?",
+                "Did the fraudster ask for an immediate payment?",
+                "Was a UPI transaction made from your account without your authorization?",
+                "Did you receive any suspicious messages or calls regarding UPI payments?",
+                "Was your UPI PIN or other sensitive information compromised?",
+                "Did you share your UPI details with anyone you don't know or trust?",
+                "Did you lose money due to a fraudulent UPI transaction?",
+                "Did you report the incident to your bank or UPI provider?",
+                "Did you file a complaint on cybercrime.gov.in regarding the UPI fraud?"
+            ],
+            "has_please_specify_field": true,
+            "has_next_button": true
+        },
+        {
+            "id": 2,
+            "fraud_type": "Debit / Credit Card / SIM Swap Fraud",
+            "source_image": "WhatsApp Image 2026-02-27 at 1.38.14 PM.jpeg",
+            "additional_questions": [
+                "Did you receive a call or message asking to verify your card details?",
+                "Did you lose access to your SIM card recently?",
+                "Were you informed that your card details were compromised?",
+                "Was your debit/credit card used for unauthorized transactions?",
+                "Did you receive any unexpected alerts about card transactions?",
+                "Did you experience a SIM swap without your consent?",
+                "Did you share your card details or PIN with anyone?",
+                "Have you lost money due to unauthorized card transactions or SIM swap?",
+                "Did you report the incident to your bank and/or telecom provider?",
+                "Did you file a complaint on cybercrime.gov.in regarding the card/SIM swap fraud?"
+            ],
+            "has_please_specify_field": true,
+            "has_next_button": true
+        },
+        {
+            "id": 3,
+            "fraud_type": "Internet Banking Related Fraud",
+            "source_image": "WhatsApp Image 2026-02-27 at 8.40.15 PM.jpeg",
+            "additional_questions": [
+                "Did you receive an email or SMS asking for your internet banking credentials?",
+                "Did you notice unauthorized transactions in your account?",
+                "Did you share your internet banking details with someone?",
+                "Was your internet banking account accessed without your permission?",
+                "Did you receive any suspicious emails or messages regarding your internet banking?",
+                "Did you lose money due to fraudulent internet banking activity?",
+                "Did you report the incident to your bank?",
+                "Did you file a complaint on cybercrime.gov.in regarding the internet banking fraud?"
+            ],
+            "has_please_specify_field": true,
+            "has_next_button": true
+        },
+        {
+            "id": 4,
+            "fraud_type": "E-Wallet Related Fraud",
+            "source_image": "WhatsApp Image 2026-02-27 at 8.40.44 PM.jpeg",
+            "additional_questions": [
+                "Did you receive a suspicious e-wallet transaction request?",
+                "Did you share your e-wallet credentials or OTP?",
+                "Was your e-wallet account accessed without your permission?",
+                "Did you notice any unauthorized transactions in your e-wallet?",
+                "Did you receive any suspicious messages or calls regarding your e-wallet?",
+                "Did you share your e-wallet PIN or other sensitive information with anyone?",
+                "Did you lose money due to fraudulent e-wallet activity?",
+                "Did you report the incident to your e-wallet provider?",
+                "Did you file a complaint on cybercrime.gov.in regarding the e-wallet fraud?"
+            ],
+            "has_please_specify_field": true,
+            "has_next_button": true
+        },
+        {
+            "id": 5,
+            "fraud_type": "Fraud Call / Vishing",
+            "source_image": "WhatsApp Image 2026-02-27 at 8.41.11 PM.jpeg",
+            "additional_questions": [
+                "Did you receive any suspicious calls claiming to be from a bank, government agency, or other organization?",
+                "Were you asked to share personal or financial information during the call?",
+                "Did the caller pressure you to take immediate action?",
+                "Did you provide any information to the caller?",
+                "Did you lose money or experience any other negative consequences as a result of the call?",
+                "Did you report the call to the relevant organization (e.g., your bank)?",
+                "Did you file a complaint on cybercrime.gov.in regarding the vishing attempt?"
+            ],
+            "has_please_specify_field": true,
+            "has_next_button": true
+        },
+        {
+            "id": 6,
+            "fraud_type": "Cyber Bullying / Stalking / Sexting",
+            "source_image": "WhatsApp Image 2026-02-27 at 8.41.41 PM.jpeg",
+            "additional_questions": [
+                "Have you been subjected to online harassment or bullying?",
+                "Have you received unwanted or threatening messages online?",
+                "Has anyone shared your personal information or embarrassing content online without your consent?",
+                "Have you been stalked or harassed online?",
+                "Have you received unwanted sexual messages or images?",
+                "Have you reported the cyberbullying/stalking/sexting to the platform where it occurred?",
+                "Did you file a complaint on cybercrime.gov.in regarding the cyberbullying/stalking/sexting?"
+            ],
+            "has_please_specify_field": true,
+            "has_next_button": true
+        },
+        {
+            "id": 7,
+            "fraud_type": "Fake / Impersonating Profile",
+            "source_image": "WhatsApp Image 2026-02-27 at 8.42.10 PM.jpeg",
+            "additional_questions": [
+                "Have you encountered a fake profile online that is impersonating you or someone you know?",
+                "Is the fake profile using your photos or other personal information without your consent?",
+                "Is the fake profile contacting your friends or family members?",
+                "Is the fake profile spreading false information or rumors?",
+                "Has the fake profile caused you any harm or distress?",
+                "Have you reported the fake profile to the platform where it exists?",
+                "Did you file a complaint on cybercrime.gov.in regarding the fake profile?"
+            ],
+            "has_please_specify_field": true,
+            "has_next_button": true
+        },
+        {
+            "id": 8,
+            "fraud_type": "Cheating by Impersonation",
+            "source_image": "WhatsApp Image 2026-02-27 at 8.42.32 PM.jpeg",
+            "additional_questions": [
+                "Have you been deceived by someone online who was impersonating someone else?",
+                "Did the impersonator try to gain your trust or build a relationship with you?",
+                "Did the impersonator ask you for money or other valuable items?",
+                "Did you provide any money or items to the impersonator?",
+                "Did you suffer any financial or emotional harm as a result of the impersonation?",
+                "Have you reported the impersonation to the platform where it occurred?",
+                "Did you file a complaint on cybercrime.gov.in regarding the cheating by impersonation?"
+            ],
+            "has_please_specify_field": true,
+            "has_next_button": true
+        },
+        {
+            "id": 9,
+            "fraud_type": "Profile Hacking / Identity Theft",
+            "source_image": "WhatsApp Image 2026-02-27 at 8.42.51 PM.jpeg",
+            "additional_questions": [
+                "Was your online account hacked without your permission?",
+                "Did someone access your personal information without your consent?",
+                "Was your identity stolen and used for fraudulent purposes?",
+                "Did you notice any unauthorized activity on your online accounts?",
+                "Did you lose money or experience any other negative consequences due to the hacking/identity theft?",
+                "Have you changed your passwords and taken other security measures to protect your accounts?",
+                "Did you file a complaint on cybercrime.gov.in regarding the cheating by impersonation?"
+            ],
+            "has_please_specify_field": true,
+            "has_next_button": true
+        },
+        {
+            "id": 10,
+            "fraud_type": "Online Job Fraud",
+            "source_image": "WhatsApp Image 2026-02-27 at 8.43.12 PM.jpeg",
+            "additional_questions": [
+                "Were you offered a job online that seemed too good to be true?",
+                "Were you asked to pay any fees or provide financial information as part of the job application process?",
+                "Did the supposed employer avoid direct communication or rely heavily on messaging apps?",
+                "Was the job offer or company information vague or inconsistent?",
+                "Did you perform any work for the supposed employer without receiving payment?",
+                "Did you lose money or experience any other negative consequences as a result of the job offer?",
+                "Did you file a complaint on cybercrime.gov.in regarding the online job fraud?"
+            ],
+            "has_please_specify_field": true,
+            "has_next_button": true
+        },
+        {
+            "id": 11,
+            "fraud_type": "Demat / Depository Fraud / Other Cyber",
+            "source_image": "WhatsApp Image 2026-02-27 at 8.43.31 PM.jpeg",
+            "additional_questions": [
+                "Was your Demat account accessed without your permission?",
+                "Were unauthorized transactions made in your Demat account?",
+                "Did you receive any suspicious communications regarding your Demat account?",
+                "Did you share your Demat account credentials with anyone?",
+                "Did you lose money or securities due to fraudulent Demat activity?",
+                "Did you report the incident to your depository participant (DP)?",
+                "Did you file a complaint on cybercrime.gov.in regarding the Demat fraud?"
+            ],
+            "has_please_specify_field": true,
+            "has_next_button": true
+        },
+        {
+            "id": 12,
+            "fraud_type": "Online Gambling",
+            "source_image": "WhatsApp Image 2026-02-27 at 8.43.51 PM.jpeg",
+            "additional_questions": [
+                "Have you been involved in online gambling activities?",
+                "Have you experienced any issues with online gambling platforms (e.g., unfair practices, refusal to pay winnings)?",
+                "Have you lost significant amounts of money through online gambling?",
+                "Are you experiencing any negative consequences due to online gambling (e.g., financial problems, addiction)?",
+                "Have you been contacted by any individuals or organizations related to your online gambling activities?",
+                "Have you reported any issues with online gambling platforms to the appropriate authorities?",
+                "Did you file a complaint on cybercrime.gov.in regarding issues related to online gambling?"
+            ],
+            "has_please_specify_field": true,
+            "has_next_button": true
+        },
+        {
+            "id": 13,
+            "fraud_type": "Provocative Speech for Unlawful Acts",
+            "source_image": "WhatsApp Image 2026-02-27 at 8.44.13 PM.jpeg",
+            "additional_questions": [
+                "Have you encountered online content that promotes violence, hatred, or discrimination?",
+                "Have you been the target of online hate speech or threats?",
+                "Have you witnessed online discussions inciting unlawful acts?",
+                "Has anyone encouraged you to participate in illegal activities online?",
+                "Have you reported any instances of provocative speech to the platform where it occurred?",
+                "Have you experienced any harm or distress due to online provocative speech?",
+                "Did you file a complaint on cybercrime.gov.in regarding the provocative speech?"
+            ],
+            "has_please_specify_field": true,
+            "has_next_button": true
+        },
+        {
+            "id": 14,
+            "fraud_type": "Cryptocurrency Fraud",
+            "source_image": "WhatsApp Image 2026-02-27 at 8.44.41 PM.jpeg",
+            "additional_questions": [
+                "Have you been involved in any cryptocurrency transactions or investments?",
+                "Have you encountered any suspicious cryptocurrency schemes or scams?",
+                "Have you lost money due to cryptocurrency fraud?",
+                "Were you promised unrealistic returns on cryptocurrency investments?",
+                "Did you share your cryptocurrency wallet keys or other sensitive information with anyone?",
+                "Did you report the incident to the relevant cryptocurrency exchange or platform?",
+                "Did you file a complaint on cybercrime.gov.in regarding the cryptocurrency fraud?"
+            ],
+            "has_please_specify_field": true,
+            "has_next_button": true
+        },
+        {
+            "id": 15,
+            "fraud_type": "Email Phishing",
+            "source_image": "WhatsApp Image 2026-02-27 at 8.44.58 PM.jpeg",
+            "additional_questions": [
+                "Have you received any suspicious emails asking for your personal or financial information?",
+                "Did the email claim to be from a bank, government agency, or other legitimate organization?",
+                "Did the email contain links to unfamiliar websites?",
+                "Did you click on any links in the suspicious email or provide any information?",
+                "Did you lose money or experience any other negative consequences as a result of the phishing email?",
+                "Did you report the phishing email to the organization it claimed to be from?",
+                "Did you file a complaint on cybercrime.gov.in regarding the phishing attempt?"
+            ],
+            "has_please_specify_field": true,
+            "has_next_button": true
+        },
+        {
+            "id": 16,
+            "fraud_type": "Cyber Terrorism",
+            "source_image": "WhatsApp Image 2026-02-27 at 8.45.19 PM.jpeg",
+            "additional_questions": [
+                "Have you encountered any online content that promotes or glorifies cyber terrorism?",
+                "Have you witnessed any online activities that appear to be related to cyber terrorism (e.g., website defacement, data breaches)?",
+                "Have you been the target of any cyberattacks that you believe are related to cyber terrorism?",
+                "Have you reported any suspected cyber terrorism activities to the appropriate authorities?",
+                "Have you experienced any harm or distress due to suspected cyber terrorism activities?",
+                "Have you reported any suspicious online activity related to cyber terrorism to the platform where it occurred?",
+                "Did you file a complaint on cybercrime.gov.in regarding suspected cyber terrorism activity?"
+            ],
+            "has_please_specify_field": true,
+            "has_next_button": true
+        },
+        {
+            "id": 17,
+            "fraud_type": "Online Matrimonial Fraud",
+            "source_image": "WhatsApp Image 2026-02-27 at 8.45.40 PM.jpeg",
+            "additional_questions": [
+                "Have you been contacted by someone on a matrimonial website or app whose profile seemed suspicious?",
+                "Did the person you met online ask you for money or valuable gifts?",
+                "Did you provide any money or gifts to someone you met on a matrimonial platform?",
+                "Did you experience any emotional or financial harm as a result of an online matrimonial interaction?",
+                "Have you reported the suspicious profile or activity to the matrimonial platform?",
+                "Have you been deceived or misled by someone you met on a matrimonial website or app?",
+                "Did you file a complaint on cybercrime.gov.in regarding the online matrimonial fraud?"
+            ],
+            "has_please_specify_field": true,
+            "has_next_button": true
+        },
+        {
+            "id": 18,
+            "fraud_type": "Other Cyber Crimes",
+            "source_image": "WhatsApp Image 2026-02-27 at 8.46.04 PM.jpeg",
+            "additional_questions": [
+                "Have you been a victim of any other type of cybercrime not listed above?",
+                "Did you experience any financial, emotional, or other harm as a result of the cybercrime?",
+                "Did you report the incident to the relevant organization or platform?",
+                "Have you taken any steps to protect yourself from similar cybercrimes in the future?",
+                "Did the cybercrime involve the use of technology or the internet?",
+                "Have you discussed the incident with anyone else?",
+                "Did you file a complaint on cybercrime.gov.in regarding this other cybercrime?"
+            ],
+            "has_please_specify_field": true,
+            "has_next_button": true
+        }
+    ],
+    "common_form_elements": {
+        "please_specify_field": true,
+        "next_button": true,
+        "cybercrime_portal": "cybercrime.gov.in"
+    },
+    "extraction_metadata": {
+        "extracted_on": "2026-03-01",
+        "total_fraud_types_extracted": 18,
+        "images_folder": "images/",
+        "notes": [
+            "Images 3 and 4 (at 8.39.10 PM and 8.39.38 PM) were dropdown list views showing all available fraud type options.",
+            "Each fraud type form includes a 'Please specify:' text area and a 'Next' button.",
+            "All fraud types include a final question about filing a complaint on cybercrime.gov.in."
+        ]
+    }
+}

@@ -632,7 +632,7 @@ const About = () => {
                         Start Free
                       </Link>
                       <Link href="/book-demo" className="btn btn-outline-primary">
-                        Book a Demo
+                        Book A Demo
                       </Link>
                     </div>
                   </div>

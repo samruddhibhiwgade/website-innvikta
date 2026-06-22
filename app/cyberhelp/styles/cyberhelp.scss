@@ -882,7 +882,7 @@ main {
     background: var(--color-bg-card);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-full);
-    padding: 0.25rem;
+    padding: 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     display: flex;
     align-items: center;
@@ -895,6 +895,27 @@ main {
     border-color: var(--color-accent-orange);
 }
 
+.translate-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.translate-icon-left {
+    left: 12px;
+    color: var(--color-accent-orange);
+}
+
+.translate-icon-right {
+    right: 12px;
+}
+
 /* Hide the powered by google text */
 .goog-logo-link {
     display: none !important;
@@ -905,18 +926,28 @@ main {
     font-size: 0 !important;
 }
 
-/* Style the select dropdown */
 .goog-te-combo {
-    background-color: transparent;
-    color: var(--color-text-primary);
+    background-color: transparent !important;
+    color: var(--color-text-primary) !important;
     border: none;
-    padding: 0.4rem 0.8rem;
-    font-size: 0.85rem;
+    padding: 0.55rem 2rem 0.55rem 2.2rem !important;
+    font-size: 0.85rem !important;
     font-weight: 700;
     font-family: var(--font-primary);
     cursor: pointer;
     outline: none;
-    appearance: none; /* Hide default arrow to look cleaner */
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    border-radius: var(--radius-full);
+    display: block;
+    width: 100%;
+}
+
+.goog-te-combo option {
+    color: var(--color-text-primary) !important;
+    background-color: var(--color-bg-card) !important;
+    font-size: 0.85rem !important;
 }
 
 .goog-te-combo:hover {

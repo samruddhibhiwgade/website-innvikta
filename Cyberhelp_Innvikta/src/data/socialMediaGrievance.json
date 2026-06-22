@@ -1,0 +1,44 @@
+[
+    {
+        "platform": "Facebook / Meta",
+        "grievance_officer": "Amrita Kaushik",
+        "email": "fbgoindia@support.facebook.com",
+        "report_url": "https://www.facebook.com/help/reportlinks",
+        "icon": "facebook"
+    },
+    {
+        "platform": "WhatsApp",
+        "grievance_officer": "Paresh B Lal",
+        "email": "grievance_officer_wa@support.whatsapp.com",
+        "report_url": "https://www.whatsapp.com/contact",
+        "icon": "message-circle"
+    },
+    {
+        "platform": "X (Twitter)",
+        "grievance_officer": "Vinay Prakash",
+        "email": "grievance-officer-in@twitter.com",
+        "report_url": "https://help.twitter.com/en/forms",
+        "icon": "twitter"
+    },
+    {
+        "platform": "LinkedIn",
+        "grievance_officer": "Rose Maria Sebi",
+        "email": "grievanceofficer@linkedin.com",
+        "report_url": "https://www.linkedin.com/help/linkedin/ask/TS-RNBF",
+        "icon": "linkedin"
+    },
+    {
+        "platform": "Telegram",
+        "grievance_officer": "Abhimanyu Yadav",
+        "email": "abhimanyu@telegram.org",
+        "report_url": "https://telegram.org/support",
+        "icon": "send"
+    },
+    {
+        "platform": "ShareChat",
+        "grievance_officer": "Harleen Sethi",
+        "email": "grievance@sharechat.co",
+        "report_url": "https://sharechat.com/contact",
+        "icon": "share-2"
+    }
+]

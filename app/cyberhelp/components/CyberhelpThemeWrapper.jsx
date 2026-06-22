@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import DisclaimerPopup from "./shared/DisclaimerPopup";
-import GoogleTranslate from "./shared/GoogleTranslate";
 import ThemeToggle from "./shared/ThemeToggle";
 
 export default function CyberhelpThemeWrapper({ children }) {
@@ -23,7 +22,6 @@ export default function CyberhelpThemeWrapper({ children }) {
   return (
     <div className="cyberhelp-scope" data-theme={theme}>
       <DisclaimerPopup />
-      <GoogleTranslate />
       <div className="floating-theme-toggle" style={{ position: "fixed", bottom: "20px", right: "20px", zIndex: 9999 }}>
         <ThemeToggle theme={theme} onToggle={toggleTheme} />
       </div>

@@ -1,0 +1,102 @@
+{
+    "maharashtra_state": {
+        "nodal_officer": {
+            "name": "Shri. Vineet Agarwal",
+            "designation": "ADGP (Cyber)",
+            "email": "sp.cbr-mah@gov.in"
+        },
+        "grievance_officer": {
+            "phone": "022-22160080",
+            "email": "ig.cbr-mah@gov.in"
+        },
+        "mumbai_cyber_ps": {
+            "address": "1st Floor, BKC Police Station, Mumbai",
+            "phone": "022-26504008",
+            "email": "cyberpst-mum@mahapolice.gov.in"
+        }
+    },
+    "pune_region": [
+        {
+            "cell_name": "Pune City Cyber Police Station",
+            "jurisdiction": "Pune City",
+            "contact_no": "020-29710097",
+            "email": "crimecyber.pune@nic.in",
+            "address": "Shivajinagar, Pune",
+            "whatsapp": [
+                "7058719375",
+                "7058719371"
+            ],
+            "office_hours": "24x7"
+        },
+        {
+            "cell_name": "Pimpri-Chinchwad Cyber Cell",
+            "jurisdiction": "PCMC, Pune",
+            "contact_no": "020-27350939",
+            "email": "cybercell.pcmc-mh@mahapolice.gov.in",
+            "address": "Premlok Park, Near SKF Company, Chinchwad, Pune",
+            "office_hours": "10:00 AM - 6:00 PM"
+        },
+        {
+            "cell_name": "Pune Rural Cyber Cell",
+            "jurisdiction": "Pune Rural",
+            "contact_no": "020-25654616",
+            "email": "cybercell.pnr@mahapolice.gov.in",
+            "address": "Pashan Road, Pune",
+            "office_hours": "10:00 AM - 6:00 PM"
+        },
+        {
+            "cell_name": "Navi Mumbai Cyber Police Station",
+            "jurisdiction": "Navi Mumbai",
+            "contact_no": "022-27578309",
+            "email": "cybercell.navimumbai@mahapolice.gov.in",
+            "address": "Sawali Building, Nerul, Navi Mumbai",
+            "office_hours": "10:00 AM - 6:00 PM"
+        }
+    ],
+    "national_portals": [
+        {
+            "name": "National Cyber Crime Reporting Portal (NCRP)",
+            "authority": "Ministry of Home Affairs",
+            "url": "https://cybercrime.gov.in",
+            "helpline": "1930",
+            "description": "Primary digital interface for lodging cybercrime complaints in India."
+        },
+        {
+            "name": "RBI Sachet",
+            "authority": "Reserve Bank of India",
+            "url": "https://sachet.rbi.org.in",
+            "helpline": "14448",
+            "description": "Report illegal money collection, Ponzi schemes, and predatory loan apps."
+        },
+        {
+            "name": "DoT Sanchar Saathi",
+            "authority": "Department of Telecommunications",
+            "url": "https://sancharsaathi.gov.in",
+            "modules": [
+                "TAFCOP (SIM Check)",
+                "CEIR (Block Stolen Phone)",
+                "Chakshu (Report Fraud Comms)"
+            ],
+            "description": "Telecom security: check SIM registrations, block stolen devices, report fraud calls."
+        },
+        {
+            "name": "SEBI SCORES",
+            "authority": "Securities and Exchange Board of India",
+            "url": "https://scores.sebi.gov.in",
+            "helpline": "1800 266 7575",
+            "description": "Report securities market fraud: stockbrokers, mutual funds, investment schemes."
+        },
+        {
+            "name": "CERT-In",
+            "authority": "Indian Computer Emergency Response Team",
+            "email": "incident@cert-in.org.in",
+            "description": "Report national-level cyber incidents and IT security breaches."
+        },
+        {
+            "name": "Income Tax Phishing",
+            "authority": "Income Tax Department",
+            "email": "webmanager@incometax.gov.in",
+            "description": "Forward phishing emails impersonating the Income Tax Department."
+        }
+    ]
+}
