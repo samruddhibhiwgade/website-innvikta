@@ -106,4 +106,99 @@ body {
   top: 0 !important;
 }
 
+@media (min-width: 1024px) {
+  .desktop-nav-menu {
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+
+/* Protected tight layout for viewports above 1024px and below 1360px to prevent overlapping (captures Nest Hub Max 1280px) */
+@media (min-width: 1024px) and (max-width: 1359px) {
+  .desktop-nav-menu {
+    gap: 0.45rem !important;
+  }
+  .desktop-nav-menu .nav-link {
+    font-size: 13px !important;
+    padding-left: 0.25rem !important;
+    padding-right: 0.25rem !important;
+    gap: 0.15rem !important;
+  }
+  .header-cta-buttons {
+    gap: 0.35rem !important;
+  }
+  .header-cta-buttons .header-cta-start-free {
+    padding: 0.35rem 0.5rem !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+  }
+  .header-cta-buttons .header-cta-book-demo {
+    padding: 0.35rem 0.5rem !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+  }
+}
+
+/* Medium layout for standard desktops/laptops between 1360px and 1535px (including 1397px viewports) */
+@media (min-width: 1360px) and (max-width: 1535px) {
+  .desktop-nav-menu {
+    gap: 1.1rem !important;
+  }
+  .desktop-nav-menu .nav-link {
+    font-size: 16px !important;
+    padding-left: 0.65rem !important;
+    padding-right: 0.65rem !important;
+    gap: 0.3rem !important;
+  }
+  .header-cta-buttons {
+    gap: 0.75rem !important;
+  }
+  .header-cta-buttons .header-cta-start-free {
+    padding: 0.55rem 1rem !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+  }
+  .header-cta-buttons .header-cta-book-demo {
+    padding: 0.55rem 1rem !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+  }
+}
+
+/* Spacious, premium layout for 1920px (including display-scaled viewports >= 1536px) */
+@media (min-width: 1536px) {
+  .desktop-nav-menu {
+    gap: 1.6rem !important;
+  }
+  .desktop-nav-menu .nav-link {
+    font-size: 18.5px !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    gap: 0.4rem !important;
+  }
+  .header-cta-buttons {
+    gap: 1rem !important;
+  }
+  .header-cta-buttons .header-cta-start-free {
+    padding: 0.75rem 1.4rem !important;
+    font-size: 16px !important;
+    font-weight: 900 !important;
+  }
+  .header-cta-buttons .header-cta-book-demo {
+    padding: 0.75rem 1.4rem !important;
+    font-size: 16px !important;
+    font-weight: 900 !important;
+  }
+}
+
+
+
+
+
+
 

@@ -31,6 +31,7 @@ export default function SimulationRoiPage() {
   const [hourlyCost, setHourlyCost] = useState(60);
   const [productivityHoursLost, setProductivityHoursLost] = useState(4);
   const [projectedClickRate, setProjectedClickRate] = useState(8);
+  const [packageType, setPackageType] = useState("Lite");
 
   // Active FAQ state
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
@@ -59,20 +60,26 @@ export default function SimulationRoiPage() {
   const currentIncidents = Math.round(annualAttempts * (currentClickRate / 100) * (breachRate / 100));
   const futureIncidents = Math.round(annualAttempts * (projectedClickRate / 100) * (breachRate / 100));
   
-  const currentRemediation = currentIncidents * remediationFtes * hoursPerIncident * hourlyCost;
-  const futureRemediation = futureIncidents * remediationFtes * hoursPerIncident * hourlyCost;
+  const remediationCostPerIncident = remediationFtes > 0 ? (hoursPerIncident * hourlyCost) / remediationFtes : 0;
+  const currentRemediation = currentIncidents * remediationCostPerIncident;
+  const futureRemediation = futureIncidents * remediationCostPerIncident;
   
-  const currentProductivity = currentIncidents * productivityHoursLost * hourlyCost;
-  const futureProductivity = futureIncidents * productivityHoursLost * hourlyCost;
+  const averageEmployeeHourlyRate = 50000 / 2080;
+  const productivityLossPerIncident = productivityHoursLost * averageEmployeeHourlyRate;
+  const currentProductivity = currentIncidents * productivityLossPerIncident;
+  const futureProductivity = futureIncidents * productivityLossPerIncident;
   
   const industryBreachExposure = industryBreachCost * (currentClickRate / 100);
   const futureExposure = industryBreachCost * (projectedClickRate / 100);
   
-  const currentAnnualCost = currentRemediation + currentProductivity + industryBreachExposure;
-  const projectedAnnualCost = futureRemediation + futureProductivity + futureExposure;
+  const currentAnnualCost = currentRemediation + currentProductivity;
+  const projectedAnnualCost = futureRemediation + futureProductivity;
   
   const annualSavings = Math.max(0, currentAnnualCost - projectedAnnualCost);
-  const innviktaCost = employees * 13.2;
+  
+  // Calculate price based on package
+  const packagePrice = packageType === "Risk Mitigation" ? 18.0 : packageType === "Enterprise" ? 24.0 : 13.2;
+  const innviktaCost = employees * packagePrice;
   
   const roi = innviktaCost > 0 ? Math.round((annualSavings / innviktaCost) * 100) : 0;
   const reductionPercentage = currentIncidents > 0 ? Math.round(((currentIncidents - futureIncidents) / currentIncidents) * 100) : 0;
@@ -209,7 +216,7 @@ export default function SimulationRoiPage() {
       <div className="insat-page" ref={heroRef}>
         <div className="main-content">
           {/* HERO SECTION */}
-          <section className="hero-section" style={{ paddingBottom: "2rem" }}>
+          <div className="hero-section" style={{ paddingTop: "3rem", paddingBottom: "1.5rem" }}>
             <div className="hero-outer-wrapper">
               
               <div className="hero-bg-decor" aria-hidden="true">
@@ -243,7 +250,7 @@ export default function SimulationRoiPage() {
 
               <div className="container" style={{ position: "relative", zIndex: 2 }}>
                 <div style={{ maxWidth: "880px", margin: "0 auto", textAlign: "center" }}>
-                  <div className="hero-content" style={{ paddingTop: "2.5rem", textAlign: "center", width: "100%", margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                  <div className="hero-content" style={{ paddingTop: "1rem", paddingBottom: "2rem", textAlign: "center", width: "100%", margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center" }}>
                     <span className="text-subheading" style={{ display: "inline-block", margin: "0 auto 1.25rem auto", textAlign: "center" }}>Free Cybersecurity Tools</span>
                     <h1 className="text-96-heading" style={{ fontSize: "clamp(2rem, 5vw, 3.25rem)", lineHeight: "1.1", marginBottom: "1.5rem", textAlign: "center", width: "100%" }}>
                       Security Awareness <span className="text-primary">ROI Calculator</span>
@@ -268,458 +275,573 @@ export default function SimulationRoiPage() {
               </div>
 
             </div>
-          </section>
+          </div>
 
         {/* CALCULATOR & RESULTS SECTION */}
-        <section ref={calculatorRef} className="section py-20 bg-[#fafafa]">
+        <div ref={calculatorRef} style={{ backgroundColor: "#fafafa", paddingTop: "5rem", paddingBottom: "5rem" }}>
           <div className="container">
             <div className="row justify-center">
-              <div className="col-12 lg:col-8 text-center mb-16">
-                <h2 className="text-40-heading text-center mb-6">Calculate Your ROI Potential</h2>
-                <p className="text-lg text-slate-500 max-w-2xl mx-auto text-center text-balance">Adjust the operational parameters below to model simulated risk mitigation benefits tailored for your infrastructure.</p>
+              <div className="col-12 lg:col-8" style={{ textAlign: "center", marginBottom: "4rem" }}>
+                <h2 className="text-40-heading" style={{ textAlign: "center", marginBottom: "1.25rem" }}>Calculate Your ROI Potential</h2>
+                <p style={{ fontSize: "1.125rem", color: "#64748b", maxWidth: "42rem", margin: "0 auto", textAlign: "center", lineHeight: "1.75" }}>Adjust the operational parameters below to model simulated risk mitigation benefits tailored for your infrastructure.</p>
               </div>
             </div>
             
-            <div className="row justify-center gap-y-8">
+            <div className="row justify-center">
               {/* INPUTS COLUMN */}
               <div className="col-12 lg:col-8">
-                <div className="relative w-full bg-white border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.06)] rounded-[24px] !p-8 md:!p-10">
-                  <h3 className="text-xl font-bold text-slate-950 mb-8 border-b border-slate-100 pb-4">Organization Profile</h3>
+                <div className="relative w-full bg-white border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.06)] rounded-[24px] !p-8 md:!p-10 text-left">
+                  <h3 className="text-xl font-bold text-slate-950 mb-8 border-b border-slate-100 pb-4 text-left">Organization Profile & Parameters</h3>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                  {/* Industry Dropdown (Full Width) */}
-                  <div className="relative md:col-span-2">
-                    <div className="flex items-center justify-between mb-2">
-                      <label className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-                        Industry
-                        <button 
-                          className="text-slate-400 hover:text-slate-600 focus:outline-none"
-                          onMouseEnter={() => setActiveTooltip("industry")}
-                          onMouseLeave={() => setActiveTooltip(null)}
-                          aria-label="Industry Help Info"
-                        >
-                          <FiInfo className="text-xs" />
-                        </button>
-                      </label>
-                      {activeTooltip === "industry" && (
-                        <div className="absolute z-20 top-8 left-0 right-0 bg-slate-900 text-white text-xs p-3 rounded-xl shadow-lg leading-relaxed">
-                          {tooltips.industry}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 text-left">
+                    {/* Innvikta Package Selector (Full Width) */}
+                    <div className="relative md:col-span-2 text-left">
+                      <div className="flex items-center justify-between mb-2 w-full">
+                        <div className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                          <label htmlFor="package-type-select">Innvikta Subscription Package</label>
+                          <button 
+                            type="button"
+                            className="text-slate-400 hover:text-slate-600 focus:outline-none"
+                            onMouseEnter={() => setActiveTooltip("packageType")}
+                            onMouseLeave={() => setActiveTooltip(null)}
+                            aria-label="Package Type Info"
+                          >
+                            <FiInfo className="text-xs" />
+                          </button>
                         </div>
-                      )}
-                    </div>
-                    <div className="relative">
-                      <select 
-                        value={industry}
-                        onChange={(e) => setIndustry(e.target.value)}
-                        className="w-full !px-5 !py-3.5 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all appearance-none cursor-pointer font-medium"
-                      >
-                        {Object.keys(INDUSTRY_COSTS).map((ind) => (
-                          <option key={ind} value={ind}>{ind}</option>
-                        ))}
-                      </select>
-                      <div className="pointer-events-none absolute inset-y-0 right-5 flex items-center text-slate-400">
-                        <FiChevronDown />
+                        {activeTooltip === "packageType" && (
+                          <div className="absolute z-20 top-8 left-0 right-0 bg-slate-900 text-white text-xs p-3 rounded-xl shadow-lg leading-relaxed">
+                            Select the Innvikta package to calculate pricing and ROI. Lite is $13.20/employee/year, Risk Mitigation is $18.00/employee/year.
+                          </div>
+                        )}
+                      </div>
+                      <div className="relative">
+                        <select 
+                          id="package-type-select"
+                          value={packageType}
+                          onChange={(e) => setPackageType(e.target.value)}
+                          className="w-full !px-5 !py-3.5 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all appearance-none cursor-pointer font-medium"
+                        >
+                          <option value="Lite">Lite Package ($13.20 per employee/year)</option>
+                          <option value="Risk Mitigation">Risk Mitigation Package ($18.00 per employee/year)</option>
+                          <option value="Enterprise">Enterprise Package (Custom pricing)</option>
+                        </select>
+                        <div className="pointer-events-none absolute inset-y-0 right-5 flex items-center text-slate-400">
+                          <FiChevronDown />
+                        </div>
                       </div>
                     </div>
-                    <p className="mt-2 text-xs text-slate-400">Select the industry that best represents your organization.</p>
-                  </div>
 
-                  {/* Employees Input */}
-                  <div className="relative">
-                    <div className="flex items-center justify-between mb-2">
-                      <label className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-                        Employees With Email Access
-                        <button 
-                          className="text-slate-400 hover:text-slate-600 focus:outline-none"
-                          onMouseEnter={() => setActiveTooltip("employees")}
-                          onMouseLeave={() => setActiveTooltip(null)}
-                          aria-label="Employees Info"
-                        >
-                          <FiInfo className="text-xs" />
-                        </button>
-                      </label>
-                      {activeTooltip === "employees" && (
-                        <div className="absolute z-20 top-8 left-0 right-0 bg-slate-900 text-white text-xs p-3 rounded-xl shadow-lg leading-relaxed">
-                          {tooltips.employees}
+                    {/* Employees Input */}
+                    <div className="relative text-left">
+                      <div className="flex items-center justify-between mb-2 w-full">
+                        <div className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                          <label htmlFor="employees-input">Employees With Email Access</label>
+                          <button 
+                            type="button"
+                            className="text-slate-400 hover:text-slate-600 focus:outline-none"
+                            onMouseEnter={() => setActiveTooltip("employees")}
+                            onMouseLeave={() => setActiveTooltip(null)}
+                            aria-label="Employees Info"
+                          >
+                            <FiInfo className="text-xs" />
+                          </button>
                         </div>
-                      )}
+                        {activeTooltip === "employees" && (
+                          <div className="absolute z-20 top-8 left-0 right-0 bg-slate-900 text-white text-xs p-3 rounded-xl shadow-lg leading-relaxed">
+                            {tooltips.employees}
+                          </div>
+                        )}
+                      </div>
+                      <div className="relative">
+                        <input 
+                          id="employees-input"
+                          type="number"
+                          min="50"
+                          max="100000"
+                          value={employees}
+                          onChange={(e) => setEmployees(Math.max(50, Math.min(100000, parseInt(e.target.value) || 50)))}
+                          className="w-full !px-5 !py-3.5 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all font-semibold"
+                        />
+                      </div>
+                      <p className="mt-2 text-xs text-slate-400 text-left">Range: 50 – 100,000</p>
                     </div>
-                    <div className="relative">
+
+                    {/* Monthly Phishing Attempts Input */}
+                    <div className="relative text-left">
+                      <div className="flex items-center justify-between mb-2 w-full">
+                        <div className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                          <label htmlFor="monthly-attempts-input">Monthly Phishing Attacks Per Employee</label>
+                          <button 
+                            type="button"
+                            className="text-slate-400 hover:text-slate-600 focus:outline-none"
+                            onMouseEnter={() => setActiveTooltip("monthlyAttempts")}
+                            onMouseLeave={() => setActiveTooltip(null)}
+                            aria-label="Attempts Info"
+                          >
+                            <FiInfo className="text-xs" />
+                          </button>
+                        </div>
+                        {activeTooltip === "monthlyAttempts" && (
+                          <div className="absolute z-20 top-8 left-0 right-0 bg-slate-900 text-white text-xs p-3 rounded-xl shadow-lg leading-relaxed">
+                            {tooltips.monthlyAttempts}
+                          </div>
+                        )}
+                      </div>
+                      <div className="relative">
+                        <input 
+                          id="monthly-attempts-input"
+                          type="number"
+                          min="1"
+                          max="20"
+                          value={monthlyAttempts}
+                          onChange={(e) => setMonthlyAttempts(Math.max(1, Math.min(20, parseInt(e.target.value) || 1)))}
+                          className="w-full !px-5 !py-3.5 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all font-semibold"
+                        />
+                      </div>
+                      <p className="mt-2 text-xs text-slate-400 text-left">Range: 1 – 20</p>
+                    </div>
+
+                    {/* Employees Involved In Remediation Input */}
+                    <div className="relative text-left">
+                      <div className="flex items-center justify-between mb-2 w-full">
+                        <div className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                          <label htmlFor="remediation-ftes-input">Employees in Remediation (FTEs)</label>
+                          <button 
+                            type="button"
+                            className="text-slate-400 hover:text-slate-600 focus:outline-none"
+                            onMouseEnter={() => setActiveTooltip("remediationFtes")}
+                            onMouseLeave={() => setActiveTooltip(null)}
+                            aria-label="Remediation FTEs Info"
+                          >
+                            <FiInfo className="text-xs" />
+                          </button>
+                        </div>
+                        {activeTooltip === "remediationFtes" && (
+                          <div className="absolute z-20 top-8 left-0 right-0 bg-slate-900 text-white text-xs p-3 rounded-xl shadow-lg leading-relaxed">
+                            {tooltips.remediationFtes}
+                          </div>
+                        )}
+                      </div>
+                      <div className="relative">
+                        <input 
+                          id="remediation-ftes-input"
+                          type="number"
+                          min="1"
+                          max="20"
+                          value={remediationFtes}
+                          onChange={(e) => setRemediationFtes(Math.max(1, Math.min(20, parseInt(e.target.value) || 1)))}
+                          className="w-full !px-5 !py-3.5 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all font-semibold"
+                        />
+                      </div>
+                      <p className="mt-2 text-xs text-slate-400 text-left">Range: 1 – 20</p>
+                    </div>
+
+                    {/* Hours Required Per Incident Input */}
+                    <div className="relative text-left">
+                      <div className="flex items-center justify-between mb-2 w-full">
+                        <div className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                          <label htmlFor="hours-per-incident-input">Hours per FTE to Remediate One Incident</label>
+                          <button 
+                            type="button"
+                            className="text-slate-400 hover:text-slate-600 focus:outline-none"
+                            onMouseEnter={() => setActiveTooltip("hoursPerIncident")}
+                            onMouseLeave={() => setActiveTooltip(null)}
+                            aria-label="Hours Info"
+                          >
+                            <FiInfo className="text-xs" />
+                          </button>
+                        </div>
+                        {activeTooltip === "hoursPerIncident" && (
+                          <div className="absolute z-20 top-8 left-0 right-0 bg-slate-900 text-white text-xs p-3 rounded-xl shadow-lg leading-relaxed">
+                            {tooltips.hoursPerIncident}
+                          </div>
+                        )}
+                      </div>
+                      <div className="relative">
+                        <input 
+                          id="hours-per-incident-input"
+                          type="number"
+                          min="1"
+                          max="20"
+                          value={hoursPerIncident}
+                          onChange={(e) => setHoursPerIncident(Math.max(1, Math.min(20, parseInt(e.target.value) || 1)))}
+                          className="w-full !px-5 !py-3.5 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all font-semibold"
+                        />
+                      </div>
+                      <p className="mt-2 text-xs text-slate-400 text-left">Range: 1 – 20</p>
+                    </div>
+
+                    {/* Hourly Cost Input */}
+                    <div className="relative text-left">
+                      <div className="flex items-center justify-between mb-2 w-full">
+                        <div className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                          <label htmlFor="hourly-cost-input">Average Employee Hourly Cost ($)</label>
+                          <button 
+                            type="button"
+                            className="text-slate-400 hover:text-slate-600 focus:outline-none"
+                            onMouseEnter={() => setActiveTooltip("hourlyCost")}
+                            onMouseLeave={() => setActiveTooltip(null)}
+                            aria-label="Hourly Cost Info"
+                          >
+                            <FiInfo className="text-xs" />
+                          </button>
+                        </div>
+                        {activeTooltip === "hourlyCost" && (
+                          <div className="absolute z-20 top-8 left-0 right-0 bg-slate-900 text-white text-xs p-3 rounded-xl shadow-lg leading-relaxed">
+                            {tooltips.hourlyCost}
+                          </div>
+                        )}
+                      </div>
+                      <div className="relative">
+                        <input 
+                          id="hourly-cost-input"
+                          type="number"
+                          min="1"
+                          value={hourlyCost}
+                          onChange={(e) => setHourlyCost(Math.max(1, parseInt(e.target.value) || 0))}
+                          className="w-full !px-5 !py-3.5 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all font-semibold"
+                        />
+                      </div>
+                      <p className="mt-2 text-xs text-slate-400 text-left">Hourly loaded wage of employees involved.</p>
+                    </div>
+
+                    {/* Productivity Hours Lost Input */}
+                    <div className="relative text-left">
+                      <div className="flex items-center justify-between mb-2 w-full">
+                        <div className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                          <label htmlFor="productivity-hours-lost-input">Hours Lost per Breached Employee</label>
+                          <button 
+                            type="button"
+                            className="text-slate-400 hover:text-slate-600 focus:outline-none"
+                            onMouseEnter={() => setActiveTooltip("productivityHoursLost")}
+                            onMouseLeave={() => setActiveTooltip(null)}
+                            aria-label="Downtime Info"
+                          >
+                            <FiInfo className="text-xs" />
+                          </button>
+                        </div>
+                        {activeTooltip === "productivityHoursLost" && (
+                          <div className="absolute z-20 top-8 left-0 right-0 bg-slate-900 text-white text-xs p-3 rounded-xl shadow-lg leading-relaxed">
+                            {tooltips.productivityHoursLost}
+                          </div>
+                        )}
+                      </div>
+                      <div className="relative">
+                        <input 
+                          id="productivity-hours-lost-input"
+                          type="number"
+                          min="1"
+                          max="20"
+                          value={productivityHoursLost}
+                          onChange={(e) => setProductivityHoursLost(Math.max(1, Math.min(20, parseInt(e.target.value) || 1)))}
+                          className="w-full !px-5 !py-3.5 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all font-semibold"
+                        />
+                      </div>
+                      <p className="mt-2 text-xs text-slate-400 text-left">Range: 1 – 20</p>
+                    </div>
+
+                    {/* Current Phishing Penetration Rate Slider */}
+                    <div className="relative md:col-span-2 mt-4 pt-6 border-t border-slate-100 text-left">
+                      <div className="flex items-center justify-between mb-3 w-full">
+                        <div className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                          <label htmlFor="current-click-rate-slider">Current Phishing Penetration Rate (%)</label>
+                          <button 
+                            type="button"
+                            className="text-slate-400 hover:text-slate-600 focus:outline-none"
+                            onMouseEnter={() => setActiveTooltip("currentClickRate")}
+                            onMouseLeave={() => setActiveTooltip(null)}
+                            aria-label="Click Rate Info"
+                          >
+                            <FiInfo className="text-xs" />
+                          </button>
+                        </div>
+                        <span className="text-sm font-extrabold text-[#f15a24] bg-[#f15a24]/10 px-3 py-1 rounded-full">{currentClickRate}%</span>
+                        {activeTooltip === "currentClickRate" && (
+                          <div className="absolute z-20 top-8 left-0 right-0 bg-slate-900 text-white text-xs p-3 rounded-xl shadow-lg leading-relaxed">
+                            {tooltips.currentClickRate}
+                          </div>
+                        )}
+                      </div>
                       <input 
-                        type="number"
+                        id="current-click-rate-slider"
+                        type="range"
                         min="1"
-                        value={employees}
-                        onChange={(e) => setEmployees(Math.max(1, parseInt(e.target.value) || 0))}
-                        className="w-full !px-5 !py-3.5 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all font-semibold"
+                        max="40"
+                        step="1"
+                        value={currentClickRate}
+                        onChange={(e) => setCurrentClickRate(parseInt(e.target.value))}
+                        className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-[#f15a24]"
                       />
+                      <div className="flex justify-between text-[10px] text-slate-400 font-bold mt-1">
+                        <span>1%</span>
+                        <span>40%</span>
+                      </div>
+                      <p className="mt-2 text-xs text-slate-400 text-left">Percentage of phishing emails successfully fooling employees.</p>
                     </div>
-                    <p className="mt-2 text-xs text-slate-400">Employees who regularly receive and interact with emails.</p>
-                  </div>
 
-                  {/* Monthly Phishing Attempts Input */}
-                  <div className="relative">
-                    <div className="flex items-center justify-between mb-2">
-                      <label className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-                        Monthly Phishing Attempts
-                        <button 
-                          className="text-slate-400 hover:text-slate-600 focus:outline-none"
-                          onMouseEnter={() => setActiveTooltip("monthlyAttempts")}
-                          onMouseLeave={() => setActiveTooltip(null)}
-                          aria-label="Attempts Info"
-                        >
-                          <FiInfo className="text-xs" />
-                        </button>
-                      </label>
-                      {activeTooltip === "monthlyAttempts" && (
-                        <div className="absolute z-20 top-8 left-0 right-0 bg-slate-900 text-white text-xs p-3 rounded-xl shadow-lg leading-relaxed">
-                          {tooltips.monthlyAttempts}
+                    {/* Breach Conversion Rate Slider */}
+                    <div className="relative md:col-span-2 text-left">
+                      <div className="flex items-center justify-between mb-3 w-full">
+                        <div className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                          <label htmlFor="breach-rate-slider">Breach Conversion Rate (%)</label>
+                          <button 
+                            type="button"
+                            className="text-slate-400 hover:text-slate-600 focus:outline-none"
+                            onMouseEnter={() => setActiveTooltip("breachRate")}
+                            onMouseLeave={() => setActiveTooltip(null)}
+                            aria-label="Breach Rate Info"
+                          >
+                            <FiInfo className="text-xs" />
+                          </button>
                         </div>
-                      )}
-                    </div>
-                    <div className="relative">
+                        <span className="text-sm font-extrabold text-[#f15a24] bg-[#f15a24]/10 px-3 py-1 rounded-full">{breachRate}%</span>
+                        {activeTooltip === "breachRate" && (
+                          <div className="absolute z-20 top-8 left-0 right-0 bg-slate-900 text-white text-xs p-3 rounded-xl shadow-lg leading-relaxed">
+                            {tooltips.breachRate}
+                          </div>
+                        )}
+                      </div>
                       <input 
-                        type="number"
+                        id="breach-rate-slider"
+                        type="range"
                         min="1"
-                        value={monthlyAttempts}
-                        onChange={(e) => setMonthlyAttempts(Math.max(1, parseInt(e.target.value) || 0))}
-                        className="w-full !px-5 !py-3.5 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all font-semibold"
+                        max="20"
+                        step="1"
+                        value={breachRate}
+                        onChange={(e) => setBreachRate(parseInt(e.target.value))}
+                        className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-[#f15a24]"
                       />
+                      <div className="flex justify-between text-[10px] text-slate-400 font-bold mt-1">
+                        <span>1%</span>
+                        <span>20%</span>
+                      </div>
+                      <p className="mt-2 text-xs text-slate-400 text-left">Percentage of successful phishing clicks that become incidents.</p>
                     </div>
-                    <p className="mt-2 text-xs text-slate-400">Per employee every month.</p>
-                  </div>
 
-                  {/* Employees Involved In Remediation Input */}
-                  <div className="relative">
-                    <div className="flex items-center justify-between mb-2">
-                      <label className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-                        Employees Involved In Remediation
-                        <button 
-                          className="text-slate-400 hover:text-slate-600 focus:outline-none"
-                          onMouseEnter={() => setActiveTooltip("remediationFtes")}
-                          onMouseLeave={() => setActiveTooltip(null)}
-                          aria-label="Remediation FTEs Info"
-                        >
-                          <FiInfo className="text-xs" />
-                        </button>
-                      </label>
-                      {activeTooltip === "remediationFtes" && (
-                        <div className="absolute z-20 top-8 left-0 right-0 bg-slate-900 text-white text-xs p-3 rounded-xl shadow-lg leading-relaxed">
-                          {tooltips.remediationFtes}
+                    {/* Projected Phishing Penetration Rate Slider */}
+                    <div className="relative md:col-span-2 text-left">
+                      <div className="flex items-center justify-between mb-3 w-full">
+                        <div className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                          <label htmlFor="projected-click-rate-slider">Projected Phishing Penetration Rate (%)</label>
+                          <button 
+                            type="button"
+                            className="text-slate-400 hover:text-slate-600 focus:outline-none"
+                            onMouseEnter={() => setActiveTooltip("projectedClickRate")}
+                            onMouseLeave={() => setActiveTooltip(null)}
+                            aria-label="Target Click Rate Info"
+                          >
+                            <FiInfo className="text-xs" />
+                          </button>
                         </div>
-                      )}
-                    </div>
-                    <div className="relative">
+                        <span className="text-sm font-extrabold text-[#f15a24] bg-[#f15a24]/10 px-3 py-1 rounded-full">{projectedClickRate}%</span>
+                        {activeTooltip === "projectedClickRate" && (
+                          <div className="absolute z-20 top-8 left-0 right-0 bg-slate-900 text-white text-xs p-3 rounded-xl shadow-lg leading-relaxed">
+                            {tooltips.projectedClickRate}
+                          </div>
+                        )}
+                      </div>
                       <input 
-                        type="number"
+                        id="projected-click-rate-slider"
+                        type="range"
                         min="1"
-                        value={remediationFtes}
-                        onChange={(e) => setRemediationFtes(Math.max(1, parseInt(e.target.value) || 0))}
-                        className="w-full !px-5 !py-3.5 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all font-semibold"
+                        max="40"
+                        step="1"
+                        value={projectedClickRate}
+                        onChange={(e) => setProjectedClickRate(parseInt(e.target.value))}
+                        className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-[#f15a24]"
                       />
+                      <div className="flex justify-between text-[10px] text-slate-400 font-bold mt-1">
+                        <span>1%</span>
+                        <span>40%</span>
+                      </div>
+                      <p className="mt-2 text-xs text-slate-400 text-left">Susceptibility target after training programs.</p>
                     </div>
-                    <p className="mt-2 text-xs text-slate-400">Number of personnel handling an incident.</p>
-                  </div>
-
-                  {/* Hours Required Per Incident Input */}
-                  <div className="relative">
-                    <div className="flex items-center justify-between mb-2">
-                      <label className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-                        Hours Required Per Incident
-                        <button 
-                          className="text-slate-400 hover:text-slate-600 focus:outline-none"
-                          onMouseEnter={() => setActiveTooltip("hoursPerIncident")}
-                          onMouseLeave={() => setActiveTooltip(null)}
-                          aria-label="Hours Info"
-                        >
-                          <FiInfo className="text-xs" />
-                        </button>
-                      </label>
-                      {activeTooltip === "hoursPerIncident" && (
-                        <div className="absolute z-20 top-8 left-0 right-0 bg-slate-900 text-white text-xs p-3 rounded-xl shadow-lg leading-relaxed">
-                          {tooltips.hoursPerIncident}
-                        </div>
-                      )}
-                    </div>
-                    <div className="relative">
-                      <input 
-                        type="number"
-                        min="1"
-                        value={hoursPerIncident}
-                        onChange={(e) => setHoursPerIncident(Math.max(1, parseInt(e.target.value) || 0))}
-                        className="w-full !px-5 !py-3.5 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all font-semibold"
-                      />
-                    </div>
-                    <p className="mt-2 text-xs text-slate-400">Average time spent by each employee.</p>
-                  </div>
-
-                  {/* Hourly Cost Input */}
-                  <div className="relative">
-                    <div className="flex items-center justify-between mb-2">
-                      <label className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-                        Average Employee Hourly Cost ($)
-                        <button 
-                          className="text-slate-400 hover:text-slate-600 focus:outline-none"
-                          onMouseEnter={() => setActiveTooltip("hourlyCost")}
-                          onMouseLeave={() => setActiveTooltip(null)}
-                          aria-label="Hourly Cost Info"
-                        >
-                          <FiInfo className="text-xs" />
-                        </button>
-                      </label>
-                      {activeTooltip === "hourlyCost" && (
-                        <div className="absolute z-20 top-8 left-0 right-0 bg-slate-900 text-white text-xs p-3 rounded-xl shadow-lg leading-relaxed">
-                          {tooltips.hourlyCost}
-                        </div>
-                      )}
-                    </div>
-                    <div className="relative">
-                      <input 
-                        type="number"
-                        min="1"
-                        value={hourlyCost}
-                        onChange={(e) => setHourlyCost(Math.max(1, parseInt(e.target.value) || 0))}
-                        className="w-full !px-5 !py-3.5 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all font-semibold"
-                      />
-                    </div>
-                    <p className="mt-2 text-xs text-slate-400">Cost of an employee in incident response.</p>
-                  </div>
-
-                  {/* Productivity Hours Lost Input */}
-                  <div className="relative">
-                    <div className="flex items-center justify-between mb-2">
-                      <label className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-                        Productivity Hours Lost Per Breach
-                        <button 
-                          className="text-slate-400 hover:text-slate-600 focus:outline-none"
-                          onMouseEnter={() => setActiveTooltip("productivityHoursLost")}
-                          onMouseLeave={() => setActiveTooltip(null)}
-                          aria-label="Downtime Info"
-                        >
-                          <FiInfo className="text-xs" />
-                        </button>
-                      </label>
-                      {activeTooltip === "productivityHoursLost" && (
-                        <div className="absolute z-20 top-8 left-0 right-0 bg-slate-900 text-white text-xs p-3 rounded-xl shadow-lg leading-relaxed">
-                          {tooltips.productivityHoursLost}
-                        </div>
-                      )}
-                    </div>
-                    <div className="relative">
-                      <input 
-                        type="number"
-                        min="1"
-                        value={productivityHoursLost}
-                        onChange={(e) => setProductivityHoursLost(Math.max(1, parseInt(e.target.value) || 0))}
-                        className="w-full !px-5 !py-3.5 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all font-semibold"
-                      />
-                    </div>
-                    <p className="mt-2 text-xs text-slate-400">Average work hours lost.</p>
-                  </div>
-
-                  {/* Current Phishing Click Rate Slider */}
-                  <div className="relative md:col-span-2 mt-4 pt-6 border-t border-slate-100">
-                    <div className="flex items-center justify-between mb-3">
-                      <label className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-                        Current Phishing Click Rate
-                        <button 
-                          className="text-slate-400 hover:text-slate-600 focus:outline-none"
-                          onMouseEnter={() => setActiveTooltip("currentClickRate")}
-                          onMouseLeave={() => setActiveTooltip(null)}
-                          aria-label="Click Rate Info"
-                        >
-                          <FiInfo className="text-xs" />
-                        </button>
-                      </label>
-                      <span className="text-sm font-extrabold text-[#f15a24] bg-[#f15a24]/10 px-3 py-1 rounded-full">{currentClickRate}%</span>
-                      {activeTooltip === "currentClickRate" && (
-                        <div className="absolute z-20 top-8 left-0 right-0 bg-slate-900 text-white text-xs p-3 rounded-xl shadow-lg leading-relaxed">
-                          {tooltips.currentClickRate}
-                        </div>
-                      )}
-                    </div>
-                    <input 
-                      type="range"
-                      min="1"
-                      max="40"
-                      step="1"
-                      value={currentClickRate}
-                      onChange={(e) => setCurrentClickRate(parseInt(e.target.value))}
-                      className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-[#f15a24]"
-                    />
-                    <div className="flex justify-between text-[10px] text-slate-400 font-bold mt-1">
-                      <span>1%</span>
-                      <span>40%</span>
-                    </div>
-                    <p className="mt-2 text-xs text-slate-400">Percentage of employees likely to click a phishing email.</p>
-                  </div>
-
-                  {/* Successful Breach Rate Slider */}
-                  <div className="relative md:col-span-2">
-                    <div className="flex items-center justify-between mb-3">
-                      <label className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-                        Successful Breach Rate
-                        <button 
-                          className="text-slate-400 hover:text-slate-600 focus:outline-none"
-                          onMouseEnter={() => setActiveTooltip("breachRate")}
-                          onMouseLeave={() => setActiveTooltip(null)}
-                          aria-label="Breach Rate Info"
-                        >
-                          <FiInfo className="text-xs" />
-                        </button>
-                      </label>
-                      <span className="text-sm font-extrabold text-[#f15a24] bg-[#f15a24]/10 px-3 py-1 rounded-full">{breachRate}%</span>
-                      {activeTooltip === "breachRate" && (
-                        <div className="absolute z-20 top-8 left-0 right-0 bg-slate-900 text-white text-xs p-3 rounded-xl shadow-lg leading-relaxed">
-                          {tooltips.breachRate}
-                        </div>
-                      )}
-                    </div>
-                    <input 
-                      type="range"
-                      min="1"
-                      max="20"
-                      step="1"
-                      value={breachRate}
-                      onChange={(e) => setBreachRate(parseInt(e.target.value))}
-                      className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-[#f15a24]"
-                    />
-                    <div className="flex justify-between text-[10px] text-slate-400 font-bold mt-1">
-                      <span>1%</span>
-                      <span>20%</span>
-                    </div>
-                    <p className="mt-2 text-xs text-slate-400">Percentage of phishing clicks that result in a security incident requiring remediation.</p>
-                  </div>
-
-                  {/* Projected Click Rate Slider */}
-                  <div className="relative md:col-span-2">
-                    <div className="flex items-center justify-between mb-3">
-                      <label className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-                        Projected Click Rate With Innvikta
-                        <button 
-                          className="text-slate-400 hover:text-slate-600 focus:outline-none"
-                          onMouseEnter={() => setActiveTooltip("projectedClickRate")}
-                          onMouseLeave={() => setActiveTooltip(null)}
-                          aria-label="Target Click Rate Info"
-                        >
-                          <FiInfo className="text-xs" />
-                        </button>
-                      </label>
-                      <span className="text-sm font-extrabold text-[#f15a24] bg-[#f15a24]/10 px-3 py-1 rounded-full">{projectedClickRate}%</span>
-                      {activeTooltip === "projectedClickRate" && (
-                        <div className="absolute z-20 top-8 left-0 right-0 bg-slate-900 text-white text-xs p-3 rounded-xl shadow-lg leading-relaxed">
-                          {tooltips.projectedClickRate}
-                        </div>
-                      )}
-                    </div>
-                    <input 
-                      type="range"
-                      min="1"
-                      max="40"
-                      step="1"
-                      value={projectedClickRate}
-                      onChange={(e) => setProjectedClickRate(parseInt(e.target.value))}
-                      className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-[#f15a24]"
-                    />
-                    <div className="flex justify-between text-[10px] text-slate-400 font-bold mt-1">
-                      <span>1%</span>
-                      <span>40%</span>
-                    </div>
-                    <p className="mt-2 text-xs text-slate-400">Expected phishing click rate after implementing awareness training and phishing simulations.</p>
                   </div>
                 </div>
               </div>
-            </div>
+              {/* RESULTS PANEL COLUMN */}
+              <div className="col-12 lg:col-8" style={{ marginTop: "2rem" }}>
+              <main className="summary-card rounded-2xl !p-8 md:!p-12 pb-12 text-left" style={{ backgroundColor: "#ffffff", isolation: "isolate", boxShadow: "0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1)", border: "1px solid #f1f5f9" }} data-purpose="main-dashboard-container">
+                {/* BEGIN: HeaderSection */}
+                <header style={{ marginBottom: "1.75rem" }}>
+                  <h2 className="text-3xl font-extrabold text-slate-950" style={{ marginBottom: "0.35rem" }}>Executive ROI Summary</h2>
+                  <p className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Financial impact analysis for security awareness training and phishing simulations.</p>
+                </header>
+                {/* END: HeaderSection */}
 
-            {/* RESULTS PANEL COLUMN */}
-              <div className="col-12 lg:col-8">
-                <div className="w-full bg-white rounded-[24px] shadow-[0_20px_60px_rgba(0,0,0,0.08)] border border-slate-200 overflow-hidden">
-                  {/* Report Header */}
-                  <div className="bg-slate-50 border-b border-slate-200 !px-8 !py-6 flex items-center justify-between">
-                    <div>
-                      <h3 className="text-xl font-bold text-slate-900 tracking-tight">Executive ROI Summary</h3>
-                      <p className="text-sm text-slate-500 mt-1">Financial impact analysis for security awareness training</p>
-                    </div>
-                    <div className="hidden md:flex items-center gap-2 !px-3 !py-1.5 bg-white border border-slate-200 rounded-lg shadow-sm">
-                      <FiCheckCircle className="text-[#f15a24]" />
-                      <span className="text-xs font-bold text-slate-700 uppercase tracking-widest">Real-Time Data</span>
-                    </div>
+                {/* BEGIN: NarrativeSummary */}
+                <div style={{ marginBottom: "2rem" }} data-purpose="narrative-text">
+                  <p className="text-slate-800 leading-relaxed text-[16px]" style={{ lineHeight: "1.8" }}>
+                    Based on your current phishing exposure, phishing-related remediation effort and productivity loss may be costing your organization approximately <strong className="font-bold text-slate-950">{formatCurrency(currentAnnualCost)}</strong> annually. Reducing phishing penetration from <strong className="font-bold text-slate-950">{currentClickRate}%</strong> to <strong className="font-bold text-slate-950">{projectedClickRate}%</strong> could lower annual operational costs to approximately <strong className="font-bold text-slate-950">{formatCurrency(projectedAnnualCost)}</strong>. This represents a potential annual savings of <strong className="font-extrabold text-[#f15a24]">{formatCurrency(annualSavings)}</strong> and an estimated ROI of <strong className="font-bold text-slate-950">{roi}%</strong>.
+                  </p>
+                </div>
+                {/* END: NarrativeSummary */}
+
+                {/* BEGIN: PrimaryMetrics */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6" style={{ marginBottom: "2.5rem" }} data-purpose="top-metrics-grid">
+                  <div className="bg-slate-50/50 border border-slate-200/60 rounded-xl shadow-sm transition-all hover:shadow-md" style={{ padding: "1.25rem 1.5rem" }}>
+                    <span className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider" style={{ marginBottom: "0.5rem" }}>Current Annual Cost</span>
+                    <span className="text-2xl font-extrabold text-slate-950">{formatCurrency(currentAnnualCost)}</span>
                   </div>
-
-                  <div className="!p-8 space-y-8">
-                    {/* Primary Highlight: ROI & Savings */}
-                    <div className="flex flex-col md:flex-row gap-6">
-                      <div className="flex-1 bg-[#f15a24] rounded-2xl !p-6 text-white shadow-lg relative overflow-hidden">
-                        <div className="absolute top-0 right-0 !p-4 opacity-20">
-                          <FiActivity size={80} />
-                        </div>
-                        <div className="relative z-10">
-                          <div className="text-xs font-bold uppercase tracking-widest text-white/80 mb-2">Estimated ROI</div>
-                          <div className="text-5xl font-black tracking-tight mb-1">{roi}%</div>
-                          <div className="text-sm text-white/90">Return on training investment</div>
-                        </div>
-                      </div>
-                      
-                      <div className="flex-1 bg-white border border-slate-200 rounded-2xl !p-6 shadow-sm">
-                        <div className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Estimated Annual Savings</div>
-                        <div className="text-4xl font-black text-[#f15a24] tracking-tight mb-1">{formatCurrency(annualSavings)}</div>
-                        <div className="text-sm text-slate-500">Reclaimed from reduced remediation and downtime</div>
-                      </div>
-                    </div>
-
-                    {/* Detailed Financial Breakdown */}
-                    <div>
-                      <h4 className="text-sm font-bold uppercase tracking-widest text-slate-900 border-b border-slate-100 !pb-3 mb-4">Financial Breakdown</h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="bg-slate-50 rounded-xl !p-5 border border-slate-100">
-                          <div className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1">Current Annual Cost</div>
-                          <div className="text-2xl font-bold text-slate-900">{formatCurrency(currentAnnualCost)}</div>
-                          <p className="text-xs text-slate-400 mt-2">Cost before implementing Innvikta</p>
-                        </div>
-                        <div className="bg-[#f15a24]/5 rounded-xl !p-5 border border-[#f15a24]/20">
-                          <div className="text-xs font-bold uppercase tracking-widest text-[#f15a24] mb-1">Projected Annual Cost</div>
-                          <div className="text-2xl font-bold text-[#f15a24]">{formatCurrency(projectedAnnualCost)}</div>
-                          <p className="text-xs text-slate-500 mt-2">Expected cost with training</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Operational Metrics */}
-                    <div>
-                      <h4 className="text-sm font-bold uppercase tracking-widest text-slate-900 border-b border-slate-100 !pb-3 mb-4">Operational Impact</h4>
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        <div className="!p-4 border border-slate-100 rounded-xl flex flex-col justify-center">
-                          <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">Current Incidents</div>
-                          <div className="text-xl font-bold text-slate-800">{currentIncidents} <span className="text-sm font-normal text-slate-500">/ yr</span></div>
-                        </div>
-                        <div className="!p-4 border border-slate-100 rounded-xl flex flex-col justify-center">
-                          <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">Projected Incidents</div>
-                          <div className="text-xl font-bold text-slate-800">{futureIncidents} <span className="text-sm font-normal text-slate-500">/ yr</span></div>
-                        </div>
-                        <div className="!p-4 border border-slate-100 rounded-xl bg-slate-50 md:col-span-1 col-span-2 flex flex-col justify-center">
-                          <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">Incident Reduction</div>
-                          <div className="text-xl font-bold text-[#f15a24]">{reductionPercentage}%</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Industry Context */}
-                    <div className="bg-slate-900 rounded-xl !p-5 flex flex-col md:flex-row md:items-center justify-between text-white shadow-md gap-4">
-                      <div>
-                        <div className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Industry Context: {industry}</div>
-                        <div className="text-sm text-slate-300">Average cost of a full-scale data breach</div>
-                      </div>
-                      <div className="text-2xl font-black">{formatCurrency(industryBreachCost)}</div>
-                    </div>
-
+                  <div className="bg-slate-50/50 border border-slate-200/60 rounded-xl shadow-sm transition-all hover:shadow-md" style={{ padding: "1.25rem 1.5rem" }}>
+                    <span className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider" style={{ marginBottom: "0.5rem" }}>Projected Annual Cost</span>
+                    <span className="text-2xl font-extrabold text-slate-950">{formatCurrency(projectedAnnualCost)}</span>
+                  </div>
+                  <div className="bg-orange-50/40 border border-orange-100 rounded-xl shadow-sm transition-all hover:shadow-md" style={{ padding: "1.25rem 1.5rem" }}>
+                    <span className="block text-[10px] font-bold text-[#f15a24] uppercase tracking-wider" style={{ marginBottom: "0.5rem" }}>Annual Savings</span>
+                    <span className="text-2xl font-extrabold text-[#f15a24]">{formatCurrency(annualSavings)}</span>
+                  </div>
+                  <div className="bg-slate-50/50 border border-slate-200/60 rounded-xl shadow-sm transition-all hover:shadow-md" style={{ padding: "1.25rem 1.5rem" }}>
+                    <span className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider" style={{ marginBottom: "0.5rem" }}>Estimated ROI</span>
+                    <span className="text-2xl font-extrabold text-slate-950">{roi}%</span>
                   </div>
                 </div>
-              </div>
+                {/* END: PrimaryMetrics */}
+
+                {/* BEGIN: StateComparisonTable */}
+                <div className="overflow-x-auto" style={{ marginBottom: "2.5rem" }} data-purpose="comparison-table-section">
+                  <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest" style={{ marginBottom: "1rem" }}>State Comparison</h3>
+                  <table className="w-full text-left text-sm border-collapse">
+                    <thead>
+                      <tr className="border-b border-slate-200">
+                        <th className="pb-3 font-semibold text-xs text-slate-500 uppercase tracking-wider">Metric</th>
+                        <th className="pb-3 font-semibold text-xs text-slate-500 uppercase tracking-wider">Current State</th>
+                        <th className="pb-3 font-semibold text-xs text-[#f15a24] uppercase tracking-wider">Future State</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-slate-800">
+                      <tr className="border-b border-slate-100 hover:bg-slate-50/30 transition-colors">
+                        <td className="py-3 text-slate-700">Phishing Penetration Rate</td>
+                        <td className="py-3 font-bold text-slate-900">{currentClickRate}%</td>
+                        <td className="py-3 font-bold text-[#f15a24]">{projectedClickRate}%</td>
+                      </tr>
+                      <tr className="border-b border-slate-100 hover:bg-slate-50/30 transition-colors">
+                        <td className="py-3 text-slate-700">Annual Breaches</td>
+                        <td className="py-3 font-bold text-slate-900">{currentIncidents}</td>
+                        <td className="py-3 font-bold text-[#f15a24]">{futureIncidents}</td>
+                      </tr>
+                      <tr className="border-b border-slate-100 hover:bg-slate-50/30 transition-colors">
+                        <td className="py-3 text-slate-700">Remediation Cost</td>
+                        <td className="py-3 font-bold text-slate-900">{formatCurrency(currentRemediation)}</td>
+                        <td className="py-3 font-bold text-[#f15a24]">{formatCurrency(futureRemediation)}</td>
+                      </tr>
+                      <tr className="border-b border-slate-100 hover:bg-slate-50/30 transition-colors">
+                        <td className="py-3 text-slate-700">Productivity Loss</td>
+                        <td className="py-3 font-bold text-slate-900">{formatCurrency(currentProductivity)}</td>
+                        <td className="py-3 font-bold text-[#f15a24]">{formatCurrency(futureProductivity)}</td>
+                      </tr>
+                      <tr className="font-bold text-slate-900 bg-slate-50/70">
+                        <td className="py-3 px-3">Total Annual Cost</td>
+                        <td className="py-3 px-3 font-extrabold text-slate-950">{formatCurrency(currentAnnualCost)}</td>
+                        <td className="py-3 px-3 font-extrabold text-[#f15a24]">{formatCurrency(projectedAnnualCost)}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                {/* END: StateComparisonTable */}
+
+                {/* BEGIN: SavingsBreakdown */}
+                <div style={{ marginBottom: "2.5rem" }} data-purpose="savings-breakdown-section">
+                  <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest" style={{ marginBottom: "1rem" }}>Savings Breakdown</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="bg-orange-50/50 border border-orange-100/50 rounded-xl transition-all hover:shadow-sm" style={{ padding: "1.25rem 1.5rem" }}>
+                      <span className="block text-[10px] font-bold text-[#f15a24] uppercase tracking-wider" style={{ marginBottom: "0.4rem" }}>Remediation Savings</span>
+                      <span className="text-2xl font-extrabold text-[#f15a24]">{formatCurrency(currentRemediation - futureRemediation)}</span>
+                    </div>
+                    <div className="bg-slate-50 border border-slate-200/50 rounded-xl transition-all hover:shadow-sm" style={{ padding: "1.25rem 1.5rem" }}>
+                      <span className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider" style={{ marginBottom: "0.4rem" }}>Productivity Savings</span>
+                      <span className="text-2xl font-extrabold text-slate-950">{formatCurrency(currentProductivity - futureProductivity)}</span>
+                    </div>
+                  </div>
+                </div>
+                {/* END: SavingsBreakdown */}
+
+                {/* BEGIN: RecommendationSection */}
+                <div style={{ marginBottom: "2.5rem" }} data-purpose="package-recommendation">
+                  <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest" style={{ marginBottom: "1rem" }}>Package Recommendation</h3>
+                  <div className="bg-slate-50/80 rounded-xl border border-slate-200/50" style={{ padding: "1.5rem 1.75rem" }}>
+                    <h4 className="text-base font-bold text-slate-900" style={{ marginBottom: "0.5rem" }}>Recommended Package: <span className="text-[#f15a24]">{packageType} Package</span></h4>
+                    <p className="text-[14px] leading-relaxed" style={{ color: "#475569", lineHeight: "1.75" }}>
+                      {packageType === "Risk Mitigation" 
+                        ? "An advanced security awareness package designed to reduce susceptibility click rates and build human firewalls."
+                        : packageType === "Enterprise"
+                        ? "Fully customized training program with dedicated risk analyst, custom LMS integrations, and enterprise-grade reporting."
+                        : "A standard training regime helps maintain security baseline compliance for organizations with moderate risk profiles."}
+                    </p>
+                  </div>
+                </div>
+                {/* END: RecommendationSection */}
+
+                {/* BEGIN: KeyInsights */}
+                <div style={{ marginBottom: "3rem" }} data-purpose="insights-list">
+                  <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest" style={{ marginBottom: "1rem" }}>Key Insights</h3>
+                  <ul style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                    <li className="flex items-start text-sm" style={{ color: "#334155" }}>
+                      <span className="h-2 w-2 rounded-full bg-[#f15a24] flex-shrink-0" style={{ marginTop: "0.375rem", marginRight: "0.75rem" }}></span>
+                      Phishing susceptibility directly drives operational cost.
+                    </li>
+                    <li className="flex items-start text-sm" style={{ color: "#334155" }}>
+                      <span className="h-2 w-2 rounded-full bg-[#f15a24] flex-shrink-0" style={{ marginTop: "0.375rem", marginRight: "0.75rem" }}></span>
+                      Reducing successful attacks lowers remediation effort.
+                    </li>
+                    <li className="flex items-start text-sm" style={{ color: "#334155" }}>
+                      <span className="h-2 w-2 rounded-full bg-[#f15a24] flex-shrink-0" style={{ marginTop: "0.375rem", marginRight: "0.75rem" }}></span>
+                      Productivity gains are a major contributor to savings.
+                    </li>
+                    <li className="flex items-start text-sm" style={{ color: "#334155" }}>
+                      <span className="h-2 w-2 rounded-full bg-[#f15a24] flex-shrink-0" style={{ marginTop: "0.375rem", marginRight: "0.75rem" }}></span>
+                      The Innvikta subscription cost is explicitly included as the investment in ROI calculations.
+                    </li>
+                  </ul>
+                </div>
+                {/* END: KeyInsights */}
+
+                {/* BEGIN: ActionButtons */}
+                <footer className="flex flex-col sm:flex-row justify-end items-center gap-3" style={{ marginTop: "2rem" }} data-purpose="footer-actions">
+                  <Link
+                    href="/book-demo"
+                    style={{
+                      display: "inline-block",
+                      padding: "0.75rem 2rem",
+                      border: "2px solid #f15a24",
+                      color: "#f15a24",
+                      backgroundColor: "#ffffff",
+                      borderRadius: "0.5rem",
+                      fontWeight: "700",
+                      fontSize: "0.875rem",
+                      textAlign: "center",
+                      textDecoration: "none",
+                    }}
+                  >
+                    Book a Demo
+                  </Link>
+                  <button
+                    onClick={scrollToCta}
+                    style={{
+                      padding: "0.75rem 2rem",
+                      backgroundColor: "#f15a24",
+                      color: "#ffffff",
+                      borderRadius: "0.5rem",
+                      fontWeight: "700",
+                      fontSize: "0.875rem",
+                      border: "none",
+                      cursor: "pointer",
+                      boxShadow: "0 4px 14px rgba(241,90,36,0.35)",
+                    }}
+                  >
+                    Start Free
+                  </button>
+                </footer>
+                {/* END: ActionButtons */}
+              </main>
             </div>
           </div>
-        </section>
+        </div>
+        </div>
 
         {/* FAQ SECTION */}
-        <section className="bg-grey-5 py-20">
+        <div style={{ backgroundColor: "#FFF6E9", paddingTop: "5rem", paddingBottom: "5rem" }}>
           <div className="container faq-grid">
             <div className="faq-title-col">
               <span className="inline-block px-3 py-1.5 mb-4 text-xs font-bold tracking-widest text-[#f15a24] bg-[#f15a24]/10 rounded-full uppercase">
@@ -743,7 +865,7 @@ export default function SimulationRoiPage() {
                 const isOpen = openFaqIndex === index;
                 return (
                   <div key={index} className={`faq-item ${isOpen ? 'active' : ''}`}>
-                    <button type="button" className="faq-trigger" aria-expanded={isOpen} onClick={() => setOpenFaqIndex(isOpen ? null : index)}>
+                    <button type="button" className="faq-trigger w-full" aria-expanded={isOpen} onClick={() => setOpenFaqIndex(isOpen ? null : index)}>
                       <span className="faq-question">{faq.q}</span>
                       <div className="faq-icon-wrapper">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -764,7 +886,7 @@ export default function SimulationRoiPage() {
               })}
             </div>
           </div>
-        </section>
+        </div>
       </div>
       </div>
 

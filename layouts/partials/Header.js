@@ -513,7 +513,7 @@ const menuData = {
         icon: FiBookOpen,
         headline: "Level up your security awareness knowledge and threat prevention strategy.",
         cells: [
-          { name: "Security Blog", desc: "Latest threat research findings and awareness campaign tips.", href: "/posts" },
+          { name: "Security Blog", desc: "Latest threat research findings and awareness campaign tips.", href: "/blog" },
           { name: "Cybersecurity Guides", desc: "Deep-dives into modern corporate digital defense systems.", href: "#" },
           { name: "Glossary", desc: "A comprehensive glossary of cybersecurity terms and concepts.", href: "/resources/glossary" },
           { name: "Compliance Mappings", desc: "Cross-reference training with global privacy frameworks.", href: "#" }
@@ -549,36 +549,15 @@ const menuData = {
         id: "community_hub",
         label: "Community",
         icon: FiCalendar,
-        headline: "Connect with security awareness professionals and join events.",
+        headline: "Stay up to date with the latest platform updates and security insights.",
         cells: [
-          { name: "Interactive Webinars", desc: "Join monthly panel discussions with global security experts.", href: "#" },
-          { name: "Launch Workshops", desc: "Practical classes for simulation planning and deployment.", href: "#" },
-          { name: "Platform Updates", desc: "See the latest features added to the Innvikta training suite.", href: "#" },
+          { name: "Platform Updates", desc: "See the latest features added to the Innvikta training suite.", href: "/platform-updates" },
           { name: "Weekly Newsletter", desc: "Security tips and campaign ideas delivered directly to your inbox.", href: "#" }
         ],
         cta: {
           title: "Join our next live webinar",
           desc: "Register to watch expert panels dissect active social engineering vectors live.",
           label: "Register Now",
-          href: "#",
-          svgType: "resources"
-        }
-      },
-      {
-        id: "proof_trust",
-        label: "Proof & Trust",
-        icon: FiUsers,
-        headline: "See how we help organizations build strong security cultures.",
-        cells: [
-          { name: "Customer Success Stories", desc: "How leading enterprises transformed employee secure behaviors.", href: "#" },
-          { name: "Verified G2 Reviews", desc: "Check software rankings and verified platform user ratings.", href: "#" },
-          { name: "Partner Network", desc: "Our trusted integrations and reseller alliances globally.", href: "#" },
-          { name: "Performance Metrics", desc: "Verified statistics showing phishing click rate improvements.", href: "#" }
-        ],
-        cta: {
-          title: "Read enterprise customer stories",
-          desc: "Discover how Fortune 500 companies reduced click rates from 20% to under 2% in six months.",
-          label: "View Success Stories",
           href: "#",
           svgType: "resources"
         }
@@ -1238,7 +1217,7 @@ const Header = () => {
             )}
           </AnimatePresence>
 
-          <div className={`container-xl h-full flex items-center justify-between transition-opacity duration-200 ${isSearchOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+          <div className={`relative container-xl h-full flex items-center justify-between transition-opacity duration-200 ${isSearchOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
             {/* Logo */}
             <div className="z-50 shrink-0 flex items-center">
               <Link href="/">
@@ -1251,14 +1230,14 @@ const Header = () => {
             </div>
 
             {/* Main Navigation Items */}
-            <ul className="hidden lg:flex items-center lg:gap-1.5 xl:gap-5 lg:ml-3 xl:ml-8 h-full">
+            <ul className="hidden lg:flex items-center justify-center lg:gap-3 xl:gap-6 lg:absolute lg:left-1/2 lg:-translate-x-1/2 h-full desktop-nav-menu">
               {Object.keys(menuData).map((menuKey) => (
                 <li
                   key={menuKey}
                   className="h-full flex items-center"
                   onMouseEnter={() => handleMenuHover(menuKey)}
                 >
-                  <button className={`nav-link h-full flex items-center gap-1 lg:text-[13px] xl:text-[16.5px] lg:px-1.5 xl:px-3 font-bold text-slate-900 hover:text-[#f15a24] transition-colors focus:outline-none whitespace-nowrap ${
+                  <button className={`nav-link h-full flex items-center text-slate-900 hover:text-[#f15a24] transition-colors focus:outline-none whitespace-nowrap ${
                     activeMegaMenu === menuKey ? "text-[#f15a24]" : ""
                   }`}>
                     {menuKey === "arcade" && <IoGameControllerOutline className="text-lg text-[#f15a24]" />}
@@ -1277,23 +1256,23 @@ const Header = () => {
               <div className={`transition-all duration-300 flex items-center h-full ${pathname === "/partners" ? "opacity-100 pointer-events-auto translate-x-0" : "opacity-0 pointer-events-none translate-x-4 absolute right-0"}`}>
                 <Link 
                   href="#form" 
-                  className="mr-4 xl:mr-10 px-4 xl:px-6 py-2 bg-[#f15a24] hover:bg-orange-600 text-white rounded-lg text-[12px] xl:text-[13px] font-bold transition-all duration-300 flex items-center gap-1 border border-[#f15a24] hover:border-orange-600 whitespace-nowrap"
+                  className="px-4 xl:px-6 py-2 bg-[#f15a24] hover:bg-orange-600 text-white rounded-lg text-[12px] xl:text-[13px] font-bold transition-all duration-300 flex items-center gap-1 border border-[#f15a24] hover:border-orange-600 whitespace-nowrap"
                 >
                   Become a Partner <FiArrowRight className="text-xs" />
                 </Link>
               </div>
 
               {/* Standard CTAs */}
-              <div className={`transition-all duration-300 flex items-center lg:gap-1.5 xl:gap-4 h-full ${pathname !== "/partners" ? "opacity-100 pointer-events-auto translate-x-0" : "opacity-0 pointer-events-none -translate-x-4 absolute right-0"}`}>
+              <div className={`header-cta-buttons transition-all duration-300 flex items-center h-full ${pathname !== "/partners" ? "opacity-100 pointer-events-auto translate-x-0" : "opacity-0 pointer-events-none -translate-x-4 absolute right-0"}`}>
                 <Link 
                   href="/start-free" 
-                  className="px-2.5 py-1.5 xl:px-4 xl:py-2 bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] text-[#f15a24] hover:text-white rounded-lg text-[11px] xl:text-[13px] font-extrabold transition-all duration-300 whitespace-nowrap"
+                  className="bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] text-[#f15a24] hover:text-white rounded-lg transition-all duration-300 whitespace-nowrap header-cta-start-free"
                 >
                   Start Free
                 </Link>
                 <Link 
                   href="/book-demo" 
-                  className="px-3 py-1.5 xl:px-5 xl:py-2 bg-[#f15a24] hover:bg-orange-600 text-white rounded-lg text-[11px] xl:text-[13px] font-bold transition-all duration-300 flex items-center gap-1 whitespace-nowrap"
+                  className="bg-[#f15a24] hover:bg-orange-600 text-white rounded-lg transition-all duration-300 flex items-center gap-1 whitespace-nowrap header-cta-book-demo"
                 >
                   Book A Demo <FiArrowRight className="text-xs" />
                 </Link>
@@ -1578,22 +1557,23 @@ const Header = () => {
                                   return (
                                     <li key={idx} className="block py-1">
                                       {isCellPlaceholder ? (
-                                        <span className="text-slate-700 hover:text-[#f15a24] text-xs font-bold block">
+                                        <span className="text-slate-700 text-xs font-bold block">
                                           {cell.name}
                                         </span>
                                       ) : (
                                         <Link 
                                           href={cell.href} 
                                           onClick={() => setShowMenu(false)}
-                                          className="text-slate-700 hover:text-[#f15a24] text-xs font-bold block"
+                                          className="text-[#f15a24] hover:text-orange-600 text-xs font-bold inline-flex items-center gap-1 transition-colors"
                                         >
                                           {cell.name}
+                                          <FiArrowRight className="text-[10px]" />
                                         </Link>
                                       )}
                                       
                                       {cell.desc && (
                                         isCellPlaceholder ? (
-                                          <p className="text-[10px] text-slate-400 font-medium leading-tight">
+                                          <p className="text-[10px] text-slate-400 font-medium leading-tight mt-0.5">
                                             {cell.desc}
                                           </p>
                                         ) : (

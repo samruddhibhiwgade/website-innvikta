@@ -52,6 +52,7 @@ module.exports = {
         "border-secondary": theme.colors.default.theme_color.border_secondary,
         "theme-light": theme.colors.default.theme_color.theme_light,
         "theme-dark": theme.colors.default.theme_color.theme_dark,
+        "roi-orange": "#f15a24",
       },
       fontSize: {
         base: font_base + "px",

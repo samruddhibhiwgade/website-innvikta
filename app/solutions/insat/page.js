@@ -436,7 +436,7 @@ const InsatPage = () => {
                     
                     <div className="feature-card animate">
                         <div className="feature-visual">
-                            <img alt="Security Awareness Training" loading="lazy" src="/insat/images/awareness-section3.png" />
+                            <img alt="Security Awareness Training" loading="lazy" src="/insat/images/sat.jpeg" />
                         </div>
                         <div className="feature-content">
                             <h3 className="feature-title">Security Awareness Training</h3>
@@ -451,7 +451,7 @@ const InsatPage = () => {
                     <div className="feature-card animate">
                         <div className="feature-visual bg-grey-30">
                             <img alt="Phishing simulations mockup" loading="lazy"
-                                src="/insat/images/Risk-Scoring-1.jpg" />
+                                src="/insat/images/phishing.jpeg" />
                         </div>
                         <div className="feature-content">
                             <h3 className="feature-title">Phishing Simulations</h3>
@@ -466,7 +466,7 @@ const InsatPage = () => {
                     <div className="feature-card animate">
                         <div className="feature-visual bg-aquamarine">
                             <img alt="Microlearning modules mockup" loading="lazy"
-                                src="/insat/images/api-new-static.jpg" />
+                                src="/insat/images/microlearning.jpeg" />
                         </div>
                         <div className="feature-content">
                             <h3 className="feature-title">Microlearning</h3>
@@ -600,205 +600,10 @@ const InsatPage = () => {
                 </div>
             </div>
         </section>
-
-        
-        <section className="bg-white">
-            <div className="container">
-                <div className="slider-container animate" id="testimonialsSlider">
-                    <div className="slider-wrapper" ref={sliderWrapperRef}>
-
-                        
-                        <div className="slide slide-quote-card">
-                            <div className="testimonial-card bg-plum" style={{color: "var(--color-lavender)"}}>
-                                <blockquote className="testimonial-quote">
-                                    “InSAT is a true security awareness partner: not only is the training highly
-                                    engaging for our teams, but it also delivers real behavior change and measurable
-                                    risk reduction.”
-                                </blockquote>
-                                <div className="testimonial-author-row">
-                                    <div className="testimonial-author-name">Katharina Schneider</div>
-                                    <div className="testimonial-author-role">VP Security Strategy</div>
-                                </div>
-                                <div className="testimonial-footer">
-                                    <a className="arrow-link" href="/solutions/insat"
-                                        style={{color: "var(--color-lavender)", marginTop: "0"}}>
-                                        <div className="arrow-circle">
-                                            <span className="arrow-circle-bg"
-                                                style={{backgroundColor: "var(--color-white)"}}></span>
-                                            <svg width="6" height="8" viewBox="0 0 6 8" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path fill="currentColor" style={{color: "var(--color-plum)"}}
-                                                    d="M3.86426 4.00028L0.818237 0.954267L1.68853 0.0839844L5.60481 4.00028L1.68853 7.91652L0.818237 7.04625L3.86426 4.00028Z" />
-                                            </svg>
-                                        </div>
-                                        <span>Read success story</span>
-                                    </a>
-                                    <div className="testimonial-logo">
-                                        <img alt="malt unbound" src="/insat/images/malt-unbound.svg" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        
-                        <div className="slide slide-promo-card">
-                            <div className="testimonial-card bg-sky" style={{color: "var(--color-midnight)"}}>
-                                <div className="testimonial-logo">
-                                    <img alt="StaffMe Powered by NOWJOBS"
-                                        src="/insat/images/StaffMe-Powered-by-NOWJOBS-Forest.svg" />
-                                </div>
-                                <div style={{marginTop: "3rem"}}>
-                                    <h3 className="text-28-heading">StaffMe reduces phishing click rates by 80% with InSAT
-                                    </h3>
-                                    <a className="arrow-link" href="/solutions/insat"
-                                        style={{color: "var(--color-midnight)", marginTop: "2rem"}}>
-                                        <div className="arrow-circle">
-                                            <span className="arrow-circle-bg"></span>
-                                            <svg width="6" height="8" viewBox="0 0 6 8" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path fill="currentColor"
-                                                    d="M3.86426 4.00028L0.818237 0.954267L1.68853 0.0839844L5.60481 4.00028L1.68853 7.91652L0.818237 7.04625L3.86426 4.00028Z" />
-                                            </svg>
-                                        </div>
-                                        <span>Read success story</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        
-                        <div className="slide slide-quote-card">
-                            <div className="testimonial-card bg-forest" style={{color: "var(--color-white)"}}>
-                                <blockquote className="testimonial-quote">
-                                    “InSAT is a 2.0, if not 3.0 security awareness solution, and it’s entirely evident.
-                                    It has transformed our security culture into something our employees actually
-                                    enjoy.”
-                                </blockquote>
-                                <div className="testimonial-author-row">
-                                    <div className="testimonial-author-name">Antoine Bordalis</div>
-                                    <div className="testimonial-author-role">CISO at Comet</div>
-                                </div>
-                                <div className="testimonial-footer">
-                                    <a className="arrow-link" href="index.html"
-                                        style={{color: "var(--color-white)", marginTop: "0"}}>
-                                        <div className="arrow-circle">
-                                            <span className="arrow-circle-bg"
-                                                style={{backgroundColor: "var(--color-white)"}}></span>
-                                            <svg width="6" height="8" viewBox="0 0 6 8" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path fill="currentColor" style={{color: "var(--color-forest)"}}
-                                                    d="M3.86426 4.00028L0.818237 0.954267L1.68853 0.0839844L5.60481 4.00028L1.68853 7.91652L0.818237 7.04625L3.86426 4.00028Z" />
-                                            </svg>
-                                        </div>
-                                        <span>Learn more</span>
-                                    </a>
-                                    <div className="testimonial-logo">
-                                        <img alt="Comet White" src="/insat/images/Comet-White.svg" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        
-                        <div className="slide slide-promo-card">
-                            <div className="testimonial-card bg-salmon" style={{color: "var(--color-brick)"}}>
-                                <div className="testimonial-logo">
-                                    <img alt="JUMP Brick" src="/insat/images/JUMP_Brick.svg" />
-                                </div>
-                                <div style={{marginTop: "3rem"}}>
-                                    <h3 className="text-28-heading">Jump turns compliance training into everyday secure
-                                        habits in less than 30 days with InSAT</h3>
-                                    <a className="arrow-link" href="/solutions/insat"
-                                        style={{color: "var(--color-brick)", marginTop: "2rem"}}>
-                                        <div className="arrow-circle">
-                                            <span className="arrow-circle-bg"
-                                                style={{backgroundColor: "var(--color-brick)"}}></span>
-                                            <svg width="6" height="8" viewBox="0 0 6 8" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path fill="currentColor" style={{color: "var(--color-salmon)"}}
-                                                    d="M3.86426 4.00028L0.818237 0.954267L1.68853 0.0839844L5.60481 4.00028L1.68853 7.91652L0.818237 7.04625L3.86426 4.00028Z" />
-                                            </svg>
-                                        </div>
-                                        <span>Read success story</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    
-                    <div className="slider-controls">
-                        <button type="button" className="slider-btn prev" id="sliderPrevBtn" aria-label="Previous Slide" disabled={prevDisabled} onClick={() => currentIndex > 0 && setCurrentIndex(currentIndex - 1)}>
-                            <span className="slider-btn-ring"></span>
-                            <span className="slider-btn-fill"></span>
-                            <span className="slider-btn-inner"></span>
-                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M5.44095 7.0007L0.364258 1.92401L1.81474 0.473541L8.34188 7.0007L1.81474 13.5278L0.364258 12.0773L5.44095 7.0007Z"
-                                    fill="var(--color-forest)" />
-                            </svg>
-                        </button>
-                        <button type="button" className="slider-btn next" id="sliderNextBtn" aria-label="Next Slide" disabled={nextDisabled} onClick={() => currentIndex < 3 && setCurrentIndex(currentIndex + 1)}>
-                            <span className="slider-btn-ring"></span>
-                            <span className="slider-btn-fill"></span>
-                            <span className="slider-btn-inner"></span>
-                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M5.44095 7.0007L0.364258 1.92401L1.81474 0.473541L8.34188 7.0007L1.81474 13.5278L0.364258 12.0773L5.44095 7.0007Z"
-                                    fill="var(--color-forest)" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        
-        <section className="bg-white" style={{paddingTop: "0", paddingBottom: "0"}}>
-            <div className="container" style={{padding: "0"}}>
-                <div className="rounded-card-box bg-forest">
-                    
-                    <div className="box-backdrop-visual">
-                        <div className="visual-inner">
-                            <video autoplay loop playsinline muted width="100%" height="100%">
-                                <source src="/insat/images/currencies.webm" type="video/webm" />
-                                <source src="/insat/images/currencies-1.mov" type="video/quicktime" />
-                            </video>
-                        </div>
-                    </div>
-
-                    
-                    <div className="rounded-card-content animate">
-                        <h2>Build Security Awareness Across Your Organization</h2>
-                        <p className="text-20-content rounded-card-desc">
-                            Deliver continuous awareness training, phishing simulations, behavioural analytics, and
-                            reinforcement from one unified platform.
-                        </p>
-                        <a className="arrow-link" href="https://docs.insat.training/page/supported-countries"
-                            style={{color: "var(--color-white)", marginTop: "2rem"}}>
-                            <div className="arrow-circle">
-                                <span className="arrow-circle-bg" style={{backgroundColor: "var(--color-white)"}}></span>
-                                <svg width="6" height="8" viewBox="0 0 6 8" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill="currentColor" style={{color: "var(--color-forest)"}}
-                                        d="M3.86426 4.00028L0.818237 0.954267L1.68853 0.0839844L5.60481 4.00028L1.68853 7.91652L0.818237 7.04625L3.86426 4.00028Z" />
-                                </svg>
-                            </div>
-                            <span>Explore Platform Capabilities</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        
         <section className="bg-white" style={{paddingBottom: "0"}}>
             <div className="container">
                 <div style={{textAlign: "center"}} className="animate">
-                    <h2 className="text-40-heading">Integrate with Your IT & Security Stack</h2>
+                    <h2 className="text-52-heading">Integrate with Your IT & Security Stack</h2>
                     <p className="text-18-content opacity-70"
                         style={{marginTop: "0.75rem", maxWidth: "523px", marginLeft: "auto", marginRight: "auto"}}>
                         Ditch the manual admin work. InSAT auto-syncs with your identity providers, LMS, and

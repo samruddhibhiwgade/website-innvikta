@@ -3579,3 +3579,22 @@ section {
         }
     }
 }
+
+/* ============================================================
+   ROI SUMMARY CARD — forced isolation from any ancestor tints
+   ============================================================ */
+.summary-card {
+    background-color: #ffffff !important;
+    isolation: isolate !important;
+    overflow: visible !important;
+    color: #1e293b !important;
+}
+
+.summary-card p,
+.summary-card td,
+.summary-card th,
+.summary-card li,
+.summary-card h3,
+.summary-card h4 {
+    color: #334155;
+}

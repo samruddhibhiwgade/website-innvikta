@@ -50,7 +50,6 @@ features:
 #intro
 intro:
   title: Experience the Next-Gen in Security Awareness
-  subtitle: INSIDE THE INNVIKTA ARCADE
   description: Get a firsthand look at our world-class training modules—cinematic, engaging, and designed to transform employee security behavior.
   thumbnail: "/images/training-thumbnail.png"
   video_id: -tmmOl6JYiY

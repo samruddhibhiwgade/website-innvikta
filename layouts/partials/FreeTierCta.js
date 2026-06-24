@@ -10,6 +10,7 @@ const FreeTierCta = ({ data }) => {
   
   const [form, setForm] = useState({
     fullName: "",
+    designation: "",
     email: "",
     phone: "",
     company: "",
@@ -35,6 +36,7 @@ const FreeTierCta = ({ data }) => {
     const newErrors = {};
     
     if (!form.fullName) newErrors.fullName = "Please fill the required field";
+    if (!form.designation) newErrors.designation = "Please fill the required field";
     const emailError = validateEmail(form.email);
     if (emailError) newErrors.email = emailError;
     if (!form.phone) newErrors.phone = "Please fill the required field";
@@ -47,6 +49,14 @@ const FreeTierCta = ({ data }) => {
       setIsSubmitting(true);
       setTimeout(() => {
         alert("Form submitted successfully!");
+        setForm({
+          fullName: "",
+          designation: "",
+          email: "",
+          phone: "",
+          company: "",
+          teamSize: ""
+        });
         setIsSubmitting(false);
       }, 1000);
     }
@@ -101,7 +111,7 @@ const FreeTierCta = ({ data }) => {
           <div className="col-12 lg:col-5 relative">
             <div className="absolute inset-0 -m-8 bg-orange-500/10 blur-[60px] rounded-full pointer-events-none" />
             
-            <div className="relative bg-white border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.08)] rounded-[24px] p-8 md:p-10">
+            <div className="relative bg-white border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.08)] rounded-[24px] p-8 md:p-10 text-left">
               <div className="mb-8">
                 <h3 className="text-2xl font-bold text-dark mb-2">
                   Start Your Free <span className="text-primary">InSAT Workspace</span>
@@ -122,6 +132,25 @@ const FreeTierCta = ({ data }) => {
                     className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.fullName ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                   />
                   {errors.fullName && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.fullName}</p>}
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-400 uppercase mb-2 tracking-wide">Designation</label>
+                  <select 
+                    value={form.designation}
+                    onChange={(e) => setForm({...form, designation: e.target.value})}
+                    className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.designation ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all appearance-none cursor-pointer`}
+                  >
+                    <option value="">Select designation</option>
+                    <option>Director / VP</option>
+                    <option>CISO / CSO / CIO</option>
+                    <option>Manager / Lead</option>
+                    <option>Engineer / Specialist</option>
+                    <option>HR / Compliance Officer</option>
+                    <option>Consultant / Advisor</option>
+                    <option>Other / Executive</option>
+                  </select>
+                  {errors.designation && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.designation}</p>}
                 </div>
                 
                 <div>
