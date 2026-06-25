@@ -9,9 +9,7 @@ const Challenges = ({ challenges }) => {
       <div className="container">
         <div className="row items-center">
           <div className="col-12 lg:col-5 mb-16 lg:mb-0 px-6 md:px-12 lg:px-16">
-            <h2 className="mb-8 text-4xl md:text-5xl lg:text-6xl font-medium leading-tight">
-              {challenges.title}
-            </h2>
+            {markdownify(challenges.title, "h2", "mb-8 text-4xl md:text-5xl lg:text-6xl font-medium leading-tight")}
             {challenges.stats_summary && (
               <div className="text-lg md:text-xl leading-relaxed font-medium mb-4">
                 {markdownify(challenges.stats_summary, "div", "challenges-stats")}

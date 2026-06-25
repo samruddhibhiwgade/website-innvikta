@@ -142,7 +142,7 @@ metrics:
       label: "phishing resistance improvement"
 
 challenges:
-  title: "Security Starts With People."
+  title: "Security Starts With <span class='text-primary'>People.</span>"
   stats_summary: ""
   description: "InSAT empowers your workforce with adaptive training, phishing simulations, and human risk intelligence to proactively reduce cyber risk."
   cards:
