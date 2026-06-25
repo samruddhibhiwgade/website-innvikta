@@ -144,8 +144,8 @@ body {
   }
 }
 
-/* Medium layout for standard desktops/laptops between 1360px and 1535px (including 1397px viewports) */
-@media (min-width: 1360px) and (max-width: 1535px) {
+/* Medium layout for standard desktops/laptops between 1360px and 1679px (including 1397px viewports) */
+@media (min-width: 1360px) and (max-width: 1679px) {
   .desktop-nav-menu {
     gap: 1.1rem !important;
   }
@@ -170,8 +170,8 @@ body {
   }
 }
 
-/* Spacious, premium layout for 1920px (including display-scaled viewports >= 1536px) */
-@media (min-width: 1536px) {
+/* Spacious, premium layout for 1920px (including display-scaled viewports >= 1680px) */
+@media (min-width: 1680px) {
   .desktop-nav-menu {
     gap: 1.6rem !important;
   }
