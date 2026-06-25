@@ -723,7 +723,7 @@ export default function SpotThePhish() {
                           marginBottom: "2.5rem",
                           fontWeight: 500
                         }}>
-                          Suspicious emails are landing in your inbox. Can you tell the difference between a harmless message and a malicious phishing attack? Put your phishing detection skills to the test and spot the phish!
+                          Every day, sophisticated email threats bypass security filters and land directly in employee inboxes. Do you have the sharp eye needed to separate genuine business communications from clever phishing attempts? Test your instincts and see if you can spot the phish!
                         </p>
 
                         {/* Action guide */}
