@@ -201,7 +201,7 @@ const BlogPageClient = ({ initialPosts, title }) => {
           <div className="absolute -bottom-40 -right-40 w-96 h-96 rounded-full bg-orange-300 blur-[100px] opacity-50" />
         </div>
 
-        <div className="container relative z-10 px-4 md:px-8">
+        <div className="container relative z-10 px-6 md:px-12 lg:px-24">
           {/* Top row: Social Share Align Right */}
           <div className="flex justify-end mb-6">
             {/* Social Share Box */}
@@ -217,7 +217,7 @@ const BlogPageClient = ({ initialPosts, title }) => {
               <button className="hover:text-orange-200 transition-colors" title="Share via Email"><FaEnvelope className="text-sm" /></button>
             </div>
           </div>
-
+ 
           {/* Main Content Area */}
           <div className="max-w-3xl space-y-4">
             <h1 className="text-3xl md:text-5xl font-secondary font-black tracking-tight leading-none text-white border-b-4 border-white pb-3 inline-block">
@@ -229,10 +229,10 @@ const BlogPageClient = ({ initialPosts, title }) => {
           </div>
         </div>
       </section>
-
+ 
       {/* Main Content Container */}
       <section className="section bg-white pt-12 pb-24">
-        <div className="container px-4 md:px-8">
+        <div className="container px-6 md:px-12 lg:px-24">
         {/* Category Navigation Bar & Search Strip */}
         <div className="w-full flex flex-col md:flex-row items-stretch md:items-center justify-between border border-slate-100 rounded-xl overflow-hidden mb-12 shadow-sm bg-slate-50/50">
           {/* Categories Tab Strip */}
