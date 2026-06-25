@@ -53,49 +53,6 @@ const PartnersPage = () => {
         { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
         ">-0.4"
       );
-
-      // Section Headings & Cards Scroll Animations
-      gsap.utils.toArray("section").forEach((section) => {
-        const headerElements = section.querySelectorAll("span, h2, p.text-18-content");
-        if (headerElements.length > 0) {
-          gsap.fromTo(
-            headerElements,
-            { y: 40, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.8,
-              stagger: 0.1,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: section,
-                start: "top 85%",
-                toggleActions: "play none none none"
-              }
-            }
-          );
-        }
-
-        const cards = section.querySelectorAll(".grid > div");
-        if (cards.length > 0) {
-          gsap.fromTo(
-            cards,
-            { y: 45, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.8,
-              stagger: 0.15,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: cards[0],
-                start: "top 90%",
-                toggleActions: "play none none none"
-              }
-            }
-          );
-        }
-      });
     }, containerRef);
 
     return () => ctx.revert();
