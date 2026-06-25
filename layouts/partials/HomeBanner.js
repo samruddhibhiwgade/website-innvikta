@@ -403,8 +403,8 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
       </div>
       
       {/* End-to-end full page width image */}
-      <div className="w-full relative mt-10 px-0">
-        <div className="banner-img relative w-full min-h-[400px] md:min-h-[600px] overflow-hidden shadow-2xl shadow-orange-500/10 group">
+      <div className="w-full relative mt-6 md:mt-10 px-0">
+        <div className="banner-img relative w-full min-h-[150px] sm:min-h-[280px] md:min-h-[500px] lg:min-h-[600px] overflow-hidden shadow-2xl shadow-orange-500/10 group">
           <ImageFallback
             src="/images/banner-app.png"
             className="w-full h-auto object-cover relative z-0 transition-all duration-700"
@@ -416,7 +416,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
       </div>
 
       <div className="container-xl relative z-20">
-        <div className="row border-y border-border py-10">
+        <div className="row border-y border-border py-6 md:py-10">
           <div className="col-12 text-center mb-6">
             <span className="text-xs font-bold uppercase tracking-[0.15em] text-slate-400">
               Trusted By
