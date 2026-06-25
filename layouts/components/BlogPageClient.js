@@ -166,26 +166,11 @@ const BlogPageClient = ({ initialPosts, title }) => {
           </p>
         </div>
 
-        <div className="flex items-center justify-between pt-5 mt-5 border-t border-slate-50">
-          <div className="flex items-center gap-3">
-            {post.frontmatter.author?.avatar && (
-              <ImageFallback
-                src={post.frontmatter.author.avatar}
-                alt={post.frontmatter.author.name}
-                width={32}
-                height={32}
-                className="rounded-full object-cover"
-              />
-            )}
-            <div>
-              <p className="text-xs font-bold text-slate-850 leading-none">
-                {post.frontmatter.author?.name}
-              </p>
-              <p className="text-[10px] text-slate-400 font-semibold mt-1">
-                {dateFormat(post.frontmatter.date)}
-              </p>
-            </div>
-          </div>
+        <div className="flex items-center justify-between pt-5 mt-5 border-t border-slate-50 text-[11px] text-slate-400 font-semibold">
+          <span className="flex items-center gap-1">
+            <FiCalendar className="text-[#f15a24]" />
+            {dateFormat(post.frontmatter.date)}
+          </span>
           <span className="text-[10.5px] text-[#f15a24] font-bold bg-orange-50/50 px-2.5 py-1 rounded-full flex items-center gap-1">
             <FiClock className="text-xs" /> {readingTime(post.content)}
           </span>
@@ -373,35 +358,14 @@ const BlogPageClient = ({ initialPosts, title }) => {
                       </p>
                     </div>
 
-                    <div className="flex items-center justify-between pt-6 mt-6 border-t border-slate-50">
-                      <div className="flex items-center gap-3.5">
-                        {featuredPost.frontmatter.author?.avatar && (
-                          <ImageFallback
-                            src={featuredPost.frontmatter.author.avatar}
-                            alt={featuredPost.frontmatter.author.name}
-                            width={38}
-                            height={38}
-                            className="rounded-full object-cover border border-slate-100"
-                          />
-                        )}
-                        <div>
-                          <p className="text-sm font-bold text-slate-850 leading-none">
-                            {featuredPost.frontmatter.author?.name}
-                          </p>
-                          <p className="text-[11px] text-slate-400 font-semibold mt-1">
-                            {dateFormat(featuredPost.frontmatter.date)}
-                          </p>
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-center gap-3">
-                        <span className="text-[11px] text-slate-400 font-bold flex items-center gap-1">
-                          <FiEye /> 1,462 views
-                        </span>
-                        <span className="text-[11px] text-[#f15a24] font-black bg-orange-50 px-3 py-1.5 rounded-full flex items-center gap-1.5">
-                          <FiClock className="text-xs" /> {readingTime(featuredPost.content)}
-                        </span>
-                      </div>
+                    <div className="flex items-center justify-between pt-6 mt-6 border-t border-slate-50 text-[12px] text-slate-400 font-semibold">
+                      <span className="flex items-center gap-1">
+                        <FiCalendar className="text-[#f15a24]" />
+                        {dateFormat(featuredPost.frontmatter.date)}
+                      </span>
+                      <span className="text-[11px] text-[#f15a24] font-black bg-orange-50 px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                        <FiClock className="text-xs" /> {readingTime(featuredPost.content)}
+                      </span>
                     </div>
                   </div>
                 </div>
