@@ -703,7 +703,7 @@ export default function SpotThePhish() {
                           marginBottom: "0.75rem",
                           fontFamily: "var(--font-heading)"
                         }}>
-                          Inbox Threat Detected!
+                          Spot the Phish
                         </h2>
 
                         {/* Orange accent line */}
@@ -723,7 +723,7 @@ export default function SpotThePhish() {
                           marginBottom: "2.5rem",
                           fontWeight: 500
                         }}>
-                          Suspicious emails are landing in your inbox. Can you tell the difference between a harmless message and a malicious phishing attack? Put your detection skills to the test!
+                          Suspicious emails are landing in your inbox. Can you tell the difference between a harmless message and a malicious phishing attack? Put your phishing detection skills to the test and spot the phish!
                         </p>
 
                         {/* Action guide */}
