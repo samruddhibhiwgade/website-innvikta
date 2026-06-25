@@ -620,7 +620,7 @@ export default function SpotThePhish() {
                   <div className="hero-content" style={{ paddingTop: "2rem", textAlign: "center", width: "100%", margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center" }}>
                     <span className="text-subheading" style={{ display: "inline-block", margin: "0 auto 1.25rem auto", textAlign: "center" }}>Free Phishing Awareness Simulator</span>
                     <h1 className="text-96-heading" style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: "1.1", marginBottom: "1.5rem", textAlign: "center", width: "100%" }}>
-                      Email Threat <span className="text-primary">Identifier</span>
+                      Spot the <span className="text-primary">Phish</span>
                     </h1>
                     <p className="text-20-content hero-paragraph" style={{ marginBottom: "2rem", maxWidth: "720px", margin: "0 auto 2rem auto", textAlign: "center" }}>
                       Think you can spot a phishing email before attackers trick you? Review realistic scenarios and test your ability to detect modern cyber threats.
@@ -723,7 +723,7 @@ export default function SpotThePhish() {
                           marginBottom: "2.5rem",
                           fontWeight: 500
                         }}>
-                          Every day, sophisticated email threats bypass security filters and land directly in employee inboxes. Do you have the sharp eye needed to separate genuine business communications from clever phishing attempts? Test your instincts and see if you can spot the phish!
+                          Suspicious emails are landing in your inbox. Can you tell the difference between a harmless message and a malicious phishing attack? Put your phishing detection skills to the test and spot the phish!
                         </p>
 
                         {/* Action guide */}
