@@ -251,7 +251,7 @@ const BlogPageClient = ({ initialPosts, title }) => {
         {/* Category Navigation Bar & Search Strip */}
         <div className="w-full flex flex-col md:flex-row items-stretch md:items-center justify-between border border-slate-100 rounded-xl overflow-hidden mb-12 shadow-sm bg-slate-50/50">
           {/* Categories Tab Strip */}
-          <div className="flex flex-wrap items-stretch flex-1 overflow-x-auto no-scrollbar scroll-smooth divide-x divide-slate-100 border-b md:border-b-0 border-slate-100">
+          <div className="flex flex-nowrap items-stretch flex-1 overflow-x-auto no-scrollbar scroll-smooth divide-x divide-slate-100 border-b md:border-b-0 border-slate-100">
             {categories.map((category) => {
               const isActive = activeCategory === category;
               return (
@@ -327,13 +327,13 @@ const BlogPageClient = ({ initialPosts, title }) => {
             {/* Asymmetric Core Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               {/* Left Column: Stacked smaller cards */}
-              <div className="lg:col-span-3 flex flex-col gap-8">
+              <div className="lg:col-span-3 flex flex-col gap-8 order-2 lg:order-1">
                 {leftPosts.map((post) => renderSmallCard(post))}
               </div>
 
               {/* Center/Right Column: Huge Featured Post */}
               {featuredPost && (
-                <div className="lg:col-span-9">
+                <div className="lg:col-span-9 order-1 lg:order-2">
                   <div className="group flex flex-col bg-white border border-slate-100 rounded-3xl p-6 w-full">
                     <div className="space-y-4">
                       {featuredPost.frontmatter.image && (
