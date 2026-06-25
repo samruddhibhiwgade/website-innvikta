@@ -281,10 +281,10 @@ const menuData = {
             chips: [{ label: "Personalized Learning Paths" }, { label: "Dynamic Risk Profiling" }]
           },
           { 
-            name: "Microlearning", 
-            desc: "Deliver bite-sized, targeted modules to reinforce key security concepts.", 
-            href: "/solutions/insat#microlearning",
-            chips: [{ label: "Bite-sized Training" }, { label: "Just-in-Time Learning" }]
+            name: "Human Risk Intelligence", 
+            desc: "Turn awareness data into measurable, board-ready risk scoring and visibility.", 
+            href: "/solutions/insat#human-risk-intelligence",
+            chips: [{ label: "Risk Dashboards" }, { label: "Behavioral Analytics" }]
           }
         ],
         cta: {
@@ -340,46 +340,6 @@ const menuData = {
           label: "Explore Phishing Simulations",
           href: "/solutions/phishing-simulation",
           svgType: "phishing"
-        }
-      },
-      {
-        id: "human_risk_intelligence",
-        label: "Human Risk Intelligence",
-        href: "/solutions/human-risk-intelligence",
-        icon: FiActivity,
-        headline: "Turn awareness data into measurable, board-ready human risk visibility.",
-        cells: [
-          { 
-            name: "Risk Scoring", 
-            desc: "Deep-dive analysis into user report rates, click habits, and trends.", 
-            href: "/solutions/human-risk-intelligence#risk-scoring",
-            chips: [{ label: "Behavioral Analytics" }, { label: "Threat Intelligence" }]
-          },
-          { 
-            name: "Department Heatmaps", 
-            desc: "Calculate dynamic compliance and risk scores for every team.", 
-            href: "/solutions/human-risk-intelligence#department-heatmaps",
-            chips: [{ label: "Trend Dashboards" }, { label: "Program Impact Analysis" }]
-          },
-          { 
-            name: "Executive Reporting", 
-            desc: "Locate vulnerable spots or training gaps by department and location.", 
-            href: "/solutions/human-risk-intelligence#executive-reporting",
-            chips: [{ label: "Board Reports" }, { label: "Risk Benchmarking" }]
-          },
-          { 
-            name: "Pre/Post Analysis", 
-            desc: "Generate board-ready reports showing campaign impact and program ROI.", 
-            href: "/solutions/human-risk-intelligence#pre-post-analysis",
-            chips: [{ label: "Workforce Comparison" }, { label: "Security Maturity Tracking" }]
-          }
-        ],
-        cta: {
-          title: "Provide leaders with clear behavior metrics",
-          desc: "Identify security gaps and track behavioral improvements across your entire organization automatically.",
-          label: "Explore Dashboard",
-          href: "/solutions/human-risk-intelligence",
-          svgType: "analytics"
         }
       },
       {

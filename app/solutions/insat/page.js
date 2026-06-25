@@ -279,7 +279,7 @@ const InsatPage = () => {
                 
                 <div className="container container-hero-visual">
                     <div className="hero-visual">
-                        <img src="/insat/images/dashboard_platform.png" alt="InSAT Platform Dashboard" className="hero-platform-img" />
+                        <img src="/insat/images/dashboard_platform1.png" alt="InSAT Platform Dashboard" className="hero-platform-img" />
                     </div>
                 </div>
 
@@ -515,7 +515,7 @@ const InsatPage = () => {
                 </div>
 
                 
-                <div className="two-col-grid reverse" style={{marginTop: "6rem"}}>
+                <div id="human-risk-intelligence" className="two-col-grid reverse" style={{marginTop: "6rem"}}>
                     <div className="two-col-content-block animate from-right">
                         <h2 className="text-40-heading">Reporting & Human Risk Evidence</h2>
                         <div style={{marginTop: "1.5rem", opacity: "0.7"}}>

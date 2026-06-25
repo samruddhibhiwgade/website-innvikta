@@ -358,7 +358,7 @@ const ComplianceTrainingPage = () => {
               {/* Standard Bezel Hero Visual Frame */}
               <div className="container container-hero-visual">
                 <div className="hero-visual">
-                  <img src="/insat/images/dashboard_platform.png" alt="InSAT Platform Dashboard" className="hero-platform-img" />
+                  <img src="/insat/images/dashboard_platform1.png" alt="InSAT Platform Dashboard" className="hero-platform-img" />
                 </div>
               </div>
 

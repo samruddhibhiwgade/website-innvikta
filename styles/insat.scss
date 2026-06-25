@@ -853,6 +853,7 @@ section {
 /* Platform screenshot — full size inside the container */
 .hero-platform-img {
     width: 100%;
+    max-width: 100%;
     height: auto;
     border-radius: inherit;
     display: block;

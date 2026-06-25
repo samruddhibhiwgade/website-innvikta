@@ -142,15 +142,16 @@ metrics:
       label: "phishing resistance improvement"
 
 challenges:
-  title: "90% of breaches start with a human. Your firewall is ready. Is your team?"
-  stats_summary: "<span class='text-primary'>$4.88M</span> average breach cost"
+  title: "Security Starts With People."
+  stats_summary: ""
+  description: "InSAT empowers your workforce with adaptive training, phishing simulations, and human risk intelligence to proactively reduce cyber risk."
   cards:
-    - title: "Engagement Gap"
-      content: "Employees tune out generic awareness modules that feel disconnected from their daily work."
-    - title: "Compliance Pressure"
-      content: "Teams struggle to deliver role-relevant training and defensible audit evidence across distributed workforces."
-    - title: "Outdated Training"
-      content: "Annual modules and static videos fail to prepare employees for real-time phishing, social engineering, and workplace pressure."
+    - title: "$ 4.4M Average Global Breach Cost"
+      content: "Breaches from credentials and phishing take the longest to identify (over 290 days), compounding direct financial losses with regulator fines, customer churn, and lasting brand damage."
+    - title: "33% Unapproved AI Usage"
+      content: "As employees adopt generative AI, proprietary source code, customer records, and corporate strategies are leaked, creating massive compliance and data exposure risks."
+    - title: "67% Fewer Security Incidents"
+      content: "Spaced-repetition training and gamified arcade quizzes reinforce secure habits, helping employees spot phishing attempts instantly and report them before they escalate."
 
 free_tier:
   enable: true

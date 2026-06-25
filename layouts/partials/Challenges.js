@@ -9,11 +9,28 @@ const Challenges = ({ challenges }) => {
       <div className="container">
         <div className="row items-center">
           <div className="col-12 lg:col-5 mb-16 lg:mb-0 px-6 md:px-12 lg:px-16">
-            <h2 className="mb-8 text-3xl md:text-4xl font-bold leading-tight">
+            <h2 className="mb-8 text-4xl md:text-5xl lg:text-6xl font-medium leading-tight">
               {challenges.title}
             </h2>
-            <div className="text-lg md:text-xl leading-relaxed font-medium">
-              {markdownify(challenges.stats_summary, "div", "challenges-stats")}
+            {challenges.stats_summary && (
+              <div className="text-lg md:text-xl leading-relaxed font-medium mb-4">
+                {markdownify(challenges.stats_summary, "div", "challenges-stats")}
+              </div>
+            )}
+            {challenges.description && (
+              <div className="text-slate-600 mb-8 leading-relaxed">
+                {markdownify(challenges.description)}
+              </div>
+            )}
+            <div style={{ marginTop: "2rem" }}>
+              <a className="btn btn-primary btn-cta" href="/book-demo" style={{ display: 'inline-flex', alignItems: 'center', whiteSpace: 'nowrap', gap: '8px' }}>
+                <span>Book A Demo</span>
+                <div className="arrow-wrapper" style={{ display: 'inline-flex', alignItems: 'center', margin: 0 }}>
+                  <svg className="arrow-icon" width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3.29985 4.50047L0 1.20062L0.942813 0.257812L5.18545 4.50047L0.942813 8.74306L0 7.80027L3.29985 4.50047Z" fill="currentColor" />
+                  </svg>
+                </div>
+              </a>
             </div>
             <style jsx global>{`
               .challenges-stats .text-primary {
@@ -27,92 +44,107 @@ const Challenges = ({ challenges }) => {
                 <div key={index} className="group h-[450px] [perspective:1000px]">
                   <div className="relative h-full w-full rounded-2xl transition-all duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] cursor-pointer">
                     {/* Front */}
-                    <div className="absolute inset-0 h-full w-full rounded-2xl bg-[#FFFBF7] border border-orange-100 p-6 flex flex-col [backface-visibility:hidden] shadow-sm overflow-hidden">
-                      {/* Top Row */}
-                      <div className="flex justify-between items-start mb-6">
-                        <div className="flex flex-col">
-                          <span className="text-[10px] font-bold text-orange-500 uppercase tracking-widest">Problem 0{index + 1}</span>
-                          <div className="w-8 h-[2px] bg-orange-200 mt-1"></div>
-                        </div>
-                        <div className="w-10 h-10 bg-orange-50 rounded-full flex items-center justify-center text-orange-500 shadow-inner">
-                          <FeatherIcon icon={index === 0 ? "users" : index === 1 ? "shield" : "activity"} size={18} />
-                        </div>
-                      </div>
-
-                      {/* Heading */}
-                      <h3 className="text-2xl font-bold text-slate-800 leading-tight mb-2">{card.title}</h3>
-                      
-                      {/* Mock UI Section */}
-                      <div className="mt-4 mb-4 relative bg-white/60 rounded-xl border border-orange-50 p-4 shadow-sm flex flex-col justify-center min-h-[180px]">
-                        {index === 0 && (
-                          <div className="space-y-3">
-                            <div className="flex justify-between items-end">
-                              <div>
-                                <span className="text-[10px] text-slate-400 font-bold block">Course Completion</span>
-                                <span className="text-2xl font-bold text-orange-500">18%</span>
-                              </div>
-                              <span className="text-[10px] text-orange-500 font-bold">↓ 62% from avg</span>
-                            </div>
-                            <div className="h-20 w-full bg-gradient-to-t from-orange-50 to-transparent relative overflow-hidden rounded-lg">
-                              <svg viewBox="0 0 100 40" className="w-full h-full preserve-aspect-ratio-none">
-                                <path d="M0 10 Q 25 15, 50 25 T 100 35 L 100 40 L 0 40 Z" fill="rgba(254, 96, 25, 0.1)" />
-                                <path d="M0 10 Q 25 15, 50 25 T 100 35" fill="none" stroke="#f15a24" strokeWidth="2" />
+                    <div className="absolute inset-0 h-full w-full rounded-2xl bg-[#FFFBF7] border border-orange-100 p-6 flex flex-col [backface-visibility:hidden] shadow-sm overflow-hidden text-center justify-between">
+                      {index === 0 && (
+                        <div className="flex flex-col h-full justify-between">
+                          <div className="card-icon-wrapper" style={{ background: "#FFEFEA", display: "inline-flex", padding: "0.5rem", borderRadius: "50%", width: "64px", height: "64px", alignItems: "center", justifyContent: "center", marginLeft: "auto", marginRight: "auto" }}>
+                              <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "32px", height: "32px" }}>
+                                  <circle cx="20" cy="20" r="14" stroke="#f15a24" strokeWidth="2.5" fill="none" />
+                                  <ellipse cx="20" cy="20" rx="6" ry="14" stroke="#f15a24" strokeWidth="2" fill="none" />
+                                  <line x1="6" y1="20" x2="34" y2="20" stroke="#f15a24" strokeWidth="2" />
+                                  <path d="M34 24 L42 38 L26 38 Z" fill="#f15a24" stroke="white" strokeWidth="1.5" strokeLinejoin="round" />
+                                  <text x="34" y="35.5" fontFamily="Inter" fontSize="10" fontWeight="bold" fill="white" textAnchor="middle">!</text>
                               </svg>
-                            </div>
                           </div>
-                        )}
-                        {index === 1 && (
-                          <div className="space-y-2">
-                             <div className="flex items-center gap-3">
-                               <div className="w-12 h-12 rounded-full border-4 border-orange-100 border-t-orange-500 flex items-center justify-center">
-                                 <span className="text-xs font-bold">64%</span>
-                               </div>
-                               <div className="flex-grow space-y-1">
-                                 <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-                                   <div className="h-full w-[64%] bg-orange-500"></div>
-                                 </div>
-                                 <span className="text-[8px] text-slate-400 font-bold uppercase">Compliance Score</span>
-                               </div>
-                             </div>
-                             <div className="grid grid-cols-2 gap-1 mt-2">
-                               {['ISO 27001', 'SOC 2', 'GDPR', 'HIPAA'].map(tag => (
-                                 <div key={tag} className="px-2 py-1 bg-slate-50 border border-slate-100 rounded text-[8px] font-bold text-slate-500 flex items-center gap-1">
-                                   <div className="w-1 h-1 rounded-full bg-orange-400"></div> {tag}
-                                 </div>
-                               ))}
-                             </div>
+                          <div className="card-number" style={{ fontSize: "2.25rem", fontWeight: "800", color: "#f15a24", marginTop: "0.5rem" }}>$4.4M</div>
+                          <div className="card-divider" style={{ width: "32px", height: "3px", backgroundColor: "#f15a24", margin: "0.5rem auto" }}></div>
+                          <h3 className="card-title" style={{ fontSize: "1.1rem", fontWeight: "700", color: "#1e293b", marginBottom: "0.25rem", lineHeight: "1.3" }}>Average Global Breach Cost</h3>
+                          <p className="card-description" style={{ fontSize: "0.85rem", color: "#64748b", lineHeight: "1.4", margin: "0 auto 0.25rem", maxWidth: "220px" }}>average global cost of a data breach</p>
+                          <span className="card-source" style={{ fontSize: "0.65rem", fontWeight: "700", color: "#94a3b8", display: "block", marginBottom: "0.75rem" }}>SOURCE: IBM</span>
+                          <div className="card-chart" style={{ display: "flex", justifyContent: "center", marginTop: "auto" }}>
+                              <svg width="140" height="80" viewBox="0 0 150 92" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ margin: "0 auto" }}>
+                                  <line x1="10" y1="90" x2="140" y2="90" stroke="#FFEFEA" strokeWidth="1" />
+                                  <rect x="15" y="18" width="14" height="72" rx="2" fill="#f15a24" />
+                                  <rect x="39" y="34" width="14" height="56" rx="2" fill="#f15a24" fillOpacity="0.9" />
+                                  <rect x="63" y="50" width="14" height="40" rx="2" fill="#f15a24" fillOpacity="0.7" />
+                                  <rect x="87" y="66" width="14" height="24" rx="2" fill="#f15a24" fillOpacity="0.5" />
+                                  <rect x="111" y="78" width="14" height="12" rx="2" fill="#f15a24" fillOpacity="0.3" />
+                                  <path d="M22 18 C 50 18, 95 32, 118 78" stroke="#f15a24" strokeWidth="1.5" strokeDasharray="3 3" fill="none" />
+                                  <path d="M113 78 L119 80 L119 73" stroke="#f15a24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                                  <circle cx="132" cy="78" r="10" fill="#f15a24" />
+                                  <text x="132" y="82" fontFamily="Inter, sans-serif" fontSize="11" fontWeight="700" fill="white" textAnchor="middle">$</text>
+                              </svg>
                           </div>
-                        )}
-                        {index === 2 && (
-                          <div className="space-y-2">
-                            <div className="bg-slate-50 rounded-lg p-2 border border-slate-100 relative">
-                               <div className="flex items-center gap-2 mb-2">
-                                 <div className="w-4 h-4 bg-orange-500 rounded text-white flex items-center justify-center"><FeatherIcon icon="star" size={8} /></div>
-                                 <span className="text-[8px] font-bold">Your Progress</span>
-                               </div>
-                               <div className="h-2 w-full bg-slate-200 rounded-full overflow-hidden">
-                                 <div className="h-full w-[78%] bg-orange-500"></div>
-                               </div>
-                               <span className="absolute right-2 top-2 text-[8px] font-bold text-orange-500">78%</span>
-                            </div>
-                            <div className="flex gap-1 justify-center mt-2">
-                              {[1, 2, 3].map(i => <div key={i} className="w-6 h-6 rounded bg-orange-50 border border-orange-100"></div>)}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Footer Info */}
-                      <div className="mt-auto pt-4 border-t border-orange-50 flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center shrink-0 shadow-sm">
-                           <FeatherIcon icon={index === 0 ? "trending-down" : index === 1 ? "file-text" : "zap"} size={14} />
                         </div>
-                        <p className="text-[10px] leading-tight font-medium text-slate-600">
-                          {index === 0 ? "Only 18% of employees complete traditional training." : 
-                           index === 1 ? "Security awareness is now required across frameworks." : 
-                           "Outdated training fails to create measurable behavioral change."}
-                        </p>
-                      </div>
+                      )}
+
+                      {index === 1 && (
+                        <div className="flex flex-col h-full justify-between">
+                          <div className="card-icon-wrapper" style={{ background: "#FFEFEA", display: "inline-flex", padding: "0.5rem", borderRadius: "50%", width: "64px", height: "64px", alignItems: "center", justifyContent: "center", marginLeft: "auto", marginRight: "auto" }}>
+                              <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "32px", height: "32px" }}>
+                                  <path d="M22 12 C16 12, 10 16, 10 24 C10 28, 13 32, 16 34 C17 35, 18 36, 18 37 C18 40, 20 40, 22 40 L22 12 Z" stroke="#f15a24" strokeWidth="2.5" strokeLinejoin="round" fill="none" />
+                                  <path d="M16 20 C18 20, 20 22, 22 22" stroke="#f15a24" strokeWidth="2" />
+                                  <path d="M14 28 C17 28, 19 28, 22 26" stroke="#f15a24" strokeWidth="2" />
+                                  <path d="M26 12 C32 12, 38 16, 38 24 C38 28, 35 32, 32 34 C31 35, 30 36, 30 37 C30 40, 28 40, 26 40 L26 12 Z" stroke="#f15a24" strokeWidth="2.5" strokeLinejoin="round" fill="none" />
+                                  <circle cx="34" cy="20" r="2" fill="#f15a24" />
+                                  <line x1="26" y1="20" x2="32" y2="20" stroke="#f15a24" strokeWidth="2" />
+                                  <circle cx="32" cy="28" r="2" fill="#f15a24" />
+                                  <line x1="26" y1="28" x2="30" y2="28" stroke="#f15a24" strokeWidth="2" />
+                                  <circle cx="30" cy="34" r="2" fill="#f15a24" />
+                                  <line x1="26" y1="34" x2="28" y2="34" stroke="#f15a24" strokeWidth="2" />
+                              </svg>
+                          </div>
+                          <div className="card-number" style={{ fontSize: "2.25rem", fontWeight: "800", color: "#f15a24", marginTop: "0.5rem" }}>33%</div>
+                          <div className="card-divider" style={{ width: "32px", height: "3px", backgroundColor: "#f15a24", margin: "0.5rem auto" }}></div>
+                          <h3 className="card-title" style={{ fontSize: "1.1rem", fontWeight: "700", color: "#1e293b", marginBottom: "0.25rem", lineHeight: "1.3" }}>Unapproved AI Usage</h3>
+                          <p className="card-description" style={{ fontSize: "0.85rem", color: "#64748b", lineHeight: "1.4", margin: "0 auto 0.25rem", maxWidth: "220px" }}>employees sharing sensitive data with unapproved AI tools</p>
+                          <span className="card-source" style={{ fontSize: "0.65rem", fontWeight: "700", color: "#94a3b8", display: "block", marginBottom: "0.75rem" }}>SOURCE: IBM</span>
+                          <div className="card-chart" style={{ display: "flex", justifyContent: "center", marginTop: "auto" }}>
+                              <svg width="140" height="80" viewBox="0 0 150 92" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ margin: "0 auto" }}>
+                                  <g transform="translate(15, 26)">
+                                      <circle cx="16" cy="14" r="8" stroke="#f15a24" strokeWidth="2" fill="none" />
+                                      <path d="M2 36 C2 28, 8 24, 16 24 C24 24, 30 28, 30 36" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" fill="none" />
+                                  </g>
+                                  <g transform="translate(57, 18)">
+                                      <circle cx="16" cy="14" r="8" stroke="#f15a24" strokeWidth="2" fill="none" />
+                                      <path d="M2 36 C2 28, 8 24, 16 24 C24 24, 30 28, 30 36" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" fill="#FFEFEA" />
+                                      <path d="M16 28 L23 40 L9 40 Z" fill="#f15a24" stroke="white" strokeWidth="1.5" strokeLinejoin="round" />
+                                      <text x="16" y="38" fontFamily="Inter" fontSize="9" fontWeight="bold" fill="white" textAnchor="middle">!</text>
+                                  </g>
+                                  <g transform="translate(99, 26)">
+                                      <circle cx="16" cy="14" r="8" stroke="#f15a24" strokeWidth="2" fill="none" />
+                                      <path d="M2 36 C2 28, 8 24, 16 24 C24 24, 30 28, 30 36" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" fill="none" />
+                                  </g>
+                              </svg>
+                          </div>
+                        </div>
+                      )}
+
+                      {index === 2 && (
+                        <div className="flex flex-col h-full justify-between">
+                          <div className="card-icon-wrapper" style={{ background: "#FFEFEA", display: "inline-flex", padding: "0.5rem", borderRadius: "50%", width: "64px", height: "64px", alignItems: "center", justifyContent: "center", marginLeft: "auto", marginRight: "auto" }}>
+                              <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "32px", height: "32px" }}>
+                                  <path d="M24 6 L38 12 L38 24 Q38 36, 24 42 Q10 36, 10 24 L10 12 Z" stroke="#f15a24" strokeWidth="2.5" fill="none" />
+                                  <path d="M18 24 L22 28 L30 18" stroke="#f15a24" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                              </svg>
+                          </div>
+                          <div className="card-number" style={{ fontSize: "2.25rem", fontWeight: "800", color: "#f15a24", marginTop: "0.5rem" }}>67%</div>
+                          <div className="card-divider" style={{ width: "32px", height: "3px", backgroundColor: "#f15a24", margin: "0.5rem auto" }}></div>
+                          <h3 className="card-title" style={{ fontSize: "1.1rem", fontWeight: "700", color: "#1e293b", marginBottom: "0.25rem", lineHeight: "1.3" }}>Fewer Security Incidents</h3>
+                          <p className="card-description" style={{ fontSize: "0.85rem", color: "#64748b", lineHeight: "1.4", margin: "0 auto 0.25rem", maxWidth: "220px" }}>organizations reporting fewer incidents after training</p>
+                          <span className="card-source" style={{ fontSize: "0.65rem", fontWeight: "700", color: "#94a3b8", display: "block", marginBottom: "0.75rem" }}>SOURCE: FORTINET</span>
+                          <div className="card-chart" style={{ display: "flex", justifyContent: "center", marginTop: "auto" }}>
+                              <svg width="140" height="80" viewBox="0 0 150 92" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ margin: "0 auto" }}>
+                                  <path d="M25 80 A50 50 0 0 1 125 80" stroke="#FFEFEA" strokeWidth="10" strokeLinecap="round" fill="none" />
+                                  <path d="M25 80 A50 50 0 0 1 120.5 37" stroke="#f15a24" strokeWidth="10" strokeLinecap="round" fill="none" />
+                                  <g transform="translate(63, 52)">
+                                      <path d="M12 2 L22 6 L22 14 Q22 21 12 25 Q2 21 2 14 L2 6 Z" stroke="#f15a24" strokeWidth="2" fill="#FFEFEA" />
+                                      <path d="M8 13 L11 16 L16 10" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                                  </g>
+                              </svg>
+                          </div>
+                        </div>
+                      )}
                     </div>
                     {/* Back */}
                     <div className="absolute inset-0 h-full w-full rounded-2xl bg-primary px-8 flex items-center justify-center text-center text-white [transform:rotateY(180deg)] [backface-visibility:hidden] shadow-xl">

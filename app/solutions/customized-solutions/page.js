@@ -406,7 +406,7 @@ const CustomizedSolutionsPage = () => {
 
               <div className="container container-hero-visual">
                 <div className="hero-visual">
-                  <img src="/insat/images/dashboard_platform.png" alt="Customized Security Awareness Platform" className="hero-platform-img" />
+                  <img src="/insat/images/dashboard_platform1.png" alt="Customized Security Awareness Platform" className="hero-platform-img" />
                 </div>
               </div>
 
