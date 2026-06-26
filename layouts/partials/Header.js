@@ -1072,7 +1072,7 @@ const Header = () => {
         {/* =========================================================
             LAYER 2: MAIN NAVIGATION BAR (Logo, Navigation & CTA Buttons)
             ========================================================= */}
-        <div className="w-full transition-all duration-300 bg-white border-b border-slate-100 h-[80px] relative z-40">
+        <div className="w-full transition-all duration-300 bg-transparent border-b border-slate-100 h-[80px] relative z-40">
           {/* Search Overlay Container */}
           <AnimatePresence>
             {isSearchOpen && (
@@ -1257,13 +1257,13 @@ const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 8 }}
                 transition={{ duration: 0.15, ease: "easeOut" }}
-                className="absolute left-0 right-0 top-[80px] w-full bg-white border-t border-slate-100 shadow-[0_30px_50px_-10px_rgba(0,0,0,0.08)] z-50 pointer-events-auto max-h-[calc(100vh-120px)] overflow-y-auto no-scrollbar"
+                className="absolute left-0 right-0 top-[80px] w-full mega-menu-flyout border-t border-slate-100 shadow-[0_30px_50px_-10px_rgba(0,0,0,0.08)] z-50 pointer-events-auto max-h-[calc(100vh-120px)] overflow-y-auto no-scrollbar"
                 onMouseEnter={() => handleMenuHover(activeMegaMenu)}
                 onMouseLeave={handleMenuLeave}
               >
                 <div className="container-xl mx-auto flex min-h-[380px] lg:min-h-[420px] xl:min-h-[460px]">
                   {/* 1. LEFT TAB RAIL (Persistent skeleton anchor) */}
-                  <div className="w-[240px] xl:w-[280px] 2xl:w-[320px] bg-slate-50 border-r border-slate-100 pt-4 pb-8 xl:pt-6 xl:pb-12 px-2 xl:px-4 flex flex-col gap-2 shrink-0">
+                  <div className="w-[240px] xl:w-[280px] 2xl:w-[320px] bg-slate-50/40 border-r border-slate-100 pt-4 pb-8 xl:pt-6 xl:pb-12 px-2 xl:px-4 flex flex-col gap-2 shrink-0">
                     {menuData[activeMegaMenu].tabs.map((tab) => {
                       const isActive = activeTabs[activeMegaMenu] === tab.id;
                       const isPlaceholder = !tab.href || tab.href === "#";
