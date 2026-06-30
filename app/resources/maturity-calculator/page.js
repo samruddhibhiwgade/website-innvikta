@@ -481,13 +481,13 @@ export default function MaturityCalculator() {
                         <text x="130.5" y="28.2" fill="black" fontSize="15" fontWeight="bold" textAnchor="middle" dominantBaseline="middle" transform="rotate(23, 130.5, 28.2)">B</text>
                         <text x="172.3" y="70.8" fill="white" fontSize="15" fontWeight="bold" textAnchor="middle" dominantBaseline="middle" transform="rotate(68, 172.3, 70.8)">A</text>
 
-                        {/* Needle with dynamic transition swinging animation */}
+                        {/* Static needle without animation or inline transform-origin styles */}
                         <g 
-                          transform={`rotate(${needleAngle}, 100, 100)`}
-                          style={{ 
-                            transition: "transform 1.6s cubic-bezier(0.25, 1, 0.2, 1.1)",
-                            transformOrigin: "100px 100px"
-                          }}
+                          transform={`rotate(${
+                            overallScore >= 90 ? 68 :
+                            overallScore >= 70 ? 23 :
+                            overallScore >= 50 ? -23 : -68
+                          }, 100, 100)`}
                         >
                           <polygon points="98,100 100,22 102,100" fill="#1A202C" />
                           <circle cx="100" cy="100" r="6" fill="#1A202C" />
