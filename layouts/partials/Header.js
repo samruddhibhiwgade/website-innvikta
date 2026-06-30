@@ -1829,7 +1829,7 @@ const Header = () => {
         {/* =========================================================
             MOBILE ACCORDION-BASED MENU (Preserves Information Hierarchy)
             ========================================================= */}
-        <div className={`fixed inset-x-0 top-0 h-screen bg-white z-[99999] px-6 pt-24 pb-28 overflow-y-auto transition-all duration-500 lg:hidden flex flex-col justify-between ${
+        <div className={`fixed inset-x-0 top-0 h-screen bg-white z-30 px-6 pt-24 pb-28 overflow-y-auto transition-all duration-500 lg:hidden flex flex-col justify-between ${
           showMenu ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"
         }`}>
           <div className="space-y-3">
