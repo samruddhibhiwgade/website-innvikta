@@ -1481,7 +1481,8 @@ const Header = () => {
 
           <div className={`relative container-xl h-full flex items-center justify-between transition-opacity duration-200 ${isSearchOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
             {/* Logo */}
-            <div className="z-50 shrink-0 flex items-center">
+            {/* Logo */}
+            <div className="shrink-0 flex items-center" style={{ zIndex: 100001 }}>
               <Link href="/">
                 <img 
                   src="/images/logo-main.png" 
@@ -1542,7 +1543,7 @@ const Header = () => {
             </div>
 
             {/* Mobile Navigation Toggle Button */}
-            <div className="flex items-center lg:hidden z-50">
+            <div className="flex items-center lg:hidden" style={{ zIndex: 100001 }}>
               <button
                 onClick={() => setShowMenu(!showMenu)}
                 className="p-2 text-slate-800 hover:text-[#f15a24] text-2xl transition-colors duration-200"
