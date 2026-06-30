@@ -63,11 +63,13 @@ export default function AdminBlogPanel() {
 
   useEffect(() => {
     fetchPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Run SEO audit
   useEffect(() => {
     runSeoAudit();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.content, formData.title, formData.metaDescription, focusKeyphrase]);
 
   const showNotification = (type, message) => {
@@ -572,7 +574,7 @@ export default function AdminBlogPanel() {
                 <FiFileText className="mx-auto h-12 w-12 text-slate-300 mb-4" />
                 <h3 className="text-lg font-bold text-slate-900">No blog posts found</h3>
                 <p className="text-slate-500 text-sm max-w-sm mx-auto mt-1">
-                  Start creating and organizing articles using the "Write New Article" option.
+                  Start creating and organizing articles using the &quot;Write New Article&quot; option.
                 </p>
               </div>
             ) : (
