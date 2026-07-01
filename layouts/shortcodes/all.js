@@ -9,6 +9,7 @@ import Video from "./Video";
 import Youtube from "./Youtube";
 import BookDemo from "./BookDemo";
 import FAQ from "./FAQ";
+import KeyTakeaways from "./KeyTakeaways";
 
 const shortcodes = {
   Button,
@@ -22,6 +23,7 @@ const shortcodes = {
   Blockquote,
   BookDemo,
   FAQ,
+  KeyTakeaways,
 };
 
 export default shortcodes;

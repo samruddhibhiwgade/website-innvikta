@@ -46,6 +46,12 @@ export default function AdminBlogPanel() {
   const [faqTitle, setFaqTitle] = useState("Frequently Asked Questions");
   const [faqSubtitle, setFaqSubtitle] = useState("");
 
+  // Key Takeaways Modal States
+  const [showTakeawaysModal, setShowTakeawaysModal] = useState(false);
+  const [takeawaysTitle, setTakeawaysTitle] = useState("Key Takeaways");
+  const [takeawaysPasteText, setTakeawaysPasteText] = useState("");
+  const [takeawaysType, setTakeawaysType] = useState("bullet"); // bullet, number, roman
+
   const [focusKeyphrase, setFocusKeyphrase] = useState("");
   const [seoReport, setSeoReport] = useState([]);
   const [notification, setNotification] = useState(null);
@@ -301,6 +307,61 @@ export default function AdminBlogPanel() {
     setShowFaqModal(false);
   };
 
+  // Convert pasted takeaway points into KeyTakeaways shortcode card layout
+  const handleInsertParsedTakeaways = () => {
+    if (!takeawaysPasteText.trim()) return;
+
+    const lines = takeawaysPasteText.split("\n");
+    const points = [];
+
+    for (let line of lines) {
+      const trimmed = line.trim();
+      if (!trimmed) continue;
+
+      // Strip bullet points like -, *, +, 1., a)
+      const cleanPoint = trimmed
+        .replace(/^(?:-|\*|\+)\s*/, "")
+        .replace(/^\d+[\.\)]\s*/, "")
+        .replace(/^[a-zA-Z][\.\)]\s*/, "");
+
+      if (cleanPoint.trim()) {
+        points.push(cleanPoint.trim());
+      }
+    }
+
+    if (points.length === 0) return;
+
+    let mdx = `\n<KeyTakeaways title="${takeawaysTitle}"${takeawaysType !== "bullet" ? ` type="${takeawaysType}"` : ""}>\n\n`;
+    points.forEach((point, idx) => {
+      if (takeawaysType === "bullet") {
+        mdx += `- ${point}\n\n`;
+      } else {
+        mdx += `${idx + 1}. ${point}\n\n`;
+      }
+    });
+    mdx += `</KeyTakeaways>\n`;
+
+    const textarea = textareaRef.current;
+    if (textarea) {
+      const startPos = textarea.selectionStart;
+      const endPos = textarea.selectionEnd;
+      const originalText = textarea.value;
+      const newText = originalText.substring(0, startPos) + mdx + originalText.substring(endPos);
+      setFormData((prev) => ({ ...prev, content: newText }));
+      
+      setTimeout(() => {
+        textarea.focus();
+        textarea.setSelectionRange(startPos + mdx.length, startPos + mdx.length);
+      }, 50);
+    }
+
+    // Reset state and close modal
+    setTakeawaysTitle("Key Takeaways");
+    setTakeawaysPasteText("");
+    setTakeawaysType("bullet");
+    setShowTakeawaysModal(false);
+  };
+
   // Real-time Yoast SEO auditor
   const runSeoAudit = () => {
     const checks = [];
@@ -527,6 +588,86 @@ export default function AdminBlogPanel() {
         </cite>
       </blockquote>
     `);
+    // Render mockup for <KeyTakeaways> shortcode inside Live Preview (with type)
+    html = html.replace(/&lt;KeyTakeaways\s+title="([^"]+)"\s+type="([^"]+)"&gt;([\s\S]*?)&lt;\/KeyTakeaways&gt;/g, (match, title, type, content) => {
+      let listClass = type === "number" ? "key-takeaways-number" : (type === "roman" ? "key-takeaways-roman" : "key-takeaways-bullet");
+      return `
+        <div class="my-8 p-6 bg-[#f8fafc] border border-slate-100 rounded-2xl shadow-sm max-w-3xl mx-auto text-left relative overflow-hidden">
+          <div class="mb-4">
+            <h4 class="text-base font-extrabold text-slate-900 m-0 uppercase tracking-wide">
+              ${title}
+            </h4>
+          </div>
+          <div class="prose prose-slate max-w-none text-slate-700 text-sm leading-relaxed font-semibold ${listClass}">
+            ${content}
+          </div>
+          <style>
+            .key-takeaways-bullet ul, .key-takeaways-number ol, .key-takeaways-roman ol {
+              list-style-type: none !important;
+              padding-left: 0 !important;
+              display: flex;
+              flex-direction: column;
+              gap: 0.65rem !important;
+              margin-top: 0.5rem !important;
+              margin-bottom: 0.5rem !important;
+            }
+            .key-takeaways-bullet ul li {
+              position: relative;
+              padding-left: 1.25rem !important;
+            }
+            .key-takeaways-bullet ul li::before {
+              content: "-" !important;
+              position: absolute;
+              left: 0;
+              color: #64748b;
+              font-weight: bold;
+            }
+            .key-takeaways-number ol { counter-reset: takeaway-counter; }
+            .key-takeaways-number ol li {
+              position: relative;
+              padding-left: 1.5rem !important;
+            }
+            .key-takeaways-number ol li::before {
+              counter-increment: takeaway-counter;
+              content: counter(takeaway-counter) "." !important;
+              position: absolute;
+              left: 0;
+              color: #64748b;
+              font-weight: bold;
+            }
+            .key-takeaways-roman ol { counter-reset: takeaway-roman-counter; }
+            .key-takeaways-roman ol li {
+              position: relative;
+              padding-left: 2rem !important;
+            }
+            .key-takeaways-roman ol li::before {
+              counter-increment: takeaway-roman-counter;
+              content: counter(takeaway-roman-counter, upper-roman) "." !important;
+              position: absolute;
+              left: 0;
+              color: #64748b;
+              font-weight: bold;
+            }
+          </style>
+        </div>
+      `;
+    });
+
+    // Render mockup for <KeyTakeaways> shortcode inside Live Preview (default type="bullet")
+    html = html.replace(/&lt;KeyTakeaways\s+title="([^"]+)"\s*&gt;([\s\S]*?)&lt;\/KeyTakeaways&gt;/g, (match, title, content) => {
+      return `
+        <div class="my-8 p-6 bg-[#f8fafc] border border-slate-100 rounded-2xl shadow-sm max-w-3xl mx-auto text-left relative overflow-hidden">
+          <div class="mb-4">
+            <h4 class="text-base font-extrabold text-slate-900 m-0 uppercase tracking-wide">
+              ${title}
+            </h4>
+          </div>
+          <div class="prose prose-slate max-w-none text-slate-700 text-sm leading-relaxed font-semibold key-takeaways-bullet">
+            ${content}
+          </div>
+        </div>
+      `;
+    });
 
     return html;
   };
@@ -807,6 +948,83 @@ export default function AdminBlogPanel() {
           </div>
         )}
 
+        {/* Key Takeaways Modal */}
+        {showTakeawaysModal && (
+          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl w-full max-w-lg p-6 text-left shadow-2xl border border-slate-100">
+              <div className="flex justify-between items-center border-b border-slate-100 pb-3 mb-4">
+                <h4 className="text-base font-bold text-slate-900">Bulk Insert Key Takeaways Card</h4>
+                <button 
+                  onClick={() => {
+                    setShowTakeawaysModal(false);
+                    setTakeawaysPasteText("");
+                  }}
+                  className="text-slate-400 hover:text-slate-600 cursor-pointer"
+                >
+                  <FiX className="text-lg" />
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Card Title</label>
+                  <input
+                    type="text"
+                    value={takeawaysTitle}
+                    onChange={(e) => setTakeawaysTitle(e.target.value)}
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">List Style</label>
+                  <select
+                    value={takeawaysType}
+                    onChange={(e) => setTakeawaysType(e.target.value)}
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                  >
+                    <option value="bullet">Bullets (-)</option>
+                    <option value="number">Numbered List (1, 2, 3)</option>
+                    <option value="roman">Roman Numerals (I, II, III)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Paste Key Takeaway Points (One per line)</label>
+                  <textarea
+                    rows="8"
+                    value={takeawaysPasteText}
+                    onChange={(e) => setTakeawaysPasteText(e.target.value)}
+                    placeholder={`Paste your points here. For example:\n\n- Phishing attacks cost enterprises millions annually.\n- Implementing regular training reduces successful attacks by 80%.\n- MFA acts as a critical second line of defense.`}
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-850 placeholder-slate-400 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-mono leading-relaxed"
+                  />
+                  <p className="text-[10px] text-slate-400 mt-1.5">Each line will be converted into a bullet point in the styled card layout.</p>
+                </div>
+
+                <div className="flex gap-3 pt-3 border-t border-slate-100">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowTakeawaysModal(false);
+                      setTakeawaysPasteText("");
+                    }}
+                    className="flex-1 border border-slate-200 text-slate-600 py-2.5 rounded-xl text-xs font-bold hover:bg-slate-50 cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleInsertParsedTakeaways}
+                    className="flex-1 bg-[#f15a24] hover:bg-orange-600 text-white py-2.5 rounded-xl text-xs font-bold shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 cursor-pointer"
+                  >
+                    Convert & Insert
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Tab Controls */}
         <div className="flex border-b border-slate-200 mb-8">
           <button
@@ -1060,6 +1278,15 @@ export default function AdminBlogPanel() {
                             title="Insert Styled Blockquote"
                           >
                             <span>+ Quote</span>
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => setShowTakeawaysModal(true)}
+                            className="px-2.5 py-1.5 hover:bg-[#f15a24]/10 text-slate-600 hover:text-[#f15a24] rounded-lg transition-colors flex items-center gap-1 cursor-pointer text-xs font-bold border border-dashed border-slate-300 hover:border-[#f15a24]"
+                            title="Bulk Insert Key Takeaways Card"
+                          >
+                            <span>+ Key Takeaways</span>
                           </button>
                         </div>
 
