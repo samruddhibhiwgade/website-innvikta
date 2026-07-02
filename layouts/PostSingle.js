@@ -10,7 +10,6 @@ import ImageFallback from "./components/ImageFallback";
 import Share from "./components/Share";
 import TableOfContents from "./components/TableOfContents";
 import Post from "./partials/Post";
-import CopyLinkButton from "./components/CopyLinkButton";
 import PostSingleClientControls from "./components/PostSingleClientControls";
 import SeoMeta from "./partials/SeoMeta";
 import { analyzeArticle } from "@lib/seoAnalyzer";
@@ -167,8 +166,7 @@ const PostSingle = ({ frontmatter, content, recentPosts, slug }) => {
                       className="flex gap-4 text-xl text-slate-400 [&_a]:transition-colors [&_a]:duration-200 [&_a:hover]:text-primary"
                     />
                     
-                    {/* Copy Link Button */}
-                    <CopyLinkButton />
+
                   </div>
                 </div>
               </aside>
@@ -207,7 +205,7 @@ const PostSingle = ({ frontmatter, content, recentPosts, slug }) => {
                     slug={`blog/${slug}`}
                     className="flex gap-5 text-2xl text-slate-400 justify-start"
                   />
-                  <CopyLinkButton />
+
                 </div>
 
                 {/* Article content block */}
