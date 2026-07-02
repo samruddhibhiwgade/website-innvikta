@@ -1,6 +1,3 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import config from "@config/config.json";
 import dateFormat from "@lib/utils/dateFormat";
 import readingTime from "@lib/utils/readingTime";
@@ -13,6 +10,7 @@ import ImageFallback from "./components/ImageFallback";
 import Share from "./components/Share";
 import TableOfContents from "./components/TableOfContents";
 import Post from "./partials/Post";
+import CopyLinkButton from "./components/CopyLinkButton";
 import SeoMeta from "./partials/SeoMeta";
 import { analyzeArticle } from "@lib/seoAnalyzer";
 
@@ -20,34 +18,7 @@ const PostSingle = ({ frontmatter, content, recentPosts, slug }) => {
   let { description, title, date, lastUpdatedDate, image, imageAlt, author, categories, primaryKeyword, sources, disableAutoLinking } = frontmatter;
   description = description ? description : content.slice(0, 120);
 
-  // States for Reading Experience
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [showBackToTop, setShowBackToTop] = useState(0);
-  const [isCopied, setIsCopied] = useState(false);
-  const [isSeoPanelOpen, setIsSeoPanelOpen] = useState(false);
 
-  // Calculate scrolling progress and floating back-to-top visibility
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalScroll > 0) {
-        setScrollProgress((window.scrollY / totalScroll) * 100);
-      }
-      setShowBackToTop(window.scrollY > 400);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText(window.location.href);
-    setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 2000);
-  };
 
   // Automatically link key phrases inside content to solutions, tools, and arcade
   const autoLinkContent = (text) => {
@@ -362,12 +333,7 @@ const PostSingle = ({ frontmatter, content, recentPosts, slug }) => {
                     slug={`blog/${slug}`}
                     className="flex gap-5 text-2xl text-slate-400 justify-start"
                   />
-                  <button 
-                    onClick={handleCopyLink} 
-                    className="text-xs font-bold text-slate-500 hover:text-primary transition-colors bg-slate-50 hover:bg-orange-50 px-3 py-1.5 rounded-lg border border-slate-100 flex items-center gap-1.5"
-                  >
-                    {isCopied ? "Copied!" : "Copy Link"}
-                  </button>
+                  <CopyLinkButton />
                 </div>
 
                 {/* Article content block */}
