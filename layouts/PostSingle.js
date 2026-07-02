@@ -254,18 +254,17 @@ const PostSingle = ({ frontmatter, content, recentPosts, slug }) => {
 
           {/* Related Articles Footer list */}
           <div className="section mt-16 text-left">
-            <h2 className="text-2xl font-black text-slate-900 uppercase tracking-wide text-center mb-10">Related Articles</h2>
+            <h2 className="text-2xl font-black text-slate-900 uppercase tracking-wide text-center mb-4">Related Articles</h2>
+            {/* Centered short orange line below title */}
+            <div className="w-[50px] h-[5px] bg-[#f15a24] rounded-full mx-auto mb-12" />
             <div className="row justify-center">
               {recentPosts.slice(0, 3).map((post, index) => (
-                <div key={"post-" + index} className="animate lg:col-4">
+                <div key={"post-" + index} className="animate lg:col-4 flex flex-col">
                   <Post post={post} />
                 </div>
               ))}
             </div>
           </div>
-          
-          {/* Centered short orange line below recent articles */}
-          <div className="w-[50px] h-[5px] bg-[#f15a24] rounded-full mx-auto mt-12 mb-16" />
         </div>
       </section>
     </>
