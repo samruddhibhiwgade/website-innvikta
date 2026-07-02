@@ -5,7 +5,7 @@ import config from "@config/config.json";
 import dateFormat from "@lib/utils/dateFormat";
 import readingTime from "@lib/utils/readingTime";
 import { markdownify } from "@lib/utils/textConverter";
-import MDXContent from "app/helper/MDXContent";
+import MDXContent from "../app/helper/MDXContent";
 import Link from "next/link";
 import Image from "next/image";
 import Cta from "./components/Cta";
