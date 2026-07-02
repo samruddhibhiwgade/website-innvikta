@@ -5,7 +5,6 @@ import { markdownify } from "@lib/utils/textConverter";
 import MDXContent from "../app/helper/MDXContent";
 import Link from "next/link";
 import Image from "next/image";
-import Cta from "./components/Cta";
 import ImageFallback from "./components/ImageFallback";
 import Share from "./components/Share";
 import TableOfContents from "./components/TableOfContents";
@@ -264,13 +263,11 @@ const PostSingle = ({ frontmatter, content, recentPosts, slug }) => {
               ))}
             </div>
           </div>
-
+          
+          {/* Centered short orange line below recent articles */}
+          <div className="w-[50px] h-[5px] bg-[#f15a24] rounded-full mx-auto mt-12 mb-16" />
         </div>
       </section>
-
-      {/* Orange border separator before the CTA */}
-      <div className="border-t-[6px] border-[#f15a24] w-full" />
-      <Cta />
     </>
   );
 };
