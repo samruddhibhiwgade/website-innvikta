@@ -265,10 +265,11 @@ const PostSingle = ({ frontmatter, content, recentPosts, slug }) => {
             </div>
           </div>
 
-          <Cta />
         </div>
       </section>
 
+      {/* Orange border separator before the CTA */}
+      <div className="border-t-[6px] border-[#f15a24] w-full" />
       <Cta />
     </>
   );

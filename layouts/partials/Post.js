@@ -31,7 +31,7 @@ const Post = ({ post, i }) => {
       {post.frontmatter.image && (
         <Link href={`/${blog_folder}/${post.slug}`}>
           <ImageFallback
-            className="w-full h-auto object-contain max-h-[220px] bg-slate-50/50"
+            className="w-full h-[220px] object-cover bg-slate-50/50"
             src={post.frontmatter.image}
             alt={post.frontmatter.title}
             width={570}
