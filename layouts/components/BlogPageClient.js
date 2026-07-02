@@ -127,7 +127,7 @@ const BlogPageClient = ({ initialPosts, title }) => {
               </span>
             ))}
           </div>
-          <h3 className="text-base font-bold text-slate-800 leading-snug">
+          <h3 className="text-base font-black text-slate-900 leading-snug">
             <Link href={`/blog/${post.slug}`}>{post.frontmatter.title}</Link>
           </h3>
         </div>
