@@ -95,7 +95,7 @@ const BlogPageClient = ({ initialPosts, title }) => {
                 alt={post.frontmatter.title}
                 width={400}
                 height={300}
-                className="w-full aspect-[4/3] object-cover"
+                className="w-full h-auto object-contain max-h-[180px] bg-slate-50/50"
               />
             </Link>
           )}
@@ -144,7 +144,7 @@ const BlogPageClient = ({ initialPosts, title }) => {
                 alt={post.frontmatter.title}
                 width={400}
                 height={240}
-                className="w-full h-[180px] object-cover"
+                className="w-full h-auto object-contain max-h-[180px] bg-slate-50/50"
               />
             </Link>
           )}
@@ -331,7 +331,7 @@ const BlogPageClient = ({ initialPosts, title }) => {
                             alt={featuredPost.frontmatter.title}
                             width={750}
                             height={440}
-                            className="w-full h-[320px] md:h-[400px] object-cover"
+                            className="w-full h-auto object-contain max-h-[320px] md:max-h-[400px] bg-slate-50/50"
                           />
                         </Link>
                       )}

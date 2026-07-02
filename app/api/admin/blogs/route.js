@@ -37,8 +37,7 @@ export async function GET() {
 
 export async function POST(request) {
   try {
-    const data = await request.json();
-    const { filename, title, content, categories, authorName, image, date, draft, metaDescription } = data;
+    const { filename, title, content, categories, authorName, image, date, draft, metaDescription, disableAutoLinking } = data;
 
     if (!title || !content) {
       return NextResponse.json({ error: "Title and content are required" }, { status: 400 });
@@ -65,6 +64,7 @@ export async function POST(request) {
       draft: draft || false,
       categories: Array.isArray(categories) ? categories : categories ? [categories] : ["Security"],
       metaDescription: metaDescription || "",
+      disableAutoLinking: disableAutoLinking || false,
     };
 
     const fileString = matter.stringify(content, frontmatter);

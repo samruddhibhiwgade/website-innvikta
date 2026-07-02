@@ -58,5 +58,13 @@
     "enable": false,
     "shortname": "themefisher-template",
     "settings": {}
-  }
+  },
+
+  "keyword_links": [
+    { "keywords": ["phishing simulation", "phishing simulations"], "url": "/solutions/phishing-simulation" },
+    { "keywords": ["security awareness training"], "url": "/solutions/security-awareness-training" },
+    { "keywords": ["cyber arcade", "innvikta arcade"], "url": "/cyber-arcade" },
+    { "keywords": ["domain security analyzer", "domain analyzer"], "url": "/freetools/domain-security-analyzer" },
+    { "keywords": ["human cyber risk", "human risk management"], "url": "/solutions" }
+  ]
 }

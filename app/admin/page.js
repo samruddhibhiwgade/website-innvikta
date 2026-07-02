@@ -30,8 +30,14 @@ export default function AdminBlogPanel() {
     image: "",
     date: "",
     draft: false,
-    metaDescription: "", 
+    metaDescription: "",
+    disableAutoLinking: false,
   });
+  
+  const [keywordLinks, setKeywordLinks] = useState([]);
+  const [newKeywords, setNewKeywords] = useState("");
+  const [newUrl, setNewUrl] = useState("");
+  const [isSavingLinks, setIsSavingLinks] = useState(false);
   
   // Custom states for uploading & alt text
   const [isUploadingCover, setIsUploadingCover] = useState(false);
@@ -73,8 +79,128 @@ export default function AdminBlogPanel() {
     }
   };
 
+  const fetchKeywordLinks = async () => {
+    try {
+      const res = await fetch("/api/admin/config");
+      const data = await res.json();
+      if (data.keyword_links) {
+        setKeywordLinks(data.keyword_links);
+      }
+    } catch (err) {
+      console.error("Failed to load keyword links.", err);
+    }
+  };
+
+  const autoLinkContent = (text) => {
+    if (!text || !keywordLinks || keywordLinks.length === 0) return text;
+    
+    let placeholders = [];
+    let placeholderCounter = 0;
+    
+    // Extract markdown links to avoid nesting links
+    let processedText = text.replace(/\[([^\]]+)\]\([^\)]+\)/g, (match) => {
+      const key = `___MDLINK_${placeholderCounter++}___`;
+      placeholders.push({ key, value: match });
+      return key;
+    });
+
+    // Extract HTML/JSX tags to avoid matching keywords in tag parameters
+    processedText = processedText.replace(/<[^>]+>/g, (match) => {
+      const key = `___JSXTAG_${placeholderCounter++}___`;
+      placeholders.push({ key, value: match });
+      return key;
+    });
+
+    // Replace first occurrence of each keyword group
+    keywordLinks.forEach(({ keywords, url }) => {
+      const sortedKeywords = [...keywords].sort((a, b) => b.length - a.length);
+      for (let kw of sortedKeywords) {
+        const regex = new RegExp(`\\b(${kw.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})\\b`, 'i');
+        if (regex.test(processedText)) {
+          processedText = processedText.replace(regex, `[$1](${url})`);
+          break; // Link once per post
+        }
+      }
+    });
+
+    // Restore tags and links
+    for (let i = placeholders.length - 1; i >= 0; i--) {
+      const { key, value } = placeholders[i];
+      processedText = processedText.replace(key, value);
+    }
+
+    return processedText;
+  };
+
+  const handleAddLinkRule = async (e) => {
+    e.preventDefault();
+    if (!newKeywords.trim() || !newUrl.trim()) {
+      showNotification("error", "Keywords and destination URL are required.");
+      return;
+    }
+
+    const keywordList = newKeywords
+      .split(",")
+      .map((k) => k.trim())
+      .filter((k) => k.length > 0);
+
+    if (keywordList.length === 0) {
+      showNotification("error", "Please enter at least one valid keyword.");
+      return;
+    }
+
+    setIsSavingLinks(true);
+    try {
+      const updatedLinks = [...keywordLinks, { keywords: keywordList, url: newUrl.trim() }];
+      const res = await fetch("/api/admin/config", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ keyword_links: updatedLinks }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setKeywordLinks(data.keyword_links);
+        setNewKeywords("");
+        setNewUrl("");
+        showNotification("success", "Auto-link rule added successfully!");
+      } else {
+        showNotification("error", data.error || "Failed to add link rule.");
+      }
+    } catch (err) {
+      showNotification("error", "An error occurred while saving the rule.");
+    } finally {
+      setIsSavingLinks(false);
+    }
+  };
+
+  const handleDeleteLinkRule = async (indexToDelete) => {
+    if (!window.confirm("Are you sure you want to delete this link rule?")) return;
+
+    setIsSavingLinks(true);
+    try {
+      const updatedLinks = keywordLinks.filter((_, idx) => idx !== indexToDelete);
+      const res = await fetch("/api/admin/config", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ keyword_links: updatedLinks }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setKeywordLinks(data.keyword_links);
+        showNotification("success", "Auto-link rule deleted successfully!");
+      } else {
+        showNotification("error", data.error || "Failed to delete link rule.");
+      }
+    } catch (err) {
+      showNotification("error", "An error occurred while deleting the rule.");
+    } finally {
+      setIsSavingLinks(false);
+    }
+  };
+
   useEffect(() => {
     fetchPosts();
+    fetchKeywordLinks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -450,7 +576,8 @@ export default function AdminBlogPanel() {
   // Simple Markdown Parser to render Preview HTML
   const parseMarkdownToHtml = (markdown) => {
     if (!markdown) return "";
-    let html = markdown;
+    const linkedMarkdown = formData.disableAutoLinking ? markdown : autoLinkContent(markdown);
+    let html = linkedMarkdown;
 
     // Escaping HTML characters
     html = html
@@ -683,6 +810,7 @@ export default function AdminBlogPanel() {
       date: post.frontmatter.date ? post.frontmatter.date.substring(0, 16) : "",
       draft: post.frontmatter.draft || false,
       metaDescription: post.frontmatter.metaDescription || "",
+      disableAutoLinking: post.frontmatter.disableAutoLinking || false,
     });
     setActiveTab("write");
     setEditorTab("edit");
@@ -734,6 +862,7 @@ export default function AdminBlogPanel() {
           date: "",
           draft: false,
           metaDescription: "",
+          disableAutoLinking: false,
         });
         setFocusKeyphrase("");
         setActiveTab("list");
@@ -757,6 +886,7 @@ export default function AdminBlogPanel() {
       date: "",
       draft: false,
       metaDescription: "",
+      disableAutoLinking: false,
     });
     setFocusKeyphrase("");
     setActiveTab("write");
@@ -1505,6 +1635,20 @@ export default function AdminBlogPanel() {
                     />
                     <label htmlFor="draft-checkbox" className="text-xs font-bold text-slate-700 uppercase tracking-wider cursor-pointer">
                       Save as draft
+                    </label>
+                  </div>
+
+                  <div className="flex items-center gap-3 pt-2">
+                    <input
+                      id="disable-links-checkbox"
+                      type="checkbox"
+                      name="disableAutoLinking"
+                      checked={formData.disableAutoLinking}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, disableAutoLinking: e.target.checked }))}
+                      className="w-4 h-4 text-[#f15a24] border-slate-300 rounded focus:ring-[#f15a24]"
+                    />
+                    <label htmlFor="disable-links-checkbox" className="text-xs font-bold text-slate-750 uppercase tracking-wider cursor-pointer flex items-center gap-1">
+                      <span>Disable Auto-Linking</span>
                     </label>
                   </div>
                 </div>

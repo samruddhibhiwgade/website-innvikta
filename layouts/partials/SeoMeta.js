@@ -11,6 +11,8 @@ const SeoMeta = ({
   description,
   canonical,
   noindex,
+  content = "",
+  frontmatter = {}
 }) => {
   const { meta_image, meta_author, meta_description } = config.metadata;
   const { base_url } = config.site;
@@ -19,7 +21,10 @@ const SeoMeta = ({
   // Auto-generate canonical URL if not explicitly provided
   const canonicalUrl = canonical || `${base_url}${pathname === "/" ? "" : pathname}`;
 
-  // Organization Schema (identity validation for LLMs & Search Engines)
+  const { date, lastUpdatedDate, author, categories, primaryKeyword, secondaryKeywords } = frontmatter;
+  const wordCount = content ? content.split(/\s+/).filter(Boolean).length : 0;
+
+  // 1. Organization Schema
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -42,7 +47,7 @@ const SeoMeta = ({
     }
   };
 
-  // Local Business Schema (Local SEO validation)
+  // 2. Local Business Schema
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -61,7 +66,7 @@ const SeoMeta = ({
     }
   };
 
-  // Website Schema
+  // 3. Website Schema
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -70,7 +75,7 @@ const SeoMeta = ({
     "url": base_url
   };
 
-  // Breadcrumb List Schema
+  // 4. Breadcrumb List Schema
   const pathSegments = pathname.split("/").filter(Boolean);
   const breadcrumbElements = [
     {
@@ -96,7 +101,7 @@ const SeoMeta = ({
     "itemListElement": breadcrumbElements
   };
 
-  // Product / SoftwareApplication Schema (for product/solution pages)
+  // 5. Product / SoftwareApplication Schema
   const isSolutionsPage = pathname.startsWith("/solutions");
   const productSchema = isSolutionsPage ? {
     "@context": "https://schema.org",
@@ -113,6 +118,68 @@ const SeoMeta = ({
     }
   } : null;
 
+  // 6. BlogPosting Schema (E-E-A-T & Google Search schema optimization)
+  const isBlogPost = pathname.startsWith("/blog/") && pathname !== "/blog";
+  const blogPostingSchema = isBlogPost ? {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": `${base_url}${pathname}#blogposting`,
+    "headline": title,
+    "description": description || meta_description,
+    "image": image ? (image.startsWith("http") ? image : `${base_url}${image}`) : `${base_url}${meta_image}`,
+    "datePublished": date || new Date().toISOString(),
+    "dateModified": lastUpdatedDate || date || new Date().toISOString(),
+    "author": {
+      "@type": "Person",
+      "name": author?.name || "Derick C.",
+      "image": author?.avatar ? (author.avatar.startsWith("http") ? author.avatar : `${base_url}${author.avatar}`) : `${base_url}/images/author/derick.jpg`
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Innvikta",
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${base_url}${config.site.logo}`
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `${base_url}${pathname}`
+    },
+    "keywords": primaryKeyword ? [primaryKeyword, ...(secondaryKeywords || [])].join(", ") : undefined,
+    "articleSection": categories ? categories.join(", ") : "Cybersecurity",
+    "wordCount": wordCount,
+    "inLanguage": "en-US"
+  } : null;
+
+  // 7. FAQPage Schema (AEO Voice/FAQ SEO validation)
+  const faqSchema = (() => {
+    if (!content) return null;
+    const accordionRegex = /<Accordion\s+title="([^"]+)"[^>]*>([\s\S]*?)<\/Accordion>/g;
+    const matches = [];
+    let match;
+    while ((match = accordionRegex.exec(content)) !== null) {
+      matches.push({
+        question: match[1],
+        answer: match[2].trim().replace(/<[^>]*>/g, "")
+      });
+    }
+    if (matches.length === 0) return null;
+    
+    return {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": matches.map(item => ({
+        "@type": "Question",
+        "name": item.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": item.answer
+        }
+      }))
+    };
+  })();
+
   return (
     <>
       {/* title */}
@@ -124,7 +191,11 @@ const SeoMeta = ({
       <link rel="canonical" href={canonicalUrl} />
 
       {/* noindex robots */}
-      {noindex && <meta name="robots" content="noindex,nofollow" />}
+      {noindex ? (
+        <meta name="robots" content="noindex,nofollow" />
+      ) : (
+        <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+      )}
 
       {/* meta-description */}
       <meta
@@ -133,7 +204,7 @@ const SeoMeta = ({
       />
 
       {/* author from config.json */}
-      <meta name="author" content={meta_author} />
+      <meta name="author" content={author?.name || meta_author} />
 
       {/* og-title */}
       <meta
@@ -148,11 +219,22 @@ const SeoMeta = ({
         property="og:description"
         content={plainify(description ? description : meta_description)}
       />
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content={isBlogPost ? "article" : "website"} />
       <meta
         property="og:url"
         content={`${base_url}/${pathname.replace("/", "")}`}
       />
+
+      {isBlogPost && (
+        <>
+          <meta property="article:published_time" content={date || new Date().toISOString()} />
+          <meta property="article:modified_time" content={lastUpdatedDate || date || new Date().toISOString()} />
+          <meta property="article:author" content={author?.name || "Derick C."} />
+          {categories?.map((cat, idx) => (
+            <meta key={idx} property="article:section" content={cat} />
+          ))}
+        </>
+      )}
 
       {/* twitter-title */}
       <meta
@@ -171,13 +253,13 @@ const SeoMeta = ({
       {/* og-image */}
       <meta
         property="og:image"
-        content={`${base_url}${image ? image : meta_image}`}
+        content={image ? (image.startsWith("http") ? image : `${base_url}${image}`) : `${base_url}${meta_image}`}
       />
 
       {/* twitter-image */}
       <meta
         name="twitter:image"
-        content={`${base_url}${image ? image : meta_image}`}
+        content={image ? (image.startsWith("http") ? image : `${base_url}${image}`) : `${base_url}${meta_image}`}
       />
       <meta name="twitter:card" content="summary_large_image" />
 
@@ -204,6 +286,18 @@ const SeoMeta = ({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+        />
+      )}
+      {blogPostingSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
+        />
+      )}
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       )}
     </>
