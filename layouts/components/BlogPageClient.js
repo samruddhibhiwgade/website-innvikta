@@ -8,6 +8,24 @@ import readingTime from "@lib/utils/readingTime";
 import { FiSearch, FiArrowRight, FiClock, FiCalendar, FiEye, FiShield, FiLock, FiTerminal, FiGlobe, FiCpu, FiAlertTriangle } from "react-icons/fi";
 import { FaTwitter, FaLinkedin, FaFacebookF, FaLink, FaEnvelope } from "react-icons/fa";
 
+const stripMarkdown = (content) => {
+  if (!content) return "";
+  return content
+    // Normalize headings without space first so we can parse/strip them
+    .replace(/^(#{1,6})([^\s#].*)$/gm, "$1 $2")
+    // Remove HTML/JSX tags like <BookDemo /> or <Notice>...</Notice>
+    .replace(/<[^>]*>/g, "")
+    // Remove markdown headers: e.g. ## heading
+    .replace(/^#+\s*(.*)$/gm, "$1")
+    // Remove markdown links: [text](url) -> text
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    // Remove bold/italic/code-block/inline-code markup
+    .replace(/[\*_~`]/g, "")
+    // Normalize white spaces
+    .replace(/\s+/g, " ")
+    .trim();
+};
+
 const BlogPageClient = ({ initialPosts, title }) => {
   const [activeCategory, setActiveCategory] = useState("All Articles");
   const [searchQuery, setSearchQuery] = useState("");
@@ -158,11 +176,11 @@ const BlogPageClient = ({ initialPosts, title }) => {
               </span>
             ))}
           </div>
-          <h3 className="text-lg font-black text-slate-800 leading-snug">
+          <h3 className="text-lg font-black text-slate-800 leading-snug line-clamp-2 min-h-[52px]">
             <Link href={`/blog/${post.slug}`}>{post.frontmatter.title}</Link>
           </h3>
           <p className="text-xs text-slate-500 font-medium leading-relaxed line-clamp-3">
-            {post.content}
+            {stripMarkdown(post.content).slice(0, 140)}...
           </p>
         </div>
 
@@ -354,7 +372,7 @@ const BlogPageClient = ({ initialPosts, title }) => {
                       </h3>
 
                       <p className="text-sm text-slate-500 font-medium leading-relaxed line-clamp-3">
-                        {featuredPost.content}
+                        {stripMarkdown(featuredPost.content).slice(0, 240)}...
                       </p>
                     </div>
 
