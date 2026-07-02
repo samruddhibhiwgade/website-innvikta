@@ -156,15 +156,7 @@ const PostSingle = ({ frontmatter, content, recentPosts, slug }) => {
                 <div className="sticky top-36 self-start flex flex-col gap-10">
                   <TableOfContents content={parsedContent} />
                   
-                  {/* Reading statistics card */}
-                  <div className="border-t border-slate-100 pt-6">
-                    <h4 className="text-xs font-black uppercase tracking-wider text-slate-400 mb-2">Metrics</h4>
-                    <p className="text-xs font-bold text-slate-600 flex items-center gap-1.5">
-                      <span>🕒 {readingTime(parsedContent)}</span>
-                      <span>•</span>
-                      <span>📖 {wordCount} words</span>
-                    </p>
-                  </div>
+
 
                   <div className="border-t border-slate-100 pt-6 flex flex-col gap-4">
                     <h4 className="text-xs font-black uppercase tracking-wider text-slate-400">Share Article</h4>
@@ -256,62 +248,12 @@ const PostSingle = ({ frontmatter, content, recentPosts, slug }) => {
                   ) : <div />}
                 </nav>
 
-                {/* Author Information Box */}
-                <footer className="author-box border border-slate-100 bg-slate-50/50 rounded-3xl p-6 md:p-8 mt-10 mb-10 flex flex-col sm:flex-row items-center sm:items-start gap-5">
-                  <div className="overflow-hidden rounded-full border-2 border-white shadow-md shrink-0 w-[80px] h-[80px]">
-                    <ImageFallback
-                      src={authorData.avatar}
-                      width={80}
-                      height={80}
-                      alt={authorData.name}
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="flex-1 text-center sm:text-left">
-                    <h4 className="text-lg font-black text-slate-900 mb-2">Written By {authorData.name}</h4>
-                    <p className="text-xs text-slate-500 leading-relaxed font-medium mb-4">{authorData.bio}</p>
-                    <div className="flex items-center justify-center sm:justify-start gap-4">
-                      {authorData.twitter && (
-                        <a href={authorData.twitter} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors text-xs font-bold flex items-center gap-1">
-                          🐦 Twitter
-                        </a>
-                      )}
-                      {authorData.linkedin && (
-                        <a href={authorData.linkedin} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-[#0a66c2] transition-colors text-xs font-bold flex items-center gap-1">
-                          💼 LinkedIn
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </footer>
+
               </div>
             </div>
           </article>
 
-          {/* Related Products / Solutions / Free Tools Links */}
-          <div className="border-t border-slate-100 pt-12 mt-12 text-left">
-            <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest mb-6">Recommended Products & Tools</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-slate-50/50 border border-slate-100 rounded-2xl p-5 hover:border-primary/20 transition-all">
-                <span className="text-2xl mb-3 block">🛡️</span>
-                <h4 className="text-sm font-bold text-slate-900 mb-2">Phishing Simulation</h4>
-                <p className="text-xs text-slate-500 mb-4 font-medium">Deliver realistic phishing attacks and simulations to measure user risks.</p>
-                <Link href="/solutions/phishing-simulation" className="text-xs font-black text-primary hover:underline">Explore Solution →</Link>
-              </div>
-              <div className="bg-slate-50/50 border border-slate-100 rounded-2xl p-5 hover:border-primary/20 transition-all">
-                <span className="text-2xl mb-3 block">🎮</span>
-                <h4 className="text-sm font-bold text-slate-900 mb-2">Innvikta Arcade</h4>
-                <p className="text-xs text-slate-500 mb-4 font-medium">Interactive games to build cybersecurity awareness with positive retention.</p>
-                <Link href="/cyber-arcade" className="text-xs font-black text-primary hover:underline">Explore Arcade →</Link>
-              </div>
-              <div className="bg-slate-50/50 border border-slate-100 rounded-2xl p-5 hover:border-primary/20 transition-all">
-                <span className="text-2xl mb-3 block">🔍</span>
-                <h4 className="text-sm font-bold text-slate-900 mb-2">Domain Analyzer</h4>
-                <p className="text-xs text-slate-500 mb-4 font-medium">Verify your email and domain status against public security spoof threats.</p>
-                <Link href="/freetools/domain-security-analyzer" className="text-xs font-black text-primary hover:underline">Use Free Tool →</Link>
-              </div>
-            </div>
-          </div>
+
 
           {/* Related Articles Footer list */}
           <div className="section mt-16 text-left">
