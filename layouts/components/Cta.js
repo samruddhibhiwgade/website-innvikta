@@ -6,7 +6,7 @@ import ImageFallback from "./ImageFallback";
 
 function Cta() {
   const { title, content, button, button_secondary, enable } = config.call_to_action;
-  if (!enable) return;
+  if (!enable) return null;
 
   return (
     <section className="cta section pt-0">

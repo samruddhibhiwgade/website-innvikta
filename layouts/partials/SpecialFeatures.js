@@ -62,7 +62,7 @@ const SpecialFeatures = ({ speciality }) => {
             </div>
 
             <div
-              className={`animate md:col-5 ${index % 2 !== 0 ? "order-1 md:order-2 pr-6 md:pr-12 lg:pr-24" : "pl-6 md:pl-12 lg:pl-24"
+              className={`animate md:col-5 px-6 ${index % 2 !== 0 ? "order-1 md:order-2 md:pl-0 md:pr-12 lg:pr-24" : "md:pr-0 md:pl-12 lg:pl-24"
                 }`}
             >
               {/* Main Heading */}
@@ -91,8 +91,8 @@ const SpecialFeatures = ({ speciality }) => {
               )}
             </div>
             <div
-              className={`animate ${index % 2 === 0 ? "from-right" : "from-left order-2 md:order-1 pl-6 md:pl-12 lg:pl-24"
-                } md:col-6 mt-10 md:mt-0 ${index % 2 === 0 ? "pr-6 md:pr-12 lg:pr-24" : ""
+              className={`animate ${index % 2 === 0 ? "from-right" : "from-left order-2 md:order-1"
+                } md:col-6 mt-10 md:mt-0 px-6 ${index % 2 === 0 ? "md:pl-0 md:pr-12 lg:pr-24" : "md:pr-0 md:pl-12 lg:pl-24"
                 }`}
             >
               <ImageFallback

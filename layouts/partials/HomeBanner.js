@@ -198,6 +198,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
           className="circle left-[2.5%] top-[29%]"
           width={85}
           height={85}
+          fill={false}
         />
         <Circle
           className="circle bottom-[48%] left-[22%]"
