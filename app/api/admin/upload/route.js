@@ -1,8 +1,4 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-
-const UPLOAD_DIR = path.join(process.cwd(), "public/images/blog");
 
 export async function POST(request) {
   try {
@@ -13,23 +9,22 @@ export async function POST(request) {
       return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
     }
 
-    const buffer = Buffer.from(await file.arrayBuffer());
+    const backendUrl = process.env.NEXT_PUBLIC_PHP_BACKEND_URL || "https://innvikta.co.in/Innvikta-Website/Cyberhelp_Innvikta/server";
     
-    // Ensure upload directory exists
-    if (!fs.existsSync(UPLOAD_DIR)) {
-      fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+    const res = await fetch(`${backendUrl}/upload_api.php`, {
+      method: "POST",
+      body: formData, // passing the FormData object directly works in Next.js fetch
+    });
+
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error(`PHP Error: ${res.status} - ${errText}`);
     }
 
-    // Clean file name
-    const filename = file.name.replace(/[^a-zA-Z0-9.]/g, "_");
-    const filePath = path.join(UPLOAD_DIR, filename);
-
-    fs.writeFileSync(filePath, buffer);
-
-    // Return the relative URL path accessible on the client
-    const fileUrl = `/images/blog/${filename}`;
-    return NextResponse.json({ success: true, url: fileUrl });
+    const responseData = await res.json();
+    return NextResponse.json(responseData);
   } catch (error) {
+    console.error("Upload error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
