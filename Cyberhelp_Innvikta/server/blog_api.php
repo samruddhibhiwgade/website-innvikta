@@ -46,7 +46,16 @@ if ($method === 'POST') {
     $title = $data['title'];
     $slug = strtolower(preg_replace('/[^a-z0-9]+/', '-', $title));
     $slug = trim($slug, '-');
-    $filename = !empty($data['filename']) ? $data['filename'] : ($slug . '.md');
+    
+    $new_filename = $slug . '.md';
+    $old_filename = !empty($data['filename']) ? $data['filename'] : '';
+
+    if ($old_filename && $old_filename !== $new_filename) {
+        $stmt = $db->prepare("UPDATE blogs SET filename = :new_filename WHERE filename = :old_filename");
+        $stmt->execute([':new_filename' => $new_filename, ':old_filename' => $old_filename]);
+    }
+
+    $filename = $new_filename;
 
     $categories = !empty($data['categories']) ? $data['categories'] : ['Security'];
     if (!is_array($categories)) {
