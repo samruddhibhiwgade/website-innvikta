@@ -22,6 +22,12 @@ export async function POST(request) {
     }
 
     const responseData = await res.json();
+    
+    // Prefix the relative path with the backend URL so it resolves correctly everywhere
+    if (responseData.success && responseData.url) {
+      responseData.url = `${backendUrl}${responseData.url}`;
+    }
+
     return NextResponse.json(responseData);
   } catch (error) {
     console.error("Upload error:", error);

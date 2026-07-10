@@ -34,10 +34,8 @@ if ($method === 'POST') {
     }
 
     if (move_uploaded_file($file['tmp_name'], $filePath)) {
-        // Return absolute URL
-        $serverUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
-        $scriptPath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
-        $fileUrl = $serverUrl . $scriptPath . '/uploads/blog/' . $filename;
+        // Return relative path. The Next.js API will prefix it with NEXT_PUBLIC_PHP_BACKEND_URL
+        $fileUrl = '/uploads/blog/' . $filename;
 
         jsonResponse(['success' => true, 'url' => $fileUrl]);
     } else {
