@@ -170,6 +170,21 @@ CREATE TABLE IF NOT EXISTS blogs (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ");
 
+$db->exec("
+CREATE TABLE IF NOT EXISTS user_events (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    session_id VARCHAR(100) NOT NULL,
+    event_type VARCHAR(50) NOT NULL,
+    page_url VARCHAR(300) NOT NULL,
+    target_element VARCHAR(255),
+    additional_data JSON,
+    ip_address VARCHAR(45),
+    user_agent TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+");
+
+
 echo "All tables created.\n\n";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -375,3 +390,4 @@ echo "  social_media_grievance - " . count($socialJson) . " records\n";
 echo "  national_contacts   - " . count($contactJson['national_portals'] ?? []) . " records\n";
 echo "  regional_contacts   - " . count($contactJson['pune_region'] ?? []) . " records\n";
 echo "  complaints          - (empty — filled by users)\n";
+echo "  user_events         - (empty — filled by trackers)\n";
