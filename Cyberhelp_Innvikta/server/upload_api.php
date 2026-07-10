@@ -34,16 +34,9 @@ if ($method === 'POST') {
     }
 
     if (move_uploaded_file($file['tmp_name'], $filePath)) {
-        // Return relative path from server document root (this relies on the Apache config)
-        // Usually Next.js expects an absolute or relative URL.
-        // Assuming the PHP server hosts this at https://innvikta.co.in/Innvikta-Website/Cyberhelp_Innvikta/server/
-        
-        // Let's return the absolute URL to ensure it works anywhere
-        // Or if NEXT_PUBLIC_PHP_BACKEND_URL is used in Next.js, we can just return a relative path.
-        // Let's just return the URL starting from the backend.
-        
-        $serverUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
-        $scriptPath = dirname($_SERVER['SCRIPT_NAME']); 
+        // Return absolute URL
+        $serverUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
+        $scriptPath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
         $fileUrl = $serverUrl . $scriptPath . '/uploads/blog/' . $filename;
 
         jsonResponse(['success' => true, 'url' => $fileUrl]);
