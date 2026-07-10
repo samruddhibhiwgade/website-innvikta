@@ -70,7 +70,7 @@ export default function TrackingAdminPanel() {
             </div>
             <div>
               <p className="text-sm text-slate-500 font-medium">Total Page Views</p>
-              <h3 className="text-2xl font-bold text-slate-900">{data?.stats?.total_events - data?.stats?.total_clicks}</h3>
+              <h3 className="text-2xl font-bold text-slate-900">{(data?.stats?.total_events || 0) - (data?.stats?.total_clicks || 0)}</h3>
             </div>
           </div>
           
@@ -141,7 +141,7 @@ export default function TrackingAdminPanel() {
                       </td>
                       <td className="px-4 py-3">
                         <div className="max-w-[200px] truncate" title={ev.event_type === 'click' ? ev.target_element : ev.page_url}>
-                          {ev.event_type === 'click' ? ev.target_element : ev.page_url.split('/').pop() || '/'}
+                          {ev.event_type === 'click' ? ev.target_element : (ev.page_url ? ev.page_url.split('/').pop() : '/')}
                         </div>
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-xs text-slate-400">
