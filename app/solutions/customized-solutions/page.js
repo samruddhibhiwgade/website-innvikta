@@ -72,7 +72,7 @@ const policyCards = [
   {
     title: "InfoSec Policies",
     desc: "Modules on password rules, access control, phishing reporting, and data handling.",
-    image: "/insat/images/phishing_simulation.png",
+    image: "/images/solutions/customised_Solutions/infosec_policy.png",
     icon: (active) => (
       <svg className={`w-6 h-6 transition-colors duration-300 ${active ? "text-white" : "text-current"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect className="lock-body" x="3" y="11" width="18" height="11" rx="2" ry="2" />
@@ -83,7 +83,7 @@ const policyCards = [
   {
     title: "Data Privacy",
     desc: "Modules on DPDP, GDPR, consent, personal data use, sharing limits, and breach escalation.",
-    image: "/insat/images/security_training.png",
+    image: "/images/solutions/customised_Solutions/dataprivacy_policy.png",
     icon: (active) => (
       <svg className={`w-6 h-6 transition-colors duration-300 ${active ? "text-white" : "text-current"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path className="privacy-shield" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -93,7 +93,7 @@ const policyCards = [
   {
     title: "Incident Reporting",
     desc: "Modules on decision-based situations and reporting channels.",
-    image: "/insat/images/microlearning.png",
+    image: "/images/solutions/customised_Solutions/customimage.png",
     icon: (active) => (
       <svg className={`w-6 h-6 transition-colors duration-300 ${active ? "text-white" : "text-current"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path className="alert-triangle" d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
@@ -105,7 +105,7 @@ const policyCards = [
   {
     title: "Device Usage",
     desc: "Modules on laptops, mobiles, USBs, public Wi-Fi, and remote work.",
-    image: "/insat/images/phishing_simulation_v2.png",
+    image: "/images/solutions/customised_Solutions/deviceusage_policy.png",
     icon: (active) => (
       <svg className={`w-6 h-6 transition-colors duration-300 ${active ? "text-white" : "text-current"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect className="device-screen" x="2" y="3" width="20" height="14" rx="2" ry="2" />
@@ -117,7 +117,7 @@ const policyCards = [
   {
     title: "HR Policies",
     desc: "Modules on confidentiality, employee data, POSH and workplace conduct.",
-    image: "/insat/images/security_training_v2.png",
+    image: "/images/solutions/customised_Solutions/Hr_policy.png",
     icon: (active) => (
       <svg className={`w-6 h-6 transition-colors duration-300 ${active ? "text-white" : "text-current"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path className="hr-user-right" d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -130,7 +130,7 @@ const policyCards = [
   {
     title: "Finance Approvals",
     desc: "Modules on fake vendors, payment fraud, invoice manipulation, and CEO fraud.",
-    image: "/insat/images/microlearning_v2.png",
+    image: "/images/solutions/customised_Solutions/Finance_policy.png",
     icon: (active) => (
       <svg className={`w-6 h-6 transition-colors duration-300 ${active ? "text-white" : "text-current"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <line className="finance-line" x1="12" y1="1" x2="12" y2="23" />
@@ -202,12 +202,12 @@ const CustomizedSolutionsPage = () => {
   const [activeFaq, setActiveFaq] = useState(null);
   const [activePolicy, setActivePolicy] = useState(0);
   const [displayImages, setDisplayImages] = useState({
-    current: "/insat/images/phishing_simulation.png",
+    current: "/images/solutions/customised_Solutions/infosec_policy.png",
     prev: null
   });
 
   useEffect(() => {
-    const nextImg = activePolicy !== null ? policyCards[activePolicy].image : "/insat/images/phishing_simulation.png";
+    const nextImg = activePolicy !== null ? policyCards[activePolicy].image : "/images/solutions/customised_Solutions/infosec_policy.png";
     if (nextImg !== displayImages.current) {
       setDisplayImages((prev) => ({
         prev: prev.current,
