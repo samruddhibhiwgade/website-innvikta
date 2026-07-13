@@ -835,7 +835,7 @@ const menuData = {
         headline: "Benchmark your workforce risk baseline and training maturity.",
         cells: [
           { name: "Maturity Calculator", desc: "Grade the effectiveness and maturity of your training program.", href: "/resources/maturity-calculator" },
-          { name: "Risk Estimator", desc: "Estimate employee click rates before starting simulations.", href: "#" },
+          { name: "Simulation ROI Tool", desc: "Estimate potential cost savings from threat training campaigns.", href: "/resources/simulation-roi" },
           { name: "Baseline Score Tool", desc: "Get a baseline human risk score for your active domain.", href: "/freetools/baseline-score-tool" },
           { name: "Culture Benchmarking", desc: "Measure security culture indicators and threat reports.", href: "/freetools/culture-benchmarking" }
         ],
@@ -856,7 +856,7 @@ const menuData = {
           { name: "Free Password Generator", desc: "Create secure passwords and check credential strength locally.", href: "/freetools/password-generator" },
           { name: "Domain Security Analyzer", desc: "Scan SPF, DKIM, and DMARC record vulnerabilities.", href: "/freetools/domain-security-analyzer" },
           { name: "Spot The Phish", desc: "Test your ability to detect phishing emails in an interactive simulator.", href: "/freetools/spot-the-phish" },
-          { name: "Simulation ROI Tool", desc: "Estimate potential cost savings from threat training campaigns.", href: "/resources/simulation-roi" }
+          { name: "Cybersecurity Word Search", desc: "Find hidden security terms and test your vocabulary in our puzzle.", href: "/free-tools/cybersecurity-word-search" }
         ],
         cta: {
           title: "Check password exposure logs",
@@ -1041,7 +1041,7 @@ const searchIndex = [
     description: "Verify baseline employee susceptibility in less than 5 minutes.",
     url: "/freetools/baseline-score-tool",
     category: "Free Tools",
-    keywords: ["baseline", "calculator", "risk estimator", "free tool"]
+    keywords: ["baseline", "calculator", "word search", "free tool"]
   },
   {
     title: "Free Security Culture Benchmarking",

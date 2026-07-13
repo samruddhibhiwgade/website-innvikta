@@ -12,12 +12,17 @@ const ImageFallback = (props) => {
   }, [src]);
 
   return (
-    <Image
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
       alt={alt || ""}
       {...rest}
       src={imgSrc}
       onError={() => {
-        setImgSrc(fallback);
+        const defaultFallback = "/images/logo.png";
+        const nextFallback = fallback || defaultFallback;
+        if (imgSrc !== nextFallback) {
+          setImgSrc(nextFallback);
+        }
       }}
     />
   );

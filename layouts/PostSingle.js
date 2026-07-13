@@ -130,13 +130,12 @@ const PostSingle = ({ frontmatter, content, recentPosts, slug }) => {
               <div className="lg:col-10">
                 {image && (
                   <figure className="relative w-full overflow-hidden rounded-2xl border border-slate-100">
-                    <Image
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
                       src={image}
-                      height="700"
-                      width="1120"
                       alt={imageAlt || title}
-                      priority={true}
                       className="fade w-full rounded-2xl object-cover"
+                      style={{ maxHeight: "700px", width: "100%" }}
                     />
                     {imageAlt && (
                       <figcaption className="block text-center text-xs text-slate-400 mt-3 italic">
@@ -154,6 +153,7 @@ const PostSingle = ({ frontmatter, content, recentPosts, slug }) => {
                 <div className="sticky top-36 self-start flex flex-col gap-10">
                   <TableOfContents content={parsedContent} />
                   
+
 
 
                   <div className="border-t border-slate-100 pt-6 flex flex-col gap-4">
@@ -211,23 +211,6 @@ const PostSingle = ({ frontmatter, content, recentPosts, slug }) => {
                 <section className="content text-left">
                   <MDXContent content={parsedContent} />
                 </section>
-
-                {/* Sources & References component */}
-                {defaultSources && defaultSources.length > 0 && (
-                  <section className="sources-section border-t border-slate-150 pt-8 mt-12">
-                    <h3 className="text-base font-black text-slate-900 uppercase tracking-widest mb-4">Sources & References</h3>
-                    <ul className="space-y-2 list-none p-0 m-0">
-                      {defaultSources.map((source, idx) => (
-                        <li key={idx} className="text-sm font-medium text-slate-500 flex items-start gap-2">
-                          <span className="text-primary mt-0.5">🔗</span>
-                          <a href={source.link} target="_blank" rel="noopener noreferrer" className="hover:text-primary underline text-slate-600 transition-colors">
-                            {source.name}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </section>
-                )}
 
                 {/* Previous / Next Navigation Row */}
                 <nav className="flex justify-between items-center border-t border-slate-100 py-8 my-8 gap-4" aria-label="Article navigation">

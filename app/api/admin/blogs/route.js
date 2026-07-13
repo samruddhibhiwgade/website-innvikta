@@ -37,6 +37,7 @@ export async function GET() {
 
 export async function POST(request) {
   try {
+    const data = await request.json();
     const { filename, title, content, categories, authorName, image, date, draft, metaDescription, disableAutoLinking } = data;
 
     if (!title || !content) {

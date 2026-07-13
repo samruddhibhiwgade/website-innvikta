@@ -322,8 +322,63 @@ export default function AdminBlogPanel() {
     const selectedText = originalText.substring(startPos, endPos) || placeholder;
 
     let replacement = "";
-    if (syntax === "bold") replacement = `**${selectedText}**`;
-    else if (syntax === "italic") replacement = `*${selectedText}*`;
+    if (syntax === "bold") {
+      if (selectedText.startsWith("**") && selectedText.endsWith("**") && selectedText.length >= 4) {
+        replacement = selectedText.slice(2, -2);
+      } else if (
+        startPos >= 2 &&
+        endPos <= originalText.length - 2 &&
+        originalText.substring(startPos - 2, startPos) === "**" &&
+        originalText.substring(endPos, endPos + 2) === "**"
+      ) {
+        const newStartPos = startPos - 2;
+        const newEndPos = endPos + 2;
+        const cleanText = originalText.substring(startPos, endPos);
+        const newText = originalText.substring(0, newStartPos) + cleanText + originalText.substring(newEndPos);
+        setFormData((prev) => ({ ...prev, content: newText }));
+        setTimeout(() => {
+          textarea.focus();
+          textarea.setSelectionRange(newStartPos, newStartPos + cleanText.length);
+        }, 50);
+        return;
+      } else {
+        replacement = `**${selectedText}**`;
+      }
+    }
+    else if (syntax === "italic") {
+      const isItalicWrapped = (text) => {
+        if (text.startsWith("*") && text.endsWith("*") && text.length >= 2) {
+          if (text.startsWith("**") && text.endsWith("**")) {
+            return text.startsWith("***") && text.endsWith("***") && text.length >= 6;
+          }
+          return true;
+        }
+        return false;
+      };
+      if (isItalicWrapped(selectedText)) {
+        replacement = selectedText.slice(1, -1);
+      } else if (
+        startPos >= 1 &&
+        endPos <= originalText.length - 1 &&
+        originalText.charAt(startPos - 1) === "*" &&
+        originalText.charAt(endPos) === "*" &&
+        originalText.charAt(startPos - 2) !== "*" &&
+        originalText.charAt(endPos + 1) !== "*"
+      ) {
+        const newStartPos = startPos - 1;
+        const newEndPos = endPos + 1;
+        const cleanText = originalText.substring(startPos, endPos);
+        const newText = originalText.substring(0, newStartPos) + cleanText + originalText.substring(newEndPos);
+        setFormData((prev) => ({ ...prev, content: newText }));
+        setTimeout(() => {
+          textarea.focus();
+          textarea.setSelectionRange(newStartPos, newStartPos + cleanText.length);
+        }, 50);
+        return;
+      } else {
+        replacement = `*${selectedText}*`;
+      }
+    }
     else if (syntax === "h1") replacement = `\n# ${selectedText}\n`;
     else if (syntax === "h2") replacement = `\n## ${selectedText}\n`;
     else if (syntax === "h3") replacement = `\n### ${selectedText}\n`;
@@ -1442,6 +1497,7 @@ export default function AdminBlogPanel() {
                     {formData.image && (
                       <div className="w-full h-64 md:h-80 rounded-2xl overflow-hidden shadow-sm relative">
                         <img 
+                          key={formData.image}
                           src={formData.image} 
                           alt="Cover Preview" 
                           className="w-full h-full object-cover" 
@@ -1591,22 +1647,33 @@ export default function AdminBlogPanel() {
                       <input
                         type="text"
                         name="image"
-                        value={formData.image}
+                        value={formData.image && formData.image.startsWith("data:") ? "Uploaded Image (Base64 Data)" : formData.image}
                         onChange={handleInputChange}
+                        readOnly={formData.image && formData.image.startsWith("data:")}
                         placeholder="/images/blog/01.jpg"
                         className="flex-1 px-3 py-2 bg-slate-50 border border-slate-100 rounded-xl text-slate-700 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
                       />
-                      <label className="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1.5 cursor-pointer transition-colors shadow-sm shrink-0 border border-slate-200">
-                        <FiUploadCloud />
-                        <span>Upload</span>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={handleCoverImageUpload}
-                          className="hidden"
-                          disabled={isUploadingCover}
-                        />
-                      </label>
+                      {formData.image ? (
+                        <button
+                          type="button"
+                          onClick={() => setFormData(prev => ({ ...prev, image: "" }))}
+                          className="bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1.5 cursor-pointer transition-colors shadow-sm shrink-0 border border-rose-200"
+                        >
+                          Clear
+                        </button>
+                      ) : (
+                        <label className="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1.5 cursor-pointer transition-colors shadow-sm shrink-0 border border-slate-200">
+                          <FiUploadCloud />
+                          <span>Upload</span>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleCoverImageUpload}
+                            className="hidden"
+                            disabled={isUploadingCover}
+                          />
+                        </label>
+                      )}
                     </div>
                     {isUploadingCover && (
                       <span className="text-[10px] text-[#f15a24] font-semibold animate-pulse block mt-1">Uploading cover image...</span>

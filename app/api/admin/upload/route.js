@@ -15,20 +15,31 @@ export async function POST(request) {
 
     const buffer = Buffer.from(await file.arrayBuffer());
     
-    // Ensure upload directory exists
-    if (!fs.existsSync(UPLOAD_DIR)) {
-      fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+    try {
+      // Ensure upload directory exists
+      if (!fs.existsSync(UPLOAD_DIR)) {
+        fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+      }
+
+      // Clean file name
+      const filename = file.name.replace(/[^a-zA-Z0-9.]/g, "_");
+      const filePath = path.join(UPLOAD_DIR, filename);
+
+      fs.writeFileSync(filePath, buffer);
+
+      // Return the relative URL path accessible on the client
+      const fileUrl = `/images/blog/${filename}`;
+      return NextResponse.json({ success: true, url: fileUrl });
+    } catch (writeError) {
+      console.warn("Local filesystem write failed, falling back to base64 encoding:", writeError);
+      
+      // Fallback: Convert to base64 Data URL
+      const base64Data = buffer.toString("base64");
+      const mimeType = file.type || "image/png";
+      const fileUrl = `data:${mimeType};base64,${base64Data}`;
+      
+      return NextResponse.json({ success: true, url: fileUrl, fallback: true });
     }
-
-    // Clean file name
-    const filename = file.name.replace(/[^a-zA-Z0-9.]/g, "_");
-    const filePath = path.join(UPLOAD_DIR, filename);
-
-    fs.writeFileSync(filePath, buffer);
-
-    // Return the relative URL path accessible on the client
-    const fileUrl = `/images/blog/${filename}`;
-    return NextResponse.json({ success: true, url: fileUrl });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

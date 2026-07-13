@@ -537,9 +537,9 @@ const InsatPage = () => {
                             <span>View Reporting Features</span>
                         </a>
                     </div>
-                    <div className="two-col-visual-block aspect-628-517 bg-midnight animate from-left">
+                    <div className="two-col-visual-block aspect-628-517 bg-white animate from-left">
                         <img alt="Monitor training and assessments" loading="lazy"
-                            src="/insat/images/Monitor-Paymentsmidnight.jpg" />
+                            src="/insat/images/humanriskevidence (2).png" style={{ objectFit: "contain" }} />
                     </div>
                 </div>
 
@@ -595,7 +595,7 @@ const InsatPage = () => {
                         </a>
                     </div>
                     <div className="two-col-visual-block aspect-628-517 bg-midnight animate from-left">
-                        <img alt="Continuous reinforcement" loading="lazy" src="/insat/images/Risk-Scoring-1.jpg" />
+                        <img alt="Continuous reinforcement" loading="lazy" src="/insat/images/continious_reinforcement.png" />
                     </div>
                 </div>
             </div>
@@ -719,101 +719,78 @@ const InsatPage = () => {
         </section>
 
         
-        <section className="bg-white">
+        <section className="bg-white" style={{paddingTop: "0"}}>
             <div className="container">
-                <div className="section-intro animate" style={{maxWidth: "740px"}}>
-                    <h2 className="text-52-heading">Training That Matches Real Employee Risk</h2>
-                    <p className="text-20-content opacity-70" style={{marginTop: "1rem"}}>
-                        Different departments face different threats. InSAT delivers relevant learning based on role,
-                        department, and risk behaviour.
+                <div className="section-intro" style={{maxWidth: "800px", marginBottom: "4rem"}}>
+                    <span className="text-subheading" style={{color: "var(--color-night)", opacity: "0.5", display: "block", marginBottom: "0.5rem"}}>Role-Based Learning</span>
+                    <h2 className="text-52-heading">Training That Matches the Employee’s Real Work</h2>
+                    <p className="text-20-content opacity-70" style={{marginTop: "1.5rem"}}>
+                        Different roles face different risks. InSAT helps assign relevant learning paths based on department, role, or risk profile.
                     </p>
                 </div>
 
-                
-                <div className="grid-sticky-layout">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     
-                    <div className="sticky-col animate from-left">
-                        <div className="sticky-inner-box">
-                            <div className="sticky-text-wrapper">
-                                <span className="text-subheading"
-                                    style={{color: "var(--color-night)", opacity: "0.5"}}>Departmental Threat Training</span>
-                                <h3 className="text-40-heading" style={{marginTop: "1rem"}}>Customized paths that target the
-                                    specific threats each team encounters daily</h3>
-                                <a className="arrow-link" href="/solutions/insat">
-                                    <div className="arrow-circle">
-                                        <span className="arrow-circle-bg"></span>
-                                        <svg width="6" height="8" viewBox="0 0 6 8" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path fill="currentColor"
-                                                d="M3.86426 4.00028L0.818237 0.954267L1.68853 0.0839844L5.60481 4.00028L1.68853 7.91652L0.818237 7.04625L3.86426 4.00028Z" />
-                                        </svg>
-                                    </div>
-                                    <span>Learn more</span>
-                                </a>
+                    <div className="side-card" style={{display: "flex", flexDirection: "column", height: "100%"}}>
+                        <div className="side-card-text-wrapper" style={{flex: "1"}}>
+                            <div className="side-card-title-row">
+                                <span className="side-card-title">Finance</span>
                             </div>
-                            <div className="sticky-visual">
-                                <img alt="Departmental threats dashboard mockup" loading="lazy"
-                                    src="/insat/images/api-new-static.jpg" />
-                            </div>
+                            <p className="side-card-desc">
+                                Invoice fraud, payment manipulation, fake vendor requests, and CEO fraud.
+                            </p>
+                        </div>
+                        <div className="side-card-visual bg-plum">
+                            <img alt="Finance risks illustration" loading="lazy"
+                                src="/insat/images/Protection-1.jpg" />
                         </div>
                     </div>
 
                     
-                    <div className="side-grid-col animate from-right">
-                        
-                        <div className="side-card">
-                            <div className="side-card-text-wrapper">
-                                <div className="side-card-title-row">
-                                    <a className="arrow-link" href="/solutions/insat" style={{marginTop: "0"}}>
-                                        <div className="arrow-circle">
-                                            <span className="arrow-circle-bg"></span>
-                                            <svg width="6" height="8" viewBox="0 0 6 8" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path fill="currentColor"
-                                                    d="M3.86426 4.00028L0.818237 0.954267L1.68853 0.0839844L5.60481 4.00028L1.68853 7.91652L0.818237 7.04625L3.86426 4.00028Z" />
-                                            </svg>
-                                        </div>
-                                        <span className="side-card-title">Finance & HR Risks</span>
-                                    </a>
-                                </div>
-                                <p className="side-card-desc">
-                                    <strong>Finance:</strong> Invoice fraud, fake vendor requests, CEO fraud.
-                                    <br /><strong>HR:</strong> Resume malware, employee data handling risks, and fake
-                                    documents.
-                                </p>
+                    <div className="side-card" style={{display: "flex", flexDirection: "column", height: "100%"}}>
+                        <div className="side-card-text-wrapper" style={{flex: "1"}}>
+                            <div className="side-card-title-row">
+                                <span className="side-card-title">HR</span>
                             </div>
-                            <div className="side-card-visual bg-plum">
-                                <img alt="Finance & HR risks illustration" loading="lazy"
-                                    src="/insat/images/Protection-1.jpg" />
-                            </div>
+                            <p className="side-card-desc">
+                                Resume malware, employee data handling, fake documents, and social engineering.
+                            </p>
                         </div>
+                        <div className="side-card-visual bg-plum">
+                            <img alt="HR risks illustration" loading="lazy"
+                                src="/insat/images/Transfers.jpg" />
+                        </div>
+                    </div>
 
-                        
-                        <div className="side-card">
-                            <div className="side-card-text-wrapper">
-                                <div className="side-card-title-row">
-                                    <a className="arrow-link" href="/solutions/insat" style={{marginTop: "0"}}>
-                                        <div className="arrow-circle">
-                                            <span className="arrow-circle-bg"></span>
-                                            <svg width="6" height="8" viewBox="0 0 6 8" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path fill="currentColor"
-                                                    d="M3.86426 4.00028L0.818237 0.954267L1.68853 0.0839844L5.60481 4.00028L1.68853 7.91652L0.818237 7.04625L3.86426 4.00028Z" />
-                                            </svg>
-                                        </div>
-                                        <span className="side-card-title">Sales & IT Risks</span>
-                                    </a>
-                                </div>
-                                <p className="side-card-desc">
-                                    <strong>Sales:</strong> Public Wi-Fi risks, impersonation attacks, CRM exposure.
-                                    <br /><strong>IT:</strong> Privileged access risks, malware response, and cloud
-                                    security awareness.
-                                </p>
+                    
+                    <div className="side-card" style={{display: "flex", flexDirection: "column", height: "100%"}}>
+                        <div className="side-card-text-wrapper" style={{flex: "1"}}>
+                            <div className="side-card-title-row">
+                                <span className="side-card-title">Sales</span>
                             </div>
-                            <div className="side-card-visual bg-plum">
-                                <img alt="Sales & IT risks illustration" loading="lazy"
-                                    src="/insat/images/Risk-Scoring-1.jpg" />
+                            <p className="side-card-desc">
+                                Client data protection, public Wi-Fi risks, CRM access, and impersonation attempts.
+                            </p>
+                        </div>
+                        <div className="side-card-visual bg-plum">
+                            <img alt="Sales risks illustration" loading="lazy"
+                                src="/insat/images/Monitor-Paymentsmidnight.jpg" />
+                        </div>
+                    </div>
+
+                    
+                    <div className="side-card" style={{display: "flex", flexDirection: "column", height: "100%"}}>
+                        <div className="side-card-text-wrapper" style={{flex: "1"}}>
+                            <div className="side-card-title-row">
+                                <span className="side-card-title">IT</span>
                             </div>
+                            <p className="side-card-desc">
+                                Privileged access, malware response, cloud risks, and incident reporting.
+                            </p>
+                        </div>
+                        <div className="side-card-visual bg-plum">
+                            <img alt="IT risks illustration" loading="lazy"
+                                src="/insat/images/Risk-Scoring-1.jpg" />
                         </div>
                     </div>
                 </div>
