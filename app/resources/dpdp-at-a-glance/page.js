@@ -786,7 +786,7 @@ export default function DpdpAtAGlancePage() {
                 
                 <div className={`faq-item ${activeFaq === 0 ? 'active' : ''}`}>
                   <button type="button" className="faq-trigger" aria-expanded={activeFaq === 0} onClick={() => setActiveFaq(activeFaq === 0 ? null : 0)}>
-                    <span className="faq-question">How does Innvikta's DPDP awareness training help Indian organisations comply with the DPDP Act 2023?</span>
+                    <span className="faq-question">How does Innvikta&apos;s DPDP awareness training help Indian organisations comply with the DPDP Act 2023?</span>
                     <div className="faq-icon-wrapper">
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14.1659 8.16671H1.83594V7.83337H14.1659V8.16671Z" stroke="var(--color-grey-30)" />
@@ -816,7 +816,7 @@ export default function DpdpAtAGlancePage() {
                   <div className="faq-panel">
                     <div className="faq-panel-inner">
                       <div className="faq-answer">
-                        <p>Innvikta offers specialised modules designed for various departments—including HR, Customer Support, IT, and Finance. Each module translates complex DPDP rules (like consent notices, data principal rights, and secure processing) into everyday practical scenarios relevant to the employee's role.</p>
+                        <p>Innvikta offers specialised modules designed for various departments—including HR, Customer Support, IT, and Finance. Each module translates complex DPDP rules (like consent notices, data principal rights, and secure processing) into everyday practical scenarios relevant to the employee&apos;s role.</p>
                       </div>
                     </div>
                   </div>
@@ -835,7 +835,7 @@ export default function DpdpAtAGlancePage() {
                   <div className="faq-panel">
                     <div className="faq-panel-inner">
                       <div className="faq-answer">
-                        <p>Yes. Innvikta’s compliance dashboard generates audit-ready reports tracking employee participation, assessment scores, and completion rates. This provides concrete evidence of "reasonable security safeguards" to protect personal data as mandated under Section 8 of the DPDP Act.</p>
+                        <p>Yes. Innvikta&apos;s compliance dashboard generates audit-ready reports tracking employee participation, assessment scores, and completion rates. This provides concrete evidence of &quot;reasonable security safeguards&quot; to protect personal data as mandated under Section 8 of the DPDP Act.</p>
                       </div>
                     </div>
                   </div>
@@ -854,7 +854,7 @@ export default function DpdpAtAGlancePage() {
                   <div className="faq-panel">
                     <div className="faq-panel-inner">
                       <div className="faq-answer">
-                        <p>Organisations can deploy Innvikta's automated training platform to launch simulated phishing scenarios and interactive compliance modules across their entire workforce. With automatic reminders and custom risk scoring, you can build a strong privacy-first culture in days.</p>
+                        <p>Organisations can deploy Innvikta&apos;s automated training platform to launch simulated phishing scenarios and interactive compliance modules across their entire workforce. With automatic reminders and custom risk scoring, you can build a strong privacy-first culture in days.</p>
                       </div>
                     </div>
                   </div>

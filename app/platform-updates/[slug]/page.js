@@ -54,7 +54,7 @@ export default function PlatformUpdateDetailPage() {
             3. Dynamic Regional Compliance Mappings
           </h3>
           <p>
-            Compliance shouldn't be a headache. The new compliance dashboard enables security managers to instantly map active employee training completions to specific compliance frameworks, including the Digital Personal Data Protection (DPDP) Act of India, GDPR, HIPAA, and SOC 2 audits.
+            Compliance shouldn&apos;t be a headache. The new compliance dashboard enables security managers to instantly map active employee training completions to specific compliance frameworks, including the Digital Personal Data Protection (DPDP) Act of India, GDPR, HIPAA, and SOC 2 audits.
           </p>
 
           <div className="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200 mt-6">
@@ -83,7 +83,7 @@ export default function PlatformUpdateDetailPage() {
       content: (
         <div className="space-y-6 text-slate-700 leading-relaxed">
           <p className="text-lg text-slate-800 font-medium">
-            Gamification is no longer a buzzword; it is a proven strategy for building a resilient security culture. The Innvikta Arcade introduces immersive gamified challenges that test employees' defense reflexes in real-time.
+            Gamification is no longer a buzzword; it is a proven strategy for building a resilient security culture. The Innvikta Arcade introduces immersive gamified challenges that test employees&apos; defense reflexes in real-time.
           </p>
 
           <h3 className="text-2xl font-bold text-slate-900 border-l-4 border-[#f15a24] pl-3 mt-8">
@@ -132,7 +132,7 @@ export default function PlatformUpdateDetailPage() {
             Intent-Based Template Generation
           </h3>
           <p>
-            Our engine analyzes active threat patterns globally and automatically crafts email lures that reflect actual real-time threat campaigns. Whether it's a fake tax refund, an urgent corporate policy change, or a software update prompt, the lures are dynamically tailored.
+            Our engine analyzes active threat patterns globally and automatically crafts email lures that reflect actual real-time threat campaigns. Whether it&apos;s a fake tax refund, an urgent corporate policy change, or a software update prompt, the lures are dynamically tailored.
           </p>
 
           <h3 className="text-2xl font-bold text-[#f15a24] mt-8">
@@ -172,7 +172,7 @@ export default function PlatformUpdateDetailPage() {
       content: (
         <div className="space-y-6 text-slate-700 leading-relaxed">
           <p className="text-lg text-slate-800 font-medium">
-            With the rapid implementation of regional data protection laws like India's DPDP Act, compliance tracking has become a critical operational requirement for enterprises.
+            With the rapid implementation of regional data protection laws like India&apos;s DPDP Act, compliance tracking has become a critical operational requirement for enterprises.
           </p>
 
           <h3 className="text-2xl font-bold text-slate-900 border-l-4 border-[#f15a24] pl-3 mt-8">
