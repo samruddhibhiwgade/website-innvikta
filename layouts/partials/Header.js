@@ -813,6 +813,7 @@ const menuData = {
           { name: "Maturity Benchmarks", desc: "Compare regional click rates and reporting rates against industry peers.", href: "/maturity-benchmarks" },
           { name: "Case Studies", desc: "Success stories from real enterprise security leadership teams.", href: "/resources/case-studies" },
           { name: "Platform Updates", desc: "See the latest features added to the Innvikta training suite.", href: "/platform-updates" },
+          { name: "DPDP at a Glance", desc: "A quick summary of India's Digital Personal Data Protection Act compliance requirements.", href: "/resources/dpdp-at-a-glance" },
           { name: "Weekly Newsletter", desc: "Security tips and campaign ideas delivered directly to your inbox.", href: "#" }
         ],
         cta: {
@@ -1077,6 +1078,13 @@ const searchIndex = [
     url: "/resources/glossary",
     category: "Resources",
     keywords: ["glossary", "dictionary", "terms", "definitions", "cybersecurity", "phishing", "bec"]
+  },
+  {
+    title: "DPDP at a Glance",
+    description: "India's Digital Personal Data Protection Act, 2023 and DPDP Rules, 2025 in a quick summary.",
+    url: "/resources/dpdp-at-a-glance",
+    category: "Resources",
+    keywords: ["dpdp", "privacy", "act", "india", "personal data", "compliance", "law", "fiduciary"]
   }
 ];
 
@@ -1495,7 +1503,7 @@ const Header = () => {
             </div>
 
             {/* Main Navigation Items */}
-            <ul className="hidden lg:flex items-center justify-center lg:gap-3 xl:gap-6 lg:absolute lg:left-1/2 lg:-translate-x-1/2 h-full desktop-nav-menu">
+            <ul className="hidden xl:flex items-center justify-center gap-x-2 xl:gap-x-4 h-full desktop-nav-menu mx-auto">
               {Object.keys(menuData).map((menuKey) => (
                 <li
                   key={menuKey}
@@ -1516,7 +1524,7 @@ const Header = () => {
             </ul>
 
             {/* Sticky Conversion Area */}
-            <div className="hidden lg:flex items-center ml-auto relative">
+            <div className="hidden xl:flex items-center ml-auto relative">
               {/* Partner CTA */}
               <div className={`transition-all duration-300 flex items-center h-full ${pathname === "/partners" ? "opacity-100 pointer-events-auto translate-x-0" : "opacity-0 pointer-events-none translate-x-4 absolute right-0"}`}>
                 <Link 
@@ -1545,7 +1553,7 @@ const Header = () => {
             </div>
 
             {/* Mobile Navigation Toggle Button */}
-            <div className="flex items-center lg:hidden" style={{ zIndex: 100001 }}>
+            <div className="flex items-center xl:hidden" style={{ zIndex: 100001 }}>
               <button
                 onClick={() => setShowMenu(!showMenu)}
                 className="p-2 text-slate-800 hover:text-[#f15a24] text-2xl transition-colors duration-200"
@@ -1831,7 +1839,7 @@ const Header = () => {
         {/* =========================================================
             MOBILE ACCORDION-BASED MENU (Preserves Information Hierarchy)
             ========================================================= */}
-        <div className={`fixed inset-x-0 top-0 h-screen bg-white z-30 px-6 pt-24 pb-28 overflow-y-auto transition-all duration-500 lg:hidden flex flex-col justify-between ${
+        <div className={`fixed inset-x-0 top-0 h-screen bg-white z-30 px-6 pt-24 pb-28 overflow-y-auto transition-all duration-500 xl:hidden flex flex-col justify-between ${
           showMenu ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"
         }`}>
           <div className="space-y-3">

@@ -8,6 +8,7 @@ import GSAPWrapper from "@layouts/components/GSAPWrapper";
 export default function PlatformUpdatesPage() {
   const updatesList = [
     {
+      slug: "innvikta-arcade-interactive-gamified-training-challenges",
       category: "INNVIKTA ARCADE",
       date: "May 12, 2026",
       title: "Innvikta Arcade: Interactive Gamified Training Challenges",
@@ -16,6 +17,7 @@ export default function PlatformUpdatesPage() {
       graphicText: "INNVIKTA ARCADE"
     },
     {
+      slug: "advanced-intent-based-phishing-simulations",
       category: "SIMULATIONS",
       date: "April 08, 2026",
       title: "Advanced Intent-Based Phishing Simulations",
@@ -24,6 +26,7 @@ export default function PlatformUpdatesPage() {
       graphicText: "PHISHING SIMULATION"
     },
     {
+      slug: "regional-data-privacy-compliance-mappings",
       category: "COMPLIANCE",
       date: "March 15, 2026",
       title: "Regional Data Privacy & Compliance Mappings",
@@ -92,7 +95,7 @@ export default function PlatformUpdatesPage() {
               {/* CTA */}
               <div className="pt-2">
                 <Link 
-                  href="#"
+                  href="/platform-updates/product-updates-q2-2026-review"
                   className="text-xs font-extrabold uppercase tracking-wider text-slate-900 hover:text-[#f15a24] transition-colors border-b-2 border-slate-900 hover:border-[#f15a24] pb-0.5 font-sans"
                 >
                   Read article
@@ -121,9 +124,12 @@ export default function PlatformUpdatesPage() {
               </div>
 
               <div className="relative z-10 flex justify-end">
-                <div className="w-12 h-12 rounded-full border-2 border-[#f15a24]/30 flex items-center justify-center text-[#f15a24] hover:bg-[#f15a24] hover:text-white transition-all duration-300">
+                <Link
+                  href="/platform-updates/product-updates-q2-2026-review"
+                  className="w-12 h-12 rounded-full border-2 border-[#f15a24]/30 flex items-center justify-center text-[#f15a24] hover:bg-[#f15a24] hover:text-white transition-all duration-300"
+                >
                   <FiArrowRight className="text-xl" />
-                </div>
+                </Link>
               </div>
             </div>
 
@@ -139,8 +145,9 @@ export default function PlatformUpdatesPage() {
                 className="grid grid-cols-1 md:grid-cols-12 gap-8 py-10 border-b border-slate-200/60 items-center"
               >
                 {/* Left image block */}
-                <div 
-                  className="md:col-span-5 aspect-[16/10] rounded-2xl overflow-hidden relative flex flex-col items-center justify-center text-center p-6 bg-cover bg-center"
+                <Link
+                  href={`/platform-updates/${update.slug}`}
+                  className="md:col-span-5 aspect-[16/10] rounded-2xl overflow-hidden relative flex flex-col items-center justify-center text-center p-6 bg-cover bg-center block"
                   style={{ backgroundImage: `url(${update.image})` }}
                 >
                   <div className="absolute inset-0 bg-black/55 backdrop-blur-[1px] transition-colors duration-300 hover:bg-black/45 pointer-events-none" />
@@ -148,7 +155,7 @@ export default function PlatformUpdatesPage() {
                   <h4 className="relative z-10 text-lg md:text-xl font-bold text-white tracking-wider max-w-[200px] leading-tight font-secondary">
                     {update.graphicText}
                   </h4>
-                </div>
+                </Link>
 
                 {/* Right content block */}
                 <div className="md:col-span-7 flex flex-col justify-center space-y-4">
@@ -159,7 +166,9 @@ export default function PlatformUpdatesPage() {
                       <span className="text-xs text-slate-400 font-bold uppercase tracking-wider font-sans">{update.date}</span>
                     </div>
                     <h3 className="text-xl md:text-2xl font-bold font-secondary text-slate-900 leading-snug">
-                      {update.title}
+                      <Link href={`/platform-updates/${update.slug}`} className="hover:text-[#f15a24] transition-colors">
+                        {update.title}
+                      </Link>
                     </h3>
                     <p className="text-slate-600 text-xs md:text-sm leading-relaxed font-sans">
                       {update.desc}
@@ -169,7 +178,7 @@ export default function PlatformUpdatesPage() {
                   {/* Action */}
                   <div className="pt-2">
                     <Link 
-                      href="#"
+                      href={`/platform-updates/${update.slug}`}
                       className="text-xs font-extrabold uppercase tracking-wider text-slate-900 hover:text-[#f15a24] transition-colors border-b-2 border-slate-900 hover:border-[#f15a24] pb-0.5 font-sans"
                     >
                       Read article
