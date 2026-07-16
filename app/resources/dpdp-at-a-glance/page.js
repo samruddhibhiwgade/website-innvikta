@@ -725,16 +725,16 @@ export default function DpdpAtAGlancePage() {
                 </div>
  
                 {/* Footer values list strip */}
-                <div className="cta-footer-strip" style={{ justifyContent: "center", display: "flex", gap: "2rem" }}>
+                <div className="cta-footer-strip" style={{ justifyContent: "center", display: "flex", gap: "2rem", flexWrap: "wrap", marginTop: "1.5rem" }}>
                   {[
                     "Raise awareness",
                     "Reduce human risk",
                     "Strengthen compliance",
                     "Build trust"
                   ].map((val, idx) => (
-                    <div key={idx} className="cta-footer-item">
-                      <CheckCircle2 size={15} className="text-[#f15a24]" />
-                      <span>{val}</span>
+                    <div key={idx} className="cta-footer-item" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+                      <CheckCircle2 size={16} className="text-[#f15a24] shrink-0" />
+                      <span style={{ margin: 0, padding: 0 }}>{val}</span>
                     </div>
                   ))}
                 </div>
