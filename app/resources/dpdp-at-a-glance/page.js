@@ -668,7 +668,7 @@ export default function DpdpAtAGlancePage() {
                     <div className="cta-visual-laptop w-full max-w-[320px] lg:max-w-[360px]">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img 
-                        src="/images/dpdp_images/dpdp_compliance.png" 
+                        src="/images/dpdp_compliance.png" 
                         alt="DPDP Compliance" 
                         className="w-full h-auto object-contain" 
                         style={{ maxHeight: "320px" }}
