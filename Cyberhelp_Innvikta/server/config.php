@@ -28,6 +28,10 @@ define('MAIL_FROM',       $envVars['MAIL_FROM'] ?? 'mahesh.hattimare@innvikta.co
 define('MAIL_FROM_NAME',  $envVars['MAIL_FROM_NAME'] ?? 'Cyberhelp Innvikta');
 define('MAIL_TO',         $envVars['MAIL_TO'] ?? 'samruddhi.bhiwgade@innvikta.com');
 
+// ── Platform Webhook Configuration ────────────────────────────────────────
+define('PLATFORM_SIGNUP_API_URL', $envVars['PLATFORM_SIGNUP_API_URL'] ?? null);
+define('PLATFORM_API_KEY',        $envVars['PLATFORM_API_KEY'] ?? 'inv_sf_prod_8g2A0jU5h');
+
 // Start output buffering immediately so stray PHP output never corrupts JSON
 if (!ob_get_level()) ob_start();
 ini_set('display_errors', 1);

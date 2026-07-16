@@ -83,17 +83,67 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         $mailSent = smtpSend(MAIL_TO, $subject, $email_content);
 
+        // Webhook integration for Start Free
+        $platform_response = null;
+        if ($form_type === 'Start Free') {
+            $platform_response = postToPlatform($data);
+        }
+
         echo json_encode([
             'success' => true, 
             'id' => $id, 
             'message' => 'Form submitted successfully',
-            'email_sent' => $mailSent
+            'email_sent' => $mailSent,
+            'platform_sync' => $platform_response
         ]);
     } catch (Exception $e) {
         http_response_code(500);
         echo json_encode(['success' => false, 'error' => $e->getMessage()]);
     }
     exit;
+}
+
+// Send user data directly to the InSAT Platform database
+function postToPlatform($data) {
+    $url = defined('PLATFORM_SIGNUP_API_URL') ? PLATFORM_SIGNUP_API_URL : null;
+    $apiKey = defined('PLATFORM_API_KEY') ? PLATFORM_API_KEY : null;
+    if (!$url) {
+        return ['success' => false, 'error' => 'Platform URL not configured'];
+    }
+
+    $payload = json_encode([
+        'name' => $data['name'] ?? '',
+        'email' => $data['email'] ?? '',
+        'phone' => $data['phone'] ?? '',
+        'company' => $data['company'] ?? '',
+        'designation' => $data['designation'] ?? '',
+        'team_size' => $data['team_size'] ?? ''
+    ]);
+
+    $options = [
+        'http' => [
+            'method'  => 'POST',
+            'header'  => "Content-Type: application/json\r\n" .
+                         "x-api-key: " . $apiKey . "\r\n",
+            'content' => $payload,
+            'ignore_errors' => true,
+            'timeout' => 15
+        ]
+    ];
+
+    $context  = stream_context_create($options);
+    $response = @file_get_contents($url, false, $context);
+    if ($response === false) {
+        $error = error_get_last();
+        return ['success' => false, 'error' => $error['message'] ?? 'Connection failed'];
+    }
+    
+    $resData = json_decode($response, true);
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        return ['success' => false, 'error' => 'Invalid JSON from platform: ' . substr($response, 0, 100)];
+    }
+    
+    return $resData;
 }
 
 // SMTP mailer function (copied from submit_complaint.php)
