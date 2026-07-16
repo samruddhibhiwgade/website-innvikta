@@ -1,5 +1,6 @@
 "use client";
 
+import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import "../../../styles/insat.scss";
@@ -242,6 +243,7 @@ const CustomizedSolutionsPage = () => {
 
   return (
     <GSAPWrapper>
+      <SeoMeta title="Customized Security Awareness Training | Innvikta" description="Build custom training modules, phishing scenarios, and behavioral journeys tailored to your policies, people, and risks." />
       <div className="insat-page" ref={heroRef}>
         <div className="main-content">
           
@@ -793,7 +795,13 @@ const CustomizedSolutionsPage = () => {
 
                 {/* Right Column: Image */}
                 <div className="two-col-visual-block aspect-628-517 bg-grey animate from-right" style={{ marginTop: "3rem" }}>
-                  <img alt="High-risk scenarios monitoring" loading="lazy" src="/insat/images/api-new-static.jpg" />
+                  <ImageFallback
+                    src="/images/solutions/customised_Solutions/Targeteduser.png"
+                    alt="High-risk scenarios monitoring"
+                    fill={true}
+                    className="object-cover"
+                    priority={true}
+                  />
                 </div>
 
               </div>

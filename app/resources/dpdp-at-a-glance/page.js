@@ -1,5 +1,6 @@
 "use client";
 
+import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import "../../../styles/insat.scss";
@@ -270,6 +271,7 @@ export default function DpdpAtAGlancePage() {
 
   return (
     <GSAPWrapper>
+      <SeoMeta title="DPDP Act at a Glance | Innvikta Compliance Resource" description="A comprehensive guide to India's Digital Personal Data Protection (DPDP) Act requirements, penalties, and employee training compliance." />
       <div className="insat-page" ref={heroRef}>
         <div className="main-content">
 
@@ -286,11 +288,12 @@ export default function DpdpAtAGlancePage() {
                    --color-grey-5: #FFF6E9;
                    --color-emerald: #f15a24;
                  }
-                 @media (min-width: 1024px) {
-                   .dpdp-hero-grid {
-                     grid-template-columns: 1.15fr 0.85fr !important;
-                   }
-                 }
+                  @media (min-width: 1024px) {
+                    .dpdp-hero-grid {
+                      grid-template-columns: 1.05fr 0.95fr !important;
+                      align-items: center !important;
+                    }
+                  }
                 .aspects-grid-bg {
                   background: transparent;
                   border-radius: 0px;
@@ -426,40 +429,16 @@ export default function DpdpAtAGlancePage() {
                   </div>
 
                   {/* Right Graphics/Illustration */}
-                  <div className="hero-image-right flex justify-center">
-                    <div className="relative w-80 h-80 flex items-center justify-center">
-                      <div className="absolute w-64 h-64 rounded-full border border-[#FFEAD4] bg-[#FFFBF7]/35 flex items-center justify-center">
-                        <div className="w-48 h-48 rounded-full border border-orange-100/60" />
-                      </div>
-                      <div className="absolute w-24 h-24 bg-white border border-[#FFEAD4] rounded-full flex items-center justify-center shadow-md z-10">
-                        <div className="w-18 h-18 bg-[#f15a24] rounded-full flex items-center justify-center text-white shadow-sm">
-                          <ShieldCheck size={36} />
-                        </div>
-                      </div>
-
-                      {[
-                        { icon: User, angle: 0 },
-                        { icon: Building2, angle: 72 },
-                        { icon: Cpu, angle: 144 },
-                        { icon: ClipboardCheck, angle: 216 },
-                        { icon: Users, angle: 288 }
-                      ].map((node, index) => {
-                        const radius = 105;
-                        const angleRad = (node.angle * Math.PI) / 180;
-                        const x = Math.cos(angleRad) * radius;
-                        const y = Math.sin(angleRad) * radius;
-
-                        return (
-                          <div
-                            key={index}
-                            style={{ transform: `translate(${x}px, ${y}px)` }}
-                            className="absolute w-10 h-10 bg-white border border-slate-100 rounded-full flex items-center justify-center text-[#f15a24] shadow-sm z-20"
-                          >
-                            <node.icon size={16} />
-                          </div>
-                        );
-                      })}
-                    </div>
+                  <div className="hero-image-right flex justify-center" style={{ overflow: "visible" }}>
+                    <ImageFallback
+                      src="/images/dpdp_hero.png"
+                      className="hero-sim-img"
+                      style={{ maxWidth: "100%", width: "100%", height: "auto", transform: "scale(1.15) translateX(55px)", transformOrigin: "center right" }}
+                      width={700}
+                      height={580}
+                      alt="DPDP At A Glance Hero"
+                      priority={true}
+                    />
                   </div>
                 </div>
               </div>

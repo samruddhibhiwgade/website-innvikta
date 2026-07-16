@@ -1,4 +1,5 @@
 "use client";
+import SeoMeta from "@layouts/partials/SeoMeta";
 
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
@@ -298,6 +299,7 @@ export default function SimulationRoiPage() {
 
   return (
     <>
+      <SeoMeta title="Phishing Simulation ROI Calculator | Innvikta" description="Calculate the return on investment of running phishing simulation and security training programs." />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

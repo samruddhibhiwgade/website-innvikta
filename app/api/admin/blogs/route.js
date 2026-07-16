@@ -38,24 +38,26 @@ export async function GET() {
 export async function POST(request) {
   try {
     const data = await request.json();
-    const { filename, title, content, categories, authorName, image, date, draft, metaDescription, disableAutoLinking } = data;
+    const { filename, title, content, categories, authorName, image, date, draft, metaDescription, disableAutoLinking, metaTitle, slug } = data;
 
     if (!title || !content) {
       return NextResponse.json({ error: "Title and content are required" }, { status: 400 });
     }
 
     // Format slug
-    const slug = title
+    const formattedSlug = (slug || title)
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "");
 
-    const fileToSave = filename || `${slug}.md`;
+    const fileToSave = filename || `${formattedSlug}.md`;
     const filePath = path.join(BLOG_DIR, fileToSave);
 
     // Frontmatter object
     const frontmatter = {
       title,
+      metaTitle: metaTitle || "",
+      slug: formattedSlug,
       image: image || "/images/blog/01.jpg",
       author: {
         name: authorName || "Admin",

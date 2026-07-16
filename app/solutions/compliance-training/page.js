@@ -1,5 +1,6 @@
 "use client";
 
+import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import "../../../styles/insat.scss";
@@ -184,6 +185,7 @@ const ComplianceTrainingPage = () => {
 
   return (
     <GSAPWrapper>
+      <SeoMeta title="Audit-Ready Compliance Training Suite | Innvikta" description="Train employees on GDPR, HIPAA, DPDP, PCI-DSS, AI policies, and workplace conduct using short, scenarios-based retention training." />
       <div className="insat-page" ref={heroRef}>
         <div className="main-content">
 

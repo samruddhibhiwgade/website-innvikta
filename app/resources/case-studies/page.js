@@ -89,6 +89,7 @@ export default function CaseStudies() {
 
   return (
     <GSAPWrapper>
+      <SeoMeta title="Cybersecurity Success Stories & Case Studies | Innvikta" description="Read how leading organizations partner with Innvikta to build secure behaviors, satisfy compliance audits, and mitigate phishing risk." />
       <SeoMeta title="Enterprise Success Stories & Case Studies | Innvikta" description="Read how global BFSI, Healthcare, IT, and Manufacturing enterprises reduce human risk and satisfy compliance audits with Innvikta." />
 
       {/* Hero Section */}

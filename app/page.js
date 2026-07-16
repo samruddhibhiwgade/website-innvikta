@@ -8,7 +8,6 @@ import ShortIntro from "@layouts/partials/ShortIntro";
 import SpecialFeatures from "@layouts/partials/SpecialFeatures";
 import FreeTierCta from "@layouts/partials/FreeTierCta";
 import Testimonial from "@layouts/partials/Testimonial";
-import WhyChooseInnvikta from "@layouts/partials/WhyChooseInnvikta";
 import { getListPage } from "@lib/contentParser";
 
 const Home = async () => {
@@ -21,7 +20,6 @@ const Home = async () => {
       <SeoMeta title="Innvikta | Security Awareness Training & Phishing Simulation" />
       <HomeBanner banner={banner} brands={brands} />
       <Challenges challenges={challenges} />
-      <WhyChooseInnvikta />
       <ShortIntro intro={intro} />
       <SpecialFeatures speciality={speciality} />
       <Testimonial testimonial={testimonial} />

@@ -1,5 +1,6 @@
 "use client";
 
+import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import "../../../styles/insat.scss";
@@ -306,6 +307,7 @@ const CultureBenchmarkingPage = () => {
 
   return (
     <GSAPWrapper>
+      <SeoMeta title="Security Culture Benchmarking Tool | Innvikta" description="Assess and benchmark your organization's security culture and reporting behaviors." />
       <div className="insat-page" ref={heroRef} style={{ background: "#FFFFFF", color: "#1F1F1F" }}>
         <div className="main-content">
 

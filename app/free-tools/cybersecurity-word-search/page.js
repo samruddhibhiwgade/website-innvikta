@@ -1,5 +1,6 @@
 "use client";
 
+import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import "../../../styles/insat.scss";
@@ -412,6 +413,7 @@ const WordSearchPage = () => {
 
   return (
     <GSAPWrapper>
+      <SeoMeta title="Free Cybersecurity Word Search Game | Innvikta" description="Boost security vocabulary and team engagement with our interactive cybersecurity word search game." />
       <div className="insat-page" ref={heroRef}>
         <div className="main-content" style={{ backgroundColor: "#FFFAF6" }}>
         {/* 1. HERO SECTION */}

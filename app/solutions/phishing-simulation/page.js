@@ -1,5 +1,6 @@
 "use client";
 
+import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import "../../../styles/insat.scss";
@@ -222,6 +223,7 @@ const PhishingSimulationPage = () => {
   
   return (
     <GSAPWrapper>
+      <SeoMeta title="Automated Phishing Simulation & Training Platform | Innvikta" description="Empower employees to detect and report social engineering attacks with realistic, automated phishing simulations." />
       <div className="insat-page" ref={heroRef}>
         <div className="main-content">
         

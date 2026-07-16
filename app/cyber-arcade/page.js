@@ -1,4 +1,5 @@
 "use client";
+import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 
@@ -473,6 +474,7 @@ export default function CyberArcadePage() {
 
   return (
     <div ref={containerRef}>
+      <SeoMeta title="Innvikta Arcade | Gamified Cybersecurity Awareness Training" description="Immerse your workforce in cybersecurity training with Innvikta's gamified arcade learning journeys." />
       <div className="scroll-progress" id="progress-bar"></div>
 
       {/* DRAG HINT */}

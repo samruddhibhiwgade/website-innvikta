@@ -1,5 +1,6 @@
 "use client";
 
+import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import "../../../styles/insat.scss";
@@ -70,6 +71,7 @@ const InsatPage = () => {
   
   return (
     <GSAPWrapper>
+      <SeoMeta title="InSAT | AI-Powered Security Awareness Training Platform" description="Reduce threat susceptibility with Innvikta's Interactive Security Awareness Training (InSAT) platform, offering gamified learning and simulations." />
       <div className="insat-page" ref={heroRef}>
         <div className="main-content">
         
@@ -593,7 +595,7 @@ const InsatPage = () => {
                         </div>
                         <div className="side-card-visual bg-plum">
                             <img alt="Finance risks illustration" loading="lazy"
-                                src="/insat/images/Protection-1.jpg" />
+                                src="/insat/images/finance.png" />
                         </div>
                     </div>
 
@@ -609,7 +611,7 @@ const InsatPage = () => {
                         </div>
                         <div className="side-card-visual bg-plum">
                             <img alt="HR risks illustration" loading="lazy"
-                                src="/insat/images/Transfers.jpg" />
+                                src="/insat/images/Hr.png" />
                         </div>
                     </div>
 
@@ -625,7 +627,7 @@ const InsatPage = () => {
                         </div>
                         <div className="side-card-visual bg-plum">
                             <img alt="Sales risks illustration" loading="lazy"
-                                src="/insat/images/Monitor-Paymentsmidnight.jpg" />
+                                src="/insat/images/sales.png" />
                         </div>
                     </div>
 
@@ -641,7 +643,7 @@ const InsatPage = () => {
                         </div>
                         <div className="side-card-visual bg-plum">
                             <img alt="IT risks illustration" loading="lazy"
-                                src="/insat/images/Risk-Scoring-1.jpg" />
+                                src="/insat/images/IT.png" />
                         </div>
                     </div>
                 </div>

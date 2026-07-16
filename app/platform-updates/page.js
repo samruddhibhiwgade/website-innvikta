@@ -1,5 +1,6 @@
 "use client";
 
+import SeoMeta from "@layouts/partials/SeoMeta";
 import React from "react";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
@@ -38,6 +39,7 @@ export default function PlatformUpdatesPage() {
 
   return (
     <GSAPWrapper>
+      <SeoMeta title="Platform Updates & Changelog | Innvikta" description="Stay up to date with the latest features, enhancements, and security training modules on the Innvikta platform." />
       <div className="min-h-screen w-full overflow-x-hidden bg-white text-slate-800 font-sans selection:bg-[#f15a24] selection:text-white pb-16">
         
         {/* ================= HEADER SECTION ================= */}

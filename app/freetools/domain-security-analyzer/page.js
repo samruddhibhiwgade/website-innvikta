@@ -1,5 +1,6 @@
 "use client";
 
+import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import "../../../styles/insat.scss";
@@ -148,6 +149,7 @@ export default function DomainSecurityAnalyzer() {
 
   return (
     <GSAPWrapper>
+      <SeoMeta title="Free Domain Security & SPF/DMARC Analyzer | Innvikta" description="Analyze your domain's SPF, DKIM, and DMARC settings to prevent email spoofing and phishing attacks." />
       <div className="insat-page" ref={heroRef}>
         <div className="main-content">
           

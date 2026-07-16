@@ -1,5 +1,6 @@
 "use client";
 
+import SeoMeta from "@layouts/partials/SeoMeta";
 import { useState } from "react";
 import { FiArrowRight, FiCheckCircle } from "react-icons/fi";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
@@ -110,6 +111,7 @@ const StartFreePage = () => {
 
   return (
     <GSAPWrapper>
+      <SeoMeta title="Start a Free Trial | Innvikta" description="Get instant access to Innvikta's security awareness training and phishing simulation platform." />
       <div className="min-h-screen bg-[#fafafa]">
         {/* Banner Section */}
         <div className="bg-[#f15a24] text-white py-12 relative overflow-hidden">

@@ -15,6 +15,87 @@ const AVAILABLE_CATEGORIES = [
   "AI"
 ];
 
+const convertHtmlToMarkdown = (htmlString) => {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, "text/html");
+  const body = doc.body;
+
+  const traverse = (node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      return node.textContent;
+    }
+    if (node.nodeType !== Node.ELEMENT_NODE) {
+      return "";
+    }
+
+    let childrenContent = "";
+    node.childNodes.forEach((child) => {
+      childrenContent += traverse(child);
+    });
+
+    const tagName = node.tagName.toLowerCase();
+
+    switch (tagName) {
+      case "h1": return `\n# ${childrenContent.trim()}\n`;
+      case "h2": return `\n## ${childrenContent.trim()}\n`;
+      case "h3": return `\n### ${childrenContent.trim()}\n`;
+      case "h4": return `\n#### ${childrenContent.trim()}\n`;
+      case "h5": return `\n##### ${childrenContent.trim()}\n`;
+      case "h6": return `\n###### ${childrenContent.trim()}\n`;
+      case "p": return `\n${childrenContent.trim()}\n`;
+      case "br": return `\n`;
+      case "b":
+      case "strong":
+        return `**${childrenContent.trim()}**`;
+      case "i":
+      case "em":
+        return `*${childrenContent.trim()}*`;
+      case "a":
+        const href = node.getAttribute("href") || "#";
+        return `[${childrenContent.trim()}](${href})`;
+      case "li":
+        return `\n- ${childrenContent.trim()}`;
+      case "ul":
+        return `\n${childrenContent.trim()}\n`;
+      case "ol": {
+        let items = "";
+        let count = 1;
+        node.childNodes.forEach((child) => {
+          if (child.tagName && child.tagName.toLowerCase() === "li") {
+            items += `\n${count++}. ${traverse(child).replace(/^\n-\s*/, "").trim()}`;
+          }
+        });
+        return `\n${items}\n`;
+      }
+      case "table": {
+        let mdTable = "\n";
+        const rows = Array.from(node.querySelectorAll("tr"));
+        if (rows.length === 0) return "";
+        const headers = Array.from(rows[0].querySelectorAll("th, td")).map(el => el.textContent.trim());
+        mdTable += `| ${headers.join(" | ")} |\n`;
+        mdTable += `| ${headers.map(() => "---").join(" | ")} |\n`;
+        for (let i = 1; i < rows.length; i++) {
+          const cells = Array.from(rows[i].querySelectorAll("td, th")).map(el => el.textContent.trim());
+          mdTable += `| ${cells.join(" | ")} |\n`;
+        }
+        return mdTable + "\n";
+      }
+      case "tr":
+      case "td":
+      case "th":
+      case "thead":
+      case "tbody":
+        return childrenContent;
+      default:
+        return childrenContent;
+    }
+  };
+
+  return traverse(body)
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+};
+
 export default function AdminBlogPanel() {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -24,6 +105,8 @@ export default function AdminBlogPanel() {
   const [formData, setFormData] = useState({
     filename: "",
     title: "",
+    metaTitle: "",
+    slug: "",
     content: "",
     categories: [],
     authorName: "Derick C.",
@@ -33,6 +116,9 @@ export default function AdminBlogPanel() {
     metaDescription: "",
     disableAutoLinking: false,
   });
+
+  const [availableCategories, setAvailableCategories] = useState(AVAILABLE_CATEGORIES);
+  const [newCategoryInput, setNewCategoryInput] = useState("");
   
   const [keywordLinks, setKeywordLinks] = useState([]);
   const [newKeywords, setNewKeywords] = useState("");
@@ -199,10 +285,24 @@ export default function AdminBlogPanel() {
   };
 
   useEffect(() => {
+    document.title = "Admin Blog Panel | Innvikta";
     fetchPosts();
     fetchKeywordLinks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Sync loaded categories from fetched blog posts dynamically
+  useEffect(() => {
+    if (posts && posts.length > 0) {
+      const allCats = new Set(AVAILABLE_CATEGORIES);
+      posts.forEach(post => {
+        if (post.frontmatter.categories) {
+          post.frontmatter.categories.forEach(cat => allCats.add(cat));
+        }
+      });
+      setAvailableCategories(Array.from(allCats));
+    }
+  }, [posts]);
 
   // Run SEO audit
   useEffect(() => {
@@ -217,10 +317,44 @@ export default function AdminBlogPanel() {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+    setFormData((prev) => {
+      const updated = {
+        ...prev,
+        [name]: type === "checkbox" ? checked : value,
+      };
+      
+      // If title is changing, auto-update the slug if slug hasn't been edited
+      if (name === "title" && !prev.filename) {
+        const autoSlug = value
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)/g, "");
+        updated.slug = autoSlug;
+      }
+      return updated;
+    });
+  };
+
+  const handlePaste = (e) => {
+    const html = e.clipboardData.getData("text/html");
+    if (html) {
+      e.preventDefault();
+      const markdown = convertHtmlToMarkdown(html);
+      
+      const textarea = textareaRef.current;
+      if (textarea) {
+        const startPos = textarea.selectionStart;
+        const endPos = textarea.selectionEnd;
+        const originalText = textarea.value;
+        const newText = originalText.substring(0, startPos) + markdown + originalText.substring(endPos);
+        setFormData((prev) => ({ ...prev, content: newText }));
+        
+        setTimeout(() => {
+          textarea.focus();
+          textarea.setSelectionRange(startPos + markdown.length, startPos + markdown.length);
+        }, 50);
+      }
+    }
   };
 
   const handleCategoryToggle = (category) => {
@@ -399,6 +533,9 @@ export default function AdminBlogPanel() {
     }
     else if (syntax === "quote") {
       replacement = `\n<Blockquote name="Author/Speaker Name">\nEnter quote content here...\n</Blockquote>\n`;
+    }
+    else if (syntax === "table") {
+      replacement = `\n| Feature | Innvikta InSAT | Others |\n| :--- | :---: | :---: |\n| **Gamified Learning** | Yes | No |\n| **Phishing Simulations** | Yes | Basic |\n| **Custom Scenarios** | Yes | Limited |\n`;
     }
 
     const newText = originalText.substring(0, startPos) + replacement + originalText.substring(endPos);
@@ -640,13 +777,47 @@ export default function AdminBlogPanel() {
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;");
 
-    // Headings
-    html = html.replace(/^######\s+(.+)$/gm, '<h6 class="text-xs font-bold text-slate-800 mt-4 mb-2">$1</h6>');
-    html = html.replace(/^#####\s+(.+)$/gm, '<h5 class="text-sm font-bold text-slate-800 mt-4 mb-2">$1</h5>');
-    html = html.replace(/^####\s+(.+)$/gm, '<h4 class="text-base font-bold text-slate-900 mt-5 mb-2">$1</h4>');
-    html = html.replace(/^###\s+(.+)$/gm, '<h3 class="text-lg font-bold text-slate-900 mt-6 mb-3">$1</h3>');
-    html = html.replace(/^##\s+(.+)$/gm, '<h2 class="text-2xl font-extrabold text-slate-950 mt-8 mb-4 border-b border-slate-100 pb-2">$1</h2>');
-    html = html.replace(/^#\s+(.+)$/gm, '<h1 class="text-3xl font-extrabold text-slate-950 mt-10 mb-6">$1</h1>');
+    // Parse tables to HTML with medium weights
+    const tableRegex = /^\|([^\n]+)\n\|([^\n]+)\n((?:\|[^\n]+\n*)+)/gm;
+    html = html.replace(tableRegex, (match, headerLine, alignLine, rowsBlock) => {
+      const headers = headerLine.split("|").slice(1, -1).map(h => h.trim());
+      const alignments = alignLine.split("|").slice(1, -1).map(a => {
+        if (a.includes(":") && a.endsWith(":")) return "center";
+        if (a.endsWith(":")) return "right";
+        return "left";
+      });
+      const rows = rowsBlock.trim().split("\n").map(r => r.split("|").slice(1, -1).map(c => c.trim()));
+      
+      let tableHtml = `<div class="my-6 overflow-x-auto"><table class="w-full border-collapse border border-slate-100 text-slate-700 text-sm">`;
+      tableHtml += `<thead><tr class="bg-slate-50/80 border-b border-slate-100">`;
+      headers.forEach((h, idx) => {
+        const align = alignments[idx] || "left";
+        tableHtml += `<th class="px-4 py-3 text-xs font-semibold text-slate-800 uppercase tracking-wider text-${align} border-r border-slate-100/50">${h}</th>`;
+      });
+      tableHtml += `</tr></thead><tbody>`;
+      rows.forEach(row => {
+        tableHtml += `<tr class="border-b border-slate-150 hover:bg-slate-50/30 transition-colors">`;
+        row.forEach((cell, idx) => {
+          const align = alignments[idx] || "left";
+          let cleanedCell = cell;
+          if (cleanedCell.startsWith("**") && cleanedCell.endsWith("**")) {
+            cleanedCell = `<span class="font-medium text-slate-800">${cleanedCell.slice(2, -2)}</span>`;
+          }
+          tableHtml += `<td class="px-4 py-2.5 text-xs text-${align} border-r border-slate-100/50">${cleanedCell}</td>`;
+        });
+        tableHtml += `</tr>`;
+      });
+      tableHtml += `</tbody></table></div>`;
+      return tableHtml;
+    });
+
+    // Headings spacing adjustments
+    html = html.replace(/^######\s+(.+)$/gm, '<h6 class="text-xs font-bold text-slate-850 mt-3 mb-1.5">$1</h6>');
+    html = html.replace(/^#####\s+(.+)$/gm, '<h5 class="text-sm font-bold text-slate-850 mt-3 mb-1.5">$1</h5>');
+    html = html.replace(/^####\s+(.+)$/gm, '<h4 class="text-base font-bold text-slate-900 mt-3.5 mb-2">$1</h4>');
+    html = html.replace(/^###\s+(.+)$/gm, '<h3 class="text-lg font-bold text-slate-900 mt-4 mb-2.5">$1</h3>');
+    html = html.replace(/^##\s+(.+)$/gm, '<h2 class="text-2xl font-extrabold text-slate-950 mt-5 mb-3 border-b border-slate-100 pb-2">$1</h2>');
+    html = html.replace(/^#\s+(.+)$/gm, '<h1 class="text-3xl font-extrabold text-slate-950 mt-6 mb-4">$1</h1>');
 
     // Images with custom styling
     html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<div class="my-6"><img src="$2" alt="$1" class="w-full h-auto rounded-2xl shadow-md" /><span class="block text-center text-xs text-slate-400 mt-2">$1</span></div>');
@@ -858,6 +1029,8 @@ export default function AdminBlogPanel() {
     setFormData({
       filename: post.filename,
       title: post.frontmatter.title || "",
+      metaTitle: post.frontmatter.metaTitle || "",
+      slug: post.frontmatter.slug || post.slug || "",
       content: post.content || "",
       categories: post.frontmatter.categories || [],
       authorName: post.frontmatter.author?.name || "Derick C.",
@@ -910,6 +1083,8 @@ export default function AdminBlogPanel() {
         setFormData({
           filename: "",
           title: "",
+          metaTitle: "",
+          slug: "",
           content: "",
           categories: [],
           authorName: "Derick C.",
@@ -934,6 +1109,8 @@ export default function AdminBlogPanel() {
     setFormData({
       filename: "",
       title: "",
+      metaTitle: "",
+      slug: "",
       content: "",
       categories: [],
       authorName: "Derick C.",
@@ -1473,6 +1650,15 @@ export default function AdminBlogPanel() {
                           >
                             <span>+ Key Takeaways</span>
                           </button>
+
+                          <button
+                            type="button"
+                            onClick={() => insertMarkdown("table")}
+                            className="px-2.5 py-1.5 hover:bg-[#f15a24]/10 text-slate-600 hover:text-[#f15a24] rounded-lg transition-colors flex items-center gap-1 cursor-pointer text-xs font-bold border border-dashed border-slate-300 hover:border-[#f15a24]"
+                            title="Insert Comparison Table"
+                          >
+                            <span>+ Table</span>
+                          </button>
                         </div>
 
                         {/* Content Textarea */}
@@ -1483,6 +1669,7 @@ export default function AdminBlogPanel() {
                           rows="18"
                           value={formData.content}
                           onChange={handleInputChange}
+                          onPaste={handlePaste}
                           placeholder="Start writing blog post content in markdown... Use Heading helper buttons (H1 to H6) to design sections with proper tags."
                           className="w-full px-4 py-3 bg-white border-0 focus:outline-none focus:ring-0 transition-all font-mono text-sm leading-relaxed"
                         ></textarea>
@@ -1551,7 +1738,7 @@ export default function AdminBlogPanel() {
                 </h4>
                 <p className="text-xs text-slate-500 mb-4">Select categories to display this article under in the frontend blog page filter.</p>
                 <div className="space-y-3">
-                  {AVAILABLE_CATEGORIES.map((cat) => (
+                  {availableCategories.map((cat) => (
                     <label key={cat} className="flex items-center gap-3 cursor-pointer">
                       <input
                         type="checkbox"
@@ -1562,6 +1749,29 @@ export default function AdminBlogPanel() {
                       <span className="text-sm font-semibold text-slate-700">{cat}</span>
                     </label>
                   ))}
+                </div>
+                <div className="mt-4 pt-4 border-t border-slate-100 flex gap-2">
+                  <input
+                    type="text"
+                    placeholder="New category..."
+                    value={newCategoryInput}
+                    onChange={(e) => setNewCategoryInput(e.target.value)}
+                    className="flex-1 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const trimmed = newCategoryInput.trim();
+                      if (trimmed && !availableCategories.includes(trimmed)) {
+                        setAvailableCategories([...availableCategories, trimmed]);
+                        handleCategoryToggle(trimmed);
+                        setNewCategoryInput("");
+                      }
+                    }}
+                    className="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-200 transition-all cursor-pointer"
+                  >
+                    Add
+                  </button>
                 </div>
               </div>
 
@@ -1617,6 +1827,30 @@ export default function AdminBlogPanel() {
                 </h4>
 
                 <div className="space-y-4">
+                  <div>
+                    <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Meta Title</label>
+                    <input
+                      type="text"
+                      name="metaTitle"
+                      value={formData.metaTitle}
+                      onChange={handleInputChange}
+                      placeholder="SEO Meta Title..."
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-100 rounded-xl text-slate-700 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">URL Slug</label>
+                    <input
+                      type="text"
+                      name="slug"
+                      value={formData.slug}
+                      onChange={handleInputChange}
+                      placeholder="e.g. why-security-is-important"
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-100 rounded-xl text-slate-700 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                    />
+                  </div>
+
                   <div>
                     <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Meta Description (Excerpt)</label>
                     <textarea

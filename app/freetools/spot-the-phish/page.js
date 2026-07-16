@@ -1,5 +1,6 @@
 "use client";
 
+import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import "../../../styles/insat.scss";
@@ -494,6 +495,7 @@ export default function SpotThePhish() {
 
   return (
     <GSAPWrapper>
+      <SeoMeta title="Spot the Phish Simulation Game | Innvikta" description="Test your phishing detection skills in our interactive Spot the Phish training simulation game." />
       {/* Schema.org Injection */}
       <script
         type="application/ld+json"

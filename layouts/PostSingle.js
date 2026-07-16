@@ -134,8 +134,8 @@ const PostSingle = ({ frontmatter, content, recentPosts, slug }) => {
                     <img
                       src={image}
                       alt={imageAlt || title}
-                      className="fade w-full rounded-2xl object-cover"
-                      style={{ maxHeight: "700px", width: "100%" }}
+                      className="fade w-full rounded-2xl object-contain bg-slate-50/20"
+                      style={{ maxHeight: "600px", width: "100%" }}
                     />
                     {imageAlt && (
                       <figcaption className="block text-center text-xs text-slate-400 mt-3 italic">
@@ -173,7 +173,7 @@ const PostSingle = ({ frontmatter, content, recentPosts, slug }) => {
               {/* Main Content Area */}
               <div className="col-12 lg:col-7">
                 <header className="mb-6">
-                  {markdownify(title, "h1", "font-black leading-tight text-3xl md:text-5xl text-slate-900")}
+                  {markdownify(title, "h1", "font-bold leading-tight text-3xl md:text-5xl text-slate-900")}
                   
                   {/* Author Details and dates */}
                   <div className="mt-6 flex items-center mb-8 border-b border-slate-100 pb-6">

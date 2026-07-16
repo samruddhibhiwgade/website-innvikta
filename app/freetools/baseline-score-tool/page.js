@@ -1,5 +1,6 @@
 "use client";
 
+import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import "../../../styles/insat.scss";
@@ -223,6 +224,7 @@ const BaselineScoreToolPage = () => {
 
   return (
     <GSAPWrapper>
+      <SeoMeta title="Free Phishing Baseline Score Calculator | Innvikta" description="Calculate your organization's baseline susceptibility to phishing simulations and compare against industry standards." />
       <div className="insat-page" ref={heroRef} style={{ background: "#FFFFFF", color: "#1F1F1F" }}>
         <div className="main-content">
 

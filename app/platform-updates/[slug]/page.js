@@ -6,6 +6,8 @@ import { useParams } from "next/navigation";
 import { FiArrowLeft, FiCalendar, FiTag, FiClock, FiShare2, FiCheckCircle, FiInfo } from "react-icons/fi";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
 
+import SeoMeta from "@layouts/partials/SeoMeta";
+
 export default function PlatformUpdateDetailPage() {
   const params = useParams();
   const slug = params.slug;
@@ -212,6 +214,7 @@ export default function PlatformUpdateDetailPage() {
 
   return (
     <GSAPWrapper>
+      <SeoMeta title={`${currentUpdate.title} | Innvikta Platform Updates`} description={currentUpdate.desc} />
       <div className="min-h-screen w-full bg-white text-slate-800 font-sans selection:bg-[#f15a24] selection:text-white pb-24">
         
         {/* ================= HEADER BANNER ================= */}

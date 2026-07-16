@@ -1,5 +1,6 @@
 "use client";
 
+import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import "../../../styles/insat.scss";
@@ -371,6 +372,7 @@ export default function PasswordGeneratorPage() {
 
   return (
     <GSAPWrapper>
+      <SeoMeta title="Secure Strong Password Generator | Innvikta" description="Generate cryptographically secure, random passwords to protect your online accounts." />
       {/* Schema.org Injections */}
       <script
         type="application/ld+json"
