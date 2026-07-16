@@ -228,7 +228,7 @@ export default function NewsletterDetailPage() {
                     <div className="text-center py-4">
                       <FiCheckCircle size={40} className="text-emerald-500 mx-auto mb-2 animate-bounce" />
                       <h4 className="text-sm font-bold text-slate-900 mb-1">Subscribed Successfully!</h4>
-                      <p className="text-slate-500 text-[10px] font-semibold">You're in. We'll email you next Thursday.</p>
+                      <p className="text-slate-500 text-[10px] font-semibold">You&apos;re in. We&apos;ll email you next Thursday.</p>
                     </div>
                   ) : (
                     <form onSubmit={handleSubscribe} className="space-y-4">

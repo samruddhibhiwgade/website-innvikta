@@ -164,7 +164,7 @@ export default function WeeklyNewsletterPage() {
                   <FiCheckCircle size={32} className="text-emerald-500 shrink-0" />
                   <div>
                     <h4 className="text-sm font-bold">Subscription Confirmed!</h4>
-                    <p className="text-xs text-slate-500 font-medium">We'll deliver the next intel this Thursday.</p>
+                    <p className="text-xs text-slate-500 font-medium">We&apos;ll deliver the next intel this Thursday.</p>
                   </div>
                 </div>
               ) : (
