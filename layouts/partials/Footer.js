@@ -27,7 +27,7 @@ const Footer = () => {
       { name: "Maturity Benchmarks", url: "/maturity-benchmarks" },
       { name: "Blog", url: "/blog" },
       { name: "Innvikta Cyberhelp", url: "/cyberhelp" },
-      { name: "Weekly Newsletter", url: "/resources/weekly-newsletter" },
+      { name: "Cybersecurity Guides", url: "#" },
       { name: "Glossary", url: "/resources/glossary" },
       { name: "Customer Success Stories", url: "/resources/case-studies" }
     ],
