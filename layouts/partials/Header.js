@@ -1301,6 +1301,7 @@ const Header = () => {
   };
 
   const handleMenuHover = (menuKey) => {
+    if (isSearchOpen) return;
     setActiveMegaMenu(menuKey);
   };
 
@@ -1343,16 +1344,13 @@ const Header = () => {
               <button 
                 onClick={() => {
                   setIsSearchOpen(!isSearchOpen);
+                  setActiveMegaMenu(null);
                   if (isSearchOpen) setSearchQuery("");
                 }}
                 className="hover:text-white transition-colors flex items-center gap-1.5 focus:outline-none cursor-pointer"
               >
                 <FiSearch className="text-[14px]" /> Search
               </button>
-              <span className="h-3 w-[1px] bg-white/30"></span>
-              <Link href="#" className="hover:text-white transition-colors flex items-center gap-1.5">
-                <FiHelpCircle className="text-[14px]" /> Support
-              </Link>
               <span className="h-3 w-[1px] bg-white/30"></span>
  
               <div className="relative">
@@ -1397,7 +1395,7 @@ const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.25, ease: "easeOut" }}
-                className="absolute inset-0 w-full h-[80px] bg-white z-[60] flex items-center border-b border-slate-100"
+                className="absolute inset-0 w-full h-[80px] bg-white z-[100000] flex items-center border-b border-slate-100"
               >
                 <div className="container-xl flex items-center justify-center gap-4 w-full relative">
                   <div className="relative flex-1 max-w-[800px]">
@@ -1433,7 +1431,7 @@ const Header = () => {
                         exit={{ opacity: 0, y: 10 }}
                         transition={{ duration: 0.15 }}
                         ref={searchResultsRef}
-                        className="absolute left-0 right-0 top-[60px] mx-auto max-w-[800px] bg-white border border-slate-100 rounded-2xl shadow-xl z-[70] overflow-hidden max-h-[450px] overflow-y-auto"
+                        className="absolute left-0 right-0 top-[60px] mx-auto max-w-[800px] bg-white border border-slate-100 rounded-2xl shadow-xl z-[100001] overflow-hidden max-h-[450px] overflow-y-auto"
                       >
                         {filteredResults.length === 0 ? (
                           <div className="p-8 text-center text-slate-400 font-semibold">
