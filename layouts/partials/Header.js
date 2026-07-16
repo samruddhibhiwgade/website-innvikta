@@ -814,7 +814,7 @@ const menuData = {
           { name: "Case Studies", desc: "Success stories from real enterprise security leadership teams.", href: "/resources/case-studies" },
           { name: "Platform Updates", desc: "See the latest features added to the Innvikta training suite.", href: "/platform-updates" },
           { name: "DPDP at a Glance", desc: "A quick summary of India's Digital Personal Data Protection Act compliance requirements.", href: "/resources/dpdp-at-a-glance" },
-          { name: "Weekly Newsletter", desc: "Security tips and campaign ideas delivered directly to your inbox.", href: "#" }
+          { name: "Weekly Newsletter", desc: "Security tips and campaign ideas delivered directly to your inbox.", href: "/resources/weekly-newsletter" }
         ],
         cta: {
           title: "Explore the Innvikta Blog",

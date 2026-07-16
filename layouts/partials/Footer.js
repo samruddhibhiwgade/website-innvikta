@@ -20,22 +20,21 @@ const Footer = () => {
       { name: "Domain Security Analyzer", url: "/freetools/domain-security-analyzer" },
       { name: "Baseline Score Tool", url: "/freetools/baseline-score-tool" },
       { name: "Culture Benchmarking", url: "/freetools/culture-benchmarking" },
-      { name: "Maturity Calculator", url: "#" },
+      { name: "Maturity Calculator", url: "/resources/maturity-calculator" },
       { name: "Cybersecurity Word Search", url: "/free-tools/cybersecurity-word-search" }
     ],
     resources: [
       { name: "Maturity Benchmarks", url: "/maturity-benchmarks" },
       { name: "Blog", url: "/blog" },
       { name: "Innvikta Cyberhelp", url: "/cyberhelp" },
-      { name: "Cybersecurity Guides", url: "#" },
+      { name: "Weekly Newsletter", url: "/resources/weekly-newsletter" },
       { name: "Glossary", url: "/resources/glossary" },
-      { name: "Customer Success Stories", url: "#" }
+      { name: "Customer Success Stories", url: "/resources/case-studies" }
     ],
     company: [
       { name: "About Us", url: "/about" },
       { name: "Contact Sales", url: "/book-demo" },
-      { name: "Partners", url: "/partners" },
-      { name: "Careers", url: "#" }
+      { name: "Partners", url: "/partners" }
     ]
   };
 
