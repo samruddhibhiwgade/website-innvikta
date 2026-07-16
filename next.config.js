@@ -6,6 +6,7 @@ const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ["swiper"],
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
