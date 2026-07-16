@@ -1085,6 +1085,13 @@ const searchIndex = [
     url: "/resources/dpdp-at-a-glance",
     category: "Resources",
     keywords: ["dpdp", "privacy", "act", "india", "personal data", "compliance", "law", "fiduciary"]
+  },
+  {
+    title: "Weekly Cybersecurity Newsletter",
+    description: "Read recent and trending editions of our weekly newsletter covering human risk, threat defense, and compliance.",
+    url: "/resources/weekly-newsletter",
+    category: "Resources",
+    keywords: ["newsletter", "weekly", "weekly-newsletter", "insights", "threats", "compliance", "read", "intel"]
   }
 ];
 
