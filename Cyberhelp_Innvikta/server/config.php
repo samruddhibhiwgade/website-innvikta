@@ -20,13 +20,13 @@ define('DB_USER', $envVars['DB_USER'] ?? 'platform1');
 define('DB_PASS', $envVars['DB_PASS'] ?? 'Himanshu@1272');
 
 // ── Mail Configuration ────────────────────────────────────────────────────
-define('MAIL_HOST',       'mail.innvikta.com');
-define('MAIL_PORT',        587);
-define('MAIL_USERNAME',   'mahesh.hattimare@innvikta.com');
-define('MAIL_PASSWORD',   '@^NZgXrBdC[G');
-define('MAIL_FROM',       'mahesh.hattimare@innvikta.com');
-define('MAIL_FROM_NAME',  'Cyberhelp Innvikta');
-define('MAIL_TO',         'samruddhi.bhiwgade@innvikta.com');
+define('MAIL_HOST',       $envVars['MAIL_HOST'] ?? 'mail.innvikta.com');
+define('MAIL_PORT',        isset($envVars['MAIL_PORT']) ? intval($envVars['MAIL_PORT']) : 587);
+define('MAIL_USERNAME',   $envVars['MAIL_USERNAME'] ?? 'mahesh.hattimare@innvikta.com');
+define('MAIL_PASSWORD',   $envVars['MAIL_PASSWORD'] ?? '@^NZgXrBdC[G');
+define('MAIL_FROM',       $envVars['MAIL_FROM'] ?? 'mahesh.hattimare@innvikta.com');
+define('MAIL_FROM_NAME',  $envVars['MAIL_FROM_NAME'] ?? 'Cyberhelp Innvikta');
+define('MAIL_TO',         $envVars['MAIL_TO'] ?? 'samruddhi.bhiwgade@innvikta.com');
 
 // Start output buffering immediately so stray PHP output never corrupts JSON
 if (!ob_get_level()) ob_start();
