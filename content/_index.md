@@ -82,7 +82,7 @@ speciality:
       button:
         label: "Explore Innvikta Arcade"
         link: "/cyber-arcade"
-      image: /images/features-02.png
+      image: /images/home_arcade.png
     - subtitle: "Customized Solutions"
       description: "Tailored content, workflows and campaigns for your specific risks, regions and regulators - designed and managed by Innvikta’s team of security experts."
       button:
