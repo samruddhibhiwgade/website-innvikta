@@ -56,11 +56,27 @@ const CyberAwarenessPopup = () => {
     }
 
     setError("");
-    setIsSubmitted(true);
     sessionStorage.setItem("cyber_awareness_seen", "true");
     
-    // Simulate API call
-    console.log("Enquiry sent for:", email);
+    fetch("/api/forms", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        form_type: "Cyber Awareness Popup",
+        email: email
+      })
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.success) {
+        setIsSubmitted(true);
+      } else {
+        setError(data.error || "Failed to submit enquiry. Please try again.");
+      }
+    })
+    .catch((err) => {
+      setError("An error occurred. Please try again.");
+    });
   };
 
   if (!isOpen) return null;

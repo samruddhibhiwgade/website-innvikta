@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Social from "@components/Social";
 import config from "@config/config.json";
 import social from "@config/social.json";
@@ -5,6 +6,37 @@ import { markdownify } from "@lib/utils/textConverter";
 import Link from "next/link";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!email) return;
+    setIsSubmitting(true);
+    fetch("/api/forms", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        form_type: "Newsletter",
+        email: email
+      })
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      setIsSubmitting(false);
+      if (data.success) {
+        alert("Subscribed successfully!");
+        setEmail("");
+      } else {
+        alert("Subscription failed: " + (data.error || "Please try again."));
+      }
+    })
+    .catch((err) => {
+      setIsSubmitting(false);
+      alert("An error occurred. Please try again.");
+    });
+  };
+
   const footerData = {
     solutions: [
       { name: "InSAT (Security Awareness)", url: "/solutions/insat" },
@@ -118,17 +150,21 @@ const Footer = () => {
               <p className="text-sm text-slate-500 mb-8 leading-relaxed font-medium text-left">
                 Get the latest cybersecurity insights, human risk trends, phishing research, and product updates from Innvikta.
               </p>
-              <form className="relative mb-6">
+              <form onSubmit={handleSubmit} className="relative mb-6">
                 <input 
                   type="email" 
                   placeholder="your@email.com" 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                   className="form-input w-full rounded-full py-4 px-6 border-slate-300 focus:border-primary outline-none text-sm pr-36 bg-white" 
                 />
                 <button 
                   type="submit" 
-                  className="btn btn-primary absolute right-1.5 top-1.5 bottom-1.5 !h-auto !rounded-full py-2 px-6 text-xs font-bold uppercase tracking-wider"
+                  disabled={isSubmitting}
+                  className="btn btn-primary absolute right-1.5 top-1.5 bottom-1.5 !h-auto !rounded-full py-2 px-6 text-xs font-bold uppercase tracking-wider disabled:opacity-50"
                 >
-                  Subscribe
+                  {isSubmitting ? "Subscribing..." : "Subscribe"}
                 </button>
               </form>
               <p className="text-[11px] text-slate-400 leading-relaxed font-medium text-left">

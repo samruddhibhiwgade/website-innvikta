@@ -94,20 +94,46 @@ const PartnersPage = () => {
 
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
-      setTimeout(() => {
-        alert("Thank you for your partner request! Our team will get in touch with you shortly.");
-        setForm({
-          fullName: "",
-          email: "",
-          phone: "",
-          companyName: "",
-          website: "",
-          employeeSize: "",
-          partnershipType: "",
-          message: ""
-        });
+      fetch("/api/forms", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          form_type: "Partners",
+          name: form.fullName,
+          email: form.email,
+          phone: form.phone,
+          company: form.companyName,
+          team_size: form.employeeSize,
+          message: form.message,
+          payload: {
+            website: form.website,
+            partnershipType: form.partnershipType
+          }
+        })
+      })
+      .then((res) => res.json())
+      .then((data) => {
         setIsSubmitting(false);
-      }, 1000);
+        if (data.success) {
+          alert("Thank you for your partner request! Our team will get in touch with you shortly.");
+          setForm({
+            fullName: "",
+            email: "",
+            phone: "",
+            companyName: "",
+            website: "",
+            employeeSize: "",
+            partnershipType: "",
+            message: ""
+          });
+        } else {
+          alert("Error: " + (data.error || "Failed to submit partner request. Please try again."));
+        }
+      })
+      .catch((err) => {
+        setIsSubmitting(false);
+        alert("An error occurred. Please try again later.");
+      });
     }
   };
 

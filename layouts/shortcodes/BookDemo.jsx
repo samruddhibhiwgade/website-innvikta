@@ -40,16 +40,36 @@ const BookDemo = () => {
     
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
-      setTimeout(() => {
-        setIsSuccess(true);
-        setForm({
-          fullName: "",
-          email: "",
-          company: "",
-          phone: ""
-        });
+      fetch("/api/forms", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          form_type: "Book Demo (Shortcode)",
+          name: form.fullName,
+          email: form.email,
+          company: form.company,
+          phone: form.phone
+        })
+      })
+      .then((res) => res.json())
+      .then((data) => {
         setIsSubmitting(false);
-      }, 1000);
+        if (data.success) {
+          setIsSuccess(true);
+          setForm({
+            fullName: "",
+            email: "",
+            company: "",
+            phone: ""
+          });
+        } else {
+          alert("Error: " + (data.error || "Failed to submit demo request. Please try again."));
+        }
+      })
+      .catch((err) => {
+        setIsSubmitting(false);
+        alert("An error occurred. Please try again later.");
+      });
     }
   };
 

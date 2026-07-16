@@ -101,18 +101,40 @@ const FreeTierCta = ({ data }) => {
     
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
-      setTimeout(() => {
-        alert("Form submitted successfully!");
-        setForm({
-          fullName: "",
-          designation: "",
-          email: "",
-          phone: "",
-          company: "",
-          teamSize: ""
-        });
+      fetch("/api/forms", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          form_type: "Free Tier Cta",
+          name: form.fullName,
+          email: form.email,
+          phone: form.phone,
+          company: form.company,
+          designation: form.designation,
+          team_size: form.teamSize
+        })
+      })
+      .then((res) => res.json())
+      .then((data) => {
         setIsSubmitting(false);
-      }, 1000);
+        if (data.success) {
+          alert("Workspace request submitted successfully! We will contact you shortly.");
+          setForm({
+            fullName: "",
+            designation: "",
+            email: "",
+            phone: "",
+            company: "",
+            teamSize: ""
+          });
+        } else {
+          alert("Error: " + (data.error || "Failed to submit request. Please try again."));
+        }
+      })
+      .catch((err) => {
+        setIsSubmitting(false);
+        alert("An error occurred. Please try again later.");
+      });
     }
   };
 

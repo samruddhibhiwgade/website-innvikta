@@ -48,10 +48,32 @@ const StartFreePage = () => {
     
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
-      setTimeout(() => {
-        setSubmitted(true);
+      fetch("/api/forms", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          form_type: "Start Free",
+          name: form.fullName,
+          email: form.email,
+          phone: form.phone,
+          company: form.company,
+          designation: form.designation,
+          team_size: form.expectedUsers
+        })
+      })
+      .then((res) => res.json())
+      .then((data) => {
         setIsSubmitting(false);
-      }, 1000);
+        if (data.success) {
+          setSubmitted(true);
+        } else {
+          alert("Error: " + (data.error || "Failed to submit request. Please try again."));
+        }
+      })
+      .catch((err) => {
+        setIsSubmitting(false);
+        alert("An error occurred. Please try again later.");
+      });
     }
   };
 

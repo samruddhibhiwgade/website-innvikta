@@ -105,10 +105,33 @@ export default function CyberAwarenessMonthCampaignPage() {
     
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
-      setTimeout(() => {
-        setSubmitted(true);
+      fetch("/api/forms", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          form_type: "Cybersecurity Awareness Month Kit",
+          name: form.fullName,
+          email: form.email,
+          company: form.company,
+          designation: form.title,
+          payload: {
+            industry: form.industry
+          }
+        })
+      })
+      .then((res) => res.json())
+      .then((data) => {
         setIsSubmitting(false);
-      }, 1000);
+        if (data.success) {
+          setSubmitted(true);
+        } else {
+          alert("Error: " + (data.error || "Failed to register. Please try again."));
+        }
+      })
+      .catch((err) => {
+        setIsSubmitting(false);
+        alert("An error occurred. Please try again later.");
+      });
     }
   };
 

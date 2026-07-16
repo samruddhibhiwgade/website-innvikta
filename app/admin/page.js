@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import { 
   FiPlus, FiEdit, FiTrash2, FiFileText, FiSave, FiX, FiCheck, 
   FiAlertCircle, FiBold, FiItalic, FiLink, FiImage, FiList, 
-  FiEye, FiTrendingUp, FiSearch, FiUploadCloud
+  FiEye, FiTrendingUp, FiSearch, FiUploadCloud, FiUsers
 } from "react-icons/fi";
 
 const AVAILABLE_CATEGORIES = [
@@ -1155,13 +1156,22 @@ export default function AdminBlogPanel() {
             <p className="text-sm text-slate-500 mt-1">WordPress-style rich content editor and built-in SEO auditor.</p>
           </div>
           {activeTab === "list" && (
-            <button
-              onClick={startNewPost}
-              className="flex items-center gap-2 bg-[#f15a24] hover:bg-orange-600 text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer"
-            >
-              <FiPlus />
-              <span>Write New Article</span>
-            </button>
+            <div className="flex gap-3">
+              <Link
+                href="/admin/leads"
+                className="flex items-center gap-2 bg-slate-800 hover:bg-slate-900 text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer"
+              >
+                <FiUsers />
+                <span>View Form Submissions</span>
+              </Link>
+              <button
+                onClick={startNewPost}
+                className="flex items-center gap-2 bg-[#f15a24] hover:bg-orange-600 text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer"
+              >
+                <FiPlus />
+                <span>Write New Article</span>
+              </button>
+            </div>
           )}
         </div>
 
