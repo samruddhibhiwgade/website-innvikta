@@ -1,5 +1,6 @@
 "use client";
 
+import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useState } from "react";
 import { FiCheckCircle, FiArrowRight, FiFileText, FiImage, FiMonitor, FiLayers, FiPlay, FiSmile, FiShield, FiLock, FiAlertTriangle, FiCheck, FiBriefcase } from "react-icons/fi";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
@@ -113,6 +114,7 @@ export default function CyberAwarenessMonthCampaignPage() {
 
   return (
     <GSAPWrapper>
+      <SeoMeta title="Cybersecurity Awareness Month Kit | Innvikta" description="Access free resources, posters, training templates, and simulation guides for Cybersecurity Awareness Month." />
       {/* Structured FAQ Schema Markup */}
       <script
         type="application/ld+json"

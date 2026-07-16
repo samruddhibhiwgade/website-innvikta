@@ -1,5 +1,6 @@
 "use client";
 
+import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import "../../../styles/insat.scss";
@@ -144,6 +145,7 @@ const HumanRiskIntelligencePage = () => {
 
   return (
     <GSAPWrapper>
+      <SeoMeta title="Human Risk Intelligence & Security Culture | Innvikta" description="Get visibility into your human cyber risk surface, benchmark security culture, and drive everyday secure employee behaviors." />
       <div className="insat-page" ref={heroRef}>
         <div className="main-content">
         

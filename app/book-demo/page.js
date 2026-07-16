@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { FiArrowRight } from "react-icons/fi";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
+import SeoMeta from "@layouts/partials/SeoMeta";
 
 const DemoPage = () => {
   const [form, setForm] = useState({
@@ -79,6 +80,7 @@ const DemoPage = () => {
 
   return (
     <GSAPWrapper>
+      <SeoMeta title="Request a Free Demo | Innvikta" description="Request a personalized demo of Innvikta InSAT. Learn how we help enterprises reduce human cyber risk with security awareness training." />
       <div className="min-h-screen bg-[#fafafa]">
         {/* Header Banner (Proofpoint inspired layout, using Innvikta branding/colors) */}
         <div className="bg-[#f15a24] text-white py-12 relative overflow-hidden">

@@ -813,6 +813,7 @@ const menuData = {
           { name: "Maturity Benchmarks", desc: "Compare regional click rates and reporting rates against industry peers.", href: "/maturity-benchmarks" },
           { name: "Case Studies", desc: "Success stories from real enterprise security leadership teams.", href: "/resources/case-studies" },
           { name: "Platform Updates", desc: "See the latest features added to the Innvikta training suite.", href: "/platform-updates" },
+          { name: "DPDP at a Glance", desc: "A quick summary of India's Digital Personal Data Protection Act compliance requirements.", href: "/resources/dpdp-at-a-glance" },
           { name: "Weekly Newsletter", desc: "Security tips and campaign ideas delivered directly to your inbox.", href: "#" }
         ],
         cta: {
@@ -835,7 +836,7 @@ const menuData = {
         headline: "Benchmark your workforce risk baseline and training maturity.",
         cells: [
           { name: "Maturity Calculator", desc: "Grade the effectiveness and maturity of your training program.", href: "/resources/maturity-calculator" },
-          { name: "Risk Estimator", desc: "Estimate employee click rates before starting simulations.", href: "#" },
+          { name: "Simulation ROI Tool", desc: "Estimate potential cost savings from threat training campaigns.", href: "/resources/simulation-roi" },
           { name: "Baseline Score Tool", desc: "Get a baseline human risk score for your active domain.", href: "/freetools/baseline-score-tool" },
           { name: "Culture Benchmarking", desc: "Measure security culture indicators and threat reports.", href: "/freetools/culture-benchmarking" }
         ],
@@ -856,7 +857,7 @@ const menuData = {
           { name: "Free Password Generator", desc: "Create secure passwords and check credential strength locally.", href: "/freetools/password-generator" },
           { name: "Domain Security Analyzer", desc: "Scan SPF, DKIM, and DMARC record vulnerabilities.", href: "/freetools/domain-security-analyzer" },
           { name: "Spot The Phish", desc: "Test your ability to detect phishing emails in an interactive simulator.", href: "/freetools/spot-the-phish" },
-          { name: "Simulation ROI Tool", desc: "Estimate potential cost savings from threat training campaigns.", href: "/resources/simulation-roi" }
+          { name: "Cybersecurity Word Search", desc: "Find hidden security terms and test your vocabulary in our puzzle.", href: "/free-tools/cybersecurity-word-search" }
         ],
         cta: {
           title: "Check password exposure logs",
@@ -1041,7 +1042,7 @@ const searchIndex = [
     description: "Verify baseline employee susceptibility in less than 5 minutes.",
     url: "/freetools/baseline-score-tool",
     category: "Free Tools",
-    keywords: ["baseline", "calculator", "risk estimator", "free tool"]
+    keywords: ["baseline", "calculator", "word search", "free tool"]
   },
   {
     title: "Free Security Culture Benchmarking",
@@ -1077,6 +1078,13 @@ const searchIndex = [
     url: "/resources/glossary",
     category: "Resources",
     keywords: ["glossary", "dictionary", "terms", "definitions", "cybersecurity", "phishing", "bec"]
+  },
+  {
+    title: "DPDP at a Glance",
+    description: "India's Digital Personal Data Protection Act, 2023 and DPDP Rules, 2025 in a quick summary.",
+    url: "/resources/dpdp-at-a-glance",
+    category: "Resources",
+    keywords: ["dpdp", "privacy", "act", "india", "personal data", "compliance", "law", "fiduciary"]
   }
 ];
 
@@ -1293,6 +1301,7 @@ const Header = () => {
   };
 
   const handleMenuHover = (menuKey) => {
+    if (isSearchOpen) return;
     setActiveMegaMenu(menuKey);
   };
 
@@ -1335,16 +1344,13 @@ const Header = () => {
               <button 
                 onClick={() => {
                   setIsSearchOpen(!isSearchOpen);
+                  setActiveMegaMenu(null);
                   if (isSearchOpen) setSearchQuery("");
                 }}
                 className="hover:text-white transition-colors flex items-center gap-1.5 focus:outline-none cursor-pointer"
               >
                 <FiSearch className="text-[14px]" /> Search
               </button>
-              <span className="h-3 w-[1px] bg-white/30"></span>
-              <Link href="#" className="hover:text-white transition-colors flex items-center gap-1.5">
-                <FiHelpCircle className="text-[14px]" /> Support
-              </Link>
               <span className="h-3 w-[1px] bg-white/30"></span>
  
               <div className="relative">
@@ -1389,7 +1395,7 @@ const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.25, ease: "easeOut" }}
-                className="absolute inset-0 w-full h-[80px] bg-white z-[60] flex items-center border-b border-slate-100"
+                className="absolute inset-0 w-full h-[80px] bg-white z-[100000] flex items-center border-b border-slate-100"
               >
                 <div className="container-xl flex items-center justify-center gap-4 w-full relative">
                   <div className="relative flex-1 max-w-[800px]">
@@ -1425,7 +1431,7 @@ const Header = () => {
                         exit={{ opacity: 0, y: 10 }}
                         transition={{ duration: 0.15 }}
                         ref={searchResultsRef}
-                        className="absolute left-0 right-0 top-[60px] mx-auto max-w-[800px] bg-white border border-slate-100 rounded-2xl shadow-xl z-[70] overflow-hidden max-h-[450px] overflow-y-auto"
+                        className="absolute left-0 right-0 top-[60px] mx-auto max-w-[800px] bg-white border border-slate-100 rounded-2xl shadow-xl z-[100001] overflow-hidden max-h-[450px] overflow-y-auto"
                       >
                         {filteredResults.length === 0 ? (
                           <div className="p-8 text-center text-slate-400 font-semibold">
@@ -1495,7 +1501,7 @@ const Header = () => {
             </div>
 
             {/* Main Navigation Items */}
-            <ul className="hidden lg:flex items-center justify-center lg:gap-3 xl:gap-6 lg:absolute lg:left-1/2 lg:-translate-x-1/2 h-full desktop-nav-menu">
+            <ul className="hidden xl:flex items-center justify-center gap-x-2 xl:gap-x-4 h-full desktop-nav-menu mx-auto">
               {Object.keys(menuData).map((menuKey) => (
                 <li
                   key={menuKey}
@@ -1516,7 +1522,7 @@ const Header = () => {
             </ul>
 
             {/* Sticky Conversion Area */}
-            <div className="hidden lg:flex items-center ml-auto relative">
+            <div className="hidden xl:flex items-center ml-auto relative">
               {/* Partner CTA */}
               <div className={`transition-all duration-300 flex items-center h-full ${pathname === "/partners" ? "opacity-100 pointer-events-auto translate-x-0" : "opacity-0 pointer-events-none translate-x-4 absolute right-0"}`}>
                 <Link 
@@ -1545,7 +1551,7 @@ const Header = () => {
             </div>
 
             {/* Mobile Navigation Toggle Button */}
-            <div className="flex items-center lg:hidden" style={{ zIndex: 100001 }}>
+            <div className="flex items-center xl:hidden" style={{ zIndex: 100001 }}>
               <button
                 onClick={() => setShowMenu(!showMenu)}
                 className="p-2 text-slate-800 hover:text-[#f15a24] text-2xl transition-colors duration-200"
@@ -1831,7 +1837,7 @@ const Header = () => {
         {/* =========================================================
             MOBILE ACCORDION-BASED MENU (Preserves Information Hierarchy)
             ========================================================= */}
-        <div className={`fixed inset-x-0 top-0 h-screen bg-white z-30 px-6 pt-24 pb-28 overflow-y-auto transition-all duration-500 lg:hidden flex flex-col justify-between ${
+        <div className={`fixed inset-x-0 top-0 h-screen bg-white z-30 px-6 pt-24 pb-28 overflow-y-auto transition-all duration-500 xl:hidden flex flex-col justify-between ${
           showMenu ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"
         }`}>
           <div className="space-y-3">

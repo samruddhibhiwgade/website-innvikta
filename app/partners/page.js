@@ -1,5 +1,6 @@
 "use client";
 
+import SeoMeta from "@layouts/partials/SeoMeta";
 import { useState, useEffect, useRef } from "react";
 import { gsap } from "@lib/gsap";
 import { FiArrowRight, FiShield, FiBriefcase, FiLayers, FiActivity, FiGlobe, FiCheckCircle, FiTrendingUp, FiSettings, FiAward, FiMail, FiMonitor, FiImage, FiUsers, FiPieChart } from "react-icons/fi";
@@ -193,6 +194,7 @@ const PartnersPage = () => {
 
   return (
     <GSAPWrapper>
+      <SeoMeta title="Innvikta Partners Program | MSP & Enterprise Partners" description="Partner with Innvikta to offer leading-edge security awareness training, phishing simulations, and human risk management." />
       <div ref={containerRef} className="min-h-screen bg-[#fafafa]">
         
         {/* HERO SECTION */}

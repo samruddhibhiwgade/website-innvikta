@@ -21,7 +21,7 @@ const Footer = () => {
       { name: "Baseline Score Tool", url: "/freetools/baseline-score-tool" },
       { name: "Culture Benchmarking", url: "/freetools/culture-benchmarking" },
       { name: "Maturity Calculator", url: "#" },
-      { name: "Risk Estimator", url: "#" }
+      { name: "Cybersecurity Word Search", url: "/free-tools/cybersecurity-word-search" }
     ],
     resources: [
       { name: "Maturity Benchmarks", url: "/maturity-benchmarks" },

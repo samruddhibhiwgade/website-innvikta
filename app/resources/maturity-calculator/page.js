@@ -1,5 +1,6 @@
 "use client";
 
+import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useState, useRef, useEffect } from "react";
 import { 
   FiArrowRight, FiShield, FiCheckCircle, FiActivity, 
@@ -278,6 +279,7 @@ export default function MaturityCalculator() {
 
   return (
     <GSAPWrapper>
+      <SeoMeta title="Security Awareness Maturity Calculator | Innvikta" description="Assess your organization's security awareness maturity and get actionable recommendations." />
       <div className="insat-page" style={{ background: "#FFFFFF", color: "#1F1F1F" }}>
         <div className="main-content">
           

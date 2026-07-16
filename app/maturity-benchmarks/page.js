@@ -1,4 +1,5 @@
 // Maturity Benchmarks Page - Trigger deployment build
+import SeoMeta from "../../layouts/partials/SeoMeta";
 import React from "react";
 import Link from "next/link";
 import IndustryBenchmarkChart from "./components/IndustryBenchmarkChart";
@@ -109,6 +110,7 @@ export default function MaturityBenchmarksPage() {
 
   return (
     <>
+      <SeoMeta title="Security Awareness Maturity Benchmarks | Innvikta" description="Compare phishing click rates and reporting rates across industries and geographic regions. Factual benchmark data for security leaders." />
       {/* JSON-LD Structured Data Schema Markup */}
       <script
         type="application/ld+json"

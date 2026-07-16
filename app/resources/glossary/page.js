@@ -1,5 +1,6 @@
 "use client";
 
+import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import ImageFallback from "@layouts/components/ImageFallback";
 import Circle from "@layouts/components/Circle";
@@ -327,6 +328,7 @@ export default function GlossaryPage() {
 
   return (
     <GSAPWrapper>
+      <SeoMeta title="Cybersecurity Glossary & Terms | Innvikta" description="Browse our library of security awareness terminology, cyber threat definitions, and regulatory compliance concepts." />
       <div className="insat-page" ref={heroRef}>
         <div className="main-content">
           
