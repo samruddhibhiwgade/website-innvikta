@@ -665,25 +665,14 @@ export default function DpdpAtAGlancePage() {
                   
                   {/* Left Column: Mockup visual with laptop, plant and coffee cup */}
                   <div className="lg:col-span-4 flex justify-center">
-                    <div className="cta-visual-laptop">
-                      <svg viewBox="0 0 400 300" className="w-full h-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="180" y="220" width="40" height="40" fill="#cbd5e1" />
-                        <ellipse cx="200" cy="260" rx="45" ry="8" fill="#94a3b8" />
-                        <rect x="70" y="40" width="260" height="180" rx="12" fill="#1e293b" />
-                        <rect x="76" y="46" width="248" height="162" rx="6" fill="#f8fafc" />
-                        <path d="M200 65 L245 80 L200 95 L155 80 Z" fill="#6366f1" />
-                        <path d="M175 87 L175 110 L225 110 L225 87" fill="#4f46e5" />
-                        <path d="M245 80 L245 105" stroke="#f59e0b" strokeWidth="2" />
-                        <circle cx="245" cy="106" r="3" fill="#f59e0b" />
-                        <path d="M200 130 C210 130, 215 133, 215 142 C215 152, 200 162, 200 162 C200 162, 185 152, 185 142 C185 133, 190 130, 200 130 Z" fill="#FFEFEA" stroke="#f15a24" strokeWidth="2" />
-                        <rect x="332" y="160" width="16" height="24" rx="2" fill="#f97316" />
-                        <path d="M340 135 C345 145, 335 155, 340 160" stroke="#10b981" strokeWidth="2" strokeLinecap="round" />
-                        <path d="M336 138 C330 148, 338 155, 336 160" stroke="#10b981" strokeWidth="2" strokeLinecap="round" />
-                        <rect x="42" y="185" width="14" height="18" rx="2" fill="#ef4444" />
-                        <path d="M56 190 A3 3 0 0 1 56 196" stroke="#ef4444" strokeWidth="2" />
-                        <rect x="30" y="240" width="45" height="10" rx="1" fill="#f59e0b" />
-                        <rect x="34" y="233" width="40" height="7" rx="1" fill="#3b82f6" />
-                      </svg>
+                    <div className="cta-visual-laptop w-full max-w-[320px] lg:max-w-[360px]">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img 
+                        src="/images/dpdp_images/dpdp_compliance.png" 
+                        alt="DPDP Compliance" 
+                        className="w-full h-auto object-contain" 
+                        style={{ maxHeight: "320px" }}
+                      />
                     </div>
                   </div>
  
