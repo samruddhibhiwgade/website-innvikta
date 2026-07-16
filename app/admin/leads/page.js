@@ -92,7 +92,7 @@ export default function AdminLeadsPanel() {
                   {leads.map((lead) => (
                     <tr 
                       key={lead.id} 
-                      className={\`hover:bg-slate-50 transition-colors cursor-pointer \${selectedLead?.id === lead.id ? 'bg-primary/5' : ''}\`}
+                      className={`hover:bg-slate-50 transition-colors cursor-pointer ${selectedLead?.id === lead.id ? 'bg-primary/5' : ''}`}
                       onClick={() => setSelectedLead(lead)}
                     >
                       <td className="p-4">
@@ -142,7 +142,7 @@ export default function AdminLeadsPanel() {
                     <div className="mt-1 text-slate-400"><FiMail /></div>
                     <div>
                       <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Email</div>
-                      <a href={\`mailto:\${selectedLead.email}\`} className="text-primary font-medium hover:underline">
+                      <a href={`mailto:${selectedLead.email}`} className="text-primary font-medium hover:underline">
                         {selectedLead.email}
                       </a>
                     </div>
@@ -154,7 +154,7 @@ export default function AdminLeadsPanel() {
                     <div className="mt-1 text-slate-400"><FiPhone /></div>
                     <div>
                       <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Phone</div>
-                      <a href={\`tel:\${selectedLead.phone}\`} className="text-slate-700 font-medium hover:underline">
+                      <a href={`tel:${selectedLead.phone}`} className="text-slate-700 font-medium hover:underline">
                         {selectedLead.phone}
                       </a>
                     </div>
