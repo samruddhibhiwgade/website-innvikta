@@ -3327,12 +3327,13 @@ section {
     .journey-left-col {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         height: 100%;
         
         @media (min-width: 1024px) {
             position: sticky;
             top: 150px;
+            padding-top: 50px;
             padding-bottom: 2rem;
         }
     }
