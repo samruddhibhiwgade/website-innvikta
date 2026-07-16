@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { gsap } from "@lib/gsap";
 import { FiArrowRight, FiShield, FiBriefcase, FiLayers, FiActivity, FiGlobe, FiCheckCircle, FiTrendingUp, FiSettings, FiAward, FiMail, FiMonitor, FiImage, FiUsers, FiPieChart } from "react-icons/fi";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
+import SuccessPopup from "@layouts/partials/SuccessPopup";
 
 const heading96Style = {
   fontSize: 'clamp(2.5rem, 6vw, 5.5rem)',
@@ -36,6 +37,7 @@ const PartnersPage = () => {
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
 
   const containerRef = useRef(null);
@@ -95,7 +97,7 @@ const PartnersPage = () => {
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
       setTimeout(() => {
-        alert("Thank you for your partner request! Our team will get in touch with you shortly.");
+        setShowPopup(true);
         setForm({
           fullName: "",
           email: "",
@@ -451,9 +453,9 @@ const PartnersPage = () => {
                         <label className="block text-xs font-bold text-slate-400 uppercase mb-2 tracking-wide">Phone Number</label>
                         <input 
                           type="tel" 
-                          placeholder="+1 (555) 000-0000"
+                          placeholder="9876543210"
                           value={form.phone}
-                          onChange={(e) => setForm({...form, phone: e.target.value})}
+                          onChange={(e) => setForm({...form, phone: e.target.value.replace(/\D/g, "")})}
                           className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.phone ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                         />
                         {errors.phone && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.phone}</p>}
@@ -557,6 +559,12 @@ const PartnersPage = () => {
           </div>
         </section>
 
+        <SuccessPopup 
+          isOpen={showPopup} 
+          onClose={() => setShowPopup(false)} 
+          title="Partner Request Received!" 
+          message="Thank you for reaching out. Our partnerships team will review your details and contact you shortly." 
+        />
       </div>
     </GSAPWrapper>
   );

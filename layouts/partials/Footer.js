@@ -1,10 +1,25 @@
+"use client";
+
+import { useState } from "react";
 import Social from "@components/Social";
 import config from "@config/config.json";
 import social from "@config/social.json";
 import { markdownify } from "@lib/utils/textConverter";
 import Link from "next/link";
+import SuccessPopup from "./SuccessPopup";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (email.trim()) {
+      setShowPopup(true);
+      setEmail("");
+    }
+  };
+
   const footerData = {
     solutions: [
       { name: "InSAT (Security Awareness)", url: "/solutions/insat" },
@@ -27,7 +42,7 @@ const Footer = () => {
       { name: "Maturity Benchmarks", url: "/maturity-benchmarks" },
       { name: "Blog", url: "/blog" },
       { name: "Innvikta Cyberhelp", url: "/cyberhelp" },
-      { name: "Cybersecurity Guides", url: "#" },
+      { name: "Weekly Newsletter", url: "/resources/weekly-newsletter" },
       { name: "Glossary", url: "/resources/glossary" },
       { name: "Customer Success Stories", url: "/resources/case-studies" }
     ],
@@ -117,9 +132,12 @@ const Footer = () => {
               <p className="text-sm text-slate-500 mb-8 leading-relaxed font-medium text-left">
                 Get the latest cybersecurity insights, human risk trends, phishing research, and product updates from Innvikta.
               </p>
-              <form className="relative mb-6">
+              <form onSubmit={handleSubmit} className="relative mb-6">
                 <input 
                   type="email" 
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="your@email.com" 
                   className="form-input w-full rounded-full py-4 px-6 border-slate-300 focus:border-primary outline-none text-sm pr-36 bg-white" 
                 />
@@ -162,6 +180,12 @@ const Footer = () => {
             </div>
           </div>
         </div>
+        <SuccessPopup 
+          isOpen={showPopup} 
+          onClose={() => setShowPopup(false)} 
+          title="Subscription Confirmed!" 
+          message="Thank you for subscribing! You will receive the weekly updates related to modern threat intelligence and human security." 
+        />
       </div>
     </footer>
   );
