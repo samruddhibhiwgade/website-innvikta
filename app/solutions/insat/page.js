@@ -123,7 +123,7 @@ const InsatPage = () => {
                               src="/insat/images/Insat_heroimage.png" 
                               alt="InSAT Platform Visual" 
                               className="hero-sim-img" 
-                              style={{ maxWidth: "none", width: "100%", transform: "scale(1.35) translate(30px, -25px)", transformOrigin: "center right" }}
+                              style={{ maxWidth: "none", width: "100%", transform: "scale(1.50) translate(25px, 0px)", transformOrigin: "center right" }}
                             />
                         </div>
                     </div>
