@@ -5,8 +5,11 @@ import { FolderOpen, Upload, FolderSearch, Download, ClipboardList, X, Lightbulb
 
 export default function EvidenceVault() {
     const [files, setFiles] = useState(() => {
-        const saved = localStorage.getItem('innvikta_evidence_vault')
-        return saved ? JSON.parse(saved) : []
+        if (typeof window !== 'undefined') {
+            const saved = localStorage.getItem('innvikta_evidence_vault')
+            return saved ? JSON.parse(saved) : []
+        }
+        return []
     })
     const [rawFiles, setRawFiles] = useState({}) // Stores [id]: File object
     const [dragActive, setDragActive] = useState(false)
