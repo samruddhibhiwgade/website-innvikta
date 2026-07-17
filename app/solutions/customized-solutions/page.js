@@ -417,7 +417,7 @@ const CustomizedSolutionsPage = () => {
             <div className="container">
               <div className="section-intro animate" style={{ textAlign: "left", marginBottom: "4rem" }}>
                 <span className="text-subheading">TARGETED PATHS</span>
-                <h2 className="text-64-heading">
+                <h2 className="text-52-heading">
                   Relevant Learning for <span style={{ color: "#f15a24" }}>Every Team</span>
                 </h2>
                 <p className="text-18-content" style={{ opacity: "0.8", marginTop: "1rem", maxWidth: "800px" }}>
@@ -598,7 +598,7 @@ const CustomizedSolutionsPage = () => {
                 {/* Left Column: Heading, Description & Bullet Points */}
                 <div className="two-col-content-block animate from-left" style={{ maxWidth: "620px" }}>
                   <span className="text-subheading">EXECUTIVE & HIGH-RISK</span>
-                  <h2 className="text-64-heading" style={{ marginTop: "0.5rem", lineHeight: "1.1" }}>
+                  <h2 className="text-52-heading" style={{ marginTop: "0.5rem", lineHeight: "1.1" }}>
                     Focused Journeys for <br />
                     <span style={{ color: "#f15a24" }}>People Attackers Target First</span>
                   </h2>
