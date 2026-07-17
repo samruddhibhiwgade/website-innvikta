@@ -10,7 +10,7 @@ const Testimonial = ({ testimonial }) => {
     <section className="section bg-white py-24 overflow-hidden border-t border-border">
       <div className="container">
         <div className="animate text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight text-dark">
+          <h2 className="text-3xl md:text-4xl !font-semibold mb-4 leading-tight text-dark">
             {testimonial.title}
           </h2>
           <p className="text-base md:text-lg text-slate-600 max-w-3xl mx-auto font-medium">

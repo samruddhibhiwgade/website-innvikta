@@ -127,7 +127,7 @@ const BlogPageClient = ({ initialPosts, title }) => {
               </span>
             ))}
           </div>
-          <h3 className="text-base font-black text-slate-900 leading-snug">
+          <h3 className="text-base font-bold text-slate-900 leading-snug">
             <Link href={`/blog/${post.slug}`}>{post.frontmatter.title}</Link>
           </h3>
         </div>
@@ -176,7 +176,7 @@ const BlogPageClient = ({ initialPosts, title }) => {
               </span>
             ))}
           </div>
-          <h3 className="text-lg font-black text-slate-800 leading-snug line-clamp-2 min-h-[52px]">
+          <h3 className="text-lg font-bold text-slate-800 leading-snug line-clamp-2 min-h-[52px]">
             <Link href={`/blog/${post.slug}`}>{post.frontmatter.title}</Link>
           </h3>
           <p className="text-xs text-slate-500 font-medium leading-relaxed line-clamp-3">
@@ -238,7 +238,7 @@ const BlogPageClient = ({ initialPosts, title }) => {
  
           {/* Main Content Area */}
           <div className="max-w-3xl space-y-4">
-            <h1 className="text-3xl md:text-5xl font-secondary font-black tracking-tight leading-none text-white border-b-4 border-white pb-3 inline-block">
+            <h1 className="text-3xl md:text-5xl font-secondary font-bold tracking-tight leading-none text-white border-b-4 border-white pb-3 inline-block">
               The Innvikta Blog
             </h1>
             <p className="text-sm md:text-lg text-white/95 font-medium leading-relaxed max-w-2xl pt-1">
@@ -365,7 +365,7 @@ const BlogPageClient = ({ initialPosts, title }) => {
                         ))}
                       </div>
 
-                      <h3 className="text-xl md:text-2xl font-black text-slate-800 leading-tight">
+                      <h3 className="text-xl md:text-2xl font-bold text-slate-800 leading-tight">
                         <Link href={`/blog/${featuredPost.slug}`}>
                           {featuredPost.frontmatter.title}
                         </Link>
@@ -396,7 +396,7 @@ const BlogPageClient = ({ initialPosts, title }) => {
             {/* Bottom Grid: Rest of the posts */}
             {bottomPosts.length > 0 && (
               <div className="space-y-8">
-                <h4 className="text-lg font-black text-slate-800 tracking-tight font-secondary">
+                <h4 className="text-lg font-bold text-slate-800 tracking-tight font-secondary">
                   More From the Blog
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

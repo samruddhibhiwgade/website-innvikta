@@ -372,7 +372,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                         ? "Master Security Through <span class='text-primary'>Interactive Play</span>" 
                         : bannerData.title,
                       "h1",
-                      "mb-6 banner-title font-black text-slate-900 text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight"
+                      "mb-6 banner-title font-bold text-slate-900 text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight"
                     )}
                     <p className="banner-desc text-slate-600 text-base md:text-lg max-w-3xl mx-auto mb-8 font-medium leading-relaxed">
                       {isHookActive 

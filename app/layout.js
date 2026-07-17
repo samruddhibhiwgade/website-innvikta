@@ -10,6 +10,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "../styles/style.scss";
 
+import TrackingProvider from "@layouts/components/TrackingProvider";
+
 export default function RootLayout({ children }) {
   // import google font css
   const pf = theme.fonts.font_family.primary;
@@ -67,7 +69,7 @@ export default function RootLayout({ children }) {
 
         {/* Fontshare Satoshi */}
         <link
-          href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&display=swap"
+          href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,600,500,300,400&display=swap"
           rel="stylesheet"
         />
 
@@ -87,10 +89,12 @@ export default function RootLayout({ children }) {
       </head>
       <body suppressHydrationWarning={true} className="overflow-x-hidden">
         <TwSizeIndicator />
-        <Header />
-        {children}
-        <Footer />
-        <Chatbot />
+        <TrackingProvider>
+          <Header />
+          {children}
+          <Footer />
+          <Chatbot />
+        </TrackingProvider>
       </body>
     </html>
   );

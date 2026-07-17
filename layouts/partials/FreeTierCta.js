@@ -4,7 +4,6 @@ import { markdownify } from "@lib/utils/textConverter";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { FiCheck, FiArrowRight, FiChevronDown } from "react-icons/fi";
-import SuccessPopup from "./SuccessPopup";
 
 function CustomDropdown({ label, value, placeholder, options, onChange, error }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -74,7 +73,6 @@ const FreeTierCta = ({ data }) => {
   
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
 
   const freeDomains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "icloud.com", "aol.com"];
 
@@ -103,18 +101,40 @@ const FreeTierCta = ({ data }) => {
     
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
-      setTimeout(() => {
-        setShowPopup(true);
-        setForm({
-          fullName: "",
-          designation: "",
-          email: "",
-          phone: "",
-          company: "",
-          teamSize: ""
-        });
+      fetch("/api/forms", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          form_type: "Free Tier Cta",
+          name: form.fullName,
+          email: form.email,
+          phone: form.phone,
+          company: form.company,
+          designation: form.designation,
+          team_size: form.teamSize
+        })
+      })
+      .then((res) => res.json())
+      .then((data) => {
         setIsSubmitting(false);
-      }, 1000);
+        if (data.success) {
+          alert("Workspace request submitted successfully! We will contact you shortly.");
+          setForm({
+            fullName: "",
+            designation: "",
+            email: "",
+            phone: "",
+            company: "",
+            teamSize: ""
+          });
+        } else {
+          alert("Error: " + (data.error || "Failed to submit request. Please try again."));
+        }
+      })
+      .catch((err) => {
+        setIsSubmitting(false);
+        alert("An error occurred. Please try again later.");
+      });
     }
   };
 
@@ -155,7 +175,7 @@ const FreeTierCta = ({ data }) => {
             <span className="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest text-primary bg-primary/10 rounded-full uppercase">
               {label}
             </span>
-            <h2 className="text-3xl md:text-5xl font-bold text-dark leading-[1.1] mb-6">
+            <h2 className="text-3xl md:text-5xl !font-semibold text-dark leading-[1.1] mb-6">
               {title}
             </h2>
             <p className="text-lg md:text-xl text-slate-600 mb-10 leading-relaxed max-w-xl">
@@ -191,7 +211,7 @@ const FreeTierCta = ({ data }) => {
             
             <div className="relative bg-white border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.08)] rounded-[24px] p-8 md:p-10 text-left">
               <div className="mb-8">
-                <h3 className="text-2xl font-bold text-dark mb-2">
+                <h3 className="text-2xl !font-semibold text-dark mb-2">
                   Start Your Free <span className="text-primary">InSAT Workspace</span>
                 </h3>
                 <p className="text-slate-500 text-sm">
@@ -237,9 +257,9 @@ const FreeTierCta = ({ data }) => {
                   <label className="block text-xs font-bold text-slate-400 uppercase mb-2 tracking-wide">Phone Number</label>
                   <input 
                     type="tel" 
-                    placeholder="9876543210"
+                    placeholder="+1 (555) 000-0000"
                     value={form.phone}
-                    onChange={(e) => setForm({...form, phone: e.target.value.replace(/\D/g, "")})}
+                    onChange={(e) => setForm({...form, phone: e.target.value})}
                     className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.phone ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                   />
                   {errors.phone && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.phone}</p>}
@@ -293,12 +313,6 @@ const FreeTierCta = ({ data }) => {
           </div>
         </div>
       </div>
-      <SuccessPopup 
-        isOpen={showPopup} 
-        onClose={() => setShowPopup(false)} 
-        title="Trial Setup Initialized!" 
-        message="Thank you for signing up for the free tier! We are preparing your company dashboard link and will email it to you shortly." 
-      />
     </section>
   );
 };

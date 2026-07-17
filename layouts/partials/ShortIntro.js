@@ -12,7 +12,7 @@ const ShortIntro = ({ intro }) => {
           <div className="text-center">
             <div className="animate">
               <p>{intro.subtitle}</p>
-              {markdownify(intro.title, "h2", "mt-4 section-title leading-tight")}
+              {markdownify(intro.title, "h2", "mt-4 section-title !font-semibold leading-tight")}
               {markdownify(intro.description, "p", "mt-10")}
             </div>
             <div className="mx-auto mt-10 h-full max-h-[320px] w-full max-w-[580px] shadow-lg rounded-2xl overflow-hidden border-4 border-white/80">
