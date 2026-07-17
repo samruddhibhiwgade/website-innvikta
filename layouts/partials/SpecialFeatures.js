@@ -31,7 +31,7 @@ const SpecialFeatures = ({ speciality }) => {
               }`}
           >
             {/* Decorative Waves for each row */}
-            <div className={`absolute top-1/4 left-0 w-full -translate-y-1/2 -z-10 opacity-70 pointer-events-none ${index % 2 !== 0 ? 'rotate-180' : ''}`}>
+            <div className={`absolute top-1/4 left-0 w-full -translate-y-1/2 -z-10 opacity-20 pointer-events-none ${index % 2 !== 0 ? 'rotate-180' : ''}`}>
                <Image 
                 src="/images/wave.svg" 
                 alt="wave decoration" 
@@ -40,7 +40,7 @@ const SpecialFeatures = ({ speciality }) => {
                 className="w-full scale-150"
                />
             </div>
-            <div className={`absolute top-3/4 left-0 w-full -translate-y-1/2 -z-10 opacity-80 pointer-events-none ${index % 2 === 0 ? 'rotate-180' : ''}`}>
+            <div className={`absolute top-3/4 left-0 w-full -translate-y-1/2 -z-10 opacity-30 pointer-events-none ${index % 2 === 0 ? 'rotate-180' : ''}`}>
                <Image 
                 src="/images/wave.svg" 
                 alt="wave decoration" 
@@ -50,16 +50,6 @@ const SpecialFeatures = ({ speciality }) => {
                />
             </div>
 
-            {/* Floating Shields */}
-            <div className="absolute top-10 left-[10%] opacity-10 -z-10 animate-bounce duration-[3s]">
-              <FeatherIcon icon="shield" size={120} className="text-primary" />
-            </div>
-            <div className="absolute bottom-10 right-[15%] opacity-10 -z-10 animate-bounce duration-[4s]">
-              <FeatherIcon icon="shield" size={80} className="text-primary" />
-            </div>
-            <div className="absolute top-1/2 right-[5%] opacity-5 -z-10 rotate-12">
-              <FeatherIcon icon="shield" size={160} className="text-primary" />
-            </div>
 
             <div
               className={`animate md:col-5 px-6 ${index % 2 !== 0 ? "order-1 md:order-2 md:pl-0 md:pr-12 lg:pr-24" : "md:pr-0 md:pl-12 lg:pl-24"

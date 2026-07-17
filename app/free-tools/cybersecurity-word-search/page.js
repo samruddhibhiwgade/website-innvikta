@@ -1119,8 +1119,8 @@ const WordSearchPage = () => {
         {/* 6. SYSTEM-WIDE FAQ */}
         <section className="bg-[#FFFAF6] border-t border-border py-16">
           <div className="container faq-grid">
-            <div className="faq-title-col animate from-left">
-              <h2 className="text-40-heading">We’re here to help</h2>
+            <div className="faq-title-col animate from-left flex flex-col justify-center self-center items-center text-center">
+              <h2 className="text-40-heading text-center">We’re here to help</h2>
               <a className="arrow-link" href="https://docs.insat.training/docs/getting-started" target="_blank" rel="noopener noreferrer" style={{ marginTop: "1.25rem" }}>
                 <div className="arrow-circle">
                   <span className="arrow-circle-bg"></span>
@@ -1171,8 +1171,12 @@ const WordSearchPage = () => {
                   Run safe simulations and turn risky behaviour into measurable learning.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4 mt-10" style={{ marginTop: "2.5rem" }}>
-                  <Link href="/book-demo" className="btn btn-primary">Book A Demo</Link>
-                  <Link href="/start-free" className="btn btn-outline-primary">Start Free</Link>
+                  <Link href="/start-free" className="btn btn-outline-primary">
+                    Start Free
+                  </Link>
+                  <Link href="/book-demo" className="btn btn-primary">
+                    Book a demo &rarr;
+                  </Link>
                 </div>
               </div>
               <div className="bg-theme animated-bg absolute top-0 left-0 w-full after:hidden overflow-hidden">

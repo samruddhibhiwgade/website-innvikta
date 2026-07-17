@@ -208,7 +208,7 @@ export default function CaseStudies() {
                   </div>
                 </div>
 
-                {/* Read More Button styled like Book A Demo in navbar */}
+                {/* Read More Button styled like Book a demo in navbar */}
                 <div className="px-2 pb-6">
                   <Link 
                     href={`/resources/case-studies/${study.slug || ""}`} 

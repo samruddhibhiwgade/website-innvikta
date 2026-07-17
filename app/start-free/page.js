@@ -344,7 +344,7 @@ const StartFreePage = () => {
           <section className="bg-grey-5 py-20">
             <div className="container faq-grid">
               <div className="faq-title-col">
-                <h2 className="text-40-heading">We’re here to help</h2>
+                <h2 className="text-40-heading text-center">We’re here to help</h2>
                 <a className="arrow-link" href="https://docs.insat.training/docs/getting-started" target="_blank" rel="noopener noreferrer" style={{ marginTop: "1.25rem" }}>
                   <div className="arrow-circle">
                     <span className="arrow-circle-bg"></span>

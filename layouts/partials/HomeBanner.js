@@ -184,7 +184,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
           width={1920}
           height={1080}
           priority 
-          className="w-full h-auto object-top opacity-60 will-change-transform" 
+          className="w-full h-full object-cover object-center md:object-top opacity-60 will-change-transform" 
           alt="hero background"
         />
         <NetworkBackground />
@@ -381,22 +381,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                     </p>
                   </motion.div>
                 </AnimatePresence>
-                <div className="banner-btn flex flex-wrap items-center justify-center gap-4">
-                  <Link
-                    className="btn btn-primary shadow-lg shadow-orange-500/15"
-                    href={bannerData.link.href}
-                  >
-                    {bannerData.link.label}
-                  </Link>
-                  {bannerData.link_secondary && (
-                    <Link
-                      className="btn btn-outline-primary h-12 flex items-center justify-center rounded-[6px] px-6 font-bold"
-                      href={bannerData.link_secondary.href}
-                    >
-                      {bannerData.link_secondary.label}
-                    </Link>
-                  )}
-                </div>
+                {/* CTA buttons removed as requested */}
               </div>
             </div>
           </div>

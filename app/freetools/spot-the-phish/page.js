@@ -1350,13 +1350,13 @@ export default function SpotThePhish() {
                     A single phishing email can bypass even the strongest technical controls. Discover how vulnerable your employees are to phishing attacks and gain actionable insights into human cyber risk.
                   </p>
                   <div className="flex flex-wrap justify-center gap-4 mt-10" style={{ marginTop: "2.5rem" }}>
-                    <Link href="/book-demo" className="btn btn-primary">
-                      Book A Demo
-                    </Link>
-                    <Link href="/book-demo" className="btn btn-outline-primary">
-                      Start Free
-                    </Link>
-                  </div>
+                  <Link href="/start-free" className="btn btn-outline-primary">
+                    Start Free
+                  </Link>
+                  <Link href="/book-demo" className="btn btn-primary">
+                    Book a demo &rarr;
+                  </Link>
+                </div>
                 </div>
                 
                 <div className="bg-theme animated-bg absolute top-0 left-0 w-full after:hidden overflow-hidden z-[-1] rounded-2xl">

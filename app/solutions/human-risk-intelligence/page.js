@@ -308,7 +308,7 @@ const HumanRiskIntelligencePage = () => {
                                 </div>
                             </Link>
                             <Link className="btn btn-secondary" href="/book-demo">
-                                <span>Book A Demo</span>
+                                <span>Book a demo</span>
                             </Link>
                         </div>
                     </div>
@@ -338,7 +338,7 @@ const HumanRiskIntelligencePage = () => {
 
                         <div style={{ marginTop: "2rem" }}>
                             <Link className="btn btn-primary btn-cta" href="/book-demo">
-                                <span>Book A Demo</span>
+                                <span>Book a demo</span>
                                 <div className="arrow-wrapper">
                                     <svg className="arrow-icon" width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M3.29985 4.50047L0 1.20062L0.942813 0.257812L5.18545 4.50047L0.942813 8.74306L0 7.80027L3.29985 4.50047Z" fill="currentColor" />
@@ -969,8 +969,8 @@ const HumanRiskIntelligencePage = () => {
         {/* 10. FAQ SECTION */}
         <section className="bg-grey-5">
             <div className="container faq-grid">
-                <div className="faq-title-col animate from-left">
-                    <h2 className="text-40-heading">We’re here to help</h2>
+                <div className="faq-title-col animate from-left flex flex-col justify-center self-center items-center text-center">
+                    <h2 className="text-40-heading text-center">We’re here to help</h2>
                     <a className="arrow-link" href="https://docs.insat.training/docs/getting-started" target="_blank" rel="noopener noreferrer" style={{marginTop: "1.25rem"}}>
                         <div className="arrow-circle">
                             <span className="arrow-circle-bg"></span>
@@ -1019,13 +1019,13 @@ const HumanRiskIntelligencePage = () => {
                     Use AI-assisted intelligence to uncover, prioritize, and reduce workforce risk.
                   </p>
                   <div className="flex flex-wrap justify-center gap-4 mt-10" style={{ marginTop: "2.5rem" }}>
-                    <Link href="/book-demo" className="btn btn-primary">
-                      Book A Demo
-                    </Link>
-                    <Link href="/book-demo" className="btn btn-outline-primary">
-                      Start Free
-                    </Link>
-                  </div>
+                  <Link href="/start-free" className="btn btn-outline-primary">
+                    Start Free
+                  </Link>
+                  <Link href="/book-demo" className="btn btn-primary">
+                    Book a demo &rarr;
+                  </Link>
+                </div>
                 </div>
                 <div className="bg-theme animated-bg absolute top-0 left-0 w-full after:hidden overflow-hidden">
                   <div className="animate-wave absolute inset-0 w-full h-full">

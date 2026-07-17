@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { CgClose } from "react-icons/cg";
-import { IoGameControllerOutline } from "react-icons/io5";
+import { IoGameControllerOutline, IoGameController } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   FiChevronDown, 
@@ -780,6 +780,7 @@ const menuData = {
       {
         id: "victim_support",
         label: "Innvikta Cyberhelp",
+        href: "/cyberhelp",
         icon: FiShield,
         headline: "Victim of Cyberfraud? We’re Here to Help You Fight Back.",
         headlineCta: {
@@ -805,6 +806,7 @@ const menuData = {
       {
         id: "knowledge_hub",
         label: "Knowledge Hub",
+        href: "/blog",
         icon: FiBookOpen,
         headline: "Explore our latest cybersecurity articles, global benchmarks, and community updates.",
         cells: [
@@ -832,6 +834,7 @@ const menuData = {
       {
         id: "assessments",
         label: "Security Assessments",
+        href: "/resources/maturity-calculator",
         icon: FiActivity,
         headline: "Benchmark your workforce risk baseline and training maturity.",
         cells: [
@@ -851,6 +854,7 @@ const menuData = {
       {
         id: "cyber_tools",
         label: "Free Cybersecurity Tools",
+        href: "/freetools/password-generator",
         icon: FiMonitor,
         headline: "Immediate security utilities for IT and security administration teams.",
         cells: [
@@ -875,6 +879,7 @@ const menuData = {
       {
         id: "arcade_exp",
         label: "Arcade Experience",
+        href: "/cyber-arcade",
         icon: IoGameControllerOutline,
         headline: "Turn security awareness into engaging, game-based learning.",
         cells: [
@@ -894,6 +899,7 @@ const menuData = {
       {
         id: "gamification_sys",
         label: "Gamification System",
+        href: "/cyber-arcade",
         icon: FiAward,
         headline: "Keep employees motivated with progression, badges, and rewards.",
         cells: [
@@ -1066,7 +1072,7 @@ const searchIndex = [
     keywords: ["start free", "trial", "register", "free account"]
   },
   {
-    title: "Book A Demo",
+    title: "Book a demo",
     description: "Schedule a live demo session with our product experts.",
     url: "/book-demo",
     category: "Get Started",
@@ -1119,6 +1125,29 @@ const getLangFromCookie = () => {
     return reverseMap[code] || 'English (US)';
   }
   return 'English (US)';
+};
+
+const isMenuKeyActive = (menuKey, currentPath) => {
+  if (!currentPath) return false;
+
+  const isFreeToolResource = currentPath.includes("/resources/maturity-calculator") || currentPath.includes("/resources/simulation-roi");
+
+  if (menuKey === "resources") {
+    if (isFreeToolResource) return false;
+    return (currentPath.includes("/resources") || currentPath.includes("/cyberhelp") || currentPath.includes("/blog") || currentPath.includes("/maturity-benchmarks"));
+  }
+
+  if (menuKey === "solutions" && currentPath.includes("/solutions")) return true;
+
+  if (menuKey === "freetools") {
+    return (currentPath.includes("/freetools") || currentPath.includes("/free-tools") || isFreeToolResource);
+  }
+
+  if (menuKey === "arcade" && (currentPath.includes("/cyber-arcade") || currentPath.includes("/arcade"))) return true;
+  if (menuKey === "partners" && currentPath.includes("/partners")) return true;
+  if (menuKey === "company" && currentPath.includes("/about")) return true;
+
+  return false;
 };
 
 const Header = () => {
@@ -1185,7 +1214,7 @@ const Header = () => {
   const [activeMegaMenu, setActiveMegaMenu] = useState(null);
   const [activeTabs, setActiveTabs] = useState({
     solutions: "insat",
-    resources: "knowledge_hub",
+    resources: "victim_support",
     freetools: "assessments",
     arcade: "arcade_exp",
     partners: "partner_prog",
@@ -1513,15 +1542,25 @@ const Header = () => {
                 <li
                   key={menuKey}
                   className="h-full flex items-center"
-                  onMouseEnter={() => handleMenuHover(menuKey)}
                 >
-                  <button className={`nav-link h-full flex items-center text-slate-900 hover:text-[#f15a24] transition-colors focus:outline-none whitespace-nowrap ${
-                    activeMegaMenu === menuKey ? "text-[#f15a24]" : ""
-                  }`}>
-                    {menuKey === "arcade" && <IoGameControllerOutline className="text-lg text-[#f15a24]" />}
+                  <button 
+                    onClick={() => {
+                      if (activeMegaMenu === menuKey) {
+                        handleMenuLeave();
+                      } else {
+                        handleMenuHover(menuKey);
+                      }
+                    }}
+                    className={`nav-link h-full flex items-center transition-colors focus:outline-none whitespace-nowrap ${
+                      activeMegaMenu === menuKey || isMenuKeyActive(menuKey, pathname) ? "text-[#f15a24]" : "text-slate-900 hover:text-[#f15a24]"
+                    }`}
+                  >
+                    {menuKey === "arcade" && <IoGameController className="text-lg text-[#f15a24]" />}
                     {menuData[menuKey].title}
                     <FiChevronDown className={`text-xs transition-transform duration-200 ${
-                      activeMegaMenu === menuKey ? "rotate-180 text-[#f15a24]" : "text-slate-400"
+                      activeMegaMenu === menuKey ? "rotate-180" : ""
+                    } ${
+                      activeMegaMenu === menuKey || isMenuKeyActive(menuKey, pathname) ? "text-[#f15a24]" : "text-slate-400"
                     }`} />
                   </button>
                 </li>
@@ -1552,7 +1591,7 @@ const Header = () => {
                   href="/book-demo" 
                   className="bg-[#f15a24] hover:bg-orange-600 text-white rounded-lg transition-all duration-300 flex items-center gap-1 whitespace-nowrap header-cta-book-demo"
                 >
-                  Book A Demo <FiArrowRight className="text-xs" />
+                  Book a demo <FiArrowRight className="text-xs" />
                 </Link>
               </div>
             </div>
@@ -1824,9 +1863,9 @@ const Header = () => {
                                 <Link 
                                   href={currentTab.cta.href || "#"}
                                   onClick={handleMenuLeave}
-                                  className="w-full justify-center text-center py-2.5 xl:py-3 bg-[#f15a24] hover:bg-orange-600 text-white font-semibold whitespace-nowrap rounded-lg text-[10px] xl:text-xs transition-colors flex items-center gap-1.5 uppercase tracking-wider shadow-md shadow-orange-500/10"
+                                  className="w-full justify-center text-center py-2 xl:py-2.5 text-[#f15a24] hover:text-orange-700 font-bold whitespace-nowrap text-[13px] xl:text-[14px] transition-colors flex items-center gap-1.5 group-hover/card:underline"
                                 >
-                                  {currentTab.cta.label} <FiArrowRight className="text-xs" />
+                                  {currentTab.cta.label.charAt(0).toUpperCase() + currentTab.cta.label.slice(1).toLowerCase()} <FiArrowRight className="text-[15px]" />
                                 </Link>
                               </div>
                             </div>
@@ -2030,7 +2069,7 @@ const Header = () => {
                 onClick={() => setShowMenu(false)}
                 className="w-full block text-center py-3 bg-[#f15a24] text-white font-extrabold rounded-lg text-sm shadow-md shadow-orange-500/10 flex items-center justify-center gap-1"
               >
-                Book A Demo <FiArrowRight className="text-xs" />
+                Book a demo <FiArrowRight className="text-xs" />
               </Link>
             </div>
           </div>

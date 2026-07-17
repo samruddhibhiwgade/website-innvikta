@@ -807,13 +807,13 @@ export default function GlossaryPage() {
                               Run safe simulations and turn risky behaviour into measurable learning.
                           </p>
                           <div className="flex flex-wrap justify-center gap-4 mt-10" style={{ marginTop: "2.5rem" }}>
-                              <Link href="/book-demo" className="btn btn-primary text-white font-bold">
-                                  Book A Demo
-                              </Link>
-                              <Link href="/book-demo" className="btn btn-outline-primary font-bold">
-                                  Start Free
-                              </Link>
-                          </div>
+                  <Link href="/start-free" className="btn btn-outline-primary">
+                    Start Free
+                  </Link>
+                  <Link href="/book-demo" className="btn btn-primary">
+                    Book a demo &rarr;
+                  </Link>
+                </div>
                       </div>
                       <div className="bg-theme animated-bg absolute top-0 left-0 w-full after:hidden overflow-hidden">
                           <div className="animate-wave absolute inset-0 w-full h-full">

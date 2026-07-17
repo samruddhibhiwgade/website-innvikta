@@ -706,7 +706,7 @@ const Chatbot = () => {
               onClick={startBookingFlow}
               className="text-[11px] font-medium text-[#f15a24] hover:bg-orange-50 bg-white border border-[#f15a24]/20 px-2 py-0.5 rounded-full transition-all flex items-center gap-0.5 cursor-pointer"
             >
-              Book A Demo
+              Book a demo
             </button>
           </div>
         )}

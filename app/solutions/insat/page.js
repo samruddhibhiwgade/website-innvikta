@@ -6,7 +6,8 @@ import Link from "next/link";
 import "../../../styles/insat.scss";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
 import { gsap } from "@lib/gsap";
-
+import Circle from "@layouts/components/Circle";
+import ImageFallback from "@layouts/components/ImageFallback";
 const InsatPage = () => {
   const [activeFaq, setActiveFaq] = useState(null);
   const heroRef = useRef(null);
@@ -162,7 +163,7 @@ const InsatPage = () => {
                         <div style={{ marginTop: "2rem" }}>
                             <Link className="btn btn-primary btn-cta" href="/book-demo">
                                 <span className="hover-sweep"></span>
-                                <span>Book A Demo</span>
+                                <span>Book a demo</span>
                                 <div className="arrow-wrapper">
                                     <svg className="arrow-icon" width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M3.29985 4.50047L0 1.20062L0.942813 0.257812L5.18545 4.50047L0.942813 8.74306L0 7.80027L3.29985 4.50047Z" fill="currentColor" />
@@ -585,7 +586,11 @@ const InsatPage = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     
                     <div className="side-card" style={{display: "flex", flexDirection: "column", height: "100%"}}>
-                        <div className="side-card-text-wrapper" style={{flex: "1"}}>
+                        <div className="side-card-visual bg-plum">
+                            <img alt="Finance risks illustration" loading="lazy"
+                                src="/insat/images/finance.png" />
+                        </div>
+                        <div className="side-card-text-wrapper pt-4" style={{flex: "1"}}>
                             <div className="side-card-title-row">
                                 <span className="side-card-title">Finance</span>
                             </div>
@@ -593,15 +598,15 @@ const InsatPage = () => {
                                 Invoice fraud, payment manipulation, fake vendor requests, and CEO fraud.
                             </p>
                         </div>
-                        <div className="side-card-visual bg-plum">
-                            <img alt="Finance risks illustration" loading="lazy"
-                                src="/insat/images/finance.png" />
-                        </div>
                     </div>
 
                     
                     <div className="side-card" style={{display: "flex", flexDirection: "column", height: "100%"}}>
-                        <div className="side-card-text-wrapper" style={{flex: "1"}}>
+                        <div className="side-card-visual bg-plum">
+                            <img alt="HR risks illustration" loading="lazy"
+                                src="/insat/images/Hr.png" />
+                        </div>
+                        <div className="side-card-text-wrapper pt-4" style={{flex: "1"}}>
                             <div className="side-card-title-row">
                                 <span className="side-card-title">HR</span>
                             </div>
@@ -609,15 +614,15 @@ const InsatPage = () => {
                                 Resume malware, employee data handling, fake documents, and social engineering.
                             </p>
                         </div>
-                        <div className="side-card-visual bg-plum">
-                            <img alt="HR risks illustration" loading="lazy"
-                                src="/insat/images/Hr.png" />
-                        </div>
                     </div>
 
                     
                     <div className="side-card" style={{display: "flex", flexDirection: "column", height: "100%"}}>
-                        <div className="side-card-text-wrapper" style={{flex: "1"}}>
+                        <div className="side-card-visual bg-plum">
+                            <img alt="Sales risks illustration" loading="lazy"
+                                src="/insat/images/sales.png" />
+                        </div>
+                        <div className="side-card-text-wrapper pt-4" style={{flex: "1"}}>
                             <div className="side-card-title-row">
                                 <span className="side-card-title">Sales</span>
                             </div>
@@ -625,25 +630,21 @@ const InsatPage = () => {
                                 Client data protection, public Wi-Fi risks, CRM access, and impersonation attempts.
                             </p>
                         </div>
-                        <div className="side-card-visual bg-plum">
-                            <img alt="Sales risks illustration" loading="lazy"
-                                src="/insat/images/sales.png" />
-                        </div>
                     </div>
 
                     
                     <div className="side-card" style={{display: "flex", flexDirection: "column", height: "100%"}}>
-                        <div className="side-card-text-wrapper" style={{flex: "1"}}>
+                        <div className="side-card-visual bg-plum">
+                            <img alt="IT risks illustration" loading="lazy"
+                                src="/insat/images/IT.png" />
+                        </div>
+                        <div className="side-card-text-wrapper pt-4" style={{flex: "1"}}>
                             <div className="side-card-title-row">
                                 <span className="side-card-title">IT</span>
                             </div>
                             <p className="side-card-desc">
                                 Privileged access, malware response, cloud risks, and incident reporting.
                             </p>
-                        </div>
-                        <div className="side-card-visual bg-plum">
-                            <img alt="IT risks illustration" loading="lazy"
-                                src="/insat/images/IT.png" />
                         </div>
                     </div>
                 </div>
@@ -653,8 +654,8 @@ const InsatPage = () => {
         
         <section className="bg-grey-5">
             <div className="container faq-grid">
-                <div className="faq-title-col animate from-left">
-                    <h2 className="text-40-heading">We’re here to help</h2>
+                <div className="faq-title-col animate from-left flex flex-col justify-center self-center items-center text-center">
+                    <h2 className="text-40-heading text-center">We’re here to help</h2>
                     <a className="arrow-link" href="https://docs.insat.training/docs/getting-started" target="_blank" rel="noopener noreferrer"
                         style={{marginTop: "1.25rem"}}>
                         <div className="arrow-circle">
@@ -775,7 +776,46 @@ const InsatPage = () => {
             </div>
         </section>
 
-    
+        {/* FINAL CTA SECTION */}
+        <section className="cta" style={{ marginTop: "-3.5rem", paddingTop: "0", paddingBottom: "4rem" }}>
+          <div className="container-xl">
+            <div className="section relative px-4 text-center" style={{ isolation: "isolate", paddingTop: "4.5rem", paddingBottom: "4.5rem" }}>
+              <div className="animate">
+                <h2 className="section-title leading-tight">
+                  Ready to Make Security Awareness Measurable?
+                </h2>
+                <p className="mt-10 font-primary text-base text-slate-600 leading-relaxed" style={{ marginTop: "2.5rem" }}>
+                  Deliver gamified learning, simulate real-world attacks, and build human risk evidence from one unified platform.
+                </p>
+                <div className="flex flex-wrap justify-center gap-4 mt-10" style={{ marginTop: "2.5rem" }}>
+                  <Link href="/start-free" className="btn btn-outline-primary">
+                    Start Free
+                  </Link>
+                  <Link href="/book-demo" className="btn btn-primary">
+                    Book a demo &rarr;
+                  </Link>
+                </div>
+              </div>
+              <div className="bg-theme animated-bg absolute top-0 left-0 w-full after:hidden overflow-hidden">
+                <div className="animate-wave absolute inset-0 w-full h-full">
+                  <ImageFallback
+                    src="/images/wave.svg"
+                    fill={true}
+                    sizes="100vw"
+                    alt="bg wave"
+                  />
+                </div>
+                <Circle className="left-[10%] top-12" width={32} height={32} fill={false} fillValue="#FF5A1F" />
+                <Circle className="left-[3%] bottom-[13%]" width={85} height={85} fillValue="#FF5A1F" />
+                <Circle className="left-[15%] bottom-[35%]" width={47} height={47} fill={false} fillValue="#FF5A1F" />
+                <Circle className="right-[12%] top-[12%]" width={20} height={20} fillValue="#FF5A1F" />
+                <Circle className="right-[2%] bottom-[30%]" width={73} height={73} fill={false} fillValue="#FF5A1F" />
+                <Circle className="right-[19%] bottom-[16%]" width={37} height={37} fill={false} fillValue="#FF5A1F" />
+              </div>
+            </div>
+          </div>
+        </section>
+
         </div>
       </div>
     </GSAPWrapper>

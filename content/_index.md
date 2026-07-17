@@ -4,7 +4,7 @@ banner:
   description: "Innvikta helps enterprises build safer employee behaviour through phishing simulations, gamified learning, AI-powered training journeys, and human risk visibility for security leaders."
   image: /images/banner-app.png
   link:
-    label: Book A Demo
+    label: Book a demo
     href: "/book-demo"
   link_secondary:
     label: Start Free

@@ -124,44 +124,27 @@
 }
 
 /* === Reset & Base === */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    font-size: 16px;
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-body {
+.cyberhelp-scope {
     font-family: var(--font-primary);
     background: var(--color-bg-primary);
     color: var(--color-text-primary);
     line-height: 1.6;
     min-height: 100vh;
-    overflow-x: hidden;
     transition: background 0.3s ease, color 0.3s ease;
-}
+    
+    * {
+        box-sizing: border-box;
+    }
 
-#root {
-    position: relative;
-    z-index: 1;
-}
+    a {
+        color: var(--color-accent-orange);
+        text-decoration: none;
+        transition: color var(--transition-fast);
+    }
 
-a {
-    color: var(--color-accent-orange);
-    text-decoration: none;
-    transition: color var(--transition-fast);
-}
-
-a:hover {
-    color: #EA580C;
+    a:hover {
+        color: #EA580C;
+    }
 }
 
 /* === Utility Classes === */

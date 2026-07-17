@@ -7,13 +7,14 @@
   color: #ffffff !important;
 
   &:hover {
-    @apply bg-primary/95 brightness-95;
+    @apply opacity-90 brightness-95;
     color: #ffffff !important;
   }
 }
 
 .btn-outline-primary {
   @apply border-primary border bg-transparent text-primary rounded-[6px] h-12 transition duration-300;
+  color: #f15a24 !important;
 
   &:hover {
     @apply bg-primary;
