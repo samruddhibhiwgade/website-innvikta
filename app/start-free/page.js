@@ -4,6 +4,7 @@ import SeoMeta from "@layouts/partials/SeoMeta";
 import { useState } from "react";
 import { FiArrowRight, FiCheckCircle } from "react-icons/fi";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
+import SuccessPopup from "@layouts/partials/SuccessPopup";
 import "../../styles/insat.scss";
 
 const StartFreePage = () => {
@@ -19,6 +20,7 @@ const StartFreePage = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const [activeFaq, setActiveFaq] = useState(null);
 
   const freeDomains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "icloud.com", "aol.com"];
@@ -66,6 +68,7 @@ const StartFreePage = () => {
         setIsSubmitting(false);
         if (data.success) {
           setSubmitted(true);
+          setShowPopup(true);
         } else {
           alert("Error: " + (data.error || "Failed to submit request. Please try again."));
         }
@@ -273,9 +276,9 @@ const StartFreePage = () => {
                         <label className="block text-xs font-bold text-slate-400 uppercase mb-2 tracking-wide">Phone Number</label>
                         <input 
                           type="tel" 
-                          placeholder="+1 (555) 000-0000"
+                          placeholder="9876543210"
                           value={form.phone}
-                          onChange={(e) => setForm({...form, phone: e.target.value})}
+                          onChange={(e) => setForm({...form, phone: e.target.value.replace(/\D/g, "")})}
                           className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.phone ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                         />
                         {errors.phone && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.phone}</p>}
@@ -379,6 +382,12 @@ const StartFreePage = () => {
           </section>
         </div>
       </div>
+      <SuccessPopup 
+        isOpen={showPopup} 
+        onClose={() => setShowPopup(false)} 
+        title="Trial Setup Initialized!" 
+        message="Thank you for signing up for the free tier! We are preparing your company dashboard link and will email it to you shortly." 
+      />
     </GSAPWrapper>
   );
 };
