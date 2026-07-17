@@ -85,7 +85,7 @@ const InsatPage = () => {
 
                 
                 <div className="container">
-                    <div className="hero-grid-container" style={{ gridTemplateColumns: "1.1fr 0.9fr", gap: "4.5rem" }}>
+                    <div className="hero-grid-container">
                         <div className="hero-content">
                             <span className="text-subheading">AI-Powered Security Awareness Platform</span>
                             <h1 className="text-96-heading hero-title-custom">
