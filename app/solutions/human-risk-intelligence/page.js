@@ -289,7 +289,7 @@ const HumanRiskIntelligencePage = () => {
                 <div className="container">
                     <div className="hero-content">
                         <span className="text-subheading">HUMAN BEHAVIOUR & RISK ANALYTICS</span>
-                        <h1 className="text-96-heading">AI-Powered Human Risk Intelligence</h1>
+                        <h1 className="text-96-heading hero-title-custom">AI-Powered Human Risk Intelligence</h1>
 
                         <div className="hero-text-wrapper">
                             <p className="text-20-content hero-paragraph">
