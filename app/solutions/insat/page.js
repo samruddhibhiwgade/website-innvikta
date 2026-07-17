@@ -89,7 +89,7 @@ const InsatPage = () => {
                         <div className="hero-content">
                             <span className="text-subheading">AI-Powered Security Awareness Platform</span>
                             <h1 className="text-96-heading hero-title-custom" style={{ fontSize: "clamp(2.5rem, 3.8vw, 3.6rem)", lineHeight: "1.0", marginBottom: "1.5rem" }}>
-                              Security Awareness<br />Training Built for Real Behaviour Change
+                              Security Awareness<br />Training Built for<br />Real Behaviour Change
                             </h1>
 
                             <div className="hero-text-wrapper">
