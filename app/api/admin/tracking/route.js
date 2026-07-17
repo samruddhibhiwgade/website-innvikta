@@ -4,7 +4,7 @@ const PHP_BACKEND = process.env.NEXT_PUBLIC_PHP_BACKEND_URL || "https://innvikta
 
 export async function GET() {
   try {
-    const res = await fetch(`${PHP_BACKEND}/track_analytics.php`, {
+    const res = await fetch(`${PHP_BACKEND}/track_analytics.php?api_key=INX_ADMIN_API_KEY_77`, {
       cache: 'no-store',
       headers: {
         'Accept': 'application/json'

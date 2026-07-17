@@ -180,9 +180,22 @@ CREATE TABLE IF NOT EXISTS user_events (
     additional_data JSON,
     ip_address VARCHAR(45),
     user_agent TEXT,
+    utm_source VARCHAR(100),
+    utm_medium VARCHAR(100),
+    utm_campaign VARCHAR(100),
+    referrer VARCHAR(300),
+    country VARCHAR(100),
+    city VARCHAR(100),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ");
+
+try { $db->exec("ALTER TABLE user_events ADD COLUMN utm_source VARCHAR(100) AFTER user_agent"); } catch (Exception $e) {}
+try { $db->exec("ALTER TABLE user_events ADD COLUMN utm_medium VARCHAR(100) AFTER utm_source"); } catch (Exception $e) {}
+try { $db->exec("ALTER TABLE user_events ADD COLUMN utm_campaign VARCHAR(100) AFTER utm_medium"); } catch (Exception $e) {}
+try { $db->exec("ALTER TABLE user_events ADD COLUMN referrer VARCHAR(300) AFTER utm_campaign"); } catch (Exception $e) {}
+try { $db->exec("ALTER TABLE user_events ADD COLUMN country VARCHAR(100) AFTER referrer"); } catch (Exception $e) {}
+try { $db->exec("ALTER TABLE user_events ADD COLUMN city VARCHAR(100) AFTER country"); } catch (Exception $e) {}
 
 
 echo "All tables created.\n\n";
