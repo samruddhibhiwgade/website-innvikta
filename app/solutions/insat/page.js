@@ -336,13 +336,13 @@ const InsatPage = () => {
         <section className="bg-white">
             <div className="container">
                 <div className="section-intro animate" style={{textAlign: "center"}}>
-                    <h2 className="text-64-heading">Build Security Awareness Across Your Organization</h2>
+                    <h2 className="text-52-heading">Build Security Awareness Across Your Organization</h2>
                 </div>
 
                 
                 <div id="ai-adaptive-learning" className="two-col-grid" style={{marginTop: "4rem"}}>
                     <div className="two-col-content-block animate from-left">
-                        <h2 className="text-40-heading">AI Adaptive Learning</h2>
+                        <h2 className="text-52-heading">AI Adaptive Learning</h2>
                         <div style={{marginTop: "1.5rem", opacity: "0.7"}}>
                             <p className="text-18-content">
                                 Personalize learning journeys based on user performance, risk indicators, and training
@@ -370,7 +370,7 @@ const InsatPage = () => {
                 
                 <div id="human-risk-intelligence" className="two-col-grid reverse" style={{marginTop: "6rem"}}>
                     <div className="two-col-content-block animate from-right">
-                        <h2 className="text-40-heading">Reporting & Human Risk Evidence</h2>
+                        <h2 className="text-52-heading">Reporting & Human Risk Evidence</h2>
                         <div style={{marginTop: "1.5rem", opacity: "0.7"}}>
                             <p className="text-18-content">
                                 Generate structured records of training, assessments, simulations, and participation for
@@ -399,7 +399,7 @@ const InsatPage = () => {
                 
                 <div id="interactive-gamified-arcade" className="two-col-grid" style={{marginTop: "6rem"}}>
                     <div className="two-col-content-block animate from-left">
-                        <h2 className="text-40-heading">Gamified Engagement</h2>
+                        <h2 className="text-52-heading">Gamified Engagement</h2>
                         <div style={{marginTop: "1.5rem", opacity: "0.7"}}>
                             <p className="text-18-content">
                                 Use quizzes, challenges, points, and interactive modules to improve participation and
@@ -427,7 +427,7 @@ const InsatPage = () => {
                 
                 <div id="microlearning" className="two-col-grid reverse" style={{marginTop: "6rem"}}>
                     <div className="two-col-content-block animate from-right">
-                        <h2 className="text-40-heading">Continuous Reinforcement</h2>
+                        <h2 className="text-52-heading">Continuous Reinforcement</h2>
                         <div style={{marginTop: "1.5rem", opacity: "0.7"}}>
                             <p className="text-18-content">
                                 Trigger bite-sized learning after risky actions, phishing clicks, campaigns, or policy
@@ -520,7 +520,7 @@ const InsatPage = () => {
                     
                     <div className="two-col-grid items-start">
                         <div className="two-col-content-block max-w-[413px]">
-                            <h2 className="text-40-heading">Everything Needed to Build Everyday Secure Behaviour</h2>
+                            <h2 className="text-52-heading">Everything Needed to Build Everyday Secure Behaviour</h2>
                         </div>
 
                         <div className="faq-list-col flex flex-col gap-8 max-w-[652px]">
