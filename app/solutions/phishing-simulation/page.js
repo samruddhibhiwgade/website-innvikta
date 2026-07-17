@@ -236,7 +236,7 @@ const PhishingSimulationPage = () => {
                     <div className="hero-grid-container">
                         <div className="hero-content">
                             <span className="text-subheading">Test Human Risk Before Attackers Do</span>
-                            <h1 className="text-64-heading" style={{ fontWeight: 800, marginBottom: "1.2rem", letterSpacing: "-0.03em", marginTop: 0 }}>Identify and Reduce<br />Human Risk Before<br />It Becomes a Breach</h1>
+                            <h1 className="text-96-heading hero-title-custom">Identify and Reduce<br />Human Risk Before<br />It Becomes a Breach</h1>
 
                             <div className="hero-text-wrapper">
                                 <p className="text-20-content hero-paragraph">
