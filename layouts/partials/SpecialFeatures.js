@@ -99,8 +99,7 @@ const SpecialFeatures = ({ speciality }) => {
                 src={item.image}
                 width={585}
                 height={447}
-                alt={item.title || item.subtitle}
-                className="w-full h-auto object-contain rounded-3xl"
+                alt={item.title}
               />
             </div>
           </div>

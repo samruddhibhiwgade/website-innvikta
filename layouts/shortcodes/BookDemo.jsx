@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { FiArrowRight, FiCheckCircle, FiUser, FiBriefcase, FiMail, FiPhone, FiSend, FiLock } from "react-icons/fi";
-import SuccessPopup from "../partials/SuccessPopup";
 
 const BookDemo = () => {
   const [form, setForm] = useState({
@@ -74,7 +73,19 @@ const BookDemo = () => {
     }
   };
 
-
+  if (isSuccess) {
+    return (
+      <div className="bg-emerald-50/50 border border-emerald-100 rounded-2xl p-6 my-8 text-center animate-fade-in max-w-3xl mx-auto shadow-sm">
+        <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-3 text-emerald-600">
+          <FiCheckCircle className="text-2xl" />
+        </div>
+        <h4 className="text-lg font-bold text-slate-900 mb-1">Demo Request Received!</h4>
+        <p className="text-sm text-slate-600 max-w-md mx-auto">
+          Thank you! Our team will contact you shortly to schedule your personalized live walkthrough.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.05)] rounded-[24px] overflow-hidden my-8 text-left max-w-4xl mx-auto flex flex-col md:flex-row">
@@ -173,9 +184,9 @@ const BookDemo = () => {
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="9876543210"
+                  placeholder="98765 43210"
                   value={form.phone}
-                  onChange={(e) => setForm({ ...form, phone: e.target.value.replace(/\D/g, "") })}
+                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
                     errors.phone ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
                   } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
@@ -206,12 +217,6 @@ const BookDemo = () => {
           </div>
         </form>
       </div>
-      <SuccessPopup 
-        isOpen={isSuccess} 
-        onClose={() => setIsSuccess(false)} 
-        title="Demo Request Received!" 
-        message="Thank you! Our team will contact you shortly to schedule your personalized live walkthrough." 
-      />
     </div>
   );
 };

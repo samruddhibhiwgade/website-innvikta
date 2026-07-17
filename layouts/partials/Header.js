@@ -814,7 +814,7 @@ const menuData = {
           { name: "Case Studies", desc: "Success stories from real enterprise security leadership teams.", href: "/resources/case-studies" },
           { name: "Platform Updates", desc: "See the latest features added to the Innvikta training suite.", href: "/platform-updates" },
           { name: "DPDP at a Glance", desc: "A quick summary of India's Digital Personal Data Protection Act compliance requirements.", href: "/resources/dpdp-at-a-glance" },
-          { name: "Weekly Newsletter", desc: "Security tips and campaign ideas delivered directly to your inbox.", href: "/resources/weekly-newsletter" }
+          { name: "Weekly Newsletter", desc: "Security tips and campaign ideas delivered directly to your inbox.", href: "#" }
         ],
         cta: {
           title: "Explore the Innvikta Blog",
@@ -1085,13 +1085,6 @@ const searchIndex = [
     url: "/resources/dpdp-at-a-glance",
     category: "Resources",
     keywords: ["dpdp", "privacy", "act", "india", "personal data", "compliance", "law", "fiduciary"]
-  },
-  {
-    title: "Weekly Cybersecurity Newsletter",
-    description: "Read recent and trending editions of our weekly newsletter covering human risk, threat defense, and compliance.",
-    url: "/resources/weekly-newsletter",
-    category: "Resources",
-    keywords: ["newsletter", "weekly", "weekly-newsletter", "insights", "threats", "compliance", "read", "intel"]
   }
 ];
 

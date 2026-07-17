@@ -4,7 +4,6 @@ import { useState } from "react";
 import { FiArrowRight } from "react-icons/fi";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
 import SeoMeta from "@layouts/partials/SeoMeta";
-import SuccessPopup from "@layouts/partials/SuccessPopup";
 
 const DemoPage = () => {
   const [form, setForm] = useState({
@@ -18,7 +17,6 @@ const DemoPage = () => {
   
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
 
   const freeDomains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "icloud.com", "aol.com"];
 
@@ -64,7 +62,7 @@ const DemoPage = () => {
       .then((data) => {
         setIsSubmitting(false);
         if (data.success) {
-          setShowPopup(true);
+          alert("Demo request submitted successfully! Our team will contact you shortly.");
           setForm({
             fullName: "",
             designation: "",
@@ -286,9 +284,9 @@ const DemoPage = () => {
                       <label className="block text-xs font-bold text-slate-400 uppercase mb-2 tracking-wide">Phone Number</label>
                       <input 
                         type="tel" 
-                        placeholder="9876543210"
+                        placeholder="+1 (555) 000-0000"
                         value={form.phone}
-                        onChange={(e) => setForm({...form, phone: e.target.value.replace(/\D/g, "")})}
+                        onChange={(e) => setForm({...form, phone: e.target.value})}
                         className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.phone ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                       />
                       {errors.phone && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.phone}</p>}
@@ -359,12 +357,6 @@ const DemoPage = () => {
           </div>
         </section>
       </div>
-      <SuccessPopup 
-        isOpen={showPopup} 
-        onClose={() => setShowPopup(false)} 
-        title="Demo Request Received!" 
-        message="Thank you! Our team will contact you shortly to schedule your personalized live walkthrough." 
-      />
     </GSAPWrapper>
   );
 };

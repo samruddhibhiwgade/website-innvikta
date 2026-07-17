@@ -1,21 +1,17 @@
-"use client";
-
 import { useState } from "react";
 import Social from "@components/Social";
 import config from "@config/config.json";
 import social from "@config/social.json";
 import { markdownify } from "@lib/utils/textConverter";
 import Link from "next/link";
-import SuccessPopup from "./SuccessPopup";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!email.trim()) return;
+    if (!email) return;
     setIsSubmitting(true);
     fetch("/api/forms", {
       method: "POST",
@@ -29,7 +25,7 @@ const Footer = () => {
     .then((data) => {
       setIsSubmitting(false);
       if (data.success) {
-        setShowPopup(true);
+        alert("Subscribed successfully!");
         setEmail("");
       } else {
         alert("Subscription failed: " + (data.error || "Please try again."));
@@ -56,21 +52,22 @@ const Footer = () => {
       { name: "Domain Security Analyzer", url: "/freetools/domain-security-analyzer" },
       { name: "Baseline Score Tool", url: "/freetools/baseline-score-tool" },
       { name: "Culture Benchmarking", url: "/freetools/culture-benchmarking" },
-      { name: "Maturity Calculator", url: "/resources/maturity-calculator" },
+      { name: "Maturity Calculator", url: "#" },
       { name: "Cybersecurity Word Search", url: "/free-tools/cybersecurity-word-search" }
     ],
     resources: [
       { name: "Maturity Benchmarks", url: "/maturity-benchmarks" },
       { name: "Blog", url: "/blog" },
       { name: "Innvikta Cyberhelp", url: "/cyberhelp" },
-      { name: "Weekly Newsletter", url: "/resources/weekly-newsletter" },
+      { name: "Cybersecurity Guides", url: "#" },
       { name: "Glossary", url: "/resources/glossary" },
-      { name: "Customer Success Stories", url: "/resources/case-studies" }
+      { name: "Customer Success Stories", url: "#" }
     ],
     company: [
       { name: "About Us", url: "/about" },
       { name: "Contact Sales", url: "/book-demo" },
-      { name: "Partners", url: "/partners" }
+      { name: "Partners", url: "/partners" },
+      { name: "Careers", url: "#" }
     ]
   };
 
@@ -156,9 +153,6 @@ const Footer = () => {
               <form onSubmit={handleSubmit} className="relative mb-6">
                 <input 
                   type="email" 
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="your@email.com" 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -205,12 +199,6 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <SuccessPopup 
-          isOpen={showPopup} 
-          onClose={() => setShowPopup(false)} 
-          title="Subscription Confirmed!" 
-          message="Thank you for subscribing! You will receive the weekly updates related to modern threat intelligence and human security." 
-        />
       </div>
     </footer>
   );

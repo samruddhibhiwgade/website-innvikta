@@ -64,31 +64,31 @@ speciality:
       button:
         label: "Explore InSAT Platform"
         link: "/solutions/insat"
-      image: /images/insatplatform.png
+      image: /images/features-01.png
     - subtitle: "User Risk Simulation"
       description: "Real world phishing and attack simulations that measure user risk, flag repeat offenders, and trigger targeted training instead of generic courses."
       button:
         label: "Explore Simulations"
         link: "/solutions/phishing-simulation"
-      image: /images/userrisk_simulation.png
+      image: /images/features-02.png
     - subtitle: "Compliance Training"
       description: "Role based modules for data privacy, information security and industry regulations, mapped to your policies and generating audit ready records by default."
       button:
         label: "Explore Compliance Training"
         link: "/solutions/compliance-training"
-      image: /images/compliance.png
+      image: /images/features-01.png
     - subtitle: "Innvikta Arcade"
       description: "An immersive cybersecurity gaming platform built to drive repeat engagement, healthy competition, and stronger retention than traditional courses."
       button:
         label: "Explore Innvikta Arcade"
         link: "/cyber-arcade"
-      image: /images/home_arcade.png
+      image: /images/features-02.png
     - subtitle: "Customized Solutions"
       description: "Tailored content, workflows and campaigns for your specific risks, regions and regulators - designed and managed by Innvikta’s team of security experts."
       button:
         label: "Contact Us"
         link: "/contact"
-      image: /images/home_customisedsolution.png
+      image: /images/features-01.png
 
 
 #Testimonial
