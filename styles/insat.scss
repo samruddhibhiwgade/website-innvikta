@@ -796,7 +796,7 @@ section {
     position: relative;
     z-index: 10;
     padding-top: 2.5rem;
-    padding-bottom: 5rem;
+    padding-bottom: 2.5rem;
 }
 
 @media (min-width: 768px) {
@@ -857,7 +857,7 @@ section {
 }
 
 .hero-title-custom {
-    font-size: clamp(2.5rem, 3.8vw, 3.6rem) !important;
+    font-size: clamp(2.7rem, 4.3vw, 4.1rem) !important;
     line-height: 1.0;
     margin-bottom: 1.5rem;
 }
@@ -877,7 +877,7 @@ section {
 
 @media (min-width: 1024px) {
     .hero-visual {
-        max-width: 1360px;
+        max-width: 1520px;
     }
 }
 
