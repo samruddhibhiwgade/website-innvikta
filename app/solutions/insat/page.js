@@ -119,12 +119,11 @@ const InsatPage = () => {
                             </div>
                         </div>
 
-                        <div className="hero-image-right animate from-right pl-12 md:pl-0" style={{ justifyContent: "flex-end", display: "flex", width: "100%" }}>
+                        <div className="hero-image-right animate from-right w-full block md:flex justify-center md:justify-end mt-8 md:mt-0 px-4 md:px-0">
                             <img 
                               src="/insat/images/Insat_heroimage.png" 
                               alt="InSAT Platform Visual" 
-                              className="hero-sim-img" 
-                              style={{ maxWidth: "none", width: "100%", transform: "scale(1.50) translate(25px, 0px)", transformOrigin: "center right" }}
+                              className="hero-sim-img hero-sim-img-custom mx-auto md:mx-0 shrink-0 md:!w-full md:!max-w-none md:ml-0 md:scale-[1.50] md:translate-x-[50px] origin-center md:origin-right object-contain" 
                             />
                         </div>
                     </div>

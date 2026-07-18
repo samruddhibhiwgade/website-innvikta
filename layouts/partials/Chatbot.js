@@ -615,15 +615,15 @@ const Chatbot = () => {
       {/* Floating Chat Bubble - Modernized cybersecurity shield icon */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 w-14 h-14 bg-[#f15a24] hover:bg-orange-600 text-white rounded-full shadow-[0_8px_30px_rgb(241,90,36,0.3)] hover:shadow-[0_8px_30px_rgb(241,90,36,0.5)] transition-all duration-300 flex items-center justify-center z-50 cursor-pointer hover:scale-105"
+        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 w-12 h-12 md:w-14 md:h-14 bg-[#f15a24] hover:bg-orange-600 text-white rounded-full shadow-[0_8px_30px_rgb(241,90,36,0.3)] hover:shadow-[0_8px_30px_rgb(241,90,36,0.5)] transition-all duration-300 flex items-center justify-center z-50 cursor-pointer hover:scale-105"
         aria-label="Toggle Chat"
       >
-        {isOpen ? <FiX className="text-2xl" /> : <FiShield className="text-2xl" />}
+        {isOpen ? <FiX className="text-xl md:text-2xl" /> : <FiShield className="text-xl md:text-2xl" />}
       </button>
 
       {/* Chat Window - Reduced Size with Smooth Slide & Scale transition */}
       <div 
-        className="fixed bottom-24 right-6 w-[320px] md:w-[350px] h-[430px] bg-white border border-slate-100 shadow-[0_15px_40px_rgba(0,0,0,0.12)] rounded-2xl flex flex-col z-50 overflow-hidden"
+        className="fixed bottom-20 right-4 md:bottom-24 md:right-6 w-[280px] md:w-[350px] h-[380px] md:h-[430px] bg-white border border-slate-100 shadow-[0_15px_40px_rgba(0,0,0,0.12)] rounded-2xl flex flex-col z-50 overflow-hidden"
         style={{
           opacity: isOpen ? 1 : 0,
           transform: isOpen ? "translateY(0) scale(1)" : "translateY(20px) scale(0.95)",
