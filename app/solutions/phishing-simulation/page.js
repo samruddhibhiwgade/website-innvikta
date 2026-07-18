@@ -269,7 +269,7 @@ const PhishingSimulationPage = () => {
                     </div>
                 </div>
 
-                <div className="container container-hero-visual">
+                <div className="container container-hero-visual hidden md:block">
                     <div className="hero-visual">
                         <img src="/insat/images/dashboard_platform1.png" alt="InSAT Platform Dashboard" className="hero-platform-img" />
                     </div>

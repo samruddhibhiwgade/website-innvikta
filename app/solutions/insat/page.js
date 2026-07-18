@@ -119,7 +119,7 @@ const InsatPage = () => {
                             </div>
                         </div>
 
-                        <div className="hero-image-right animate from-right" style={{ justifyContent: "flex-end", display: "flex", width: "100%" }}>
+                        <div className="hero-image-right animate from-right pl-12 md:pl-0" style={{ justifyContent: "flex-end", display: "flex", width: "100%" }}>
                             <img 
                               src="/insat/images/Insat_heroimage.png" 
                               alt="InSAT Platform Visual" 
@@ -131,7 +131,7 @@ const InsatPage = () => {
                 </div>
  
                 
-                <div className="container container-hero-visual">
+                <div className="container container-hero-visual hidden md:block">
                     <div className="hero-visual" style={{ marginTop: "3rem" }}>
                         <img src="/insat/images/dashboard_platform1.png" alt="InSAT Platform Dashboard" className="hero-platform-img" />
                     </div>
