@@ -9,14 +9,16 @@ const ShortIntro = ({ intro }) => {
     <section className="section pt-0">
       <div className="container-xl">
         <div className="relative px-4 py-[70px]">
-          <div className="text-center">
-            <div className="animate">
-              <p>{intro.subtitle}</p>
-              {markdownify(intro.title, "h2", "mt-4 section-title leading-tight")}
-              {markdownify(intro.description, "p", "mt-10")}
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 text-center lg:text-left relative z-10">
+            <div className="w-full lg:w-1/2 flex justify-center lg:justify-start">
+              <div className="w-full max-w-[580px] shadow-lg rounded-2xl overflow-hidden border-4 border-white/80">
+                <VideoPopup id={intro.video_id} thumbnail={intro.thumbnail} />
+              </div>
             </div>
-            <div className="mx-auto mt-10 h-full max-h-[320px] w-full max-w-[580px] shadow-lg rounded-2xl overflow-hidden border-4 border-white/80">
-              <VideoPopup id={intro.video_id} thumbnail={intro.thumbnail} />
+            <div className="w-full lg:w-1/2 animate">
+              {intro.subtitle && <p className="mb-4">{intro.subtitle}</p>}
+              {markdownify(intro.title, "h2", "mb-8 text-4xl md:text-5xl lg:text-6xl font-medium leading-tight")}
+              {markdownify(intro.description, "p", "mt-6 text-lg")}
             </div>
           </div>
           <div className="bg-theme absolute left-0 top-0 w-full">

@@ -49,8 +49,8 @@ features:
 
 #intro
 intro:
-  title: Experience the Next-Gen in Security Awareness
-  description: Get a firsthand look at our world-class training modules - cinematic, engaging, and designed to transform employee security behavior.
+  title: "Experience the <br/> Next-Gen in Security Awareness"
+  description: Get a firsthand look at our training modules - cinematic, engaging, and designed to transform employee security behavior.
   thumbnail: "/images/training-thumbnail.png"
   video_id: -tmmOl6JYiY
 

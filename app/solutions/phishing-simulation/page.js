@@ -229,7 +229,7 @@ const PhishingSimulationPage = () => {
         
 
         
-        <section className="hero-section">
+        <section className="hero-section" style={{ backgroundColor: "var(--color-grey-5)" }}>
             <div className="hero-outer-wrapper">
 
                 <div className="container">
