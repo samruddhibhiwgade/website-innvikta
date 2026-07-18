@@ -1907,16 +1907,32 @@ const Header = () => {
                         const isSubTabOpen = mobileActiveSubTab === tab.id;
                         return (
                           <div key={tab.id} className="space-y-2">
-                            <button
-                              onClick={() => toggleMobileSubTab(tab.id)}
-                              className="w-full flex items-center justify-between text-left text-[14px] font-bold text-slate-700 focus:outline-none"
-                            >
-                              <span className="flex items-center gap-2">
-                                <tab.icon className="text-[#f15a24] text-xs" />
-                                {tab.label}
-                              </span>
-                              <FiChevronDown className={`transform transition-transform duration-300 text-xs ${isSubTabOpen ? "rotate-180" : ""}`} />
-                            </button>
+                            <div className="w-full flex items-center justify-between text-left text-[14px] font-bold text-slate-700">
+                              {tab.href ? (
+                                <Link 
+                                  href={tab.href}
+                                  onClick={() => setShowMenu(false)}
+                                  className="flex items-center gap-2 py-2 flex-grow focus:outline-none"
+                                >
+                                  <tab.icon className="text-[#f15a24] text-xs" />
+                                  {tab.label}
+                                </Link>
+                              ) : (
+                                <button
+                                  onClick={() => toggleMobileSubTab(tab.id)}
+                                  className="flex items-center gap-2 py-2 flex-grow focus:outline-none text-left"
+                                >
+                                  <tab.icon className="text-[#f15a24] text-xs" />
+                                  {tab.label}
+                                </button>
+                              )}
+                              <button 
+                                onClick={() => toggleMobileSubTab(tab.id)}
+                                className="p-2 pr-0 pl-4 focus:outline-none flex items-center justify-center"
+                              >
+                                <FiChevronDown className={`transform transition-transform duration-300 text-lg ${isSubTabOpen ? "rotate-180" : ""}`} />
+                              </button>
+                            </div>
 
                             <div className={`transition-all duration-300 overflow-hidden pl-4 ${isSubTabOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"}`}>
                               <ul className="space-y-3 py-1 border-l border-slate-100 pl-3">

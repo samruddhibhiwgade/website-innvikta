@@ -159,7 +159,7 @@ const About = () => {
     if (isHovered) return;
     const timer = setTimeout(() => {
       setActiveLeaderIndex((prevIndex) => (prevIndex + 1) % leadershipTeam.length);
-    }, 2000);
+    }, 5000);
     return () => clearTimeout(timer);
   }, [activeLeaderIndex, isHovered]);
 
@@ -188,7 +188,7 @@ const About = () => {
               <div className="col-12">
                 <div className="row relative justify-center pb-10">
                   <div className="banner-content col-10 pb-0 pt-10 md:pt-20 text-center will-change-transform">
-                    <h1 className="mb-6 banner-title font-black text-slate-900 text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
+                    <h1 className="mb-6 banner-title font-bold text-slate-900 text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
                       Human Risk Management <br />for the <span className="text-primary">AI Era</span>
                     </h1>
                     <p className="banner-desc text-slate-600 text-base md:text-lg max-w-3xl mx-auto mb-8 font-medium leading-relaxed">
@@ -335,7 +335,7 @@ const About = () => {
                   LEADERSHIP & ADVISORS
                 </span>
                 <h2 className="text-52-heading" style={{ color: "#111111", marginTop: "0.5rem", marginBottom: "1.25rem", lineHeight: "1.2" }}>
-                  Led by <span style={{ color: "#F15A24" }}>Security, Strategy, and Enterprise Experience</span>
+                  Led by Security, Strategy, and Enterprise <span style={{ color: "#F15A24" }}>Experience</span>
                 </h2>
                 <p className="text-18-content" style={{ color: "#6B7280", maxWidth: "800px", margin: "0 auto", lineHeight: "1.6" }}>
                   Innvikta is guided by a focused leadership team and experienced advisors across cybersecurity, business growth, compliance, and enterprise transformation.

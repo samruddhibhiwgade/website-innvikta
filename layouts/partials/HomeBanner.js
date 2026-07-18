@@ -357,8 +357,8 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
       <div className="container-xl relative z-20">
         <div className="row overflow-hidden rounded-2xl will-change-transform">
           <div className="col-12">
-            <div className="row relative justify-center pb-10">
-              <div className="banner-content col-10 pb-0 pt-10 md:pt-20 text-center will-change-transform">
+            <div className="row relative justify-center pb-6 md:pb-10">
+              <div className="banner-content col-12 px-4 md:col-10 md:px-0 pb-0 pt-4 md:pt-20 text-center will-change-transform">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={isHookActive ? "gamified" : "original"}
@@ -370,11 +370,11 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                     {markdownify(
                       isHookActive 
                         ? "Master Security Through <span class='text-primary'>Interactive Play</span>" 
-                        : bannerData.title,
+                        : bannerData.title.replace('<br />', '<br class="hidden md:block" />'),
                       "h1",
-                      "mb-6 banner-title font-black text-slate-900 text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight"
+                      "mb-4 md:mb-6 banner-title font-black text-slate-900 text-[32px] leading-tight sm:text-5xl md:text-6xl lg:text-7xl"
                     )}
-                    <p className="banner-desc text-slate-600 text-base md:text-lg max-w-3xl mx-auto mb-8 font-medium leading-relaxed">
+                    <p className="banner-desc text-slate-600 text-[15px] leading-relaxed md:text-lg max-w-3xl mx-auto mb-6 md:mb-8 font-medium px-2 md:px-0">
                       {isHookActive 
                         ? "Innvikta transforms complex cybersecurity training into engaging, gamified experiences. Level up your team's defense with interactive simulations and real-world threat scenarios."
                         : bannerData.description}
