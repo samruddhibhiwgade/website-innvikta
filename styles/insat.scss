@@ -30,7 +30,6 @@
     font-display: swap;
 }
 
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@1,2&display=swap');
 
 .insat-page {
     /* ==========================================================================
@@ -856,10 +855,23 @@ section {
     }
 }
 
+.insat-page .hero-title-custom,
 .hero-title-custom {
     font-size: clamp(2.9rem, 4.8vw, 4.6rem) !important;
     line-height: 1.0;
     margin-bottom: 1.25rem;
+    font-weight: 300 !important;
+    letter-spacing: -0.02em !important;
+}
+
+/* Force all .insat-page headings to non-bold */
+.insat-page h1,
+.insat-page h2,
+.insat-page h3,
+.insat-page h4,
+.insat-page h5,
+.insat-page h6 {
+    font-weight: 300 !important;
 }
 
 /* Hero graphic mockup container — full width of container, top-rounded only */

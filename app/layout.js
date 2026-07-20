@@ -69,7 +69,7 @@ export default function RootLayout({ children }) {
 
         {/* Fontshare Satoshi */}
         <link
-          href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&display=swap"
+          href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,600,500,300,400&display=swap"
           rel="stylesheet"
         />
 

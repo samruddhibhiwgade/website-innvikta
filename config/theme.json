@@ -20,7 +20,7 @@
     "font_family": {
       "primary": "Inter:wght@400;500;600;700",
       "primary_type": "sans-serif",
-      "secondary": "Satoshi:wght@400;500;700;900",
+      "secondary": "Satoshi:wght@400;500;600;700;900",
       "secondary_type": "sans-serif"
     },
     "font_size": {

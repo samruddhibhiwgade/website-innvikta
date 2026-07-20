@@ -157,7 +157,7 @@ const PostSingle = ({ frontmatter, content, recentPosts, slug }) => {
 
 
                   <div className="border-t border-slate-100 pt-6 flex flex-col gap-4">
-                    <h4 className="text-xs font-black uppercase tracking-wider text-slate-400">Share Article</h4>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">Share Article</h4>
                     <Share
                       title={title}
                       description={description}
@@ -173,7 +173,7 @@ const PostSingle = ({ frontmatter, content, recentPosts, slug }) => {
               {/* Main Content Area */}
               <div className="col-12 lg:col-7">
                 <header className="mb-6">
-                  {markdownify(title, "h1", "font-bold leading-tight text-3xl md:text-5xl text-slate-900")}
+                  {markdownify(title, "h1", "font-semibold leading-tight text-3xl md:text-5xl text-slate-900")}
                   
                   {/* Author Details and dates */}
                   <div className="mt-6 flex items-center mb-8 border-b border-slate-100 pb-6">
@@ -216,14 +216,14 @@ const PostSingle = ({ frontmatter, content, recentPosts, slug }) => {
                 <nav className="flex justify-between items-center border-t border-slate-100 py-8 my-8 gap-4" aria-label="Article navigation">
                   {prevPost ? (
                     <Link href={`/blog/${prevPost.slug}`} className="group flex flex-col text-left max-w-[48%]">
-                      <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1.5">Previous Article</span>
-                      <span className="text-sm font-bold text-slate-900 group-hover:text-primary transition-colors line-clamp-1">{prevPost.frontmatter.title}</span>
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1.5">Previous Article</span>
+                      <span className="text-sm font-semibold text-slate-900 group-hover:text-primary transition-colors line-clamp-1">{prevPost.frontmatter.title}</span>
                     </Link>
                   ) : <div />}
                   {nextPost ? (
                     <Link href={`/blog/${nextPost.slug}`} className="group flex flex-col text-right max-w-[48%]">
-                      <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1.5">Next Article</span>
-                      <span className="text-sm font-bold text-slate-900 group-hover:text-primary transition-colors line-clamp-1">{nextPost.frontmatter.title}</span>
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1.5">Next Article</span>
+                      <span className="text-sm font-semibold text-slate-900 group-hover:text-primary transition-colors line-clamp-1">{nextPost.frontmatter.title}</span>
                     </Link>
                   ) : <div />}
                 </nav>
@@ -237,7 +237,7 @@ const PostSingle = ({ frontmatter, content, recentPosts, slug }) => {
 
           {/* Related Articles Footer list */}
           <div className="section mt-16 text-left">
-            <h2 className="text-2xl font-black text-slate-900 uppercase tracking-wide text-center mb-4">Related Articles</h2>
+            <h2 className="text-2xl font-bold text-slate-900 uppercase tracking-wide text-center mb-4">Related Articles</h2>
             {/* Centered short orange line below title */}
             <div className="w-[50px] h-[5px] bg-[#f15a24] rounded-full mx-auto mb-12" />
             <div className="row justify-center">
