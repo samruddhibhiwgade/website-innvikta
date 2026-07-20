@@ -122,9 +122,12 @@ const PrivacyPolicy = () => {
 
               <hr className="my-8 border-slate-200" />
 
-              <h3 className="text-2xl font-bold text-dark mb-4 mt-8">11. Children&apos;s Privacy</h3>
+              <h3 className="text-2xl font-bold text-dark mb-4 mt-8">11. Children’s and Students’ Privacy</h3>
               <p className="text-slate-650 text-base md:text-lg leading-relaxed mb-6">
-                Our website and services are intended for businesses and organizations. They are not directed toward children under the age required by applicable law, and we do not knowingly collect personal information from children.
+                Our services are primarily intended for businesses and organisations. Certain cybersecurity-awareness programmes may also be offered to school and college students through authorised educational institutions.
+              </p>
+              <p className="text-slate-650 text-base md:text-lg leading-relaxed mb-6">
+                Where required by applicable law, personal data of minors will be processed only with appropriate parental or guardian consent. We collect only the information necessary to deliver the programme and do not sell student data or use it for targeted advertising.
               </p>
 
               <hr className="my-8 border-slate-200" />
@@ -208,7 +211,7 @@ const PrivacyPolicy = () => {
               <p className="text-slate-650 text-base md:text-lg leading-relaxed mb-6">
                 If you have questions about this Privacy Policy or our privacy practices, please contact us:
                 <br /><strong className="text-dark">Innvikta Cybersecurity Solutions</strong>
-                <br />Email: <a href="mailto:info@innvikta.com" className="text-[#f15a24] hover:underline">info@innvikta.com</a>
+                <br />Email: <a href="mailto:privacy@innvikta.com" className="text-[#f15a24] hover:underline">privacy@innvikta.com</a>
                 <br />Website: <a href="https://innvikta.com" target="_blank" rel="noopener noreferrer" className="text-[#f15a24] hover:underline">https://innvikta.com</a>
               </p>
 

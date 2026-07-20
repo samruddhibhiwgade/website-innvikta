@@ -8,7 +8,7 @@ conn.on('ready', () => {
     cd /home/platform/public_html/Innvikta-Website
     rm -f Cyberhelp_Innvikta/server/forms_api.php
     git checkout -- Cyberhelp_Innvikta/server/forms_api.php || true
-    git pull https://github.com/Himanshutadse114/innvikta-website.git main
+    git pull https://github.com/samruddhibhiwgade/website-innvikta.git main
     
     # Run the build
     . ~/.nvm/nvm.sh

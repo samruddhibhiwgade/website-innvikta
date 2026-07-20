@@ -211,7 +211,7 @@ const TermsConditions = () => {
               <p className="text-slate-650 text-base md:text-lg leading-relaxed mb-6">
                 For questions regarding these Terms &amp; Conditions, please contact:
                 <br /><strong className="text-dark">Innvikta Cybersecurity Solutions</strong>
-                <br />Email: <a href="mailto:info@innvikta.com" className="text-[#f15a24] hover:underline">info@innvikta.com</a>
+                <br />Email: <a href="mailto:terms@innvikta.com" className="text-[#f15a24] hover:underline">terms@innvikta.com</a>
                 <br />Website: <a href="https://innvikta.com" target="_blank" rel="noopener noreferrer" className="text-[#f15a24] hover:underline">https://innvikta.com</a>
               </p>
 
