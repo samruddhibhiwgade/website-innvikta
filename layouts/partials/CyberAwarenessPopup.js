@@ -185,7 +185,7 @@ const CyberAwarenessPopup = () => {
                   />
                   <button 
                     type="submit"
-                    className="flex-shrink-0 bg-[#f15a24] hover:bg-[#d64a1b] text-white text-sm font-bold py-2 px-5 rounded-lg transition-colors flex items-center gap-2"
+                    className="flex-shrink-0 bg-[#f15a24] hover:bg-[#d64a1b] !text-white text-sm font-bold py-2 px-5 rounded-lg transition-colors flex items-center gap-2"
                   >
                     Send Enquiry <span className="text-base">→</span>
                   </button>

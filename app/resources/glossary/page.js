@@ -7,7 +7,7 @@ import Circle from "@layouts/components/Circle";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
 import Link from "next/link";
 import { gsap } from "@lib/gsap";
-import { FiSearch, FiBookOpen, FiShield, FiAlertTriangle, FiCpu } from "react-icons/fi";
+import { FiSearch, FiBookOpen, FiShield, FiAlertTriangle, FiCpu, FiArrowRight } from "react-icons/fi";
 import "../../../styles/insat.scss";
 
 const glossaryTerms = [
@@ -763,7 +763,7 @@ export default function GlossaryPage() {
                             >
                               {item.category}
                             </span>
-                            <div className="w-8 h-8 rounded-full bg-[#FFEFEA] flex items-center justify-center text-[#f15a24] group-hover:bg-[#f15a24] group-hover:text-white transition-colors duration-300">
+                            <div className="w-8 h-8 rounded-full bg-[#FFEFEA] flex items-center justify-center text-[#f15a24] group-hover:bg-[#f15a24] group-hover:!text-white transition-colors duration-300">
                               <IconComponent className="text-sm shrink-0" />
                             </div>
                           </div>
@@ -810,9 +810,7 @@ export default function GlossaryPage() {
                   <Link href="/start-free" className="btn btn-outline-primary">
                     Start Free
                   </Link>
-                  <Link href="/book-demo" className="btn btn-primary">
-                    Book a demo &rarr;
-                  </Link>
+                  <Link href="/book-demo" className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap px-5 h-12 font-bold shadow-md shadow-orange-500/10">Book a Demo <FiArrowRight className="text-xs" /></Link>
                 </div>
                       </div>
                       <div className="bg-theme animated-bg absolute top-0 left-0 w-full after:hidden overflow-hidden">

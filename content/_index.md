@@ -4,7 +4,7 @@ banner:
   description: "Innvikta helps enterprises build safer employee behaviour through phishing simulations, gamified learning, AI-powered training journeys, and human risk visibility for security leaders."
   image: /images/banner-app.png
   link:
-    label: Book a demo
+    label: Book a Demo
     href: "/book-demo"
   link_secondary:
     label: Start Free
@@ -49,7 +49,7 @@ features:
 
 #intro
 intro:
-  title: "Experience the <br/> Next-Gen in Security Awareness"
+  title: "Experience the <br/> <span class='text-primary'>Next-Gen</span> in Security Awareness"
   description: Get a firsthand look at our training modules - cinematic, engaging, and designed to transform employee security behavior.
   thumbnail: "/images/training-thumbnail.png"
   video_id: -tmmOl6JYiY

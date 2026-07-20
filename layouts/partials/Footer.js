@@ -174,7 +174,7 @@ const Footer = () => {
                 </button>
               </form>
               <p className="text-[11px] text-slate-400 leading-relaxed font-medium text-left">
-                By subscribing, you agree to receive updates from Innvikta. Read our <Link href="/terms-policy" className="underline hover:text-primary">Privacy Policy</Link> for details.
+                By subscribing, you agree to receive updates from Innvikta. Read our <Link href="/privacy-policy" className="underline hover:text-primary">Privacy Policy</Link> for details.
               </p>
             </div>
           </div>
@@ -192,16 +192,12 @@ const Footer = () => {
               © 2026 Innvikta Technologies Pvt. Ltd.
             </div>
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-              <Link href="/terms-policy" className="hover:text-primary">Privacy</Link>
+              <Link href="/privacy-policy" className="hover:text-primary">Privacy Policy</Link>
               <span className="text-slate-200">•</span>
-              <Link href="/terms-policy" className="hover:text-primary">Terms</Link>
-              <span className="text-slate-200">•</span>
-              <Link href="#" className="hover:text-primary">Cookies</Link>
-              <span className="text-slate-200">•</span>
-              <Link href="#" className="hover:text-primary">Responsible Disclosure</Link>
+              <Link href="/terms-conditions" className="hover:text-primary">Terms & Conditions</Link>
             </div>
             <div className="text-left md:text-right">
-              <span className="font-bold text-dark text-base">Made to reduce human risk.</span>
+              <span className="text-sm text-slate-500 font-medium">Made to reduce human risk.</span>
             </div>
           </div>
         </div>

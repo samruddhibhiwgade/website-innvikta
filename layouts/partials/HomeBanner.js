@@ -14,6 +14,7 @@ const Scene = dynamic(() => import("@layouts/components/Scene"), { ssr: false })
 import { useStore } from "../../store/useStore";
 import { Target, Shield, AlertTriangle, MessageSquare, Phone, QrCode, Usb } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { FiArrowRight } from "react-icons/fi";
 
 class SceneErrorBoundary extends Component {
   constructor(props) {
@@ -271,7 +272,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                 
                 <div className="flex flex-col gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-[#f15a24] flex items-center justify-center text-white shadow-lg shadow-orange-500/20 shrink-0">
+                    <div className="w-10 h-10 rounded-2xl bg-[#f15a24] flex items-center justify-center !text-white shadow-lg shadow-orange-500/20 shrink-0">
                       <Icon className="w-5 h-5" />
                     </div>
                     <div>
@@ -381,7 +382,14 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                     </p>
                   </motion.div>
                 </AnimatePresence>
-                {/* CTA buttons removed as requested */}
+                <div className="flex justify-center items-center gap-4 mt-8 banner-btn">
+                  <Link 
+                    href="/book-demo" 
+                    className="bg-[#f15a24] hover:bg-orange-600 text-white rounded-lg transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap px-8 py-3.5 font-bold text-base shadow-lg shadow-orange-500/20 hover:scale-[1.02] transform"
+                  >
+                    Book a Demo <FiArrowRight className="text-sm" />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

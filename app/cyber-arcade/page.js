@@ -502,7 +502,7 @@ export default function CyberArcadePage() {
             </h1>
             <p className="hero-description">A gamified platform</p>
             <a href="https://innvikta.com/contact/" target="_blank" rel="noopener noreferrer" className="hero-cta-btn">
-              Book a demo
+              Book a Demo
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
                 <path d="M4 9h10M10 5l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -638,7 +638,7 @@ export default function CyberArcadePage() {
                     <h3 className="more-title">And Many<br /><span style={{ color: 'var(--accent)' }}>More</span> Games</h3>
                     <p className="more-desc">Want to explore our full interactive library of security awareness games?</p>
                     <a href="https://innvikta.com/contact/" target="_blank" rel="noopener noreferrer" className="more-cta-btn">
-                      Book a demo
+                      Book a Demo
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>

@@ -1,4 +1,5 @@
 "use client";
+import { FiArrowRight } from "react-icons/fi";
 
 import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useState, useEffect, useRef } from "react";
@@ -935,15 +936,7 @@ const BaselineScoreToolPage = () => {
             <div className="container faq-grid">
               <div className="faq-title-col animate from-left">
                 <h2 className="text-40-heading">Frequently Asked Questions</h2>
-                <Link className="arrow-link" href="/book-demo" style={{ marginTop: "1.25rem" }}>
-                  <div className="arrow-circle">
-                    <span className="arrow-circle-bg"></span>
-                    <svg width="6" height="8" viewBox="0 0 6 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path fill="currentColor" d="M3.86426 4.00028L0.818237 0.954267L1.68853 0.0839844L5.60481 4.00028L1.68853 7.91652L0.818237 7.04625L3.86426 4.00028Z" />
-                    </svg>
-                  </div>
-                  <span>Still have questions? Contact us</span>
-                </Link>
+                <Link href="/book-demo" style={{ marginTop: "1.25rem" }} className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap px-5 h-12 font-bold shadow-md shadow-orange-500/10">Book a Demo <FiArrowRight className="text-xs" /></Link>
               </div>
 
               <div className="faq-list-col animate from-right">
@@ -993,15 +986,7 @@ const BaselineScoreToolPage = () => {
                     >
                       Start Free
                     </button>
-                    <Link href="/book-demo" className="btn btn-primary btn-cta">
-                      <span className="hover-sweep"></span>
-                      <span>Book a demo</span>
-                      <div className="arrow-wrapper">
-                        <svg className="arrow-icon" width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M3.29985 4.50047L0 1.20062L0.942813 0.257812L5.18545 4.50047L0.942813 8.74306L0 7.80027L3.29985 4.50047Z" fill="currentColor" />
-                        </svg>
-                      </div>
-                    </Link>
+                    <Link href="/book-demo" className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap px-5 h-12 font-bold shadow-md shadow-orange-500/10">Book a Demo <FiArrowRight className="text-xs" /></Link>
                   </div>
                 </div>
                 <div className="bg-theme animated-bg absolute top-0 left-0 w-full after:hidden overflow-hidden">

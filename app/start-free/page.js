@@ -2,12 +2,14 @@
 
 import SeoMeta from "@layouts/partials/SeoMeta";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { FiArrowRight, FiCheckCircle } from "react-icons/fi";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
 import SuccessPopup from "@layouts/partials/SuccessPopup";
 import "../../styles/insat.scss";
 
 const StartFreePage = () => {
+  const router = useRouter();
   const [form, setForm] = useState({
     fullName: "",
     designation: "",
@@ -42,7 +44,11 @@ const StartFreePage = () => {
     if (!form.designation) newErrors.designation = "Please fill the required field";
     const emailError = validateEmail(form.email);
     if (emailError) newErrors.email = emailError;
-    if (!form.phone) newErrors.phone = "Please fill the required field";
+    if (!form.phone) {
+      newErrors.phone = "Please fill the required field";
+    } else if (!/^\d{10}$/.test(form.phone)) {
+      newErrors.phone = "Phone number must be exactly 10 digits";
+    }
     if (!form.company) newErrors.company = "Please fill the required field";
     if (!form.expectedUsers) newErrors.expectedUsers = "Please fill the required field";
     
@@ -67,8 +73,7 @@ const StartFreePage = () => {
       .then((data) => {
         setIsSubmitting(false);
         if (data.success) {
-          setSubmitted(true);
-          setShowPopup(true);
+          router.push("/thank-you/trial");
         } else {
           alert("Error: " + (data.error || "Failed to submit request. Please try again."));
         }
@@ -77,6 +82,17 @@ const StartFreePage = () => {
         setIsSubmitting(false);
         alert("An error occurred. Please try again later.");
       });
+    } else {
+      setTimeout(() => {
+        const firstErrorEl = document.querySelector('.text-red-500');
+        if (firstErrorEl) {
+          firstErrorEl.scrollIntoView({ behavior: "smooth", block: "center" });
+          const inputEl = firstErrorEl.parentElement.querySelector('input, select, textarea');
+          if (inputEl) {
+            inputEl.focus();
+          }
+        }
+      }, 100);
     }
   };
 
@@ -134,12 +150,37 @@ const StartFreePage = () => {
     }
   ];
 
+  const getEmailError = () => {
+    if (errors.email) return errors.email;
+    if (form.email) {
+      const emailErr = validateEmail(form.email);
+      if (emailErr && emailErr !== "Please fill the required field") {
+        return emailErr;
+      }
+    }
+    return "";
+  };
+
+  const getPhoneError = () => {
+    if (errors.phone) return errors.phone;
+    if (form.phone && form.phone.length > 0 && form.phone.length < 10) {
+      return "Phone number must be exactly 10 digits";
+    }
+    return "";
+  };
+
+  const isFullNameFilled = !!form.fullName.trim();
+  const isDesignationSelected = !!form.designation;
+  const isEmailValid = !!form.email.trim() && !validateEmail(form.email);
+  const isPhoneValid = /^\d{10}$/.test(form.phone);
+  const isCompanyFilled = !!form.company.trim();
+
   return (
     <GSAPWrapper>
       <SeoMeta title="Start a Free Trial | Innvikta" description="Get instant access to Innvikta's security awareness training and phishing simulation platform." />
       <div className="min-h-screen bg-[#fafafa]">
         {/* Banner Section */}
-        <div className="bg-[#f15a24] text-white py-12 relative overflow-hidden">
+        <div className="bg-[#f15a24] !text-white py-12 relative overflow-hidden">
           {/* Background Decorative Elements */}
           <div className="absolute right-0 top-0 bottom-0 w-1/2 md:w-1/3 opacity-25 pointer-events-none">
             <svg viewBox="0 0 300 200" fill="none" className="w-full h-full object-cover md:object-right">
@@ -235,17 +276,23 @@ const StartFreePage = () => {
                           type="text" 
                           placeholder="John Doe"
                           value={form.fullName}
-                          onChange={(e) => setForm({...form, fullName: e.target.value})}
+                          onChange={(e) => {
+                            setForm({...form, fullName: e.target.value});
+                            if (errors.fullName) setErrors({...errors, fullName: ""});
+                          }}
                           className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.fullName ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                         />
                         {errors.fullName && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.fullName}</p>}
                       </div>
 
-                      <div>
+                       <div>
                         <label className="block text-xs font-bold text-slate-400 uppercase mb-2 tracking-wide">Designation</label>
                         <select 
                           value={form.designation}
-                          onChange={(e) => setForm({...form, designation: e.target.value})}
+                          onChange={(e) => {
+                            setForm({...form, designation: e.target.value});
+                            if (errors.designation) setErrors({...errors, designation: ""});
+                          }}
                           className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.designation ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all appearance-none cursor-pointer`}
                         >
                           <option value="">Select designation</option>
@@ -266,10 +313,13 @@ const StartFreePage = () => {
                           type="email" 
                           placeholder="john@company.com"
                           value={form.email}
-                          onChange={(e) => setForm({...form, email: e.target.value})}
-                          className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.email ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
+                          onChange={(e) => {
+                            setForm({...form, email: e.target.value});
+                            if (errors.email && !validateEmail(e.target.value)) setErrors({...errors, email: ""});
+                          }}
+                          className={`w-full px-5 py-3.5 bg-slate-50 border ${(errors.email || getEmailError()) ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                         />
-                        {errors.email && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.email}</p>}
+                        {getEmailError() && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{getEmailError()}</p>}
                       </div>
 
                       <div>
@@ -278,10 +328,15 @@ const StartFreePage = () => {
                           type="tel" 
                           placeholder="9876543210"
                           value={form.phone}
-                          onChange={(e) => setForm({...form, phone: e.target.value.replace(/\D/g, "")})}
-                          className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.phone ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
+                          onChange={(e) => {
+                            const val = e.target.value.replace(/\D/g, "");
+                            setForm({...form, phone: val});
+                            if (errors.phone && val.length === 10) setErrors({...errors, phone: ""});
+                          }}
+                          maxLength={10}
+                          className={`w-full px-5 py-3.5 bg-slate-50 border ${(errors.phone || getPhoneError()) ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                         />
-                        {errors.phone && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.phone}</p>}
+                        {getPhoneError() && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{getPhoneError()}</p>}
                       </div>
 
                       <div>
@@ -290,7 +345,10 @@ const StartFreePage = () => {
                           type="text" 
                           placeholder="Acme Inc."
                           value={form.company}
-                          onChange={(e) => setForm({...form, company: e.target.value})}
+                          onChange={(e) => {
+                            setForm({...form, company: e.target.value});
+                            if (errors.company) setErrors({...errors, company: ""});
+                          }}
                           className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.company ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                         />
                         {errors.company && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.company}</p>}
@@ -300,7 +358,10 @@ const StartFreePage = () => {
                         <label className="block text-xs font-bold text-slate-400 uppercase mb-2 tracking-wide">Expected Number of Users</label>
                         <select 
                           value={form.expectedUsers}
-                          onChange={(e) => setForm({...form, expectedUsers: e.target.value})}
+                          onChange={(e) => {
+                            setForm({...form, expectedUsers: e.target.value});
+                            if (errors.expectedUsers) setErrors({...errors, expectedUsers: ""});
+                          }}
                           className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.expectedUsers ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all appearance-none cursor-pointer`}
                         >
                           <option value="">Select size</option>
@@ -317,7 +378,7 @@ const StartFreePage = () => {
                         <button 
                           type="submit" 
                           disabled={isSubmitting}
-                          className="group relative px-6 md:px-10 py-3.5 bg-[#f15a24] hover:bg-[#f15a24]/90 text-white font-bold rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/40 overflow-hidden transition-all duration-300 transform hover:-translate-y-1 disabled:opacity-50 disabled:translate-y-0 whitespace-nowrap"
+                          className="group relative px-6 md:px-10 py-3.5 bg-[#f15a24] hover:bg-[#f15a24]/90 !text-white font-bold rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/40 overflow-hidden transition-all duration-300 transform hover:-translate-y-1 disabled:opacity-50 disabled:translate-y-0 whitespace-nowrap"
                         >
                           <div className="relative z-10 flex items-center gap-2">
                             <span className="uppercase tracking-wider text-sm whitespace-nowrap">

@@ -2,6 +2,7 @@
 
 import SeoMeta from "@layouts/partials/SeoMeta";
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { gsap } from "@lib/gsap";
 import { FiArrowRight, FiShield, FiBriefcase, FiLayers, FiActivity, FiGlobe, FiCheckCircle, FiTrendingUp, FiSettings, FiAward, FiMail, FiMonitor, FiImage, FiUsers, FiPieChart } from "react-icons/fi";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
@@ -24,6 +25,7 @@ const heading52Style = {
 };
 
 const PartnersPage = () => {
+  const router = useRouter();
   const [form, setForm] = useState({
     fullName: "",
     email: "",
@@ -86,7 +88,11 @@ const PartnersPage = () => {
     if (!form.fullName) newErrors.fullName = "Please fill the required field";
     const emailError = validateEmail(form.email);
     if (emailError) newErrors.email = emailError;
-    if (!form.phone) newErrors.phone = "Please fill the required field";
+    if (!form.phone) {
+      newErrors.phone = "Please fill the required field";
+    } else if (!/^\d{10}$/.test(form.phone)) {
+      newErrors.phone = "Phone number must be exactly 10 digits";
+    }
     if (!form.companyName) newErrors.companyName = "Please fill the required field";
     if (!form.website) newErrors.website = "Please fill the required field";
     if (!form.employeeSize) newErrors.employeeSize = "Please fill the required field";
@@ -117,17 +123,7 @@ const PartnersPage = () => {
       .then((data) => {
         setIsSubmitting(false);
         if (data.success) {
-          setShowPopup(true);
-          setForm({
-            fullName: "",
-            email: "",
-            phone: "",
-            companyName: "",
-            website: "",
-            employeeSize: "",
-            partnershipType: "",
-            message: ""
-          });
+          router.push("/thank-you/partner");
         } else {
           alert("Error: " + (data.error || "Failed to submit partner request. Please try again."));
         }
@@ -136,6 +132,17 @@ const PartnersPage = () => {
         setIsSubmitting(false);
         alert("An error occurred. Please try again later.");
       });
+    } else {
+      setTimeout(() => {
+        const firstErrorEl = document.querySelector('.text-red-500');
+        if (firstErrorEl) {
+          firstErrorEl.scrollIntoView({ behavior: "smooth", block: "center" });
+          const inputEl = firstErrorEl.parentElement.querySelector('input, select, textarea');
+          if (inputEl) {
+            inputEl.focus();
+          }
+        }
+      }, 100);
     }
   };
 
@@ -220,6 +227,33 @@ const PartnersPage = () => {
     }
   ];
 
+  const getEmailError = () => {
+    if (errors.email) return errors.email;
+    if (form.email) {
+      const emailErr = validateEmail(form.email);
+      if (emailErr && emailErr !== "Please fill the required field") {
+        return emailErr;
+      }
+    }
+    return "";
+  };
+
+  const getPhoneError = () => {
+    if (errors.phone) return errors.phone;
+    if (form.phone && form.phone.length > 0 && form.phone.length < 10) {
+      return "Phone number must be exactly 10 digits";
+    }
+    return "";
+  };
+
+  const isFullNameFilled = !!form.fullName.trim();
+  const isEmailValid = !!form.email.trim() && !validateEmail(form.email);
+  const isPhoneValid = /^\d{10}$/.test(form.phone);
+  const isCompanyFilled = !!form.companyName.trim();
+  const isWebsiteFilled = !!form.website.trim();
+  const isEmployeeSizeSelected = !!form.employeeSize;
+  const isPartnershipTypeSelected = !!form.partnershipType;
+
   return (
     <GSAPWrapper>
       <SeoMeta title="Innvikta Partners Program | MSP & Enterprise Partners" description="Partner with Innvikta to offer leading-edge security awareness training, phishing simulations, and human risk management." />
@@ -245,7 +279,7 @@ const PartnersPage = () => {
                   <a 
                     href="#form" 
                     onClick={scrollToForm}
-                    className="group inline-flex items-center gap-2 px-8 py-3.5 bg-[#f15a24] hover:bg-orange-600 text-white border-2 border-[#f15a24] hover:border-orange-600 font-bold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
+                    className="group inline-flex items-center gap-2 px-8 py-3.5 bg-[#f15a24] hover:bg-orange-600 !text-white border-2 border-[#f15a24] hover:border-orange-600 font-bold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
                   >
                     <span>Become a Partner</span>
                     <FiArrowRight className="text-lg transition-transform duration-300 group-hover:translate-x-1" />
@@ -303,7 +337,7 @@ const PartnersPage = () => {
                         <div>
                           {/* Icon Beside Heading */}
                           <div className="flex items-center gap-4 mb-4">
-                            <div className="w-10 h-10 rounded-xl bg-orange-50/50 text-[#f15a24] flex items-center justify-center group-hover:bg-[#f15a24] group-hover:text-white group-hover:scale-110 transition-all duration-300 shadow-sm shrink-0">
+                            <div className="w-10 h-10 rounded-xl bg-orange-50/50 text-[#f15a24] flex items-center justify-center group-hover:bg-[#f15a24] group-hover:!text-white group-hover:scale-110 transition-all duration-300 shadow-sm shrink-0">
                               <Icon className="text-lg" />
                             </div>
                             <h3 className="text-base font-bold text-dark font-secondary group-hover:text-[#f15a24] transition-colors duration-300 leading-snug">{benefit.title}</h3>
@@ -421,7 +455,7 @@ const PartnersPage = () => {
               <div className="flex flex-col lg:flex-row">
                 
                 {/* Left side panel: Orange background */}
-                <div className="w-full lg:w-[38%] bg-[#f15a24] p-8 md:p-12 text-white flex flex-col justify-between relative overflow-hidden">
+                <div className="w-full lg:w-[38%] bg-[#f15a24] p-8 md:p-12 !text-white flex flex-col justify-between relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
                   
                   <div className="relative z-10">
@@ -456,23 +490,29 @@ const PartnersPage = () => {
                         type="text" 
                         placeholder="John Doe"
                         value={form.fullName}
-                        onChange={(e) => setForm({...form, fullName: e.target.value})}
+                        onChange={(e) => {
+                          setForm({...form, fullName: e.target.value});
+                          if (errors.fullName) setErrors({...errors, fullName: ""});
+                        }}
                         className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.fullName ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                       />
                       {errors.fullName && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.fullName}</p>}
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <div>
                         <label className="block text-xs font-bold text-slate-400 uppercase mb-2 tracking-wide">Work Email</label>
                         <input 
                           type="email" 
                           placeholder="john@company.com"
                           value={form.email}
-                          onChange={(e) => setForm({...form, email: e.target.value})}
-                          className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.email ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
+                          onChange={(e) => {
+                            setForm({...form, email: e.target.value});
+                            if (errors.email && !validateEmail(e.target.value)) setErrors({...errors, email: ""});
+                          }}
+                          className={`w-full px-5 py-3.5 bg-slate-50 border ${(errors.email || getEmailError()) ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                         />
-                        {errors.email && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.email}</p>}
+                        {getEmailError() && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{getEmailError()}</p>}
                       </div>
 
                       <div>
@@ -481,10 +521,15 @@ const PartnersPage = () => {
                           type="tel" 
                           placeholder="9876543210"
                           value={form.phone}
-                          onChange={(e) => setForm({...form, phone: e.target.value.replace(/\D/g, "")})}
-                          className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.phone ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
+                          onChange={(e) => {
+                            const val = e.target.value.replace(/\D/g, "");
+                            setForm({...form, phone: val});
+                            if (errors.phone && val.length === 10) setErrors({...errors, phone: ""});
+                          }}
+                          maxLength={10}
+                          className={`w-full px-5 py-3.5 bg-slate-50 border ${(errors.phone || getPhoneError()) ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                         />
-                        {errors.phone && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.phone}</p>}
+                        {getPhoneError() && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{getPhoneError()}</p>}
                       </div>
                     </div>
 
@@ -495,7 +540,10 @@ const PartnersPage = () => {
                           type="text" 
                           placeholder="Acme Inc."
                           value={form.companyName}
-                          onChange={(e) => setForm({...form, companyName: e.target.value})}
+                          onChange={(e) => {
+                            setForm({...form, companyName: e.target.value});
+                            if (errors.companyName) setErrors({...errors, companyName: ""});
+                          }}
                           className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.companyName ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                         />
                         {errors.companyName && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.companyName}</p>}
@@ -507,7 +555,10 @@ const PartnersPage = () => {
                           type="text" 
                           placeholder="https://company.com"
                           value={form.website}
-                          onChange={(e) => setForm({...form, website: e.target.value})}
+                          onChange={(e) => {
+                            setForm({...form, website: e.target.value});
+                            if (errors.website) setErrors({...errors, website: ""});
+                          }}
                           className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.website ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                         />
                         {errors.website && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.website}</p>}
@@ -519,7 +570,10 @@ const PartnersPage = () => {
                         <label className="block text-xs font-bold text-slate-400 uppercase mb-2 tracking-wide">Employee Size</label>
                         <select 
                           value={form.employeeSize}
-                          onChange={(e) => setForm({...form, employeeSize: e.target.value})}
+                          onChange={(e) => {
+                            setForm({...form, employeeSize: e.target.value});
+                            if (errors.employeeSize) setErrors({...errors, employeeSize: ""});
+                          }}
                           className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.employeeSize ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all appearance-none cursor-pointer`}
                         >
                           <option value="">Select size</option>
@@ -537,7 +591,10 @@ const PartnersPage = () => {
                         <label className="block text-xs font-bold text-slate-400 uppercase mb-2 tracking-wide">Partnership Type</label>
                         <select 
                           value={form.partnershipType}
-                          onChange={(e) => setForm({...form, partnershipType: e.target.value})}
+                          onChange={(e) => {
+                            setForm({...form, partnershipType: e.target.value});
+                            if (errors.partnershipType) setErrors({...errors, partnershipType: ""});
+                          }}
                           className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.partnershipType ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all appearance-none cursor-pointer`}
                         >
                           <option value="">Select type</option>
@@ -565,7 +622,7 @@ const PartnersPage = () => {
                       <button 
                         type="submit" 
                         disabled={isSubmitting}
-                        className="group relative px-6 md:px-10 py-3.5 bg-[#f15a24] hover:bg-[#f15a24]/90 text-white font-bold rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/40 overflow-hidden transition-all duration-300 transform hover:-translate-y-1 disabled:opacity-50 disabled:translate-y-0 whitespace-nowrap"
+                        className="group relative px-6 md:px-10 py-3.5 bg-[#f15a24] hover:bg-[#f15a24]/90 !text-white font-bold rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/40 overflow-hidden transition-all duration-300 transform hover:-translate-y-1 disabled:opacity-50 disabled:translate-y-0 whitespace-nowrap"
                       >
                         <div className="relative z-10 flex items-center gap-2">
                           <span className="uppercase tracking-wider text-sm whitespace-nowrap">

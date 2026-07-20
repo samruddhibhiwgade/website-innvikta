@@ -3,6 +3,7 @@
 import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { FiArrowRight } from "react-icons/fi";
 import "../../../styles/insat.scss";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
 import { gsap } from "@lib/gsap";
@@ -897,17 +898,11 @@ const CustomizedSolutionsPage = () => {
                     Let’s create a program aligned to your policies, people, risks, and priorities.
                   </p>
                   <div className="flex flex-wrap justify-center gap-4 mt-10 animate-fade-in" style={{ marginTop: "2.5rem" }}>
-                    <Link href="/book-demo" className="btn btn-secondary">
+                    <Link href="/start-free" className="btn btn-outline-primary">
                       Start Free
                     </Link>
-                    <Link href="/book-demo" className="btn btn-primary btn-cta">
-                      <span className="hover-sweep"></span>
-                      <span>Book a demo</span>
-                      <div className="arrow-wrapper">
-                        <svg className="arrow-icon" width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M3.29985 4.50047L0 1.20062L0.942813 0.257812L5.18545 4.50047L0.942813 8.74306L0 7.80027L3.29985 4.50047Z" fill="currentColor" />
-                        </svg>
-                      </div>
+                    <Link href="/book-demo" className="btn btn-primary gap-1.5">
+                      Book a Demo <FiArrowRight className="text-xs" />
                     </Link>
                   </div>
                 </div>

@@ -1,4 +1,5 @@
 "use client";
+import { FiArrowRight } from "react-icons/fi";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 
 import { markdownify } from "@lib/utils/textConverter";
@@ -21,14 +22,7 @@ const Challenges = ({ challenges }) => {
               </div>
             )}
             <div style={{ marginTop: "2rem" }}>
-              <a className="btn btn-primary btn-cta" href="/book-demo" style={{ display: 'inline-flex', alignItems: 'center', whiteSpace: 'nowrap', gap: '8px' }}>
-                <span>Book a demo</span>
-                <div className="arrow-wrapper" style={{ display: 'inline-flex', alignItems: 'center', margin: 0 }}>
-                  <svg className="arrow-icon" width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3.29985 4.50047L0 1.20062L0.942813 0.257812L5.18545 4.50047L0.942813 8.74306L0 7.80027L3.29985 4.50047Z" fill="currentColor" />
-                  </svg>
-                </div>
-              </a>
+              <a href="/book-demo" style={{ display: 'inline-flex', alignItems: 'center', whiteSpace: 'nowrap', gap: '8px' }} className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap px-5 h-12 font-bold shadow-md shadow-orange-500/10">Book a Demo <FiArrowRight className="text-xs" /></a>
             </div>
             <style jsx global>{`
               .challenges-stats .text-primary {

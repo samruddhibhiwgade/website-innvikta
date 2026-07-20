@@ -53,7 +53,7 @@ const SolutionHero = ({ hero }) => {
             <div className="flex flex-wrap items-center gap-5">
               {hero.button && (
                 <Link 
-                  className="px-8 py-3.5 bg-[#f15a24] hover:bg-orange-600 shadow-lg shadow-orange-500/20 text-white rounded-full text-[15px] font-bold transition-all duration-300 flex items-center gap-2 group" 
+                  className="px-8 py-3.5 bg-[#f15a24] hover:bg-orange-600 shadow-lg shadow-orange-500/20 !text-white rounded-full text-[15px] font-bold transition-all duration-300 flex items-center gap-2 group" 
                   href={hero.button.link}
                 >
                   {hero.button.label} 

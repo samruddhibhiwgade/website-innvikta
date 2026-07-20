@@ -40,7 +40,7 @@ export default function PlatformUpdatesPage() {
   return (
     <GSAPWrapper>
       <SeoMeta title="Platform Updates & Changelog | Innvikta" description="Stay up to date with the latest features, enhancements, and security training modules on the Innvikta platform." />
-      <div className="min-h-screen w-full overflow-x-hidden bg-white text-slate-800 font-sans selection:bg-[#f15a24] selection:text-white pb-16">
+      <div className="min-h-screen w-full overflow-x-hidden bg-white text-slate-800 font-sans selection:bg-[#f15a24] selection:!text-white pb-16">
         
         {/* ================= HEADER SECTION ================= */}
         <section className="pt-32 pb-24 bg-gradient-to-br from-[#f15a24] to-[#df4b17] relative overflow-hidden border-b border-[#e24e1b] mb-16 text-white">
@@ -128,7 +128,7 @@ export default function PlatformUpdatesPage() {
               <div className="relative z-10 flex justify-end">
                 <Link
                   href="/platform-updates/product-updates-q2-2026-review"
-                  className="w-12 h-12 rounded-full border-2 border-[#f15a24]/30 flex items-center justify-center text-[#f15a24] hover:bg-[#f15a24] hover:text-white transition-all duration-300"
+                  className="w-12 h-12 rounded-full border-2 border-[#f15a24]/30 flex items-center justify-center text-[#f15a24] hover:bg-[#f15a24] hover:!text-white transition-all duration-300"
                 >
                   <FiArrowRight className="text-xl" />
                 </Link>

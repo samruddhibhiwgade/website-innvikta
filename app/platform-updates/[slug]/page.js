@@ -202,7 +202,7 @@ export default function PlatformUpdateDetailPage() {
       <div className="min-h-screen flex flex-col items-center justify-center bg-white text-slate-800 p-6">
         <h1 className="text-3xl font-bold mb-4">Platform Update Not Found</h1>
         <p className="text-slate-600 mb-6">The update you are trying to access does not exist or has been relocated.</p>
-        <Link href="/platform-updates" className="flex items-center gap-2 bg-[#f15a24] text-white px-5 py-2.5 rounded-full hover:bg-[#df4b17] transition-all font-sans font-bold text-sm">
+        <Link href="/platform-updates" className="flex items-center gap-2 bg-[#f15a24] !text-white px-5 py-2.5 rounded-full hover:bg-[#df4b17] transition-all font-sans font-bold text-sm">
           <FiArrowLeft /> Back to updates
         </Link>
       </div>
@@ -215,7 +215,7 @@ export default function PlatformUpdateDetailPage() {
   return (
     <GSAPWrapper>
       <SeoMeta title={`${currentUpdate.title} | Innvikta Platform Updates`} description={currentUpdate.desc} />
-      <div className="min-h-screen w-full bg-white text-slate-800 font-sans selection:bg-[#f15a24] selection:text-white pb-24">
+      <div className="min-h-screen w-full bg-white text-slate-800 font-sans selection:bg-[#f15a24] selection:!text-white pb-24">
         
         {/* ================= HEADER BANNER ================= */}
         <section className="pt-32 pb-20 bg-gradient-to-br from-[#f15a24] to-[#df4b17] relative overflow-hidden text-white border-b border-[#e24e1b]">

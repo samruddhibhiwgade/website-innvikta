@@ -3,6 +3,7 @@
 import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { FiArrowRight } from "react-icons/fi";
 import "../../../styles/insat.scss";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
 import { gsap } from "@lib/gsap";
@@ -420,7 +421,7 @@ const InsatPage = () => {
                         </a>
                     </div>
                     <div className="two-col-visual-block aspect-628-517 bg-plum animate from-right">
-                        <img alt="Gamified engagement" loading="lazy" src="/insat/images/Protection-1.jpg" />
+                        <img alt="Gamified engagement" loading="lazy" src="/images/home_arcade.png" style={{ objectFit: "contain" }} />
                     </div>
                 </div>
 
@@ -453,61 +454,34 @@ const InsatPage = () => {
                 </div>
             </div>
         </section>
-        <section className="bg-white" style={{paddingBottom: "0"}}>
+        <section className="bg-white" style={{paddingBottom: "4rem"}}>
             <div className="container">
-                <div style={{textAlign: "center"}} className="animate">
-                    <h2 className="text-52-heading">Integrate with Your IT & Security Stack</h2>
-                    <p className="text-18-content opacity-70"
-                        style={{marginTop: "0.75rem", maxWidth: "523px", marginLeft: "auto", marginRight: "auto"}}>
-                        Ditch the manual admin work. InSAT auto-syncs with your identity providers, LMS, and
-                        communication platforms to automate training management.
-                    </p>
-                </div>
-            </div>
-
-            
-            <div className="ticker-container animate">
-                
-                <div className="ticker-track ticker-forward">
-                    
-                    <div className="ticker-item"><img alt="Microsoft 365" src="/insat/images/Frame-1000003126.svg" /></div>
-                    <div className="ticker-item"><img alt="Google Workspace" src="/insat/images/Frame-1000003125.svg" /></div>
-                    <div className="ticker-item"><img alt="Slack" src="/insat/images/Frame-1000003127.svg" /></div>
-                    <div className="ticker-item"><img alt="Teams" src="/insat/images/Frame-1000003129.svg" /></div>
-                    <div className="ticker-item"><img alt="LMS" src="/insat/images/Frame-1000003130.svg" /></div>
-                    <div className="ticker-item"><img alt="SIEM" src="/insat/images/Frame-1000003131.svg" /></div>
-                    <div className="ticker-item"><img alt="HRMS" src="/insat/images/Frame-1000003132.svg" /></div>
-                    <div className="ticker-item"><img alt="Identity" src="/insat/images/Frame-1000003133.svg" /></div>
-                    
-                    <div className="ticker-item"><img alt="Microsoft 365" src="/insat/images/Frame-1000003126.svg" /></div>
-                    <div className="ticker-item"><img alt="Google Workspace" src="/insat/images/Frame-1000003125.svg" /></div>
-                    <div className="ticker-item"><img alt="Slack" src="/insat/images/Frame-1000003127.svg" /></div>
-                    <div className="ticker-item"><img alt="Teams" src="/insat/images/Frame-1000003129.svg" /></div>
-                    <div className="ticker-item"><img alt="LMS" src="/insat/images/Frame-1000003130.svg" /></div>
-                    <div className="ticker-item"><img alt="SIEM" src="/insat/images/Frame-1000003131.svg" /></div>
-                    <div className="ticker-item"><img alt="HRMS" src="/insat/images/Frame-1000003132.svg" /></div>
-                    <div className="ticker-item"><img alt="Identity" src="/insat/images/Frame-1000003133.svg" /></div>
-                </div>
-                
-                <div className="ticker-track ticker-reverse">
-                    
-                    <div className="ticker-item"><img alt="LMS" src="/insat/images/Frame-1000003130.svg" /></div>
-                    <div className="ticker-item"><img alt="SIEM" src="/insat/images/Frame-1000003131.svg" /></div>
-                    <div className="ticker-item"><img alt="HRMS" src="/insat/images/Frame-1000003132.svg" /></div>
-                    <div className="ticker-item"><img alt="Identity" src="/insat/images/Frame-1000003133.svg" /></div>
-                    <div className="ticker-item"><img alt="Microsoft 365" src="/insat/images/Frame-1000003126.svg" /></div>
-                    <div className="ticker-item"><img alt="Google Workspace" src="/insat/images/Frame-1000003125.svg" /></div>
-                    <div className="ticker-item"><img alt="Slack" src="/insat/images/Frame-1000003127.svg" /></div>
-                    <div className="ticker-item"><img alt="Teams" src="/insat/images/Frame-1000003129.svg" /></div>
-                    
-                    <div className="ticker-item"><img alt="LMS" src="/insat/images/Frame-1000003130.svg" /></div>
-                    <div className="ticker-item"><img alt="SIEM" src="/insat/images/Frame-1000003131.svg" /></div>
-                    <div className="ticker-item"><img alt="HRMS" src="/insat/images/Frame-1000003132.svg" /></div>
-                    <div className="ticker-item"><img alt="Identity" src="/insat/images/Frame-1000003133.svg" /></div>
-                    <div className="ticker-item"><img alt="Microsoft 365" src="/insat/images/Frame-1000003126.svg" /></div>
-                    <div className="ticker-item"><img alt="Google Workspace" src="/insat/images/Frame-1000003125.svg" /></div>
-                    <div className="ticker-item"><img alt="Slack" src="/insat/images/Frame-1000003127.svg" /></div>
-                    <div className="ticker-item"><img alt="Teams" src="/insat/images/Frame-1000003129.svg" /></div>
+                <div className="two-col-grid" style={{alignItems: "center"}}>
+                    <div className="two-col-content-block animate from-left">
+                        <h2 className="text-52-heading">Integrate with Your IT & Security Stack</h2>
+                        <div style={{marginTop: "1.5rem", opacity: "0.7"}}>
+                            <p className="text-18-content">
+                                Ditch the manual admin work. InSAT auto-syncs with your identity providers, LMS, and
+                                communication platforms to automate training management.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="two-col-visual-block animate from-right" style={{background: "none"}}>
+                        <div style={{display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.5rem"}}>
+                            <div className="logo-card-wrapper" style={{display: "flex", justifyContent: "center", alignItems: "center", background: "#F8F9FA", borderRadius: "12px", padding: "1.5rem", height: "120px", boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.03)", border: "1px solid #EAEAEA"}}>
+                                <img src="/images/Google-Workspace-Logo.png" alt="Google Workspace" style={{maxWidth: "100%", maxHeight: "100%", objectFit: "contain"}} />
+                            </div>
+                            <div className="logo-card-wrapper" style={{display: "flex", justifyContent: "center", alignItems: "center", background: "#F8F9FA", borderRadius: "12px", padding: "1.5rem", height: "120px", boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.03)", border: "1px solid #EAEAEA"}}>
+                                <img src="/images/Okta-logo.png" alt="Okta" style={{maxWidth: "100%", maxHeight: "100%", objectFit: "contain"}} />
+                            </div>
+                            <div className="logo-card-wrapper" style={{display: "flex", justifyContent: "center", alignItems: "center", background: "#F8F9FA", borderRadius: "12px", padding: "1.5rem", height: "120px", boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.03)", border: "1px solid #EAEAEA"}}>
+                                <img src="/images/Microsoft-Logo.png" alt="Microsoft" style={{maxWidth: "100%", maxHeight: "100%", objectFit: "contain"}} />
+                            </div>
+                            <div className="logo-card-wrapper" style={{display: "flex", justifyContent: "center", alignItems: "center", background: "#F8F9FA", borderRadius: "12px", padding: "1.5rem", height: "120px", boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.03)", border: "1px solid #EAEAEA"}}>
+                                <img src="/images/Slack-logo.png" alt="Slack" style={{maxWidth: "100%", maxHeight: "100%", objectFit: "contain"}} />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -790,8 +764,8 @@ const InsatPage = () => {
                   <Link href="/start-free" className="btn btn-outline-primary">
                     Start Free
                   </Link>
-                  <Link href="/book-demo" className="btn btn-primary">
-                    Book a demo &rarr;
+                  <Link href="/book-demo" className="btn btn-primary gap-1.5">
+                    Book a Demo <FiArrowRight className="text-xs" />
                   </Link>
                 </div>
               </div>

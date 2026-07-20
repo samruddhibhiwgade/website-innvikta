@@ -882,7 +882,7 @@ export default function AdminBlogPanel() {
               </div>
             </div>
             <div class="pt-4 flex justify-start">
-              <button type="button" disabled class="px-10 py-3.5 bg-[#f15a24] text-white font-bold rounded-full shadow-lg shadow-[#f15a24]/20 text-xs uppercase tracking-wider cursor-not-allowed flex items-center gap-2">
+              <button type="button" disabled class="px-10 py-3.5 bg-[#f15a24] !text-white font-bold rounded-full shadow-lg shadow-[#f15a24]/20 text-xs uppercase tracking-wider cursor-not-allowed flex items-center gap-2">
                 <span>Book a Demo</span>
                 <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </button>
@@ -1166,7 +1166,7 @@ export default function AdminBlogPanel() {
               </Link>
               <button
                 onClick={startNewPost}
-                className="flex items-center gap-2 bg-[#f15a24] hover:bg-orange-600 text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer"
+                className="flex items-center gap-2 bg-[#f15a24] hover:bg-orange-600 !text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer"
               >
                 <FiPlus />
                 <span>Write New Article</span>
@@ -1235,7 +1235,7 @@ export default function AdminBlogPanel() {
                   <button
                     type="submit"
                     disabled={isUploadingInline}
-                    className="flex-1 bg-[#f15a24] hover:bg-orange-600 text-white py-2.5 rounded-xl text-xs font-bold shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50"
+                    className="flex-1 bg-[#f15a24] hover:bg-orange-600 !text-white py-2.5 rounded-xl text-xs font-bold shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50"
                   >
                     {isUploadingInline ? "Uploading..." : "Upload & Insert"}
                   </button>
@@ -1310,7 +1310,7 @@ export default function AdminBlogPanel() {
                   <button
                     type="button"
                     onClick={handleInsertParsedFaq}
-                    className="flex-1 bg-[#f15a24] hover:bg-orange-600 text-white py-2.5 rounded-xl text-xs font-bold shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="flex-1 bg-[#f15a24] hover:bg-orange-600 !text-white py-2.5 rounded-xl text-xs font-bold shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 cursor-pointer"
                   >
                     Convert & Insert
                   </button>
@@ -1387,7 +1387,7 @@ export default function AdminBlogPanel() {
                   <button
                     type="button"
                     onClick={handleInsertParsedTakeaways}
-                    className="flex-1 bg-[#f15a24] hover:bg-orange-600 text-white py-2.5 rounded-xl text-xs font-bold shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="flex-1 bg-[#f15a24] hover:bg-orange-600 !text-white py-2.5 rounded-xl text-xs font-bold shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 cursor-pointer"
                   >
                     Convert & Insert
                   </button>
@@ -1976,7 +1976,7 @@ export default function AdminBlogPanel() {
                   <button
                     type="button"
                     onClick={handleSubmit}
-                    className="flex-1 flex items-center justify-center gap-1.5 bg-[#f15a24] hover:bg-orange-600 text-white py-3.5 rounded-xl font-bold shadow-md hover:shadow-lg transition-all text-xs cursor-pointer"
+                    className="flex-1 flex items-center justify-center gap-1.5 bg-[#f15a24] hover:bg-orange-600 !text-white py-3.5 rounded-xl font-bold shadow-md hover:shadow-lg transition-all text-xs cursor-pointer"
                   >
                     <FiSave />
                     <span>Save Post</span>

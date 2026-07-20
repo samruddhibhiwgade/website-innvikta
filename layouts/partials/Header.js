@@ -1573,7 +1573,7 @@ const Header = () => {
               <div className={`transition-all duration-300 flex items-center h-full ${pathname === "/partners" ? "opacity-100 pointer-events-auto translate-x-0" : "opacity-0 pointer-events-none translate-x-4 absolute right-0"}`}>
                 <Link 
                   href="#form" 
-                  className="px-4 xl:px-6 py-2 bg-[#f15a24] hover:bg-orange-600 text-white rounded-lg text-[12px] xl:text-[13px] font-bold transition-all duration-300 flex items-center gap-1 border border-[#f15a24] hover:border-orange-600 whitespace-nowrap"
+                  className="px-4 xl:px-6 py-2 bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg text-[12px] xl:text-[13px] font-bold transition-all duration-300 flex items-center gap-1 border border-[#f15a24] hover:border-orange-600 whitespace-nowrap"
                 >
                   Become a Partner <FiArrowRight className="text-xs" />
                 </Link>
@@ -1583,15 +1583,15 @@ const Header = () => {
               <div className={`header-cta-buttons transition-all duration-300 flex items-center h-full ${pathname !== "/partners" ? "opacity-100 pointer-events-auto translate-x-0" : "opacity-0 pointer-events-none -translate-x-4 absolute right-0"}`}>
                 <Link 
                   href="/start-free" 
-                  className="bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] text-[#f15a24] hover:text-white rounded-lg transition-all duration-300 whitespace-nowrap header-cta-start-free"
+                  className="bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] text-[#f15a24] hover:!text-white rounded-lg transition-all duration-300 whitespace-nowrap header-cta-start-free"
                 >
                   Start Free
                 </Link>
                 <Link 
                   href="/book-demo" 
-                  className="bg-[#f15a24] hover:bg-orange-600 text-white rounded-lg transition-all duration-300 flex items-center gap-1 whitespace-nowrap header-cta-book-demo"
+                  className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 flex items-center gap-1 whitespace-nowrap header-cta-book-demo"
                 >
-                  Book a demo <FiArrowRight className="text-xs" />
+                  Book a Demo <FiArrowRight className="text-xs" />
                 </Link>
               </div>
             </div>
@@ -1692,7 +1692,7 @@ const Header = () => {
                                    <Link 
                                      href={currentTab.headlineCta.href}
                                      onClick={handleMenuLeave}
-                                     className="group px-6 py-2.5 bg-[#f15a24] hover:bg-orange-600 text-white font-extrabold rounded-full text-[13px] transition-colors flex items-center gap-1.5 mt-1 hover:shadow-none"
+                                     className="group px-6 py-2.5 bg-[#f15a24] hover:bg-orange-600 !text-white font-extrabold rounded-full text-[13px] transition-colors flex items-center gap-1.5 mt-1 hover:shadow-none"
                                    >
                                      {currentTab.headlineCta.label} <FiArrowRight className="text-[13px] transition-transform duration-200 group-hover:translate-x-1" />
                                    </Link>
@@ -2065,7 +2065,7 @@ const Header = () => {
               <Link 
                 href="#form" 
                 onClick={() => setShowMenu(false)}
-                className="w-full block text-center py-3 bg-[#f15a24] text-white font-extrabold rounded-lg text-sm shadow-md shadow-orange-500/10 flex items-center justify-center gap-1"
+                className="w-full block text-center py-3 bg-[#f15a24] !text-white font-extrabold rounded-lg text-sm shadow-md shadow-orange-500/10 flex items-center justify-center gap-1"
               >
                 Become a Partner <FiArrowRight className="text-xs" />
               </Link>
@@ -2076,16 +2076,16 @@ const Header = () => {
               <Link 
                 href="/start-free" 
                 onClick={() => setShowMenu(false)}
-                className="w-full block text-center py-3 bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 text-[#f15a24] hover:text-white font-extrabold rounded-lg text-sm transition-all"
+                className="w-full block text-center py-3 bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 text-[#f15a24] hover:!text-white font-extrabold rounded-lg text-sm transition-all"
               >
                 Start Free
               </Link>
               <Link 
                 href="/book-demo" 
                 onClick={() => setShowMenu(false)}
-                className="w-full block text-center py-3 bg-[#f15a24] text-white font-extrabold rounded-lg text-sm shadow-md shadow-orange-500/10 flex items-center justify-center gap-1"
+                className="w-full block text-center py-3 bg-[#f15a24] !text-white font-extrabold rounded-lg text-sm shadow-md shadow-orange-500/10 flex items-center justify-center gap-1"
               >
-                Book a demo <FiArrowRight className="text-xs" />
+                Book a Demo <FiArrowRight className="text-xs" />
               </Link>
             </div>
           </div>

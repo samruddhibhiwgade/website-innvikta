@@ -200,7 +200,7 @@ const BlogPageClient = ({ initialPosts, title }) => {
   return (
     <>
       {/* Orange Theme Hero Section */}
-      <section className="relative bg-[#f15a24] pt-12 pb-12 overflow-hidden text-white">
+      <section className="relative bg-[#f15a24] pt-12 pb-12 overflow-hidden !text-white">
         {/* Decorative background grid, glowing circles, and floating cybersecurity icons */}
         <div className="absolute inset-0 pointer-events-none opacity-25">
           {/* Radial Grid */}
@@ -314,7 +314,7 @@ const BlogPageClient = ({ initialPosts, title }) => {
                   setActiveCategory("All Articles");
                   setSearchQuery("");
                 }}
-                className="mt-4 px-6 py-2.5 bg-[#f15a24] text-white font-extrabold text-xs rounded-full uppercase tracking-wider hover:bg-orange-600 transition-colors shadow-lg shadow-orange-500/10 cursor-pointer"
+                className="mt-4 px-6 py-2.5 bg-[#f15a24] !text-white font-extrabold text-xs rounded-full uppercase tracking-wider hover:bg-orange-600 transition-colors shadow-lg shadow-orange-500/10 cursor-pointer"
               >
                 Clear Filters
               </button>
@@ -341,7 +341,7 @@ const BlogPageClient = ({ initialPosts, title }) => {
                     <div className="space-y-4">
                       {featuredPost.frontmatter.image && (
                         <Link href={`/blog/${featuredPost.slug}`} className="block overflow-hidden rounded-2xl relative">
-                          <span className="absolute top-4 left-4 bg-[#f15a24] text-white text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-lg shadow-md z-10">
+                          <span className="absolute top-4 left-4 bg-[#f15a24] !text-white text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-lg shadow-md z-10">
                             Featured
                           </span>
                           <ImageFallback

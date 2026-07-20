@@ -83,7 +83,7 @@ export default function WeeklyNewsletterPage() {
       />
 
       {/* Hero Section */}
-      <div className="bg-[#f15a24] text-white py-20 relative overflow-hidden">
+      <div className="bg-[#f15a24] !text-white py-20 relative overflow-hidden">
         {/* Background Decorative Rings & Dots */}
         <div className="absolute right-0 top-0 bottom-0 w-1/2 md:w-1/3 opacity-25 pointer-events-none">
           <svg viewBox="0 0 300 200" fill="none" className="w-full h-full object-cover md:object-right">
@@ -179,7 +179,7 @@ export default function WeeklyNewsletterPage() {
                   />
                   <button
                     type="submit"
-                    className="absolute right-1.5 top-1.5 bottom-1.5 bg-[#f15a24] hover:bg-orange-600 text-white font-bold px-6 rounded-full text-xs transition-all cursor-pointer"
+                    className="absolute right-1.5 top-1.5 bottom-1.5 bg-[#f15a24] hover:bg-orange-600 !text-white font-bold px-6 rounded-full text-xs transition-all cursor-pointer"
                   >
                     Subscribe
                   </button>
@@ -232,7 +232,7 @@ export default function WeeklyNewsletterPage() {
 
                     <Link 
                       href={`/resources/weekly-newsletter/${edition.slug}`} 
-                      className="bg-[#f15a24] hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-all duration-300 inline-flex items-center gap-1 whitespace-nowrap font-bold text-xs shadow-md shadow-orange-500/10"
+                      className="bg-[#f15a24] hover:bg-orange-600 !text-white px-4 py-2 rounded-lg transition-all duration-300 inline-flex items-center gap-1 whitespace-nowrap font-bold text-xs shadow-md shadow-orange-500/10"
                     >
                       Read Edition <FiArrowRight className="text-xs" />
                     </Link>

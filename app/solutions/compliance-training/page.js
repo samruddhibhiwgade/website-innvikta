@@ -3,6 +3,7 @@
 import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { FiArrowRight } from "react-icons/fi";
 import "../../../styles/insat.scss";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
 import { gsap } from "@lib/gsap";
@@ -757,8 +758,8 @@ const ComplianceTrainingPage = () => {
                   <Link href="/start-free" className="btn btn-outline-primary">
                     Start Free
                   </Link>
-                  <Link href="/book-demo" className="btn btn-primary">
-                    Book a demo &rarr;
+                  <Link href="/book-demo" className="btn btn-primary gap-1.5">
+                    Book a Demo <FiArrowRight className="text-xs" />
                   </Link>
                 </div>
                 </div>

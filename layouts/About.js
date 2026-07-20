@@ -196,18 +196,8 @@ const About = () => {
                     </p>
 
                     <div className="banner-btn flex flex-wrap items-center justify-center gap-4">
-                      <Link 
-                        href="/book-demo"
-                        className="btn btn-primary shadow-lg shadow-orange-500/15 w-44 h-12 flex items-center justify-center font-bold text-base gap-1.5"
-                      >
-                        Book Demo <FiArrowRight className="text-xs" />
-                      </Link>
-                      <Link 
-                        href="/book-demo"
-                        className="w-44 h-12 flex items-center justify-center rounded-lg font-bold text-base bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] text-[#f15a24] hover:text-white transition-all duration-300"
-                      >
-                        Start Free
-                      </Link>
+                      <Link href="/book-demo" className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap px-5 h-12 font-bold shadow-md shadow-orange-500/10">Book a Demo <FiArrowRight className="text-xs" /></Link>
+                      <Link href="/book-demo" className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap px-5 h-12 font-bold shadow-md shadow-orange-500/10">Book a Demo <FiArrowRight className="text-xs" /></Link>
                     </div>
                   </div>
                 </div>
@@ -628,12 +618,8 @@ const About = () => {
                     </p>
                     
                     <div className="flex flex-wrap justify-center gap-4 mt-10" style={{ marginTop: "2.5rem" }}>
-                      <Link href="/book-demo" className="btn btn-primary">
-                        Start Free
-                      </Link>
-                      <Link href="/book-demo" className="btn btn-outline-primary">
-                        Book a demo
-                      </Link>
+                      <Link href="/start-free" className="btn btn-outline-primary">Start Free</Link>
+                      <Link href="/book-demo" className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap px-5 h-12 font-bold shadow-md shadow-orange-500/10">Book a Demo <FiArrowRight className="text-xs" /></Link>
                     </div>
                   </div>
                   <div className="absolute top-0 left-0 w-full h-full bg-[#fff7f3] rounded-2xl overflow-hidden -z-10">

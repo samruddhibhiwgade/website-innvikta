@@ -157,10 +157,10 @@ export default function CyberAwarenessMonthCampaignPage() {
         }}
       />
 
-      <div className="min-h-screen w-full overflow-x-hidden bg-[#fafafa] text-slate-800 font-sans selection:bg-[#f15a24] selection:text-white">
+      <div className="min-h-screen w-full overflow-x-hidden bg-[#fafafa] text-slate-800 font-sans selection:bg-[#f15a24] selection:!text-white">
         
         {/* ================= SECTION 1: HERO ================= */}
-        <div className="bg-[#f15a24] text-white py-20 relative overflow-hidden">
+        <div className="bg-[#f15a24] !text-white py-20 relative overflow-hidden">
           {/* Background Decorative Rings */}
           <div className="absolute right-0 top-0 bottom-0 w-1/2 md:w-1/3 opacity-20 pointer-events-none">
             <svg viewBox="0 0 300 200" fill="none" className="w-full h-full object-cover md:object-right">
@@ -193,7 +193,7 @@ export default function CyberAwarenessMonthCampaignPage() {
                 </a>
                 <a 
                   href="#register" 
-                  className="px-8 py-4 bg-[#f15a24] border border-white hover:bg-white hover:text-[#f15a24] text-white font-extrabold text-sm rounded-full uppercase tracking-wider transition-all duration-300 transform hover:-translate-y-1"
+                  className="px-8 py-4 bg-[#f15a24] border border-white hover:bg-white hover:text-[#f15a24] !text-white font-extrabold text-sm rounded-full uppercase tracking-wider transition-all duration-300 transform hover:-translate-y-1"
                 >
                   Get Updates
                 </a>
@@ -539,7 +539,7 @@ export default function CyberAwarenessMonthCampaignPage() {
                         <button 
                           type="submit" 
                           disabled={isSubmitting}
-                          className="group relative px-10 py-3.5 bg-[#f15a24] hover:bg-[#f15a24]/90 text-white font-bold rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/40 overflow-hidden transition-all duration-300 transform hover:-translate-y-1 disabled:opacity-50 disabled:translate-y-0 whitespace-nowrap cursor-pointer"
+                          className="group relative px-10 py-3.5 bg-[#f15a24] hover:bg-[#f15a24]/90 !text-white font-bold rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/40 overflow-hidden transition-all duration-300 transform hover:-translate-y-1 disabled:opacity-50 disabled:translate-y-0 whitespace-nowrap cursor-pointer"
                         >
                           <div className="relative z-10 flex items-center gap-2">
                             <span className="uppercase tracking-wider text-sm">

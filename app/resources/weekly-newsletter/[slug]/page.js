@@ -250,7 +250,7 @@ export default function NewsletterDetailPage() {
                         />
                         <button
                           type="submit"
-                          className="absolute right-1.5 top-1.5 bottom-1.5 bg-[#f15a24] hover:bg-orange-600 text-white font-bold px-6 rounded-full text-xs transition-all cursor-pointer"
+                          className="absolute right-1.5 top-1.5 bottom-1.5 bg-[#f15a24] hover:bg-orange-600 !text-white font-bold px-6 rounded-full text-xs transition-all cursor-pointer"
                         >
                           Subscribe
                         </button>

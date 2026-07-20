@@ -3,6 +3,7 @@ import { markdownify } from "@lib/utils/textConverter";
 import Link from "next/link";
 import Circle from "./Circle";
 import ImageFallback from "./ImageFallback";
+import { FiArrowRight } from "react-icons/fi";
 
 function Cta() {
   const { title, content, button, button_secondary, enable } = config.call_to_action;
@@ -16,8 +17,8 @@ function Cta() {
             {markdownify(title, "h2", "section-title leading-tight")}
             {markdownify(content, "p", "mt-10")}
             <div className="flex flex-wrap justify-center gap-4 mt-10">
-              <Link href={button.link} className="btn btn-primary">
-                {button.label}
+              <Link href={button.link} className="btn btn-primary inline-flex items-center gap-1.5">
+                {button.label} <FiArrowRight className="text-xs" />
               </Link>
               {button_secondary?.label && (
                 <Link href={button_secondary.link} className="btn btn-outline-primary">

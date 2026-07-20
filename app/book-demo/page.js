@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { FiArrowRight } from "react-icons/fi";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
 import SeoMeta from "@layouts/partials/SeoMeta";
 import SuccessPopup from "@layouts/partials/SuccessPopup";
 
 const DemoPage = () => {
+  const router = useRouter();
   const [form, setForm] = useState({
     fullName: "",
     designation: "",
@@ -39,7 +41,11 @@ const DemoPage = () => {
     if (!form.designation) newErrors.designation = "Please fill the required field";
     const emailError = validateEmail(form.email);
     if (emailError) newErrors.email = emailError;
-    if (!form.phone) newErrors.phone = "Please fill the required field";
+    if (!form.phone) {
+      newErrors.phone = "Please fill the required field";
+    } else if (!/^\d{10}$/.test(form.phone)) {
+      newErrors.phone = "Phone number must be exactly 10 digits";
+    }
     if (!form.company) newErrors.company = "Please fill the required field";
     if (!form.teamSize) newErrors.teamSize = "Please fill the required field";
     
@@ -64,15 +70,7 @@ const DemoPage = () => {
       .then((data) => {
         setIsSubmitting(false);
         if (data.success) {
-          setShowPopup(true);
-          setForm({
-            fullName: "",
-            designation: "",
-            email: "",
-            phone: "",
-            company: "",
-            teamSize: ""
-          });
+          router.push("/thank-you/demo");
         } else {
           alert("Error: " + (data.error || "Failed to submit demo request. Please try again."));
         }
@@ -81,6 +79,17 @@ const DemoPage = () => {
         setIsSubmitting(false);
         alert("An error occurred. Please try again later.");
       });
+    } else {
+      setTimeout(() => {
+        const firstErrorEl = document.querySelector('.text-red-500');
+        if (firstErrorEl) {
+          firstErrorEl.scrollIntoView({ behavior: "smooth", block: "center" });
+          const inputEl = firstErrorEl.parentElement.querySelector('input, select, textarea');
+          if (inputEl) {
+            inputEl.focus();
+          }
+        }
+      }, 100);
     }
   };
 
@@ -102,12 +111,37 @@ const DemoPage = () => {
     }
   ];
 
+  const getEmailError = () => {
+    if (errors.email) return errors.email;
+    if (form.email) {
+      const emailErr = validateEmail(form.email);
+      if (emailErr && emailErr !== "Please fill the required field") {
+        return emailErr;
+      }
+    }
+    return "";
+  };
+
+  const getPhoneError = () => {
+    if (errors.phone) return errors.phone;
+    if (form.phone && form.phone.length > 0 && form.phone.length < 10) {
+      return "Phone number must be exactly 10 digits";
+    }
+    return "";
+  };
+
+  const isFullNameFilled = !!form.fullName.trim();
+  const isDesignationSelected = !!form.designation;
+  const isEmailValid = !!form.email.trim() && !validateEmail(form.email);
+  const isPhoneValid = /^\d{10}$/.test(form.phone);
+  const isCompanyFilled = !!form.company.trim();
+
   return (
     <GSAPWrapper>
       <SeoMeta title="Request a Free Demo | Innvikta" description="Request a personalized demo of Innvikta InSAT. Learn how we help enterprises reduce human cyber risk with security awareness training." />
       <div className="min-h-screen bg-[#fafafa]">
         {/* Header Banner (Proofpoint inspired layout, using Innvikta branding/colors) */}
-        <div className="bg-[#f15a24] text-white py-12 relative overflow-hidden">
+        <div className="bg-[#f15a24] !text-white py-12 relative overflow-hidden">
           {/* Background Decorative Rings & Dots */}
           <div className="absolute right-0 top-0 bottom-0 w-1/2 md:w-1/3 opacity-25 pointer-events-none">
             <svg viewBox="0 0 300 200" fill="none" className="w-full h-full object-cover md:object-right">
@@ -245,7 +279,10 @@ const DemoPage = () => {
                         type="text" 
                         placeholder="John Doe"
                         value={form.fullName}
-                        onChange={(e) => setForm({...form, fullName: e.target.value})}
+                        onChange={(e) => {
+                          setForm({...form, fullName: e.target.value});
+                          if (errors.fullName) setErrors({...errors, fullName: ""});
+                        }}
                         className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.fullName ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                       />
                       {errors.fullName && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.fullName}</p>}
@@ -255,7 +292,10 @@ const DemoPage = () => {
                       <label className="block text-xs font-bold text-slate-400 uppercase mb-2 tracking-wide">Designation</label>
                       <select 
                         value={form.designation}
-                        onChange={(e) => setForm({...form, designation: e.target.value})}
+                        onChange={(e) => {
+                          setForm({...form, designation: e.target.value});
+                          if (errors.designation) setErrors({...errors, designation: ""});
+                        }}
                         className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.designation ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all appearance-none cursor-pointer`}
                       >
                         <option value="">Select designation</option>
@@ -276,10 +316,13 @@ const DemoPage = () => {
                         type="email" 
                         placeholder="john@company.com"
                         value={form.email}
-                        onChange={(e) => setForm({...form, email: e.target.value})}
-                        className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.email ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
+                        onChange={(e) => {
+                          setForm({...form, email: e.target.value});
+                          if (errors.email && !validateEmail(e.target.value)) setErrors({...errors, email: ""});
+                        }}
+                        className={`w-full px-5 py-3.5 bg-slate-50 border ${(errors.email || getEmailError()) ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                       />
-                      {errors.email && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.email}</p>}
+                      {getEmailError() && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{getEmailError()}</p>}
                     </div>
 
                     <div>
@@ -288,10 +331,15 @@ const DemoPage = () => {
                         type="tel" 
                         placeholder="9876543210"
                         value={form.phone}
-                        onChange={(e) => setForm({...form, phone: e.target.value.replace(/\D/g, "")})}
-                        className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.phone ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
+                        onChange={(e) => {
+                          const val = e.target.value.replace(/\D/g, "");
+                          setForm({...form, phone: val});
+                          if (errors.phone && val.length === 10) setErrors({...errors, phone: ""});
+                        }}
+                        maxLength={10}
+                        className={`w-full px-5 py-3.5 bg-slate-50 border ${(errors.phone || getPhoneError()) ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                       />
-                      {errors.phone && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.phone}</p>}
+                      {getPhoneError() && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{getPhoneError()}</p>}
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -301,7 +349,10 @@ const DemoPage = () => {
                           type="text" 
                           placeholder="Acme Inc."
                           value={form.company}
-                          onChange={(e) => setForm({...form, company: e.target.value})}
+                          onChange={(e) => {
+                            setForm({...form, company: e.target.value});
+                            if (errors.company) setErrors({...errors, company: ""});
+                          }}
                           className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.company ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                         />
                         {errors.company && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.company}</p>}
@@ -310,7 +361,10 @@ const DemoPage = () => {
                         <label className="block text-xs font-bold text-slate-400 uppercase mb-2 tracking-wide">Team Size</label>
                         <select 
                           value={form.teamSize}
-                          onChange={(e) => setForm({...form, teamSize: e.target.value})}
+                          onChange={(e) => {
+                            setForm({...form, teamSize: e.target.value});
+                            if (errors.teamSize) setErrors({...errors, teamSize: ""});
+                          }}
                           className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.teamSize ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all appearance-none cursor-pointer`}
                         >
                           <option value="">Select size</option>
@@ -336,7 +390,7 @@ const DemoPage = () => {
                       >
                         <div className="relative z-10 flex items-center gap-2">
                           <span className="uppercase tracking-wider text-sm">
-                            {isSubmitting ? "Submitting..." : "Book a demo"}
+                            {isSubmitting ? "Submitting..." : "Book a Demo"}
                           </span>
                           {!isSubmitting && (
                             <FiArrowRight className="text-lg transition-transform group-hover:translate-x-1" />

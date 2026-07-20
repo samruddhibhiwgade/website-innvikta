@@ -39,7 +39,7 @@ export default function PostSingleClientControls({ seoAnalysis }) {
       {showBackToTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-50 bg-[#f15a24] hover:bg-[#c2410c] text-white p-3.5 rounded-full shadow-lg transition-all duration-300 hover:-translate-y-1 active:scale-95 flex items-center justify-center border border-white/10"
+          className="fixed bottom-6 right-6 z-50 bg-[#f15a24] hover:bg-[#c2410c] !text-white p-3.5 rounded-full shadow-lg transition-all duration-300 hover:-translate-y-1 active:scale-95 flex items-center justify-center border border-white/10"
           aria-label="Back to top"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

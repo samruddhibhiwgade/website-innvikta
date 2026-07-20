@@ -8,6 +8,19 @@ export async function GET() {
     if (!res.ok) throw new Error("Failed to fetch blogs from database");
     
     const data = await res.json();
+    if (data.posts) {
+      data.posts = data.posts.map((page) => {
+        const title = page.frontmatter.title || "";
+        const correctSlug = title
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)/g, "");
+        return {
+          ...page,
+          slug: correctSlug
+        };
+      });
+    }
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
