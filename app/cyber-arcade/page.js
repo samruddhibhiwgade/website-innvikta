@@ -149,7 +149,7 @@ export default function CyberArcadePage() {
       // LOAD MODEL
       let car = null;
       let carLoaded = false;
-      const modelUrl = '/models/cyber-arcade/steam_deck_console.glb';
+      const modelUrl = '/models/cyber-arcade/low_poly_steam_deck.glb';
 
       loadHDR();
       if (modelUrl) {
