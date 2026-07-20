@@ -56,8 +56,8 @@
     --color-black-text: #1F2937;
 
     /* Typography */
-    --font-heading: 'Satoshi', sans-serif;
-    --font-body: 'Satoshi', sans-serif;
+    --font-heading: var(--font-secondary), sans-serif;
+    --font-body: var(--font-secondary), sans-serif;
 
     /* Layout Spacing */
     --container-max-width: 1360px;
