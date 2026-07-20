@@ -936,7 +936,7 @@ const BaselineScoreToolPage = () => {
             <div className="container faq-grid">
               <div className="faq-title-col animate from-left">
                 <h2 className="text-40-heading">Frequently Asked Questions</h2>
-                <Link href="/book-demo" style={{ marginTop: "1.25rem" }} className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap px-5 h-12 font-bold shadow-md shadow-orange-500/10">Book a Demo <FiArrowRight className="text-xs" /></Link>
+                <Link href="/book-demo" style={{ marginTop: "1.25rem", paddingLeft: "1.5rem", paddingRight: "1.5rem" }} className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap px-5 h-12 font-bold shadow-md shadow-orange-500/10">Book a Demo <FiArrowRight className="text-xs" /></Link>
               </div>
 
               <div className="faq-list-col animate from-right">
@@ -986,7 +986,7 @@ const BaselineScoreToolPage = () => {
                     >
                       Start Free
                     </button>
-                    <Link href="/book-demo" className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap px-5 h-12 font-bold shadow-md shadow-orange-500/10">Book a Demo <FiArrowRight className="text-xs" /></Link>
+                    <Link href="/book-demo" style={{ paddingLeft: "1.5rem", paddingRight: "1.5rem" }} className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap px-5 h-12 font-bold shadow-md shadow-orange-500/10">Book a Demo <FiArrowRight className="text-xs" /></Link>
                   </div>
                 </div>
                 <div className="bg-theme animated-bg absolute top-0 left-0 w-full after:hidden overflow-hidden">

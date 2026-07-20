@@ -860,18 +860,18 @@ section {
     font-size: clamp(2.9rem, 4.8vw, 4.6rem) !important;
     line-height: 1.0;
     margin-bottom: 1.25rem;
-    font-weight: 300 !important;
+    font-weight: 400 !important;
     letter-spacing: -0.02em !important;
 }
 
-/* Force all .insat-page headings to non-bold */
+/* Force all .insat-page headings to 400 */
 .insat-page h1,
 .insat-page h2,
 .insat-page h3,
 .insat-page h4,
 .insat-page h5,
 .insat-page h6 {
-    font-weight: 300 !important;
+    font-weight: 400 !important;
 }
 
 /* Hero graphic mockup container — full width of container, top-rounded only */
@@ -3269,7 +3269,25 @@ section {
 
     /* Premium Responsive CTA Section Redesign */
     .cta {
+        .container-xl, .container {
+            position: static !important;
+        }
+
+        .bg-theme {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 0 !important;
+
+            &::before {
+                border-radius: 0 !important;
+            }
+        }
+
         .section {
+            position: static !important;
             padding-left: 1.5rem !important;
             padding-right: 1.5rem !important;
 
@@ -3281,6 +3299,7 @@ section {
 
         .section-title {
             font-size: clamp(1.65rem, 6vw, 2.5rem);
+            font-weight: 400 !important;
             line-height: 1.25;
             margin-bottom: 1.5rem;
             max-width: 1100px;
@@ -3322,12 +3341,15 @@ section {
             white-space: nowrap !important;
             transition: all 0.2s ease !important;
             box-sizing: border-box !important;
+            width: 180px !important;
+            max-width: 47% !important;
 
             @media (max-width: 480px) {
                 font-size: 0.85rem !important;
-                padding: 0 1.1rem !important;
+                padding: 0 0.5rem !important;
                 height: 2.75rem !important; /* 44px on mobile */
                 line-height: 2.75rem !important;
+                width: 160px !important;
             }
         }
     }
