@@ -67,8 +67,8 @@ module.exports = {
         h6: h6 + "rem",
       },
       fontFamily: {
-        primary: [fontPrimary, fontPrimaryType],
-        secondary: [fontSecondary, fontSecondaryType],
+        primary: ["var(--font-primary)", fontPrimaryType],
+        secondary: ["var(--font-secondary)", fontSecondaryType],
       },
     },
   },

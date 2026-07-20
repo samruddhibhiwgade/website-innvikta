@@ -11,7 +11,27 @@ import "swiper/css/pagination";
 import "../styles/style.scss";
 
 import TrackingProvider from "@layouts/components/TrackingProvider";
+import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-primary",
+  display: "swap",
+});
+
+const satoshi = localFont({
+  src: [
+    { path: "../public/fonts/Satoshi-Light.woff2", weight: "300", style: "normal" },
+    { path: "../public/fonts/Satoshi-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../public/fonts/Satoshi-Medium.woff2", weight: "500", style: "normal" },
+    { path: "../public/fonts/Satoshi-Bold.woff2", weight: "700", style: "normal" },
+    { path: "../public/fonts/Satoshi-Black.woff2", weight: "900", style: "normal" },
+  ],
+  variable: "--font-secondary",
+  display: "swap",
+});
 export default function RootLayout({ children }) {
   // import google font css
   const pf = theme.fonts.font_family.primary;
@@ -56,22 +76,7 @@ export default function RootLayout({ children }) {
         {/* theme meta */}
         <meta name="theme-name" content="andromeda-light-nextjs" />
 
-        {/* google font css */}
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
 
-        {/* Fontshare Satoshi */}
-        <link
-          href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,600,500,300,400&display=swap"
-          rel="stylesheet"
-        />
 
         {/* theme meta */}
         <meta name="theme-name" content="andromeda-light-nextjs" />
@@ -87,7 +92,7 @@ export default function RootLayout({ children }) {
           content="#000"
         />
       </head>
-      <body suppressHydrationWarning={true} className="overflow-x-hidden">
+      <body suppressHydrationWarning={true} className={`overflow-x-hidden ${inter.variable} ${satoshi.variable}`}>
         <TwSizeIndicator />
         <TrackingProvider>
           <Header />
