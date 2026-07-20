@@ -174,48 +174,17 @@ export default function CyberArcadePage() {
 
             car.traverse(child => {
               if (child.isMesh) {
-                const name = child.name.toLowerCase();
-                if (name.includes('valve') || name.includes('logo') || name.includes('branding')) {
-                  child.visible = false;
-                }
-
                 child.castShadow = true;
                 child.receiveShadow = true;
                 if (child.material) {
                   const mats = Array.isArray(child.material) ? child.material : [child.material];
                   mats.forEach(m => {
                     m.envMapIntensity = sceneValues.hdrIntensity;
+                    m.side = THREE.DoubleSide; // Fix invisible backfaces
                   });
                 }
               }
             });
-
-            // Add INNVIKTA text
-            const labelCanvas = document.createElement('canvas');
-            labelCanvas.width = 1024;
-            labelCanvas.height = 256;
-            const ctx = labelCanvas.getContext('2d');
-            ctx.fillStyle = '#0f0f0f';
-            ctx.fillRect(0, 0, 1024, 256);
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.4)'; 
-            ctx.font = '900 120px "Barlow Condensed"';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText('INNVIKTA', 512, 128);
-
-            const labelTex = new THREE.CanvasTexture(labelCanvas);
-            const labelMat = new THREE.MeshStandardMaterial({ 
-              map: labelTex,
-              transparent: false,
-              roughness: 0.2,
-              metalness: 0.9
-            });
-            const labelGeo = new THREE.PlaneGeometry(2.0, 0.7);
-            const labelMesh = new THREE.Mesh(labelGeo, labelMat);
-            
-            labelMesh.position.set(center.x, center.y + 0.22, center.z - size.z/2 - 0.015); 
-            labelMesh.rotation.y = Math.PI; 
-            car.add(labelMesh);
 
             scene.add(car);
             carLoaded = true;
@@ -233,7 +202,7 @@ export default function CyberArcadePage() {
 
       const keyframes = [
         { x: 0.46, z: 2.69, cx: 2.06, cy: 0.01, cz: 4.8, lx: -2.23, ly: 0.0, lz: 0.0, fov: 45.0, yaw: 0.0 }, // Hero
-        { x: -0.11, z: 4.53, cx: 1.66, cy: -0.12, cz: 6.05, lx: -0.23, ly: 0.05, lz: 2.35, fov: 15.0, yaw: 3.138 }, // Overview
+        { x: -0.11, z: 4.53, cx: 1.66, cy: -0.12, cz: 6.5, lx: -0.23, ly: 0.05, lz: 2.35, fov: 20.0, yaw: 3.138 }, // Overview
         { x: -1.5, z: 0.4, cx: -5.1, cy: 1.21, cz: 0.5, lx: -0.57, ly: -0.5, lz: 0.0, fov: 30.0, yaw: 0.8 }, // Specs
         { x: -0.46, z: -0.63, cx: 0.23, cy: 6.02, cz: 0.6, lx: 0.06, ly: -3.13, lz: 0.17, fov: 21.5, yaw: 1.858 }, // Features
         { x: 0.0, z: 0.0, cx: 0.0, cy: 0.1, cz: 3.5, lx: 0.0, ly: 0.0, lz: 0.0, fov: 15.0, yaw: 0.0 }, // Games
