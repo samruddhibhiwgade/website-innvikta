@@ -31,16 +31,16 @@ const Challenges = ({ challenges }) => {
             `}</style>
           </div>
           <div className="col-12 xl:col-7 px-4 sm:px-6 md:px-8 xl:px-12">
-            <div className="flex overflow-x-auto pb-6 gap-6 no-scrollbar snap-x snap-mandatory sm:grid sm:grid-cols-2 md:grid-cols-3 sm:gap-6 sm:overflow-visible sm:pb-0">
+            <div className="grid grid-cols-3 gap-1.5 xs:gap-3 sm:gap-6 sm:grid-cols-2 md:grid-cols-3">
               {challenges.cards?.map((card, index) => (
-                <div key={index} className="group h-[380px] sm:h-[400px] md:h-[450px] xl:h-[450px] [perspective:1000px] min-w-[290px] w-[290px] sm:min-w-0 sm:w-auto snap-center shrink-0">
+                <div key={index} className="group h-[160px] xs:h-[180px] sm:h-[400px] md:h-[450px] xl:h-[450px] [perspective:1000px] w-full">
                   <div className="relative h-full w-full rounded-2xl transition-all duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] cursor-pointer">
                     {/* Front */}
-                    <div className="absolute inset-0 h-full w-full rounded-2xl bg-[#FFFBF7] border border-orange-100 p-6 flex flex-col [backface-visibility:hidden] shadow-sm overflow-hidden text-center justify-between">
+                    <div className="absolute inset-0 h-full w-full rounded-2xl bg-[#FFFBF7] border border-orange-100 p-2 xs:p-3 sm:p-6 flex flex-col [backface-visibility:hidden] shadow-sm overflow-hidden text-center justify-between">
                       {index === 0 && (
                         <div className="flex flex-col h-full justify-between">
-                          <div className="card-icon-wrapper" style={{ background: "#FFEFEA", display: "inline-flex", padding: "0.5rem", borderRadius: "50%", width: "64px", height: "64px", alignItems: "center", justifyContent: "center", marginLeft: "auto", marginRight: "auto" }}>
-                              <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "32px", height: "32px" }}>
+                          <div className="card-icon-wrapper bg-[#FFEFEA] rounded-full flex items-center justify-center mx-auto w-8 h-8 sm:w-16 sm:h-16 p-1.5 sm:p-2.5">
+                              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 sm:w-8 sm:h-8">
                                   <circle cx="20" cy="20" r="14" stroke="#f15a24" strokeWidth="2.5" fill="none" />
                                   <ellipse cx="20" cy="20" rx="6" ry="14" stroke="#f15a24" strokeWidth="2" fill="none" />
                                   <line x1="6" y1="20" x2="34" y2="20" stroke="#f15a24" strokeWidth="2" />
@@ -48,12 +48,12 @@ const Challenges = ({ challenges }) => {
                                   <text x="34" y="35.5" fontFamily="Inter" fontSize="10" fontWeight="bold" fill="white" textAnchor="middle">!</text>
                               </svg>
                           </div>
-                          <div className="card-number" style={{ fontSize: "2.25rem", fontWeight: "800", color: "#f15a24", marginTop: "0.5rem" }}>$4.4M</div>
-                          <div className="card-divider" style={{ width: "32px", height: "3px", backgroundColor: "#f15a24", margin: "0.5rem auto" }}></div>
-                          <h3 className="card-title" style={{ fontSize: "1.1rem", fontWeight: "700", color: "#1e293b", marginBottom: "0.25rem", lineHeight: "1.3" }}>Average Global Breach Cost</h3>
-                          <p className="card-description" style={{ fontSize: "0.85rem", color: "#64748b", lineHeight: "1.4", margin: "0 auto 0.25rem", maxWidth: "220px" }}>average global cost of a data breach</p>
-                          <span className="card-source" style={{ fontSize: "0.65rem", fontWeight: "700", color: "#94a3b8", display: "block", marginBottom: "0.75rem" }}>SOURCE: IBM</span>
-                          <div className="card-chart" style={{ display: "flex", justifyContent: "center", marginTop: "auto" }}>
+                          <div className="card-number font-extrabold text-[#f15a24] mt-1 sm:mt-2 text-sm xs:text-base sm:text-3xl md:text-[2.25rem]">$4.4M</div>
+                          <div className="card-divider hidden sm:block bg-[#f15a24] w-8 h-[3px] mx-auto my-2"></div>
+                          <h3 className="card-title font-bold text-dark mb-1 sm:mb-2 text-[9px] xs:text-[10px] sm:text-sm md:text-base lg:text-[1.1rem] leading-snug">Average Global Breach Cost</h3>
+                          <p className="card-description hidden sm:block" style={{ fontSize: "0.85rem", color: "#64748b", lineHeight: "1.4", margin: "0 auto 0.25rem", maxWidth: "220px" }}>average global cost of a data breach</p>
+                          <span className="card-source hidden sm:block" style={{ fontSize: "0.65rem", fontWeight: "700", color: "#94a3b8", display: "block", marginBottom: "0.75rem" }}>SOURCE: IBM</span>
+                          <div className="card-chart hidden sm:flex" style={{ display: "flex", justifyContent: "center", marginTop: "auto" }}>
                               <svg width="140" height="80" viewBox="0 0 150 92" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ margin: "0 auto" }}>
                                   <line x1="10" y1="90" x2="140" y2="90" stroke="#FFEFEA" strokeWidth="1" />
                                   <rect x="15" y="18" width="14" height="72" rx="2" fill="#f15a24" />
@@ -72,8 +72,8 @@ const Challenges = ({ challenges }) => {
 
                       {index === 1 && (
                         <div className="flex flex-col h-full justify-between">
-                          <div className="card-icon-wrapper" style={{ background: "#FFEFEA", display: "inline-flex", padding: "0.5rem", borderRadius: "50%", width: "64px", height: "64px", alignItems: "center", justifyContent: "center", marginLeft: "auto", marginRight: "auto" }}>
-                              <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "32px", height: "32px" }}>
+                          <div className="card-icon-wrapper bg-[#FFEFEA] rounded-full flex items-center justify-center mx-auto w-8 h-8 sm:w-16 sm:h-16 p-1.5 sm:p-2.5">
+                              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 sm:w-8 sm:h-8">
                                   <path d="M22 12 C16 12, 10 16, 10 24 C10 28, 13 32, 16 34 C17 35, 18 36, 18 37 C18 40, 20 40, 22 40 L22 12 Z" stroke="#f15a24" strokeWidth="2.5" strokeLinejoin="round" fill="none" />
                                   <path d="M16 20 C18 20, 20 22, 22 22" stroke="#f15a24" strokeWidth="2" />
                                   <path d="M14 28 C17 28, 19 28, 22 26" stroke="#f15a24" strokeWidth="2" />
@@ -86,12 +86,12 @@ const Challenges = ({ challenges }) => {
                                   <line x1="26" y1="34" x2="28" y2="34" stroke="#f15a24" strokeWidth="2" />
                               </svg>
                           </div>
-                          <div className="card-number" style={{ fontSize: "2.25rem", fontWeight: "800", color: "#f15a24", marginTop: "0.5rem" }}>33%</div>
-                          <div className="card-divider" style={{ width: "32px", height: "3px", backgroundColor: "#f15a24", margin: "0.5rem auto" }}></div>
-                          <h3 className="card-title" style={{ fontSize: "1.1rem", fontWeight: "700", color: "#1e293b", marginBottom: "0.25rem", lineHeight: "1.3" }}>Unapproved AI Usage</h3>
-                          <p className="card-description" style={{ fontSize: "0.85rem", color: "#64748b", lineHeight: "1.4", margin: "0 auto 0.25rem", maxWidth: "220px" }}>employees sharing sensitive data with unapproved AI tools</p>
-                          <span className="card-source" style={{ fontSize: "0.65rem", fontWeight: "700", color: "#94a3b8", display: "block", marginBottom: "0.75rem" }}>SOURCE: IBM</span>
-                          <div className="card-chart" style={{ display: "flex", justifyContent: "center", marginTop: "auto" }}>
+                          <div className="card-number font-extrabold text-[#f15a24] mt-1 sm:mt-2 text-sm xs:text-base sm:text-3xl md:text-[2.25rem]">33%</div>
+                          <div className="card-divider hidden sm:block bg-[#f15a24] w-8 h-[3px] mx-auto my-2"></div>
+                          <h3 className="card-title font-bold text-dark mb-1 sm:mb-2 text-[9px] xs:text-[10px] sm:text-sm md:text-base lg:text-[1.1rem] leading-snug">Unapproved AI Usage</h3>
+                          <p className="card-description hidden sm:block" style={{ fontSize: "0.85rem", color: "#64748b", lineHeight: "1.4", margin: "0 auto 0.25rem", maxWidth: "220px" }}>employees sharing sensitive data with unapproved AI tools</p>
+                          <span className="card-source hidden sm:block" style={{ fontSize: "0.65rem", fontWeight: "700", color: "#94a3b8", display: "block", marginBottom: "0.75rem" }}>SOURCE: IBM</span>
+                          <div className="card-chart hidden sm:flex" style={{ display: "flex", justifyContent: "center", marginTop: "auto" }}>
                               <svg width="140" height="80" viewBox="0 0 150 92" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ margin: "0 auto" }}>
                                   <g transform="translate(15, 26)">
                                       <circle cx="16" cy="14" r="8" stroke="#f15a24" strokeWidth="2" fill="none" />
@@ -114,18 +114,18 @@ const Challenges = ({ challenges }) => {
 
                       {index === 2 && (
                         <div className="flex flex-col h-full justify-between">
-                          <div className="card-icon-wrapper" style={{ background: "#FFEFEA", display: "inline-flex", padding: "0.5rem", borderRadius: "50%", width: "64px", height: "64px", alignItems: "center", justifyContent: "center", marginLeft: "auto", marginRight: "auto" }}>
-                              <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "32px", height: "32px" }}>
+                          <div className="card-icon-wrapper bg-[#FFEFEA] rounded-full flex items-center justify-center mx-auto w-8 h-8 sm:w-16 sm:h-16 p-1.5 sm:p-2.5">
+                              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 sm:w-8 sm:h-8">
                                   <path d="M24 6 L38 12 L38 24 Q38 36, 24 42 Q10 36, 10 24 L10 12 Z" stroke="#f15a24" strokeWidth="2.5" fill="none" />
                                   <path d="M18 24 L22 28 L30 18" stroke="#f15a24" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                               </svg>
                           </div>
-                          <div className="card-number" style={{ fontSize: "2.25rem", fontWeight: "800", color: "#f15a24", marginTop: "0.5rem" }}>67%</div>
-                          <div className="card-divider" style={{ width: "32px", height: "3px", backgroundColor: "#f15a24", margin: "0.5rem auto" }}></div>
-                          <h3 className="card-title" style={{ fontSize: "1.1rem", fontWeight: "700", color: "#1e293b", marginBottom: "0.25rem", lineHeight: "1.3" }}>Fewer Security Incidents</h3>
-                          <p className="card-description" style={{ fontSize: "0.85rem", color: "#64748b", lineHeight: "1.4", margin: "0 auto 0.25rem", maxWidth: "220px" }}>organizations reporting fewer incidents after training</p>
-                          <span className="card-source" style={{ fontSize: "0.65rem", fontWeight: "700", color: "#94a3b8", display: "block", marginBottom: "0.75rem" }}>SOURCE: FORTINET</span>
-                          <div className="card-chart" style={{ display: "flex", justifyContent: "center", marginTop: "auto" }}>
+                          <div className="card-number font-extrabold text-[#f15a24] mt-1 sm:mt-2 text-sm xs:text-base sm:text-3xl md:text-[2.25rem]">67%</div>
+                          <div className="card-divider hidden sm:block bg-[#f15a24] w-8 h-[3px] mx-auto my-2"></div>
+                          <h3 className="card-title font-bold text-dark mb-1 sm:mb-2 text-[9px] xs:text-[10px] sm:text-sm md:text-base lg:text-[1.1rem] leading-snug">Fewer Security Incidents</h3>
+                          <p className="card-description hidden sm:block" style={{ fontSize: "0.85rem", color: "#64748b", lineHeight: "1.4", margin: "0 auto 0.25rem", maxWidth: "220px" }}>organizations reporting fewer incidents after training</p>
+                          <span className="card-source hidden sm:block" style={{ fontSize: "0.65rem", fontWeight: "700", color: "#94a3b8", display: "block", marginBottom: "0.75rem" }}>SOURCE: FORTINET</span>
+                          <div className="card-chart hidden sm:flex" style={{ display: "flex", justifyContent: "center", marginTop: "auto" }}>
                               <svg width="140" height="80" viewBox="0 0 150 92" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ margin: "0 auto" }}>
                                   <path d="M25 80 A50 50 0 0 1 125 80" stroke="#FFEFEA" strokeWidth="10" strokeLinecap="round" fill="none" />
                                   <path d="M25 80 A50 50 0 0 1 120.5 37" stroke="#f15a24" strokeWidth="10" strokeLinecap="round" fill="none" />
@@ -139,8 +139,8 @@ const Challenges = ({ challenges }) => {
                       )}
                     </div>
                     {/* Back */}
-                    <div className="absolute inset-0 h-full w-full rounded-2xl bg-primary px-8 flex items-center justify-center text-center text-white [transform:rotateY(180deg)] [backface-visibility:hidden] shadow-xl">
-                      <p className="text-sm md:text-base font-medium leading-relaxed">
+                    <div className="absolute inset-0 h-full w-full rounded-2xl bg-primary px-1.5 py-2 xs:px-3 sm:px-8 flex items-center justify-center text-center text-white [transform:rotateY(180deg)] [backface-visibility:hidden] shadow-xl">
+                      <p className="text-[7.5px] xs:text-[9.5px] sm:text-sm md:text-base font-medium leading-normal sm:leading-relaxed">
                         {card.content}
                       </p>
                     </div>
