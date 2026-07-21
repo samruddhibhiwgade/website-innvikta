@@ -160,9 +160,6 @@ const Footer = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="your@email.com" 
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
                   className="form-input w-full rounded-full py-4 px-6 border-slate-300 focus:border-primary outline-none text-sm pr-36 bg-white" 
                 />
                 <button 
