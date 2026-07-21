@@ -139,8 +139,8 @@ const Challenges = ({ challenges }) => {
                       )}
                     </div>
                     {/* Back */}
-                    <div className="absolute inset-0 h-full w-full rounded-2xl bg-primary px-3 py-3 sm:px-8 flex items-center justify-center text-center text-white [transform:rotateY(180deg)] [backface-visibility:hidden] shadow-xl">
-                      <p className="text-xs sm:text-sm md:text-base font-medium leading-normal sm:leading-relaxed">
+                    <div className="absolute inset-0 h-full w-full rounded-2xl bg-primary p-2 sm:p-4 md:px-8 flex items-center justify-center text-center text-white [transform:rotateY(180deg)] [backface-visibility:hidden] shadow-xl overflow-y-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                      <p className="text-[8px] xs:text-[10px] sm:text-sm md:text-base font-medium leading-tight sm:leading-relaxed h-max my-auto">
                         {card.content}
                       </p>
                     </div>
