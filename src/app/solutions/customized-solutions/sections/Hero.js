@@ -40,7 +40,7 @@ export default function HeroSection() {
               <img 
                 src="/images/solutions/customised_Solutions/custom-solution-hero.png" 
                 alt="Customized Security Awareness Hero" 
-                className="hero-sim-img mx-auto md:mx-0 shrink-0 md:!w-full md:!max-w-none md:ml-0 md:scale-[1.50] md:translate-x-[50px] origin-center md:origin-right object-contain" 
+                className="hero-sim-img mx-auto md:mx-0 w-full max-w-md lg:max-w-lg xl:max-w-xl object-contain drop-shadow-xl" 
               />
             </div>
           </div>
