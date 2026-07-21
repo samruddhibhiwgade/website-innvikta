@@ -466,7 +466,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                   className="h-16 md:h-20 cursor-pointer py-1"
                   key={"brand-" + index}
                 >
-                  <div className="relative h-14 md:h-16 w-full flex items-center justify-center bg-white border border-slate-100/80 shadow-[0_2px_8px_rgba(0,0,0,0.02)] rounded-xl p-2 md:p-3 hover:border-orange-100 hover:shadow-md transition-all duration-300">
+                  <div className="relative h-14 md:h-16 w-full flex items-center justify-center bg-transparent p-2 md:p-3">
                     <img
                       className="max-h-8 md:max-h-10 max-w-[85%] object-contain mx-auto"
                       src={brand}
