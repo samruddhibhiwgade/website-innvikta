@@ -1,0 +1,52 @@
+import React from "react";
+import Link from "next/link";
+import { FiArrowRight } from "react-icons/fi";
+import ImageFallback from "@layouts/components/ImageFallback";
+import Circle from "@layouts/components/Circle";
+
+export default function FinalCtaSection() {
+  return (
+    <section className="cta" style={{ marginTop: "-3.5rem", paddingTop: "0", paddingBottom: "0" }}>
+      <div className="container-xl">
+        <div className="section relative px-4 text-center" style={{ isolation: "isolate", paddingTop: "4.5rem", paddingBottom: "4.5rem" }}>
+          <div className="animate">
+            <h2 className="section-title leading-tight" style={{ maxWidth: "1100px", marginLeft: "auto", marginRight: "auto", fontSize: "2.25rem", fontWeight: "600" }}>
+              Ready to Measure Your Human Risk?
+            </h2>
+            <p className="mt-10 font-primary text-base text-slate-600 leading-relaxed" style={{ marginTop: "2.5rem" }}>
+              Human risk is measurable. The first step toward reducing phishing susceptibility, impersonation exposure, and workforce cyber risk is understanding where you stand today.
+            </p>
+            
+            <div className="flex flex-wrap justify-center gap-4 mt-10 animate-fade-in" style={{ marginTop: "2.5rem" }}>
+              <button
+                type="button"
+                onClick={() => {
+                  document.body.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="btn btn-secondary"
+              >
+                Start Free
+              </button>
+              <Link href="/book-demo" style={{ paddingLeft: "1.5rem", paddingRight: "1.5rem" }} className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap px-5 h-12 font-bold shadow-md shadow-orange-500/10">Book a Demo <FiArrowRight className="text-xs" /></Link>
+            </div>
+          </div>
+          <div className="bg-theme animated-bg absolute top-0 left-0 w-full after:hidden overflow-hidden">
+            <div className="animate-wave absolute inset-0 w-full h-full">
+              <ImageFallback
+                src="/images/wave.svg"
+                fill={true}
+                sizes="100vw"
+                alt="bg wave"
+              />
+            </div>
+            <Circle className="left-[10%] top-12" width={32} height={32} fill={false} fillValue="#FF5A1F" />
+            <Circle className="left-[3%] bottom-[13%]" width={85} height={85} fillValue="#FF5A1F" />
+            <Circle className="left-[15%] bottom-[35%]" width={47} height={47} fill={false} fillValue="#FF5A1F" />
+            <Circle className="right-[12%] top-[12%]" width={20} height={20} fillValue="#FF5A1F" />
+            <Circle className="right-[2%] bottom-[30%]" width={73} height={73} fill={false} fillValue="#FF5A1F" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
