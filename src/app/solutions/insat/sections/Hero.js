@@ -39,11 +39,11 @@ export default function HeroSection() {
               </div>
             </div>
 
-            <div className="hero-image-right animate from-right w-full block md:flex justify-center md:justify-end mt-8 md:mt-0 px-4 md:px-0">
+            <div className="hero-image-right animate from-right w-full flex justify-center md:justify-end mt-8 md:mt-0 px-4 md:px-0">
               <img 
                 src="/insat/images/Insat_heroimage.png" 
                 alt="InSAT Platform Visual" 
-                className="hero-sim-img hero-sim-img-custom mx-auto md:mx-0 shrink-0 md:!w-full md:!max-w-none md:ml-0 md:scale-[1.50] md:translate-x-[50px] origin-center md:origin-right object-contain" 
+                className="hero-sim-img mx-auto md:mx-0 shrink-0 w-[95%] xs:w-[90%] max-w-[420px] xs:max-w-[480px] md:!w-full md:!max-w-none md:ml-0 md:scale-[1.50] md:translate-x-[50px] origin-center md:origin-right object-contain" 
               />
             </div>
           </div>

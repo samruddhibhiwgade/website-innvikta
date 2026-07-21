@@ -52,13 +52,13 @@ const SpecialFeatures = ({ speciality }) => {
 
 
             <div
-              className={`animate md:col-5 px-6 order-2 ${index % 2 === 0 ? "md:order-1 md:pr-0 md:pl-12 lg:pl-24" : "md:order-2 md:pl-0 md:pr-12 lg:pr-24"}`}
+              className={`animate md:col-5 px-6 order-2 pt-6 md:pt-0 ${index % 2 === 0 ? "md:order-1 md:pr-0 md:pl-12 lg:pl-24" : "md:order-2 md:pl-0 md:pr-12 lg:pr-24"}`}
             >
               {/* Main Heading */}
               {item.subtitle && markdownify(
                 item.subtitle,
                 "h2",
-                "!font-semibold leading-tight text-primary uppercase text-2xl md:text-3xl mb-4"
+                "!font-semibold leading-tight text-primary uppercase text-2xl md:text-3xl mb-2 md:mb-4"
               )}
 
               {/* Sub Heading / Metric - Further Reduced Size */}
@@ -69,7 +69,7 @@ const SpecialFeatures = ({ speciality }) => {
               )}
 
               {/* Description - Darker for visibility */}
-              {item.description && markdownify(item.description, "p", "mt-6 text-slate-700 text-lg leading-relaxed")}
+              {item.description && markdownify(item.description, "p", "mt-3 md:mt-6 text-slate-700 text-lg leading-relaxed")}
 
               {item.button && (
                 <div className="mt-8">
