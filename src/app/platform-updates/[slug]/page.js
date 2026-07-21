@@ -215,7 +215,7 @@ export default function PlatformUpdateDetailPage() {
   return (
     <GSAPWrapper>
       <SeoMeta title={`${currentUpdate.title} | Innvikta Platform Updates`} description={currentUpdate.desc} />
-      <div className="min-h-screen w-full bg-white text-slate-800 font-sans selection:bg-[#f15a24] selection:!text-white pb-24">
+      <div className="insat-page min-h-screen w-full bg-white text-slate-800 selection:bg-[#f15a24] selection:!text-white pb-24">
         
         {/* ================= HEADER BANNER ================= */}
         <section className="pt-32 pb-20 bg-gradient-to-br from-[#f15a24] to-[#df4b17] relative overflow-hidden text-white border-b border-[#e24e1b]">

@@ -279,16 +279,18 @@ const PartnersPage = () => {
                   <a 
                     href="#form" 
                     onClick={scrollToForm}
-                    className="group inline-flex items-center gap-2 px-8 py-3.5 bg-[#f15a24] hover:bg-orange-600 !text-white border-2 border-[#f15a24] hover:border-orange-600 font-bold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+                    className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10"
+                    style={{ padding: "14px 28px" }}
                   >
                     <span>Become a Partner</span>
-                    <FiArrowRight className="text-lg transition-transform duration-300 group-hover:translate-x-1" />
+                    <FiArrowRight className="text-sm" />
                   </a>
                   <a 
                     href="mailto:sale@innvikta.com" 
-                    className="group inline-flex items-center gap-2 px-8 py-3.5 bg-slate-800/80 hover:bg-slate-700 text-white border-2 border-slate-700/50 hover:border-slate-600 font-bold rounded-lg transition-all duration-300 shadow-sm hover:shadow-md"
+                    className="bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] !text-[#f15a24] hover:!text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold"
+                    style={{ padding: "14px 28px" }}
                   >
-                    <FiMail className="text-lg text-slate-400 group-hover:text-white transition-colors duration-300" />
+                    <FiMail className="text-sm" />
                     <span>Talk to Us</span>
                   </a>
                 </div>

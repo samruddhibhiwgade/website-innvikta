@@ -40,7 +40,7 @@ export default function PlatformUpdatesPage() {
   return (
     <GSAPWrapper>
       <SeoMeta title="Platform Updates & Changelog | Innvikta" description="Stay up to date with the latest features, enhancements, and security training modules on the Innvikta platform." />
-      <div className="min-h-screen w-full overflow-x-hidden bg-white text-slate-800 font-sans selection:bg-[#f15a24] selection:!text-white pb-16">
+      <div className="insat-page min-h-screen w-full overflow-x-hidden pb-16">
         
         {/* ================= HEADER SECTION ================= */}
         <section className="pt-32 pb-24 bg-gradient-to-br from-[#f15a24] to-[#df4b17] relative overflow-hidden border-b border-[#e24e1b] mb-16 text-white">
@@ -61,13 +61,13 @@ export default function PlatformUpdatesPage() {
           
           <div className="container px-6 md:px-12 lg:px-24 relative z-10">
             <div className="max-w-4xl space-y-3">
-              <span className="text-xs font-extrabold uppercase tracking-widest text-orange-100 mb-2 block font-sans">
+              <span className="text-subheading text-orange-100 mb-2 block">
                 LATEST ANNOUNCEMENTS
               </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-secondary text-white tracking-tight leading-tight">
+              <h1 className="text-64-heading text-white tracking-tight leading-tight">
                 Platform Updates
               </h1>
-              <p className="text-lg md:text-xl text-orange-50 leading-relaxed max-w-2xl font-sans">
+              <p className="text-20-content text-orange-50 leading-relaxed max-w-2xl">
                 Explore the latest features, security content, and enhancements added to the Innvikta training suite.
               </p>
             </div>
@@ -82,14 +82,14 @@ export default function PlatformUpdatesPage() {
             <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <span className="text-xs font-extrabold uppercase tracking-widest text-[#f15a24] font-sans">PRODUCT</span>
+                  <span className="text-subheading text-[#f15a24]">PRODUCT</span>
                   <span className="text-xs text-slate-400 font-semibold">•</span>
-                  <span className="text-xs text-slate-400 font-bold uppercase tracking-wider font-sans">June 24, 2026</span>
+                  <span className="text-subheading text-slate-400">June 24, 2026</span>
                 </div>
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold font-secondary text-slate-900 leading-tight">
+                <h2 className="text-40-heading text-slate-900 leading-tight">
                   Product Updates: Q2 2026 Review & Core Enhancements
                 </h2>
-                <p className="text-slate-650 text-sm md:text-base leading-relaxed font-sans">
+                <p className="text-16-content leading-relaxed text-slate-600">
                   This quarter, we rolled out advanced AI-driven phishing simulation customization, compliance tracking mappings for regional privacy laws, and multiplayer security quizzes inside the Innvikta Arcade. Read on to discover how these features will improve employee retention and streamline audit logging.
                 </p>
               </div>
@@ -163,16 +163,16 @@ export default function PlatformUpdatesPage() {
                 <div className="md:col-span-7 flex flex-col justify-center space-y-4">
                   <div className="space-y-2">
                     <div className="flex items-center gap-3">
-                      <span className="text-xs font-extrabold uppercase tracking-widest text-[#f15a24] font-sans">{update.category}</span>
+                      <span className="text-subheading text-[#f15a24]">{update.category}</span>
                       <span className="text-xs text-slate-400 font-semibold">•</span>
-                      <span className="text-xs text-slate-400 font-bold uppercase tracking-wider font-sans">{update.date}</span>
+                      <span className="text-subheading text-slate-400">{update.date}</span>
                     </div>
-                    <h3 className="text-xl md:text-2xl font-bold font-secondary text-slate-900 leading-snug">
+                    <h3 className="text-28-heading text-slate-900 leading-snug">
                       <Link href={`/platform-updates/${update.slug}`} className="hover:text-[#f15a24] transition-colors">
                         {update.title}
                       </Link>
                     </h3>
-                    <p className="text-slate-600 text-xs md:text-sm leading-relaxed font-sans">
+                    <p className="text-16-content leading-relaxed text-slate-600">
                       {update.desc}
                     </p>
                   </div>

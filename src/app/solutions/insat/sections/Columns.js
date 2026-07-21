@@ -20,17 +20,7 @@ export default function ColumnsSection() {
                 </p>
               </div>
 
-              <a className="arrow-link" href="/solutions/insat">
-                <div className="arrow-circle">
-                  <span className="arrow-circle-bg"></span>
-                  <svg width="6" height="8" viewBox="0 0 6 8" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill="currentColor"
-                      d="M3.86426 4.00028L0.818237 0.954267L1.68853 0.0839844L5.60481 4.00028L1.68853 7.91652L0.818237 7.04625L3.86426 4.00028Z" />
-                  </svg>
-                </div>
-                <span>Explore Adaptive Learning</span>
-              </a>
+
             </div>
             <div className="two-col-visual-block bg-white animate from-right">
               <img alt="AI adaptive learning routes" loading="lazy" src="/insat/images/adaptive_learning.png" style={{ width: "100%", height: "auto", display: "block" }} />
@@ -48,17 +38,7 @@ export default function ColumnsSection() {
                 </p>
               </div>
 
-              <a className="arrow-link" href="/solutions/insat">
-                <div className="arrow-circle">
-                  <span className="arrow-circle-bg"></span>
-                  <svg width="6" height="8" viewBox="0 0 6 8" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill="currentColor"
-                      d="M3.86426 4.00028L0.818237 0.954267L1.68853 0.0839844L5.60481 4.00028L1.68853 7.91652L0.818237 7.04625L3.86426 4.00028Z" />
-                  </svg>
-                </div>
-                <span>View Reporting Features</span>
-              </a>
+
             </div>
             <div className="two-col-visual-block aspect-628-517 bg-white animate from-left">
               <img alt="Monitor training and assessments" loading="lazy"
@@ -77,17 +57,7 @@ export default function ColumnsSection() {
                 </p>
               </div>
 
-              <a className="arrow-link" href="/solutions/insat">
-                <div className="arrow-circle">
-                  <span className="arrow-circle-bg"></span>
-                  <svg width="6" height="8" viewBox="0 0 6 8" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill="currentColor"
-                      d="M3.86426 4.00028L0.818237 0.954267L1.68853 0.0839844L5.60481 4.00028L1.68853 7.91652L0.818237 7.04625L3.86426 4.00028Z" />
-                  </svg>
-                </div>
-                <span>Explore Gamified Training</span>
-              </a>
+
             </div>
             <div className="two-col-visual-block aspect-628-517 bg-plum animate from-right">
               <img alt="Gamified engagement" loading="lazy" src="/images/home_arcade.png" style={{ objectFit: "contain" }} />
@@ -105,17 +75,7 @@ export default function ColumnsSection() {
                 </p>
               </div>
 
-              <a className="arrow-link" href="/solutions/insat">
-                <div className="arrow-circle">
-                  <span className="arrow-circle-bg"></span>
-                  <svg width="6" height="8" viewBox="0 0 6 8" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill="currentColor"
-                      d="M3.86426 4.00028L0.818237 0.954267L1.68853 0.0839844L5.60481 4.00028L1.68853 7.91652L0.818237 7.04625L3.86426 4.00028Z" />
-                  </svg>
-                </div>
-                <span>Explore InSAT Platform</span>
-              </a>
+
             </div>
             <div className="two-col-visual-block aspect-628-517 bg-midnight animate from-left">
               <img alt="Continuous reinforcement" loading="lazy" src="/insat/images/continious_reinforcement.png" />

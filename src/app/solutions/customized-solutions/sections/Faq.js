@@ -6,8 +6,8 @@ export default function FAQSection({ activeFaq, setActiveFaq }) {
   return (
     <section className="bg-grey-5" style={{ paddingTop: "5rem", paddingBottom: "5rem" }}>
       <div className="container faq-grid">
-        <div className="faq-title-col animate from-left">
-          <h2 className="text-40-heading">Frequently Asked Questions</h2>
+        <div className="faq-title-col animate from-left flex flex-col justify-center self-center items-center text-center w-full lg:w-auto">
+          <h2 className="text-40-heading text-center">Frequently Asked Questions</h2>
           <Link className="arrow-link" href="/book-demo" style={{ marginTop: "1.25rem" }}>
             <div className="arrow-circle">
               <span className="arrow-circle-bg"></span>

@@ -23,11 +23,14 @@ export default function FinalCtaSection() {
                 onClick={() => {
                   document.body.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="btn btn-secondary"
+                className="btn bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] !text-[#f15a24] hover:!text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center font-bold text-sm whitespace-nowrap"
+                style={{ padding: "14px 28px" }}
               >
                 Start Free
               </button>
-              <Link href="/book-demo" style={{ paddingLeft: "1.5rem", paddingRight: "1.5rem" }} className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap px-5 h-12 font-bold shadow-md shadow-orange-500/10">Book a Demo <FiArrowRight className="text-xs" /></Link>
+              <Link href="/book-demo" className="btn bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 text-sm" style={{ padding: "14px 28px" }}>
+                Book a Demo <FiArrowRight className="text-xs" />
+              </Link>
             </div>
           </div>
           <div className="bg-theme animated-bg absolute top-0 left-0 w-full after:hidden overflow-hidden">

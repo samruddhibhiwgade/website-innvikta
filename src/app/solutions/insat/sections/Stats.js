@@ -33,9 +33,9 @@ export default function StatsSection() {
             </div>
           </div>
 
-          <div className="stats-cards-block animate from-right">
+          <div className="stats-cards-block animate from-right flex md:grid md:grid-cols-3 gap-4 md:gap-6 overflow-x-auto md:overflow-x-visible pb-6 md:pb-0 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {/* Card 1: Average Global Cost of a Data Breach */}
-            <div className="stats-card">
+            <div className="stats-card shrink-0 w-[80%] md:w-full snap-align-center" style={{ minWidth: "260px" }}>
               <div className="card-icon-wrapper" style={{ background: "#FFEFEA", display: "inline-flex", padding: "0.5rem", borderRadius: "50%", width: "72px", height: "72px", alignItems: "center", justifyContent: "center", marginLeft: "auto", marginRight: "auto" }}>
                 <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "40px", height: "40px" }}>
                   <circle cx="20" cy="20" r="14" stroke="#f15a24" strokeWidth="2.5" fill="none" />
@@ -67,7 +67,7 @@ export default function StatsSection() {
             </div>
 
             {/* Card 2: Employees Share Sensitive Data with Unapproved AI Tools */}
-            <div className="stats-card">
+            <div className="stats-card shrink-0 w-[80%] md:w-full snap-align-center" style={{ minWidth: "260px" }}>
               <div className="card-icon-wrapper" style={{ background: "#FFEFEA", display: "inline-flex", padding: "0.5rem", borderRadius: "50%", width: "72px", height: "72px", alignItems: "center", justifyContent: "center", marginLeft: "auto", marginRight: "auto" }}>
                 <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "40px", height: "40px" }}>
                   <path d="M22 12 C16 12, 10 16, 10 24 C10 28, 13 32, 16 34 C17 35, 18 36, 18 37 C18 40, 20 40, 22 40 L22 12 Z" stroke="#f15a24" strokeWidth="2.5" strokeLinejoin="round" fill="none" />
@@ -108,7 +108,7 @@ export default function StatsSection() {
             </div>
 
             {/* Card 3: Failed to Detect AI Audio */}
-            <div className="stats-card">
+            <div className="stats-card shrink-0 w-[80%] md:w-full snap-align-center" style={{ minWidth: "260px" }}>
               <div className="card-icon-wrapper" style={{ background: "#FFEFEA", display: "inline-flex", padding: "0.5rem", borderRadius: "50%", width: "72px", height: "72px", alignItems: "center", justifyContent: "center", marginLeft: "auto", marginRight: "auto" }}>
                 <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "40px", height: "40px" }}>
                   <path d="M24 6 L38 12 L38 24 Q38 36, 24 42 Q10 36, 10 24 L10 12 Z" stroke="#f15a24" strokeWidth="2.5" fill="none" />

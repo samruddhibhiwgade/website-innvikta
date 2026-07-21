@@ -459,8 +459,8 @@ export default function GameInterface({
                       margin: "0.5rem 0 1.5rem 0"
                     }}
                   >
-                    <button onClick={() => startNewGame()} className="btn btn-primary px-6 py-3 cursor-pointer">Play Again</button>
-                    <Link href="/solutions/insat" className="btn btn-secondary px-6 py-3">Explore Innvikta Platform</Link>
+                    <button onClick={() => startNewGame()} className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 text-sm cursor-pointer" style={{ padding: "14px 28px" }}>Play Again</button>
+                    <Link href="/solutions/insat" className="bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] !text-[#f15a24] hover:!text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center font-bold text-sm whitespace-nowrap" style={{ padding: "14px 28px" }}>Explore Innvikta Platform</Link>
                   </div>
                 </div>
               )}

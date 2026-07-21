@@ -27,7 +27,7 @@ const SpecialFeatures = ({ speciality }) => {
         {speciality.list?.map((item, index) => (
           <div
             key={index}
-            className={`row relative items-center justify-between ${index !== 0 ? "mt-16" : "mt-10"
+            className={`row relative items-center justify-between gap-y-3 md:gap-y-0 ${index !== 0 ? "mt-16" : "mt-10"
               }`}
           >
             {/* Decorative Waves for each row */}
@@ -52,7 +52,7 @@ const SpecialFeatures = ({ speciality }) => {
 
 
             <div
-              className={`animate md:col-5 px-6 order-2 pt-6 md:pt-0 ${index % 2 === 0 ? "md:order-1 md:pr-0 md:pl-12 lg:pl-24" : "md:order-2 md:pl-0 md:pr-12 lg:pr-24"}`}
+              className={`animate md:col-5 px-6 order-2 pt-2 md:pt-0 ${index % 2 === 0 ? "md:order-1 md:pr-0 md:pl-12 lg:pl-24" : "md:order-2 md:pl-0 md:pr-12 lg:pr-24"}`}
             >
               {/* Main Heading */}
               {item.subtitle && markdownify(
@@ -73,21 +73,21 @@ const SpecialFeatures = ({ speciality }) => {
 
               {item.button && (
                 <div className="mt-8">
-                  <Link href={item.button.link} className="btn btn-primary">
+                  <Link href={item.button.link} className="btn btn-primary inline-flex items-center justify-center font-bold">
                     {item.button.label}
                   </Link>
                 </div>
               )}
             </div>
             <div
-              className={`animate md:col-6 px-6 order-1 mt-6 md:mt-0 ${index % 2 === 0 ? "md:order-2 md:pl-0 md:pr-12 lg:pr-24" : "md:order-1 md:pr-0 md:pl-12 lg:pl-24"}`}
+              className={`animate md:col-6 px-6 order-1 mb-2 md:mb-0 ${index % 2 === 0 ? "md:order-2 md:pl-0 md:pr-12 lg:pr-24" : "md:order-1 md:pr-0 md:pl-12 lg:pl-24"}`}
             >
               <ImageFallback
                 src={item.image}
                 width={585}
                 height={447}
                 alt={item.title || "solution feature image"}
-                className="rounded-2xl shadow-sm border border-slate-100/50"
+                className="rounded-2xl shadow-sm border border-slate-100/50 w-full h-auto object-cover"
               />
             </div>
           </div>

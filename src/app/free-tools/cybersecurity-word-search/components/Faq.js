@@ -1,20 +1,21 @@
 import React from "react";
+import Link from "next/link";
 
 export default function FAQSection({ activeFaq, setActiveFaq }) {
   return (
     <section className="bg-[#FFFAF6] border-t border-border py-16">
       <div className="container faq-grid">
-        <div className="faq-title-col animate from-left flex flex-col justify-center self-center items-center text-center">
-          <h2 className="text-40-heading text-center">We’re here to help</h2>
-          <a className="arrow-link" href="https://docs.insat.training/docs/getting-started" target="_blank" rel="noopener noreferrer" style={{ marginTop: "1.25rem" }}>
+        <div className="faq-title-col animate from-left flex flex-col justify-center self-center items-center text-center w-full lg:w-auto">
+          <h2 className="text-40-heading text-center">Frequently Asked Questions</h2>
+          <Link className="arrow-link" href="/book-demo" style={{ marginTop: "1.25rem" }}>
             <div className="arrow-circle">
               <span className="arrow-circle-bg"></span>
               <svg width="6" height="8" viewBox="0 0 6 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill="currentColor" d="M3.86426 4.00028L0.818237 0.954267L1.68853 0.0839844L5.60481 4.00028L1.68853 7.91652L0.818237 7.04625L3.86426 4.00028Z" />
               </svg>
             </div>
-            <span>Learn more</span>
-          </a>
+            <span>Still have questions? Contact us</span>
+          </Link>
         </div>
 
         <div className="faq-list-col animate from-right">

@@ -291,12 +291,11 @@ const FreeTierCta = ({ data }) => {
                   <button 
                     type="submit" 
                     disabled={isSubmitting}
-                    className="group relative px-10 py-3.5 bg-[#f15a24] hover:bg-orange-600 !text-white font-bold rounded-lg shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 overflow-hidden transition-all duration-300 transform hover:-translate-y-1 disabled:opacity-50 disabled:translate-y-0 cursor-pointer"
+                    className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 cursor-pointer disabled:opacity-50"
+                    style={{ padding: "14px 28px" }}
                   >
-                    <div className="relative z-10 flex items-center gap-2">
-                      <span>{formData.button_label}</span>
-                      <FiArrowRight className="transition-transform duration-200 group-hover:translate-x-1" />
-                    </div>
+                    <span>{formData.button_label}</span>
+                    <FiArrowRight className="text-xs" />
                   </button>
                 </div>
               </form>

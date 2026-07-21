@@ -328,7 +328,7 @@ export default function SimulationRoiPage() {
                          disabled={!companyName || !industry || !country || !employees || !existingProgram || !programCostPerUser || !currency || isCalculating}
                          className={`w-full md:w-auto !px-10 !py-4 rounded-xl font-bold text-white shadow-lg transition-all flex items-center justify-center !gap-2 cursor-pointer ${
                            (!companyName || !industry || !country || !employees || !existingProgram || !programCostPerUser || !currency || isCalculating)
-                             ? 'bg-slate-200 text-slate-400 cursor-not-allowed shadow-none'
+                             ? 'bg-[#f15a24]/20 text-[#f15a24]/60 border-2 border-[#f15a24]/25 cursor-not-allowed shadow-none'
                              : 'bg-[#f15a24] hover:bg-orange-600 hover:scale-[1.02]'
                          }`}
                        >
@@ -363,6 +363,9 @@ export default function SimulationRoiPage() {
                         </p>
                       </div>
                     )}
+                    
+                    {/* Orange left accent rail */}
+                    <div className="absolute left-0 top-4 bottom-4 w-1 rounded-full z-10" style={{ background: "#f15a24", opacity: isCalculated ? 1 : 0.25, transition: "opacity 0.5s ease" }} />
                     
                     <main className={`summary-card rounded-2xl !p-8 md:!p-12 pb-12 text-left transition-all duration-500 ${!isCalculated ? 'select-none pointer-events-none opacity-40' : ''}`} style={{ backgroundColor: "#ffffff", isolation: "isolate", boxShadow: "0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1)", border: "1px solid #f1f5f9" }} data-purpose="main-dashboard-container">
                     

@@ -11,8 +11,8 @@ export default function HeroSection() {
           Challenge yourself by finding cybersecurity words hidden inside the letter grid while learning essential security concepts used by professionals.
         </p>
         <div style={{ justifyContent: "center", display: "flex", flexWrap: "wrap", gap: "1rem", marginTop: "2rem" }}>
-          <a className="btn btn-primary" href="#wordsearch-game">Play Now</a>
-          <Link className="btn btn-secondary" href="/solutions/insat">Learn About Security Training</Link>
+          <a className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center font-bold text-sm" style={{ padding: "14px 28px" }} href="#wordsearch-game">Play Now</a>
+          <Link className="bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] !text-[#f15a24] hover:!text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center font-bold text-sm" style={{ padding: "14px 28px" }} href="/solutions/insat">Learn About Security Training</Link>
         </div>
       </div>
 

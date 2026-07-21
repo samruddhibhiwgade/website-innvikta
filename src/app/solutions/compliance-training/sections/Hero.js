@@ -1,5 +1,7 @@
 "use client";
 import React from "react";
+import Link from "next/link";
+import { FiArrowRight } from "react-icons/fi";
 
 const HeroSection = React.forwardRef((props, ref) => {
   return (
@@ -30,18 +32,20 @@ const HeroSection = React.forwardRef((props, ref) => {
               </div>
 
               <div className="hero-actions-row">
-                <a className="btn btn-primary btn-cta" href="/book-demo">
-                  <span className="hover-sweep"></span>
-                  <span>Explore Our Platform</span>
-                  <div className="arrow-wrapper">
-                    <svg className="arrow-icon" width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M3.29985 4.50047L0 1.20062L0.942813 0.257812L5.18545 4.50047L0.942813 8.74306L0 7.80027L3.29985 4.50047Z" fill="currentColor" />
-                    </svg>
-                  </div>
-                </a>
-                <a className="btn btn-secondary" href="/book-demo">
-                  <span>Book a demo</span>
-                </a>
+                <Link 
+                  href="/start-free" 
+                  className="bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] !text-[#f15a24] hover:!text-white rounded-lg transition-all duration-300 flex items-center justify-center font-bold text-sm"
+                  style={{ padding: "14px 28px" }}
+                >
+                  Start Free
+                </Link>
+                <Link 
+                  href="/book-demo" 
+                  className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 text-sm"
+                  style={{ padding: "14px 28px" }}
+                >
+                  Explore Platform <FiArrowRight className="text-xs" />
+                </Link>
               </div>
             </div>
 

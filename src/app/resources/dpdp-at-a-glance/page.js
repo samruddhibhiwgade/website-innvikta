@@ -463,12 +463,12 @@ export default function DpdpAtAGlancePage() {
                     style={{ padding: "2rem 1.25rem", height: "100%", minHeight: "240px" }}
                   >
                     <div className="mb-4 flex items-center justify-center" style={{ minHeight: "56px" }}>
-                      <item.icon size={44} className="text-[#f15a24]" />
+                      <item.icon size={28} strokeWidth={1} className="text-[#f15a24]" />
                     </div>
-                    <h3 className="text-20-content font-bold mb-2 leading-snug" style={{ color: "#f15a24" }}>
+                    <h3 className="text-22-heading mb-2 leading-snug" style={{ color: "#f15a24", fontFamily: "var(--font-secondary)", fontWeight: "700" }}>
                       {item.title}
                     </h3>
-                    <p className="text-16-content leading-relaxed text-slate-600" style={{ margin: 0 }}>
+                    <p className="text-16-content leading-relaxed text-slate-600" style={{ margin: 0, fontFamily: "var(--font-primary)" }}>
                       {item.desc}
                     </p>
                   </div>
@@ -501,14 +501,15 @@ export default function DpdpAtAGlancePage() {
                         <div className="aspect-card-header">
                           <div className="aspect-card-left">
                             <div className="aspect-card-icon">
-                              <aspect.icon size={18} />
+                              <aspect.icon size={18} strokeWidth={1.2} />
                             </div>
                             <div>
-                              <h3 className="text-20-content font-bold text-slate-900 leading-snug" style={{ margin: 0 }}>{aspect.title}</h3>
+                              <h3 className="text-20-content text-slate-900 leading-snug" style={{ margin: 0, fontFamily: "var(--font-secondary)", fontWeight: "700" }}>{aspect.title}</h3>
                             </div>
                           </div>
                           <ChevronDown 
                             size={16} 
+                            strokeWidth={1.5}
                             className={`text-slate-400 transform transition-transform duration-300 ${isOpen ? "rotate-180 text-[#f15a24]" : ""}`} 
                           />
                         </div>
@@ -521,7 +522,7 @@ export default function DpdpAtAGlancePage() {
                         >
                           <ul className="space-y-2">
                             {aspect.bullets.map((bullet, bIdx) => (
-                              <li key={bIdx} className="text-16-content leading-relaxed text-slate-600" style={{ listStyle: "none", paddingLeft: "1.25rem", position: "relative" }}>
+                              <li key={bIdx} className="text-16-content leading-relaxed text-slate-600" style={{ listStyle: "none", paddingLeft: "1.25rem", position: "relative", fontFamily: "var(--font-primary)" }}>
                                 <span style={{ position: "absolute", left: "0px", top: "0.6em", width: "5px", height: "5px", borderRadius: "50%", background: "#f15a24" }} />
                                 {bullet}
                               </li>
@@ -596,19 +597,19 @@ export default function DpdpAtAGlancePage() {
                           )}
 
                           {/* Date inside card */}
-                          <div className="text-center font-bold text-16-content uppercase tracking-wider mb-4" style={{ color: "#f15a24" }}>
+                          <div className="text-center text-subheading uppercase tracking-wider mb-4" style={{ color: "#f15a24", fontFamily: "var(--font-secondary)", fontWeight: "700" }}>
                             {evt.date}
                           </div>
 
                           {/* Large Centered Orange Icon */}
                           <div className="mb-4 text-[#f15a24] flex items-center justify-center" style={{ minHeight: "44px" }}>
-                            <evt.icon size={40} />
+                            <evt.icon size={28} strokeWidth={1} />
                           </div>
 
-                          <h4 className="text-20-content font-bold text-slate-900 leading-snug mb-2">
+                          <h4 className="text-22-heading text-slate-900 leading-snug mb-2" style={{ fontFamily: "var(--font-secondary)", fontWeight: "700" }}>
                             {evt.title}
                           </h4>
-                          <p className="text-16-content text-slate-500 leading-relaxed mt-auto" style={{ margin: 0 }}>
+                          <p className="text-16-content text-slate-500 leading-relaxed mt-auto" style={{ margin: 0, fontFamily: "var(--font-primary)" }}>
                             {evt.desc}
                           </p>
                         </div>
@@ -679,10 +680,10 @@ export default function DpdpAtAGlancePage() {
  
                   {/* Right Column: Expanded Text & 5 icon elements */}
                   <div className="lg:col-span-8 text-left space-y-4">
-                    <h3 className="text-40-heading text-slate-900 leading-tight">
+                    <h3 className="text-40-heading text-slate-900 leading-tight" style={{ fontFamily: "var(--font-secondary)", fontWeight: "700" }}>
                       Innvikta translates DPDP compliance <span style={{ color: "#f15a24" }}>into everyday action.</span>
                     </h3>
-                    <p className="text-16-content leading-relaxed text-slate-500">
+                    <p className="text-16-content leading-relaxed text-slate-500" style={{ fontFamily: "var(--font-primary)" }}>
                       We help employees recognise personal data, handle it responsibly and respond correctly when something goes wrong—turning regulatory requirements into practical, role-relevant behaviour.
                     </p>
  
@@ -703,8 +704,8 @@ export default function DpdpAtAGlancePage() {
                             minHeight: "80px"
                           }}
                         >
-                          <item.icon size={26} className="text-[#f15a24] mb-2 shrink-0" />
-                          <span className="text-slate-600 font-bold text-center leading-tight" style={{ fontSize: "10.5px", margin: 0 }}>
+                          <item.icon size={26} strokeWidth={1.2} className="text-[#f15a24] mb-2 shrink-0" />
+                          <span className="text-slate-600 font-bold text-center leading-tight" style={{ fontSize: "10.5px", margin: 0, fontFamily: "var(--font-primary)" }}>
                             {item.label}
                           </span>
                         </div>
@@ -715,20 +716,19 @@ export default function DpdpAtAGlancePage() {
                 </div>
  
                 {/* Footer values list strip */}
-                <div className="cta-footer-strip" style={{ justifyContent: "center", display: "flex", gap: "2rem", flexWrap: "wrap", marginTop: "1.5rem", alignItems: "center" }}>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 mt-6 pt-6 border-t border-slate-200 w-full text-center" style={{ fontFamily: "var(--font-primary)" }}>
                   {[
                     "Raise awareness",
                     "Reduce human risk",
                     "Strengthen compliance",
                     "Build trust"
                   ].map((val, idx) => (
-                    <div key={idx} className="cta-footer-item" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", lineHeight: "1" }}>
-                      <CheckCircle2 size={16} className="text-[#f15a24] shrink-0" style={{ display: "inline-block", verticalAlign: "middle" }} />
-                      <span style={{ margin: 0, padding: 0, display: "inline-block", verticalAlign: "middle", lineHeight: "1" }}>{val}</span>
+                    <div key={idx} className="inline-flex items-center justify-center gap-2" style={{ lineHeight: "1" }}>
+                      <CheckCircle2 size={16} strokeWidth={1.5} className="text-[#f15a24] shrink-0" style={{ display: "inline-block", verticalAlign: "middle" }} />
+                      <span className="font-bold text-slate-700" style={{ margin: 0, padding: 0, display: "inline-block", verticalAlign: "middle", lineHeight: "1" }}>{val}</span>
                     </div>
                   ))}
                 </div>
- 
               </div>
             </div>
           </section>
@@ -738,17 +738,17 @@ export default function DpdpAtAGlancePage() {
               ========================================== */}
           <section className="bg-grey-5" style={{ paddingBottom: "5rem", paddingTop: "5rem", backgroundColor: "#FFF6E9" }}>
             <div className="container faq-grid">
-              <div className="faq-title-col animate from-left flex flex-col justify-center self-center items-center text-center">
-                <h2 className="text-40-heading text-center">We’re here to help</h2>
-                <a className="arrow-link" href="https://docs.insat.training/docs/getting-started" target="_blank" rel="noopener noreferrer" style={{ marginTop: "1.25rem" }}>
+              <div className="faq-title-col animate from-left flex flex-col justify-center self-center items-center text-center w-full lg:w-auto">
+                <h2 className="text-40-heading text-center">Frequently Asked Questions</h2>
+                <Link className="arrow-link" href="/book-demo" style={{ marginTop: "1.25rem" }}>
                   <div className="arrow-circle">
                     <span className="arrow-circle-bg"></span>
                     <svg width="6" height="8" viewBox="0 0 6 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path fill="currentColor" d="M3.86426 4.00028L0.818237 0.954267L1.68853 0.0839844L5.60481 4.00028L1.68853 7.91652L0.818237 7.04625L3.86426 4.00028Z" />
                     </svg>
                   </div>
-                  <span>Learn more</span>
-                </a>
+                  <span>Still have questions? Contact us</span>
+                </Link>
               </div>
 
               <div className="faq-list-col animate from-right">
@@ -847,11 +847,21 @@ export default function DpdpAtAGlancePage() {
                     Deploy role-based awareness modules and establish a robust privacy-first compliance culture across your team.
                   </p>
                   <div className="flex flex-wrap justify-center gap-4 mt-10" style={{ marginTop: "2.5rem" }}>
-                  <Link href="/start-free" className="btn btn-outline-primary">
-                    Start Free
-                  </Link>
-                  <Link href="/book-demo" className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap px-5 h-12 font-bold shadow-md shadow-orange-500/10">Book a Demo <FiArrowRight className="text-xs" /></Link>
-                </div>
+                    <Link 
+                      href="/start-free" 
+                      className="bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] !text-[#f15a24] hover:!text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center font-bold text-sm whitespace-nowrap" 
+                      style={{ padding: "14px 28px" }}
+                    >
+                      Start Free
+                    </Link>
+                    <Link 
+                      href="/book-demo" 
+                      className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 text-sm" 
+                      style={{ padding: "14px 28px" }}
+                    >
+                      Book a Demo <FiArrowRight className="text-xs" />
+                    </Link>
+                  </div>
                 </div>
                 <div className="bg-theme animated-bg absolute top-0 left-0 w-full after:hidden overflow-hidden">
                   <div className="animate-wave absolute inset-0 w-full h-full">

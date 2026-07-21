@@ -806,7 +806,7 @@ const menuData = {
       {
         id: "knowledge_hub",
         label: "Knowledge Hub",
-        href: "/blog",
+        href: null,
         icon: FiBookOpen,
         headline: "Explore our latest cybersecurity articles, global benchmarks, and community updates.",
         cells: [
@@ -819,10 +819,10 @@ const menuData = {
           { name: "Weekly Newsletter", desc: "Security tips and campaign ideas delivered directly to your inbox.", href: "/resources/weekly-newsletter" }
         ],
         cta: {
-          title: "Explore the Innvikta Blog",
-          desc: "Stay updated with real-time cybersecurity findings and employee engagement tactics.",
-          label: "Go to Blog",
-          href: "/blog",
+          title: "Explore the Cybersecurity Glossary",
+          desc: "Browse our library of security awareness terminology, cyber threat definitions, and compliance concepts.",
+          label: "View Glossary",
+          href: "/resources/glossary",
           svgType: "resources"
         }
       }
@@ -1369,10 +1369,10 @@ const Header = () => {
             ========================================================= */}
         <div className="hidden lg:block w-full bg-[#f15a24] border-b border-[#e14a14] h-[40px] transition-all duration-300">
           <div className="container-xl h-full flex items-center justify-between text-[13px] font-bold text-white/90">
-            <div className="flex items-center gap-3">
-              <span className="bg-white/20 text-white border border-white/30 font-extrabold px-2 py-0.5 rounded text-[11px] uppercase tracking-wider">NEW</span>
-              <Link href="#" className="hover:text-white transition-colors flex items-center gap-1">
-                InSAT Platform Release 2026: Human Behavior Analytics <FiArrowRight className="text-[12px]" />
+            <div className="flex items-center gap-2 flex-nowrap min-w-0">
+              <span className="bg-white/20 text-white border border-white/30 font-extrabold px-2 py-0.5 rounded text-[11px] uppercase tracking-wider shrink-0">NEW</span>
+              <Link href="#" className="hover:text-white transition-colors flex items-center gap-1 whitespace-nowrap">
+                InSAT Platform Release 2026: Human Behavior Analytics <FiArrowRight className="text-[12px] shrink-0" />
               </Link>
             </div>
 
@@ -1583,7 +1583,7 @@ const Header = () => {
               <div className={`header-cta-buttons transition-all duration-300 flex items-center h-full ${pathname !== "/partners" ? "opacity-100 pointer-events-auto translate-x-0" : "opacity-0 pointer-events-none -translate-x-4 absolute right-0"}`}>
                 <Link 
                   href="/start-free" 
-                  className="bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] text-[#f15a24] hover:!text-white rounded-lg transition-all duration-300 whitespace-nowrap header-cta-start-free"
+                  className="bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] !text-[#f15a24] hover:!text-white rounded-lg transition-all duration-300 whitespace-nowrap header-cta-start-free"
                 >
                   Start Free
                 </Link>
@@ -2076,7 +2076,7 @@ const Header = () => {
               <Link 
                 href="/start-free" 
                 onClick={() => setShowMenu(false)}
-                className="w-full block text-center py-3 bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 text-[#f15a24] hover:!text-white font-extrabold rounded-lg text-sm transition-all"
+                className="w-full block text-center py-3 bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 !text-[#f15a24] hover:!text-white font-extrabold rounded-lg text-sm transition-all"
               >
                 Start Free
               </Link>

@@ -53,15 +53,20 @@ const SolutionHero = ({ hero }) => {
             <div className="flex flex-wrap items-center gap-5">
               {hero.button && (
                 <Link 
-                  className="px-8 py-3.5 bg-[#f15a24] hover:bg-orange-600 shadow-lg shadow-orange-500/20 !text-white rounded-full text-[15px] font-bold transition-all duration-300 flex items-center gap-2 group" 
+                  className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 text-sm"
+                  style={{ padding: "14px 28px" }}
                   href={hero.button.link}
                 >
                   {hero.button.label} 
-                  <FiArrowRight className="text-sm transition-transform group-hover:translate-x-1" />
+                  <FiArrowRight className="text-xs" />
                 </Link>
               )}
               {hero.button_secondary && (
-                <Link className="btn btn-outline-primary h-12 flex items-center justify-center rounded-[6px] px-6 font-bold" href={hero.button_secondary.link}>
+                <Link 
+                  className="bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] !text-[#f15a24] hover:!text-white rounded-lg transition-all duration-300 flex items-center justify-center font-bold text-sm"
+                  style={{ padding: "14px 28px" }}
+                  href={hero.button_secondary.link}
+                >
                   {hero.button_secondary.label}
                 </Link>
               )}

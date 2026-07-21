@@ -111,10 +111,10 @@ export default function HeroSection({ scrollToGenerator, scrollToStrength }) {
               </div>
 
               <div className="flex flex-wrap justify-center gap-4">
-                <button onClick={scrollToGenerator} className="btn btn-primary" style={{ padding: "12px 28px", borderRadius: "8px", fontWeight: 700 }}>
+                <button onClick={scrollToGenerator} className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 text-sm" style={{ padding: "14px 28px" }}>
                   Generate Password
                 </button>
-                <button onClick={scrollToStrength} className="btn btn-secondary" style={{ padding: "12px 28px", borderRadius: "8px", fontWeight: 700 }}>
+                <button onClick={scrollToStrength} className="bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] !text-[#f15a24] hover:!text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center font-bold text-sm whitespace-nowrap" style={{ padding: "14px 28px" }}>
                   Check Password Strength
                 </button>
               </div>
