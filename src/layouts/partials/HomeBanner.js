@@ -436,13 +436,19 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                 }, 100);
               }}
               loop={true}
-              slidesPerView={4}
+              slidesPerView={3}
               breakpoints={{
+                540: {
+                  slidesPerView: 4,
+                },
                 992: {
+                  slidesPerView: 6,
+                },
+                1200: {
                   slidesPerView: 7,
                 },
               }}
-              spaceBetween={5}
+              spaceBetween={16}
               modules={[Autoplay, FreeMode]}
               autoplay={{
                 delay: 0,
@@ -457,18 +463,20 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
             >
               {brands.map((brand, index) => (
                 <SwiperSlide
-                  className="h-20 md:h-24 cursor-pointer px-1 py-1 lg:px-4"
+                  className="h-16 md:h-20 cursor-pointer py-1"
                   key={"brand-" + index}
                 >
-                  <div className="relative h-16 md:h-20 w-full flex items-center justify-center bg-white/50 rounded-lg">
-                    <ImageFallback
-                      className="object-contain p-0.5 md:p-2"
-                      src={brand}
-                      sizes="200px"
-                      alt=""
-                      fill={true}
-                      priority={true}
-                    />
+                  <div className="relative h-14 md:h-16 w-full flex items-center justify-center bg-white border border-slate-100/80 shadow-[0_2px_8px_rgba(0,0,0,0.02)] rounded-xl p-3 md:p-4 hover:border-orange-100 hover:shadow-md transition-all duration-300">
+                    <div className="relative w-full h-full">
+                      <ImageFallback
+                        className="object-contain"
+                        src={brand}
+                        sizes="180px"
+                        alt="brand logo"
+                        fill={true}
+                        priority={true}
+                      />
+                    </div>
                   </div>
                 </SwiperSlide>
               ))}

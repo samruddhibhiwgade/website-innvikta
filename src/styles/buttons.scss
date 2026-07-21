@@ -1,9 +1,9 @@
 .btn {
-  @apply inline-block px-5 py-3 transition;
+  @apply inline-flex items-center justify-center px-5 h-12 transition font-bold;
 }
 
 .btn-primary {
-  @apply bg-primary text-white rounded-[6px] h-12 transition duration-300 relative;
+  @apply bg-primary text-white rounded-[6px] transition duration-300 relative;
   color: #ffffff !important;
 
   &:hover {
@@ -13,8 +13,9 @@
 }
 
 .btn-outline-primary {
-  @apply border-primary border bg-transparent text-primary rounded-[6px] h-12 transition duration-300;
+  @apply border-primary border bg-transparent text-primary rounded-[6px] transition duration-300;
   color: #f15a24 !important;
+
 
   &:hover {
     @apply bg-primary;

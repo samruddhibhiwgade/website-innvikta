@@ -52,8 +52,7 @@ const SpecialFeatures = ({ speciality }) => {
 
 
             <div
-              className={`animate md:col-5 px-6 ${index % 2 !== 0 ? "order-1 md:order-2 md:pl-0 md:pr-12 lg:pr-24" : "md:pr-0 md:pl-12 lg:pl-24"
-                }`}
+              className={`animate md:col-5 px-6 order-2 ${index % 2 === 0 ? "md:order-1 md:pr-0 md:pl-12 lg:pl-24" : "md:order-2 md:pl-0 md:pr-12 lg:pr-24"}`}
             >
               {/* Main Heading */}
               {item.subtitle && markdownify(
@@ -81,15 +80,14 @@ const SpecialFeatures = ({ speciality }) => {
               )}
             </div>
             <div
-              className={`animate ${index % 2 === 0 ? "from-right" : "from-left order-2 md:order-1"
-                } md:col-6 mt-10 md:mt-0 px-6 ${index % 2 === 0 ? "md:pl-0 md:pr-12 lg:pr-24" : "md:pr-0 md:pl-12 lg:pl-24"
-                }`}
+              className={`animate md:col-6 px-6 order-1 mt-6 md:mt-0 ${index % 2 === 0 ? "md:order-2 md:pl-0 md:pr-12 lg:pr-24" : "md:order-1 md:pr-0 md:pl-12 lg:pl-24"}`}
             >
               <ImageFallback
                 src={item.image}
                 width={585}
                 height={447}
-                alt={item.title}
+                alt={item.title || "solution feature image"}
+                className="rounded-2xl shadow-sm border border-slate-100/50"
               />
             </div>
           </div>

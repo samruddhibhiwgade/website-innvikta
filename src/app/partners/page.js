@@ -279,14 +279,14 @@ const PartnersPage = () => {
                   <a 
                     href="#form" 
                     onClick={scrollToForm}
-                    className="group inline-flex items-center gap-2 px-8 py-3.5 bg-[#f15a24] hover:bg-orange-600 !text-white border-2 border-[#f15a24] hover:border-orange-600 font-bold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
+                    className="group inline-flex items-center gap-2 px-8 py-3.5 bg-[#f15a24] hover:bg-orange-600 !text-white border-2 border-[#f15a24] hover:border-orange-600 font-bold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
                   >
                     <span>Become a Partner</span>
                     <FiArrowRight className="text-lg transition-transform duration-300 group-hover:translate-x-1" />
                   </a>
                   <a 
                     href="mailto:sale@innvikta.com" 
-                    className="group inline-flex items-center gap-2 px-8 py-3.5 bg-slate-800/80 hover:bg-slate-700 text-white border-2 border-slate-700/50 hover:border-slate-600 font-bold rounded-full transition-all duration-300 shadow-sm hover:shadow-md"
+                    className="group inline-flex items-center gap-2 px-8 py-3.5 bg-slate-800/80 hover:bg-slate-700 text-white border-2 border-slate-700/50 hover:border-slate-600 font-bold rounded-lg transition-all duration-300 shadow-sm hover:shadow-md"
                   >
                     <FiMail className="text-lg text-slate-400 group-hover:text-white transition-colors duration-300" />
                     <span>Talk to Us</span>
@@ -622,7 +622,7 @@ const PartnersPage = () => {
                       <button 
                         type="submit" 
                         disabled={isSubmitting}
-                        className="group relative px-6 md:px-10 py-3.5 bg-[#f15a24] hover:bg-[#f15a24]/90 !text-white font-bold rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/40 overflow-hidden transition-all duration-300 transform hover:-translate-y-1 disabled:opacity-50 disabled:translate-y-0 whitespace-nowrap"
+                        className="group relative px-6 md:px-10 py-3.5 bg-[#f15a24] hover:bg-orange-600 !text-white font-bold rounded-lg shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 overflow-hidden transition-all duration-300 transform hover:-translate-y-1 disabled:opacity-50 disabled:translate-y-0 whitespace-nowrap cursor-pointer"
                       >
                         <div className="relative z-10 flex items-center gap-2">
                           <span className="uppercase tracking-wider text-sm whitespace-nowrap">

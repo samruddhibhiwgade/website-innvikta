@@ -187,13 +187,13 @@ export default function CyberAwarenessMonthCampaignPage() {
               <div className="flex flex-wrap gap-4 pt-4">
                 <a 
                   href="#register" 
-                  className="group px-8 py-4 bg-white text-[#f15a24] font-extrabold text-sm rounded-full uppercase tracking-wider transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl flex items-center gap-2"
+                  className="group px-8 py-4 bg-white text-[#f15a24] font-extrabold text-sm rounded-lg uppercase tracking-wider transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl flex items-center gap-2"
                 >
                   Download Toolkit <FiArrowRight className="transition-transform group-hover:translate-x-1" />
                 </a>
                 <a 
                   href="#register" 
-                  className="px-8 py-4 bg-[#f15a24] border border-white hover:bg-white hover:text-[#f15a24] !text-white font-extrabold text-sm rounded-full uppercase tracking-wider transition-all duration-300 transform hover:-translate-y-1"
+                  className="px-8 py-4 bg-[#f15a24] border border-white hover:bg-white hover:text-[#f15a24] !text-white font-extrabold text-sm rounded-lg uppercase tracking-wider transition-all duration-300 transform hover:-translate-y-1"
                 >
                   Get Updates
                 </a>
@@ -539,7 +539,7 @@ export default function CyberAwarenessMonthCampaignPage() {
                         <button 
                           type="submit" 
                           disabled={isSubmitting}
-                          className="group relative px-10 py-3.5 bg-[#f15a24] hover:bg-[#f15a24]/90 !text-white font-bold rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/40 overflow-hidden transition-all duration-300 transform hover:-translate-y-1 disabled:opacity-50 disabled:translate-y-0 whitespace-nowrap cursor-pointer"
+                          className="group relative px-10 py-3.5 bg-[#f15a24] hover:bg-orange-600 !text-white font-bold rounded-lg shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 overflow-hidden transition-all duration-300 transform hover:-translate-y-1 disabled:opacity-50 disabled:translate-y-0 whitespace-nowrap cursor-pointer"
                         >
                           <div className="relative z-10 flex items-center gap-2">
                             <span className="uppercase tracking-wider text-sm">
