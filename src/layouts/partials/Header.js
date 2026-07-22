@@ -628,7 +628,8 @@ const menuData = {
           desc: "Deliver personalized learning built for active participation and defensible compliance evidence.",
           label: "Explore Training Platform",
           href: "/solutions/insat",
-          svgType: "platform"
+          svgType: "platform",
+          image: "/images/menu-insat.jpeg"
         }
       },
       {
@@ -674,7 +675,8 @@ const menuData = {
           desc: "Test your team across multiple vectors including SMS, QR codes, and voice to verify click resilience.",
           label: "Explore Phishing Simulations",
           href: "/solutions/phishing-simulation",
-          svgType: "phishing"
+          svgType: "phishing",
+          image: "/images/menu-phishing.jpeg"
         }
       },
       {
@@ -714,7 +716,8 @@ const menuData = {
           desc: "Audit-ready training modules built to satisfy global frameworks, privacy rules, and internal audits.",
           label: "See Compliance Solutions",
           href: "/solutions/compliance-training",
-          svgType: "compliance"
+          svgType: "compliance",
+          image: "/images/menu-compliance.png"
         }
       },
       {
@@ -769,7 +772,8 @@ const menuData = {
           desc: "Build customized learning paths based on the unique regulatory and operational risks of your sector.",
           label: "View Customized Solutions",
           href: "/solutions/customized-solutions",
-          svgType: "network"
+          svgType: "network",
+          image: "/images/menu-customized.png"
         }
       }
     ]
@@ -1839,26 +1843,15 @@ const Header = () => {
                           {/* 3. FEATURED CARD (Integrated conversion card) */}
                           {currentTab.cta && (
                             <div className="w-[220px] lg:w-[260px] xl:w-[320px] 2xl:w-[360px] pt-4 pb-8 xl:pt-6 xl:pb-12 px-3 xl:px-6 border-l border-slate-200/10 bg-transparent shrink-0 flex flex-col justify-start">
-                              <div className="bg-white/20 rounded-2xl p-3 xl:p-5 flex flex-col gap-3 xl:gap-5 shadow-sm border border-white/20 relative text-slate-700">
-                                <div className="flex flex-col gap-3">
-                                  <div className="w-full bg-white/30 rounded-xl border border-white/20 shadow-sm overflow-hidden mb-2 relative group-hover/card:shadow-md transition-shadow">
-                                    {currentTab.cta.image && (
-                                      <div className="absolute top-3 left-3 bg-[#10b981] text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md shadow-sm z-10">
-                                        Featured
-                                      </div>
-                                    )}
-                                    {currentTab.cta.image ? (
-                                      <img src={currentTab.cta.image} alt={currentTab.cta.title} className="w-full h-auto object-cover aspect-[4/3] transform hover:scale-105 transition-transform duration-500" />
-                                    ) : (
-                                      <div className="w-full aspect-[4/3] flex items-center justify-center overflow-hidden">
-                                        <RenderSvgIllustration type={currentTab.cta.svgType} />
-                                      </div>
-                                    )}
-                                  </div>
-                                  <h5 className="text-[13px] xl:text-[15px] font-medium text-slate-900 leading-snug">
-                                    {currentTab.cta.title}
-                                  </h5>
-                                  {/* Description removed to reduce text as requested */}
+                              <div className="bg-white/20 rounded-2xl p-3 xl:p-5 flex flex-col gap-3 xl:gap-4 shadow-sm border border-white/20 relative text-slate-700">
+                                <div className="w-full bg-white/30 rounded-xl border border-white/20 shadow-sm overflow-hidden relative group-hover/card:shadow-md transition-shadow">
+                                  {currentTab.cta.image ? (
+                                    <img src={currentTab.cta.image} alt={currentTab.cta.title} className="w-full h-auto object-cover aspect-[4/3] transform hover:scale-105 transition-transform duration-500" />
+                                  ) : (
+                                    <div className="w-full aspect-[4/3] flex items-center justify-center overflow-hidden">
+                                      <RenderSvgIllustration type={currentTab.cta.svgType} />
+                                    </div>
+                                  )}
                                 </div>
                                 <Link 
                                   href={currentTab.cta.href || "#"}
