@@ -139,12 +139,12 @@ body {
   .header-cta-buttons .header-cta-start-free {
     padding: 0.25rem 0.4rem !important;
     font-size: 10.5px !important;
-    font-weight: 800 !important;
+    font-weight: 700 !important;
   }
   .header-cta-buttons .header-cta-book-demo {
     padding: 0.25rem 0.4rem !important;
     font-size: 10.5px !important;
-    font-weight: 800 !important;
+    font-weight: 700 !important;
   }
   .container-xl img[alt="Innvikta"] {
     max-height: 22px !important;
@@ -168,12 +168,12 @@ body {
   .header-cta-buttons .header-cta-start-free {
     padding: 0.35rem 0.5rem !important;
     font-size: 11px !important;
-    font-weight: 800 !important;
+    font-weight: 700 !important;
   }
   .header-cta-buttons .header-cta-book-demo {
     padding: 0.35rem 0.5rem !important;
     font-size: 11px !important;
-    font-weight: 800 !important;
+    font-weight: 700 !important;
   }
 }
 
@@ -194,12 +194,12 @@ body {
   .header-cta-buttons .header-cta-start-free {
     padding: 0.55rem 1rem !important;
     font-size: 14px !important;
-    font-weight: 800 !important;
+    font-weight: 700 !important;
   }
   .header-cta-buttons .header-cta-book-demo {
     padding: 0.55rem 1rem !important;
     font-size: 14px !important;
-    font-weight: 800 !important;
+    font-weight: 700 !important;
   }
 }
 
@@ -220,12 +220,39 @@ body {
   .header-cta-buttons .header-cta-start-free {
     padding: 0.75rem 1.4rem !important;
     font-size: 16px !important;
-    font-weight: 900 !important;
+    font-weight: 700 !important;
   }
   .header-cta-buttons .header-cta-book-demo {
     padding: 0.75rem 1.4rem !important;
     font-size: 16px !important;
-    font-weight: 900 !important;
+    font-weight: 700 !important;
+  }
+}
+
+/* Ensure all page CTA buttons match nav bar CTA font sizes across all viewports */
+@media (max-width: 991px) {
+  .btn, .btn-cta {
+    font-size: 13px !important;
+  }
+}
+@media (min-width: 992px) and (max-width: 1023px) {
+  .btn, .btn-cta {
+    font-size: 10.5px !important;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1359px) {
+  .btn, .btn-cta {
+    font-size: 11px !important;
+  }
+}
+@media (min-width: 1360px) and (max-width: 1849px) {
+  .btn, .btn-cta {
+    font-size: 14px !important;
+  }
+}
+@media (min-width: 1850px) {
+  .btn, .btn-cta {
+    font-size: 16px !important;
   }
 }
 

@@ -10,11 +10,16 @@ const FaqAccordion = ({ faqs }) => {
   };
 
   return (
-    <>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 w-full">
       {faqs.map((faq, index) => {
         const isActive = activeFaq === index;
+        const isLastInCol = index === faqs.length - 2 || index === faqs.length - 1;
         return (
-          <div key={index} className={`faq-item ${isActive ? "active" : ""}`}>
+          <div 
+            key={index} 
+            className={`faq-item ${isActive ? "active" : ""}`}
+            style={isLastInCol ? { borderBottom: "1px solid var(--color-forest-15)" } : {}}
+          >
             <button
               type="button"
               className="faq-trigger"
@@ -54,7 +59,7 @@ const FaqAccordion = ({ faqs }) => {
           </div>
         );
       })}
-    </>
+    </div>
   );
 };
 

@@ -7,10 +7,14 @@ export default function FAQSection({ activeFaq, setActiveFaq }) {
   const leftFaqs = faqData.slice(0, 6);
   const rightFaqs = faqData.slice(6, 11);
 
-  const renderFaqItem = (item, index, offset = 0) => {
+  const renderFaqItem = (item, index, offset = 0, isLastInCol = false) => {
     const globalIndex = index + offset;
     return (
-      <div className={`faq-item ${activeFaq === globalIndex ? 'active' : ''}`} key={globalIndex}>
+      <div 
+        className={`faq-item ${activeFaq === globalIndex ? 'active' : ''}`} 
+        key={globalIndex}
+        style={isLastInCol ? { borderBottom: "1px solid var(--color-forest-15)" } : {}}
+      >
         <button type="button" className="faq-trigger" aria-expanded={activeFaq === globalIndex} onClick={() => setActiveFaq(activeFaq === globalIndex ? null : globalIndex)}>
           <span className="faq-question">{item.q}</span>
           <div className="faq-icon-wrapper">
@@ -33,8 +37,9 @@ export default function FAQSection({ activeFaq, setActiveFaq }) {
 
   return (
     <section className="bg-grey-5" style={{ paddingTop: "5rem", paddingBottom: "5rem" }}>
-      <div className="container faq-grid">
-        <div className="faq-title-col animate from-left flex flex-col justify-center self-center items-center text-center w-full lg:w-auto">
+      <div className="container max-w-[1200px] mx-auto px-4 md:px-6">
+        {/* FAQ Text at the Top */}
+        <div className="animate from-left flex flex-col justify-center items-center text-center w-full" style={{ marginBottom: "4rem" }}>
           <h2 className="text-40-heading text-center">Frequently Asked Questions</h2>
           <Link className="arrow-link" href="/book-demo" style={{ marginTop: "1.25rem" }}>
             <div className="arrow-circle">
@@ -47,14 +52,27 @@ export default function FAQSection({ activeFaq, setActiveFaq }) {
           </Link>
         </div>
 
-        <div className="faq-list-col animate from-right">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10">
-            <div>
-              {leftFaqs.map((item, index) => renderFaqItem(item, index, 0))}
-            </div>
-            <div>
-              {rightFaqs.map((item, index) => renderFaqItem(item, index, 6))}
-            </div>
+        {/* Two Equal Sections (Columns) of the FAQ */}
+        <div className="animate from-right w-full text-left">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 w-full">
+            {Array.from({ length: Math.max(leftFaqs.length, rightFaqs.length) }).map((_, rowIndex) => {
+              const leftItem = leftFaqs[rowIndex];
+              const rightItem = rightFaqs[rowIndex];
+              return (
+                <React.Fragment key={rowIndex}>
+                  {leftItem ? (
+                    renderFaqItem(leftItem, rowIndex, 0, rowIndex === leftFaqs.length - 1)
+                  ) : (
+                    <div className="hidden md:block" />
+                  )}
+                  {rightItem ? (
+                    renderFaqItem(rightItem, rowIndex, 6, rowIndex === rightFaqs.length - 1)
+                  ) : (
+                    <div className="hidden md:block" />
+                  )}
+                </React.Fragment>
+              );
+            })}
           </div>
         </div>
       </div>

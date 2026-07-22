@@ -4,9 +4,9 @@ import { cultureCampaignCards } from "./constants";
 
 export default function CampaignsSection() {
   return (
-    <section id="culture-benchmark-studies" className="bg-white" style={{ paddingTop: "5rem", paddingBottom: "5rem" }}>
+    <section id="culture-benchmark-studies" className="bg-white campaigns-section">
       <div className="container">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Left Column: Text Content */}
           <div className="lg:col-span-5 animate from-left">
@@ -23,8 +23,9 @@ export default function CampaignsSection() {
                 <span className="hover-sweep"></span>
                 <span>Book a demo</span>
                 <div className="arrow-wrapper">
-                  <svg className="arrow-icon" width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3.29985 4.50047L0 1.20062L0.942813 0.257812L5.18545 4.50047L0.942813 8.74306L0 7.80027L3.29985 4.50047Z" fill="currentColor" />
+                  <svg className="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
                   </svg>
                 </div>
               </Link>
@@ -33,61 +34,18 @@ export default function CampaignsSection() {
 
           {/* Right Column: Bento Grid of 5 Cards */}
           <div className="lg:col-span-7 animate from-right">
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem", width: "100%" }}>
+            <div className="campaigns-bento-grid">
               {cultureCampaignCards.map((card, idx) => (
                 <div
                   key={idx}
-                  className="stats-card transition-all duration-300 hover:-translate-y-1 hover:shadow-sm"
-                  style={{
-                    background: "#FFFBF7",
-                    border: "1px solid #FFEAD4",
-                    borderRadius: "14px",
-                    padding: "1.25rem",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "0.25rem",
-                    gridColumn: card.span,
-                    justifyContent: "center"
-                  }}
+                  className="campaigns-bento-card"
+                  style={{ gridColumn: card.span }}
                 >
-                  <div
-                    style={{
-                      background: "#FFEFEA",
-                      display: "inline-flex",
-                      padding: "0.45rem",
-                      borderRadius: "50%",
-                      width: "36px",
-                      height: "36px",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginBottom: "0.25rem"
-                    }}
-                  >
+                  <div className="cbc-icon">
                     {card.icon}
                   </div>
-                  <h3
-                    style={{
-                      marginTop: "0px",
-                      marginBottom: "0.25rem",
-                      fontSize: "1.05rem",
-                      fontWeight: "600",
-                      color: "#1E293B",
-                      lineHeight: "1.2"
-                    }}
-                  >
-                    {card.title}
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: "0.85rem",
-                      color: "#334155",
-                      marginTop: "0px",
-                      marginBottom: "0px",
-                      lineHeight: "1.4"
-                    }}
-                  >
-                    {card.desc}
-                  </p>
+                  <h3 className="cbc-title">{card.title}</h3>
+                  <p className="cbc-desc">{card.desc}</p>
                 </div>
               ))}
             </div>

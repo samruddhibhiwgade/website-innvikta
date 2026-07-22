@@ -1863,7 +1863,7 @@ const Header = () => {
                                 <Link 
                                   href={currentTab.cta.href || "#"}
                                   onClick={handleMenuLeave}
-                                  className="w-full justify-center text-center py-2 xl:py-2.5 text-[#f15a24] hover:text-orange-700 font-bold whitespace-nowrap text-[13px] xl:text-[14px] transition-colors flex items-center gap-1.5 group-hover/card:underline"
+                                  className="w-full justify-start text-left py-2 xl:py-2.5 text-[#f15a24] hover:text-orange-700 font-bold whitespace-nowrap text-[13px] xl:text-[14px] transition-colors flex items-center gap-1.5 group-hover/card:underline"
                                 >
                                   {currentTab.cta.label.charAt(0).toUpperCase() + currentTab.cta.label.slice(1).toLowerCase()} <FiArrowRight className="text-[15px]" />
                                 </Link>
@@ -2072,18 +2072,18 @@ const Header = () => {
             </div>
 
             {/* Standard CTA */}
-            <div className={`transition-all duration-300 w-full max-w-[320px] mx-auto flex flex-col gap-3 ${pathname !== "/partners" ? "opacity-100 pointer-events-auto translate-y-0" : "opacity-0 pointer-events-none -translate-y-2 absolute inset-x-0"}`}>
+            <div className={`transition-all duration-300 w-full max-w-[320px] mx-auto flex flex-row gap-3 ${pathname !== "/partners" ? "opacity-100 pointer-events-auto translate-y-0" : "opacity-0 pointer-events-none -translate-y-2 absolute inset-x-0"}`}>
               <Link 
                 href="/start-free" 
                 onClick={() => setShowMenu(false)}
-                className="w-full block text-center py-3 bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 !text-[#f15a24] hover:!text-white font-extrabold rounded-lg text-sm transition-all"
+                className="flex-1 block text-center py-3 bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 !text-[#f15a24] hover:!text-white font-extrabold rounded-lg text-sm transition-all"
               >
                 Start Free
               </Link>
               <Link 
                 href="/book-demo" 
                 onClick={() => setShowMenu(false)}
-                className="w-full block text-center py-3 bg-[#f15a24] !text-white font-extrabold rounded-lg text-sm shadow-md shadow-orange-500/10 flex items-center justify-center gap-1"
+                className="flex-1 block text-center py-3 bg-[#f15a24] !text-white font-extrabold rounded-lg text-sm shadow-md shadow-orange-500/10 flex items-center justify-center gap-1"
               >
                 Book a Demo <FiArrowRight className="text-xs" />
               </Link>

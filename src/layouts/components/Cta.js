@@ -10,21 +10,21 @@ function Cta() {
   if (!enable) return null;
 
   return (
-    <section className="cta section pt-0">
+    <section className="cta section pt-24 md:pt-32">
       <div className="container-xl">
         <div className="section relative px-4 text-center">
           <div className="animate">
             {markdownify(title, "h2", "section-title leading-tight")}
             {markdownify(content, "p", "mt-10")}
             <div className="flex flex-wrap justify-center gap-4 mt-10">
-              <Link href={button.link} className="btn bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 text-sm" style={{ padding: "14px 28px" }}>
-                {button.label} <FiArrowRight className="text-xs" />
-              </Link>
               {button_secondary?.label && (
                 <Link href={button_secondary.link} className="btn bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] !text-[#f15a24] hover:!text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center font-bold text-sm whitespace-nowrap" style={{ padding: "14px 28px" }}>
                   {button_secondary.label}
                 </Link>
               )}
+              <Link href={button.link} className="btn bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 text-sm" style={{ padding: "14px 28px" }}>
+                {button.label} <FiArrowRight className="text-xs" />
+              </Link>
             </div>
           </div>
           <div className="absolute top-0 left-0 w-full h-full bg-[#fff7f3] rounded-2xl overflow-hidden -z-10">

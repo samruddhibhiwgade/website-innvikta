@@ -28,8 +28,9 @@ export default function OverviewSection() {
                 <span className="hover-sweep"></span>
                 <span>Book a demo</span>
                 <div className="arrow-wrapper">
-                  <svg className="arrow-icon" width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3.29985 4.50047L0 1.20062L0.942813 0.257812L5.18545 4.50047L0.942813 8.74306L0 7.80027L3.29985 4.50047Z" fill="currentColor" />
+                  <svg className="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
                   </svg>
                 </div>
               </Link>
@@ -37,10 +38,10 @@ export default function OverviewSection() {
           </div>
 
           {/* Right Column: 4 Customized Cards */}
-          <div className="lg:col-span-7 animate from-right">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-12" style={{ paddingTop: "2rem" }}>
+          <div className="lg:col-span-7 animate from-right" style={{ overflow: "visible" }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-16" style={{ paddingTop: "2.5rem", overflow: "visible" }}>
               {customizedCards.map((card, idx) => (
-                <div key={idx} className="customized-stats-card">
+                <div key={idx} className="customized-stats-card" style={{ overflow: "visible" }}>
                   {/* Floating circular icon */}
                   <div className="card-icon-container">
                     {card.icon}

@@ -352,6 +352,18 @@ const Chatbot = () => {
       return "That is an important cybersecurity topic! Educating employees on terms like that is exactly what Innvikta does. Our InSAT platform contains interactive lessons covering passwords, malware, spoofing, and endpoint protection. Would you like to schedule a quick demo to see them?";
     }
 
+    if (lowerText.includes("directory") || lowerText.includes("ldap") || lowerText.includes("active directory") || lowerText.includes("sync") || lowerText.includes("google workspace") || lowerText.includes("microsoft 365")) {
+      return "Innvikta InSAT supports seamless **directory synchronization** with leading identity providers. You can sync your user base from:\n- **Microsoft 365 / Azure AD**: Automated user provisioning via SCIM\n- **Google Workspace**: Directory sync via API\n- **LDAP / Active Directory**: On-premise enterprise integrations\n\nOnce synced, employees are automatically enrolled into relevant awareness campaigns. Setup takes less than 5 minutes. Visit the [Start Free page](/start-free) to begin.";
+    }
+
+    if (lowerText.includes("template") || lowerText.includes("email template") || lowerText.includes("custom template") || lowerText.includes("branded")) {
+      return "Innvikta provides a rich library of **customizable phishing simulation email templates**. You can:\n- Use pre-built industry templates (HR, Finance, IT, Logistics)\n- Build custom templates with your organization's branding\n- Simulate realistic sender spoofing scenarios\n- Clone and localize templates in 30+ languages\n\nAll templates include automatic educational hooks that appear immediately after an employee interacts with them. Explore template options on the [Customized Solutions page](/solutions/customized-solutions).";
+    }
+
+    if (lowerText.includes("game") || lowerText.includes("gamif") || lowerText.includes("arcade") || lowerText.includes("interactive course") || lowerText.includes("gamified")) {
+      return "Innvikta offers **gamified cybersecurity learning** through our Cyber Arcade. These interactive experiences include:\n- 🚗 **Dash Car**: Real-time endpoint defense challenges\n- 📨 **Secure Inbox**: Spot phishing emails under time pressure\n- 🪐 **Crystal Planet**: Sci-fi threat identification game\n- 🔒 **Escape Room**: Puzzle-based security assessments\n\nStudies show gamified training improves knowledge retention by over 40% compared to static e-learning. Try the [Cyber Arcade](/cyber-arcade) today!";
+    }
+
     return null;
   };
 
@@ -623,7 +635,7 @@ const Chatbot = () => {
 
       {/* Chat Window - Reduced Size with Smooth Slide & Scale transition */}
       <div 
-        className="fixed bottom-20 right-4 md:bottom-24 md:right-6 w-[280px] md:w-[350px] h-[380px] md:h-[430px] bg-white border border-slate-100 shadow-[0_15px_40px_rgba(0,0,0,0.12)] rounded-2xl flex flex-col z-50 overflow-hidden"
+        className="fixed bottom-20 right-4 md:bottom-24 md:right-6 w-[270px] md:w-[350px] h-[340px] md:h-[430px] bg-white border border-slate-100 shadow-[0_15px_40px_rgba(0,0,0,0.12)] rounded-2xl flex flex-col z-50 overflow-hidden"
         style={{
           opacity: isOpen ? 1 : 0,
           transform: isOpen ? "translateY(0) scale(1)" : "translateY(20px) scale(0.95)",

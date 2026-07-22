@@ -281,6 +281,7 @@
     text-align: left !important;
     position: relative !important;
     height: 100% !important;
+    overflow: visible !important;
     transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
     box-shadow: 0 10px 30px rgba(241, 90, 36, 0.02) !important;
 
@@ -331,5 +332,70 @@
         h3.card-title-custom {
             color: #f15a24 !important;
         }
+    }
+}
+
+/* Compliance Training Bento Grid Cards */
+.compliance-bento-card {
+    background: #FFFBF7;
+    border: 1px solid #FFEAD4;
+    border-radius: 14px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 4px 12px rgba(241, 90, 36, 0.03);
+
+    &:hover {
+        transform: translateY(-4px);
+        border-color: #f15a24;
+        box-shadow: 0 10px 24px rgba(241, 90, 36, 0.08);
+    }
+
+    .card-icon-wrapper {
+        background: #FFEFEA;
+        display: inline-flex;
+        padding: 0.35rem;
+        border-radius: 50%;
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+        min-height: 34px;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.6rem;
+    }
+
+    .card-title {
+        margin-top: 0;
+        margin-bottom: 0.3rem;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #1E293B;
+        line-height: 1.2;
+        text-align: center;
+    }
+
+    .card-description {
+        font-size: 0.82rem;
+        color: #475569;
+        margin: 0;
+        line-height: 1.5;
+        text-align: center;
+    }
+
+    .card-source {
+        font-size: 0.6rem;
+        font-weight: 700;
+        color: #94A3B8;
+        margin-top: 0.5rem;
+        margin-bottom: 0;
+        display: block;
+        text-align: center;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
     }
 }

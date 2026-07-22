@@ -4,10 +4,9 @@ import Link from "next/link";
 const cardStyle = {
   background: "#FFFBF7",
   border: "1px solid #FFEAD4",
-  borderRadius: "16px",
-  padding: "1.25rem",
+  borderRadius: "14px",
+  padding: "1rem",
   display: "flex",
-  height: "100%",
   transition: "transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
   textAlign: "center"
 };
@@ -17,34 +16,32 @@ const iconWrapperStyle = {
   display: "inline-flex",
   padding: "0.35rem",
   borderRadius: "50%",
-  width: "32px",
-  height: "32px",
-  minWidth: "32px",
-  minHeight: "32px",
+  width: "34px",
+  height: "34px",
+  minWidth: "34px",
+  minHeight: "34px",
   alignItems: "center",
   justifyContent: "center",
-  marginBottom: "0.5rem"
+  marginBottom: "0.6rem"
 };
 
 const titleStyle = {
   marginTop: "0px",
-  marginBottom: "0.25rem",
-  fontSize: "1.05rem",
-  fontWeight: "600",
+  marginBottom: "0.3rem",
+  fontSize: "1rem",
+  fontWeight: "700",
   color: "#1E293B",
-  minHeight: "0px",
   display: "block",
   textAlign: "center",
   lineHeight: "1.2"
 };
 
 const descStyle = {
-  fontSize: "0.85rem",
-  color: "#334155",
+  fontSize: "0.82rem",
+  color: "#475569",
   marginTop: "0px",
   marginBottom: "0px",
-  lineHeight: "1.4",
-  minHeight: "0px",
+  lineHeight: "1.5",
   display: "block",
   textAlign: "center"
 };
@@ -56,7 +53,8 @@ const sourceStyle = {
   marginTop: "0.5rem",
   marginBottom: "0px",
   display: "block",
-  textAlign: "center"
+  textAlign: "center",
+  letterSpacing: "0.05em"
 };
 
 export default function BentoGridSection() {
@@ -85,8 +83,9 @@ export default function BentoGridSection() {
                 <span className="hover-sweep"></span>
                 <span>Explore Our Platform</span>
                 <div className="arrow-wrapper">
-                  <svg className="arrow-icon" width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3.29985 4.50047L0 1.20062L0.942813 0.257812L5.18545 4.50047L0.942813 8.74306L0 7.80027L3.29985 4.50047Z" fill="currentColor" />
+                  <svg className="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
                   </svg>
                 </div>
               </Link>
@@ -97,7 +96,7 @@ export default function BentoGridSection() {
           <div className="stats-cards-block animate from-right" style={{ display: "grid", gridTemplateColumns: "1.25fr 1fr 1.25fr", gap: "1rem", width: "100%" }}>
             
             {/* Card 1: DPDP (Col span 2) */}
-            <div className="stats-card" style={{ ...cardStyle, gridColumn: "span 2", flexDirection: "column", justifyContent: "center", gap: "0.25rem" }}>
+            <div className="compliance-bento-card" style={{ ...cardStyle, gridColumn: "span 2", flexDirection: "column", justifyContent: "flex-start", gap: "0.15rem" }}>
               <div className="card-icon-wrapper" style={iconWrapperStyle}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2.5">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -110,7 +109,7 @@ export default function BentoGridSection() {
             </div>
 
             {/* Card 2: GDPR (Col span 1) */}
-            <div className="stats-card" style={{ ...cardStyle, gridColumn: "span 1", flexDirection: "column", justifyContent: "center", gap: "0.25rem" }}>
+            <div className="compliance-bento-card" style={{ ...cardStyle, gridColumn: "span 1", flexDirection: "column", justifyContent: "flex-start", gap: "0.15rem" }}>
               <div className="card-icon-wrapper" style={iconWrapperStyle}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2.5">
                   <circle cx="12" cy="12" r="10" />
@@ -122,7 +121,7 @@ export default function BentoGridSection() {
             </div>
 
             {/* Card 3: HIPAA (Col span 1) */}
-            <div className="stats-card" style={{ ...cardStyle, gridColumn: "span 1", flexDirection: "column", justifyContent: "center", gap: "0.25rem" }}>
+            <div className="compliance-bento-card" style={{ ...cardStyle, gridColumn: "span 1", flexDirection: "column", justifyContent: "flex-start", gap: "0.15rem" }}>
               <div className="card-icon-wrapper" style={iconWrapperStyle}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2.5">
                   <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
@@ -133,7 +132,7 @@ export default function BentoGridSection() {
             </div>
 
             {/* Card 4: PCI-DSS (Col span 2) */}
-            <div className="stats-card" style={{ ...cardStyle, gridColumn: "span 2", flexDirection: "column", justifyContent: "center", gap: "0.25rem" }}>
+            <div className="compliance-bento-card" style={{ ...cardStyle, gridColumn: "span 2", flexDirection: "column", justifyContent: "flex-start", gap: "0.15rem" }}>
               <div className="card-icon-wrapper" style={iconWrapperStyle}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2.5">
                   <rect x="2" y="5" width="20" height="14" rx="2" />
@@ -146,7 +145,7 @@ export default function BentoGridSection() {
             </div>
 
             {/* Card 5: AI Usage Policy (Col span 2) */}
-            <div className="stats-card" style={{ ...cardStyle, gridColumn: "span 2", flexDirection: "column", justifyContent: "center", gap: "0.25rem" }}>
+            <div className="compliance-bento-card" style={{ ...cardStyle, gridColumn: "span 2", flexDirection: "column", justifyContent: "flex-start", gap: "0.15rem" }}>
               <div className="card-icon-wrapper" style={iconWrapperStyle}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2.5">
                   <circle cx="12" cy="12" r="10" />
@@ -160,7 +159,7 @@ export default function BentoGridSection() {
             </div>
 
             {/* Card 6: Internal Policies (Col span 1) */}
-            <div className="stats-card" style={{ ...cardStyle, gridColumn: "span 1", flexDirection: "column", justifyContent: "center", gap: "0.25rem" }}>
+            <div className="compliance-bento-card" style={{ ...cardStyle, gridColumn: "span 1", flexDirection: "column", justifyContent: "flex-start", gap: "0.15rem" }}>
               <div className="card-icon-wrapper" style={iconWrapperStyle}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f15a24" strokeWidth="2.5">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />

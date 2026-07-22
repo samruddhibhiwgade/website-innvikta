@@ -16,9 +16,9 @@ export default function FinalCta() {
               Explore how Innvikta helps enterprises make awareness practical, engaging, and measurable.
             </p>
             
-            <div className="flex flex-wrap justify-center gap-4 mt-10" style={{ marginTop: "2.5rem" }}>
-              <Link href="/start-free" className="btn btn-outline-primary">Start Free</Link>
-              <Link href="/book-demo" className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap px-5 h-12 font-bold shadow-md shadow-orange-500/10">Book a Demo <FiArrowRight className="text-xs" /></Link>
+            <div className="flex flex-row flex-nowrap justify-center gap-2 sm:gap-4 mt-10" style={{ marginTop: "2.5rem" }}>
+              <Link href="/start-free" className="btn btn-outline-primary" style={{ padding: "0 clamp(12px, 3vw, 28px)", height: "48px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>Start Free</Link>
+              <Link href="/book-demo" className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap h-12 font-bold shadow-md shadow-orange-500/10" style={{ padding: "0 clamp(12px, 3vw, 28px)" }}>Book a Demo <FiArrowRight className="text-xs" /></Link>
             </div>
           </div>
           <div className="absolute top-0 left-0 w-full h-full bg-[#fff7f3] rounded-2xl overflow-hidden -z-10">

@@ -8,21 +8,7 @@ import { FiArrowRight, FiShield, FiBriefcase, FiLayers, FiActivity, FiGlobe, FiC
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
 import SuccessPopup from "@layouts/partials/SuccessPopup";
 
-const heading96Style = {
-  fontSize: 'clamp(2.5rem, 6vw, 5.5rem)',
-  lineHeight: '0.95',
-  fontWeight: '400',
-  letterSpacing: '-0.02em',
-  fontFamily: "'Satoshi', sans-serif"
-};
 
-const heading52Style = {
-  fontSize: 'clamp(2rem, 4vw, 3.25rem)',
-  lineHeight: '1.1',
-  fontWeight: '400',
-  letterSpacing: '-0.02em',
-  fontFamily: "'Satoshi', sans-serif"
-};
 
 const PartnersPage = () => {
   const router = useRouter();
@@ -257,7 +243,7 @@ const PartnersPage = () => {
   return (
     <GSAPWrapper>
       <SeoMeta title="Innvikta Partners Program | MSP & Enterprise Partners" description="Partner with Innvikta to offer leading-edge security awareness training, phishing simulations, and human risk management." />
-      <div ref={containerRef} className="min-h-screen bg-[#fafafa]">
+      <div ref={containerRef} className="insat-page min-h-screen bg-[#fafafa]">
         
         {/* HERO SECTION */}
         <section className="bg-[#111827] text-white py-20 md:py-24 border-b border-slate-800 relative overflow-hidden">
@@ -267,8 +253,8 @@ const PartnersPage = () => {
               
               {/* Left Column: Text & CTAs */}
               <div className="lg:col-span-8 hero-content">
-                <span style={{ color: '#FFFFFFB3', fontSize: '1.125rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '1.25rem', display: 'inline-block' }}>INNVIKTA PARTNER NETWORK</span>
-                <h1 style={{ fontSize: 'clamp(2.3rem, 5.5vw, 4.5rem)', lineHeight: '1.05', fontWeight: '400', letterSpacing: '-0.02em', fontFamily: "'Satoshi', sans-serif" }} className="text-white mb-6">
+                <span className="text-subheading text-[#FFFFFFB3] !mb-5 inline-block">INNVIKTA PARTNER NETWORK</span>
+                <h1 className="text-96-heading text-white mb-6">
                   <span className="block md:whitespace-nowrap">Partner With Innvikta to</span>
                   <span className="block md:whitespace-nowrap">Build <span className="text-[#f15a24]">Safer Workforces</span></span>
                 </h1>
@@ -287,7 +273,7 @@ const PartnersPage = () => {
                   </a>
                   <a 
                     href="mailto:sale@innvikta.com" 
-                    className="bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] !text-[#f15a24] hover:!text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold"
+                    className="bg-white/10 hover:bg-[#f15a24] border border-white/20 hover:border-[#f15a24] !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold"
                     style={{ padding: "14px 28px" }}
                   >
                     <FiMail className="text-sm" />
@@ -317,11 +303,11 @@ const PartnersPage = () => {
               
               {/* Left Column: Heading and Description */}
               <div className="lg:col-span-5">
-                <span style={{ color: '#1F2937B3', fontSize: '1.125rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '1.25rem', display: 'inline-block' }}>PARTNER WITH INNVIKTA</span>
-                <h2 style={heading52Style} className="text-slate-900 mb-5">
+                <span className="text-subheading text-[#1F2937B3] !mb-5 inline-block">PARTNER WITH INNVIKTA</span>
+                <h2 className="text-52-heading text-slate-900 mb-5">
                   Grow With a Modern <span className="text-[#f15a24]">Human Risk Platform</span>
                 </h2>
-                <p className="text-18-content text-slate-600 leading-relaxed">
+                <p className="text-20-content text-slate-600 leading-relaxed">
                   Cyber threats are becoming more personal, AI-driven, and employee-focused. Innvikta gives partners a strong offering to help clients build safer behaviour across their workforce.
                 </p>
               </div>
@@ -342,9 +328,9 @@ const PartnersPage = () => {
                             <div className="w-10 h-10 rounded-xl bg-orange-50/50 text-[#f15a24] flex items-center justify-center group-hover:bg-[#f15a24] group-hover:!text-white group-hover:scale-110 transition-all duration-300 shadow-sm shrink-0">
                               <Icon className="text-lg" />
                             </div>
-                            <h3 className="text-base font-bold text-dark font-secondary group-hover:text-[#f15a24] transition-colors duration-300 leading-snug">{benefit.title}</h3>
+                            <h3 className="text-xl md:text-2xl font-medium text-dark font-secondary group-hover:text-[#f15a24] transition-colors duration-300 leading-snug">{benefit.title}</h3>
                           </div>
-                          <p className="text-slate-500 text-xs leading-relaxed">{benefit.desc}</p>
+                          <p className="text-slate-500 text-base md:text-lg leading-relaxed">{benefit.desc}</p>
                         </div>
                       </div>
                     );
@@ -360,11 +346,11 @@ const PartnersPage = () => {
         <section id="reseller" className="py-20 bg-white border-b border-slate-100">
           <div className="container px-6 md:px-12 lg:px-24">
             <div className="max-w-3xl mx-auto text-center mb-16">
-              <span style={{ color: '#1F2937B3', fontSize: '1.125rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '1.25rem', display: 'inline-block' }}>CHANNEL & RESELLER PARTNERS</span>
-              <h2 style={heading52Style} className="text-slate-900 mb-5">
+              <span className="text-subheading text-[#1F2937B3] !mb-5 inline-block">CHANNEL & RESELLER PARTNERS</span>
+              <h2 className="text-52-heading text-slate-900 mb-5">
                 Offer Innvikta to Clients Who Need <span className="text-[#f15a24]">Better Awareness Outcomes</span>
               </h2>
-              <p className="text-18-content text-slate-600 leading-relaxed">
+              <p className="text-20-content text-slate-600 leading-relaxed">
                 Innvikta is ideal for partners serving cybersecurity, IT, compliance, HR, learning, and enterprise risk teams.
               </p>
             </div>
@@ -377,8 +363,8 @@ const PartnersPage = () => {
                     <div className="text-3xl text-[#f15a24] mb-5 flex justify-center">
                       <Icon />
                     </div>
-                    <h3 className="font-bold text-dark text-lg md:text-xl mb-3 leading-snug font-secondary min-h-[56px]">{partner.title}</h3>
-                    <p className="text-slate-500 text-sm md:text-base leading-relaxed">{partner.desc}</p>
+                    <h3 className="font-medium text-dark text-xl md:text-2xl mb-3 leading-snug font-secondary min-h-[56px]">{partner.title}</h3>
+                    <p className="text-slate-500 text-base md:text-lg leading-relaxed">{partner.desc}</p>
                   </div>
                 );
               })}
@@ -392,11 +378,11 @@ const PartnersPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               
               <div>
-                <span style={{ color: '#1F2937B3', fontSize: '1.125rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '1.25rem', display: 'inline-block' }}>PARTNER SUPPORT</span>
-                <h2 style={heading52Style} className="text-slate-900 mb-6">
+                <span className="text-subheading text-[#1F2937B3] !mb-5 inline-block">PARTNER SUPPORT</span>
+                <h2 className="text-52-heading text-slate-900 mb-6">
                   Support That Helps You <span className="text-[#f15a24]">Sell and Deliver Better</span>
                 </h2>
-                <p className="text-18-content text-slate-600 mb-10 leading-relaxed">
+                <p className="text-20-content text-slate-600 mb-10 leading-relaxed">
                   We work closely with partners to help them position, present, and deliver Innvikta effectively.
                 </p>
                 
@@ -406,7 +392,7 @@ const PartnersPage = () => {
                     return (
                       <div key={i} className="flex items-center gap-3.5">
                         <Icon className="text-2xl text-[#f15a24] shrink-0" />
-                        <span className="text-sm font-bold text-slate-700">{support.text}</span>
+                        <span className="text-base md:text-lg font-medium text-slate-700">{support.text}</span>
                       </div>
                     );
                   })}
@@ -437,8 +423,8 @@ const PartnersPage = () => {
                           {step.step}
                         </div>
                         <div className={`transition-all duration-500 ${isActive ? 'translate-x-2' : ''}`}>
-                          <h4 className={`font-bold text-lg mb-1.5 transition-colors duration-500 ${isActive ? 'text-[#f15a24]' : 'text-slate-700'}`}>{step.title}</h4>
-                          <p className={`text-slate-500 text-sm leading-relaxed transition-all duration-500 ${isActive ? 'text-slate-700 font-medium' : ''}`}>{step.desc}</p>
+                          <h4 className={`font-medium font-secondary text-xl md:text-2xl mb-1.5 transition-colors duration-500 ${isActive ? 'text-[#f15a24]' : 'text-slate-700'}`}>{step.title}</h4>
+                          <p className={`text-slate-500 text-base md:text-lg leading-relaxed transition-all duration-500 ${isActive ? 'text-slate-700' : ''}`}>{step.desc}</p>
                         </div>
                       </div>
                     );
@@ -461,7 +447,7 @@ const PartnersPage = () => {
                   <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
                   
                   <div className="relative z-10">
-                    <h2 style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: '500', letterSpacing: '-0.02em' }} className="text-3xl md:text-4xl text-white mb-6 leading-tight">
+                    <h2 className="font-secondary font-medium tracking-tight text-3xl md:text-4xl text-white mb-6 leading-tight">
                       Become an Innvikta Partner
                     </h2>
                     <p className="text-white/90 text-sm md:text-base leading-relaxed mb-8">

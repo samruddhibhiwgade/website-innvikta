@@ -6,7 +6,7 @@ import { markdownify } from "@lib/utils/textConverter";
 
 const ShortIntro = ({ intro }) => {
   return (
-    <section className="section pt-0">
+    <section className="section pt-24 md:pt-32">
       <div className="container-xl">
         <div className="relative px-4 py-[70px]">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 text-center lg:text-left relative z-10">

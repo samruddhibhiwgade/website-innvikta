@@ -26,7 +26,7 @@ function CustomDropdown({ label, value, placeholder, options, onChange, error })
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className={`w-full flex items-center justify-between px-5 py-3.5 bg-slate-50 border ${error ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all font-medium text-left cursor-pointer`}
+          className={`w-full flex items-center justify-between px-5 py-3.5 bg-slate-50 border ${error ? "border-red-300 ring-4 ring-red-50" : "border-slate-300"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all font-medium text-left cursor-pointer`}
         >
           <span className={value ? "text-dark" : "text-slate-400"}>{value || placeholder}</span>
           <FiChevronDown className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
@@ -161,7 +161,7 @@ const FreeTierCta = ({ data }) => {
   ];
 
   return (
-    <section className="section relative overflow-hidden bg-[#fafafa]">
+    <section className="section py-24 md:py-32 relative overflow-hidden bg-[#fafafa]">
       {/* Background Decor */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none -z-10">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-orange-500/5 blur-[120px] rounded-full" />
@@ -227,7 +227,7 @@ const FreeTierCta = ({ data }) => {
                     placeholder="John Doe"
                     value={form.fullName}
                     onChange={(e) => setForm({...form, fullName: e.target.value})}
-                    className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.fullName ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
+                    className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.fullName ? "border-red-300 ring-4 ring-red-50" : "border-slate-300"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                   />
                   {errors.fullName && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.fullName}</p>}
                 </div>
@@ -248,7 +248,7 @@ const FreeTierCta = ({ data }) => {
                     placeholder="john@company.com"
                     value={form.email}
                     onChange={(e) => setForm({...form, email: e.target.value})}
-                    className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.email ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
+                    className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.email ? "border-red-300 ring-4 ring-red-50" : "border-slate-300"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                   />
                   {errors.email && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.email}</p>}
                 </div>
@@ -260,7 +260,7 @@ const FreeTierCta = ({ data }) => {
                     placeholder="+1 (555) 000-0000"
                     value={form.phone}
                     onChange={(e) => setForm({...form, phone: e.target.value})}
-                    className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.phone ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
+                    className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.phone ? "border-red-300 ring-4 ring-red-50" : "border-slate-300"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                   />
                   {errors.phone && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.phone}</p>}
                 </div>
@@ -273,7 +273,7 @@ const FreeTierCta = ({ data }) => {
                       placeholder="Acme Inc."
                       value={form.company}
                       onChange={(e) => setForm({...form, company: e.target.value})}
-                      className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.company ? "border-red-300 ring-4 ring-red-50" : "border-slate-100"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
+                      className={`w-full px-5 py-3.5 bg-slate-50 border ${errors.company ? "border-red-300 ring-4 ring-red-50" : "border-slate-300"} rounded-xl text-dark focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all`}
                     />
                     {errors.company && <p className="mt-1.5 text-[10px] font-bold text-red-500 uppercase tracking-wide">{errors.company}</p>}
                   </div>

@@ -5,6 +5,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { FiInfo, FiActivity, FiArrowRight } from "react-icons/fi";
 import "../../../styles/insat.scss";
 import FreeTierCta from "@layouts/partials/FreeTierCta";
+import GSAPWrapper from "@layouts/components/GSAPWrapper";
 
 import { BENCHMARKS, ASSUMPTIONS, CURRENCIES, COUNTRIES, tooltips, ctaData } from "./components/constants";
 import CustomDropdown from "./components/CustomDropdown";
@@ -105,7 +106,7 @@ export default function SimulationRoiPage() {
   }, {});
 
   return (
-    <>
+    <GSAPWrapper>
       <SeoMeta title="Phishing Simulation ROI Calculator | Innvikta" description="Calculate the return on investment of running phishing simulation and security training programs." />
       <script
         type="application/ld+json"
@@ -174,7 +175,7 @@ export default function SimulationRoiPage() {
                            value={companyName}
                            onChange={(e) => setCompanyName(e.target.value)}
                            placeholder="Enter company name"
-                           className="w-full !px-5 !py-3.5 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all font-semibold"
+                           className="w-full !px-5 !py-3.5 bg-slate-50 border border-slate-300 rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all font-semibold"
                          />
                        </div>
 
@@ -236,7 +237,7 @@ export default function SimulationRoiPage() {
                              setEmployees(val === "" ? "" : Math.max(1, parseInt(val, 10) || 1));
                            }}
                            placeholder="Enter employee count"
-                           className="w-full !px-5 !py-3.5 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all font-semibold"
+                           className="w-full !px-5 !py-3.5 bg-slate-50 border border-slate-300 rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all font-semibold"
                          />
                        </div>
 
@@ -314,7 +315,7 @@ export default function SimulationRoiPage() {
                            }}
                            placeholder={currency ? "Enter cost per user" : "Please choose currency first"}
                            disabled={!currency}
-                           className={`w-full !px-5 !py-3.5 border border-slate-100 rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all font-semibold ${!currency ? 'cursor-not-allowed bg-slate-100 text-slate-400 opacity-60' : 'bg-slate-50'}`}
+                           className={`w-full !px-5 !py-3.5 border border-slate-300 rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all font-semibold ${!currency ? 'cursor-not-allowed bg-slate-100 text-slate-400 opacity-60' : 'bg-slate-50'}`}
                          />
                        </div>
 
@@ -434,6 +435,6 @@ export default function SimulationRoiPage() {
       <div ref={ctaRef}>
         <FreeTierCta data={ctaData} />
       </div>
-    </>
+      </GSAPWrapper>
   );
 }

@@ -6,6 +6,7 @@ import IndustryBenchmarkChart from "./components/IndustryBenchmarkChart";
 import RegionalBenchmarkMap from "./components/RegionalBenchmarkMap";
 import FaqAccordion from "./components/FaqAccordion";
 import "../../styles/insat.scss";
+import GSAPWrapper from "@layouts/components/GSAPWrapper";
 
 export const metadata = {
   title: "Security Awareness Maturity Benchmarks | Innvikta",
@@ -108,8 +109,17 @@ export default function MaturityBenchmarksPage() {
     }))
   };
 
+  const interleavedFaqs = [];
+  const halfLength = Math.ceil(faqData.length / 2);
+  for (let i = 0; i < halfLength; i++) {
+    interleavedFaqs.push(faqData[i]);
+    if (faqData[i + halfLength]) {
+      interleavedFaqs.push(faqData[i + halfLength]);
+    }
+  }
+
   return (
-    <>
+    <GSAPWrapper>
       <SeoMeta title="Security Awareness Maturity Benchmarks | Innvikta" description="Compare phishing click rates and reporting rates across industries and geographic regions. Factual benchmark data for security leaders." />
       {/* JSON-LD Structured Data Schema Markup */}
       <script
@@ -337,34 +347,27 @@ export default function MaturityBenchmarksPage() {
           </div>
         </section>
 
-        {/* SECTION 4: FAQ (Design matches solutions pages layout and design exactly) */}
-        <section className="bg-[#fffaf3] py-20 md:py-24 text-left border-t border-b border-[#ffece4]">
+        {/* SECTION 4: FAQ */}
+        <section className="bg-[#fffaf3] py-20 md:py-24 border-t border-b border-[#ffece4]">
           <div className="insat-page !bg-transparent" style={{ backgroundColor: "transparent" }}>
-            <div className="container faq-grid">
+            <div className="container max-w-[1200px] mx-auto px-4 md:px-6">
               
-              {/* Left Column: Title Block */}
-              <div className="faq-title-col">
-                <h2 className="text-[32px] md:text-[42px] font-normal text-slate-900 leading-tight mb-6">
+              {/* FAQ Text at the Top */}
+              <div className="text-center flex flex-col items-center" style={{ marginBottom: "4rem" }}>
+                <h2 className="text-[32px] md:text-[42px] font-normal text-slate-900 leading-tight mb-4">
                   Frequently Asked Questions
                 </h2>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center justify-center gap-2">
                   <span className="text-primary font-bold text-sm">&gt;</span>
                   <Link href="/book-demo" className="text-sm font-semibold text-slate-700 hover:text-primary transition-colors">
                     Still have questions? Contact us
-                    </Link>
+                  </Link>
                 </div>
               </div>
 
-              {/* Right Column: FAQ Accordion 2-column (5 + 5) */}
-              <div className="faq-list-col">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10">
-                  <div>
-                    <FaqAccordion faqs={faqData.slice(0, 5)} />
-                  </div>
-                  <div>
-                    <FaqAccordion faqs={faqData.slice(5, 10)} />
-                  </div>
-                </div>
+              {/* Two Equal Sections (Columns) of the FAQ */}
+              <div className="w-full text-left">
+                <FaqAccordion faqs={interleavedFaqs} />
               </div>
 
             </div>
@@ -372,6 +375,6 @@ export default function MaturityBenchmarksPage() {
         </section>
 
       </div>
-    </>
+    </GSAPWrapper>
   );
 }

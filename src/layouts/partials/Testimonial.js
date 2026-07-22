@@ -7,7 +7,7 @@ const Testimonial = ({ testimonial }) => {
   const tickerItems = [...testimonial.list, ...testimonial.list];
 
   return (
-    <section className="section bg-white py-24 overflow-hidden border-t border-border">
+    <section className="section bg-white py-24 md:py-32 overflow-hidden border-t border-border">
       <div className="container">
         <div className="animate text-center mb-16">
           <h2 className="text-3xl md:text-4xl !font-semibold mb-4 leading-tight text-dark">

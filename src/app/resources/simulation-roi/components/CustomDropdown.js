@@ -45,7 +45,7 @@ export default function CustomDropdown({ label, value, options, optionLabels, on
           type="button"
           disabled={disabled}
           onClick={() => !disabled && setIsOpen(!isOpen)}
-          className={`w-full flex items-center justify-between !px-5 !py-3.5 border border-slate-100 rounded-xl focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all font-medium text-left ${disabled ? 'cursor-not-allowed bg-slate-100 text-slate-400' : 'cursor-pointer'} ${!value ? 'text-slate-400' : 'text-slate-800'}`}
+          className={`w-full flex items-center justify-between !px-5 !py-3.5 border border-slate-300 rounded-xl focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all font-medium text-left ${disabled ? 'cursor-not-allowed bg-slate-100 text-slate-400' : 'cursor-pointer'} ${!value ? 'text-slate-400' : 'text-slate-800'}`}
           style={{ backgroundColor: disabled ? "#e2e8f0" : "#f8fafc" }}
         >
           <span>{value ? (optionLabels ? optionLabels[value] : value) : placeholder}</span>
