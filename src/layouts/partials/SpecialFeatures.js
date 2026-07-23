@@ -27,7 +27,7 @@ const SpecialFeatures = ({ speciality }) => {
         {speciality.list?.map((item, index) => (
           <div
             key={index}
-            className={`row relative items-center justify-between gap-y-0 md:gap-y-0 ${index !== 0 ? "mt-10 md:mt-16" : "mt-4 md:mt-10"
+            className={`row relative items-center justify-between gap-y-0 md:gap-y-0 ${index !== 0 ? "mt-20 md:mt-24" : "mt-4 md:mt-10"
               }`}
           >
             {/* Decorative Waves removed */}
