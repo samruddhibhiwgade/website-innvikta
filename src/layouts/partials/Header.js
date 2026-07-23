@@ -802,9 +802,10 @@ const menuData = {
         cta: {
           title: "Stop Threats at Every Layer—People, Data, AI",
           desc: "Innvikta provides intent-based protection for every human, every AI agent, across all data.",
-          label: "Learn More",
-          href: "#",
-          svgType: "resources"
+          label: "Weekly Newsletter",
+          href: "/resources/weekly-newsletter",
+          svgType: "resources",
+          image: "/images/menu-Resources menu bar image.png"
         }
       },
       {
@@ -823,11 +824,12 @@ const menuData = {
           { name: "Weekly Newsletter", desc: "Security tips and campaign ideas delivered directly to your inbox.", href: "/resources/weekly-newsletter" }
         ],
         cta: {
-          title: "Explore the Cybersecurity Glossary",
-          desc: "Browse our library of security awareness terminology, cyber threat definitions, and compliance concepts.",
-          label: "View Glossary",
-          href: "/resources/glossary",
-          svgType: "resources"
+          title: "Weekly Cybersecurity Newsletter",
+          desc: "Security tips and campaign ideas delivered directly to your inbox.",
+          label: "Weekly Newsletter",
+          href: "/resources/weekly-newsletter",
+          svgType: "resources",
+          image: "/images/menu-Resources menu bar image.png"
         }
       }
     ]
@@ -852,7 +854,8 @@ const menuData = {
           desc: "Verify baseline employee susceptibility in less than 5 minutes.",
           label: "Start Assessment",
           href: "#",
-          svgType: "assessments"
+          svgType: "assessments",
+          image: "/images/menu-Free Tools menu bar image.png"
         }
       },
       {
@@ -872,7 +875,8 @@ const menuData = {
           desc: "Analyze if employee credentials exist on public breach indexes securely.",
           label: "Run Tool",
           href: "#",
-          svgType: "assessments"
+          svgType: "assessments",
+          image: "/images/menu-Free Tools menu bar image.png"
         }
       }
     ]
@@ -1076,7 +1080,7 @@ const searchIndex = [
     keywords: ["start free", "trial", "register", "free account"]
   },
   {
-    title: "Book a demo",
+    title: "Book a Demo",
     description: "Schedule a live demo session with our product experts.",
     url: "/book-demo",
     category: "Get Started",
@@ -1842,25 +1846,23 @@ const Header = () => {
 
                           {/* 3. FEATURED CARD (Integrated conversion card) */}
                           {currentTab.cta && (
-                            <div className="w-[220px] lg:w-[260px] xl:w-[320px] 2xl:w-[360px] pt-4 pb-8 xl:pt-6 xl:pb-12 px-3 xl:px-6 border-l border-slate-200/10 bg-transparent shrink-0 flex flex-col justify-start">
-                              <div className="bg-white/20 rounded-2xl p-3 xl:p-5 flex flex-col gap-3 xl:gap-4 shadow-sm border border-white/20 relative text-slate-700">
-                                <div className="w-full bg-white/30 rounded-xl border border-white/20 shadow-sm overflow-hidden relative group-hover/card:shadow-md transition-shadow">
-                                  {currentTab.cta.image ? (
-                                    <img src={currentTab.cta.image} alt={currentTab.cta.title} className="w-full h-auto object-cover aspect-[4/3] transform hover:scale-105 transition-transform duration-500" />
-                                  ) : (
-                                    <div className="w-full aspect-[4/3] flex items-center justify-center overflow-hidden">
-                                      <RenderSvgIllustration type={currentTab.cta.svgType} />
-                                    </div>
-                                  )}
-                                </div>
-                                <Link 
-                                  href={currentTab.cta.href || "#"}
-                                  onClick={handleMenuLeave}
-                                  className="w-full justify-start text-left py-2 xl:py-2.5 text-[#f15a24] hover:text-orange-700 font-bold whitespace-nowrap text-[13px] xl:text-[14px] transition-colors flex items-center gap-1.5 group-hover/card:underline"
-                                >
-                                  {currentTab.cta.label.charAt(0).toUpperCase() + currentTab.cta.label.slice(1).toLowerCase()} <FiArrowRight className="text-[15px]" />
-                                </Link>
+                            <div className="w-[240px] lg:w-[290px] xl:w-[350px] 2xl:w-[400px] pt-4 pb-8 xl:pt-6 xl:pb-12 px-3 xl:px-6 border-l border-slate-200/10 bg-transparent shrink-0 flex flex-col justify-between">
+                              <div className="flex flex-col gap-3 relative text-slate-700 w-full">
+                                {currentTab.cta.image ? (
+                                  <img src={currentTab.cta.image} alt={currentTab.cta.title} className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-500 rounded-xl" style={{ minHeight: activeMegaMenu === "resources" ? "320px" : "160px" }} />
+                                ) : (
+                                  <div className="w-full aspect-[4/3] flex items-center justify-center overflow-hidden rounded-xl">
+                                    <RenderSvgIllustration type={currentTab.cta.svgType} />
+                                  </div>
+                                )}
                               </div>
+                              <Link 
+                                href={currentTab.cta.href || "#"}
+                                onClick={handleMenuLeave}
+                                className="w-full flex justify-center text-center py-2 text-[#f15a24] hover:text-orange-700 font-bold whitespace-nowrap text-[13px] xl:text-[14px] transition-colors items-center gap-1.5 hover:underline"
+                              >
+                                {currentTab.cta.label} <FiArrowRight className="text-[15px]" />
+                              </Link>
                             </div>
                           )}
                         </motion.div>

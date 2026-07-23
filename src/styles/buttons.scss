@@ -1,4 +1,4 @@
-.btn {
+.btn, .btn-final-cta {
   @apply inline-flex items-center justify-center px-5 h-12 transition font-bold;
 }
 
@@ -26,5 +26,47 @@
 /* Override the wildcard reset inside .insat-page to preserve button styling */
 .insat-page .btn {
   @apply inline-flex items-center justify-center px-5 h-12 rounded-[6px] transition font-primary text-base font-medium;
+}
+
+.insat-page .btn-roi-calc {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-weight: 700 !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+  padding: 14px 28px !important;
+  
+  /* Open Calculator & Calculate (active) styles */
+  &.bg-\[\#f15a24\] {
+    background-color: #f15a24 !important;
+    color: #ffffff !important;
+    border: none !important;
+    
+    &:hover {
+      background-color: #dd4f1e !important;
+    }
+  }
+
+  /* Start Free Tier style */
+  &.bg-transparent {
+    background-color: transparent !important;
+    color: #f15a24 !important;
+    border: 1px solid #f15a24 !important;
+    
+    &:hover {
+      background-color: #f15a24 !important;
+      color: #ffffff !important;
+    }
+  }
+
+  /* Disabled state style for Calculate button */
+  &:disabled, &.bg-\[\#f15a24\]\/20 {
+    background-color: rgba(241, 90, 36, 0.1) !important;
+    color: rgba(241, 90, 36, 0.4) !important;
+    border: 1px solid rgba(241, 90, 36, 0.2) !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+  }
 }
 

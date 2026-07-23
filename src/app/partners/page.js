@@ -1,6 +1,7 @@
 "use client";
 
 import SeoMeta from "@layouts/partials/SeoMeta";
+import "../../styles/features/insat-core.scss";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { gsap } from "@lib/gsap";
@@ -243,55 +244,41 @@ const PartnersPage = () => {
   return (
     <GSAPWrapper>
       <SeoMeta title="Innvikta Partners Program | MSP & Enterprise Partners" description="Partner with Innvikta to offer leading-edge security awareness training, phishing simulations, and human risk management." />
-      <div ref={containerRef} className="insat-page min-h-screen bg-[#fafafa]">
+      <div ref={containerRef} className="min-h-screen bg-[#fafafa]">
         
-        {/* HERO SECTION */}
-        <section className="bg-[#111827] text-white py-20 md:py-24 border-b border-slate-800 relative overflow-hidden">
+        <section className="partner-hero-section py-20 md:py-28 border-b border-slate-200 relative overflow-hidden">
           
           <div className="container px-6 md:px-12 lg:px-24">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              
-              {/* Left Column: Text & CTAs */}
-              <div className="lg:col-span-8 hero-content">
-                <span className="text-subheading text-[#FFFFFFB3] !mb-5 inline-block">INNVIKTA PARTNER NETWORK</span>
-                <h1 className="text-96-heading text-white mb-6">
-                  <span className="block md:whitespace-nowrap">Partner With Innvikta to</span>
-                  <span className="block md:whitespace-nowrap">Build <span className="text-[#f15a24]">Safer Workforces</span></span>
-                </h1>
-                <p className="text-20-content text-slate-300 mb-10 max-w-2xl leading-relaxed">
-                  Join us in helping organizations make security awareness practical, engaging, measurable, and ready for real-world risk.
-                </p>
-                <div className="flex flex-wrap items-center gap-4">
-                  <a 
-                    href="#form" 
-                    onClick={scrollToForm}
-                    className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10"
-                    style={{ padding: "14px 28px" }}
-                  >
-                    <span>Become a Partner</span>
-                    <FiArrowRight className="text-sm" />
-                  </a>
-                  <a 
-                    href="mailto:sale@innvikta.com" 
-                    className="bg-white/10 hover:bg-[#f15a24] border border-white/20 hover:border-[#f15a24] !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold"
-                    style={{ padding: "14px 28px" }}
-                  >
-                    <FiMail className="text-sm" />
-                    <span>Talk to Us</span>
-                  </a>
-                </div>
+            <div className="max-w-3xl hero-content">
+              <span className="text-subheading text-[#1F2937B3] !mb-5 inline-block">INNVIKTA PARTNER NETWORK</span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight leading-tight text-slate-900 font-secondary mb-6">
+                Partner With Innvikta<br />
+                to Build <span className="text-[#f15a24]">Safer Workforces</span>
+              </h1>
+              <p className="mt-6 text-lg md:text-xl text-slate-600 mb-10 max-w-2xl leading-relaxed font-medium">
+                Join us in helping organizations make security awareness<br className="hidden md:inline" />
+                practical, engaging, measurable, and ready for<br className="hidden md:inline" />
+                real-world risk.
+              </p>
+              <div className="flex flex-wrap items-center gap-4">
+                <a 
+                  href="#form" 
+                  onClick={scrollToForm}
+                  className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10"
+                  style={{ padding: "14px 28px" }}
+                >
+                  <span>Become a Partner</span>
+                  <FiArrowRight className="text-sm" />
+                </a>
+                <a 
+                  href="mailto:sale@innvikta.com" 
+                  className="bg-slate-100 hover:bg-[#f15a24] border border-slate-200 hover:border-[#f15a24] text-slate-800 hover:!text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold"
+                  style={{ padding: "14px 28px" }}
+                >
+                  <FiMail className="text-sm" />
+                  <span>Talk to Us</span>
+                </a>
               </div>
-
-              {/* Right Column: Partnership Illustration */}
-              <div className="lg:col-span-4 relative w-full flex justify-center hero-visual">
-                <div className="absolute inset-0 bg-orange-500/10 blur-[50px] rounded-full pointer-events-none" />
-                <img 
-                  src="/images/partnership_hero.png" 
-                  alt="Innvikta Partner Network Collaboration" 
-                  className="w-full max-w-[380px] h-auto object-contain transform hover:scale-102 transition-transform duration-500"
-                />
-              </div>
-
             </div>
           </div>
         </section>
@@ -304,7 +291,7 @@ const PartnersPage = () => {
               {/* Left Column: Heading and Description */}
               <div className="lg:col-span-5">
                 <span className="text-subheading text-[#1F2937B3] !mb-5 inline-block">PARTNER WITH INNVIKTA</span>
-                <h2 className="text-52-heading text-slate-900 mb-5">
+                <h2 className="text-3xl md:text-5xl lg:text-[3.25rem] font-secondary font-medium leading-[1.1] tracking-[-0.02em] text-slate-900 mb-5">
                   Grow With a Modern <span className="text-[#f15a24]">Human Risk Platform</span>
                 </h2>
                 <p className="text-20-content text-slate-600 leading-relaxed">
@@ -347,7 +334,7 @@ const PartnersPage = () => {
           <div className="container px-6 md:px-12 lg:px-24">
             <div className="max-w-3xl mx-auto text-center mb-16">
               <span className="text-subheading text-[#1F2937B3] !mb-5 inline-block">CHANNEL & RESELLER PARTNERS</span>
-              <h2 className="text-52-heading text-slate-900 mb-5">
+              <h2 className="text-3xl md:text-5xl lg:text-[3.25rem] font-secondary font-medium leading-[1.1] tracking-[-0.02em] text-slate-900 mb-5">
                 Offer Innvikta to Clients Who Need <span className="text-[#f15a24]">Better Awareness Outcomes</span>
               </h2>
               <p className="text-20-content text-slate-600 leading-relaxed">
@@ -379,7 +366,7 @@ const PartnersPage = () => {
               
               <div>
                 <span className="text-subheading text-[#1F2937B3] !mb-5 inline-block">PARTNER SUPPORT</span>
-                <h2 className="text-52-heading text-slate-900 mb-6">
+                <h2 className="text-3xl md:text-5xl lg:text-[3.25rem] font-secondary font-medium leading-[1.1] tracking-[-0.02em] text-slate-900 mb-6">
                   Support That Helps You <span className="text-[#f15a24]">Sell and Deliver Better</span>
                 </h2>
                 <p className="text-20-content text-slate-600 mb-10 leading-relaxed">
@@ -636,6 +623,21 @@ const PartnersPage = () => {
           title="Partner Request Received!" 
           message="Thank you for reaching out. Our partnerships team will review your details and contact you shortly." 
         />
+        <style jsx global>{`
+          .partner-hero-section {
+              background-color: #F6F5F8 !important;
+              background-image: none !important;
+          }
+          
+          @media (min-width: 768px) {
+              .partner-hero-section {
+                  background-image: url('/images/partner-hero.png') !important;
+                  background-size: 85% !important;
+                  background-position: right center !important;
+                  background-repeat: no-repeat !important;
+              }
+          }
+        `}</style>
       </div>
     </GSAPWrapper>
   );

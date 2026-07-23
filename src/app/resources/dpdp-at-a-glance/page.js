@@ -352,7 +352,7 @@ export default function DpdpAtAGlancePage() {
                   z-index: 0;
                 }
                 .timeline-arrow-line::after {
-                  content: '→';
+                  content: '\\2192';
                   position: absolute;
                   right: -10px;
                   top: -10px;
@@ -465,7 +465,7 @@ export default function DpdpAtAGlancePage() {
                     <div className="mb-4 flex items-center justify-center" style={{ minHeight: "56px" }}>
                       <item.icon size={28} strokeWidth={1} className="text-[#f15a24]" />
                     </div>
-                    <h3 className="text-22-heading mb-2 leading-snug" style={{ color: "#f15a24", fontWeight: "600" }}>
+                    <h3 className="text-22-heading mb-2 leading-snug" style={{ color: "#f15a24", fontWeight: "500" }}>
                       {item.title}
                     </h3>
                     <p className="text-16-content leading-relaxed text-slate-600" style={{ margin: 0 }}>
@@ -569,7 +569,7 @@ export default function DpdpAtAGlancePage() {
                             flex: "1 1 auto",
                             display: "flex",
                             flexDirection: "column",
-                            padding: isHighlight ? "2.5rem 1rem 1.5rem 1rem" : "1.75rem 1rem 1.5rem 1rem", 
+                            padding: "1.75rem 1rem 1.5rem 1rem", 
                             boxShadow: isHighlight ? "0 4px 20px rgba(241,90,36,0.08)" : "none" 
                           }}
                         >
@@ -603,7 +603,7 @@ export default function DpdpAtAGlancePage() {
                             <evt.icon size={28} strokeWidth={1} />
                           </div>
  
-                          <h4 className="text-22-heading text-slate-900 leading-snug mb-2" style={{ fontWeight: "600" }}>
+                          <h4 className="text-22-heading text-slate-900 leading-snug mb-2" style={{ fontWeight: "500" }}>
                             {evt.title}
                           </h4>
                           <p className="text-16-content text-slate-500 leading-relaxed mt-auto" style={{ margin: 0 }}>
@@ -677,7 +677,7 @@ export default function DpdpAtAGlancePage() {
  
                   {/* Right Column: Expanded Text & 5 icon elements */}
                   <div className="lg:col-span-8 text-left space-y-4">
-                    <h3 className="text-40-heading text-slate-900 leading-tight">
+                    <h3 className="text-40-heading text-slate-900 leading-tight" style={{ paddingTop: "2.5rem" }}>
                       Innvikta translates DPDP compliance <span style={{ color: "#f15a24" }}>into everyday action.</span>
                     </h3>
                     <p className="text-16-content leading-relaxed text-slate-500" style={{ fontFamily: "var(--font-primary)" }}>

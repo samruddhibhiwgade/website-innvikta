@@ -327,7 +327,7 @@ export default function SimulationRoiPage() {
                          type="button"
                          onClick={handleCalculate}
                          disabled={!companyName || !industry || !country || !employees || !existingProgram || !programCostPerUser || !currency || isCalculating}
-                         className={`w-full md:w-auto !px-10 !py-4 rounded-xl font-bold text-white shadow-lg transition-all flex items-center justify-center !gap-2 cursor-pointer ${
+                         className={`btn-roi-calc w-full md:w-auto !px-10 !py-4 rounded-xl font-bold text-white shadow-lg transition-all flex items-center justify-center !gap-2 cursor-pointer ${
                            (!companyName || !industry || !country || !employees || !existingProgram || !programCostPerUser || !currency || isCalculating)
                              ? 'bg-[#f15a24]/20 text-[#f15a24]/60 border-2 border-[#f15a24]/25 cursor-not-allowed shadow-none'
                              : 'bg-[#f15a24] hover:bg-orange-600 hover:scale-[1.02]'

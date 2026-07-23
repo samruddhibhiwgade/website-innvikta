@@ -31,7 +31,7 @@ export default function OurStory() {
           <div className="lg:col-span-6">
             <div style={{ position: "relative", borderRadius: "20px", overflow: "hidden", boxShadow: "0 20px 40px rgba(0,0,0,0.06)" }}>
               <ImageFallback
-                src="/images/about/01.jpg"
+                src="/images/about-our-story.jpeg"
                 width={600}
                 height={400}
                 alt="Innvikta Office Team"
@@ -39,20 +39,9 @@ export default function OurStory() {
                 style={{ filter: "brightness(0.9)" }}
               />
               <div
-                style={{
-                  position: "absolute",
-                  bottom: "2rem",
-                  left: "2rem",
-                  right: "2rem",
-                  background: "rgba(255, 255, 255, 0.95)",
-                  backdropFilter: "blur(8px)",
-                  padding: "1.5rem 2rem",
-                  borderRadius: "14px",
-                  borderLeft: "4px solid #F15A24",
-                  textAlign: "left"
-                }}
+                className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-6 bg-white/70 backdrop-blur-md border-l-4 border-[#F15A24] p-3 sm:p-5 text-left rounded-lg sm:rounded-xl"
               >
-                <p style={{ fontStyle: "italic", fontSize: "1.1rem", fontWeight: "500", color: "#1F1F1F", margin: 0 }}>
+                <p className="italic font-medium text-[#1F1F1F] m-0 text-xs sm:text-lg leading-snug sm:leading-relaxed">
                   “Awareness should work when the real decision happens.”
                 </p>
               </div>

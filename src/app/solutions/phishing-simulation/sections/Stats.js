@@ -22,7 +22,7 @@ export default function StatsSection() {
             <div style={{ marginTop: "2rem" }}>
               <Link className="btn btn-primary btn-cta" href="/book-demo">
                 <span className="hover-sweep"></span>
-                <span>Book a demo</span>
+                <span>Book a Demo</span>
                 <div className="arrow-wrapper">
                   <svg className="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
                     <line x1="5" y1="12" x2="19" y2="12"></line>

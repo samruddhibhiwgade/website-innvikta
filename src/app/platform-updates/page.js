@@ -1,6 +1,7 @@
 "use client";
 
 import SeoMeta from "@layouts/partials/SeoMeta";
+import "../../styles/features/insat-core.scss";
 import React from "react";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
@@ -40,7 +41,7 @@ export default function PlatformUpdatesPage() {
   return (
     <GSAPWrapper>
       <SeoMeta title="Platform Updates & Changelog | Innvikta" description="Stay up to date with the latest features, enhancements, and security training modules on the Innvikta platform." />
-      <div className="insat-page min-h-screen w-full overflow-x-hidden pb-16">
+      <div className="min-h-screen w-full overflow-x-hidden pb-16">
         
         {/* ================= HEADER SECTION ================= */}
         <section className="pt-32 pb-24 bg-gradient-to-br from-[#f15a24] to-[#df4b17] relative overflow-hidden border-b border-[#e24e1b] mb-16 text-white">
@@ -64,10 +65,10 @@ export default function PlatformUpdatesPage() {
               <span className="text-subheading text-orange-100 mb-2 block">
                 LATEST ANNOUNCEMENTS
               </span>
-              <h1 className="text-64-heading text-white tracking-tight leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight text-white font-secondary border-b-4 border-white pb-3 inline-block">
                 Platform Updates
               </h1>
-              <p className="text-20-content text-orange-50 leading-relaxed max-w-2xl">
+              <p className="mt-6 text-lg md:text-xl text-orange-50 leading-relaxed max-w-2xl font-medium">
                 Explore the latest features, security content, and enhancements added to the Innvikta training suite.
               </p>
             </div>

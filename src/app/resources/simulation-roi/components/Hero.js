@@ -44,10 +44,10 @@ export default function HeroSection({ scrollToCalculator, scrollToCta }) {
               </p>
 
               <div className="flex flex-wrap justify-center gap-4">
-                <button onClick={scrollToCalculator} className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 text-sm" style={{ padding: "14px 28px" }}>
+                <button onClick={scrollToCalculator} className="btn-roi-calc bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 text-sm" style={{ padding: "14px 28px" }}>
                   Open Calculator
                 </button>
-                <button onClick={scrollToCta} className="bg-transparent hover:bg-[#f15a24] border border-[#f15a24] !text-[#f15a24] hover:!text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center font-bold text-sm whitespace-nowrap" style={{ padding: "14px 28px" }}>
+                <button onClick={scrollToCta} className="btn-roi-calc bg-transparent hover:bg-[#f15a24] border border-[#f15a24] !text-[#f15a24] hover:!text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center font-bold text-sm whitespace-nowrap" style={{ padding: "14px 28px" }}>
                   Start Free Tier
                 </button>
               </div>

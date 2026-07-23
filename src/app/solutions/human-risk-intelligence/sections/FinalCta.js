@@ -17,10 +17,10 @@ export default function FinalCtaSection() {
               Use AI-assisted intelligence to uncover, prioritize, and reduce workforce risk.
             </p>
             <div className="flex flex-row flex-nowrap justify-center gap-2 sm:gap-4 mt-10" style={{ marginTop: "2.5rem" }}>
-              <Link href="/start-free" className="btn bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] !text-[#f15a24] hover:!text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center font-bold text-sm whitespace-nowrap" style={{ padding: "14px clamp(12px, 3vw, 28px)" }}>
+              <Link href="/start-free" className="btn-final-cta bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] !text-[#f15a24] hover:!text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center font-bold text-sm whitespace-nowrap" style={{ padding: "14px clamp(12px, 3vw, 28px)" }}>
                 Start Free
               </Link>
-              <Link href="/book-demo" className="btn bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 text-sm" style={{ padding: "14px clamp(12px, 3vw, 28px)" }}>
+              <Link href="/book-demo" className="btn-final-cta bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 text-sm" style={{ padding: "14px clamp(12px, 3vw, 28px)" }}>
                 Book a Demo <FiArrowRight className="text-xs" />
               </Link>
             </div>

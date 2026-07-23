@@ -2,7 +2,7 @@
 banner:
   title: "Turn Human Risk into <br /> <span class='text-primary'>Human Strength</span>"
   description: "Innvikta helps enterprises build safer employee behaviour through phishing simulations, gamified learning, AI-powered training journeys, and human risk visibility for security leaders."
-  image: /images/banner-app.png
+  image: /images/home page dashboard.png
   link:
     label: Book a Demo
     href: "/book-demo"
@@ -146,9 +146,9 @@ challenges:
   stats_summary: ""
   description: "InSAT empowers your workforce with adaptive training, phishing simulations, and human risk intelligence to proactively reduce cyber risk."
   cards:
-    - title: "$ 4.4M Average Global Breach Cost"
+    - title: "$4.44M Average Global Breach Cost"
       content: "Breaches from credentials and phishing take the longest to identify (over 290 days), compounding direct financial losses with regulator fines, customer churn, and lasting brand damage."
-    - title: "33% Unapproved AI Usage"
+    - title: "1 in 3 Unapproved AI Usage"
       content: "As employees adopt generative AI, proprietary source code, customer records, and corporate strategies are leaked, creating massive compliance and data exposure risks."
     - title: "67% Fewer Security Incidents"
       content: "Spaced-repetition training and gamified arcade quizzes reinforce secure habits, helping employees spot phishing attempts instantly and report them before they escalate."

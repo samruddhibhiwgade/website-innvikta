@@ -181,185 +181,24 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
     <section className="section banner pt-0 relative overflow-hidden" id="hero-banner">
       <div className="bg-theme banner-bg absolute left-0 top-0 w-full h-full overflow-hidden z-0">
         <ImageFallback 
-          src="/images/background-hero.png" 
+          src="/images/Heroimg_homepage.png" 
           width={1920}
           height={1080}
           priority 
-          className="w-full h-full object-cover object-center md:object-top opacity-60 will-change-transform" 
+          className="w-full h-full object-cover object-center md:object-top opacity-100 will-change-transform" 
           alt="hero background"
         />
-        <NetworkBackground />
-        <Circle
-          className="circle left-[10%] top-12"
-          width={32}
-          height={32}
-          fill={false}
-        />
-        <Circle
-          className="circle left-[2.5%] top-[29%]"
-          width={85}
-          height={85}
-          fill={false}
-        />
-        <Circle
-          className="circle bottom-[48%] left-[22%]"
-          width={20}
-          height={20}
-        />
-        <Circle
-          className="circle bottom-[37%] left-[15%]"
-          width={47}
-          height={47}
-          fill={false}
-        />
-        <Circle
-          className="circle bottom-[13%] left-[6%]"
-          width={62}
-          height={62}
-          fill={false}
-        />
-        <Circle
-          className="circle right-[12%] top-[15%]"
-          width={20}
-          height={20}
-        />
-        <Circle
-          className="circle right-[2%] top-[30%]"
-          width={73}
-          height={73}
-          fill={false}
-        />
-        <Circle
-          className="circle right-[19%] top-[48%]"
-          width={37}
-          height={37}
-          fill={false}
-        />
-        <Circle
-          className="circle right-[33%] top-[54%]"
-          width={20}
-          height={20}
-        />
-        <Circle
-          className="circle bottom-[20%] right-[3%]"
-          width={65}
-          height={65}
-        />
+        {/* NetworkBackground removed */}
+        {/* Circles removed */}
       </div>
 
-      {/* Glassmorphism Notification Overlay */}
-      <AnimatePresence>
-        {showNotification && currentNotification && (
-          <div id="threat-notification-wrapper" className="absolute top-0 left-0 z-[100] pointer-events-none">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-              className="w-60 bg-white/95 backdrop-blur-2xl border border-slate-200/60 rounded-[28px] p-5 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.15)] pointer-events-none overflow-hidden hidden md:block"
-            >
-              <div className="absolute -top-12 -right-12 w-32 h-32 bg-[#f15a24]/5 rounded-full blur-3xl pointer-events-none" />
-              
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-1.5">
-                    <span className="flex h-1.5 w-1.5 rounded-full bg-[#f15a24] animate-pulse" />
-                    <span className="text-[9px] font-black uppercase tracking-[0.15em] text-[#f15a24]">
-                      Threat Detected
-                    </span>
-                  </div>
-                </div>
-                
-                <div className="flex flex-col gap-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-[#f15a24] flex items-center justify-center !text-white shadow-lg shadow-orange-500/20 shrink-0">
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-black tracking-tight text-slate-900 font-secondary leading-none mb-1">
-                        {infoTitle.toUpperCase()}
-                      </h3>
-                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Analysis Complete</span>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2.5">
-                    {infoDesc.map((para, index) => (
-                      <p key={index} className="text-[11px] text-slate-500 leading-relaxed font-medium">
-                        {para}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
-
-      <div className={`absolute inset-0 z-30 ${isHookActive ? 'pointer-events-auto' : 'pointer-events-none'} hidden md:block`}>
-        <SceneErrorBoundary>
-          <Scene />
-        </SceneErrorBoundary>
-      </div>
-
-      {/* Unified Branded HUD Status Pill */}
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-40 hidden md:block">
-        <motion.div 
-          layout
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ type: 'spring', stiffness: 500, damping: 40 }}
-          className="bg-white/95 backdrop-blur-sm border border-slate-200/80 rounded-full px-4 py-2 shadow-xl shadow-slate-200/40 pointer-events-none"
-        >
-          <div className="flex items-center gap-3 text-[9px] font-black uppercase tracking-[0.1em]">
-            {/* Status Section */}
-            <div className="flex items-center gap-2">
-              <span className={`flex h-1.5 w-1.5 rounded-full animate-pulse ${isHookActive ? 'bg-green-500' : 'bg-red-500'}`} />
-              <span className={isHookActive ? 'text-green-500' : 'text-red-500'}>
-                {isHookActive ? 'ACTIVATED:' : 'INACTIVE:'}
-              </span>
-            </div>
-
-            {/* Instruction Section */}
-            <div className="flex items-center gap-2 border-l border-slate-200 pl-3">
-              <div className="flex items-center gap-1">
-                <button 
-                  onClick={() => setIsHookActive(!isHookActive)}
-                  className="text-slate-900 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200 pointer-events-auto hover:bg-slate-200 transition-colors active:scale-95"
-                >
-                  Press [ E ]
-                </button>
-                <span className="text-slate-500 font-bold">{isHookActive ? 'to Deactivate' : 'to Hook'}</span>
-              </div>
-              <div className="w-px h-3 bg-slate-100 mx-1" />
-              <div className="flex items-center gap-1">
-                <button 
-                  onClick={() => resetGame()}
-                  className="text-slate-900 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200 pointer-events-auto hover:bg-slate-200 transition-colors active:scale-95"
-                >
-                  Press [ R ]
-                </button>
-                <span className="text-slate-500 font-bold">to Reset</span>
-              </div>
-            </div>
-
-            {/* Progress Section */}
-            <div className="flex items-center gap-2 border-l border-slate-200 pl-3">
-              <Target className="w-3.5 h-3.5 text-[#f15a24]" />
-              <span className="text-slate-900 font-black font-secondary text-xs">
-                {score}<span className="text-[9px] text-slate-300 ml-0.5">/ 4</span>
-              </span>
-            </div>
-          </div>
-        </motion.div>
-      </div>
+      {/* Notification, Scene, HUD Pill removed */}
 
       <div className="container-xl relative z-20">
         <div className="row overflow-hidden rounded-2xl will-change-transform">
           <div className="col-12">
-            <div className="row relative justify-center pb-6 md:pb-10">
-              <div className="banner-content col-12 px-4 md:col-10 md:px-0 pb-0 pt-4 md:pt-20 text-center will-change-transform">
+            <div className="row relative justify-start pb-6 md:pb-10">
+              <div className="banner-content col-12 px-6 md:col-8 md:px-12 pb-0 pt-4 md:pt-20 text-left will-change-transform">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={isHookActive ? "gamified" : "original"}
@@ -375,19 +214,20 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                       "h1",
                       "mb-4 md:mb-6 banner-title font-black text-slate-900 text-[32px] leading-tight sm:text-5xl md:text-6xl lg:text-7xl"
                     )}
-                    <p className="banner-desc text-slate-600 text-[15px] leading-relaxed md:text-lg max-w-3xl mx-auto mb-6 md:mb-8 font-medium px-2 md:px-0">
+                    <p className="banner-desc text-slate-600 text-[15px] leading-relaxed md:text-lg max-w-xl mr-auto mb-6 md:mb-8 font-medium px-2 md:px-0">
                       {isHookActive 
                         ? "Innvikta transforms complex cybersecurity training into engaging, gamified experiences. Level up your team's defense with interactive simulations and real-world threat scenarios."
                         : bannerData.description}
                     </p>
                   </motion.div>
                 </AnimatePresence>
-                <div className="flex justify-center items-center gap-4 mt-8 banner-btn">
+                <div className="flex justify-start items-center gap-4 mt-8 banner-btn">
                   <Link 
                     href="/book-demo" 
-                    className="bg-[#f15a24] hover:bg-orange-600 text-white rounded-lg transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap px-8 py-3.5 font-bold text-base shadow-lg shadow-orange-500/20 hover:scale-[1.02] transform"
+                    className="btn bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 text-sm md:text-base"
+                    style={{ padding: "14px 28px" }}
                   >
-                    Book a Demo <FiArrowRight className="text-sm" />
+                    Book a Demo <FiArrowRight className="text-xs md:text-sm" />
                   </Link>
                 </div>
               </div>
@@ -396,14 +236,14 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
         </div>
       </div>
       
-      {/* End-to-end full page width image */}
-      <div className="w-full relative mt-6 md:mt-10 px-0">
-        <div className="banner-img relative w-full min-h-[150px] sm:min-h-[280px] md:min-h-[500px] lg:min-h-[600px] overflow-hidden shadow-2xl shadow-orange-500/10 group">
+      {/* End-to-end full page width image with increased size and responsive aspect scaling */}
+      <div className="w-full max-w-7xl mx-auto relative mt-6 md:mt-10 px-4 md:px-8">
+        <div className="banner-img relative w-full overflow-hidden group">
           <ImageFallback
-            src="/images/banner-app.png"
-            className="w-full h-auto object-cover relative z-0 transition-all duration-700"
+            src="/images/home page dashboard.png"
+            className="w-full h-auto object-contain relative z-0 transition-all duration-700 border-none"
             width={1920}
-            height={600}
+            height={1080}
             alt="banner image"
           />
         </div>

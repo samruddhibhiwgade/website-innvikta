@@ -30,25 +30,7 @@ const SpecialFeatures = ({ speciality }) => {
             className={`row relative items-center justify-between gap-y-0 md:gap-y-0 ${index !== 0 ? "mt-10 md:mt-16" : "mt-4 md:mt-10"
               }`}
           >
-            {/* Decorative Waves for each row */}
-            <div className={`hidden md:block absolute top-1/4 left-0 w-full -translate-y-1/2 -z-10 opacity-20 pointer-events-none ${index % 2 !== 0 ? 'rotate-180' : ''}`}>
-               <Image 
-                src="/images/wave.svg" 
-                alt="wave decoration" 
-                width={1381} 
-                height={283} 
-                className="w-full scale-150"
-               />
-            </div>
-            <div className={`hidden md:block absolute top-3/4 left-0 w-full -translate-y-1/2 -z-10 opacity-30 pointer-events-none ${index % 2 === 0 ? 'rotate-180' : ''}`}>
-               <Image 
-                src="/images/wave.svg" 
-                alt="wave decoration" 
-                width={1381} 
-                height={283} 
-                className="w-full scale-125"
-               />
-            </div>
+            {/* Decorative Waves removed */}
 
 
             <div

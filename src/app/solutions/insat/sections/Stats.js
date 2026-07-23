@@ -23,7 +23,7 @@ export default function StatsSection() {
             <div style={{ marginTop: "2rem" }}>
               <Link className="btn btn-primary btn-cta" href="/book-demo">
                 <span className="hover-sweep"></span>
-                <span>Book a demo</span>
+                <span>Book a Demo</span>
                 <div className="arrow-wrapper">
                   <svg className="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
                     <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -47,8 +47,8 @@ export default function StatsSection() {
                     <text x="34" y="35.5" fontFamily="Inter" fontSize="10" fontWeight="bold" fill="white" textAnchor="middle">!</text>
                   </svg>
                 </div>
-                <div className="card-number">$4.44M</div>
-                <div className="card-divider"></div>
+                <div className="card-number text-primary">$4.44M</div>
+                <div className="card-divider bg-primary"></div>
                 <h3 className="card-title">Average Global Breach Cost</h3>
                 <p className="card-description">average global cost of a data breach</p>
                 <span className="card-source">SOURCE: IBM</span>
@@ -86,8 +86,8 @@ export default function StatsSection() {
                     <line x1="26" y1="34" x2="28" y2="34" stroke="#f15a24" strokeWidth="2" />
                   </svg>
                 </div>
-                <div className="card-number">1 in 3</div>
-                <div className="card-divider"></div>
+                <div className="card-number text-primary">1 in 3</div>
+                <div className="card-divider bg-primary"></div>
                 <h3 className="card-title">Unapproved AI Usage</h3>
                 <p className="card-description">employees sharing sensitive data with unapproved AI tools</p>
                 <span className="card-source">SOURCE: GARTNER 2025</span>
@@ -121,8 +121,8 @@ export default function StatsSection() {
                     <path d="M18 24 L22 28 L30 18" stroke="#f15a24" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                   </svg>
                 </div>
-                <div className="card-number">67%</div>
-                <div className="card-divider"></div>
+                <div className="card-number text-primary">67%</div>
+                <div className="card-divider bg-primary"></div>
                 <h3 className="card-title">Fewer Security Incidents</h3>
                 <p className="card-description">organizations reporting fewer incidents after awareness training</p>
                 <span className="card-source">SOURCE: FORTINET 2025</span>

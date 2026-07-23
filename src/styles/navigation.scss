@@ -131,12 +131,10 @@
   }
 }
 
-// Glassmorphic mega menu flyout (matches header perfectly)
+// Solid white mega menu flyout
 .mega-menu-flyout {
-  background-color: rgba(255, 255, 255, 0.45) !important;
-  backdrop-filter: blur(30px) !important;
-  -webkit-backdrop-filter: blur(30px) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: #ffffff !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   z-index: 99999;
 }
 

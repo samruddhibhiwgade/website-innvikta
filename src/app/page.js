@@ -2,6 +2,7 @@ import Cta from "@layouts/components/Cta";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
 
 import HomeBanner from "@layouts/partials/HomeBanner";
+import "../styles/features/insat-core.scss";
 import Challenges from "@layouts/partials/Challenges";
 import SeoMeta from "@layouts/partials/SeoMeta";
 import ShortIntro from "@layouts/partials/ShortIntro";
@@ -24,7 +25,7 @@ const Home = async () => {
       <SpecialFeatures speciality={speciality} />
       <Testimonial testimonial={testimonial} />
       {free_tier?.enable && <FreeTierCta data={free_tier} />}
-      <Cta />
+      <Cta fullWidth={true} />
     </GSAPWrapper>
   );
 };
