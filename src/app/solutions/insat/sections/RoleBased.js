@@ -19,7 +19,7 @@ export default function RoleBasedSection() {
               <img alt="Finance risks illustration" loading="lazy"
                 src="/insat/images/finance.png" />
             </div>
-            <div className="side-card-text-wrapper pt-4" style={{ flex: "1" }}>
+            <div className="side-card-text-wrapper pt-2 md:pt-4" style={{ flex: "1" }}>
               <div className="side-card-title-row">
                 <span className="side-card-title">Finance</span>
               </div>
@@ -35,7 +35,7 @@ export default function RoleBasedSection() {
               <img alt="HR risks illustration" loading="lazy"
                 src="/insat/images/Hr.png" />
             </div>
-            <div className="side-card-text-wrapper pt-4" style={{ flex: "1" }}>
+            <div className="side-card-text-wrapper pt-2 md:pt-4" style={{ flex: "1" }}>
               <div className="side-card-title-row">
                 <span className="side-card-title">HR</span>
               </div>
@@ -51,7 +51,7 @@ export default function RoleBasedSection() {
               <img alt="Sales risks illustration" loading="lazy"
                 src="/insat/images/sales.png" />
             </div>
-            <div className="side-card-text-wrapper pt-4" style={{ flex: "1" }}>
+            <div className="side-card-text-wrapper pt-2 md:pt-4" style={{ flex: "1" }}>
               <div className="side-card-title-row">
                 <span className="side-card-title">Sales</span>
               </div>
@@ -67,7 +67,7 @@ export default function RoleBasedSection() {
               <img alt="IT risks illustration" loading="lazy"
                 src="/insat/images/IT.png" />
             </div>
-            <div className="side-card-text-wrapper pt-4" style={{ flex: "1" }}>
+            <div className="side-card-text-wrapper pt-2 md:pt-4" style={{ flex: "1" }}>
               <div className="side-card-title-row">
                 <span className="side-card-title">IT</span>
               </div>
