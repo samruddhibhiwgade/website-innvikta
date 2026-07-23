@@ -268,10 +268,10 @@ const Challenges = ({ challenges }) => {
   };
 
   return (
-    <section className="section bg-body py-24 md:py-32 border-b border-border">
+    <section className="section bg-body pt-10 pb-16 md:py-32 border-b border-border">
       <div className="container">
         <div className="row items-center">
-          <div className="col-12 xl:col-5 mb-16 xl:mb-0 px-4 sm:px-6 md:px-8 xl:px-12">
+          <div className="col-12 xl:col-5 mb-8 xl:mb-0 px-4 sm:px-6 md:px-8 xl:px-12">
             {markdownify(challenges.title, "h2", "mb-8 text-4xl md:text-5xl lg:text-6xl font-medium leading-tight")}
             {challenges.stats_summary && (
               <div className="text-lg md:text-xl leading-relaxed font-medium mb-4">
@@ -304,10 +304,10 @@ const Challenges = ({ challenges }) => {
               }
             `}</style>
           </div>
-          <div className="col-12 xl:col-7 mt-16 xl:mt-0 px-4 sm:px-6 md:px-8 xl:px-12">
+          <div className="col-12 xl:col-7 mt-0 xl:mt-0 px-4 sm:px-6 md:px-8 xl:px-12">
             {/* Mobile View: Custom Horizontal Sliding Layout (Peeking Cards, no scripts) */}
             <div className="insat-page">
-              <div className="flex md:hidden overflow-x-auto gap-4 pb-6 w-full snap-x snap-mandatory no-scrollbar pt-[15px]" style={{ marginTop: "2.5rem" }}>
+              <div className="flex md:hidden overflow-x-auto gap-4 pb-6 w-full snap-x snap-mandatory no-scrollbar pt-[15px]" style={{ marginTop: "1rem" }}>
                 {challenges.cards?.map((card, index) => (
                   <div key={index} className="group h-[355px] w-[220px] shrink-0 snap-center [perspective:1000px]">
                     <div className="relative h-full w-full rounded-[24px] transition-all duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] cursor-pointer">
