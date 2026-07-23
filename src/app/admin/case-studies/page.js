@@ -23,7 +23,7 @@ export default function AdminCaseStudies() {
   const [caseStudies, setCaseStudies] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
-  const [showModal, setShowModal] = useState(false);
+  const [view, setView] = useState("list"); // "list" or "form"
   const [editingId, setEditingId] = useState(null);
   const [toast, setToast] = useState({ show: false, message: "", type: "success" });
 
@@ -104,7 +104,7 @@ export default function AdminCaseStudies() {
     ]);
     setQuoteText("");
     setQuoteAuthor("");
-    setShowModal(true);
+    setView("form");
   };
 
   const handleOpenEdit = (study) => {
@@ -131,7 +131,7 @@ export default function AdminCaseStudies() {
     ]);
     setQuoteText(study.quoteText || "");
     setQuoteAuthor(study.quoteAuthor || "");
-    setShowModal(true);
+    setView("form");
   };
 
   const handleDelete = async (id) => {
@@ -189,7 +189,7 @@ export default function AdminCaseStudies() {
       const resData = await res.json();
       if (resData.success) {
         setCaseStudies(resData.data);
-        setShowModal(false);
+        setView("list");
         showToast(editingId ? "Case study updated successfully" : "New case study created successfully");
       } else {
         showToast("Failed to save case study", "error");
@@ -216,8 +216,393 @@ export default function AdminCaseStudies() {
     study.industry.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Form View Layout
+  if (view === "form") {
+    return (
+      <div className="min-h-screen bg-slate-50 py-12 font-sans relative overflow-hidden text-slate-800" style={{ paddingTop: "7rem" }}>
+        {/* Decorative Blur Orbs */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-100 rounded-full blur-[120px] -z-10 opacity-60" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-slate-200 rounded-full blur-[100px] -z-10 opacity-60" />
+
+        {/* Floating Toast Alert */}
+        {toast.show && (
+          <div className={`fixed top-24 right-8 z-50 px-6 py-3 rounded-xl shadow-xl flex items-center gap-3 border transition-all duration-300 ${
+            toast.type === "success" 
+              ? "bg-white border-green-200 text-green-700" 
+              : "bg-white border-red-200 text-red-700"
+          }`}>
+            <div className={`w-2 h-2 rounded-full ${toast.type === "success" ? "bg-green-500" : "bg-red-500"}`} />
+            <span className="text-sm font-semibold">{toast.message}</span>
+          </div>
+        )}
+
+        <div className="container max-w-5xl mx-auto px-6">
+          {/* Form Header */}
+          <div className="flex flex-col items-start gap-3 mb-8 text-left">
+            <button 
+              onClick={() => setView("list")}
+              className="inline-flex items-center gap-1.5 text-slate-500 hover:text-[#f15a24] font-bold text-sm transition-colors cursor-pointer"
+            >
+              <FiChevronLeft className="text-base" /> Back to Dashboard
+            </button>
+            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight leading-none mt-2">
+              {editingId ? "Edit Case Study" : "Create New Case Study"}
+            </h1>
+            <p className="text-slate-500 text-sm font-medium">
+              {editingId ? `Editing Record ID: ${editingId}` : "Specify client details and metrics to add a story"}
+            </p>
+          </div>
+
+          {/* Form Layout */}
+          <div className="bg-white rounded-3xl border border-slate-100 shadow-md p-8 text-left">
+            <form onSubmit={handleSave} className="space-y-8">
+              {/* 1. Basic Metadata Row */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Title *</label>
+                  <input 
+                    type="text" 
+                    required
+                    placeholder="e.g. Global Bank Reduces Phishing"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Slug (URL endpoint) *</label>
+                  <input 
+                    type="text" 
+                    required
+                    placeholder="e.g. global-bank-phishing"
+                    value={slug}
+                    onChange={(e) => setSlug(e.target.value)}
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Subtitle / Main Card Headline</label>
+                <input 
+                  type="text" 
+                  placeholder="e.g. Global Bank Reduces Phishing Susceptibility by 82%"
+                  value={subtitle}
+                  onChange={(e) => setSubtitle(e.target.value)}
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Industry Sector</label>
+                  <select
+                    value={industry}
+                    onChange={(e) => setIndustry(e.target.value)}
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium"
+                  >
+                    {INDUSTRIES.map((ind) => (
+                      <option key={ind} value={ind}>{ind}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Industry Label</label>
+                  <input 
+                    type="text" 
+                    placeholder="e.g. Banking & Finance"
+                    value={industryLabel}
+                    onChange={(e) => setIndustryLabel(e.target.value)}
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Image URL</label>
+                  <input 
+                    type="text" 
+                    placeholder="https://images.unsplash.com/..."
+                    value={image}
+                    onChange={(e) => setImage(e.target.value)}
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Location</label>
+                  <input 
+                    type="text" 
+                    placeholder="e.g. North America, Global"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium font-secondary"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Timeline Duration</label>
+                  <input 
+                    type="text" 
+                    placeholder="e.g. 6 Months, Ongoing"
+                    value={timeline}
+                    onChange={(e) => setTimeline(e.target.value)}
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium font-secondary"
+                  />
+                </div>
+                <div />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Short Grid Description *</label>
+                <textarea 
+                  required
+                  rows="3"
+                  placeholder="Provide a brief summary for the main grid page..."
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
+                />
+              </div>
+
+              <div className="border-t border-slate-100 pt-6">
+                <h3 className="text-base font-bold text-slate-900 mb-4">At a Glance Details (Bullets)</h3>
+                <div className="space-y-3">
+                  {atGlance.map((point, index) => (
+                    <div key={index} className="flex items-center gap-3">
+                      <input 
+                        type="text"
+                        placeholder={`Key metric point ${index + 1}...`}
+                        value={point}
+                        onChange={(e) => handleUpdateListField(index, e.target.value, atGlance, setAtGlance)}
+                        className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium"
+                      />
+                      <button 
+                        type="button"
+                        onClick={() => handleRemoveListField(index, atGlance, setAtGlance)}
+                        className="p-2 border border-slate-200 hover:border-red-200 text-slate-400 hover:text-red-500 rounded-xl transition-colors"
+                      >
+                        <FiTrash2 />
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() => handleAddListField(atGlance, setAtGlance)}
+                    className="inline-flex items-center gap-1.5 text-[#f15a24] hover:text-orange-600 font-bold text-xs pt-1 cursor-pointer"
+                  >
+                    <FiPlus /> Add bullet item
+                  </button>
+                </div>
+              </div>
+
+              <div className="border-t border-slate-100 pt-6 space-y-6">
+                <h3 className="text-base font-bold text-slate-900 mb-1">Story Content Blocks</h3>
+
+                {/* Summary Block */}
+                <div className="space-y-4">
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Summary Title & Paragraphs</label>
+                  <input 
+                    type="text" 
+                    placeholder="Summary Title e.g. Preserving Client Confidentiality"
+                    value={summaryTitle}
+                    onChange={(e) => setSummaryTitle(e.target.value)}
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-bold"
+                  />
+                  <div className="space-y-3">
+                    {summaryParagraphs.map((para, index) => (
+                      <div key={index} className="flex items-start gap-3">
+                        <textarea 
+                          rows="2"
+                          placeholder={`Summary Paragraph ${index + 1}...`}
+                          value={para}
+                          onChange={(e) => handleUpdateListField(index, e.target.value, summaryParagraphs, setSummaryParagraphs)}
+                          className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
+                        />
+                        <button 
+                          type="button"
+                          onClick={() => handleRemoveListField(index, summaryParagraphs, setSummaryParagraphs)}
+                          className="p-2 border border-slate-200 hover:border-red-200 text-slate-400 hover:text-red-500 rounded-xl transition-colors mt-2"
+                        >
+                          <FiTrash2 />
+                        </button>
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => handleAddListField(summaryParagraphs, setSummaryParagraphs)}
+                      className="inline-flex items-center gap-1.5 text-[#f15a24] hover:text-orange-600 font-bold text-xs pt-1 cursor-pointer"
+                    >
+                      <FiPlus /> Add paragraph
+                    </button>
+                  </div>
+                </div>
+
+                {/* Challenge Block */}
+                <div className="space-y-4 pt-4 border-t border-slate-100/50">
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Challenge Title & Paragraphs</label>
+                  <input 
+                    type="text" 
+                    placeholder="Challenge Title e.g. Minimizing Potential Data Breaches"
+                    value={challengeTitle}
+                    onChange={(e) => setChallengeTitle(e.target.value)}
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-bold"
+                  />
+                  <div className="space-y-3">
+                    {challengeParagraphs.map((para, index) => (
+                      <div key={index} className="flex items-start gap-3">
+                        <textarea 
+                          rows="2"
+                          placeholder={`Challenge Paragraph ${index + 1}...`}
+                          value={para}
+                          onChange={(e) => handleUpdateListField(index, e.target.value, challengeParagraphs, setChallengeParagraphs)}
+                          className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
+                        />
+                        <button 
+                          type="button"
+                          onClick={() => handleRemoveListField(index, challengeParagraphs, setChallengeParagraphs)}
+                          className="p-2 border border-slate-200 hover:border-red-200 text-slate-400 hover:text-red-500 rounded-xl transition-colors mt-2"
+                        >
+                          <FiTrash2 />
+                        </button>
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => handleAddListField(challengeParagraphs, setChallengeParagraphs)}
+                      className="inline-flex items-center gap-1.5 text-[#f15a24] hover:text-orange-600 font-bold text-xs pt-1 cursor-pointer"
+                    >
+                      <FiPlus /> Add paragraph
+                    </button>
+                  </div>
+                </div>
+
+                {/* Solution Paragraphs */}
+                <div className="space-y-4 pt-4 border-t border-slate-100/50">
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Solution Paragraphs</label>
+                  <div className="space-y-3">
+                    {solutionParagraphs.map((para, index) => (
+                      <div key={index} className="flex items-start gap-3">
+                        <textarea 
+                          rows="2"
+                          placeholder={`Solution Paragraph ${index + 1}...`}
+                          value={para}
+                          onChange={(e) => handleUpdateListField(index, e.target.value, solutionParagraphs, setSolutionParagraphs)}
+                          className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
+                        />
+                        <button 
+                          type="button"
+                          onClick={() => handleRemoveListField(index, solutionParagraphs, setSolutionParagraphs)}
+                          className="p-2 border border-slate-200 hover:border-red-200 text-slate-400 hover:text-red-500 rounded-xl transition-colors mt-2"
+                        >
+                          <FiTrash2 />
+                        </button>
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => handleAddListField(solutionParagraphs, setSolutionParagraphs)}
+                      className="inline-flex items-center gap-1.5 text-[#f15a24] hover:text-orange-600 font-bold text-xs pt-1 cursor-pointer"
+                    >
+                      <FiPlus /> Add paragraph
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-t border-slate-100 pt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Quote text */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Quote Text</label>
+                  <textarea 
+                    rows="4"
+                    placeholder="“From the board down, security compliance is our priority...”"
+                    value={quoteText}
+                    onChange={(e) => setQuoteText(e.target.value)}
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium italic"
+                  />
+                </div>
+                {/* Quote Author */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Quote Author</label>
+                  <input 
+                    type="text" 
+                    placeholder="e.g. Jane Doe, Head of Risk & Compliance"
+                    value={quoteAuthor}
+                    onChange={(e) => setQuoteAuthor(e.target.value)}
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-bold"
+                  />
+                </div>
+              </div>
+
+              <div className="border-t border-slate-100 pt-6 space-y-4">
+                <h3 className="text-base font-bold text-slate-900 mb-1">Sidebar Card Info</h3>
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Sidebar Challenge Summary</label>
+                  <textarea 
+                    rows="2"
+                    placeholder="Short challenge summary for the sidebar box..."
+                    value={sidebarChallenge}
+                    onChange={(e) => setSidebarChallenge(e.target.value)}
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
+                  />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {sidebarDetails.map((detail, idx) => (
+                    <div key={idx} className="space-y-2">
+                      <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Detail {idx + 1} Label</label>
+                      <input 
+                        type="text" 
+                        placeholder="e.g. Target Coverage"
+                        value={detail.label}
+                        onChange={(e) => {
+                          const updated = [...sidebarDetails];
+                          updated[idx].label = e.target.value;
+                          setSidebarDetails(updated);
+                        }}
+                        className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-xs font-bold"
+                      />
+                      <input 
+                        type="text" 
+                        placeholder="e.g. 12,000+ Endpoints"
+                        value={detail.val}
+                        onChange={(e) => {
+                          const updated = [...sidebarDetails];
+                          updated[idx].val = e.target.value;
+                          setSidebarDetails(updated);
+                        }}
+                        className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-xs font-semibold"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Submit button wrapper */}
+              <div className="flex items-center justify-end gap-4 border-t border-slate-100 pt-6">
+                <button 
+                  type="button" 
+                  onClick={() => setView("list")}
+                  className="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold rounded-xl text-sm transition-colors cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit"
+                  className="px-6 py-3 bg-[#f15a24] hover:bg-orange-600 text-white font-bold rounded-xl text-sm shadow-md shadow-orange-500/25 transition-all cursor-pointer"
+                >
+                  Save Changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Dashboard List View Layout
   return (
-    <div className="min-h-screen bg-slate-50 py-12 font-sans relative overflow-hidden" style={{ paddingTop: "7rem" }}>
+    <div className="min-h-screen bg-slate-50 py-12 font-sans relative overflow-hidden text-slate-800" style={{ paddingTop: "7rem" }}>
       {/* Decorative Blur Orbs */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-100 rounded-full blur-[120px] -z-10 opacity-60" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-slate-200 rounded-full blur-[100px] -z-10 opacity-60" />
@@ -251,7 +636,7 @@ export default function AdminCaseStudies() {
 
           <button 
             onClick={handleOpenCreate}
-            className="self-start md:self-center inline-flex items-center gap-2 bg-[#f15a24] hover:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-orange-500/25 transition-all duration-300"
+            className="self-start md:self-center inline-flex items-center gap-2 bg-[#f15a24] hover:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-orange-500/25 transition-all duration-300 cursor-pointer"
           >
             <FiPlus className="text-lg" /> Create Case Study
           </button>
@@ -289,7 +674,7 @@ export default function AdminCaseStudies() {
             </p>
             <button 
               onClick={handleOpenCreate}
-              className="bg-[#f15a24] hover:bg-orange-600 text-white font-bold px-5 py-2.5 rounded-lg text-sm transition-all"
+              className="bg-[#f15a24] hover:bg-orange-600 text-white font-bold px-5 py-2.5 rounded-lg text-sm transition-all cursor-pointer"
             >
               Add Your First Record
             </button>
@@ -341,14 +726,14 @@ export default function AdminCaseStudies() {
                     <div className="flex items-center gap-3">
                       <button 
                         onClick={() => handleOpenEdit(study)}
-                        className="p-2 border border-slate-200 hover:border-slate-800 rounded-lg text-slate-500 hover:text-slate-800 transition-colors"
+                        className="p-2 border border-slate-200 hover:border-slate-800 rounded-lg text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
                         title="Edit study"
                       >
                         <FiEdit2 className="text-sm" />
                       </button>
                       <button 
                         onClick={() => handleDelete(study.id)}
-                        className="p-2 border border-red-100 hover:bg-red-50 hover:border-red-200 rounded-lg text-red-500 transition-all"
+                        className="p-2 border border-red-100 hover:bg-red-50 hover:border-red-200 rounded-lg text-red-500 transition-all cursor-pointer"
                         title="Delete study"
                       >
                         <FiTrash2 className="text-sm" />
@@ -358,372 +743,6 @@ export default function AdminCaseStudies() {
                 </div>
               </div>
             ))}
-          </div>
-        )}
-
-        {/* Modal Form */}
-        {showModal && (
-          <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-            <div className="bg-white w-full max-w-4xl rounded-3xl shadow-2xl border border-slate-100 overflow-hidden flex flex-col max-h-[85vh] text-left">
-              {/* Modal Header */}
-              <div className="flex items-center justify-between border-b border-slate-150 px-8 py-5">
-                <div>
-                  <h2 className="text-xl font-bold text-slate-900">
-                    {editingId ? "Edit Case Study" : "Create New Case Study"}
-                  </h2>
-                  <p className="text-xs text-slate-400 font-medium mt-0.5">
-                    {editingId ? `Editing Record ID: ${editingId}` : "Specify client details and metrics to add a story"}
-                  </p>
-                </div>
-                <button 
-                  onClick={() => setShowModal(false)}
-                  className="p-2 bg-slate-50 hover:bg-slate-100 text-slate-500 hover:text-slate-800 rounded-xl transition-all"
-                >
-                  <FiX className="text-lg" />
-                </button>
-              </div>
-
-              {/* Form Body */}
-              <form onSubmit={handleSave} className="flex-1 overflow-y-auto p-8 space-y-8">
-                {/* 1. Basic Metadata Row */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Title *</label>
-                    <input 
-                      type="text" 
-                      required
-                      placeholder="e.g. Global Bank Reduces Phishing"
-                      value={title}
-                      onChange={(e) => setTitle(e.target.value)}
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Slug (URL endpoint) *</label>
-                    <input 
-                      type="text" 
-                      required
-                      placeholder="e.g. global-bank-phishing"
-                      value={slug}
-                      onChange={(e) => setSlug(e.target.value)}
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Subtitle / Main Card Headline</label>
-                  <input 
-                    type="text" 
-                    placeholder="e.g. Global Bank Reduces Phishing Susceptibility by 82%"
-                    value={subtitle}
-                    onChange={(e) => setSubtitle(e.target.value)}
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium"
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Industry Sector</label>
-                    <select
-                      value={industry}
-                      onChange={(e) => setIndustry(e.target.value)}
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium"
-                    >
-                      {INDUSTRIES.map((ind) => (
-                        <option key={ind} value={ind}>{ind}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Industry Label</label>
-                    <input 
-                      type="text" 
-                      placeholder="e.g. Banking & Finance"
-                      value={industryLabel}
-                      onChange={(e) => setIndustryLabel(e.target.value)}
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Image URL</label>
-                    <input 
-                      type="text" 
-                      placeholder="https://images.unsplash.com/..."
-                      value={image}
-                      onChange={(e) => setImage(e.target.value)}
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Location</label>
-                    <input 
-                      type="text" 
-                      placeholder="e.g. North America, Global"
-                      value={location}
-                      onChange={(e) => setLocation(e.target.value)}
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium font-secondary"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Timeline Duration</label>
-                    <input 
-                      type="text" 
-                      placeholder="e.g. 6 Months, Ongoing"
-                      value={timeline}
-                      onChange={(e) => setTimeline(e.target.value)}
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium font-secondary"
-                    />
-                  </div>
-                  <div />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Short Grid Description *</label>
-                  <textarea 
-                    required
-                    rows="3"
-                    placeholder="Provide a brief summary for the main grid page..."
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
-                  />
-                </div>
-
-                <div className="border-t border-slate-100 pt-6">
-                  <h3 className="text-base font-bold text-slate-900 mb-4">At a Glance Details (Bullets)</h3>
-                  <div className="space-y-3">
-                    {atGlance.map((point, index) => (
-                      <div key={index} className="flex items-center gap-3">
-                        <input 
-                          type="text"
-                          placeholder={`Key metric point ${index + 1}...`}
-                          value={point}
-                          onChange={(e) => handleUpdateListField(index, e.target.value, atGlance, setAtGlance)}
-                          className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium"
-                        />
-                        <button 
-                          type="button"
-                          onClick={() => handleRemoveListField(index, atGlance, setAtGlance)}
-                          className="p-2 border border-slate-200 hover:border-red-200 text-slate-400 hover:text-red-500 rounded-xl transition-colors"
-                        >
-                          <FiTrash2 />
-                        </button>
-                      </div>
-                    ))}
-                    <button
-                      type="button"
-                      onClick={() => handleAddListField(atGlance, setAtGlance)}
-                      className="inline-flex items-center gap-1.5 text-[#f15a24] hover:text-orange-600 font-bold text-xs pt-1"
-                    >
-                      <FiPlus /> Add bullet item
-                    </button>
-                  </div>
-                </div>
-
-                <div className="border-t border-slate-100 pt-6 space-y-6">
-                  <h3 className="text-base font-bold text-slate-900 mb-1">Story Content Blocks</h3>
-
-                  {/* Summary Block */}
-                  <div className="space-y-4">
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Summary Title & Paragraphs</label>
-                    <input 
-                      type="text" 
-                      placeholder="Summary Title e.g. Preserving Client Confidentiality"
-                      value={summaryTitle}
-                      onChange={(e) => setSummaryTitle(e.target.value)}
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-bold"
-                    />
-                    <div className="space-y-3">
-                      {summaryParagraphs.map((para, index) => (
-                        <div key={index} className="flex items-start gap-3">
-                          <textarea 
-                            rows="2"
-                            placeholder={`Summary Paragraph ${index + 1}...`}
-                            value={para}
-                            onChange={(e) => handleUpdateListField(index, e.target.value, summaryParagraphs, setSummaryParagraphs)}
-                            className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
-                          />
-                          <button 
-                            type="button"
-                            onClick={() => handleRemoveListField(index, summaryParagraphs, setSummaryParagraphs)}
-                            className="p-2 border border-slate-200 hover:border-red-200 text-slate-400 hover:text-red-500 rounded-xl transition-colors mt-2"
-                          >
-                            <FiTrash2 />
-                          </button>
-                        </div>
-                      ))}
-                      <button
-                        type="button"
-                        onClick={() => handleAddListField(summaryParagraphs, setSummaryParagraphs)}
-                        className="inline-flex items-center gap-1.5 text-[#f15a24] hover:text-orange-600 font-bold text-xs pt-1"
-                      >
-                        <FiPlus /> Add paragraph
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Challenge Block */}
-                  <div className="space-y-4 pt-4 border-t border-slate-100/50">
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Challenge Title & Paragraphs</label>
-                    <input 
-                      type="text" 
-                      placeholder="Challenge Title e.g. Minimizing Potential Data Breaches"
-                      value={challengeTitle}
-                      onChange={(e) => setChallengeTitle(e.target.value)}
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-bold"
-                    />
-                    <div className="space-y-3">
-                      {challengeParagraphs.map((para, index) => (
-                        <div key={index} className="flex items-start gap-3">
-                          <textarea 
-                            rows="2"
-                            placeholder={`Challenge Paragraph ${index + 1}...`}
-                            value={para}
-                            onChange={(e) => handleUpdateListField(index, e.target.value, challengeParagraphs, setChallengeParagraphs)}
-                            className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
-                          />
-                          <button 
-                            type="button"
-                            onClick={() => handleRemoveListField(index, challengeParagraphs, setChallengeParagraphs)}
-                            className="p-2 border border-slate-200 hover:border-red-200 text-slate-400 hover:text-red-500 rounded-xl transition-colors mt-2"
-                          >
-                            <FiTrash2 />
-                          </button>
-                        </div>
-                      ))}
-                      <button
-                        type="button"
-                        onClick={() => handleAddListField(challengeParagraphs, setChallengeParagraphs)}
-                        className="inline-flex items-center gap-1.5 text-[#f15a24] hover:text-orange-600 font-bold text-xs pt-1"
-                      >
-                        <FiPlus /> Add paragraph
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Solution Paragraphs */}
-                  <div className="space-y-4 pt-4 border-t border-slate-100/50">
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Solution Paragraphs</label>
-                    <div className="space-y-3">
-                      {solutionParagraphs.map((para, index) => (
-                        <div key={index} className="flex items-start gap-3">
-                          <textarea 
-                            rows="2"
-                            placeholder={`Solution Paragraph ${index + 1}...`}
-                            value={para}
-                            onChange={(e) => handleUpdateListField(index, e.target.value, solutionParagraphs, setSolutionParagraphs)}
-                            className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
-                          />
-                          <button 
-                            type="button"
-                            onClick={() => handleRemoveListField(index, solutionParagraphs, setSolutionParagraphs)}
-                            className="p-2 border border-slate-200 hover:border-red-200 text-slate-400 hover:text-red-500 rounded-xl transition-colors mt-2"
-                          >
-                            <FiTrash2 />
-                          </button>
-                        </div>
-                      ))}
-                      <button
-                        type="button"
-                        onClick={() => handleAddListField(solutionParagraphs, setSolutionParagraphs)}
-                        className="inline-flex items-center gap-1.5 text-[#f15a24] hover:text-orange-600 font-bold text-xs pt-1"
-                      >
-                        <FiPlus /> Add paragraph
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="border-t border-slate-100 pt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Quote text */}
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Quote Text</label>
-                    <textarea 
-                      rows="4"
-                      placeholder="“From the board down, security compliance is our priority...”"
-                      value={quoteText}
-                      onChange={(e) => setQuoteText(e.target.value)}
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium italic"
-                    />
-                  </div>
-                  {/* Quote Author */}
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Quote Author</label>
-                    <input 
-                      type="text" 
-                      placeholder="e.g. Jane Doe, Head of Risk & Compliance"
-                      value={quoteAuthor}
-                      onChange={(e) => setQuoteAuthor(e.target.value)}
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-bold"
-                    />
-                  </div>
-                </div>
-
-                <div className="border-t border-slate-100 pt-6 space-y-4">
-                  <h3 className="text-base font-bold text-slate-900 mb-1">Sidebar Card Info</h3>
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Sidebar Challenge Summary</label>
-                    <textarea 
-                      rows="2"
-                      placeholder="Short challenge summary for the sidebar box..."
-                      value={sidebarChallenge}
-                      onChange={(e) => setSidebarChallenge(e.target.value)}
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
-                    />
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {sidebarDetails.map((detail, idx) => (
-                      <div key={idx} className="space-y-2">
-                        <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Detail {idx + 1} Label</label>
-                        <input 
-                          type="text" 
-                          placeholder="e.g. Target Coverage"
-                          value={detail.label}
-                          onChange={(e) => {
-                            const updated = [...sidebarDetails];
-                            updated[idx].label = e.target.value;
-                            setSidebarDetails(updated);
-                          }}
-                          className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-xs font-bold"
-                        />
-                        <input 
-                          type="text" 
-                          placeholder="e.g. 12,000+ Endpoints"
-                          value={detail.val}
-                          onChange={(e) => {
-                            const updated = [...sidebarDetails];
-                            updated[idx].val = e.target.value;
-                            setSidebarDetails(updated);
-                          }}
-                          className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-xs font-semibold"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Submit button wrapper */}
-                <div className="flex items-center justify-end gap-4 border-t border-slate-100 pt-6">
-                  <button 
-                    type="button" 
-                    onClick={() => setShowModal(false)}
-                    className="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold rounded-xl text-sm transition-colors"
-                  >
-                    Cancel
-                  </button>
-                  <button 
-                    type="submit"
-                    className="px-6 py-3 bg-[#f15a24] hover:bg-orange-600 text-white font-bold rounded-xl text-sm shadow-md shadow-orange-500/25 transition-all"
-                  >
-                    Save Changes
-                  </button>
-                </div>
-              </form>
-            </div>
           </div>
         )}
       </div>
