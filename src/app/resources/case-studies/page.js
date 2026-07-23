@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
 import SeoMeta from "@layouts/partials/SeoMeta";
@@ -14,78 +14,23 @@ import {
   FiArrowRight
 } from "react-icons/fi";
 
-const CASE_STUDIES = [
-  {
-    id: 1,
-    title: "Global Bank Reduces Phishing Susceptibility by 82%",
-    imageTitle: "Global Bank Susceptibility Analysis",
-    industry: "BFSI",
-    industryLabel: "Banking & Finance",
-    description: "How a leading multinational banking corporation simulated high-risk voice phishing (vishing) and SMS attacks to secure 12,000+ endpoints.",
-    image: "https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?auto=format&fit=crop&w=600&h=600&q=80",
-    slug: "global-bank-phishing"
-  },
-  {
-    id: 2,
-    title: "Securing Patient Data and HIPAA Compliance for MedTech Leader",
-    imageTitle: "MedTech HIPAA Compliance & Security",
-    industry: "Healthcare",
-    industryLabel: "Healthcare",
-    description: "Deploying automated email and QR code simulation campaigns to educate healthcare workers and protect sensitive patient portal access.",
-    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&h=600&q=80",
-    slug: "healthcare-security-crisis"
-  },
-  {
-    id: 3,
-    title: "SaaS Enterprise Mitigates Developer Credentials Harvesting Scams",
-    imageTitle: "SaaS Developer Credentials Protection",
-    industry: "IT & Services",
-    industryLabel: "IT & Services",
-    description: "Customized AI-generated phishing templates simulating code repository access alerts and cloud provider security warnings.",
-    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&h=600&q=80",
-    slug: "saas-credentials-harvesting"
-  },
-  {
-    id: 4,
-    title: "Leading Insurer Safeguards Customer Data Against Phishing",
-    imageTitle: "Insurance Policy & Customer Data Protection",
-    industry: "Insurance",
-    industryLabel: "Insurance",
-    description: "How a major insurance provider implemented automated phishing defense campaigns to secure highly sensitive client records and meet strict regulatory standards.",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&h=600&q=80",
-    slug: "insurance-customer-data"
-  },
-  {
-    id: 5,
-    title: "Industrial Leader Safeguards Supply Chain against CEO Fraud",
-    imageTitle: "Supply Chain & CEO Fraud Mitigation",
-    industry: "Manufacturing",
-    industryLabel: "Manufacturing",
-    description: "Educating remote procurement and plant personnel against Business Email Compromise (BEC) and fake invoice requests.",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&h=600&q=80",
-    slug: "manufacturing-people-centric"
-  },
-  {
-    id: 6,
-    title: "National Agency Builds Cybersecurity Culture with Innvikta Arcade",
-    imageTitle: "National Security Awareness Campaign",
-    industry: "Government",
-    industryLabel: "Government",
-    description: "Using bite-sized gamified modules and interactive quests to train state-level employees on secure remote work habits.",
-    image: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=600&h=600&q=80",
-    slug: "national-agency-gamified"
-  }
-];
-
 const INDUSTRIES = ["All Industries", "BFSI", "Healthcare", "Insurance", "IT & Services", "Manufacturing", "Government"];
 
 export default function CaseStudies() {
+  const [caseStudies, setCaseStudies] = useState([]);
   const [activeIndustry, setActiveIndustry] = useState("All Industries");
 
+  useEffect(() => {
+    fetch("/api/case-studies")
+      .then(res => res.json())
+      .then(data => setCaseStudies(data))
+      .catch(err => console.error("Failed to fetch case studies", err));
+  }, []);
+
   const filteredCaseStudies = useMemo(() => {
-    if (activeIndustry === "All Industries") return CASE_STUDIES;
-    return CASE_STUDIES.filter(cs => cs.industry === activeIndustry);
-  }, [activeIndustry]);
+    if (activeIndustry === "All Industries") return caseStudies;
+    return caseStudies.filter(cs => cs.industry === activeIndustry);
+  }, [activeIndustry, caseStudies]);
 
   return (
     <GSAPWrapper>
