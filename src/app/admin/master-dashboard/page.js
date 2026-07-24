@@ -273,7 +273,9 @@ export default function MasterDashboard() {
     setBlogForm({
       title: blog.frontmatter.title || "",
       slug: blog.slug || "",
-      authorName: blog.frontmatter.author || "Derick C.",
+      authorName: blog.frontmatter.author && typeof blog.frontmatter.author === "object" 
+        ? blog.frontmatter.author.name 
+        : (blog.frontmatter.author || "Derick C."),
       content: blog.content || "",
       image: blog.frontmatter.image || "",
       date: blog.frontmatter.date || "",
@@ -446,8 +448,12 @@ export default function MasterDashboard() {
                     {blogsList.map((blog) => (
                       <tr key={blog.filename} className="hover:bg-slate-50/40">
                         <td className="py-4 px-6 font-bold text-slate-900">{blog.frontmatter.title}</td>
-                        <td className="py-4 px-6">{blog.frontmatter.author}</td>
-                        <td className="py-4 px-6">{blog.frontmatter.date}</td>
+                        <td className="py-4 px-6">
+                          {blog.frontmatter.author && typeof blog.frontmatter.author === "object" 
+                            ? blog.frontmatter.author.name 
+                            : blog.frontmatter.author || "Admin"}
+                        </td>
+                        <td className="py-4 px-6">{blog.frontmatter.date ? new Date(blog.frontmatter.date).toLocaleDateString() : ""}</td>
                         <td className="py-4 px-6">
                           <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold ${blog.frontmatter.draft ? 'bg-slate-100 text-slate-600' : 'bg-emerald-50 text-emerald-600'}`}>
                             {blog.frontmatter.draft ? "Draft" : "Published"}
