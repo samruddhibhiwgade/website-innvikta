@@ -146,7 +146,8 @@ export default function MasterDashboard() {
       { label: "Delivery Model", val: "" }
     ],
     quoteText: "",
-    quoteAuthor: ""
+    quoteAuthor: "",
+    customSections: []
   });
 
   const [newsletterForm, setNewsletterForm] = useState({
@@ -391,7 +392,8 @@ export default function MasterDashboard() {
         { label: "Delivery Model", val: "" }
       ],
       quoteText: study.quoteText || "",
-      quoteAuthor: study.quoteAuthor || ""
+      quoteAuthor: study.quoteAuthor || "",
+      customSections: study.customSections || []
     });
     setEditorMode("edit");
   };
@@ -516,7 +518,8 @@ export default function MasterDashboard() {
                       { label: "Delivery Model", val: "" }
                     ],
                     quoteText: "",
-                    quoteAuthor: ""
+                    quoteAuthor: "",
+                    customSections: []
                   });
                 } else if (activeTab === "newsletters") {
                   setNewsletterForm({
@@ -1006,6 +1009,100 @@ export default function MasterDashboard() {
                       <FiPlusCircle /> Add Paragraph Block
                     </button>
                   </div>
+                </div>
+
+                {/* Custom/New content sections builder */}
+                <div className="border border-slate-150 rounded-xl p-4 bg-slate-50/40 space-y-4">
+                  <h4 className="text-xs font-black text-slate-700 uppercase tracking-wider font-extrabold">Custom Content Sections</h4>
+                  
+                  {(caseForm.customSections || []).map((section, sIdx) => (
+                    <div key={sIdx} className="border border-slate-200 rounded-xl p-4 bg-white space-y-4 relative">
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs font-black text-[#f15a24]">Custom Section #{sIdx + 1}</span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const updated = caseForm.customSections.filter((_, i) => i !== sIdx);
+                            setCaseForm({ ...caseForm, customSections: updated });
+                          }}
+                          className="text-xs font-bold text-rose-600 hover:underline cursor-pointer"
+                        >
+                          Remove Section
+                        </button>
+                      </div>
+
+                      <div>
+                        <label className="block text-[10px] font-bold text-slate-500 uppercase mb-2">Section Heading/Title</label>
+                        <input
+                          type="text"
+                          required
+                          value={section.title}
+                          onChange={(e) => {
+                            const updated = [...caseForm.customSections];
+                            updated[sIdx].title = e.target.value;
+                            setCaseForm({ ...caseForm, customSections: updated });
+                          }}
+                          className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold"
+                          placeholder="e.g. Project Outcomes & Scope"
+                        />
+                      </div>
+
+                      <div className="space-y-3">
+                        <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-black">Section Paragraphs</label>
+                        {(section.paragraphs || []).map((para, pIdx) => (
+                          <div key={pIdx} className="space-y-2 border border-slate-100 p-3 rounded-lg bg-slate-50/20">
+                            <div className="flex justify-between items-center">
+                              <span className="text-[10px] font-bold text-slate-500">Paragraph #{pIdx + 1}</span>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  const updated = [...caseForm.customSections];
+                                  updated[sIdx].paragraphs = section.paragraphs.filter((_, i) => i !== pIdx);
+                                  setCaseForm({ ...caseForm, customSections: updated });
+                                }}
+                                className="text-[10px] font-bold text-rose-500 hover:underline cursor-pointer"
+                              >
+                                Remove Paragraph
+                              </button>
+                            </div>
+                            <ToolbarEditor
+                              value={para}
+                              onChange={(val) => {
+                                const updated = [...caseForm.customSections];
+                                updated[sIdx].paragraphs[pIdx] = val;
+                                setCaseForm({ ...caseForm, customSections: updated });
+                              }}
+                              placeholder="Write paragraph content..."
+                              rows={4}
+                            />
+                          </div>
+                        ))}
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const updated = [...caseForm.customSections];
+                            updated[sIdx].paragraphs = [...(section.paragraphs || []), ""];
+                            setCaseForm({ ...caseForm, customSections: updated });
+                          }}
+                          className="flex items-center gap-1.5 text-xs text-[#f15a24] font-bold hover:underline"
+                        >
+                          <FiPlusCircle /> Add Paragraph Block
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+
+                  <button
+                    type="button"
+                    onClick={() => setCaseForm({
+                      ...caseForm,
+                      customSections: [...(caseForm.customSections || []), { title: "", paragraphs: [""] }]
+                    })}
+                    className="flex items-center gap-1.5 text-xs text-white bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-xl font-bold cursor-pointer transition-all w-fit"
+                  >
+                    <FiPlus /> Add Custom Content Section
+                  </button>
                 </div>
 
                 <div className="border border-slate-100 rounded-xl p-4 bg-slate-50/50 space-y-4">

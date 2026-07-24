@@ -124,6 +124,20 @@ export default function CaseStudyDetail() {
                    </p>
                  ))}
                </div>
+
+               {/* Custom Sections */}
+               {data.customSections && data.customSections.map((section, sIdx) => (
+                 <div key={sIdx} className="space-y-4 pt-4">
+                   <h2 className="text-2xl md:text-[2rem] font-bold font-secondary text-[#0F172A] leading-snug tracking-tight mb-4">
+                     {section.title}
+                   </h2>
+                   {section.paragraphs && section.paragraphs.map((para, pIdx) => (
+                     <p key={pIdx} className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal max-w-2xl">
+                       {para}
+                     </p>
+                   ))}
+                 </div>
+               ))}
  
              </div>
 
