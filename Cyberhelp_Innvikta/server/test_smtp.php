@@ -7,14 +7,15 @@ $htmlBody = '<h1>Test Newsletter</h1><p>This is a test of the broadcast SMTP mai
 
 $host     = MAIL_HOST;
 $port     = MAIL_PORT;
+$port     = 465;
 $username = MAIL_USERNAME;
 $password = MAIL_PASSWORD;
 $from     = MAIL_FROM;
 $fromName = MAIL_FROM_NAME;
 
-echo "Connecting to $host:$port...\n";
+echo "Connecting to ssl://$host:$port...\n";
 try {
-    $sock = fsockopen('tcp://' . $host, $port, $errno, $errstr, 15);
+    $sock = fsockopen('ssl://' . $host, $port, $errno, $errstr, 15);
     if (!$sock) {
         throw new Exception('Cannot connect to ' . $host . ':' . $port . ' — ' . $errstr);
     }
@@ -40,19 +41,6 @@ try {
 
     $readAll(); // 220 Greeting
     $cmd('EHLO ' . (gethostname() ?: 'localhost'));
-
-    if ($port != 25) {
-        $r = $cmd('STARTTLS');
-        if (strpos($r, '220') === false) {
-            throw new Exception('STARTTLS rejected: ' . $r);
-        }
-        if (!stream_socket_enable_crypto($sock, true, STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT)) {
-            if (!stream_socket_enable_crypto($sock, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
-                throw new Exception('TLS upgrade failed');
-            }
-        }
-        $cmd('EHLO ' . (gethostname() ?: 'localhost'));
-    }
 
     $r = $cmd('AUTH LOGIN');
     $cmd(base64_encode($username));
