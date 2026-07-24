@@ -13,8 +13,10 @@ import {
   FiUser, 
   FiArrowLeft, 
   FiMail, 
-  FiCheckCircle 
+  FiCheckCircle,
+  FiArrowRight
 } from "react-icons/fi";
+import { marked } from "marked";
 import "../../../../styles/insat.scss";
 
 const EDITIONS_DATA = {
@@ -131,9 +133,27 @@ export default function NewsletterDetailPage() {
   const handleSubscribe = (e) => {
     e.preventDefault();
     if (email.trim()) {
-      setSubscribed(true);
-      setShowPopup(true);
-      setEmail("");
+      fetch("/api/forms", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          form_type: "Newsletter",
+          email: email
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          setSubscribed(true);
+          setShowPopup(true);
+          setEmail("");
+        } else {
+          alert("Error: " + (data.error || "Failed to subscribe. Please try again."));
+        }
+      })
+      .catch(err => {
+        console.error("Subscription error", err);
+      });
     }
   };
 
@@ -170,18 +190,42 @@ export default function NewsletterDetailPage() {
         style={{ width: `${scrollProgress}%`, zIndex: 100005 }}
       ></div>
 
+      {/* 1. Hero Banner Section */}
+      {edition.image && (
+        <div 
+          className="relative text-white py-28 bg-cover bg-center overflow-hidden min-h-[420px] flex items-end"
+          style={{ backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.7)), url(${edition.image})` }}
+        >
+          <div className="container px-6 md:px-12 lg:px-24 relative z-10 w-full text-left">
+            <Link href="/resources/weekly-newsletter" className="inline-flex items-center gap-2 text-slate-300 hover:text-white font-semibold mb-4 transition-colors font-secondary text-sm">
+              <FiArrowLeft /> Back to all editions
+            </Link>
+            <div className="max-w-4xl">
+              <span className="text-[#f15a24] font-bold text-sm tracking-wider uppercase mb-2 block font-secondary">
+                WEEKLY NEWSLETTER
+              </span>
+              <h1 className="text-4xl md:text-5xl font-bold font-secondary text-white leading-tight">
+                {edition.title}
+              </h1>
+            </div>
+          </div>
+        </div>
+      )}
+
       <section className="section bg-white pt-10 pb-24">
         <div className="container px-6 md:px-12 lg:px-24">
           
           {/* Back button */}
-          <div className="mb-8 text-left">
-            <Link 
-              href="/resources/weekly-newsletter"
-              className="inline-flex items-center gap-2 text-slate-500 hover:text-[#f15a24] font-extrabold text-xs transition-colors"
-            >
-              <FiArrowLeft size={14} /> Back to all editions
-            </Link>
-          </div>
+          {!edition.image && (
+            <div className="mb-8 text-left">
+              <Link 
+                href="/resources/weekly-newsletter"
+                className="inline-flex items-center gap-2 text-slate-500 hover:text-[#f15a24] font-extrabold text-xs transition-colors"
+              >
+                <FiArrowLeft size={14} /> Back to all editions
+              </Link>
+            </div>
+          )}
 
           <article>
             <div className="row justify-center">
@@ -226,9 +270,11 @@ export default function NewsletterDetailPage() {
                   <span className="text-xs font-bold text-[#f15a24] uppercase tracking-wider mb-3 block">
                     {edition.category}
                   </span>
-                  <h1 className="font-bold leading-tight text-3xl md:text-5xl text-slate-900">
-                    {edition.title}
-                  </h1>
+                  {!edition.image && (
+                    <h1 className="font-bold leading-tight text-3xl md:text-5xl text-slate-900">
+                      {edition.title}
+                    </h1>
+                  )}
                   
                   {/* Author Details and dates */}
                   <div className="mt-6 flex items-center border-b border-slate-100 pb-6">
@@ -256,8 +302,8 @@ export default function NewsletterDetailPage() {
 
                 {/* Newsletter content block */}
                 <section 
-                  className="content text-left" 
-                  dangerouslySetInnerHTML={{ __html: edition.content }}
+                  className="content text-left text-justify prose prose-slate max-w-none text-[#334155] leading-relaxed" 
+                  dangerouslySetInnerHTML={{ __html: marked.parse(edition.content || "") }}
                 />
 
                 {/* Subscription Card at bottom of article */}
@@ -304,6 +350,36 @@ export default function NewsletterDetailPage() {
 
         </div>
       </section>
+
+      {/* 4. Center Action Banner Section (Book a Demo Banner) */}
+      {(!edition.hasOwnProperty('showCta') || edition.showCta) && (
+        <section className="py-12 bg-white">
+          <div className="container px-6 md:px-12 lg:px-24">
+            <div className="bg-[#fff7f3] rounded-[1.5rem] px-8 py-8 md:py-10 text-center border border-[#f15a24]/10 shadow-sm relative overflow-hidden">
+              <div className="absolute -top-12 -left-12 w-24 h-24 rounded-full bg-[#f15a24]/5 pointer-events-none" />
+              <div className="absolute -bottom-16 -right-16 w-32 h-32 rounded-full bg-[#f15a24]/5 pointer-events-none" />
+
+              <div className="max-w-2xl mx-auto space-y-4 relative z-10">
+                <h3 className="text-xl md:text-2xl font-bold font-secondary text-slate-900">
+                  {edition.ctaTitle || "Ready to Build a Stronger Security Culture?"}
+                </h3>
+                <p className="text-sm text-slate-600 leading-relaxed font-normal max-w-xl mx-auto">
+                  {edition.ctaDescription || "Get a personalized walk-through of Innvikta InSAT to see how our simulated phishing campaigns and automated training modules reduce social engineering risks."}
+                </p>
+                <div className="pt-3">
+                  <Link 
+                    href={edition.ctaButtonUrl || "/book-demo"} 
+                    className="bg-[#f15a24] hover:bg-orange-600 !text-white px-5 py-2.5 rounded-lg transition-all duration-300 inline-flex items-center gap-1.5 whitespace-nowrap font-bold text-sm shadow-md shadow-orange-500/10 cursor-pointer"
+                  >
+                    {edition.ctaButtonText || "Book a Demo"} <FiArrowRight className="text-xs" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       <SuccessPopup 
         isOpen={showPopup} 
         onClose={() => setShowPopup(false)} 

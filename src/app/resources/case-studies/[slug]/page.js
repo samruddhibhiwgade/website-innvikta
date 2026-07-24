@@ -97,7 +97,7 @@ export default function CaseStudyDetail() {
                  {data.summaryParagraphs.map((para, i) => (
                    <p 
                      key={i} 
-                     className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal max-w-2xl prose prose-slate"
+                     className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal max-w-2xl prose prose-slate text-justify"
                      dangerouslySetInnerHTML={{ __html: para }}
                    />
                  ))}
@@ -111,7 +111,7 @@ export default function CaseStudyDetail() {
                  {data.challengeParagraphs.map((para, i) => (
                    <p 
                      key={i} 
-                     className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal max-w-2xl prose prose-slate"
+                     className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal max-w-2xl prose prose-slate text-justify"
                      dangerouslySetInnerHTML={{ __html: para }}
                    />
                  ))}
@@ -125,7 +125,7 @@ export default function CaseStudyDetail() {
                  {data.solutionParagraphs.map((para, i) => (
                    <p 
                      key={i} 
-                     className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal max-w-2xl prose prose-slate"
+                     className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal max-w-2xl prose prose-slate text-justify"
                      dangerouslySetInnerHTML={{ __html: para }}
                    />
                  ))}
@@ -229,7 +229,7 @@ export default function CaseStudyDetail() {
                 {data.cultureParagraphs.map((para, i) => para.trim() !== "" && (
                   <p 
                     key={i} 
-                    className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal prose prose-slate"
+                    className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal prose prose-slate text-justify"
                     dangerouslySetInnerHTML={{ __html: para }}
                   />
                 ))}
@@ -287,7 +287,7 @@ export default function CaseStudyDetail() {
                   {section.paragraphs && section.paragraphs.map((para, pIdx) => (
                     <p 
                       key={pIdx} 
-                      className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal prose prose-slate"
+                      className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal prose prose-slate text-justify"
                       dangerouslySetInnerHTML={{ __html: para }}
                     />
                   ))}
