@@ -98,3 +98,108 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     exit;
 }
+
+function smtpSend($to, $subject, $htmlBody) {
+    $host     = MAIL_HOST;
+    $port     = MAIL_PORT;
+    $username = MAIL_USERNAME;
+    $password = MAIL_PASSWORD;
+    $from     = MAIL_FROM;
+    $fromName = MAIL_FROM_NAME;
+
+    try {
+        $sock = @fsockopen('tcp://' . $host, $port, $errno, $errstr, 15);
+        if (!$sock) {
+            throw new Exception('Cannot connect to ' . $host . ':' . $port . ' — ' . $errstr);
+        }
+        stream_set_timeout($sock, 15);
+
+        $readAll = function() use ($sock) {
+            $resp = '';
+            while (!feof($sock)) {
+                $line = fgets($sock, 1024);
+                if ($line === false) break;
+                $resp .= $line;
+                if (strlen($line) >= 4 && $line[3] === ' ') break;
+            }
+            return $resp;
+        };
+
+        $cmd = function($command) use ($sock, $readAll) {
+            fwrite($sock, $command . "\r\n");
+            return $readAll();
+        };
+
+        $readAll(); // 220 Greeting
+        $cmd('EHLO ' . (gethostname() ?: 'localhost'));
+
+        if ($port != 25) {
+            $r = $cmd('STARTTLS');
+            if (strpos($r, '220') === false) {
+                throw new Exception('STARTTLS rejected: ' . $r);
+            }
+            if (!stream_socket_enable_crypto($sock, true, STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT)) {
+                if (!stream_socket_enable_crypto($sock, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
+                    throw new Exception('TLS upgrade failed');
+                }
+            }
+            $cmd('EHLO ' . (gethostname() ?: 'localhost'));
+        }
+
+        $r = $cmd('AUTH LOGIN');
+        if (strpos($r, '334') === false) {
+            throw new Exception('AUTH LOGIN not accepted: ' . $r);
+        }
+
+        $r = $cmd(base64_encode($username));
+        if (strpos($r, '334') === false) {
+            throw new Exception('Username not accepted: ' . $r);
+        }
+
+        $r = $cmd(base64_encode($password));
+        if (strpos($r, '235') === false) {
+            throw new Exception('Password rejected (check credentials): ' . $r);
+        }
+
+        $r = $cmd('MAIL FROM:<' . $from . '>');
+        if (strpos($r, '250') === false) {
+            throw new Exception('MAIL FROM rejected: ' . $r);
+        }
+
+        $r = $cmd('RCPT TO:<' . $to . '>');
+        if (strpos($r, '250') === false) {
+            throw new Exception('RCPT TO rejected: ' . $r);
+        }
+
+        $r = $cmd('DATA');
+        if (strpos($r, '354') === false) {
+            throw new Exception('DATA not accepted: ' . $r);
+        }
+
+        $encodedSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
+        $encodedFrom    = '=?UTF-8?B?' . base64_encode($fromName) . '?=';
+
+        $message  = 'Date: ' . date('r') . "\r\n";
+        $message .= 'From: ' . $encodedFrom . ' <' . $from . ">\r\n";
+        $message .= 'To: ' . $to . "\r\n";
+        $message .= 'Subject: ' . $encodedSubject . "\r\n";
+        $message .= 'MIME-Version: 1.0' . "\r\n";
+        $message .= 'Content-Type: text/html; charset=UTF-8' . "\r\n";
+        $message .= 'X-Mailer: FormsAPI/1.0' . "\r\n";
+        $message .= "\r\n";
+        $message .= $htmlBody . "\r\n.\r\n";
+
+        fwrite($sock, $message);
+        $r = $readAll();
+        if (strpos($r, '250') === false) {
+            throw new Exception('Message not accepted: ' . $r);
+        }
+
+        $cmd('QUIT');
+        fclose($sock);
+        return true;
+    } catch (Exception $e) {
+        error_log('[Forms SMTP Error] ' . $e->getMessage());
+        return false;
+    }
+}
