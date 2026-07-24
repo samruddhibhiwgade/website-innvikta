@@ -668,6 +668,8 @@ export default function MasterDashboard() {
                     ))}
                   </tbody>
                 </table>
+              </div>
+            )}
             {activeTab === "updates" && (
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
