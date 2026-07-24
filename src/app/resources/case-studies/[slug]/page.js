@@ -124,20 +124,6 @@ export default function CaseStudyDetail() {
                    </p>
                  ))}
                </div>
-
-               {/* Custom Sections */}
-               {data.customSections && data.customSections.map((section, sIdx) => (
-                 <div key={sIdx} className="space-y-4 pt-4">
-                   <h2 className="text-2xl md:text-[2rem] font-bold font-secondary text-[#0F172A] leading-snug tracking-tight mb-4">
-                     {section.title}
-                   </h2>
-                   {section.paragraphs && section.paragraphs.map((para, pIdx) => (
-                     <p key={pIdx} className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal max-w-2xl">
-                       {para}
-                     </p>
-                   ))}
-                 </div>
-               ))}
  
              </div>
 
@@ -269,7 +255,28 @@ export default function CaseStudyDetail() {
 
         </div>
       </section>
-      {/* Spacer or simple divider if needed, else empty */}
+
+      {/* Custom Sections (Rendered at the very end of the case study details) */}
+      {data.customSections && data.customSections.length > 0 && (
+        <section className="py-16 bg-[#FFFBF7] border-t border-slate-100">
+          <div className="container px-6 md:px-12 lg:px-24">
+            <div className="max-w-4xl mx-auto space-y-12 text-left">
+              {data.customSections.map((section, sIdx) => (
+                <div key={sIdx} className="space-y-4">
+                  <h2 className="text-2xl md:text-[2rem] font-bold font-secondary text-[#0F172A] leading-snug tracking-tight mb-4">
+                    {section.title}
+                  </h2>
+                  {section.paragraphs && section.paragraphs.map((para, pIdx) => (
+                    <p key={pIdx} className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal">
+                      {para}
+                    </p>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
     </GSAPWrapper>
   );
