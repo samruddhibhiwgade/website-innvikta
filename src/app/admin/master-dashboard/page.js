@@ -171,6 +171,12 @@ export default function MasterDashboard() {
     author: "Compliance Team",
     category: "Insights",
     content: "",
+    image: "",
+    ctaTitle: "",
+    ctaDescription: "",
+    ctaButtonText: "",
+    ctaButtonUrl: "",
+    showCta: true,
     mailSubscribers: false
   });
 
@@ -432,6 +438,12 @@ export default function MasterDashboard() {
       author: news.author || "Compliance Team",
       category: news.category || "Insights",
       content: news.content || "",
+      image: news.image || "",
+      ctaTitle: news.ctaTitle || "",
+      ctaDescription: news.ctaDescription || "",
+      ctaButtonText: news.ctaButtonText || "",
+      ctaButtonUrl: news.ctaButtonUrl || "",
+      showCta: news.hasOwnProperty('showCta') ? news.showCta : true,
       mailSubscribers: false
     });
     setEditorMode("edit");
@@ -562,6 +574,12 @@ export default function MasterDashboard() {
                     author: "Compliance Team",
                     category: "Insights",
                     content: "",
+                    image: "",
+                    ctaTitle: "",
+                    ctaDescription: "",
+                    ctaButtonText: "",
+                    ctaButtonUrl: "",
+                    showCta: true,
                     mailSubscribers: false
                   });
                 } else if (activeTab === "updates") {
@@ -1538,6 +1556,112 @@ export default function MasterDashboard() {
                     placeholder="Write newsletter HTML content..."
                     rows={12}
                   />
+                </div>
+
+                {/* Cover Image */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Cover Image URL</label>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={newsletterForm.image || ""}
+                      onChange={(e) => setNewsletterForm({ ...newsletterForm, image: e.target.value })}
+                      className="flex-1 px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800"
+                      placeholder="e.g. /images/newsletter-cover.jpg"
+                    />
+                    <label className="bg-slate-800 hover:bg-slate-700 text-white font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 cursor-pointer shadow-md select-none">
+                      <FiImage />
+                      <span>Upload</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={async (e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          const formData = new FormData();
+                          formData.append("file", file);
+                          try {
+                            const res = await fetch("/api/admin/upload", {
+                              method: "POST",
+                              body: formData
+                            });
+                            const data = await res.json();
+                            if (data.success) {
+                              setNewsletterForm({ ...newsletterForm, image: data.url });
+                              showNotification("success", "Cover image uploaded successfully!");
+                            } else {
+                              showNotification("error", data.error || "Failed to upload image.");
+                            }
+                          } catch (err) {
+                            showNotification("error", "Error uploading image.");
+                          }
+                        }}
+                        className="hidden"
+                      />
+                    </label>
+                  </div>
+                </div>
+
+                {/* Book a Demo Banner customization */}
+                <div className="border border-slate-100 rounded-xl p-4 bg-slate-50/50 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-xs font-black text-slate-700 uppercase tracking-wider">Book a Demo Banner</h4>
+                    <label className="flex items-center gap-1.5 text-xs text-slate-500 font-bold select-none cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={newsletterForm.showCta !== false}
+                        onChange={(e) => setNewsletterForm({ ...newsletterForm, showCta: e.target.checked })}
+                        className="w-3.5 h-3.5 rounded text-[#f15a24] focus:ring-[#f15a24]"
+                      />
+                      Show CTA Banner
+                    </label>
+                  </div>
+                  {newsletterForm.showCta !== false && (
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Banner Title</label>
+                        <input
+                          type="text"
+                          value={newsletterForm.ctaTitle || ""}
+                          onChange={(e) => setNewsletterForm({ ...newsletterForm, ctaTitle: e.target.value })}
+                          className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold"
+                          placeholder="e.g. Ready to Build a Stronger Security Culture?"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Banner Description</label>
+                        <textarea
+                          rows={3}
+                          value={newsletterForm.ctaDescription || ""}
+                          onChange={(e) => setNewsletterForm({ ...newsletterForm, ctaDescription: e.target.value })}
+                          className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold"
+                          placeholder="Get a personalized walk-through..."
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Button Text</label>
+                          <input
+                            type="text"
+                            value={newsletterForm.ctaButtonText || ""}
+                            onChange={(e) => setNewsletterForm({ ...newsletterForm, ctaButtonText: e.target.value })}
+                            className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold"
+                            placeholder="e.g. Book a Demo"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Button URL</label>
+                          <input
+                            type="text"
+                            value={newsletterForm.ctaButtonUrl || ""}
+                            onChange={(e) => setNewsletterForm({ ...newsletterForm, ctaButtonUrl: e.target.value })}
+                            className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold"
+                            placeholder="e.g. /book-demo"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex items-center gap-2 border border-slate-100 rounded-xl p-4 bg-slate-50/30">
