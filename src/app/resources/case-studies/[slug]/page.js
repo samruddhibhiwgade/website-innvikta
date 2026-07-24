@@ -210,53 +210,61 @@ export default function CaseStudyDetail() {
       </section>
 
       {/* 5. Additional Section (Quote & Team Image Layout) */}
-      <section className="py-20 bg-white">
-        <div className="container px-6 md:px-12 lg:px-24">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            {/* Left Side: Story details */}
-            <div className="lg:col-span-7 space-y-6 text-left">
-              <h2 className="text-2xl md:text-[2rem] font-bold font-secondary text-[#0F172A] leading-snug tracking-tight mb-4">
-                {data.cultureTitle || "Building a Stronger Security Culture"}
-              </h2>
-              {((data.cultureParagraphs && data.cultureParagraphs.length > 0) ? data.cultureParagraphs : [
-                "Building a security culture requires a program built around real behavior analytics, not slide library training. By triggering short, repeated reinforcement modules, employees understand the role they play in preserving compliance frameworks and cybersecurity defenses.",
-                "Using Innvikta InSAT, the organization achieved full compliance alignment, minimized repeat clickers, and accelerated threat containment times dramatically."
-              ]).map((para, i) => (
-                <p key={i} className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal">
-                  {para}
-                </p>
-              ))}
-            </div>
+      {data.cultureTitle && data.cultureParagraphs && data.cultureParagraphs.length > 0 && data.cultureParagraphs.some(p => p.trim() !== "") && (
+        <section className="py-20 bg-white border-b border-slate-100/50">
+          <div className="container px-6 md:px-12 lg:px-24">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              
+              {/* Left Side: Story details */}
+              <div className="lg:col-span-7 space-y-6 text-left">
+                <h2 className="text-2xl md:text-[2rem] font-bold font-secondary text-[#0F172A] leading-snug tracking-tight mb-4">
+                  {data.cultureTitle}
+                </h2>
+                {data.cultureParagraphs.map((para, i) => para.trim() !== "" && (
+                  <p key={i} className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal">
+                    {para}
+                  </p>
+                ))}
+              </div>
 
-            {/* Right Side: Collage / Collaboration Image */}
-            <div className="lg:col-span-5">
-              <img 
-                src={data.cultureImage || "/images/about-bg.jpeg"} 
-                alt="Security Compliance Team" 
-                className="w-full h-72 object-cover rounded-3xl border border-slate-200/80 shadow-sm"
-              />
-            </div>
+              {/* Right Side: Collage / Collaboration Image */}
+              {data.cultureImage && (
+                <div className="lg:col-span-5">
+                  <img 
+                    src={data.cultureImage} 
+                    alt="Security Compliance Team" 
+                    className="w-full h-72 object-cover rounded-3xl border border-slate-200/80 shadow-sm"
+                  />
+                </div>
+              )}
 
-          </div>
-
-          {/* 6. Big Quote Section (Centered, full width quote block) */}
-          <div className="max-w-4xl mx-auto pt-20 text-center relative">
-            <div className="absolute top-12 left-1/2 -translate-x-1/2 text-8xl font-serif text-slate-100 select-none pointer-events-none">
-              &ldquo;
-            </div>
-            <div className="relative z-10 space-y-6">
-              <blockquote className="text-xl md:text-2xl font-medium font-secondary text-slate-600 leading-relaxed italic">
-                {data.quoteText}
-              </blockquote>
-              <cite className="block text-xs font-bold text-[#f15a24] uppercase tracking-wider not-italic">
-                {data.quoteAuthor}
-              </cite>
             </div>
           </div>
+        </section>
+      )}
 
-        </div>
-      </section>
+      {/* 6. Big Quote Section (Centered, full width quote block) */}
+      {data.quoteText && (
+        <section className="py-20 bg-white">
+          <div className="container px-6 md:px-12 lg:px-24">
+            <div className="max-w-4xl mx-auto text-center relative">
+              <div className="absolute top-12 left-1/2 -translate-x-1/2 text-8xl font-serif text-slate-100 select-none pointer-events-none">
+                &ldquo;
+              </div>
+              <div className="relative z-10 space-y-6">
+                <blockquote className="text-xl md:text-2xl font-medium font-secondary text-slate-600 leading-relaxed italic">
+                  {data.quoteText}
+                </blockquote>
+                {data.quoteAuthor && (
+                  <cite className="block text-xs font-bold text-[#f15a24] uppercase tracking-wider not-italic">
+                    {data.quoteAuthor}
+                  </cite>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Custom Sections (Rendered at the very end of the case study details) */}
       {data.customSections && data.customSections.length > 0 && (
