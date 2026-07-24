@@ -29,6 +29,69 @@ import {
 const INDUSTRIES = ["BFSI", "Healthcare", "Insurance", "IT & Services", "Manufacturing", "Government"];
 const CATEGORIES = ["Insights", "Threat Defense", "Compliance"];
 
+// Reusable Word-style Rich Text Editor Toolbar Component
+function ToolbarEditor({ value, onChange, placeholder, rows = 8 }) {
+  const ref = useRef(null);
+
+  const applyFormatting = (syntax) => {
+    const textarea = ref.current;
+    if (!textarea) return;
+
+    const startPos = textarea.selectionStart;
+    const endPos = textarea.selectionEnd;
+    const originalText = textarea.value;
+    const selectedText = originalText.substring(startPos, endPos) || "text";
+
+    let replacement = "";
+    switch (syntax) {
+      case "bold": replacement = `**${selectedText}**`; break;
+      case "italic": replacement = `*${selectedText}*`; break;
+      case "h1": replacement = `\n# ${selectedText}\n`; break;
+      case "h2": replacement = `\n## ${selectedText}\n`; break;
+      case "h3": replacement = `\n### ${selectedText}\n`; break;
+      case "list": replacement = `\n- ${selectedText}`; break;
+      case "link": replacement = `[${selectedText}](url)`; break;
+      case "quote": replacement = `\n> ${selectedText}\n`; break;
+      case "table": replacement = `\n| Header 1 | Header 2 |\n| --- | --- |\n| Cell 1 | Cell 2 |\n`; break;
+    }
+
+    const newText = originalText.substring(0, startPos) + replacement + originalText.substring(endPos);
+    onChange(newText);
+
+    setTimeout(() => {
+      textarea.focus();
+      textarea.setSelectionRange(startPos + replacement.length, startPos + replacement.length);
+    }, 50);
+  };
+
+  return (
+    <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm bg-white">
+      {/* Word-style formatting toolbar */}
+      <div className="bg-slate-50 border-b border-slate-200 px-3 py-2 flex flex-wrap items-center gap-1.5">
+        <button type="button" onClick={() => applyFormatting("bold")} className="px-2.5 py-1 hover:bg-slate-200 text-slate-700 rounded cursor-pointer font-bold text-xs" title="Bold">B</button>
+        <button type="button" onClick={() => applyFormatting("italic")} className="px-2.5 py-1 hover:bg-slate-200 text-slate-700 rounded cursor-pointer italic text-xs" title="Italic">I</button>
+        <div className="w-px h-4 bg-slate-300 mx-1"></div>
+        <button type="button" onClick={() => applyFormatting("h1")} className="px-2 py-0.5 hover:bg-slate-200 text-slate-700 rounded cursor-pointer text-[10px] font-bold" title="Heading 1">H1</button>
+        <button type="button" onClick={() => applyFormatting("h2")} className="px-2 py-0.5 hover:bg-slate-200 text-slate-700 rounded cursor-pointer text-[10px] font-bold" title="Heading 2">H2</button>
+        <button type="button" onClick={() => applyFormatting("h3")} className="px-2 py-0.5 hover:bg-slate-200 text-slate-700 rounded cursor-pointer text-[10px] font-bold" title="Heading 3">H3</button>
+        <div className="w-px h-4 bg-slate-300 mx-1"></div>
+        <button type="button" onClick={() => applyFormatting("list")} className="px-2 py-1 hover:bg-slate-200 text-slate-700 rounded cursor-pointer text-xs font-bold" title="Bullet List">List</button>
+        <button type="button" onClick={() => applyFormatting("link")} className="px-2 py-1 hover:bg-slate-200 text-slate-700 rounded cursor-pointer text-xs font-bold" title="Link">Link</button>
+        <button type="button" onClick={() => applyFormatting("quote")} className="px-2 py-1 hover:bg-slate-200 text-slate-700 rounded cursor-pointer text-xs font-bold" title="Blockquote">Quote</button>
+        <button type="button" onClick={() => applyFormatting("table")} className="px-2 py-1 hover:bg-slate-200 text-slate-700 rounded cursor-pointer text-xs font-bold" title="Table">Table</button>
+      </div>
+      <textarea
+        ref={ref}
+        rows={rows}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="w-full px-4 py-3 text-xs font-mono text-slate-800 focus:outline-none focus:bg-slate-50/20"
+      />
+    </div>
+  );
+}
+
 export default function MasterDashboard() {
   const [activeTab, setActiveTab] = useState("blogs"); // "blogs", "cases", "newsletters"
   const [loading, setLoading] = useState(true);
@@ -576,11 +639,11 @@ export default function MasterDashboard() {
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Content (Markdown)</label>
-                  <textarea
-                    rows={12}
+                  <ToolbarEditor
                     value={blogForm.content}
-                    onChange={(e) => setBlogForm({ ...blogForm, content: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white"
+                    onChange={(val) => setBlogForm({ ...blogForm, content: val })}
+                    placeholder="Write article content..."
+                    rows={12}
                   />
                 </div>
                 <div className="flex items-center gap-2">
@@ -656,11 +719,11 @@ export default function MasterDashboard() {
 
                 <div>
                   <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Description</label>
-                  <textarea
-                    rows={3}
+                  <ToolbarEditor
                     value={caseForm.description}
-                    onChange={(e) => setCaseForm({ ...caseForm, description: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800"
+                    onChange={(val) => setCaseForm({ ...caseForm, description: val })}
+                    placeholder="Enter case study description summary..."
+                    rows={3}
                   />
                 </div>
 
@@ -672,6 +735,159 @@ export default function MasterDashboard() {
                     onChange={(e) => setCaseForm({ ...caseForm, atGlance: e.target.value.split("\n") })}
                     className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-805"
                   />
+                </div>
+
+                {/* Summary section */}
+                <div className="border border-slate-150 rounded-xl p-4 bg-slate-50/40 space-y-4">
+                  <h4 className="text-xs font-black text-slate-700 uppercase tracking-wider">Summary Section (Outcome Description)</h4>
+                  <div>
+                    <label className="block text-[10px] font-bold text-slate-500 uppercase mb-2">Summary Section Title</label>
+                    <input
+                      type="text"
+                      value={caseForm.summaryTitle}
+                      onChange={(e) => setCaseForm({ ...caseForm, summaryTitle: e.target.value })}
+                      className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold"
+                    />
+                  </div>
+                  <div className="space-y-3">
+                    <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-black">Content Paragraph Blocks (Success Sections)</label>
+                    {caseForm.summaryParagraphs.map((para, idx) => (
+                      <div key={idx} className="space-y-2 border border-slate-100 p-3 rounded-lg bg-white">
+                        <div className="flex justify-between items-center">
+                          <span className="text-[10px] font-bold text-[#f15a24]">Paragraph #{idx + 1}</span>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const updated = caseForm.summaryParagraphs.filter((_, i) => i !== idx);
+                              setCaseForm({ ...caseForm, summaryParagraphs: updated });
+                            }}
+                            className="text-[10px] font-bold text-rose-500 hover:underline cursor-pointer"
+                          >
+                            Remove Paragraph
+                          </button>
+                        </div>
+                        <ToolbarEditor
+                          value={para}
+                          onChange={(val) => {
+                            const updated = [...caseForm.summaryParagraphs];
+                            updated[idx] = val;
+                            setCaseForm({ ...caseForm, summaryParagraphs: updated });
+                          }}
+                          placeholder="Write paragraph content..."
+                          rows={4}
+                        />
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => setCaseForm({
+                        ...caseForm,
+                        summaryParagraphs: [...caseForm.summaryParagraphs, ""]
+                      })}
+                      className="flex items-center gap-1.5 text-xs text-[#f15a24] font-bold hover:underline"
+                    >
+                      <FiPlusCircle /> Add Paragraph Block
+                    </button>
+                  </div>
+                </div>
+
+                {/* Challenge section */}
+                <div className="border border-slate-150 rounded-xl p-4 bg-slate-50/40 space-y-4">
+                  <h4 className="text-xs font-black text-slate-700 uppercase tracking-wider">Challenge Section</h4>
+                  <div>
+                    <label className="block text-[10px] font-bold text-slate-500 uppercase mb-2">Challenge Section Title</label>
+                    <input
+                      type="text"
+                      value={caseForm.challengeTitle}
+                      onChange={(e) => setCaseForm({ ...caseForm, challengeTitle: e.target.value })}
+                      className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold"
+                    />
+                  </div>
+                  <div className="space-y-3">
+                    <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-black">Content Paragraph Blocks</label>
+                    {caseForm.challengeParagraphs.map((para, idx) => (
+                      <div key={idx} className="space-y-2 border border-slate-100 p-3 rounded-lg bg-white">
+                        <div className="flex justify-between items-center">
+                          <span className="text-[10px] font-bold text-[#f15a24]">Paragraph #{idx + 1}</span>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const updated = caseForm.challengeParagraphs.filter((_, i) => i !== idx);
+                              setCaseForm({ ...caseForm, challengeParagraphs: updated });
+                            }}
+                            className="text-[10px] font-bold text-rose-500 hover:underline cursor-pointer"
+                          >
+                            Remove Paragraph
+                          </button>
+                        </div>
+                        <ToolbarEditor
+                          value={para}
+                          onChange={(val) => {
+                            const updated = [...caseForm.challengeParagraphs];
+                            updated[idx] = val;
+                            setCaseForm({ ...caseForm, challengeParagraphs: updated });
+                          }}
+                          placeholder="Write paragraph content..."
+                          rows={4}
+                        />
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => setCaseForm({
+                        ...caseForm,
+                        challengeParagraphs: [...caseForm.challengeParagraphs, ""]
+                      })}
+                      className="flex items-center gap-1.5 text-xs text-[#f15a24] font-bold hover:underline"
+                    >
+                      <FiPlusCircle /> Add Paragraph Block
+                    </button>
+                  </div>
+                </div>
+
+                {/* Solution section */}
+                <div className="border border-slate-150 rounded-xl p-4 bg-slate-50/40 space-y-4">
+                  <h4 className="text-xs font-black text-slate-700 uppercase tracking-wider">Solution Section</h4>
+                  <div className="space-y-3">
+                    <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-black">Content Paragraph Blocks</label>
+                    {caseForm.solutionParagraphs.map((para, idx) => (
+                      <div key={idx} className="space-y-2 border border-slate-100 p-3 rounded-lg bg-white">
+                        <div className="flex justify-between items-center">
+                          <span className="text-[10px] font-bold text-[#f15a24]">Paragraph #{idx + 1}</span>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const updated = caseForm.solutionParagraphs.filter((_, i) => i !== idx);
+                              setCaseForm({ ...caseForm, solutionParagraphs: updated });
+                            }}
+                            className="text-[10px] font-bold text-rose-500 hover:underline cursor-pointer"
+                          >
+                            Remove Paragraph
+                          </button>
+                        </div>
+                        <ToolbarEditor
+                          value={para}
+                          onChange={(val) => {
+                            const updated = [...caseForm.solutionParagraphs];
+                            updated[idx] = val;
+                            setCaseForm({ ...caseForm, solutionParagraphs: updated });
+                          }}
+                          placeholder="Write paragraph content..."
+                          rows={4}
+                        />
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => setCaseForm({
+                        ...caseForm,
+                        solutionParagraphs: [...caseForm.solutionParagraphs, ""]
+                      })}
+                      className="flex items-center gap-1.5 text-xs text-[#f15a24] font-bold hover:underline"
+                    >
+                      <FiPlusCircle /> Add Paragraph Block
+                    </button>
+                  </div>
                 </div>
 
                 <div className="border border-slate-100 rounded-xl p-4 bg-slate-50/50 space-y-4">
@@ -776,11 +992,11 @@ export default function MasterDashboard() {
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Content (HTML body)</label>
-                  <textarea
-                    rows={10}
+                  <ToolbarEditor
                     value={newsletterForm.content}
-                    onChange={(e) => setNewsletterForm({ ...newsletterForm, content: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white"
+                    onChange={(val) => setNewsletterForm({ ...newsletterForm, content: val })}
+                    placeholder="Write newsletter HTML content..."
+                    rows={12}
                   />
                 </div>
 
