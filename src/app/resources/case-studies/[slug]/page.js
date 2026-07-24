@@ -115,6 +115,9 @@ export default function CaseStudyDetail() {
  
                {/* Block 3 */}
                <div className="space-y-4">
+                 <h2 className="text-2xl md:text-[2rem] font-bold font-secondary text-[#0F172A] leading-snug tracking-tight mb-4">
+                   {data.solutionTitle || "Solution Section"}
+                 </h2>
                  {data.solutionParagraphs.map((para, i) => (
                    <p key={i} className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal max-w-2xl">
                      {para}

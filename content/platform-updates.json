@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "slug": "innvikta-arcade-interactive-gamified-training-challenges",
+    "category": "INNVIKTA ARCADE",
+    "date": "May 12, 2026",
+    "title": "Innvikta Arcade: Interactive Gamified Training Challenges",
+    "desc": "Introduce employees to immersive role-based scenarios, competitive team leaderboards, and interactive security quizzes designed to keep training retention high throughout the year. Employees can test their security instincts in real-time, competing for the top spot on organizational leaderboards.",
+    "image": "/images/arcade-preview.png",
+    "graphicText": "INNVIKTA ARCADE"
+  },
+  {
+    "id": 2,
+    "slug": "advanced-intent-based-phishing-simulations",
+    "category": "SIMULATIONS",
+    "date": "April 08, 2026",
+    "title": "Advanced Intent-Based Phishing Simulations",
+    "desc": "Create custom simulation campaigns using automated template generators that reflect real-world social engineering, spear phishing, and credential harvesting attacks. Track delivery rates, click-through rates, and report metrics directly from a unified risk dashboard.",
+    "image": "/images/phishing-simulator.png",
+    "graphicText": "PHISHING SIMULATION"
+  },
+  {
+    "id": 3,
+    "slug": "regional-data-privacy-compliance-mappings",
+    "category": "COMPLIANCE",
+    "date": "March 15, 2026",
+    "title": "Regional Data Privacy & Compliance Mappings",
+    "desc": "Automatically map active security awareness courses to major global regulatory frameworks, including DPDP (India), GDPR (Europe), HIPAA (US), and SOC 2 audits. Generate comprehensive evidence logs and progress records with a single click to present to compliance auditors.",
+    "image": "/images/compliance-training.png",
+    "graphicText": "COMPLIANCE TRACKING"
+  }
+]

@@ -93,7 +93,7 @@ function ToolbarEditor({ value, onChange, placeholder, rows = 8 }) {
 }
 
 export default function MasterDashboard() {
-  const [activeTab, setActiveTab] = useState("blogs"); // "blogs", "cases", "newsletters"
+  const [activeTab, setActiveTab] = useState("blogs"); // "blogs", "cases", "newsletters", "updates"
   const [loading, setLoading] = useState(true);
   const [toast, setToast] = useState({ show: false, message: "", type: "success" });
 
@@ -101,6 +101,7 @@ export default function MasterDashboard() {
   const [blogsList, setBlogsList] = useState([]);
   const [casesList, setCasesList] = useState([]);
   const [newslettersList, setNewslettersList] = useState([]);
+  const [updatesList, setUpdatesList] = useState([]);
 
   // Search filter
   const [searchQuery, setSearchQuery] = useState("");
@@ -137,6 +138,7 @@ export default function MasterDashboard() {
     summaryParagraphs: [""],
     challengeTitle: "",
     challengeParagraphs: [""],
+    solutionTitle: "Solution Section",
     solutionParagraphs: [""],
     sidebarChallenge: "",
     sidebarDetails: [
@@ -157,6 +159,16 @@ export default function MasterDashboard() {
     category: "Insights",
     content: "",
     mailSubscribers: false
+  });
+
+  const [updateForm, setUpdateForm] = useState({
+    title: "",
+    slug: "",
+    category: "INNVIKTA ARCADE",
+    date: "",
+    desc: "",
+    image: "/images/arcade-preview.png",
+    graphicText: ""
   });
 
   // Notifications
@@ -183,6 +195,11 @@ export default function MasterDashboard() {
       const newsRes = await fetch("/api/newsletters");
       const newsData = await newsRes.json();
       if (Array.isArray(newsData)) setNewslettersList(newsData);
+
+      // Platform Updates
+      const updatesRes = await fetch("/api/platform-updates");
+      const updatesData = await updatesRes.json();
+      if (Array.isArray(updatesData)) setUpdatesList(updatesData);
 
       setLoading(false);
     } catch (err) {
@@ -366,6 +383,7 @@ export default function MasterDashboard() {
       summaryParagraphs: study.summaryParagraphs || [""],
       challengeTitle: study.challengeTitle || "",
       challengeParagraphs: study.challengeParagraphs || [""],
+      solutionTitle: study.solutionTitle || "Solution Section",
       solutionParagraphs: study.solutionParagraphs || [""],
       sidebarChallenge: study.sidebarChallenge || "",
       sidebarDetails: study.sidebarDetails || [
@@ -390,6 +408,59 @@ export default function MasterDashboard() {
       category: news.category || "Insights",
       content: news.content || "",
       mailSubscribers: false
+    });
+    setEditorMode("edit");
+  };
+
+  const handleDeleteUpdate = async (id) => {
+    if (!confirm("Are you sure you want to delete this platform update?")) return;
+    try {
+      const res = await fetch(`/api/platform-updates?id=${id}`, { method: "DELETE" });
+      const data = await res.json();
+      if (data.success) {
+        showNotification("success", "Platform update deleted successfully!");
+        fetchData();
+      } else {
+        showNotification("error", data.error || "Failed to delete platform update.");
+      }
+    } catch (err) {
+      showNotification("error", "Error deleting platform update.");
+    }
+  };
+
+  const handleSaveUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      const payload = { ...updateForm };
+      if (editingId) payload.id = editingId;
+      const res = await fetch("/api/platform-updates", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data.success) {
+        showNotification("success", "Platform update saved successfully!");
+        setEditorMode("list");
+        fetchData();
+      } else {
+        showNotification("error", data.error || "Failed to save platform update.");
+      }
+    } catch (err) {
+      showNotification("error", "Error saving platform update.");
+    }
+  };
+
+  const openEditUpdate = (item) => {
+    setEditingId(item.id);
+    setUpdateForm({
+      title: item.title || "",
+      slug: item.slug || "",
+      category: item.category || "INNVIKTA ARCADE",
+      date: item.date || "",
+      desc: item.desc || "",
+      image: item.image || "/images/arcade-preview.png",
+      graphicText: item.graphicText || ""
     });
     setEditorMode("edit");
   };
@@ -437,6 +508,7 @@ export default function MasterDashboard() {
                     summaryParagraphs: [""],
                     challengeTitle: "",
                     challengeParagraphs: [""],
+                    solutionTitle: "Solution Section",
                     solutionParagraphs: [""],
                     sidebarChallenge: "",
                     sidebarDetails: [
@@ -458,13 +530,23 @@ export default function MasterDashboard() {
                     content: "",
                     mailSubscribers: false
                   });
+                } else if (activeTab === "updates") {
+                  setUpdateForm({
+                    title: "",
+                    slug: "",
+                    category: "INNVIKTA ARCADE",
+                    date: new Date().toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' }),
+                    desc: "",
+                    image: "/images/arcade-preview.png",
+                    graphicText: ""
+                  });
                 }
                 setEditorMode("edit");
               }}
               className="flex items-center gap-2 bg-[#f15a24] hover:bg-orange-600 !text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer text-xs"
             >
               <FiPlus />
-              <span>Add New {activeTab === "blogs" ? "Blog" : activeTab === "cases" ? "Case Study" : "Newsletter"}</span>
+              <span>Add New {activeTab === "blogs" ? "Blog" : activeTab === "cases" ? "Case Study" : activeTab === "newsletters" ? "Newsletter" : "Platform Update"}</span>
             </button>
           )}
         </div>
@@ -472,7 +554,7 @@ export default function MasterDashboard() {
         {/* Dynamic tabs */}
         {editorMode === "list" && (
           <div className="flex gap-2 border-b border-slate-200 mb-6 pb-px">
-            {["blogs", "cases", "newsletters"].map((tab) => (
+            {["blogs", "cases", "newsletters", "updates"].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
@@ -482,7 +564,7 @@ export default function MasterDashboard() {
                     : "border-transparent text-slate-500 hover:text-slate-800"
                 }`}
               >
-                {tab === "cases" ? "Case Studies" : tab}
+                {tab === "cases" ? "Case Studies" : tab === "updates" ? "Platform Updates" : tab}
               </button>
             ))}
           </div>
@@ -586,6 +668,31 @@ export default function MasterDashboard() {
                     ))}
                   </tbody>
                 </table>
+            {activeTab === "updates" && (
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="bg-slate-50 border-b border-slate-100 text-slate-500 text-[10px] font-black uppercase tracking-wider">
+                      <th className="py-4 px-6">Update Title</th>
+                      <th className="py-4 px-6">Category</th>
+                      <th className="py-4 px-6">Date</th>
+                      <th className="py-4 px-6 text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 text-xs font-semibold text-slate-700">
+                    {updatesList.map((item) => (
+                      <tr key={item.id} className="hover:bg-slate-50/40">
+                        <td className="py-4 px-6 font-bold text-slate-900">{item.title}</td>
+                        <td className="py-4 px-6">{item.category}</td>
+                        <td className="py-4 px-6">{item.date}</td>
+                        <td className="py-4 px-6 text-right flex justify-end gap-2">
+                          <button onClick={() => openEditUpdate(item)} className="p-2 text-slate-500 hover:text-[#f15a24] bg-slate-50 rounded-lg cursor-pointer"><FiEdit /></button>
+                          <button onClick={() => handleDeleteUpdate(item.id)} className="p-2 text-slate-500 hover:text-rose-600 bg-slate-50 rounded-lg cursor-pointer"><FiTrash2 /></button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             )}
           </div>
@@ -594,7 +701,7 @@ export default function MasterDashboard() {
           <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
             <div className="flex justify-between items-center mb-6 border-b border-slate-100 pb-3">
               <h3 className="text-base font-bold text-slate-900">
-                {editingId ? "Edit" : "Create New"} {activeTab === "blogs" ? "Blog Post" : activeTab === "cases" ? "Case Study" : "Newsletter"}
+                {editingId ? "Edit" : "Create New"} {activeTab === "blogs" ? "Blog Post" : activeTab === "cases" ? "Case Study" : activeTab === "newsletters" ? "Newsletter" : "Platform Update"}
               </h3>
               <button 
                 onClick={() => setEditorMode("list")}
@@ -848,6 +955,15 @@ export default function MasterDashboard() {
                 {/* Solution section */}
                 <div className="border border-slate-150 rounded-xl p-4 bg-slate-50/40 space-y-4">
                   <h4 className="text-xs font-black text-slate-700 uppercase tracking-wider">Solution Section</h4>
+                  <div>
+                    <label className="block text-[10px] font-bold text-slate-500 uppercase mb-2">Solution Section Title</label>
+                    <input
+                      type="text"
+                      value={caseForm.solutionTitle}
+                      onChange={(e) => setCaseForm({ ...caseForm, solutionTitle: e.target.value })}
+                      className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold"
+                    />
+                  </div>
                   <div className="space-y-3">
                     <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-black">Content Paragraph Blocks</label>
                     {caseForm.solutionParagraphs.map((para, idx) => (
@@ -1018,6 +1134,95 @@ export default function MasterDashboard() {
 
                 <button type="submit" className="bg-[#f15a24] hover:bg-orange-600 !text-white font-bold px-6 py-2.5 rounded-xl text-xs flex items-center gap-2 cursor-pointer shadow-md">
                   <FiSave /> Publish Newsletter
+                </button>
+              </form>
+            )}
+
+            {/* Platform Updates Editor */}
+            {activeTab === "updates" && (
+              <form onSubmit={handleSaveUpdate} className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Update Title</label>
+                    <input
+                      type="text"
+                      required
+                      value={updateForm.title}
+                      onChange={(e) => setUpdateForm({ ...updateForm, title: e.target.value })}
+                      className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-808"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Category (e.g. SIMULATIONS, INNVIKTA ARCADE)</label>
+                    <input
+                      type="text"
+                      required
+                      value={updateForm.category}
+                      onChange={(e) => setUpdateForm({ ...updateForm, category: e.target.value })}
+                      className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-808"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Date (e.g. May 12, 2026)</label>
+                    <input
+                      type="text"
+                      required
+                      value={updateForm.date}
+                      onChange={(e) => setUpdateForm({ ...updateForm, date: e.target.value })}
+                      className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-808"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Graphic Banner Text</label>
+                    <input
+                      type="text"
+                      required
+                      value={updateForm.graphicText}
+                      onChange={(e) => setUpdateForm({ ...updateForm, graphicText: e.target.value })}
+                      className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-808"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Banner Image URL</label>
+                    <input
+                      type="text"
+                      required
+                      value={updateForm.image}
+                      onChange={(e) => setUpdateForm({ ...updateForm, image: e.target.value })}
+                      className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-808"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase mb-2">URL Slug (Auto-generated if empty)</label>
+                    <input
+                      type="text"
+                      value={updateForm.slug}
+                      onChange={(e) => setUpdateForm({ ...updateForm, slug: e.target.value })}
+                      className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-808"
+                      placeholder="e.g. custom-slug-value"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Short Description</label>
+                  <textarea
+                    rows={3}
+                    required
+                    value={updateForm.desc}
+                    onChange={(e) => setUpdateForm({ ...updateForm, desc: e.target.value })}
+                    className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-808"
+                  />
+                </div>
+
+                <button type="submit" className="bg-[#f15a24] hover:bg-orange-600 !text-white font-bold px-6 py-2.5 rounded-xl text-xs flex items-center gap-2 cursor-pointer shadow-md">
+                  <FiSave /> Save Platform Update
                 </button>
               </form>
             )}

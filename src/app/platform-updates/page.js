@@ -2,41 +2,29 @@
 
 import SeoMeta from "@layouts/partials/SeoMeta";
 import "../../styles/features/insat-core.scss";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
 
 export default function PlatformUpdatesPage() {
-  const updatesList = [
-    {
-      slug: "innvikta-arcade-interactive-gamified-training-challenges",
-      category: "INNVIKTA ARCADE",
-      date: "May 12, 2026",
-      title: "Innvikta Arcade: Interactive Gamified Training Challenges",
-      desc: "Introduce employees to immersive role-based scenarios, competitive team leaderboards, and interactive security quizzes designed to keep training retention high throughout the year. Employees can test their security instincts in real-time, competing for the top spot on organizational leaderboards.",
-      image: "/images/arcade-preview.png",
-      graphicText: "INNVIKTA ARCADE"
-    },
-    {
-      slug: "advanced-intent-based-phishing-simulations",
-      category: "SIMULATIONS",
-      date: "April 08, 2026",
-      title: "Advanced Intent-Based Phishing Simulations",
-      desc: "Create custom simulation campaigns using automated template generators that reflect real-world social engineering, spear phishing, and credential harvesting attacks. Track delivery rates, click-through rates, and report metrics directly from a unified risk dashboard.",
-      image: "/images/phishing-simulator.png",
-      graphicText: "PHISHING SIMULATION"
-    },
-    {
-      slug: "regional-data-privacy-compliance-mappings",
-      category: "COMPLIANCE",
-      date: "March 15, 2026",
-      title: "Regional Data Privacy & Compliance Mappings",
-      desc: "Automatically map active security awareness courses to major global regulatory frameworks, including DPDP (India), GDPR (Europe), HIPAA (US), and SOC 2 audits. Generate comprehensive evidence logs and progress records with a single click to present to compliance auditors.",
-      image: "/images/compliance-training.png",
-      graphicText: "COMPLIANCE TRACKING"
-    }
-  ];
+  const [updatesList, setUpdatesList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/platform-updates")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setUpdatesList(data);
+        }
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching updates list", err);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <GSAPWrapper>
@@ -141,8 +129,14 @@ export default function PlatformUpdatesPage() {
 
         {/* ================= LIST OF UPDATES ================= */}
         <div className="container px-6 md:px-12 lg:px-24 mb-16">
-          <div className="space-y-12">
-            {updatesList.map((update, idx) => (
+          {loading ? (
+            <div className="py-20 text-center">
+              <div className="w-10 h-10 border-4 border-[#f15a24] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+              <p className="text-slate-500 text-xs font-bold">Loading Platform Updates...</p>
+            </div>
+          ) : (
+            <div className="space-y-12">
+              {updatesList.map((update, idx) => (
               <div 
                 key={idx} 
                 className="grid grid-cols-1 md:grid-cols-12 gap-8 py-10 border-b border-slate-200/60 items-center"
@@ -190,7 +184,8 @@ export default function PlatformUpdatesPage() {
                 </div>
               </div>
             ))}
-          </div>
+            </div>
+          )}
         </div>
 
       </div>
