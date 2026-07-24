@@ -95,9 +95,11 @@ export default function CaseStudyDetail() {
                    {data.summaryTitle}
                  </h2>
                  {data.summaryParagraphs.map((para, i) => (
-                   <p key={i} className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal max-w-2xl">
-                     {para}
-                   </p>
+                   <p 
+                     key={i} 
+                     className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal max-w-2xl prose prose-slate"
+                     dangerouslySetInnerHTML={{ __html: para }}
+                   />
                  ))}
                </div>
  
@@ -107,9 +109,11 @@ export default function CaseStudyDetail() {
                    {data.challengeTitle}
                  </h2>
                  {data.challengeParagraphs.map((para, i) => (
-                   <p key={i} className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal max-w-2xl">
-                     {para}
-                   </p>
+                   <p 
+                     key={i} 
+                     className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal max-w-2xl prose prose-slate"
+                     dangerouslySetInnerHTML={{ __html: para }}
+                   />
                  ))}
                </div>
  
@@ -119,9 +123,11 @@ export default function CaseStudyDetail() {
                    {data.solutionTitle || "Solution Section"}
                  </h2>
                  {data.solutionParagraphs.map((para, i) => (
-                   <p key={i} className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal max-w-2xl">
-                     {para}
-                   </p>
+                   <p 
+                     key={i} 
+                     className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal max-w-2xl prose prose-slate"
+                     dangerouslySetInnerHTML={{ __html: para }}
+                   />
                  ))}
                </div>
  
@@ -221,9 +227,11 @@ export default function CaseStudyDetail() {
                   {data.cultureTitle}
                 </h2>
                 {data.cultureParagraphs.map((para, i) => para.trim() !== "" && (
-                  <p key={i} className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal">
-                    {para}
-                  </p>
+                  <p 
+                    key={i} 
+                    className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal prose prose-slate"
+                    dangerouslySetInnerHTML={{ __html: para }}
+                  />
                 ))}
               </div>
 
@@ -277,9 +285,11 @@ export default function CaseStudyDetail() {
                     {section.title}
                   </h2>
                   {section.paragraphs && section.paragraphs.map((para, pIdx) => (
-                    <p key={pIdx} className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal">
-                      {para}
-                    </p>
+                    <p 
+                      key={pIdx} 
+                      className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal prose prose-slate"
+                      dangerouslySetInnerHTML={{ __html: para }}
+                    />
                   ))}
                 </div>
               ))}
