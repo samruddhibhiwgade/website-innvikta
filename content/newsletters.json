@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "title": "The Future of Human Risk Management in 2026",
+    "description": "Discover how AI-driven behavioral profiling, continuous training, and automated phishing feedback loops are redefining enterprise cybersecurity culture.",
+    "date": "July 15, 2026",
+    "readTime": "6 min read",
+    "author": "Derick C.",
+    "category": "Insights",
+    "slug": "future-of-human-risk-management",
+    "content": "\n      <p>For years, security awareness training followed a simple, predictable pattern: assign a compliance video once a year, run a generic phishing simulation, record the completion, and hope for the best. But as we step into 2026, threat actors are leveraging AI to automate highly targeted social engineering campaigns at scale. The traditional, checklist-based approach is no longer sufficient.</p>\n\n      <h2>The Rise of Behavioral Profiling</h2>\n      <p>Modern human risk management (HRM) moves beyond simple compliance metrics. It uses active data telemetry to build dynamic risk profiles for every employee. Rather than treating everyone the same, organizations now analyze who is being targeted, how they interact with security prompts, and their past susceptibility.</p>\n      \n      <blockquote>\n        \"By profiling user vulnerabilities dynamically, security teams can deliver micro-learning campaigns exactly when and where they are needed most, reducing cognitive overload and maximizing engagement.\"\n      </blockquote>\n\n      <h2>Automated Feedback Loops</h2>\n      <p>One of the biggest shifts in 2026 is the introduction of automated response loops. When an employee reports a suspicious email using a reporter button, the email is analyzed in real-time by AI triaging engines. Within seconds, the employee receives a personalized feedback message detailing whether the email was a simulation, a clean email, or a genuine threat. This instant reinforcement builds high trust and encourages active reporting.</p>\n\n      <h2>Key Takeaways for Security Leaders</h2>\n      <ul>\n        <li><strong>Ditch Annual Modules:</strong> Pivot to bite-sized 2-minute micro-learning scenarios integrated into the daily flow of work.</li>\n        <li><strong>Contextual Phishing:</strong> Match phishing templates to the actual SaaS tools used by specific departments (e.g., GitHub templates for Devs, Salesforce for Sales).</li>\n        <li><strong>Reward Reporting:</strong> Celebrate employees who consistently detect and report threats rather than solely punishing clickers.</li>\n      </ul>\n    "
+  },
+  {
+    "id": 2,
+    "title": "Combating Vishing & Audio Deepfakes",
+    "description": "Practical strategies for training employees to detect AI voice cloning, phone scams, and high-frequency corporate social engineering campaigns.",
+    "date": "July 08, 2026",
+    "readTime": "8 min read",
+    "author": "Derick C.",
+    "category": "Threat Defense",
+    "slug": "combating-vishing-attacks-deepfakes",
+    "content": "\n      <p>Vishing (voice phishing) has grown exponentially in complexity due to the availability of generative AI voice cloning software. It takes less than 3 seconds of reference audio to clone a voice with near-perfect accuracy. Organizations must update their defensive training to protect employees from advanced telephone scams.</p>\n\n      <h2>How AI-Powered Voice Cloning Works</h2>\n      <p>Attackers scrape public webinars, social media videos, or news interviews of corporate executives to harvest audio samples. They then use text-to-speech tools to impersonate CFOs, CEOs, or IT admins, calling junior staff to request urgent wire transfers, credential releases, or MFA bypass confirmations.</p>\n\n      <h2>Developing a Verification Policy</h2>\n      <p>To combat voice impersonation, companies should establish a strict verification protocol for out-of-band requests. No sensitive operation should be authorized solely on a phone call. Require multi-step approval through official chat channels or secondary managers.</p>\n    "
+  },
+  {
+    "id": 3,
+    "title": "DPDP Act 2023: Employee Awareness Checklist",
+    "description": "Ensure your workforce understands data fiduciary duties, consent managers, and personal data rights under the newly notified rules.",
+    "date": "July 01, 2026",
+    "readTime": "5 min read",
+    "author": "Compliance Team",
+    "category": "Compliance",
+    "slug": "dpdp-act-employee-compliance-check",
+    "content": "\n      <p>India's Digital Personal Data Protection (DPDP) Act 2023 introduces major responsibilities for data fiduciaries. Since employee negligence is a primary cause of data exposure, educating staff on consent and personal data security is a high priority.</p>\n\n      <h2>Employee Obligations Checklist</h2>\n      <ul>\n        <li><strong>Purpose Limitation:</strong> Only process personal data for the specific reason consent was given.</li>\n        <li><strong>Data Security:</strong> Maintain secure access passwords, avoid downloading data to unauthorized personal devices.</li>\n        <li><strong>Breach Escalation:</strong> Immediately notify the DPO in case of any suspected unauthorized access or storage errors.</li>\n      </ul>\n    "
+  }
+]

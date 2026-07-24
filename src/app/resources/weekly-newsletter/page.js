@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
 import SeoMeta from "@layouts/partials/SeoMeta";
@@ -15,47 +15,26 @@ import {
 } from "react-icons/fi";
 import "../../../styles/insat.scss";
 
-const NEWSLETTER_EDITIONS = [
-  {
-    id: 1,
-    title: "The Future of Human Risk Management in 2026",
-    description: "Discover how AI-driven behavioral profiling, continuous training, and automated phishing feedback loops are redefining enterprise cybersecurity culture.",
-    date: "July 15, 2026",
-    readTime: "6 min read",
-    author: "Derick C.",
-    category: "Insights",
-    slug: "future-of-human-risk-management"
-  },
-  {
-    id: 2,
-    title: "Combating Vishing & Audio Deepfakes",
-    description: "Practical strategies for training employees to detect AI voice cloning, phone scams, and high-frequency corporate social engineering campaigns.",
-    date: "July 08, 2026",
-    readTime: "8 min read",
-    author: "Derick C.",
-    category: "Threat Defense",
-    slug: "combating-vishing-attacks-deepfakes"
-  },
-  {
-    id: 3,
-    title: "DPDP Act 2023: Employee Awareness Checklist",
-    description: "Ensure your workforce understands data fiduciary duties, consent managers, and personal data rights under the newly notified rules.",
-    date: "July 01, 2026",
-    readTime: "5 min read",
-    author: "Compliance Team",
-    category: "Compliance",
-    slug: "dpdp-act-employee-compliance-check"
-  }
-];
-
 const CATEGORIES = ["All Categories", "Insights", "Threat Defense", "Compliance"];
 
 export default function WeeklyNewsletterPage() {
+  const [newsletters, setNewsletters] = useState([]);
   const [activeCategory, setActiveCategory] = useState("All Categories");
   const [searchQuery, setSearchQuery] = useState("");
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/newsletters")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setNewsletters(data);
+        }
+      })
+      .catch(err => console.error("Error fetching newsletter editions", err));
+  }, []);
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -67,13 +46,13 @@ export default function WeeklyNewsletterPage() {
   };
 
   const filteredEditions = useMemo(() => {
-    return NEWSLETTER_EDITIONS.filter((edition) => {
+    return newsletters.filter((edition) => {
       const matchesCategory = activeCategory === "All Categories" || edition.category === activeCategory;
       const matchesSearch = edition.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                             edition.description.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesCategory && matchesSearch;
     });
-  }, [activeCategory, searchQuery]);
+  }, [activeCategory, searchQuery, newsletters]);
 
   return (
     <GSAPWrapper>

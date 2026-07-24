@@ -805,7 +805,7 @@ const menuData = {
           label: "Weekly Newsletter",
           href: "/resources/weekly-newsletter",
           svgType: "resources",
-          image: "/images/menu-Resources menu bar image.png"
+          image: "/images/menu-innvikta cyberhelp.png"
         }
       },
       {
@@ -820,7 +820,7 @@ const menuData = {
           { name: "Maturity Benchmarks", desc: "Compare regional click rates and reporting rates against industry peers.", href: "/maturity-benchmarks" },
           { name: "Case Studies", desc: "Success stories from real enterprise security leadership teams.", href: "/resources/case-studies" },
           { name: "Platform Updates", desc: "See the latest features added to the Innvikta training suite.", href: "/platform-updates" },
-          { name: "DPDP at a Glance", desc: "A quick summary of India's Digital Personal Data Protection Act compliance requirements.", href: "/resources/dpdp-at-a-glance" },
+          { name: "DPDP at a Glance", desc: "A quick summary of India's DPDP Act compliance requirements.", href: "/resources/dpdp-at-a-glance" },
           { name: "Weekly Newsletter", desc: "Security tips and campaign ideas delivered directly to your inbox.", href: "/resources/weekly-newsletter" }
         ],
         cta: {
@@ -829,7 +829,7 @@ const menuData = {
           label: "Weekly Newsletter",
           href: "/resources/weekly-newsletter",
           svgType: "resources",
-          image: "/images/menu-Resources menu bar image.png"
+          image: "/images/menu-blog.png"
         }
       }
     ]
@@ -901,7 +901,8 @@ const menuData = {
           desc: "Utilize interactive gamified lessons that build defensive employee habits through story play.",
           label: "Launch a Free Challenge",
           href: "/cyber-arcade",
-          svgType: "arcade"
+          svgType: "arcade",
+          image: "/images/menu-innvikta arcade.png"
         }
       },
       {
@@ -921,7 +922,8 @@ const menuData = {
           desc: "Leverage gamification mechanics to achieve up to 94% training engagement rates.",
           label: "See Arcade Benefits",
           href: "/cyber-arcade",
-          svgType: "arcade"
+          svgType: "arcade",
+          image: "/images/menu-innvikta arcade.png"
         }
       }
     ]
@@ -944,7 +946,8 @@ const menuData = {
           desc: "Expand your portfolio with our leading security awareness and human risk analytics tools.",
           label: "Become a Partner",
           href: "/partners#form",
-          svgType: "partners"
+          svgType: "partners",
+          image: "/images/menu-partners.png"
         }
       },
       {
@@ -962,7 +965,8 @@ const menuData = {
           desc: "Rebrand the training experience and deliver human risk visibility as a managed service.",
           label: "Explore Reseller Program",
           href: "/partners#form",
-          svgType: "partners"
+          svgType: "partners",
+          image: "/images/menu-partners.png"
         }
       }
     ]
@@ -987,7 +991,8 @@ const menuData = {
           desc: "Read about our commitment to secure employee work habits and mitigate social engineering vectors.",
           label: "Read About Us",
           href: "/about",
-          svgType: "company"
+          svgType: "company",
+          image: "/images/menu-company.png"
         }
       }
     ]
@@ -1849,7 +1854,7 @@ const Header = () => {
                             <div className="w-[240px] lg:w-[290px] xl:w-[350px] 2xl:w-[400px] pt-4 pb-8 xl:pt-6 xl:pb-12 px-3 xl:px-6 border-l border-slate-200/10 bg-transparent shrink-0 flex flex-col justify-between">
                               <div className="flex flex-col gap-3 relative text-slate-700 w-full">
                                 {currentTab.cta.image ? (
-                                  <img src={currentTab.cta.image} alt={currentTab.cta.title} className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-500 rounded-xl" style={{ minHeight: activeMegaMenu === "resources" ? "320px" : "160px" }} />
+                                  <img src={currentTab.cta.image} alt={currentTab.cta.title} className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-500 rounded-xl" style={{ minHeight: activeMegaMenu === "resources" ? "240px" : "180px" }} />
                                 ) : (
                                   <div className="w-full aspect-[4/3] flex items-center justify-center overflow-hidden rounded-xl">
                                     <RenderSvgIllustration type={currentTab.cta.svgType} />

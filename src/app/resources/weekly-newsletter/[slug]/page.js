@@ -95,8 +95,26 @@ export default function NewsletterDetailPage() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  
+  const [newsletters, setNewsletters] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const edition = EDITIONS_DATA[slug] || EDITIONS_DATA["future-of-human-risk-management"];
+  useEffect(() => {
+    fetch("/api/newsletters")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setNewsletters(data);
+        }
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching newsletters", err);
+        setLoading(false);
+      });
+  }, []);
+
+  const edition = newsletters.find(item => item.slug === slug) || newsletters[0];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -118,6 +136,26 @@ export default function NewsletterDetailPage() {
       setEmail("");
     }
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center" style={{ paddingTop: "8rem" }}>
+        <div className="w-12 h-12 border-4 border-[#f15a24] border-t-transparent rounded-full animate-spin mb-4" />
+        <span className="text-slate-500 font-bold text-sm">Loading Newsletter...</span>
+      </div>
+    );
+  }
+
+  if (!edition) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center" style={{ paddingTop: "8rem" }}>
+        <span className="text-slate-500 font-bold text-sm">Newsletter Edition Not Found</span>
+        <Link href="/resources/weekly-newsletter" className="text-[#f15a24] font-bold mt-4">Back to Newsletter List</Link>
+      </div>
+    );
+  }
+
+  const otherEditions = newsletters.filter(item => item.slug !== slug);
 
   return (
     <GSAPWrapper>
@@ -156,7 +194,7 @@ export default function NewsletterDetailPage() {
                   <div className="border-b border-slate-100 pb-6">
                     <h4 className="text-xs font-black uppercase tracking-wider text-slate-400 mb-4">Recent Editions</h4>
                     <ul className="space-y-3.5">
-                      {OTHER_EDITIONS.filter(item => item.slug !== slug).map((item) => (
+                      {otherEditions.map((item) => (
                         <li key={item.slug}>
                           <Link 
                             href={`/resources/weekly-newsletter/${item.slug}`}

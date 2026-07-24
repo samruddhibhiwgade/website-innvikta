@@ -5,7 +5,7 @@ import Link from "next/link";
 import { 
   FiPlus, FiEdit, FiTrash2, FiFileText, FiSave, FiX, FiCheck, 
   FiAlertCircle, FiBold, FiItalic, FiLink, FiImage, FiList, 
-  FiEye, FiTrendingUp, FiSearch, FiUploadCloud, FiUsers
+  FiEye, FiTrendingUp, FiSearch, FiUploadCloud, FiUsers, FiVideo
 } from "react-icons/fi";
 
 const AVAILABLE_CATEGORIES = [
@@ -131,7 +131,19 @@ export default function AdminBlogPanel() {
   const [showImageModal, setShowImageModal] = useState(false);
   const [inlineImageFile, setInlineImageFile] = useState(null);
   const [inlineImageAlt, setInlineImageAlt] = useState("");
+  const [inlineImageWidth, setInlineImageWidth] = useState("100%");
+  const [inlineImageAlign, setInlineImageAlign] = useState("center");
   const [isUploadingInline, setIsUploadingInline] = useState(false);
+
+  // Custom Video Modal States
+  const [showVideoModal, setShowVideoModal] = useState(false);
+  const [videoFile, setVideoFile] = useState(null);
+  const [videoSrcUrl, setVideoSrcUrl] = useState("");
+  const [videoWidth, setVideoWidth] = useState("100%");
+  const [videoHeight, setVideoHeight] = useState("auto");
+  const [videoAlign, setVideoAlign] = useState("center");
+  const [videoTitle, setVideoTitle] = useState("");
+  const [isUploadingVideo, setIsUploadingVideo] = useState(false);
 
   // FAQ Modal States
   const [showFaqModal, setShowFaqModal] = useState(false);
@@ -415,7 +427,7 @@ export default function AdminBlogPanel() {
       const data = await res.json();
       if (data.success) {
         const altText = inlineImageAlt || "Inline Image";
-        const imageMarkdown = `![${altText}](${data.url})`;
+        const imageMarkdown = `<BlogImage src="${data.url}" alt="${altText}" width="${inlineImageWidth}" align="${inlineImageAlign}" />`;
         
         // Insert markdown tag at cursor
         const textarea = textareaRef.current;
@@ -435,6 +447,8 @@ export default function AdminBlogPanel() {
         setShowImageModal(false);
         setInlineImageFile(null);
         setInlineImageAlt("");
+        setInlineImageWidth("100%");
+        setInlineImageAlign("center");
         showNotification("success", "Image inserted successfully!");
       } else {
         showNotification("error", data.error || "Failed to upload image.");
@@ -443,6 +457,69 @@ export default function AdminBlogPanel() {
       showNotification("error", "Error uploading image.");
     } finally {
       setIsUploadingInline(false);
+    }
+  };
+
+  // Handle uploading or linking video and inserting into content
+  const handleInsertVideo = async (e) => {
+    e.preventDefault();
+    let finalVideoUrl = videoSrcUrl.trim();
+
+    if (!finalVideoUrl && !videoFile) {
+      showNotification("error", "Please select a video file or paste a video URL.");
+      return;
+    }
+
+    setIsUploadingVideo(true);
+
+    try {
+      if (videoFile) {
+        const uploadData = new FormData();
+        uploadData.append("file", videoFile);
+
+        const res = await fetch("/api/admin/upload", {
+          method: "POST",
+          body: uploadData,
+        });
+        const data = await res.json();
+        if (data.success) {
+          finalVideoUrl = data.url;
+        } else {
+          showNotification("error", data.error || "Failed to upload video.");
+          setIsUploadingVideo(false);
+          return;
+        }
+      }
+
+      const videoMarkdown = `<Video src="${finalVideoUrl}" title="${videoTitle || 'Embedded Video'}" width="${videoWidth}" height="${videoHeight}" align="${videoAlign}" />`;
+      
+      // Insert tag at cursor
+      const textarea = textareaRef.current;
+      if (textarea) {
+        const startPos = textarea.selectionStart;
+        const endPos = textarea.selectionEnd;
+        const originalText = textarea.value;
+        const newText = originalText.substring(0, startPos) + videoMarkdown + originalText.substring(endPos);
+        setFormData((prev) => ({ ...prev, content: newText }));
+        
+        setTimeout(() => {
+          textarea.focus();
+          textarea.setSelectionRange(startPos + videoMarkdown.length, startPos + videoMarkdown.length);
+        }, 50);
+      }
+
+      setShowVideoModal(false);
+      setVideoFile(null);
+      setVideoSrcUrl("");
+      setVideoTitle("");
+      setVideoWidth("100%");
+      setVideoHeight("auto");
+      setVideoAlign("center");
+      showNotification("success", "Video inserted successfully!");
+    } catch (err) {
+      showNotification("error", "Error inserting video.");
+    } finally {
+      setIsUploadingVideo(false);
     }
   };
 
@@ -819,6 +896,70 @@ export default function AdminBlogPanel() {
     html = html.replace(/^###\s+(.+)$/gm, '<h3 class="text-lg font-bold text-slate-900 mt-4 mb-2.5">$1</h3>');
     html = html.replace(/^##\s+(.+)$/gm, '<h2 class="text-2xl font-extrabold text-slate-950 mt-5 mb-3 border-b border-slate-100 pb-2">$1</h2>');
     html = html.replace(/^#\s+(.+)$/gm, '<h1 class="text-3xl font-extrabold text-slate-950 mt-6 mb-4">$1</h1>');
+
+    // Helper to parse attributes from JSX tags
+    const parseAttributes = (attrString) => {
+      const attrs = {};
+      const regex = /(\w+)=["']([^"']*)["']/g;
+      let match;
+      while ((match = regex.exec(attrString)) !== null) {
+        attrs[match[1]] = match[2];
+      }
+      return attrs;
+    };
+
+    // Parse <BlogImage ... /> custom components in preview
+    html = html.replace(/&lt;BlogImage\s+([^&]+)\s*\/?&gt;/g, (match, attrStr) => {
+      const attrs = parseAttributes(attrStr);
+      const src = attrs.src || "";
+      const alt = attrs.alt || attrs.title || "";
+      const width = attrs.width || "100%";
+      const align = attrs.align || "center";
+      
+      let wrapperClass = "my-6 clear-both";
+      let imgClass = "rounded-2xl shadow-md";
+      if (align === "left") {
+        wrapperClass = "float-left mr-6 mb-4 clear-none";
+      } else if (align === "right") {
+        wrapperClass = "float-right ml-6 mb-4 clear-none";
+      } else {
+        wrapperClass = "flex flex-col items-center my-6 clear-both mx-auto";
+        imgClass += " mx-auto";
+      }
+      
+      return `<div class="${wrapperClass}" style="width: ${width}; max-width: 100%;">
+        <img src="${src}" alt="${alt}" class="${imgClass}" style="width: 100%; height: auto;" />
+        ${alt ? `<span class="block text-center text-xs text-slate-400 mt-2 font-medium">${alt}</span>` : ""}
+      </div>`;
+    });
+
+    // Parse <Video ... /> custom components in preview
+    html = html.replace(/&lt;Video\s+([^&]+)\s*\/?&gt;/g, (match, attrStr) => {
+      const attrs = parseAttributes(attrStr);
+      const src = attrs.src || "";
+      const title = attrs.title || "";
+      const width = attrs.width || "100%";
+      const align = attrs.align || "center";
+      const height = attrs.height || "auto";
+      
+      let wrapperClass = "my-6 clear-both";
+      let videoClass = "overflow-hidden rounded-xl shadow-md";
+      if (align === "left") {
+        wrapperClass = "float-left mr-6 mb-4 clear-none";
+      } else if (align === "right") {
+        wrapperClass = "float-right ml-6 mb-4 clear-none";
+      } else {
+        wrapperClass = "flex flex-col items-center my-6 clear-both mx-auto";
+        videoClass += " mx-auto";
+      }
+      
+      const videoSrc = src.startsWith("http") ? src : `/videos/${src}`;
+      
+      return `<div class="${wrapperClass}" style="width: ${width}; max-width: 100%;">
+        <video src="${videoSrc}" controls class="${videoClass}" style="width: 100%; height: ${height};"></video>
+        ${title ? `<span class="block text-center text-xs text-slate-400 mt-2 font-medium">${title}</span>` : ""}
+      </div>`;
+    });
 
     // Images with custom styling
     html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<div class="my-6"><img src="$2" alt="$1" class="w-full h-auto rounded-2xl shadow-md" /><span class="block text-center text-xs text-slate-400 mt-2">$1</span></div>');
@@ -1224,6 +1365,36 @@ export default function AdminBlogPanel() {
                   />
                 </div>
 
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Display Width</label>
+                    <select
+                      value={inlineImageWidth}
+                      onChange={(e) => setInlineImageWidth(e.target.value)}
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                    >
+                      <option value="100%">Full Width (100%)</option>
+                      <option value="75%">Large (75%)</option>
+                      <option value="50%">Medium (50%)</option>
+                      <option value="33%">Small (33%)</option>
+                      <option value="25%">Extra Small (25%)</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Alignment</label>
+                    <select
+                      value={inlineImageAlign}
+                      onChange={(e) => setInlineImageAlign(e.target.value)}
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                    >
+                      <option value="center">Center</option>
+                      <option value="left">Left (Float)</option>
+                      <option value="right">Right (Float)</option>
+                    </select>
+                  </div>
+                </div>
+
                 <div className="flex gap-3 pt-3 border-t border-slate-100">
                   <button
                     type="button"
@@ -1238,6 +1409,121 @@ export default function AdminBlogPanel() {
                     className="flex-1 bg-[#f15a24] hover:bg-orange-600 !text-white py-2.5 rounded-xl text-xs font-bold shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50"
                   >
                     {isUploadingInline ? "Uploading..." : "Upload & Insert"}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {/* Video Insert Modal */}
+        {showVideoModal && (
+          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl w-full max-w-md p-6 text-left shadow-2xl border border-slate-100">
+              <div className="flex justify-between items-center border-b border-slate-100 pb-3 mb-4">
+                <h4 className="text-base font-bold text-slate-900">Upload & Insert Video</h4>
+                <button 
+                  onClick={() => setShowVideoModal(false)}
+                  className="text-slate-400 hover:text-slate-600"
+                >
+                  <FiX className="text-lg" />
+                </button>
+              </div>
+
+              <form onSubmit={handleInsertVideo} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Upload Video File</label>
+                  <input
+                    type="file"
+                    accept="video/*"
+                    onChange={(e) => setVideoFile(e.target.files[0])}
+                    className="w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-[#f15a24]/10 file:text-[#f15a24] hover:file:bg-[#f15a24]/20 cursor-pointer"
+                  />
+                  <p className="text-[10px] text-slate-400 mt-1">Leave empty if you are pasting an external video URL instead.</p>
+                </div>
+
+                <div className="relative flex py-2 items-center">
+                  <div className="flex-grow border-t border-slate-100"></div>
+                  <span className="flex-shrink mx-4 text-slate-400 text-[10px] font-bold uppercase">OR</span>
+                  <div className="flex-grow border-t border-slate-100"></div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Video source URL</label>
+                  <input
+                    type="text"
+                    value={videoSrcUrl}
+                    onChange={(e) => setVideoSrcUrl(e.target.value)}
+                    placeholder="https://example.com/demo.mp4 or relative /videos/demo.mp4"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Video Caption / Title</label>
+                  <input
+                    type="text"
+                    value={videoTitle}
+                    onChange={(e) => setVideoTitle(e.target.value)}
+                    placeholder="Brief description of this video..."
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                  />
+                </div>
+
+                <div className="grid grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 tracking-wider mb-1.5">Width</label>
+                    <select
+                      value={videoWidth}
+                      onChange={(e) => setVideoWidth(e.target.value)}
+                      className="w-full px-2.5 py-2 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                    >
+                      <option value="100%">100%</option>
+                      <option value="75%">75%</option>
+                      <option value="50%">50%</option>
+                      <option value="33%">33%</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 tracking-wider mb-1.5">Height</label>
+                    <input
+                      type="text"
+                      value={videoHeight}
+                      onChange={(e) => setVideoHeight(e.target.value)}
+                      placeholder="auto"
+                      className="w-full px-2.5 py-2 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 tracking-wider mb-1.5">Align</label>
+                    <select
+                      value={videoAlign}
+                      onChange={(e) => setVideoAlign(e.target.value)}
+                      className="w-full px-2.5 py-2 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                    >
+                      <option value="center">Center</option>
+                      <option value="left">Left</option>
+                      <option value="right">Right</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 pt-3 border-t border-slate-100">
+                  <button
+                    type="button"
+                    onClick={() => setShowVideoModal(false)}
+                    className="flex-1 border border-slate-200 text-slate-600 py-2.5 rounded-xl text-xs font-bold hover:bg-slate-50 cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isUploadingVideo}
+                    className="flex-1 bg-[#f15a24] hover:bg-orange-600 !text-white py-2.5 rounded-xl text-xs font-bold shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50"
+                  >
+                    {isUploadingVideo ? "Uploading..." : "Insert Video"}
                   </button>
                 </div>
               </form>
@@ -1623,6 +1909,16 @@ export default function AdminBlogPanel() {
                             title="Upload & Insert Image"
                           >
                             <FiImage className="text-sm" />
+                          </button>
+
+                          {/* Open custom video upload modal */}
+                          <button
+                            type="button"
+                            onClick={() => setShowVideoModal(true)}
+                            className="p-2 hover:bg-slate-200 text-slate-600 hover:text-slate-950 rounded-lg transition-colors flex items-center justify-center cursor-pointer"
+                            title="Upload & Insert Video"
+                          >
+                            <FiVideo className="text-sm" />
                           </button>
 
                           <button

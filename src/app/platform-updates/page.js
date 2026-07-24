@@ -99,7 +99,7 @@ export default function PlatformUpdatesPage() {
               <div className="pt-2">
                 <Link 
                   href="/platform-updates/product-updates-q2-2026-review"
-                  className="text-xs font-extrabold uppercase tracking-wider text-slate-900 hover:text-[#f15a24] transition-colors border-b-2 border-slate-900 hover:border-[#f15a24] pb-0.5 font-sans"
+                  className="text-xs font-extrabold uppercase tracking-wider text-[#f15a24] hover:text-[#d94f1c] transition-colors border-b-2 border-[#f15a24] hover:border-[#d94f1c] pb-0.5 font-primary"
                 >
                   Read article
                 </Link>
@@ -117,7 +117,7 @@ export default function PlatformUpdatesPage() {
               </div>
 
               <div className="relative z-10">
-                <span className="text-[11px] font-bold tracking-widest text-[#f15a24] uppercase font-sans">Quarterly Recap</span>
+                <span className="text-[11px] font-bold tracking-widest text-[#f15a24] uppercase font-primary">Quarterly Recap</span>
               </div>
 
               <div className="relative z-10 space-y-1">
@@ -154,7 +154,7 @@ export default function PlatformUpdatesPage() {
                   style={{ backgroundImage: `url(${update.image})` }}
                 >
                   <div className="absolute inset-0 bg-black/55 backdrop-blur-[1px] transition-colors duration-300 hover:bg-black/45 pointer-events-none" />
-                  <span className="relative z-10 text-[10px] font-extrabold uppercase tracking-widest text-white/80 mb-2 font-sans">INNVIKTA UPDATES</span>
+                  <span className="relative z-10 text-[10px] font-extrabold uppercase tracking-widest text-white/80 mb-2 font-primary">INNVIKTA UPDATES</span>
                   <h4 className="relative z-10 text-lg md:text-xl font-bold text-white tracking-wider max-w-[200px] leading-tight font-secondary">
                     {update.graphicText}
                   </h4>
@@ -182,7 +182,7 @@ export default function PlatformUpdatesPage() {
                   <div className="pt-2">
                     <Link 
                       href={`/platform-updates/${update.slug}`}
-                      className="text-xs font-extrabold uppercase tracking-wider text-slate-900 hover:text-[#f15a24] transition-colors border-b-2 border-slate-900 hover:border-[#f15a24] pb-0.5 font-sans"
+                      className="text-xs font-extrabold uppercase tracking-wider text-[#f15a24] hover:text-[#d94f1c] transition-colors border-b-2 border-[#f15a24] hover:border-[#d94f1c] pb-0.5 font-primary"
                     >
                       Read article
                     </Link>

@@ -202,7 +202,7 @@ export default function PlatformUpdateDetailPage() {
       <div className="min-h-screen flex flex-col items-center justify-center bg-white text-slate-800 p-6">
         <h1 className="text-3xl font-bold mb-4">Platform Update Not Found</h1>
         <p className="text-slate-600 mb-6">The update you are trying to access does not exist or has been relocated.</p>
-        <Link href="/platform-updates" className="flex items-center gap-2 bg-[#f15a24] !text-white px-5 py-2.5 rounded-full hover:bg-[#df4b17] transition-all font-sans font-bold text-sm">
+        <Link href="/platform-updates" className="flex items-center gap-2 bg-[#f15a24] !text-white px-5 py-2.5 rounded-full hover:bg-[#df4b17] transition-all font-primary font-bold text-sm">
           <FiArrowLeft /> Back to updates
         </Link>
       </div>
@@ -288,7 +288,7 @@ export default function PlatformUpdateDetailPage() {
               <div className="pt-8 border-t border-slate-100 flex items-center justify-between">
                 <Link 
                   href="/platform-updates"
-                  className="inline-flex items-center gap-2 text-sm font-extrabold uppercase tracking-wider text-slate-800 hover:text-[#f15a24] transition-colors border-b-2 border-slate-800 hover:border-[#f15a24] pb-1 font-sans"
+                  className="inline-flex items-center gap-2 text-sm font-extrabold uppercase tracking-wider text-slate-800 hover:text-[#f15a24] transition-colors border-b-2 border-slate-800 hover:border-[#f15a24] pb-1 font-primary"
                 >
                   <FiArrowLeft /> Back to updates
                 </Link>
@@ -305,7 +305,7 @@ export default function PlatformUpdateDetailPage() {
                 <div className="space-y-4">
                   <div className="flex justify-between items-center py-2 border-b border-[#f15a24]/10 text-sm">
                     <span className="text-slate-500 font-medium">Release Version</span>
-                    <span className="text-slate-900 font-bold font-sans">{currentUpdate.version}</span>
+                    <span className="text-slate-900 font-bold font-primary">{currentUpdate.version}</span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-[#f15a24]/10 text-sm">
                     <span className="text-slate-500 font-medium">Impact Level</span>
@@ -326,10 +326,10 @@ export default function PlatformUpdateDetailPage() {
                   <FiShare2 /> Share update
                 </h4>
                 <div className="flex gap-3">
-                  <button className="flex-1 py-2 px-3 border border-slate-200 hover:border-[#f15a24] hover:text-[#f15a24] text-xs font-bold rounded-lg transition-colors font-sans text-slate-650">
+                  <button className="flex-1 py-2 px-3 border border-slate-200 hover:border-[#f15a24] hover:text-[#f15a24] text-xs font-bold rounded-lg transition-colors font-primary text-slate-650">
                     Twitter
                   </button>
-                  <button className="flex-1 py-2 px-3 border border-slate-200 hover:border-[#f15a24] hover:text-[#f15a24] text-xs font-bold rounded-lg transition-colors font-sans text-slate-650">
+                  <button className="flex-1 py-2 px-3 border border-slate-200 hover:border-[#f15a24] hover:text-[#f15a24] text-xs font-bold rounded-lg transition-colors font-primary text-slate-650">
                     LinkedIn
                   </button>
                 </div>

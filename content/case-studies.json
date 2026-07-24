@@ -2,6 +2,7 @@
   {
     "id": 1,
     "title": "Global Bank",
+    "imageTitle": "Global Bank Susceptibility Analysis",
     "subtitle": "Global Bank Reduces Phishing Susceptibility by 82%",
     "slug": "global-bank-phishing",
     "industry": "BFSI",
@@ -41,6 +42,7 @@
   {
     "id": 2,
     "title": "MedTech Leader",
+    "imageTitle": "MedTech HIPAA Compliance & Security",
     "subtitle": "Securing Patient Data and HIPAA Compliance for MedTech Leader",
     "slug": "healthcare-security-crisis",
     "industry": "Healthcare",
@@ -80,6 +82,7 @@
   {
     "id": 3,
     "title": "SaaS Enterprise",
+    "imageTitle": "SaaS Developer Credentials Protection",
     "subtitle": "SaaS Enterprise Mitigates Developer Credentials Harvesting Scams",
     "slug": "saas-credentials-harvesting",
     "industry": "IT & Services",
@@ -119,6 +122,7 @@
   {
     "id": 4,
     "title": "Major Insurer",
+    "imageTitle": "Insurance Customer Data Protection",
     "subtitle": "Leading Insurer Safeguards Customer Data Against Phishing",
     "slug": "insurance-customer-data",
     "industry": "Insurance",
@@ -158,6 +162,7 @@
   {
     "id": 5,
     "title": "Industrial Leader",
+    "imageTitle": "Industrial Supply Chain Security",
     "subtitle": "Industrial Leader Safeguards Supply Chain against CEO Fraud",
     "slug": "manufacturing-people-centric",
     "industry": "Manufacturing",
@@ -197,6 +202,7 @@
   {
     "id": 6,
     "title": "National Agency",
+    "imageTitle": "National Agency Cybersecurity Culture",
     "subtitle": "National Agency Builds Cybersecurity Culture with Innvikta Arcade",
     "slug": "national-agency-gamified",
     "industry": "Government",

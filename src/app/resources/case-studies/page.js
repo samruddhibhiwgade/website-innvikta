@@ -111,28 +111,30 @@ export default function CaseStudies() {
               >
                 <div>
                   {/* Square Image container with Overlay */}
-                  <div className="relative w-full aspect-square rounded-[2rem] overflow-hidden shadow-sm">
-                    <img 
-                      src={study.image} 
-                      alt={study.title} 
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                    
-                    {/* Top Overlay: CASE STUDY */}
-                    <div className="absolute top-6 left-6 flex items-center">
-                      <span className="border-l-2 border-[#f15a24] pl-2 text-[11px] font-black uppercase tracking-wider text-white">
-                        Case Study
-                      </span>
-                    </div>
+                  <Link href={`/resources/case-studies/${study.slug || ""}`} className="block">
+                    <div className="relative w-full aspect-square rounded-[2rem] overflow-hidden shadow-sm cursor-pointer">
+                      <img 
+                        src={study.image} 
+                        alt={study.title} 
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                      
+                      {/* Top Overlay: CASE STUDY */}
+                      <div className="absolute top-6 left-6 flex items-center">
+                        <span className="border-l-2 border-[#f15a24] pl-2 text-[11px] font-black uppercase tracking-wider text-white">
+                          Case Study
+                        </span>
+                      </div>
 
-                    {/* Bottom Overlay: Title */}
-                    <div className="absolute bottom-6 left-6 right-6">
-                      <h4 className="text-lg md:text-xl font-bold font-secondary text-white leading-tight">
-                        {study.imageTitle}
-                      </h4>
+                      {/* Bottom Overlay: Title */}
+                      <div className="absolute bottom-6 left-6 right-6">
+                        <h4 className="text-lg md:text-xl font-bold font-secondary text-white leading-tight">
+                          {study.imageTitle}
+                        </h4>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
 
                   {/* Content under the image */}
                   <div className="pt-6 pb-4 px-2">
@@ -142,22 +144,28 @@ export default function CaseStudies() {
                     </span>
 
                     {/* Title */}
-                    <h3 className="text-2xl font-black text-slate-900 mb-3 leading-snug tracking-tight group-hover:text-[#f15a24] transition-colors">
-                      {study.title}
-                    </h3>
+                    <Link href={`/resources/case-studies/${study.slug || ""}`} className="block">
+                      <h3 className={`text-2xl font-black mb-3 leading-snug tracking-tight transition-colors cursor-pointer ${
+                        study.industry === "Healthcare" 
+                          ? "text-[#f15a24]" 
+                          : "text-slate-900 group-hover:text-[#f15a24]"
+                      }`}>
+                        {study.subtitle}
+                      </h3>
+                    </Link>
 
                     {/* Description */}
-                    <p className="text-base text-slate-600 font-normal leading-relaxed mb-6">
+                    <p className="text-sm text-slate-500 font-normal leading-relaxed mb-6">
                       {study.description}
                     </p>
                   </div>
                 </div>
 
-                {/* Read More Button styled like Book a demo in navbar */}
+                {/* Read More Button */}
                 <div className="px-2 pb-6">
                   <Link 
                     href={`/resources/case-studies/${study.slug || ""}`} 
-                    className="bg-[#f15a24] hover:bg-orange-600 !text-white px-5 py-2.5 rounded-lg transition-all duration-300 inline-flex items-center gap-1 whitespace-nowrap font-bold text-sm shadow-md shadow-orange-500/10"
+                    className="bg-[#f15a24] hover:bg-orange-600 !text-white px-5 py-2.5 rounded-lg transition-all duration-300 inline-flex items-center gap-1 whitespace-nowrap font-bold text-sm shadow-md shadow-orange-500/10 cursor-pointer"
                   >
                     Read More <FiArrowRight className="text-xs" />
                   </Link>
@@ -168,6 +176,13 @@ export default function CaseStudies() {
 
         </div>
       </section>
+
+      {/* Floating Action Button (FAB) */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <button className="bg-[#f15a24] hover:bg-[#d94f1c] text-white p-4 rounded-full shadow-lg shadow-orange-500/30 transition-all duration-300 hover:scale-110 flex items-center justify-center cursor-pointer">
+          <FiShield className="text-2xl" />
+        </button>
+      </div>
     </GSAPWrapper>
   );
 }

@@ -7,8 +7,7 @@ import GSAPWrapper from "@layouts/components/GSAPWrapper";
 import SeoMeta from "@layouts/partials/SeoMeta";
 import { 
   FiArrowLeft, 
-  FiArrowRight,
-  FiPlay
+  FiArrowRight
 } from "react-icons/fi";
 
 export default function CaseStudyDetail() {
@@ -60,17 +59,20 @@ export default function CaseStudyDetail() {
         </div>
       </div>
 
-      {/* 2. At a Glance Section (Soft light-orange/cream background, orange bullet icons, 2x2 layout) */}
-      <section className="py-12 bg-[#FFFBF7] border-b border-orange-100">
+      {/* 2. Measure security outcomes Section (Clean, professional minimalist column layout) */}
+      <section className="py-14 bg-[#FFFBF7] border-b border-orange-100/50">
         <div className="container px-6 md:px-12 lg:px-24 text-left">
-          <h2 className="text-2xl font-bold font-secondary text-[#f15a24] mb-8">
-            At a Glance
+          <h2 className="text-2xl font-bold font-secondary text-[#f15a24] mb-10">
+            Measure security outcomes
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {data.atGlance.map((point, index) => (
-              <div key={index} className="flex items-start gap-3">
-                <span className="text-[#f15a24] font-bold text-lg leading-none shrink-0 mt-0.5">&rarr;</span>
-                <p className="text-slate-700 text-sm leading-relaxed font-normal">
+              <div 
+                key={index} 
+                className="border-l-2 border-[#f15a24] pl-4 py-1"
+              >
+                <p className="text-slate-700 text-sm md:text-base leading-relaxed font-medium">
                   {point}
                 </p>
               </div>
@@ -179,20 +181,24 @@ export default function CaseStudyDetail() {
       {/* 4. Center Action Banner Section (Rounded Card, not edge-to-edge) */}
       <section className="py-4 bg-white">
         <div className="container px-6 md:px-12 lg:px-24">
-          <div className="bg-[#CFD8DC]/50 rounded-[1.5rem] px-8 py-6 md:py-8 text-center border border-slate-200/30">
-            <div className="max-w-2xl mx-auto space-y-4">
-              <h3 className="text-xl md:text-2xl font-bold font-secondary text-[#0F172A]">
-                See Innvikta InSAT Security Awareness in Action
+          <div className="bg-[#fff7f3] rounded-[1.5rem] px-8 py-8 md:py-10 text-center border border-[#f15a24]/10 shadow-sm relative overflow-hidden">
+            {/* Subtle brand circles */}
+            <div className="absolute -top-12 -left-12 w-24 h-24 rounded-full bg-[#f15a24]/5 pointer-events-none" />
+            <div className="absolute -bottom-16 -right-16 w-32 h-32 rounded-full bg-[#f15a24]/5 pointer-events-none" />
+
+            <div className="max-w-2xl mx-auto space-y-4 relative z-10">
+              <h3 className="text-xl md:text-2xl font-bold font-secondary text-slate-900">
+                Ready to Build a Stronger Security Culture?
               </h3>
-              <p className="text-sm text-[#475569] leading-relaxed font-normal max-w-xl mx-auto">
-                Request a personalized demo today to see how simulated threat scenarios can reduce security risks across your organization.
+              <p className="text-sm text-slate-600 leading-relaxed font-normal max-w-xl mx-auto">
+                Get a personalized walk-through of Innvikta InSAT to see how our simulated phishing campaigns and automated training modules reduce social engineering risks.
               </p>
               <div className="pt-3">
                 <Link 
                   href="/book-demo" 
-                  className="inline-flex items-center gap-2 bg-[#f15a24] hover:bg-orange-600 text-white font-bold px-6 py-2.5 rounded-full text-sm transition-all shadow-md shadow-orange-500/25"
+                  className="bg-[#f15a24] hover:bg-orange-600 !text-white px-5 py-2.5 rounded-lg transition-all duration-300 inline-flex items-center gap-1.5 whitespace-nowrap font-bold text-sm shadow-md shadow-orange-500/10 cursor-pointer"
                 >
-                  Get a Demo <span className="text-sm">↗</span>
+                  Book a Demo <FiArrowRight className="text-xs" />
                 </Link>
               </div>
             </div>
@@ -207,10 +213,13 @@ export default function CaseStudyDetail() {
             
             {/* Left Side: Story details */}
             <div className="lg:col-span-7 space-y-6 text-left">
-              <p className="text-slate-600 leading-relaxed text-sm md:text-base font-normal">
+              <h2 className="text-2xl md:text-[2rem] font-bold font-secondary text-[#0F172A] leading-snug tracking-tight mb-4">
+                Building a Stronger Security Culture
+              </h2>
+              <p className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal">
                 Building a security culture requires a program built around real behavior analytics, not slide library training. By triggering short, repeated reinforcement modules, employees understand the role they play in preserving compliance frameworks and cybersecurity defenses.
               </p>
-              <p className="text-slate-600 leading-relaxed text-sm md:text-base font-normal">
+              <p className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal">
                 Using Innvikta InSAT, the organization achieved full compliance alignment, minimized repeat clickers, and accelerated threat containment times dramatically.
               </p>
             </div>
@@ -232,7 +241,7 @@ export default function CaseStudyDetail() {
               &ldquo;
             </div>
             <div className="relative z-10 space-y-6">
-              <blockquote className="text-xl md:text-2xl font-bold font-secondary text-[#1F1F1F] leading-relaxed italic">
+              <blockquote className="text-xl md:text-2xl font-medium font-secondary text-slate-600 leading-relaxed italic">
                 {data.quoteText}
               </blockquote>
               <cite className="block text-xs font-bold text-[#f15a24] uppercase tracking-wider not-italic">
@@ -243,26 +252,7 @@ export default function CaseStudyDetail() {
 
         </div>
       </section>
-
-      {/* 7. Bottom Action Banner Section */}
-      <section className="py-12 bg-slate-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(241,90,36,0.12),transparent)] pointer-events-none" />
-        <div className="container px-6 md:px-12 lg:px-24 text-center relative z-10">
-          <div className="max-w-2xl mx-auto space-y-6">
-            <h3 className="text-xl md:text-2xl font-bold font-secondary">
-              Everything you need to secure your human risk &mdash; on one platform.
-            </h3>
-            <div className="pt-2">
-              <Link 
-                href="/book-demo" 
-                className="inline-flex items-center gap-2 bg-[#f15a24] hover:bg-orange-600 text-white font-bold px-8 py-3 rounded-full text-sm transition-all shadow-md shadow-orange-500/25"
-              >
-                Book a Demo <FiPlay className="text-xs" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Spacer or simple divider if needed, else empty */}
 
     </GSAPWrapper>
   );
