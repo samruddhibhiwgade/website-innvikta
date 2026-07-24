@@ -1,4 +1,9 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+ob_implicit_flush(true);
+if (ob_get_level()) ob_end_clean();
+
 require __DIR__ . '/config.php';
 
 $to = 'samruddhi.bhiwgade@innvikta.com';
@@ -6,7 +11,6 @@ $subject = 'Test SMTP Newsletter Broadcast';
 $htmlBody = '<h1>Test Newsletter</h1><p>This is a test of the broadcast SMTP mailer.</p>';
 
 $host     = MAIL_HOST;
-$port     = MAIL_PORT;
 $port     = 465;
 $username = MAIL_USERNAME;
 $password = MAIL_PASSWORD;
