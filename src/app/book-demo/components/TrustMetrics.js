@@ -3,7 +3,7 @@ import { metrics } from "./constants";
 
 export default function TrustMetrics() {
   return (
-    <div className="col-12 lg:col-6 mb-12 lg:mb-0 pr-0 lg:pr-12">
+    <div className="col-12 lg:col-6 mb-12 lg:mb-0 pr-0 lg:pr-12 order-2 lg:order-1">
       <h2 className="text-2xl md:text-3xl font-bold text-dark mb-6">
         Why Organizations Choose <span className="text-[#f15a24]">Innvikta</span>
       </h2>

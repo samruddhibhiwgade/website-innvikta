@@ -13,7 +13,7 @@ export default function DemoForm({
   validateEmail
 }) {
   return (
-    <div className="col-12 lg:col-5 relative">
+    <div className="col-12 lg:col-5 relative order-1 lg:order-2">
       <div className="absolute inset-0 -m-8 bg-orange-500/5 blur-[60px] rounded-full pointer-events-none" />
       
       <div className="relative bg-white border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.06)] rounded-[24px] p-8 md:p-10">
