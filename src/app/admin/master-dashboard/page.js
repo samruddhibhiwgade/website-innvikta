@@ -1395,6 +1395,8 @@ export default function MasterDashboard() {
                 <button type="submit" className="bg-[#f15a24] hover:bg-orange-600 !text-white font-bold px-6 py-2.5 rounded-xl text-xs flex items-center gap-2 cursor-pointer shadow-md">
                   <FiSave /> Save Platform Update
                 </button>
+              </form>
+            )}
             {/* Live Preview Tabs */}
             {editorTab === "preview" && (
               <div className="space-y-8 bg-slate-50/50 p-6 rounded-2xl border border-slate-200 max-h-[85vh] overflow-y-auto">
