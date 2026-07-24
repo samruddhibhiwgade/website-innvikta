@@ -21,7 +21,7 @@ define('DB_PASS', $envVars['DB_PASS'] ?? 'Himanshu@1272');
 
 // ── Mail Configuration ────────────────────────────────────────────────────
 define('MAIL_HOST',       $envVars['MAIL_HOST'] ?? 'mail.innvikta.co.in');
-define('MAIL_PORT',        isset($envVars['MAIL_PORT']) ? intval($envVars['MAIL_PORT']) : 587);
+define('MAIL_PORT',        isset($envVars['MAIL_PORT']) ? intval($envVars['MAIL_PORT']) : 465);
 define('MAIL_USERNAME',   $envVars['MAIL_USERNAME'] ?? 'platform@innvikta.co.in');
 define('MAIL_PASSWORD',   $envVars['MAIL_PASSWORD'] ?? '8g2A0&jU5h');
 define('MAIL_FROM',       $envVars['MAIL_FROM'] ?? 'platform@innvikta.co.in');

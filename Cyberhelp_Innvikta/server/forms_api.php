@@ -156,7 +156,8 @@ function smtpSend($to, $subject, $htmlBody) {
     $fromName = MAIL_FROM_NAME;
 
     try {
-        $sock = @fsockopen('tcp://' . $host, $port, $errno, $errstr, 15);
+        $protocol = ($port == 465) ? 'ssl://' : 'tcp://';
+        $sock = @fsockopen($protocol . $host, $port, $errno, $errstr, 15);
         if (!$sock) {
             throw new Exception('Cannot connect to ' . $host . ':' . $port . ' — ' . $errstr);
         }
@@ -181,7 +182,7 @@ function smtpSend($to, $subject, $htmlBody) {
         $readAll(); // 220 Greeting
         $cmd('EHLO ' . (gethostname() ?: 'localhost'));
 
-        if ($port != 25) {
+        if ($port != 25 && $port != 465) {
             $r = $cmd('STARTTLS');
             if (strpos($r, '220') === false) {
                 throw new Exception('STARTTLS rejected: ' . $r);
