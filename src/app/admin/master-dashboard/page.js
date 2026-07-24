@@ -148,7 +148,17 @@ export default function MasterDashboard() {
     ],
     quoteText: "",
     quoteAuthor: "",
-    customSections: []
+    customSections: [],
+    cultureTitle: "Building a Stronger Security Culture",
+    cultureParagraphs: [
+      "Building a security culture requires a program built around real behavior analytics, not slide library training. By triggering short, repeated reinforcement modules, employees understand the role they play in preserving compliance frameworks and cybersecurity defenses.",
+      "Using Innvikta InSAT, the organization achieved full compliance alignment, minimized repeat clickers, and accelerated threat containment times dramatically."
+    ],
+    cultureImage: "/images/about-bg.jpeg",
+    ctaTitle: "Ready to Build a Stronger Security Culture?",
+    ctaDescription: "Get a personalized walk-through of Innvikta InSAT to see how our simulated phishing campaigns and automated training modules reduce social engineering risks.",
+    ctaButtonText: "Book a Demo",
+    ctaButtonUrl: "/book-demo"
   });
 
   const [newsletterForm, setNewsletterForm] = useState({
@@ -394,7 +404,17 @@ export default function MasterDashboard() {
       ],
       quoteText: study.quoteText || "",
       quoteAuthor: study.quoteAuthor || "",
-      customSections: study.customSections || []
+      customSections: study.customSections || [],
+      cultureTitle: study.cultureTitle || "Building a Stronger Security Culture",
+      cultureParagraphs: study.cultureParagraphs || [
+        "Building a security culture requires a program built around real behavior analytics, not slide library training. By triggering short, repeated reinforcement modules, employees understand the role they play in preserving compliance frameworks and cybersecurity defenses.",
+        "Using Innvikta InSAT, the organization achieved full compliance alignment, minimized repeat clickers, and accelerated threat containment times dramatically."
+      ],
+      cultureImage: study.cultureImage || "/images/about-bg.jpeg",
+      ctaTitle: study.ctaTitle || "Ready to Build a Stronger Security Culture?",
+      ctaDescription: study.ctaDescription || "Get a personalized walk-through of Innvikta InSAT to see how our simulated phishing campaigns and automated training modules reduce social engineering risks.",
+      ctaButtonText: study.ctaButtonText || "Book a Demo",
+      ctaButtonUrl: study.ctaButtonUrl || "/book-demo"
     });
     setEditorMode("edit");
   };
@@ -520,7 +540,14 @@ export default function MasterDashboard() {
                     ],
                     quoteText: "",
                     quoteAuthor: "",
-                    customSections: []
+                    customSections: [],
+                    cultureTitle: "Building a Stronger Security Culture",
+                    cultureParagraphs: [""],
+                    cultureImage: "/images/about-bg.jpeg",
+                    ctaTitle: "Ready to Build a Stronger Security Culture?",
+                    ctaDescription: "Get a personalized walk-through of Innvikta InSAT to see how our simulated phishing campaigns and automated training modules reduce social engineering risks.",
+                    ctaButtonText: "Book a Demo",
+                    ctaButtonUrl: "/book-demo"
                   });
                 } else if (activeTab === "newsletters") {
                   setNewsletterForm({
@@ -1227,6 +1254,177 @@ export default function MasterDashboard() {
                   >
                     <FiPlusCircle /> Add Custom Metric Detail
                   </button>
+                </div>
+
+                {/* Testimonial Quote Section customization */}
+                <div className="border border-slate-100 rounded-xl p-4 bg-slate-50/50 space-y-4">
+                  <h4 className="text-xs font-black text-slate-700 uppercase tracking-wider">Testimonial Quote Section</h4>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Quote Text</label>
+                    <textarea
+                      rows={3}
+                      value={caseForm.quoteText}
+                      onChange={(e) => setCaseForm({ ...caseForm, quoteText: e.target.value })}
+                      className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold"
+                      placeholder="e.g. “Innvikta Arcade turned security training from a chore into a collaborative game.”"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Quote Author / Representative (Details)</label>
+                    <input
+                      type="text"
+                      value={caseForm.quoteAuthor}
+                      onChange={(e) => setCaseForm({ ...caseForm, quoteAuthor: e.target.value })}
+                      className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold"
+                      placeholder="e.g. Helen Carter, Chief Information Officer"
+                    />
+                  </div>
+                </div>
+
+                {/* Building a Stronger Security Culture Section customization */}
+                <div className="border border-slate-100 rounded-xl p-4 bg-slate-50/50 space-y-4">
+                  <h4 className="text-xs font-black text-slate-700 uppercase tracking-wider">Security Culture Section</h4>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Section Title</label>
+                    <input
+                      type="text"
+                      value={caseForm.cultureTitle}
+                      onChange={(e) => setCaseForm({ ...caseForm, cultureTitle: e.target.value })}
+                      className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold"
+                      placeholder="e.g. Building a Stronger Security Culture"
+                    />
+                  </div>
+                  
+                  <div className="space-y-3">
+                    <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1 font-black">Culture Section Paragraphs</label>
+                    {(caseForm.cultureParagraphs || []).map((para, idx) => (
+                      <div key={idx} className="space-y-2 border border-slate-100 p-3 rounded-lg bg-white">
+                        <div className="flex justify-between items-center">
+                          <span className="text-[10px] font-bold text-[#f15a24]">Paragraph #{idx + 1}</span>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const updated = caseForm.cultureParagraphs.filter((_, i) => i !== idx);
+                              setCaseForm({ ...caseForm, cultureParagraphs: updated });
+                            }}
+                            className="text-[10px] font-bold text-rose-500 hover:underline cursor-pointer"
+                          >
+                            Remove Paragraph
+                          </button>
+                        </div>
+                        <ToolbarEditor
+                          value={para}
+                          onChange={(val) => {
+                            const updated = [...caseForm.cultureParagraphs];
+                            updated[idx] = val;
+                            setCaseForm({ ...caseForm, cultureParagraphs: updated });
+                          }}
+                          placeholder="Write paragraph content..."
+                          rows={4}
+                        />
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => setCaseForm({
+                        ...caseForm,
+                        cultureParagraphs: [...(caseForm.cultureParagraphs || []), ""]
+                      })}
+                      className="flex items-center gap-1.5 text-xs text-[#f15a24] font-bold hover:underline"
+                    >
+                      <FiPlusCircle /> Add Paragraph Block
+                    </button>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Culture Section Collage Image URL</label>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={caseForm.cultureImage}
+                        onChange={(e) => setCaseForm({ ...caseForm, cultureImage: e.target.value })}
+                        className="flex-1 px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold"
+                        placeholder="e.g. /images/about-bg.jpeg"
+                      />
+                      <label className="bg-slate-800 hover:bg-slate-700 text-white font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 cursor-pointer shadow-md select-none">
+                        <FiImage />
+                        <span>Upload</span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={async (e) => {
+                            const file = e.target.files?.[0];
+                            if (!file) return;
+                            const formData = new FormData();
+                            formData.append("file", file);
+                            try {
+                              const res = await fetch("/api/admin/upload", {
+                                method: "POST",
+                                body: formData
+                              });
+                              const data = await res.json();
+                              if (data.success) {
+                                setCaseForm({ ...caseForm, cultureImage: data.url });
+                                showNotification("success", "Collage image uploaded successfully!");
+                              } else {
+                                showNotification("error", data.error || "Failed to upload image.");
+                              }
+                            } catch (err) {
+                              showNotification("error", "Error uploading image.");
+                            }
+                          }}
+                          className="hidden"
+                        />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Custom CTA Demo Banner customization */}
+                <div className="border border-slate-100 rounded-xl p-4 bg-slate-50/50 space-y-4">
+                  <h4 className="text-xs font-black text-slate-700 uppercase tracking-wider">Book a Demo Banner</h4>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Banner Title</label>
+                    <input
+                      type="text"
+                      value={caseForm.ctaTitle}
+                      onChange={(e) => setCaseForm({ ...caseForm, ctaTitle: e.target.value })}
+                      className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold"
+                      placeholder="e.g. Ready to Build a Stronger Security Culture?"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Banner Description</label>
+                    <textarea
+                      rows={3}
+                      value={caseForm.ctaDescription}
+                      onChange={(e) => setCaseForm({ ...caseForm, ctaDescription: e.target.value })}
+                      className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold"
+                      placeholder="Get a personalized walk-through..."
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Button Text</label>
+                      <input
+                        type="text"
+                        value={caseForm.ctaButtonText}
+                        onChange={(e) => setCaseForm({ ...caseForm, ctaButtonText: e.target.value })}
+                        className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold"
+                        placeholder="e.g. Book a Demo"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Button URL</label>
+                      <input
+                        type="text"
+                        value={caseForm.ctaButtonUrl}
+                        onChange={(e) => setCaseForm({ ...caseForm, ctaButtonUrl: e.target.value })}
+                        className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold"
+                        placeholder="e.g. /book-demo"
+                      />
+                    </div>
+                  </div>
                 </div>
 
                 <button type="submit" className="bg-[#f15a24] hover:bg-orange-600 !text-white font-bold px-6 py-2.5 rounded-xl text-xs flex items-center gap-2 cursor-pointer shadow-md">

@@ -191,17 +191,17 @@ export default function CaseStudyDetail() {
 
             <div className="max-w-2xl mx-auto space-y-4 relative z-10">
               <h3 className="text-xl md:text-2xl font-bold font-secondary text-slate-900">
-                Ready to Build a Stronger Security Culture?
+                {data.ctaTitle || "Ready to Build a Stronger Security Culture?"}
               </h3>
               <p className="text-sm text-slate-600 leading-relaxed font-normal max-w-xl mx-auto">
-                Get a personalized walk-through of Innvikta InSAT to see how our simulated phishing campaigns and automated training modules reduce social engineering risks.
+                {data.ctaDescription || "Get a personalized walk-through of Innvikta InSAT to see how our simulated phishing campaigns and automated training modules reduce social engineering risks."}
               </p>
               <div className="pt-3">
                 <Link 
-                  href="/book-demo" 
+                  href={data.ctaButtonUrl || "/book-demo"} 
                   className="bg-[#f15a24] hover:bg-orange-600 !text-white px-5 py-2.5 rounded-lg transition-all duration-300 inline-flex items-center gap-1.5 whitespace-nowrap font-bold text-sm shadow-md shadow-orange-500/10 cursor-pointer"
                 >
-                  Book a Demo <FiArrowRight className="text-xs" />
+                  {data.ctaButtonText || "Book a Demo"} <FiArrowRight className="text-xs" />
                 </Link>
               </div>
             </div>
@@ -217,20 +217,22 @@ export default function CaseStudyDetail() {
             {/* Left Side: Story details */}
             <div className="lg:col-span-7 space-y-6 text-left">
               <h2 className="text-2xl md:text-[2rem] font-bold font-secondary text-[#0F172A] leading-snug tracking-tight mb-4">
-                Building a Stronger Security Culture
+                {data.cultureTitle || "Building a Stronger Security Culture"}
               </h2>
-              <p className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal">
-                Building a security culture requires a program built around real behavior analytics, not slide library training. By triggering short, repeated reinforcement modules, employees understand the role they play in preserving compliance frameworks and cybersecurity defenses.
-              </p>
-              <p className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal">
-                Using Innvikta InSAT, the organization achieved full compliance alignment, minimized repeat clickers, and accelerated threat containment times dramatically.
-              </p>
+              {((data.cultureParagraphs && data.cultureParagraphs.length > 0) ? data.cultureParagraphs : [
+                "Building a security culture requires a program built around real behavior analytics, not slide library training. By triggering short, repeated reinforcement modules, employees understand the role they play in preserving compliance frameworks and cybersecurity defenses.",
+                "Using Innvikta InSAT, the organization achieved full compliance alignment, minimized repeat clickers, and accelerated threat containment times dramatically."
+              ]).map((para, i) => (
+                <p key={i} className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal">
+                  {para}
+                </p>
+              ))}
             </div>
 
             {/* Right Side: Collage / Collaboration Image */}
             <div className="lg:col-span-5">
               <img 
-                src="/images/about-bg.jpeg" 
+                src={data.cultureImage || "/images/about-bg.jpeg"} 
                 alt="Security Compliance Team" 
                 className="w-full h-72 object-cover rounded-3xl border border-slate-200/80 shadow-sm"
               />
@@ -258,7 +260,7 @@ export default function CaseStudyDetail() {
 
       {/* Custom Sections (Rendered at the very end of the case study details) */}
       {data.customSections && data.customSections.length > 0 && (
-        <section className="py-16 bg-[#FFFBF7] border-t border-slate-100">
+        <section className="py-16 bg-white border-t border-slate-100">
           <div className="container px-6 md:px-12 lg:px-24">
             <div className="max-w-4xl mx-auto space-y-12 text-left">
               {data.customSections.map((section, sIdx) => (
