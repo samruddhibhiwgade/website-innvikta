@@ -158,7 +158,8 @@ export default function MasterDashboard() {
     ctaTitle: "Ready to Build a Stronger Security Culture?",
     ctaDescription: "Get a personalized walk-through of Innvikta InSAT to see how our simulated phishing campaigns and automated training modules reduce social engineering risks.",
     ctaButtonText: "Book a Demo",
-    ctaButtonUrl: "/book-demo"
+    ctaButtonUrl: "/book-demo",
+    heroImage: ""
   });
 
   const [newsletterForm, setNewsletterForm] = useState({
@@ -414,7 +415,8 @@ export default function MasterDashboard() {
       ctaTitle: study.ctaTitle || "Ready to Build a Stronger Security Culture?",
       ctaDescription: study.ctaDescription || "Get a personalized walk-through of Innvikta InSAT to see how our simulated phishing campaigns and automated training modules reduce social engineering risks.",
       ctaButtonText: study.ctaButtonText || "Book a Demo",
-      ctaButtonUrl: study.ctaButtonUrl || "/book-demo"
+      ctaButtonUrl: study.ctaButtonUrl || "/book-demo",
+      heroImage: study.heroImage || ""
     });
     setEditorMode("edit");
   };
@@ -547,7 +549,8 @@ export default function MasterDashboard() {
                     ctaTitle: "Ready to Build a Stronger Security Culture?",
                     ctaDescription: "Get a personalized walk-through of Innvikta InSAT to see how our simulated phishing campaigns and automated training modules reduce social engineering risks.",
                     ctaButtonText: "Book a Demo",
-                    ctaButtonUrl: "/book-demo"
+                    ctaButtonUrl: "/book-demo",
+                    heroImage: ""
                   });
                 } else if (activeTab === "newsletters") {
                   setNewsletterForm({
@@ -923,6 +926,58 @@ export default function MasterDashboard() {
                     <div className="flex items-end">
                       <div className="w-32 h-16 rounded-lg overflow-hidden border border-slate-200 bg-slate-100">
                         <img src={caseForm.image} alt="Cover Preview" className="w-full h-full object-cover" />
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Hero Banner Image URL (Optional - defaults to Cover Image)</label>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={caseForm.heroImage}
+                        onChange={(e) => setCaseForm({ ...caseForm, heroImage: e.target.value })}
+                        className="flex-1 px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-808"
+                        placeholder="e.g. /images/case-studies/banner.jpg"
+                      />
+                      <label className="bg-slate-800 hover:bg-slate-700 text-white font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 cursor-pointer shadow-md select-none">
+                        <FiImage />
+                        <span>Upload</span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={async (e) => {
+                            const file = e.target.files?.[0];
+                            if (!file) return;
+                            const formData = new FormData();
+                            formData.append("file", file);
+                            try {
+                              const res = await fetch("/api/admin/upload", {
+                                method: "POST",
+                                body: formData
+                              });
+                              const data = await res.json();
+                              if (data.success) {
+                                setCaseForm({ ...caseForm, heroImage: data.url });
+                                showNotification("success", "Hero image uploaded successfully!");
+                              } else {
+                                showNotification("error", data.error || "Failed to upload image.");
+                              }
+                            } catch (err) {
+                              showNotification("error", "Error uploading image.");
+                            }
+                          }}
+                          className="hidden"
+                        />
+                      </label>
+                    </div>
+                  </div>
+                  {caseForm.heroImage && (
+                    <div className="flex items-end">
+                      <div className="w-32 h-16 rounded-lg overflow-hidden border border-slate-200 bg-slate-100">
+                        <img src={caseForm.heroImage} alt="Hero Preview" className="w-full h-full object-cover" />
                       </div>
                     </div>
                   )}

@@ -41,8 +41,8 @@ export default function CaseStudyDetail() {
       
       {/* 1. KnowBe4-Style Hero Section (Using Innvikta Theme Overlay) */}
       <div 
-        className="relative text-white py-20 bg-cover bg-center overflow-hidden min-h-[300px] flex items-end"
-        style={{ backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.7)), url(${data.image})` }}
+        className="relative text-white py-28 bg-cover bg-center overflow-hidden min-h-[420px] flex items-end"
+        style={{ backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.7)), url(${data.heroImage || data.image})` }}
       >
         <div className="container px-6 md:px-12 lg:px-24 relative z-10 w-full text-left">
           <Link href="/resources/case-studies" className="inline-flex items-center gap-2 text-slate-300 hover:text-white font-semibold mb-4 transition-colors font-secondary text-sm">
