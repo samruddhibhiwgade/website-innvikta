@@ -32,19 +32,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $db->query("SELECT DISTINCT email FROM form_submissions WHERE form_type = 'newsletter' OR form_type = 'newsletter_subscribe' OR form_type = 'Newsletter'");
         $subscribers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if (empty($subscribers)) {
-            echo json_encode(['success' => true, 'message' => 'No active subscribers found.', 'sent_count' => 0]);
+        $emails = [];
+        foreach ($subscribers as $sub) {
+            $e = trim($sub['email']);
+            if (!empty($e) && filter_var($e, FILTER_VALIDATE_EMAIL)) {
+                $emails[] = $e;
+            }
+        }
+
+        // Always send a copy to the admin (MAIL_TO)
+        $adminEmail = defined('MAIL_TO') ? trim(MAIL_TO) : '';
+        if (!empty($adminEmail) && filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
+            if (!in_array($adminEmail, $emails)) {
+                $emails[] = $adminEmail;
+            }
+        }
+
+        if (empty($emails)) {
+            echo json_encode(['success' => true, 'message' => 'No active recipients found.', 'sent_count' => 0]);
             exit;
         }
 
         $sentCount = 0;
         $errors = [];
 
-        foreach ($subscribers as $sub) {
-            $email = $sub['email'];
-            if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                continue;
-            }
+        foreach ($emails as $email) {
 
             // Build dynamic newsletter email template
             $subject = "Innvikta Weekly Alert: " . $title;
