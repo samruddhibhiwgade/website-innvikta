@@ -164,8 +164,7 @@ export default function CyberAwarenessMonthCampaignPage() {
 
               <h1 className="hero-title">
                 The Cyber<br/>
-                <em>Champion</em><br/>
-                Quest
+                <em>Champion</em> Quest
               </h1>
 
               <p className="hero-body">
