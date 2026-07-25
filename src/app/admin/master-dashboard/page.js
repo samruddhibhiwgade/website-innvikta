@@ -159,8 +159,10 @@ export default function MasterDashboard() {
     ctaDescription: "Get a personalized walk-through of Innvikta InSAT to see how our simulated phishing campaigns and automated training modules reduce social engineering risks.",
     ctaButtonText: "Book a Demo",
     ctaButtonUrl: "/book-demo",
-    heroImage: ""
+    heroImage: "",
+    pdfUrl: ""
   });
+  const [caseContentSource, setCaseContentSource] = useState("manual");
 
   const [newsletterForm, setNewsletterForm] = useState({
     title: "",
@@ -318,8 +320,29 @@ export default function MasterDashboard() {
 
   const handleSaveCase = async (e) => {
     e.preventDefault();
+    if (caseContentSource === "pdf" && !caseForm.pdfUrl) {
+      showNotification("error", "Please upload a PDF file first.");
+      return;
+    }
     try {
       const payload = { ...caseForm };
+      if (caseContentSource === "pdf") {
+        payload.description = "PDF Case Study Document";
+        payload.atGlance = [];
+        payload.summaryTitle = "";
+        payload.summaryParagraphs = [];
+        payload.challengeTitle = "";
+        payload.challengeParagraphs = [];
+        payload.solutionTitle = "Solution Section";
+        payload.solutionParagraphs = [];
+        payload.sidebarChallenge = "";
+        payload.sidebarDetails = [];
+        payload.quoteText = "";
+        payload.quoteAuthor = "";
+        payload.customSections = [];
+      } else {
+        payload.pdfUrl = "";
+      }
       if (editingId) payload.id = editingId;
       const res = await fetch("/api/case-studies", {
         method: "POST",
@@ -422,8 +445,10 @@ export default function MasterDashboard() {
       ctaDescription: study.ctaDescription || "Get a personalized walk-through of Innvikta InSAT to see how our simulated phishing campaigns and automated training modules reduce social engineering risks.",
       ctaButtonText: study.ctaButtonText || "Book a Demo",
       ctaButtonUrl: study.ctaButtonUrl || "/book-demo",
-      heroImage: study.heroImage || ""
+      heroImage: study.heroImage || "",
+      pdfUrl: study.pdfUrl || ""
     });
+    setCaseContentSource(study.pdfUrl ? "pdf" : "manual");
     setEditorMode("edit");
   };
 
@@ -562,8 +587,10 @@ export default function MasterDashboard() {
                     ctaDescription: "Get a personalized walk-through of Innvikta InSAT to see how our simulated phishing campaigns and automated training modules reduce social engineering risks.",
                     ctaButtonText: "Book a Demo",
                     ctaButtonUrl: "/book-demo",
-                    heroImage: ""
+                    heroImage: "",
+                    pdfUrl: ""
                   });
+                  setCaseContentSource("manual");
                 } else if (activeTab === "newsletters") {
                   setNewsletterForm({
                     title: "",
@@ -1001,7 +1028,88 @@ export default function MasterDashboard() {
                   )}
                 </div>
 
-                <div>
+                {/* Case Study Content Source Toggle */}
+                <div className="border-t border-slate-100 pt-4 text-left">
+                  <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Case Study Content Source</label>
+                  <div className="flex gap-4 mb-4">
+                    <button
+                      type="button"
+                      onClick={() => setCaseContentSource("manual")}
+                      className={`px-4 py-2 rounded-xl text-xs font-bold border transition-all ${
+                        caseContentSource === "manual"
+                          ? "bg-orange-50 border-[#f15a24] text-[#f15a24]"
+                          : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50"
+                      }`}
+                    >
+                      Manual Text & Sections
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setCaseContentSource("pdf")}
+                      className={`px-4 py-2 rounded-xl text-xs font-bold border transition-all ${
+                        caseContentSource === "pdf"
+                          ? "bg-orange-50 border-[#f15a24] text-[#f15a24]"
+                          : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50"
+                      }`}
+                    >
+                      Direct PDF Upload
+                    </button>
+                  </div>
+                </div>
+
+                {caseContentSource === "pdf" && (
+                  <div className="border border-slate-150 rounded-xl p-4 bg-slate-50/40 space-y-4 text-left">
+                    <label className="block text-xs font-bold text-slate-500 uppercase">Case Study PDF Document</label>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={caseForm.pdfUrl || ""}
+                        onChange={(e) => setCaseForm({ ...caseForm, pdfUrl: e.target.value })}
+                        className="flex-1 px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold"
+                        placeholder="e.g. /uploads/blog/filename.pdf"
+                      />
+                      <label className="bg-slate-800 hover:bg-slate-700 text-white font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 cursor-pointer shadow-md select-none">
+                        <FiFileText />
+                        <span>Upload PDF</span>
+                        <input
+                          type="file"
+                          accept="application/pdf"
+                          onChange={async (e) => {
+                            const file = e.target.files?.[0];
+                            if (!file) return;
+                            const formData = new FormData();
+                            formData.append("file", file);
+                            try {
+                              const res = await fetch("/api/admin/upload", {
+                                method: "POST",
+                                body: formData
+                              });
+                              const data = await res.json();
+                              if (data.success) {
+                                setCaseForm({ ...caseForm, pdfUrl: data.url });
+                                showNotification("success", "PDF uploaded successfully!");
+                              } else {
+                                showNotification("error", data.error || "Failed to upload PDF.");
+                              }
+                            } catch (err) {
+                              showNotification("error", "Error uploading PDF.");
+                            }
+                          }}
+                          className="hidden"
+                        />
+                      </label>
+                    </div>
+                    {caseForm.pdfUrl && (
+                      <div className="text-[10px] text-green-700 font-bold bg-green-50 px-3 py-1 rounded-lg border border-green-150 w-fit">
+                        PDF Attached: {caseForm.pdfUrl}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {caseContentSource === "manual" && (
+                  <>
+                    <div>
                   <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Description</label>
                   <ToolbarEditor
                     value={caseForm.description}
@@ -1496,14 +1604,15 @@ export default function MasterDashboard() {
                         className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold"
                         placeholder="e.g. /book-demo"
                       />
-                    </div>
                   </div>
                 </div>
+                </>
+              )}
 
-                <button type="submit" className="bg-[#f15a24] hover:bg-orange-600 !text-white font-bold px-6 py-2.5 rounded-xl text-xs flex items-center gap-2 cursor-pointer shadow-md">
-                  <FiSave /> Save Case Study
-                </button>
-              </form>
+              <button type="submit" className="bg-[#f15a24] hover:bg-orange-600 !text-white font-bold px-6 py-2.5 rounded-xl text-xs flex items-center gap-2 cursor-pointer shadow-md">
+                <FiSave /> Save Case Study
+              </button>
+            </form>
             )}
 
             {/* Newsletters editor */}
