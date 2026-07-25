@@ -833,14 +833,15 @@ export default function CyberAwarenessMonthCampaignPage() {
                     <div className="space-y-4">
                       {/* Privacy Agreement Checkbox */}
                       <div className="pt-2">
-                        <label className="flex items-start gap-2.5 cursor-pointer">
+                        <label className="checkbox-field flex items-start gap-2.5 cursor-pointer">
                           <input
                             type="checkbox"
                             checked={form.agreedToPrivacy}
                             onChange={(e) => setForm({ ...form, agreedToPrivacy: e.target.checked })}
-                            className="mt-0.5 h-4 w-4 rounded border-slate-300 text-[#f15a24] focus:ring-[#f15a24]"
+                            className="hidden"
                           />
-                          <span className="text-[11px] text-slate-500 leading-normal">
+                          <div className={`checkbox-box ${errors.agreedToPrivacy ? 'border-red-500' : 'border-slate-300'} mt-0.5`}></div>
+                          <span className="checkbox-text text-[11px] text-slate-500 leading-normal">
                             I agree to receive communications from Innvikta regarding this campaign in accordance with the <a href="/privacy-policy" target="_blank" className="underline hover:text-[#f15a24] transition-colors">Privacy Policy</a>.
                           </span>
                         </label>
