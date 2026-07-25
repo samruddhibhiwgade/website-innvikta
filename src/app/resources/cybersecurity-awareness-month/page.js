@@ -699,161 +699,166 @@ export default function CyberAwarenessMonthCampaignPage() {
                 </div>
 
                 {/* Right side panel: The Form */}
-                <div className="w-full lg:w-[60%] p-8 md:p-10 bg-white">
+                <div className="w-full lg:w-[60%] p-8 md:p-10 bg-white flex flex-col justify-between">
                   <div className="flex items-center gap-3 mb-6">
                     <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 shrink-0">YOUR DETAILS</span>
                     <div className="h-px bg-slate-100 flex-1"></div>
                   </div>
 
-                  <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-                    {/* Full Name and Corporate Email */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">FULL NAME <span className="text-[#f15a24]">*</span></label>
-                        <div className="relative">
-                          <input
-                            type="text"
-                            placeholder="Jane Smith"
-                            value={form.fullName}
-                            onChange={(e) => setForm({ ...form, fullName: e.target.value })}
-                            className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
-                              errors.fullName ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
-                            } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
-                          />
-                          <FiUser className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
-                        </div>
-                        {errors.fullName && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.fullName}</p>}
-                      </div>
-
-                      <div>
-                        <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">CORPORATE EMAIL <span className="text-[#f15a24]">*</span></label>
-                        <div className="relative">
-                          <input
-                            type="email"
-                            placeholder="jane@yourcompany.com"
-                            value={form.email}
-                            onChange={(e) => setForm({ ...form, email: e.target.value })}
-                            className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
-                              errors.email ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
-                            } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
-                          />
-                          <FiMail className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
-                        </div>
-                        {errors.email && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.email}</p>}
-                      </div>
-                    </div>
-
-                    {/* Organisation and Phone */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">ORGANISATION <span className="text-[#f15a24]">*</span></label>
-                        <div className="relative">
-                          <input
-                            type="text"
-                            placeholder="Your Organisation"
-                            value={form.company}
-                            onChange={(e) => setForm({ ...form, company: e.target.value })}
-                            className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
-                              errors.company ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
-                            } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
-                          />
-                          <FiBriefcase className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
-                        </div>
-                        {errors.company && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.company}</p>}
-                      </div>
-
-                      <div>
-                        <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">PHONE NUMBER <span className="text-[#f15a24]">*</span></label>
-                        <div className="relative">
-                          <input
-                            type="text"
-                            placeholder="+1 555-0199"
-                            value={form.phone}
-                            onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                            className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
-                              errors.phone ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
-                            } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
-                          />
-                          <FiPhone className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
-                        </div>
-                        {errors.phone && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.phone}</p>}
-                      </div>
-                    </div>
-                       {/* Designation and Company Size */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">DESIGNATION / JOB TITLE <span className="text-[#f15a24]">*</span></label>
-                        <div className="relative">
-                          <select
-                            value={form.designation}
-                            onChange={(e) => setForm({ ...form, designation: e.target.value })}
-                            className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
-                              errors.designation ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
-                            } rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium appearance-none cursor-pointer`}
-                          >
-                            <option value="">Select Designation</option>
-                            <option value="CISO / IT Security Director">CISO / Security Director</option>
-                            <option value="IT Director / IT Manager">IT Director / IT Manager</option>
-                            <option value="HR / People Operations">HR / People Operations</option>
-                            <option value="Executive / Founder">Executive / Founder</option>
-                            <option value="Operations / Compliance">Operations / Compliance</option>
-                            <option value="Other">Other</option>
-                          </select>
-                          <div className="pointer-events-none absolute inset-y-0 right-3.5 flex items-center text-slate-400">
-                            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                  <form onSubmit={handleSubmit} className="space-y-6 flex-1 flex flex-col justify-between" noValidate>
+                    <div className="space-y-4">
+                      {/* Full Name and Corporate Email */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">FULL NAME <span className="text-[#f15a24]">*</span></label>
+                          <div className="relative">
+                            <input
+                              type="text"
+                              placeholder="Jane Smith"
+                              value={form.fullName}
+                              onChange={(e) => setForm({ ...form, fullName: e.target.value })}
+                              className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
+                                errors.fullName ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
+                              } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
+                            />
+                            <FiUser className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
                           </div>
+                          {errors.fullName && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.fullName}</p>}
                         </div>
-                        {errors.designation && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.designation}</p>}
-                      </div>
 
-                      <div>
-                        <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">COMPANY SIZE <span className="text-[#f15a24]">*</span></label>
-                        <div className="relative">
-                          <select
-                            value={form.companySize}
-                            onChange={(e) => setForm({ ...form, companySize: e.target.value })}
-                            className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
-                              errors.companySize ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
-                            } rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium appearance-none cursor-pointer`}
-                          >
-                            <option value="">Select Company Size</option>
-                            <option value="1-50">1 - 50 employees</option>
-                            <option value="51-200">51 - 200 employees</option>
-                            <option value="201-500">201 - 500 employees</option>
-                            <option value="501-1000">501 - 1000 employees</option>
-                            <option value="1000+">1000+ employees</option>
-                          </select>
-                          <div className="pointer-events-none absolute inset-y-0 right-3.5 flex items-center text-slate-400">
-                            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        <div>
+                          <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">CORPORATE EMAIL <span className="text-[#f15a24]">*</span></label>
+                          <div className="relative">
+                            <input
+                              type="email"
+                              placeholder="jane@yourcompany.com"
+                              value={form.email}
+                              onChange={(e) => setForm({ ...form, email: e.target.value })}
+                              className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
+                                errors.email ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
+                              } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
+                            />
+                            <FiMail className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
                           </div>
+                          {errors.email && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.email}</p>}
                         </div>
-                        {errors.companySize && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.companySize}</p>}
+                      </div>
+
+                      {/* Organisation and Phone */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">ORGANISATION <span className="text-[#f15a24]">*</span></label>
+                          <div className="relative">
+                            <input
+                              type="text"
+                              placeholder="Your Organisation"
+                              value={form.company}
+                              onChange={(e) => setForm({ ...form, company: e.target.value })}
+                              className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
+                                errors.company ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
+                              } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
+                            />
+                            <FiBriefcase className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
+                          </div>
+                          {errors.company && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.company}</p>}
+                        </div>
+
+                        <div>
+                          <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">PHONE NUMBER <span className="text-[#f15a24]">*</span></label>
+                          <div className="relative">
+                            <input
+                              type="text"
+                              placeholder="+1 555-0199"
+                              value={form.phone}
+                              onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                              className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
+                                errors.phone ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
+                              } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
+                            />
+                            <FiPhone className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
+                          </div>
+                          {errors.phone && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.phone}</p>}
+                        </div>
+                      </div>
+
+                      {/* Designation and Company Size */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">DESIGNATION / JOB TITLE <span className="text-[#f15a24]">*</span></label>
+                          <div className="relative">
+                            <select
+                              value={form.designation}
+                              onChange={(e) => setForm({ ...form, designation: e.target.value })}
+                              className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
+                                errors.designation ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
+                              } rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium appearance-none cursor-pointer`}
+                            >
+                              <option value="">Select Designation</option>
+                              <option value="CISO / IT Security Director">CISO / Security Director</option>
+                              <option value="IT Director / IT Manager">IT Director / IT Manager</option>
+                              <option value="HR / People Operations">HR / People Operations</option>
+                              <option value="Executive / Founder">Executive / Founder</option>
+                              <option value="Operations / Compliance">Operations / Compliance</option>
+                              <option value="Other">Other</option>
+                            </select>
+                            <div className="pointer-events-none absolute inset-y-0 right-3.5 flex items-center text-slate-400">
+                              <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            </div>
+                          </div>
+                          {errors.designation && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.designation}</p>}
+                        </div>
+
+                        <div>
+                          <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">COMPANY SIZE <span className="text-[#f15a24]">*</span></label>
+                          <div className="relative">
+                            <select
+                              value={form.companySize}
+                              onChange={(e) => setForm({ ...form, companySize: e.target.value })}
+                              className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
+                                errors.companySize ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
+                              } rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium appearance-none cursor-pointer`}
+                            >
+                              <option value="">Select Company Size</option>
+                              <option value="1-50">1 - 50 employees</option>
+                              <option value="51-200">51 - 200 employees</option>
+                              <option value="201-500">201 - 500 employees</option>
+                              <option value="501-1000">501 - 1000 employees</option>
+                              <option value="1000+">1000+ employees</option>
+                            </select>
+                            <div className="pointer-events-none absolute inset-y-0 right-3.5 flex items-center text-slate-400">
+                              <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            </div>
+                          </div>
+                          {errors.companySize && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.companySize}</p>}
+                        </div>
                       </div>
                     </div>
 
-                    {/* Privacy Agreement Checkbox */}
-                    <div className="pt-2">
-                      <label className="flex items-start gap-2.5 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={form.agreedToPrivacy}
-                          onChange={(e) => setForm({ ...form, agreedToPrivacy: e.target.checked })}
-                          className="mt-1 h-4 w-4 rounded border-slate-300 text-[#f15a24] focus:ring-[#f15a24]"
-                        />
-                        <span className="text-[11px] text-slate-500 leading-normal">
-                          I agree to receive communications from Innvikta regarding this campaign in accordance with the <a href="/privacy-policy" target="_blank" className="underline hover:text-[#f15a24] transition-colors">Privacy Policy</a>.
-                        </span>
-                      </label>
-                      {errors.agreedToPrivacy && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.agreedToPrivacy}</p>}
-                    </div>
+                    <div className="space-y-4">
+                      {/* Privacy Agreement Checkbox */}
+                      <div className="pt-2">
+                        <label className="flex items-start gap-2.5 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={form.agreedToPrivacy}
+                            onChange={(e) => setForm({ ...form, agreedToPrivacy: e.target.checked })}
+                            className="mt-0.5 h-4 w-4 rounded border-slate-300 text-[#f15a24] focus:ring-[#f15a24]"
+                          />
+                          <span className="text-[11px] text-slate-500 leading-normal">
+                            I agree to receive communications from Innvikta regarding this campaign in accordance with the <a href="/privacy-policy" target="_blank" className="underline hover:text-[#f15a24] transition-colors">Privacy Policy</a>.
+                          </span>
+                        </label>
+                        {errors.agreedToPrivacy && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.agreedToPrivacy}</p>}
+                      </div>
 
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-fit px-8 py-3 bg-[#f15a24] hover:bg-orange-600 disabled:bg-orange-400 disabled:cursor-not-allowed !text-white rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 text-sm cursor-pointer"
-                    >
-                      {isSubmitting ? "Submitting..." : "Register for the Campaign"} <FiArrowRight className="text-xs" />
-                    </button>
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-fit px-8 py-3 bg-[#f15a24] hover:bg-orange-600 disabled:bg-orange-400 disabled:cursor-not-allowed !text-white rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 text-sm cursor-pointer"
+                      >
+                        {isSubmitting ? "Submitting..." : "Register for the Campaign"} <FiArrowRight className="text-xs" />
+                      </button>
+                    </div>
                   </form>
                 </div>
 
