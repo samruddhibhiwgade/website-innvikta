@@ -195,7 +195,10 @@ export default function CyberAwarenessMonthCampaignPage() {
 
               <div className="hero-meta">
                 <div className="meta-item">
-                  <span className="meta-value">{registeredCount.toLocaleString()}</span><span className="meta-suffix">+</span>
+                  <div className="flex items-baseline">
+                    <span className="meta-value">{registeredCount.toLocaleString()}</span>
+                    <span className="meta-suffix">+</span>
+                  </div>
                   <span className="meta-label">Registered</span>
                 </div>
                 <div className="meta-sep"></div>
