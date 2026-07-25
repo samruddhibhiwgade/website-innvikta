@@ -74,12 +74,14 @@ export default function CyberAwarenessMonthCampaignPage() {
     setParallaxStyle({ front: {}, mid: {}, back: {} });
   };
 
-  // Form State matching BookDemo
   const [form, setForm] = useState({
     fullName: "",
     email: "",
     company: "",
-    phone: ""
+    phone: "",
+    designation: "",
+    companySize: "",
+    agreedToPrivacy: false
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -105,6 +107,9 @@ export default function CyberAwarenessMonthCampaignPage() {
     if (emailError) newErrors.email = emailError;
     if (!form.company) newErrors.company = "Company is required";
     if (!form.phone) newErrors.phone = "Phone is required";
+    if (!form.designation) newErrors.designation = "Designation is required";
+    if (!form.companySize) newErrors.companySize = "Company size is required";
+    if (!form.agreedToPrivacy) newErrors.agreedToPrivacy = "Privacy agreement is required";
     
     setErrors(newErrors);
     
@@ -118,7 +123,9 @@ export default function CyberAwarenessMonthCampaignPage() {
           name: form.fullName,
           email: form.email,
           company: form.company,
-          phone: form.phone
+          phone: form.phone,
+          designation: form.designation,
+          companySize: form.companySize
         })
       })
       .then((res) => res.json())
@@ -130,7 +137,10 @@ export default function CyberAwarenessMonthCampaignPage() {
             fullName: "",
             email: "",
             company: "",
-            phone: ""
+            phone: "",
+            designation: "",
+            companySize: "",
+            agreedToPrivacy: false
           });
         } else {
           alert("Error: " + (data.error || "Failed to submit request. Please try again."));
@@ -627,152 +637,207 @@ export default function CyberAwarenessMonthCampaignPage() {
         </section>
 
         {/* ================= REGISTER SECTION ================= */}
-        <section className="section register-section" id="register">
-          <div className="container register-grid">
-            
-            <div className="register-left">
-              <div className="section-label">Register</div>
-              <h2 className="section-heading register-heading">Join the<br/>Cyber Champion Quest</h2>
-              <p className="register-intro">Spots are limited. Register your organisation now and get full access to the complete five-week toolkit — at no cost.</p>
-
-              <div className="reg-checklist">
-                <div className="rc-item">
-                  <FiCheck className="rc-check" size={16} />
-                  <span>Full five-week program access</span>
-                </div>
-                <div className="rc-item">
-                  <FiCheck className="rc-check" size={16} />
-                  <span>All four gamified challenges</span>
-                </div>
-                <div className="rc-item">
-                  <FiCheck className="rc-check" size={16} />
-                  <span>Department-specific scenario cards</span>
-                </div>
-                <div className="rc-item">
-                  <FiCheck className="rc-check" size={16} />
-                  <span>Org-level analytics &amp; leaderboard</span>
-                </div>
-                <div className="rc-item">
-                  <FiCheck className="rc-check" size={16} />
-                  <span>Official Cyber Champion Certificates</span>
-                </div>
-              </div>
-
-              <div className="trust-strip">
-                <div className="trust-pill">
-                  <FiShield size={14} />
-                  Secure registration
-                </div>
-                <div className="trust-pill">
-                  <FiLock size={14} />
-                  No spam, ever
-                </div>
-                <div className="trust-pill">
-                  <FiBriefcase size={14} />
-                  Completely free
-                </div>
-              </div>
-            </div>
-
-            <div className="register-right">
-              <div className="bg-white border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.05)] rounded-[24px] overflow-hidden my-8 text-left max-w-4xl mx-auto flex flex-col md:flex-row">
-                {/* Left panel - Brand Highlight Accent */}
-                <div className="md:w-[40%] bg-gradient-to-br from-[#f15a24] to-[#c2410c] text-white p-6 md:p-8 flex flex-col justify-between relative overflow-hidden shrink-0">
+        <section className="section register-section py-20 bg-white" id="register">
+          <div className="container px-6 md:px-12 lg:px-24">
+            <div className="relative max-w-5xl mx-auto bg-white border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.05)] rounded-[24px] overflow-hidden p-0">
+              <div className="flex flex-col lg:flex-row">
+                
+                {/* Left side panel: Orange background */}
+                <div className="w-full lg:w-[40%] bg-gradient-to-br from-[#f15a24] to-[#c2410c] p-8 md:p-10 text-white flex flex-col justify-between relative overflow-hidden shrink-0">
                   <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "16px 16px" }}></div>
                   <div className="relative z-10">
                     <div className="inline-block px-3 py-1 mb-6 text-[10px] font-bold tracking-wider bg-white/10 rounded-full uppercase border border-white/15 backdrop-blur-sm">
                       CYBER CHAMPION QUEST 2026
                     </div>
-                    <h4 className="text-2xl md:text-3xl font-extrabold text-white leading-tight mb-4">
-                      Join the Campaign
-                    </h4>
-                    <p className="text-xs text-white/90 leading-relaxed font-medium">
-                      Register your organisation now and get full access to the complete five-week campaign toolkit, completely free.
+                    <h2 className="text-3xl font-extrabold text-white leading-tight mb-4 font-secondary">
+                      Join the Quest
+                    </h2>
+                    <p className="text-xs text-white/90 leading-relaxed font-medium mb-8">
+                      Spots are limited. Register your organisation now and get full access to the complete five-week campaign toolkit, completely free.
                     </p>
+
+                    {/* Features Checklist */}
+                    <div className="space-y-4 mb-8">
+                      <div className="flex items-center gap-3">
+                        <FiCheck className="text-white/80 shrink-0" size={16} />
+                        <span className="text-xs font-semibold text-white/90">Full five-week program access</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <FiCheck className="text-white/80 shrink-0" size={16} />
+                        <span className="text-xs font-semibold text-white/90">All four gamified challenges</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <FiCheck className="text-white/80 shrink-0" size={16} />
+                        <span className="text-xs font-semibold text-white/90">Department-specific scenario cards</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <FiCheck className="text-white/80 shrink-0" size={16} />
+                        <span className="text-xs font-semibold text-white/90">Org-level analytics &amp; leaderboard</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <FiCheck className="text-white/80 shrink-0" size={16} />
+                        <span className="text-xs font-semibold text-white/90">Official Cyber Champion Certificates</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="mt-8 relative z-10 text-[10px] text-white/70 font-semibold tracking-wider uppercase">
-                    © INNVIKTA SECURITY
+
+                  {/* Trust Pills - Better Design */}
+                  <div className="relative z-10 flex flex-wrap gap-2 mt-8 pt-6 border-t border-white/15">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-bold bg-white/10 border border-white/15 backdrop-blur-sm text-white">
+                      <FiShield size={12} />
+                      Secure Registration
+                    </div>
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-bold bg-white/10 border border-white/15 backdrop-blur-sm text-white">
+                      <FiLock size={12} />
+                      No Spam, Ever
+                    </div>
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-bold bg-white/10 border border-white/15 backdrop-blur-sm text-white">
+                      <FiBriefcase size={12} />
+                      Completely Free
+                    </div>
                   </div>
                 </div>
 
-                {/* Right panel - Form Fields */}
-                <div className="md:w-[60%] p-6 md:p-8 bg-white flex-1">
+                {/* Right side panel: The Form */}
+                <div className="w-full lg:w-[60%] p-8 md:p-10 bg-white">
                   <div className="flex items-center gap-3 mb-6">
                     <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 shrink-0">YOUR DETAILS</span>
                     <div className="h-px bg-slate-100 flex-1"></div>
                   </div>
 
                   <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-                    {/* Full Name */}
-                    <div>
-                      <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">FULL NAME <span className="text-[#f15a24]">*</span></label>
-                      <div className="relative">
-                        <input
-                          type="text"
-                          placeholder="Jane Smith"
-                          value={form.fullName}
-                          onChange={(e) => setForm({ ...form, fullName: e.target.value })}
-                          className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
-                            errors.fullName ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
-                          } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
-                        />
-                        <FiUser className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
+                    {/* Full Name and Corporate Email */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">FULL NAME <span className="text-[#f15a24]">*</span></label>
+                        <div className="relative">
+                          <input
+                            type="text"
+                            placeholder="Jane Smith"
+                            value={form.fullName}
+                            onChange={(e) => setForm({ ...form, fullName: e.target.value })}
+                            className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
+                              errors.fullName ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
+                            } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
+                          />
+                          <FiUser className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
+                        </div>
+                        {errors.fullName && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.fullName}</p>}
                       </div>
-                      {errors.fullName && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.fullName}</p>}
+
+                      <div>
+                        <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">CORPORATE EMAIL <span className="text-[#f15a24]">*</span></label>
+                        <div className="relative">
+                          <input
+                            type="email"
+                            placeholder="jane@yourcompany.com"
+                            value={form.email}
+                            onChange={(e) => setForm({ ...form, email: e.target.value })}
+                            className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
+                              errors.email ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
+                            } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
+                          />
+                          <FiMail className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
+                        </div>
+                        {errors.email && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.email}</p>}
+                      </div>
                     </div>
 
-                    {/* Corporate Email */}
-                    <div>
-                      <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">CORPORATE EMAIL <span className="text-[#f15a24]">*</span></label>
-                      <div className="relative">
-                        <input
-                          type="email"
-                          placeholder="jane@yourcompany.com"
-                          value={form.email}
-                          onChange={(e) => setForm({ ...form, email: e.target.value })}
-                          className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
-                            errors.email ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
-                          } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
-                        />
-                        <FiMail className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
+                    {/* Organisation and Phone */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">ORGANISATION <span className="text-[#f15a24]">*</span></label>
+                        <div className="relative">
+                          <input
+                            type="text"
+                            placeholder="Your Organisation"
+                            value={form.company}
+                            onChange={(e) => setForm({ ...form, company: e.target.value })}
+                            className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
+                              errors.company ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
+                            } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
+                          />
+                          <FiBriefcase className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
+                        </div>
+                        {errors.company && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.company}</p>}
                       </div>
-                      {errors.email && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.email}</p>}
+
+                      <div>
+                        <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">PHONE NUMBER <span className="text-[#f15a24]">*</span></label>
+                        <div className="relative">
+                          <input
+                            type="text"
+                            placeholder="+1 555-0199"
+                            value={form.phone}
+                            onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                            className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
+                              errors.phone ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
+                            } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
+                          />
+                          <FiPhone className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
+                        </div>
+                        {errors.phone && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.phone}</p>}
+                      </div>
                     </div>
 
-                    {/* Organisation */}
-                    <div>
-                      <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">ORGANISATION <span className="text-[#f15a24]">*</span></label>
-                      <div className="relative">
-                        <input
-                          type="text"
-                          placeholder="Your Organisation"
-                          value={form.company}
-                          onChange={(e) => setForm({ ...form, company: e.target.value })}
-                          className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
-                            errors.company ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
-                          } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
-                        />
-                        <FiBriefcase className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
+                    {/* Designation and Company Size */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">DESIGNATION / JOB TITLE <span className="text-[#f15a24]">*</span></label>
+                        <div className="relative">
+                          <input
+                            type="text"
+                            placeholder="e.g. CISO, IT Manager"
+                            value={form.designation}
+                            onChange={(e) => setForm({ ...form, designation: e.target.value })}
+                            className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
+                              errors.designation ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
+                            } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
+                          />
+                          <FiUser className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
+                        </div>
+                        {errors.designation && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.designation}</p>}
                       </div>
-                      {errors.company && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.company}</p>}
+
+                      <div>
+                        <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">COMPANY SIZE <span className="text-[#f15a24]">*</span></label>
+                        <div className="relative">
+                          <select
+                            value={form.companySize}
+                            onChange={(e) => setForm({ ...form, companySize: e.target.value })}
+                            className={`w-full px-4 !py-3 bg-slate-50 border ${
+                              errors.companySize ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
+                            } rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium appearance-none cursor-pointer`}
+                          >
+                            <option value="">Select Company Size</option>
+                            <option value="1-50">1 - 50 employees</option>
+                            <option value="51-200">51 - 200 employees</option>
+                            <option value="201-500">201 - 500 employees</option>
+                            <option value="501-1000">501 - 1000 employees</option>
+                            <option value="1000+">1000+ employees</option>
+                          </select>
+                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                          </div>
+                        </div>
+                        {errors.companySize && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.companySize}</p>}
+                      </div>
                     </div>
 
-                    {/* Phone */}
-                    <div>
-                      <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">PHONE NUMBER <span className="text-[#f15a24]">*</span></label>
-                      <div className="relative">
+                    {/* Privacy Agreement Checkbox */}
+                    <div className="pt-2">
+                      <label className="flex items-start gap-2.5 cursor-pointer">
                         <input
-                          type="text"
-                          placeholder="+1 555-0199"
-                          value={form.phone}
-                          onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                          className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
-                            errors.phone ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
-                          } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
+                          type="checkbox"
+                          checked={form.agreedToPrivacy}
+                          onChange={(e) => setForm({ ...form, agreedToPrivacy: e.target.checked })}
+                          className="mt-1 h-4 w-4 rounded border-slate-300 text-[#f15a24] focus:ring-[#f15a24]"
                         />
-                        <FiPhone className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
-                      </div>
-                      {errors.phone && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.phone}</p>}
+                        <span className="text-[11px] text-slate-500 leading-normal">
+                          I agree to receive communications from Innvikta regarding this campaign in accordance with the <a href="/privacy-policy" target="_blank" className="underline hover:text-[#f15a24] transition-colors">Privacy Policy</a>.
+                        </span>
+                      </label>
+                      {errors.agreedToPrivacy && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.agreedToPrivacy}</p>}
                     </div>
 
                     <button
@@ -784,9 +849,9 @@ export default function CyberAwarenessMonthCampaignPage() {
                     </button>
                   </form>
                 </div>
+
               </div>
             </div>
-
           </div>
 
           {/* Success Popup */}
