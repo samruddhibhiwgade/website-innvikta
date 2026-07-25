@@ -678,17 +678,17 @@ export default function CyberAwarenessMonthCampaignPage() {
                   </div>
 
                   {/* Trust Pills - Better Design */}
-                  <div className="relative z-10 flex flex-wrap gap-2 mt-8 pt-6 border-t border-white/15">
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-bold bg-white/10 border border-white/15 backdrop-blur-sm text-white">
-                      <FiShield size={12} />
+                  <div className="relative z-10 flex flex-wrap gap-5 mt-8 pt-6 border-t border-white/15">
+                    <div className="inline-flex items-center gap-1.5 text-[11px] font-bold text-white">
+                      <FiShield size={13} className="opacity-80" />
                       Secure Registration
                     </div>
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-bold bg-white/10 border border-white/15 backdrop-blur-sm text-white">
-                      <FiLock size={12} />
+                    <div className="inline-flex items-center gap-1.5 text-[11px] font-bold text-white">
+                      <FiLock size={13} className="opacity-80" />
                       No Spam, Ever
                     </div>
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-bold bg-white/10 border border-white/15 backdrop-blur-sm text-white">
-                      <FiBriefcase size={12} />
+                    <div className="inline-flex items-center gap-1.5 text-[11px] font-bold text-white">
+                      <FiBriefcase size={13} className="opacity-80" />
                       Completely Free
                     </div>
                   </div>
