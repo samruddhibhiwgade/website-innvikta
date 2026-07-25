@@ -177,25 +177,7 @@ export default function CyberAwarenessMonthCampaignPage() {
                 <a href="#weeks" className="btn btn--ghost">View the Program</a>
               </div>
 
-              <div className="hero-meta">
-                <div className="meta-item">
-                  <div className="flex items-baseline">
-                    <span className="meta-value">{registeredCount.toLocaleString()}</span>
-                    <span className="meta-suffix">+</span>
-                  </div>
-                  <span className="meta-label">Registered</span>
-                </div>
-                <div className="meta-sep"></div>
-                <div className="meta-item">
-                  <span className="meta-value">5</span>
-                  <span className="meta-label">Power Weeks</span>
-                </div>
-                <div className="meta-sep"></div>
-                <div className="meta-item">
-                  <span className="meta-value">100%</span>
-                  <span className="meta-label">Free to Join</span>
-                </div>
-              </div>
+
             </div>
 
             <div className="hero-right" aria-hidden="true">
