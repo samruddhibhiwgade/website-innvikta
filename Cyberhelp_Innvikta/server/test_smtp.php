@@ -17,15 +17,9 @@ $password = MAIL_PASSWORD;
 $from     = MAIL_FROM;
 $fromName = MAIL_FROM_NAME;
 
+echo "Connecting to ssl://$host:$port...\n";
 try {
-    $context = stream_context_create([
-        'ssl' => [
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-            'allow_self_signed' => true
-        ]
-    ]);
-    $sock = @stream_socket_client('ssl://' . $host . ':' . $port, $errno, $errstr, 15, STREAM_CLIENT_CONNECT, $context);
+    $sock = fsockopen('ssl://' . $host, $port, $errno, $errstr, 15);
     if (!$sock) {
         throw new Exception('Cannot connect to ' . $host . ':' . $port . ' — ' . $errstr);
     }
