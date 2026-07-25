@@ -209,12 +209,6 @@ export default function CyberAwarenessMonthCampaignPage() {
                   <div className="hcard-tag">Interactive Module</div>
                 </div>
               </div>
-              <div className="hero-cert-badge">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="12" cy="8" r="6"/><path d="M8.56 14.44L6 20l6-2 6 2-2.56-5.56"/>
-                </svg>
-                <span>Cyber Champion Certificate awarded</span>
-              </div>
             </div>
           </div>
         </section>
