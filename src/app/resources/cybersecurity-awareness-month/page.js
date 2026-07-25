@@ -778,6 +778,7 @@ export default function CyberAwarenessMonthCampaignPage() {
                         </div>
                         {errors.phone && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.phone}</p>}
                       </div>
+                    </div>
                        {/* Designation and Company Size */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
