@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 0);
+error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE & ~E_DEPRECATED);
 require __DIR__ . '/config.php';
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
