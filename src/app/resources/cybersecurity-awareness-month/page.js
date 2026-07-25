@@ -778,23 +778,29 @@ export default function CyberAwarenessMonthCampaignPage() {
                         </div>
                         {errors.phone && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.phone}</p>}
                       </div>
-                    </div>
-
-                    {/* Designation and Company Size */}
+                       {/* Designation and Company Size */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">DESIGNATION / JOB TITLE <span className="text-[#f15a24]">*</span></label>
                         <div className="relative">
-                          <input
-                            type="text"
-                            placeholder="e.g. CISO, IT Manager"
+                          <select
                             value={form.designation}
                             onChange={(e) => setForm({ ...form, designation: e.target.value })}
                             className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
                               errors.designation ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
-                            } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
-                          />
-                          <FiUser className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
+                            } rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium appearance-none cursor-pointer`}
+                          >
+                            <option value="">Select Designation</option>
+                            <option value="CISO / IT Security Director">CISO / Security Director</option>
+                            <option value="IT Director / IT Manager">IT Director / IT Manager</option>
+                            <option value="HR / People Operations">HR / People Operations</option>
+                            <option value="Executive / Founder">Executive / Founder</option>
+                            <option value="Operations / Compliance">Operations / Compliance</option>
+                            <option value="Other">Other</option>
+                          </select>
+                          <div className="pointer-events-none absolute inset-y-0 right-3.5 flex items-center text-slate-400">
+                            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                          </div>
                         </div>
                         {errors.designation && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.designation}</p>}
                       </div>
@@ -805,7 +811,7 @@ export default function CyberAwarenessMonthCampaignPage() {
                           <select
                             value={form.companySize}
                             onChange={(e) => setForm({ ...form, companySize: e.target.value })}
-                            className={`w-full px-4 !py-3 bg-slate-50 border ${
+                            className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
                               errors.companySize ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
                             } rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium appearance-none cursor-pointer`}
                           >
@@ -816,7 +822,7 @@ export default function CyberAwarenessMonthCampaignPage() {
                             <option value="501-1000">501 - 1000 employees</option>
                             <option value="1000+">1000+ employees</option>
                           </select>
-                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                          <div className="pointer-events-none absolute inset-y-0 right-3.5 flex items-center text-slate-400">
                             <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                           </div>
                         </div>
