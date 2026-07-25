@@ -1037,6 +1037,9 @@
     .offerings-grid > .offering-image-col {
       display: none !important;
     }
+    .offering-index {
+      font-size: 11px !important;
+    }
   }
 
   .offering {
@@ -1093,7 +1096,7 @@
 
   .offering-index {
     font-family: var(--font-display);
-    font-size: 11px;
+    font-size: 15px;
     font-weight: 700;
     letter-spacing: 0.08em;
     color: var(--text-tertiary);
