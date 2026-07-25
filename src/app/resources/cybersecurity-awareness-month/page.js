@@ -533,7 +533,7 @@ export default function CyberAwarenessMonthCampaignPage() {
             </div>
 
             <div className="offerings-grid">
-              {/* Left Column (01, 02, 03) */}
+              {/* Left Column (01, 03, 05) */}
               <div className="offering-col">
                 <div className="offering revealed" data-reveal>
                   <div className="offering-index">01</div>
@@ -543,6 +543,30 @@ export default function CyberAwarenessMonthCampaignPage() {
                   <div className="offering-tag">10 min · Self-paced</div>
                 </div>
 
+                <div className="offering revealed" data-reveal>
+                  <div className="offering-index">03</div>
+                  <div className="offering-line"></div>
+                  <h3 className="offering-title">Flipbook Comic Series</h3>
+                  <p className="offering-desc">Three cybersecurity comics designed to make threats stick. Narrative-driven, visually engaging, and shareable.</p>
+                  <div className="offering-tag">3 flipbooks</div>
+                </div>
+
+                <div className="offering revealed" data-reveal>
+                  <div className="offering-index">05</div>
+                  <div className="offering-line"></div>
+                  <h3 className="offering-title">Leaderboards &amp; Analytics</h3>
+                  <p className="offering-desc">Live scoring, top performer spotlights, and a full analytics dashboard for your security and leadership teams.</p>
+                  <div className="offering-tag">Real-time · Org-wide</div>
+                </div>
+              </div>
+
+              {/* Middle Column (Stunning visual image) */}
+              <div className="offering-image-col">
+                <img src="/images/cyber_champion_quest_middle.png" alt="Cyber Champion Quest Campaign Visual" />
+              </div>
+
+              {/* Right Column (02, 04, 06) */}
+              <div className="offering-col">
                 <div className="offering offering--accent revealed" data-reveal>
                   <div className="offering-index">02</div>
                   <div className="offering-line"></div>
@@ -552,35 +576,11 @@ export default function CyberAwarenessMonthCampaignPage() {
                 </div>
 
                 <div className="offering revealed" data-reveal>
-                  <div className="offering-index">03</div>
-                  <div className="offering-line"></div>
-                  <h3 className="offering-title">Flipbook Comic Series</h3>
-                  <p className="offering-desc">Three cybersecurity comics designed to make threats stick. Narrative-driven, visually engaging, and shareable.</p>
-                  <div className="offering-tag">3 flipbooks</div>
-                </div>
-              </div>
-
-              {/* Middle Column (Stunning visual image) */}
-              <div className="offering-image-col">
-                <img src="/images/cyber_champion_quest_middle.png" alt="Cyber Champion Quest Campaign Visual" />
-              </div>
-
-              {/* Right Column (04, 05, 06) */}
-              <div className="offering-col">
-                <div className="offering revealed" data-reveal>
                   <div className="offering-index">04</div>
                   <div className="offering-line"></div>
                   <h3 className="offering-title">Department Scenario Cards</h3>
                   <p className="offering-desc">Role-specific decision scenarios for Finance, HR, Sales, IT, and Leadership. Context-relevant and immediately applicable.</p>
                   <div className="offering-tag">5 departments</div>
-                </div>
-
-                <div className="offering revealed" data-reveal>
-                  <div className="offering-index">05</div>
-                  <div className="offering-line"></div>
-                  <h3 className="offering-title">Leaderboards &amp; Analytics</h3>
-                  <p className="offering-desc">Live scoring, top performer spotlights, and a full analytics dashboard for your security and leadership teams.</p>
-                  <div className="offering-tag">Real-time · Org-wide</div>
                 </div>
 
                 <div className="offering offering--cert revealed" data-reveal>
