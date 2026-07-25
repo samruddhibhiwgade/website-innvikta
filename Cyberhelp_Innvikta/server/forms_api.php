@@ -156,8 +156,15 @@ function smtpSend($to, $subject, $htmlBody) {
     $fromName = MAIL_FROM_NAME;
 
     try {
+        $context = stream_context_create([
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            ]
+        ]);
         $protocol = ($port == 465) ? 'ssl://' : 'tcp://';
-        $sock = @fsockopen($protocol . $host, $port, $errno, $errstr, 15);
+        $sock = @stream_socket_client($protocol . $host . ':' . $port, $errno, $errstr, 15, STREAM_CLIENT_CONNECT, $context);
         if (!$sock) {
             throw new Exception('Cannot connect to ' . $host . ':' . $port . ' — ' . $errstr);
         }
