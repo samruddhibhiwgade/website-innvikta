@@ -127,11 +127,6 @@
     line-height: 1.1;
     letter-spacing: -0.02em;
     color: var(--text-primary);
-
-    em {
-      font-style: normal;
-      color: var(--orange);
-    }
   }
 
   /* -- BUTTONS -- */
@@ -600,16 +595,16 @@
 
   .pillar-index {
     font-family: var(--font-display);
-    font-size: 15px;
+    font-size: 11px;
     font-weight: 700;
     color: var(--orange);
     letter-spacing: 0.06em;
   }
 
   .pillar-name {
-    font-size: 18px;
+    font-size: 13px;
     font-weight: 600;
-    color: var(--text-secondary);
+    color: var(--text-primary);
   }
 
   /* -- WEEKS STEPPER -- */
@@ -986,14 +981,14 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-10);
-    align-items: end;
+    align-items: start;
     margin-bottom: var(--space-12);
   }
 
   .offerings-header p {
-    font-size: 16px;
+    font-size: 1.25rem;
     color: var(--text-secondary);
-    line-height: 1.7;
+    line-height: 1.6;
   }
 
   .offerings-grid {

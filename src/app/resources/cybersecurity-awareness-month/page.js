@@ -529,7 +529,7 @@ export default function CyberAwarenessMonthCampaignPage() {
             <div className="section-label">What You Get</div>
             <div className="offerings-header">
               <h2 className="section-heading">Everything unlocked.<br/>Nothing held back.</h2>
-              <p>No paywalls, no restricted tiers. Every participant gets the full toolkit — all five weeks, every game, every asset, every certificate.</p>
+              <p>No paywalls, no restricted tiers. Every participant gets the full toolkit, all five weeks, every game, every asset, every certificate.</p>
             </div>
 
             <div className="offerings-grid">
