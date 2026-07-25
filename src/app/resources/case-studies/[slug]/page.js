@@ -60,16 +60,12 @@ export default function CaseStudyDetail() {
       </div>
 
       {data.pdfUrl ? (
-        <section className="py-12 bg-slate-50">
-          <div className="container px-6 md:px-12 lg:px-24">
-            <div className="w-full bg-white rounded-3xl border border-slate-100 shadow-xl overflow-hidden p-2 md:p-4">
-              <iframe 
-                src={`${data.pdfUrl}#toolbar=0`} 
-                className="w-full h-[800px] md:h-[1000px] rounded-2xl" 
-                title="Case Study PDF Viewer"
-              />
-            </div>
-          </div>
+        <section className="w-full py-0">
+          <iframe 
+            src={`${data.pdfUrl}#toolbar=0`} 
+            className="w-full h-[800px] md:h-[1000px] border-0" 
+            title="Case Study PDF Viewer"
+          />
         </section>
       ) : (
         <>
