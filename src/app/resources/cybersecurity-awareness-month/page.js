@@ -168,7 +168,7 @@ export default function CyberAwarenessMonthCampaignPage() {
               </h1>
 
               <p className="hero-body">
-                Five weeks of immersive, gamified learning designed to transform how your team thinks about security. From awareness to action — permanently.
+                Five weeks of immersive, gamified learning designed to transform how your team thinks about security. From awareness to action, permanently.
               </p>
 
               <div className="hero-actions">
@@ -245,7 +245,7 @@ export default function CyberAwarenessMonthCampaignPage() {
                 <h2 className="section-heading">A structured<br/>five-week journey<br/>built for real change.</h2>
               </div>
               <div className="program-intro-right">
-                <p>Most security training gets forgotten within a week. The Cyber Champion Quest is different — built around engagement, application, and measurable behavior change. Each week unlocks a new layer of capability.</p>
+                <p>Most security training gets forgotten within a week. The Cyber Champion Quest is different, built around engagement, application, and measurable behavior change. Each week unlocks a new layer of capability.</p>
                 <p>From foundational knowledge to competitive challenges and a certified outcome, this is cybersecurity awareness done right.</p>
                 <div className="intro-pillars">
                   <div className="intro-reveal-block flex gap-6 flex-wrap">
@@ -676,7 +676,7 @@ export default function CyberAwarenessMonthCampaignPage() {
                       Join the Campaign
                     </h4>
                     <p className="text-xs text-white/90 leading-relaxed font-medium">
-                      Register your organisation now and get full access to the complete five-week campaign toolkit — completely free.
+                      Register your organisation now and get full access to the complete five-week campaign toolkit, completely free.
                     </p>
                   </div>
                   <div className="mt-8 relative z-10 text-[10px] text-white/70 font-semibold tracking-wider uppercase">
