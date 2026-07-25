@@ -33,8 +33,14 @@
     ],
     "sidebarChallenge": "Vishing and smishing campaigns targeted remote bank managers, with susceptibility reaching 28% and traditional training failing to drive secure habits.",
     "sidebarDetails": [
-      { "label": "Target Coverage", "val": "12,000+ Endpoints" },
-      { "label": "Delivery Model", "val": "Multi-channel Simulations" }
+      {
+        "label": "Target Coverage",
+        "val": "12,000+ Endpoints"
+      },
+      {
+        "label": "Delivery Model",
+        "val": "Multi-channel Simulations"
+      }
     ],
     "quoteText": "“From the board down, client confidentiality is our top priority, and Innvikta ensures we’re preserving that across all digital channels.”",
     "quoteAuthor": "Sarah Jenkins, Head of IT Risk & Compliance, Global Banking Group"
@@ -73,8 +79,14 @@
     ],
     "sidebarChallenge": "Securing sensitive patient records and maintaining HIPAA compliance audit readiness against complex QR code phishing (quishing) vectors.",
     "sidebarDetails": [
-      { "label": "Compliance Goal", "val": "100% Audit Readiness" },
-      { "label": "Primary Focus", "val": "QR Code (Quishing) Training" }
+      {
+        "label": "Compliance Goal",
+        "val": "100% Audit Readiness"
+      },
+      {
+        "label": "Primary Focus",
+        "val": "QR Code (Quishing) Training"
+      }
     ],
     "quoteText": "“Innvikta’s automated simulations gave us the audit logs we needed for HIPAA compliance while successfully driving down QR code failure rates to near zero.”",
     "quoteAuthor": "David Chen, Chief Information Security Officer, MedTech Labs"
@@ -113,8 +125,14 @@
     ],
     "sidebarChallenge": "Developers were targeted with realistic code repository alerts and cloud console warnings aimed at harvesting credentials and bypassing MFA protocols.",
     "sidebarDetails": [
-      { "label": "Exposure Risk", "val": "OAuth / MFA Fatigue Scams" },
-      { "label": "Reporting Target", "val": "85%+ Active Report Rate" }
+      {
+        "label": "Exposure Risk",
+        "val": "OAuth / MFA Fatigue Scams"
+      },
+      {
+        "label": "Reporting Target",
+        "val": "85%+ Active Report Rate"
+      }
     ],
     "quoteText": "“Developers need training that respects their technical knowledge. Innvikta’s developer-focused templates successfully reduced credential theft susceptibility by 95%.”",
     "quoteAuthor": "Marcus Brody, Director of Infrastructure Security, SaaS Corp"
@@ -153,8 +171,14 @@
     ],
     "sidebarChallenge": "Protecting highly sensitive customer medical and financial records from identity theft and spear-phishing campaigns.",
     "sidebarDetails": [
-      { "label": "Report Rate Shift", "val": "From 12% to 75%" },
-      { "label": "Timeline", "val": "4-Month Campaign" }
+      {
+        "label": "Report Rate Shift",
+        "val": "From 12% to 75%"
+      },
+      {
+        "label": "Timeline",
+        "val": "4-Month Campaign"
+      }
     ],
     "quoteText": "“Our employees are now our strongest firewall. Increasing report rates to over 75% has allowed our SOC to isolate and neutralize real threats much faster.”",
     "quoteAuthor": "Laura Vance, CISO, Alliance Insurance Group"
@@ -193,8 +217,14 @@
     ],
     "sidebarChallenge": "Defending global supply chain managers and finance personnel from Business Email Compromise and fake vendor payment requests.",
     "sidebarDetails": [
-      { "label": "BEC Loss Rate", "val": "Zero incidents post-rollout" },
-      { "label": "Simulation Focus", "val": "Invoice & CEO Impersonation" }
+      {
+        "label": "BEC Loss Rate",
+        "val": "Zero incidents post-rollout"
+      },
+      {
+        "label": "Simulation Focus",
+        "val": "Invoice & CEO Impersonation"
+      }
     ],
     "quoteText": "“Innvikta helped us move from compliance theater to real resilience. Our finance team now validation-checks every vendor change request as standard workflow.”",
     "quoteAuthor": "Thomas Kemp, VP of IT & Compliance, Industrial Metals Corp"
@@ -233,10 +263,51 @@
     ],
     "sidebarChallenge": "Overcoming traditional training disengagement across public sector departments through interactive, gamified cybersecurity challenges.",
     "sidebarDetails": [
-      { "label": "Engagement Shift", "val": "94% Voluntary Completion" },
-      { "label": "Training Method", "val": "Arcade Games & Leaderboards" }
+      {
+        "label": "Engagement Shift",
+        "val": "94% Voluntary Completion"
+      },
+      {
+        "label": "Training Method",
+        "val": "Arcade Games & Leaderboards"
+      }
     ],
     "quoteText": "“Innvikta Arcade turned security training from a chore into a collaborative game. Completion rates soared to 94% with zero administrative reminders.”",
     "quoteAuthor": "Helen Carter, Chief Information Officer, National Infrastructure Board"
+  },
+  {
+    "title": "uoijkm",
+    "subtitle": "",
+    "slug": "uoijkm",
+    "industry": "BFSI",
+    "industryLabel": "Banking & Finance",
+    "description": "PDF Case Study Document",
+    "image": "",
+    "location": "",
+    "timeline": "",
+    "atGlance": [],
+    "summaryTitle": "",
+    "summaryParagraphs": [],
+    "challengeTitle": "",
+    "challengeParagraphs": [],
+    "solutionTitle": "Solution Section",
+    "solutionParagraphs": [],
+    "sidebarChallenge": "",
+    "sidebarDetails": [],
+    "quoteText": "",
+    "quoteAuthor": "",
+    "customSections": [],
+    "cultureTitle": "Building a Stronger Security Culture",
+    "cultureParagraphs": [
+      ""
+    ],
+    "cultureImage": "/images/about-bg.jpeg",
+    "ctaTitle": "Ready to Build a Stronger Security Culture?",
+    "ctaDescription": "Get a personalized walk-through of Innvikta InSAT to see how our simulated phishing campaigns and automated training modules reduce social engineering risks.",
+    "ctaButtonText": "Book a Demo",
+    "ctaButtonUrl": "/book-demo",
+    "heroImage": "",
+    "pdfUrl": "https://innvikta.co.in/Innvikta-Website/Cyberhelp_Innvikta/server/uploads/blog/IBPS_Sammu_Payment_slip.pdf",
+    "id": 7
   }
 ]
