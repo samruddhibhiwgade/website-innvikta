@@ -787,7 +787,7 @@ export default function CyberAwarenessMonthCampaignPage() {
                           <select
                             value={form.designation}
                             onChange={(e) => setForm({ ...form, designation: e.target.value })}
-                            className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border !bg-none ${
+                            className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
                               errors.designation ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
                             } rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium appearance-none cursor-pointer`}
                           >
@@ -812,7 +812,7 @@ export default function CyberAwarenessMonthCampaignPage() {
                           <select
                             value={form.companySize}
                             onChange={(e) => setForm({ ...form, companySize: e.target.value })}
-                            className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border !bg-none ${
+                            className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
                               errors.companySize ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
                             } rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium appearance-none cursor-pointer`}
                           >
@@ -850,7 +850,7 @@ export default function CyberAwarenessMonthCampaignPage() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-fit px-8 py-3.5 bg-[#f15a24] hover:bg-orange-600 disabled:bg-orange-400 disabled:cursor-not-allowed !text-white rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 text-sm cursor-pointer"
+                      className="w-fit px-8 py-3 bg-[#f15a24] hover:bg-orange-600 disabled:bg-orange-400 disabled:cursor-not-allowed !text-white rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 text-sm cursor-pointer"
                     >
                       {isSubmitting ? "Submitting..." : "Register for the Campaign"} <FiArrowRight className="text-xs" />
                     </button>
