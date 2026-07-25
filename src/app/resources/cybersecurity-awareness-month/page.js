@@ -242,13 +242,13 @@ export default function CyberAwarenessMonthCampaignPage() {
             <div className="section-label">The Program</div>
             <div className="program-intro-grid">
               <div className="program-intro-left">
-                <h2 className="section-heading">A <em>structured</em><br/>five-week journey<br/>built for real change.</h2>
+                <h2 className="section-heading">A structured<br/><span className="text-[#f15a24]">five-week</span> journey<br/>built for real change.</h2>
               </div>
               <div className="program-intro-right">
                 <p>Most security training gets forgotten within a week. The Cyber Champion Quest is different, built around engagement, application, and measurable behavior change. Each week unlocks a new layer of capability.</p>
                 <p>From foundational knowledge to competitive challenges and a certified outcome, this is cybersecurity awareness done right.</p>
                 <div className="intro-pillars">
-                  <div className="intro-reveal-block grid grid-cols-5 gap-1 sm:gap-2 w-full">
+                  <div className="intro-reveal-block flex gap-6 flex-wrap">
                     <div className="intro-pillar">
                       <span className="pillar-index">01</span>
                       <span className="pillar-name">Awareness</span>
