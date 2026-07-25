@@ -106,6 +106,10 @@ export default function CyberAwarenessMonthCampaignPage() {
 
   const validateEmail = (email) => {
     if (!email) return "Work email is required";
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return "Please enter a valid email address";
+    }
     const domain = email.split("@")[1];
     if (freeDomains.includes(domain?.toLowerCase())) {
       return "Please use a work email address";
@@ -117,11 +121,22 @@ export default function CyberAwarenessMonthCampaignPage() {
     e.preventDefault();
     const newErrors = {};
     
-    if (!form.fullName) newErrors.fullName = "Name is required";
+    if (!form.fullName.trim()) newErrors.fullName = "Name is required";
+    
     const emailError = validateEmail(form.email);
     if (emailError) newErrors.email = emailError;
-    if (!form.company) newErrors.company = "Company is required";
-    if (!form.phone) newErrors.phone = "Phone is required";
+    
+    if (!form.company.trim()) newErrors.company = "Company is required";
+    
+    if (!form.phone.trim()) {
+      newErrors.phone = "Phone is required";
+    } else {
+      const phoneRegex = /^\+?[0-9\s\-()]{7,20}$/;
+      if (!phoneRegex.test(form.phone.trim())) {
+        newErrors.phone = "Please enter a valid phone number";
+      }
+    }
+    
     if (!form.designation) newErrors.designation = "Designation is required";
     if (!form.companySize) newErrors.companySize = "Company size is required";
     if (!form.agreedToPrivacy) newErrors.agreedToPrivacy = "Privacy agreement is required";
@@ -140,7 +155,7 @@ export default function CyberAwarenessMonthCampaignPage() {
           company: form.company,
           phone: form.phone,
           designation: form.designation,
-          companySize: form.companySize
+          team_size: form.companySize
         })
       })
       .then((res) => res.json())
@@ -165,6 +180,17 @@ export default function CyberAwarenessMonthCampaignPage() {
         setIsSubmitting(false);
         alert("An error occurred. Please try again later.");
       });
+    } else {
+      setTimeout(() => {
+        const firstErrorEl = document.querySelector('.text-red-500');
+        if (firstErrorEl) {
+          firstErrorEl.scrollIntoView({ behavior: "smooth", block: "center" });
+          const inputEl = firstErrorEl.parentElement.querySelector('input, select, textarea');
+          if (inputEl) {
+            inputEl.focus();
+          }
+        }
+      }, 100);
     }
   };
 
