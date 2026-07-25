@@ -533,52 +533,63 @@ export default function CyberAwarenessMonthCampaignPage() {
             </div>
 
             <div className="offerings-grid">
-              <div className="offering revealed" data-reveal>
-                <div className="offering-index">01</div>
-                <div className="offering-line"></div>
-                <h3 className="offering-title">Interactive Learning Module</h3>
-                <p className="offering-desc">A 10-minute, self-paced module designed to cover every threat your team encounters. Bite-sized, high-retention, no bloat.</p>
-                <div className="offering-tag">10 min · Self-paced</div>
+              {/* Left Column (01, 02, 03) */}
+              <div className="offering-col">
+                <div className="offering revealed" data-reveal>
+                  <div className="offering-index">01</div>
+                  <div className="offering-line"></div>
+                  <h3 className="offering-title">Interactive Learning Module</h3>
+                  <p className="offering-desc">A 10-minute, self-paced module designed to cover every threat your team encounters. Bite-sized, high-retention, no bloat.</p>
+                  <div className="offering-tag">10 min · Self-paced</div>
+                </div>
+
+                <div className="offering offering--accent revealed" data-reveal>
+                  <div className="offering-index">02</div>
+                  <div className="offering-line"></div>
+                  <h3 className="offering-title">Four Gamified Security Challenges</h3>
+                  <p className="offering-desc">AI ScamJam, Phish or Real, Inbox Detective, and Escape the Breach. Competitive, scored, and genuinely engaging.</p>
+                  <div className="offering-tag">4 games · Competitive</div>
+                </div>
+
+                <div className="offering revealed" data-reveal>
+                  <div className="offering-index">03</div>
+                  <div className="offering-line"></div>
+                  <h3 className="offering-title">Flipbook Comic Series</h3>
+                  <p className="offering-desc">Three cybersecurity comics designed to make threats stick. Narrative-driven, visually engaging, and shareable.</p>
+                  <div className="offering-tag">3 flipbooks</div>
+                </div>
               </div>
 
-              <div className="offering offering--accent revealed" data-reveal>
-                <div className="offering-index">02</div>
-                <div className="offering-line"></div>
-                <h3 className="offering-title">Four Gamified Security Challenges</h3>
-                <p className="offering-desc">AI ScamJam, Phish or Real, Inbox Detective, and Escape the Breach. Competitive, scored, and genuinely engaging.</p>
-                <div className="offering-tag">4 games · Competitive</div>
+              {/* Middle Column (Stunning visual image) */}
+              <div className="offering-image-col">
+                <img src="/images/cyber_champion_quest_middle.png" alt="Cyber Champion Quest Campaign Visual" />
               </div>
 
-              <div className="offering revealed" data-reveal>
-                <div className="offering-index">03</div>
-                <div className="offering-line"></div>
-                <h3 className="offering-title">Flipbook Comic Series</h3>
-                <p className="offering-desc">Three cybersecurity comics designed to make threats stick. Narrative-driven, visually engaging, and shareable.</p>
-                <div className="offering-tag">3 flipbooks</div>
-              </div>
+              {/* Right Column (04, 05, 06) */}
+              <div className="offering-col">
+                <div className="offering revealed" data-reveal>
+                  <div className="offering-index">04</div>
+                  <div className="offering-line"></div>
+                  <h3 className="offering-title">Department Scenario Cards</h3>
+                  <p className="offering-desc">Role-specific decision scenarios for Finance, HR, Sales, IT, and Leadership. Context-relevant and immediately applicable.</p>
+                  <div className="offering-tag">5 departments</div>
+                </div>
 
-              <div className="offering revealed" data-reveal>
-                <div className="offering-index">04</div>
-                <div className="offering-line"></div>
-                <h3 className="offering-title">Department Scenario Cards</h3>
-                <p className="offering-desc">Role-specific decision scenarios for Finance, HR, Sales, IT, and Leadership. Context-relevant and immediately applicable.</p>
-                <div className="offering-tag">5 departments</div>
-              </div>
+                <div className="offering revealed" data-reveal>
+                  <div className="offering-index">05</div>
+                  <div className="offering-line"></div>
+                  <h3 className="offering-title">Leaderboards &amp; Analytics</h3>
+                  <p className="offering-desc">Live scoring, top performer spotlights, and a full analytics dashboard for your security and leadership teams.</p>
+                  <div className="offering-tag">Real-time · Org-wide</div>
+                </div>
 
-              <div className="offering revealed" data-reveal>
-                <div className="offering-index">05</div>
-                <div className="offering-line"></div>
-                <h3 className="offering-title">Leaderboards &amp; Analytics</h3>
-                <p className="offering-desc">Live scoring, top performer spotlights, and a full analytics dashboard for your security and leadership teams.</p>
-                <div className="offering-tag">Real-time · Org-wide</div>
-              </div>
-
-              <div className="offering offering--cert revealed" data-reveal>
-                <div className="offering-index">06</div>
-                <div className="offering-line"></div>
-                <h3 className="offering-title">Cyber Champion Certificate</h3>
-                <p className="offering-desc">An official, shareable certificate awarded to every participant who completes the full five-week quest.</p>
-                <div className="offering-tag">Official certification</div>
+                <div className="offering offering--cert revealed" data-reveal>
+                  <div className="offering-index">06</div>
+                  <div className="offering-line"></div>
+                  <h3 className="offering-title">Cyber Champion Certificate</h3>
+                  <p className="offering-desc">An official, shareable certificate awarded to every participant who completes the full five-week quest.</p>
+                  <div className="offering-tag">Official certification</div>
+                </div>
               </div>
             </div>
           </div>

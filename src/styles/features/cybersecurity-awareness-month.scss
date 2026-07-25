@@ -993,12 +993,59 @@
 
   .offerings-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1.2fr 1fr;
     gap: 1px;
     background: var(--border);
     border: 1px solid var(--border);
     border-radius: var(--r-lg);
     overflow: hidden;
+  }
+
+  .offering-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+    height: 100%;
+  }
+
+  .offering-col .offering {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .offering-image-col {
+    background: var(--white);
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .offering-image-col img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 991px) {
+    .offerings-grid {
+      grid-template-columns: 1fr;
+    }
+    .offering-image-col {
+      height: 350px;
+      order: 2;
+    }
+    .offering-col:first-of-type {
+      order: 1;
+    }
+    .offering-col:last-of-type {
+      order: 3;
+    }
   }
 
   .offering {
