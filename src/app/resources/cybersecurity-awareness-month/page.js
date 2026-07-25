@@ -191,7 +191,7 @@ export default function CyberAwarenessMonthCampaignPage() {
 
             <div className="hero-right">
               <img 
-                src="/images/cybermonth-hero.png" 
+                src="/images/cybermonth-heroimage.png" 
                 alt="Cyber Champion Quest Hero" 
                 className="hero-image-right w-full max-w-[520px] h-auto object-contain mx-auto" 
               />
