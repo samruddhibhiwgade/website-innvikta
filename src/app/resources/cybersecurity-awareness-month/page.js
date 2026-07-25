@@ -291,9 +291,9 @@ export default function CyberAwarenessMonthCampaignPage() {
               <p>No paywalls, no restricted tiers. Every participant gets the full toolkit, all five weeks, every game, every asset, every certificate.</p>
             </div>
 
-            <div className="offerings-grid">
+            <div className="offerings-grid animate">
               {/* Card 01 */}
-              <div className="offering revealed animate" data-reveal>
+              <div className="offering revealed" data-reveal>
                 <div className="offering-index">01</div>
                 <div className="offering-line"></div>
                 <h3 className="offering-title">Interactive Learning Module</h3>
@@ -302,7 +302,7 @@ export default function CyberAwarenessMonthCampaignPage() {
               </div>
 
               {/* Card 02 */}
-              <div className="offering revealed animate" data-reveal>
+              <div className="offering revealed" data-reveal>
                 <div className="offering-index">02</div>
                 <div className="offering-line"></div>
                 <h3 className="offering-title">Four Gamified Security Challenges</h3>
@@ -311,7 +311,7 @@ export default function CyberAwarenessMonthCampaignPage() {
               </div>
 
               {/* Card 03 */}
-              <div className="offering revealed animate" data-reveal>
+              <div className="offering revealed" data-reveal>
                 <div className="offering-index">03</div>
                 <div className="offering-line"></div>
                 <h3 className="offering-title">Flipbook Comic Series</h3>
@@ -320,7 +320,7 @@ export default function CyberAwarenessMonthCampaignPage() {
               </div>
 
               {/* Card 04 */}
-              <div className="offering revealed animate" data-reveal>
+              <div className="offering revealed" data-reveal>
                 <div className="offering-index">04</div>
                 <div className="offering-line"></div>
                 <h3 className="offering-title">Department Scenario Cards</h3>
@@ -329,7 +329,7 @@ export default function CyberAwarenessMonthCampaignPage() {
               </div>
 
               {/* Card 05 */}
-              <div className="offering revealed animate" data-reveal>
+              <div className="offering revealed" data-reveal>
                 <div className="offering-index">05</div>
                 <div className="offering-line"></div>
                 <h3 className="offering-title">Leaderboards &amp; Analytics</h3>
@@ -338,7 +338,7 @@ export default function CyberAwarenessMonthCampaignPage() {
               </div>
 
               {/* Card 06 */}
-              <div className="offering revealed animate" data-reveal>
+              <div className="offering revealed" data-reveal>
                 <div className="offering-index">06</div>
                 <div className="offering-line"></div>
                 <h3 className="offering-title">Cyber Champion Certificate</h3>
@@ -347,7 +347,7 @@ export default function CyberAwarenessMonthCampaignPage() {
               </div>
 
               {/* Middle Campaign Image (Positioned via Grid on desktop, hidden on mobile) */}
-              <div className="offering-image-col animate">
+              <div className="offering-image-col">
                 <img src="/images/cyber_champion_quest_middle.png" alt="Cyber Champion Quest Campaign Visual" />
               </div>
             </div>
