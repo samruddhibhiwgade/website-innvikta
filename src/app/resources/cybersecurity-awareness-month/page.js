@@ -643,7 +643,7 @@ export default function CyberAwarenessMonthCampaignPage() {
               <div className="flex flex-col lg:flex-row">
                 
                 {/* Left side panel: Orange background */}
-                <div className="w-full lg:w-[40%] bg-gradient-to-br from-[#f15a24] to-[#c2410c] p-8 md:p-10 text-white flex flex-col justify-between relative overflow-hidden shrink-0">
+                <div className="w-full lg:w-[40%] bg-[#f15a24] p-8 md:p-10 text-white flex flex-col justify-between relative overflow-hidden shrink-0">
                   <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "16px 16px" }}></div>
                   <div className="relative z-10">
                     <div className="inline-block px-3 py-1 mb-6 text-[10px] font-bold tracking-wider bg-white/10 rounded-full uppercase border border-white/15 backdrop-blur-sm">
@@ -787,7 +787,7 @@ export default function CyberAwarenessMonthCampaignPage() {
                           <select
                             value={form.designation}
                             onChange={(e) => setForm({ ...form, designation: e.target.value })}
-                            className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
+                            className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border !bg-none ${
                               errors.designation ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
                             } rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium appearance-none cursor-pointer`}
                           >
@@ -812,7 +812,7 @@ export default function CyberAwarenessMonthCampaignPage() {
                           <select
                             value={form.companySize}
                             onChange={(e) => setForm({ ...form, companySize: e.target.value })}
-                            className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
+                            className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border !bg-none ${
                               errors.companySize ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
                             } rounded-xl text-slate-800 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium appearance-none cursor-pointer`}
                           >
@@ -850,7 +850,7 @@ export default function CyberAwarenessMonthCampaignPage() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-[#f15a24] hover:bg-orange-600 disabled:bg-orange-400 disabled:cursor-not-allowed !text-white rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 text-sm py-4 cursor-pointer"
+                      className="w-fit px-8 py-3.5 bg-[#f15a24] hover:bg-orange-600 disabled:bg-orange-400 disabled:cursor-not-allowed !text-white rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 text-sm cursor-pointer"
                     >
                       {isSubmitting ? "Submitting..." : "Register for the Campaign"} <FiArrowRight className="text-xs" />
                     </button>
