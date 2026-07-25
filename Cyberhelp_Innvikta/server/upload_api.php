@@ -12,15 +12,16 @@ if ($method === 'POST') {
     $file = $_FILES['file'];
     $filename = preg_replace('/[^a-zA-Z0-9.]/', '_', $file['name']);
     
-    // Validate file is an image or video
+    // Validate file is an image, video, or PDF
     $allowedMimeTypes = [
       'image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml',
-      'video/mp4', 'video/webm', 'video/ogg', 'video/quicktime'
+      'video/mp4', 'video/webm', 'video/ogg', 'video/quicktime',
+      'application/pdf'
     ];
     $mimeType = mime_content_type($file['tmp_name']);
     
     if (!in_array($mimeType, $allowedMimeTypes)) {
-        jsonResponse(['error' => 'Invalid file type. Only images and videos are allowed.'], 400);
+        jsonResponse(['error' => 'Invalid file type. Only images, videos, and PDFs are allowed.'], 400);
     }
 
     $uploadDir = __DIR__ . '/uploads/blog/';

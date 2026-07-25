@@ -50,6 +50,8 @@ export default function AdminCaseStudies() {
   ]);
   const [quoteText, setQuoteText] = useState("");
   const [quoteAuthor, setQuoteAuthor] = useState("");
+  const [pdfUrl, setPdfUrl] = useState("");
+  const [contentSource, setContentSource] = useState("manual");
 
   // Fetch case studies on load
   const fetchCaseStudies = async () => {
@@ -104,6 +106,8 @@ export default function AdminCaseStudies() {
     ]);
     setQuoteText("");
     setQuoteAuthor("");
+    setPdfUrl("");
+    setContentSource("manual");
     setView("form");
   };
 
@@ -131,6 +135,8 @@ export default function AdminCaseStudies() {
     ]);
     setQuoteText(study.quoteText || "");
     setQuoteAuthor(study.quoteAuthor || "");
+    setPdfUrl(study.pdfUrl || "");
+    setContentSource(study.pdfUrl ? "pdf" : "manual");
     setView("form");
   };
 
@@ -152,8 +158,12 @@ export default function AdminCaseStudies() {
 
   const handleSave = async (e) => {
     e.preventDefault();
-    if (!title || !slug || !description) {
+    if (!title || !slug || (contentSource === "manual" && !description)) {
       showToast("Please fill in all required fields", "error");
+      return;
+    }
+    if (contentSource === "pdf" && !pdfUrl) {
+      showToast("Please upload a PDF file", "error");
       return;
     }
 
@@ -164,20 +174,21 @@ export default function AdminCaseStudies() {
       slug,
       industry,
       industryLabel: industryLabel || industry,
-      description,
+      description: contentSource === "manual" ? description : "PDF Case Study Document",
       image: image || "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&h=600&q=80",
       location,
       timeline,
-      atGlance: atGlance.filter(Boolean),
-      summaryTitle,
-      summaryParagraphs: summaryParagraphs.filter(Boolean),
-      challengeTitle,
-      challengeParagraphs: challengeParagraphs.filter(Boolean),
-      solutionParagraphs: solutionParagraphs.filter(Boolean),
-      sidebarChallenge,
-      sidebarDetails: sidebarDetails.filter(d => d.label && d.val),
-      quoteText,
-      quoteAuthor
+      atGlance: contentSource === "manual" ? atGlance.filter(Boolean) : [],
+      summaryTitle: contentSource === "manual" ? summaryTitle : "",
+      summaryParagraphs: contentSource === "manual" ? summaryParagraphs.filter(Boolean) : [],
+      challengeTitle: contentSource === "manual" ? challengeTitle : "",
+      challengeParagraphs: contentSource === "manual" ? challengeParagraphs.filter(Boolean) : [],
+      solutionParagraphs: contentSource === "manual" ? solutionParagraphs.filter(Boolean) : [],
+      sidebarChallenge: contentSource === "manual" ? sidebarChallenge : "",
+      sidebarDetails: contentSource === "manual" ? sidebarDetails.filter(d => d.label && d.val) : [],
+      quoteText: contentSource === "manual" ? quoteText : "",
+      quoteAuthor: contentSource === "manual" ? quoteAuthor : "",
+      pdfUrl: contentSource === "pdf" ? pdfUrl : ""
     };
 
     try {
@@ -196,6 +207,31 @@ export default function AdminCaseStudies() {
       }
     } catch (err) {
       showToast("Server error during save", "error");
+    }
+  };
+
+  const handlePdfUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    const formData = new FormData();
+    formData.append("file", file);
+    
+    try {
+      showToast("Uploading PDF...", "success");
+      const res = await fetch("/api/admin/upload", {
+        method: "POST",
+        body: formData
+      });
+      const data = await res.json();
+      if (data.success) {
+        setPdfUrl(data.url);
+        showToast("PDF uploaded successfully!");
+      } else {
+        showToast("Upload failed: " + (data.error || "Unknown error"), "error");
+      }
+    } catch (err) {
+      showToast("Upload failed due to connection error", "error");
     }
   };
 
@@ -352,230 +388,286 @@ export default function AdminCaseStudies() {
                 <div />
               </div>
 
-              <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Short Grid Description *</label>
-                <textarea 
-                  required
-                  rows="3"
-                  placeholder="Provide a brief summary for the main grid page..."
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
-                />
-              </div>
-
-              <div className="border-t border-slate-100 pt-6">
-                <h3 className="text-base font-bold text-slate-900 mb-4">At a Glance Details (Bullets)</h3>
-                <div className="space-y-3">
-                  {atGlance.map((point, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <input 
-                        type="text"
-                        placeholder={`Key metric point ${index + 1}...`}
-                        value={point}
-                        onChange={(e) => handleUpdateListField(index, e.target.value, atGlance, setAtGlance)}
-                        className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium"
-                      />
-                      <button 
-                        type="button"
-                        onClick={() => handleRemoveListField(index, atGlance, setAtGlance)}
-                        className="p-2 border border-slate-200 hover:border-red-200 text-slate-400 hover:text-red-500 rounded-xl transition-colors"
-                      >
-                        <FiTrash2 />
-                      </button>
-                    </div>
-                  ))}
+              {/* Content Source Selector */}
+              <div className="border-t border-slate-100 pt-6 text-left">
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">Case Study Content Source</label>
+                <div className="flex gap-4">
                   <button
                     type="button"
-                    onClick={() => handleAddListField(atGlance, setAtGlance)}
-                    className="inline-flex items-center gap-1.5 text-[#f15a24] hover:text-orange-600 font-bold text-xs pt-1 cursor-pointer"
+                    onClick={() => setContentSource("manual")}
+                    className={`px-5 py-2.5 rounded-xl text-sm font-bold border transition-all ${
+                      contentSource === "manual"
+                        ? "bg-orange-50 border-[#f15a24] text-[#f15a24]"
+                        : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50"
+                    }`}
                   >
-                    <FiPlus /> Add bullet item
+                    Manual Text & Sections
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setContentSource("pdf")}
+                    className={`px-5 py-2.5 rounded-xl text-sm font-bold border transition-all ${
+                      contentSource === "pdf"
+                        ? "bg-orange-50 border-[#f15a24] text-[#f15a24]"
+                        : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50"
+                    }`}
+                  >
+                    Direct PDF Upload
                   </button>
                 </div>
               </div>
 
-              <div className="border-t border-slate-100 pt-6 space-y-6">
-                <h3 className="text-base font-bold text-slate-900 mb-1">Story Content Blocks</h3>
-
-                {/* Summary Block */}
-                <div className="space-y-4">
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Summary Title & Paragraphs</label>
-                  <input 
-                    type="text" 
-                    placeholder="Summary Title e.g. Preserving Client Confidentiality"
-                    value={summaryTitle}
-                    onChange={(e) => setSummaryTitle(e.target.value)}
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-bold"
-                  />
-                  <div className="space-y-3">
-                    {summaryParagraphs.map((para, index) => (
-                      <div key={index} className="flex items-start gap-3">
-                        <textarea 
-                          rows="2"
-                          placeholder={`Summary Paragraph ${index + 1}...`}
-                          value={para}
-                          onChange={(e) => handleUpdateListField(index, e.target.value, summaryParagraphs, setSummaryParagraphs)}
-                          className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
-                        />
-                        <button 
-                          type="button"
-                          onClick={() => handleRemoveListField(index, summaryParagraphs, setSummaryParagraphs)}
-                          className="p-2 border border-slate-200 hover:border-red-200 text-slate-400 hover:text-red-500 rounded-xl transition-colors mt-2"
-                        >
-                          <FiTrash2 />
+              {contentSource === "pdf" && (
+                <div className="border-t border-slate-100 pt-6 bg-orange-50/20 p-6 rounded-2xl border border-orange-100 text-left">
+                  <h3 className="text-base font-bold text-slate-900 mb-2">Upload PDF Document</h3>
+                  <p className="text-xs text-slate-500 mb-4 font-medium">Select a PDF file. Users will view this PDF directly when opening this case study.</p>
+                  <div className="flex items-center gap-4">
+                    <input 
+                      type="file" 
+                      accept="application/pdf" 
+                      onChange={handlePdfUpload}
+                      className="text-sm font-semibold text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-extrabold file:bg-orange-50 file:text-[#f15a24] hover:file:bg-orange-100 cursor-pointer"
+                    />
+                    {pdfUrl && (
+                      <div className="flex items-center gap-2 text-green-700 bg-green-50 border border-green-200 px-3 py-1.5 rounded-xl text-xs font-bold">
+                        <FiCheck /> PDF Linked: <a href={pdfUrl} target="_blank" rel="noreferrer" className="underline hover:text-green-800">{pdfUrl.split('/').pop()}</a>
+                        <button type="button" onClick={() => setPdfUrl("")} className="text-slate-400 hover:text-red-500 ml-2">
+                          <FiX />
                         </button>
                       </div>
-                    ))}
-                    <button
-                      type="button"
-                      onClick={() => handleAddListField(summaryParagraphs, setSummaryParagraphs)}
-                      className="inline-flex items-center gap-1.5 text-[#f15a24] hover:text-orange-600 font-bold text-xs pt-1 cursor-pointer"
-                    >
-                      <FiPlus /> Add paragraph
-                    </button>
+                    )}
                   </div>
                 </div>
+              )}
 
-                {/* Challenge Block */}
-                <div className="space-y-4 pt-4 border-t border-slate-100/50">
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Challenge Title & Paragraphs</label>
-                  <input 
-                    type="text" 
-                    placeholder="Challenge Title e.g. Minimizing Potential Data Breaches"
-                    value={challengeTitle}
-                    onChange={(e) => setChallengeTitle(e.target.value)}
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-bold"
-                  />
-                  <div className="space-y-3">
-                    {challengeParagraphs.map((para, index) => (
-                      <div key={index} className="flex items-start gap-3">
-                        <textarea 
-                          rows="2"
-                          placeholder={`Challenge Paragraph ${index + 1}...`}
-                          value={para}
-                          onChange={(e) => handleUpdateListField(index, e.target.value, challengeParagraphs, setChallengeParagraphs)}
-                          className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
-                        />
-                        <button 
-                          type="button"
-                          onClick={() => handleRemoveListField(index, challengeParagraphs, setChallengeParagraphs)}
-                          className="p-2 border border-slate-200 hover:border-red-200 text-slate-400 hover:text-red-500 rounded-xl transition-colors mt-2"
-                        >
-                          <FiTrash2 />
-                        </button>
-                      </div>
-                    ))}
-                    <button
-                      type="button"
-                      onClick={() => handleAddListField(challengeParagraphs, setChallengeParagraphs)}
-                      className="inline-flex items-center gap-1.5 text-[#f15a24] hover:text-orange-600 font-bold text-xs pt-1 cursor-pointer"
-                    >
-                      <FiPlus /> Add paragraph
-                    </button>
+              {contentSource === "manual" && (
+                <>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Short Grid Description *</label>
+                    <textarea 
+                      required
+                      rows="3"
+                      placeholder="Provide a brief summary for the main grid page..."
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
+                    />
                   </div>
-                </div>
 
-                {/* Solution Paragraphs */}
-                <div className="space-y-4 pt-4 border-t border-slate-100/50">
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Solution Paragraphs</label>
-                  <div className="space-y-3">
-                    {solutionParagraphs.map((para, index) => (
-                      <div key={index} className="flex items-start gap-3">
-                        <textarea 
-                          rows="2"
-                          placeholder={`Solution Paragraph ${index + 1}...`}
-                          value={para}
-                          onChange={(e) => handleUpdateListField(index, e.target.value, solutionParagraphs, setSolutionParagraphs)}
-                          className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
-                        />
-                        <button 
-                          type="button"
-                          onClick={() => handleRemoveListField(index, solutionParagraphs, setSolutionParagraphs)}
-                          className="p-2 border border-slate-200 hover:border-red-200 text-slate-400 hover:text-red-500 rounded-xl transition-colors mt-2"
-                        >
-                          <FiTrash2 />
-                        </button>
-                      </div>
-                    ))}
-                    <button
-                      type="button"
-                      onClick={() => handleAddListField(solutionParagraphs, setSolutionParagraphs)}
-                      className="inline-flex items-center gap-1.5 text-[#f15a24] hover:text-orange-600 font-bold text-xs pt-1 cursor-pointer"
-                    >
-                      <FiPlus /> Add paragraph
-                    </button>
+                  <div className="border-t border-slate-100 pt-6">
+                    <h3 className="text-base font-bold text-slate-900 mb-4">At a Glance Details (Bullets)</h3>
+                    <div className="space-y-3">
+                      {atGlance.map((point, index) => (
+                        <div key={index} className="flex items-center gap-3">
+                          <input 
+                            type="text"
+                            placeholder={`Key metric point ${index + 1}...`}
+                            value={point}
+                            onChange={(e) => handleUpdateListField(index, e.target.value, atGlance, setAtGlance)}
+                            className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium"
+                          />
+                          <button 
+                            type="button"
+                            onClick={() => handleRemoveListField(index, atGlance, setAtGlance)}
+                            className="p-2 border border-slate-200 hover:border-red-200 text-slate-400 hover:text-red-500 rounded-xl transition-colors"
+                          >
+                            <FiTrash2 />
+                          </button>
+                        </div>
+                      ))}
+                      <button
+                        type="button"
+                        onClick={() => handleAddListField(atGlance, setAtGlance)}
+                        className="inline-flex items-center gap-1.5 text-[#f15a24] hover:text-orange-600 font-bold text-xs pt-1 cursor-pointer"
+                      >
+                        <FiPlus /> Add bullet item
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </div>
 
-              <div className="border-t border-slate-100 pt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Quote text */}
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Quote Text</label>
-                  <textarea 
-                    rows="4"
-                    placeholder="“From the board down, security compliance is our priority...”"
-                    value={quoteText}
-                    onChange={(e) => setQuoteText(e.target.value)}
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium italic"
-                  />
-                </div>
-                {/* Quote Author */}
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Quote Author</label>
-                  <input 
-                    type="text" 
-                    placeholder="e.g. Jane Doe, Head of Risk & Compliance"
-                    value={quoteAuthor}
-                    onChange={(e) => setQuoteAuthor(e.target.value)}
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-bold"
-                  />
-                </div>
-              </div>
+                  <div className="border-t border-slate-100 pt-6 space-y-6">
+                    <h3 className="text-base font-bold text-slate-900 mb-1">Story Content Blocks</h3>
 
-              <div className="border-t border-slate-100 pt-6 space-y-4">
-                <h3 className="text-base font-bold text-slate-900 mb-1">Sidebar Card Info</h3>
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Sidebar Challenge Summary</label>
-                  <textarea 
-                    rows="2"
-                    placeholder="Short challenge summary for the sidebar box..."
-                    value={sidebarChallenge}
-                    onChange={(e) => setSidebarChallenge(e.target.value)}
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
-                  />
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {sidebarDetails.map((detail, idx) => (
-                    <div key={idx} className="space-y-2">
-                      <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Detail {idx + 1} Label</label>
+                    {/* Summary Block */}
+                    <div className="space-y-4">
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Summary Title & Paragraphs</label>
                       <input 
                         type="text" 
-                        placeholder="e.g. Target Coverage"
-                        value={detail.label}
-                        onChange={(e) => {
-                          const updated = [...sidebarDetails];
-                          updated[idx].label = e.target.value;
-                          setSidebarDetails(updated);
-                        }}
-                        className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-xs font-bold"
+                        placeholder="Summary Title e.g. Preserving Client Confidentiality"
+                        value={summaryTitle}
+                        onChange={(e) => setSummaryTitle(e.target.value)}
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-bold"
                       />
+                      <div className="space-y-3">
+                        {summaryParagraphs.map((para, index) => (
+                          <div key={index} className="flex items-start gap-3">
+                            <textarea 
+                              rows="2"
+                              placeholder={`Summary Paragraph ${index + 1}...`}
+                              value={para}
+                              onChange={(e) => handleUpdateListField(index, e.target.value, summaryParagraphs, setSummaryParagraphs)}
+                              className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
+                            />
+                            <button 
+                              type="button"
+                              onClick={() => handleRemoveListField(index, summaryParagraphs, setSummaryParagraphs)}
+                              className="p-2 border border-slate-200 hover:border-red-200 text-slate-400 hover:text-red-500 rounded-xl transition-colors mt-2"
+                            >
+                              <FiTrash2 />
+                            </button>
+                          </div>
+                        ))}
+                        <button
+                          type="button"
+                          onClick={() => handleAddListField(summaryParagraphs, setSummaryParagraphs)}
+                          className="inline-flex items-center gap-1.5 text-[#f15a24] hover:text-orange-600 font-bold text-xs pt-1 cursor-pointer"
+                        >
+                          <FiPlus /> Add paragraph
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Challenge Block */}
+                    <div className="space-y-4 pt-4 border-t border-slate-100/50">
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Challenge Title & Paragraphs</label>
                       <input 
                         type="text" 
-                        placeholder="e.g. 12,000+ Endpoints"
-                        value={detail.val}
-                        onChange={(e) => {
-                          const updated = [...sidebarDetails];
-                          updated[idx].val = e.target.value;
-                          setSidebarDetails(updated);
-                        }}
-                        className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-xs font-semibold"
+                        placeholder="Challenge Title e.g. Minimizing Potential Data Breaches"
+                        value={challengeTitle}
+                        onChange={(e) => setChallengeTitle(e.target.value)}
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-bold"
+                      />
+                      <div className="space-y-3">
+                        {challengeParagraphs.map((para, index) => (
+                          <div key={index} className="flex items-start gap-3">
+                            <textarea 
+                              rows="2"
+                              placeholder={`Challenge Paragraph ${index + 1}...`}
+                              value={para}
+                              onChange={(e) => handleUpdateListField(index, e.target.value, challengeParagraphs, setChallengeParagraphs)}
+                              className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
+                            />
+                            <button 
+                              type="button"
+                              onClick={() => handleRemoveListField(index, challengeParagraphs, setChallengeParagraphs)}
+                              className="p-2 border border-slate-200 hover:border-red-200 text-slate-400 hover:text-red-500 rounded-xl transition-colors mt-2"
+                            >
+                              <FiTrash2 />
+                            </button>
+                          </div>
+                        ))}
+                        <button
+                          type="button"
+                          onClick={() => handleAddListField(challengeParagraphs, setChallengeParagraphs)}
+                          className="inline-flex items-center gap-1.5 text-[#f15a24] hover:text-orange-600 font-bold text-xs pt-1 cursor-pointer"
+                        >
+                          <FiPlus /> Add paragraph
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Solution Paragraphs */}
+                    <div className="space-y-4 pt-4 border-t border-slate-100/50">
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Solution Paragraphs</label>
+                      <div className="space-y-3">
+                        {solutionParagraphs.map((para, index) => (
+                          <div key={index} className="flex items-start gap-3">
+                            <textarea 
+                              rows="2"
+                              placeholder={`Solution Paragraph ${index + 1}...`}
+                              value={para}
+                              onChange={(e) => handleUpdateListField(index, e.target.value, solutionParagraphs, setSolutionParagraphs)}
+                              className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
+                            />
+                            <button 
+                              type="button"
+                              onClick={() => handleRemoveListField(index, solutionParagraphs, setSolutionParagraphs)}
+                              className="p-2 border border-slate-200 hover:border-red-200 text-slate-400 hover:text-red-500 rounded-xl transition-colors mt-2"
+                            >
+                              <FiTrash2 />
+                            </button>
+                          </div>
+                        ))}
+                        <button
+                          type="button"
+                          onClick={() => handleAddListField(solutionParagraphs, setSolutionParagraphs)}
+                          className="inline-flex items-center gap-1.5 text-[#f15a24] hover:text-orange-600 font-bold text-xs pt-1 cursor-pointer"
+                        >
+                          <FiPlus /> Add paragraph
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="border-t border-slate-100 pt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Quote text */}
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Quote Text</label>
+                      <textarea 
+                        rows="4"
+                        placeholder="“From the board down, security compliance is our priority...”"
+                        value={quoteText}
+                        onChange={(e) => setQuoteText(e.target.value)}
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium italic"
                       />
                     </div>
-                  ))}
-                </div>
-              </div>
+                    {/* Quote Author */}
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Quote Author</label>
+                      <input 
+                        type="text" 
+                        placeholder="e.g. Jane Doe, Head of Risk & Compliance"
+                        value={quoteAuthor}
+                        onChange={(e) => setQuoteAuthor(e.target.value)}
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-bold"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="border-t border-slate-100 pt-6 space-y-4">
+                    <h3 className="text-base font-bold text-slate-900 mb-1">Sidebar Card Info</h3>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Sidebar Challenge Summary</label>
+                      <textarea 
+                        rows="2"
+                        placeholder="Short challenge summary for the sidebar box..."
+                        value={sidebarChallenge}
+                        onChange={(e) => setSidebarChallenge(e.target.value)}
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {sidebarDetails.map((detail, idx) => (
+                        <div key={idx} className="space-y-2">
+                          <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider">Detail {idx + 1} Label</label>
+                          <input 
+                            type="text" 
+                            placeholder="e.g. Target Coverage"
+                            value={detail.label}
+                            onChange={(e) => {
+                              const updated = [...sidebarDetails];
+                              updated[idx].label = e.target.value;
+                              setSidebarDetails(updated);
+                            }}
+                            className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-xs font-bold"
+                          />
+                          <input 
+                            type="text" 
+                            placeholder="e.g. 12,000+ Endpoints"
+                            value={detail.val}
+                            onChange={(e) => {
+                              const updated = [...sidebarDetails];
+                              updated[idx].val = e.target.value;
+                              setSidebarDetails(updated);
+                            }}
+                            className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-xs font-semibold"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
 
               {/* Submit button wrapper */}
               <div className="flex items-center justify-end gap-4 border-t border-slate-100 pt-6">

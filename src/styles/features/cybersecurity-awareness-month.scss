@@ -122,10 +122,10 @@
 
   .section-heading {
     font-family: var(--font-display);
-    font-size: clamp(32px, 4vw, 52px);
-    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 400;
     line-height: 1.1;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.02em;
     color: var(--text-primary);
   }
 
@@ -198,11 +198,13 @@
 
   /* -- HERO -- */
   .hero {
-    min-height: 90svh;
-    padding: 140px 0 100px;
+    min-height: calc(100vh - 220px);
+    padding: 60px 0 30px;
     position: relative;
     overflow: hidden;
     background: var(--white);
+    display: flex;
+    align-items: center;
   }
 
   .hero-bg-lines {
@@ -236,6 +238,7 @@
     grid-template-columns: 1fr 1fr;
     gap: var(--space-16);
     align-items: center;
+    width: 100%;
   }
 
   .hero-eyebrow {
@@ -247,7 +250,7 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--orange);
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-3);
   }
 
   .eyebrow-dot {
@@ -260,12 +263,12 @@
 
   .hero-title {
     font-family: var(--font-display);
-    font-size: clamp(52px, 7vw, 88px);
-    font-weight: 700;
-    line-height: 1.0;
-    letter-spacing: -0.035em;
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
     color: var(--text-primary);
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-2);
   }
 
   .hero-title em {
@@ -288,19 +291,19 @@
   }
 
   .hero-body {
-    font-size: 17px;
+    font-size: 14.5px;
     font-weight: 400;
     color: var(--text-secondary);
-    line-height: 1.7;
+    line-height: 1.55;
     max-width: 440px;
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-3);
   }
 
   .hero-actions {
     display: flex;
     gap: var(--space-3);
     flex-wrap: wrap;
-    margin-bottom: var(--space-12);
+    margin-bottom: var(--space-4);
   }
 
   .hero-meta {
