@@ -131,9 +131,9 @@ export default function CyberAwarenessMonthCampaignPage() {
     if (!form.phone.trim()) {
       newErrors.phone = "Phone is required";
     } else {
-      const phoneRegex = /^\+?[0-9\s\-()]{7,20}$/;
-      if (!phoneRegex.test(form.phone.trim())) {
-        newErrors.phone = "Please enter a valid phone number";
+      const phoneDigits = form.phone.trim().replace(/\D/g, "");
+      if (phoneDigits.length !== 10) {
+        newErrors.phone = "Phone number must be exactly 10 digits";
       }
     }
     
