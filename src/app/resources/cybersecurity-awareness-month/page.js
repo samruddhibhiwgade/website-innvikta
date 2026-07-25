@@ -2,9 +2,10 @@
 
 import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useState, useEffect } from "react";
-import { FiArrowRight, FiFileText, FiImage, FiMonitor, FiLayers, FiPlay, FiSmile, FiShield, FiLock, FiAlertTriangle, FiCheck, FiBriefcase, FiX } from "react-icons/fi";
+import { FiArrowRight, FiFileText, FiImage, FiMonitor, FiLayers, FiPlay, FiSmile, FiShield, FiLock, FiAlertTriangle, FiCheck, FiBriefcase, FiX, FiUser, FiMail, FiPhone } from "react-icons/fi";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
 import Link from "next/link";
+import SuccessPopup from "../../../layouts/partials/SuccessPopup";
 import "../../../styles/features/cybersecurity-awareness-month.scss";
 
 export default function CyberAwarenessMonthCampaignPage() {
@@ -73,90 +74,73 @@ export default function CyberAwarenessMonthCampaignPage() {
     setParallaxStyle({ front: {}, mid: {}, back: {} });
   };
 
-  // Form State
+  // Form State matching BookDemo
   const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
+    fullName: "",
     email: "",
     company: "",
-    jobTitle: "",
-    teamSize: "",
-    department: "",
-    consent: false
+    phone: ""
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const validate = () => {
-    const newErrors = {};
-    if (!form.firstName.trim()) newErrors.firstName = "First name is required.";
-    if (!form.lastName.trim()) newErrors.lastName = "Last name is required.";
-    
-    if (!form.email.trim()) {
-      newErrors.email = "Work email is required.";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email)) {
-      newErrors.email = "Enter a valid email address.";
-    }
-    
-    if (!form.company.trim()) newErrors.company = "Organisation name is required.";
-    if (!form.consent) newErrors.consent = "Please agree to receive campaign updates.";
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  const freeDomains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "icloud.com", "aol.com"];
 
-  const handleInputChange = (field, val) => {
-    setForm({ ...form, [field]: val });
-    if (errors[field]) {
-      setErrors({ ...errors, [field]: "" });
+  const validateEmail = (email) => {
+    if (!email) return "Work email is required";
+    const domain = email.split("@")[1];
+    if (freeDomains.includes(domain?.toLowerCase())) {
+      return "Please use a work email address";
     }
+    return "";
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!validate()) return;
-
-    setIsSubmitting(true);
-    fetch("/api/forms", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        form_type: "Cybersecurity Awareness Month Kit",
-        name: `${form.firstName} ${form.lastName}`,
-        email: form.email,
-        company: form.company,
-        designation: form.jobTitle,
-        team_size: form.teamSize,
-        message: `Department: ${form.department}`,
-        payload: {
-          consent: form.consent
+    const newErrors = {};
+    
+    if (!form.fullName) newErrors.fullName = "Name is required";
+    const emailError = validateEmail(form.email);
+    if (emailError) newErrors.email = emailError;
+    if (!form.company) newErrors.company = "Company is required";
+    if (!form.phone) newErrors.phone = "Phone is required";
+    
+    setErrors(newErrors);
+    
+    if (Object.keys(newErrors).length === 0) {
+      setIsSubmitting(true);
+      fetch("/api/forms", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          form_type: "Cybersecurity Awareness Month Kit",
+          name: form.fullName,
+          email: form.email,
+          company: form.company,
+          phone: form.phone
+        })
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        setIsSubmitting(false);
+        if (data.success) {
+          setSubmitted(true);
+          setForm({
+            fullName: "",
+            email: "",
+            company: "",
+            phone: ""
+          });
+        } else {
+          alert("Error: " + (data.error || "Failed to submit request. Please try again."));
         }
       })
-    })
-    .then((res) => res.json())
-    .then((data) => {
-      setIsSubmitting(false);
-      if (data.success) {
-        setSubmitted(true);
-        setForm({
-          firstName: "",
-          lastName: "",
-          email: "",
-          company: "",
-          jobTitle: "",
-          teamSize: "",
-          department: "",
-          consent: false
-        });
-      } else {
-        alert("Error: " + (data.error || "Failed to register. Please try again."));
-      }
-    })
-    .catch((err) => {
-      setIsSubmitting(false);
-      alert("An error occurred. Please try again later.");
-    });
+      .catch((err) => {
+        setIsSubmitting(false);
+        alert("An error occurred. Please try again later.");
+      });
+    }
   };
 
   return (
@@ -705,168 +689,127 @@ export default function CyberAwarenessMonthCampaignPage() {
             </div>
 
             <div className="register-right">
-              <div className="form-card">
-                <div className="form-card-header">
-                  <h3>Create your registration</h3>
-                  <p>Fill in your details below to claim your spot.</p>
+              <div className="bg-white border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.05)] rounded-[24px] overflow-hidden my-8 text-left max-w-4xl mx-auto flex flex-col md:flex-row">
+                {/* Left panel - Brand Highlight Accent */}
+                <div className="md:w-[40%] bg-gradient-to-br from-[#f15a24] to-[#c2410c] text-white p-6 md:p-8 flex flex-col justify-between relative overflow-hidden shrink-0">
+                  <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "16px 16px" }}></div>
+                  <div className="relative z-10">
+                    <div className="inline-block px-3 py-1 mb-6 text-[10px] font-bold tracking-wider bg-white/10 rounded-full uppercase border border-white/15 backdrop-blur-sm">
+                      CYBER CHAMPION QUEST 2026
+                    </div>
+                    <h4 className="text-2xl md:text-3xl font-extrabold text-white leading-tight mb-4">
+                      Join the Campaign
+                    </h4>
+                    <p className="text-xs text-white/90 leading-relaxed font-medium">
+                      Register your organisation now and get full access to the complete five-week campaign toolkit — completely free.
+                    </p>
+                  </div>
+                  <div className="mt-8 relative z-10 text-[10px] text-white/70 font-semibold tracking-wider uppercase">
+                    © INNVIKTA SECURITY
+                  </div>
                 </div>
 
-                <form onSubmit={handleSubmit} className="reg-form" noValidate>
-                  <div className="form-row">
-                    <div className="field-group">
-                      <label className="field-label" htmlFor="firstName">First Name <span className="req">*</span></label>
-                      <input 
-                        className={`field-input ${errors.firstName ? "is-error" : ""}`}
-                        type="text" 
-                        id="firstName" 
-                        placeholder="Jane" 
-                        value={form.firstName}
-                        onChange={(e) => handleInputChange("firstName", e.target.value)}
-                      />
-                      <span className="field-err">{errors.firstName}</span>
-                    </div>
-                    <div className="field-group">
-                      <label className="field-label" htmlFor="lastName">Last Name <span className="req">*</span></label>
-                      <input 
-                        className={`field-input ${errors.lastName ? "is-error" : ""}`}
-                        type="text" 
-                        id="lastName" 
-                        placeholder="Smith" 
-                        value={form.lastName}
-                        onChange={(e) => handleInputChange("lastName", e.target.value)}
-                      />
-                      <span className="field-err">{errors.lastName}</span>
-                    </div>
+                {/* Right panel - Form Fields */}
+                <div className="md:w-[60%] p-6 md:p-8 bg-white flex-1">
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 shrink-0">YOUR DETAILS</span>
+                    <div className="h-px bg-slate-100 flex-1"></div>
                   </div>
 
-                  <div className="field-group">
-                    <label className="field-label" htmlFor="workEmail">Work Email <span className="req">*</span></label>
-                    <input 
-                      className={`field-input ${errors.email ? "is-error" : ""}`}
-                      type="email" 
-                      id="workEmail" 
-                      placeholder="jane.smith@company.com" 
-                      value={form.email}
-                      onChange={(e) => handleInputChange("email", e.target.value)}
-                    />
-                    <span className="field-err">{errors.email}</span>
-                  </div>
-
-                  <div className="field-group">
-                    <label className="field-label" htmlFor="company">Organisation <span className="req">*</span></label>
-                    <input 
-                      className={`field-input ${errors.company ? "is-error" : ""}`}
-                      type="text" 
-                      id="company" 
-                      placeholder="Your organisation" 
-                      value={form.company}
-                      onChange={(e) => handleInputChange("company", e.target.value)}
-                    />
-                    <span className="field-err">{errors.company}</span>
-                  </div>
-
-                  <div className="form-row">
-                    <div className="field-group">
-                      <label className="field-label" htmlFor="jobTitle">Job Title</label>
-                      <input 
-                        className="field-input"
-                        type="text" 
-                        id="jobTitle" 
-                        placeholder="Security Manager" 
-                        value={form.jobTitle}
-                        onChange={(e) => handleInputChange("jobTitle", e.target.value)}
-                      />
-                      <span className="field-err"></span>
-                    </div>
-                    <div className="field-group">
-                      <label className="field-label" htmlFor="teamSize">Team Size</label>
-                      <div className="select-wrap">
-                        <select 
-                          className="field-input field-select" 
-                          id="teamSize"
-                          value={form.teamSize}
-                          onChange={(e) => handleInputChange("teamSize", e.target.value)}
-                        >
-                          <option value="">Select range</option>
-                          <option value="1-10">1 – 10</option>
-                          <option value="11-50">11 – 50</option>
-                          <option value="51-200">51 – 200</option>
-                          <option value="201-500">201 – 500</option>
-                          <option value="500+">500+</option>
-                        </select>
-                        <svg className="select-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <polyline points="6 9 12 15 18 9"/>
-                        </svg>
+                  <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                    {/* Full Name */}
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">FULL NAME <span className="text-[#f15a24]">*</span></label>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          placeholder="Jane Smith"
+                          value={form.fullName}
+                          onChange={(e) => setForm({ ...form, fullName: e.target.value })}
+                          className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
+                            errors.fullName ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
+                          } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
+                        />
+                        <FiUser className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
                       </div>
-                      <span className="field-err"></span>
+                      {errors.fullName && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.fullName}</p>}
                     </div>
-                  </div>
 
-                  <div className="field-group">
-                    <label className="field-label" htmlFor="department">Department</label>
-                    <div className="select-wrap">
-                      <select 
-                        className="field-input field-select" 
-                        id="department"
-                        value={form.department}
-                        onChange={(e) => handleInputChange("department", e.target.value)}
-                      >
-                        <option value="">Select department</option>
-                        <option value="IT/Security">IT / Security</option>
-                        <option value="HR">HR / People</option>
-                        <option value="Finance">Finance</option>
-                        <option value="Sales">Sales</option>
-                        <option value="Leadership">Leadership / C-Suite</option>
-                        <option value="Other">Other</option>
-                      </select>
-                      <svg className="select-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <polyline points="6 9 12 15 18 9"/>
-                      </svg>
+                    {/* Corporate Email */}
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">CORPORATE EMAIL <span className="text-[#f15a24]">*</span></label>
+                      <div className="relative">
+                        <input
+                          type="email"
+                          placeholder="jane@yourcompany.com"
+                          value={form.email}
+                          onChange={(e) => setForm({ ...form, email: e.target.value })}
+                          className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
+                            errors.email ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
+                          } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
+                        />
+                        <FiMail className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
+                      </div>
+                      {errors.email && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.email}</p>}
                     </div>
-                    <span className="field-err"></span>
-                  </div>
 
-                  <div className="field-group">
-                    <label className="checkbox-field" htmlFor="consent">
-                      <input 
-                        type="checkbox" 
-                        id="consent" 
-                        checked={form.consent}
-                        onChange={(e) => handleInputChange("consent", e.target.checked)}
-                      />
-                      <span className="checkbox-box"></span>
-                      <span className="checkbox-text">I agree to receive campaign updates and cybersecurity resources from Innvikta. <span className="req">*</span></span>
-                    </label>
-                    <span className="field-err">{errors.consent}</span>
-                  </div>
+                    {/* Organisation */}
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">ORGANISATION <span className="text-[#f15a24]">*</span></label>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          placeholder="Your Organisation"
+                          value={form.company}
+                          onChange={(e) => setForm({ ...form, company: e.target.value })}
+                          className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
+                            errors.company ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
+                          } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
+                        />
+                        <FiBriefcase className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
+                      </div>
+                      {errors.company && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.company}</p>}
+                    </div>
 
-                  <button type="submit" className="btn btn--submit" disabled={isSubmitting}>
-                    <span>{isSubmitting ? "Registering..." : "Register for the Campaign"}</span>
-                  </button>
+                    {/* Phone */}
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">PHONE NUMBER <span className="text-[#f15a24]">*</span></label>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          placeholder="+1 555-0199"
+                          value={form.phone}
+                          onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                          className={`w-full !pl-4 !pr-10 !py-3 bg-slate-50 border ${
+                            errors.phone ? "border-red-300 ring-4 ring-red-50" : "border-slate-200"
+                          } rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#f15a24] focus:bg-white focus:ring-4 focus:ring-[#f15a24]/5 transition-all text-sm font-medium`}
+                        />
+                        <FiPhone className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
+                      </div>
+                      {errors.phone && <p className="text-[10px] text-red-500 mt-1 mb-0 font-bold">{errors.phone}</p>}
+                    </div>
 
-                  <p className="form-footnote">Your data is handled with care. We never sell or share personal information.</p>
-                </form>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-[#f15a24] hover:bg-orange-600 disabled:bg-orange-400 disabled:cursor-not-allowed !text-white rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 text-sm py-4 cursor-pointer"
+                    >
+                      {isSubmitting ? "Submitting..." : "Register for the Campaign"} <FiArrowRight className="text-xs" />
+                    </button>
+                  </form>
+                </div>
               </div>
             </div>
 
           </div>
 
-          {/* Success Screen Overlay */}
-          <div className={`success-screen ${submitted ? "is-active" : ""}`} aria-live="polite">
-            <div className="success-inner">
-              <div className="success-icon">
-                <FiCheck width={36} height={36} color="white" />
-              </div>
-              <h2>You're registered, Champion.</h2>
-              <p>Welcome to the Cyber Champion Quest 2026. Check your inbox for a confirmation and your first campaign brief. The quest begins October 1st.</p>
-              <div className="success-details-list">
-                <div className="sdl-item">Campaign starts: <strong>October 1, 2026</strong></div>
-                <div className="sdl-item">Confirmation email sent to your work address</div>
-                <div className="sdl-item">Week 0 Launch materials delivered October 1</div>
-              </div>
-              <button className="btn btn--primary" onClick={() => setSubmitted(false)}>Back to Program</button>
-            </div>
-          </div>
+          {/* Success Popup */}
+          <SuccessPopup 
+            isOpen={submitted} 
+            onClose={() => setSubmitted(false)} 
+            title="You're registered, Champion!" 
+            message="Welcome to the Cyber Champion Quest 2026. Check your inbox for a confirmation and your first campaign brief. The quest begins October 1st." 
+          />
         </section>
 
       </div>
