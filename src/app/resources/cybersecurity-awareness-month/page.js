@@ -189,36 +189,12 @@ export default function CyberAwarenessMonthCampaignPage() {
 
             </div>
 
-            <div className="hero-right" aria-hidden="true">
-              <div 
-                className="hero-card-stack" 
-                onMouseMove={handleMouseMove} 
-                onMouseLeave={handleMouseLeave}
-              >
-                <div className="hcard hcard--back" style={parallaxStyle.back}>
-                  <div className="hcard-week">Week 04</div>
-                  <div className="hcard-label">Prove</div>
-                  <div className="hcard-bar" style={{ width: "90%" }}></div>
-                </div>
-                <div className="hcard hcard--mid" style={parallaxStyle.mid}>
-                  <div className="hcard-week">Week 03</div>
-                  <div className="hcard-label">Apply</div>
-                  <div className="hcard-bar" style={{ width: "70%" }}></div>
-                </div>
-                <div className="hcard hcard--front" style={parallaxStyle.front}>
-                  <div className="hcard-chip">Active</div>
-                  <div className="hcard-week">Week 01</div>
-                  <div className="hcard-title">Learn</div>
-                  <p className="hcard-desc">Build your foundation. Know every threat vector before it knows you.</p>
-                  <div className="hcard-progress">
-                    <div className="progress-track">
-                      <div className="progress-fill" style={{ width: "45%" }}></div>
-                    </div>
-                    <span>45% complete</span>
-                  </div>
-                  <div className="hcard-tag">Interactive Module</div>
-                </div>
-              </div>
+            <div className="hero-right">
+              <img 
+                src="/images/cybermonth-hero.png" 
+                alt="Cyber Champion Quest Hero" 
+                className="hero-image-right w-full max-w-[520px] h-auto object-contain mx-auto" 
+              />
             </div>
           </div>
         </section>
