@@ -60,82 +60,14 @@ export default function CyberAwarenessMonthCampaignPage() {
     return () => clearInterval(interval);
   }, []);
 
-  // GSAP Entrance and Scroll Trigger reveals
+  // GSAP Entrance animation
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero Entrance Timeline
       const tl = gsap.timeline();
       tl.fromTo(
         ".hero-left > *",
         { y: 35, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.6, stagger: 0.15, ease: "power3.out" }
-      );
-
-      // Offerings reveals using ScrollTrigger
-      gsap.fromTo(
-        ".offerings-header > *",
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger: 0.15,
-          scrollTrigger: {
-            trigger: ".offerings-section",
-            start: "top 80%",
-            toggleActions: "play none none none"
-          }
-        }
-      );
-
-      gsap.fromTo(
-        ".offerings-grid .offering",
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: ".offerings-grid",
-            start: "top 80%",
-            toggleActions: "play none none none"
-          }
-        }
-      );
-
-      // Journey section reveal
-      gsap.fromTo(
-        ".weeks-heading, .weeks-stepper",
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger: 0.15,
-          scrollTrigger: {
-            trigger: ".weeks-section",
-            start: "top 80%",
-            toggleActions: "play none none none"
-          }
-        }
-      );
-
-      // Register section card reveal
-      gsap.fromTo(
-        ".register-section div.relative",
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".register-section",
-            start: "top 80%",
-            toggleActions: "play none none none"
-          }
-        }
       );
     }, containerRef);
     return () => ctx.revert();
@@ -272,7 +204,18 @@ export default function CyberAwarenessMonthCampaignPage() {
 
             </div>
 
-            <div className="hero-right"></div>
+            <div 
+              className="hero-right animate from-right"
+              style={{
+                backgroundImage: "url('/images/cybermonth-heroimage.png')",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center right",
+                backgroundSize: "contain",
+                width: "100%",
+                height: "100%",
+                minHeight: "480px"
+              }}
+            ></div>
           </div>
         </section>
 
@@ -343,14 +286,14 @@ export default function CyberAwarenessMonthCampaignPage() {
         <section className="section offerings-section" id="offerings">
           <div className="container">
             <div className="section-label">What You Get</div>
-            <div className="offerings-header">
+            <div className="offerings-header animate">
               <h2 className="section-heading">Everything unlocked.<br/>Nothing held back.</h2>
               <p>No paywalls, no restricted tiers. Every participant gets the full toolkit, all five weeks, every game, every asset, every certificate.</p>
             </div>
 
             <div className="offerings-grid">
               {/* Card 01 */}
-              <div className="offering revealed" data-reveal>
+              <div className="offering revealed animate" data-reveal>
                 <div className="offering-index">01</div>
                 <div className="offering-line"></div>
                 <h3 className="offering-title">Interactive Learning Module</h3>
@@ -359,7 +302,7 @@ export default function CyberAwarenessMonthCampaignPage() {
               </div>
 
               {/* Card 02 */}
-              <div className="offering revealed" data-reveal>
+              <div className="offering revealed animate" data-reveal>
                 <div className="offering-index">02</div>
                 <div className="offering-line"></div>
                 <h3 className="offering-title">Four Gamified Security Challenges</h3>
@@ -368,7 +311,7 @@ export default function CyberAwarenessMonthCampaignPage() {
               </div>
 
               {/* Card 03 */}
-              <div className="offering revealed" data-reveal>
+              <div className="offering revealed animate" data-reveal>
                 <div className="offering-index">03</div>
                 <div className="offering-line"></div>
                 <h3 className="offering-title">Flipbook Comic Series</h3>
@@ -377,7 +320,7 @@ export default function CyberAwarenessMonthCampaignPage() {
               </div>
 
               {/* Card 04 */}
-              <div className="offering revealed" data-reveal>
+              <div className="offering revealed animate" data-reveal>
                 <div className="offering-index">04</div>
                 <div className="offering-line"></div>
                 <h3 className="offering-title">Department Scenario Cards</h3>
@@ -386,7 +329,7 @@ export default function CyberAwarenessMonthCampaignPage() {
               </div>
 
               {/* Card 05 */}
-              <div className="offering revealed" data-reveal>
+              <div className="offering revealed animate" data-reveal>
                 <div className="offering-index">05</div>
                 <div className="offering-line"></div>
                 <h3 className="offering-title">Leaderboards &amp; Analytics</h3>
@@ -395,7 +338,7 @@ export default function CyberAwarenessMonthCampaignPage() {
               </div>
 
               {/* Card 06 */}
-              <div className="offering revealed" data-reveal>
+              <div className="offering revealed animate" data-reveal>
                 <div className="offering-index">06</div>
                 <div className="offering-line"></div>
                 <h3 className="offering-title">Cyber Champion Certificate</h3>
@@ -404,7 +347,7 @@ export default function CyberAwarenessMonthCampaignPage() {
               </div>
 
               {/* Middle Campaign Image (Positioned via Grid on desktop, hidden on mobile) */}
-              <div className="offering-image-col">
+              <div className="offering-image-col animate">
                 <img src="/images/cyber_champion_quest_middle.png" alt="Cyber Champion Quest Campaign Visual" />
               </div>
             </div>
@@ -415,10 +358,10 @@ export default function CyberAwarenessMonthCampaignPage() {
         <section className="section weeks-section" id="weeks">
           <div className="container">
             <div className="section-label">The Journey</div>
-            <h2 className="section-heading weeks-heading">Five weeks. Five levels.<br/>One Cyber Champion.</h2>
+            <h2 className="section-heading weeks-heading animate">Five weeks. Five levels.<br/>One Cyber Champion.</h2>
 
             {/* Stepper Header */}
-            <div className="weeks-stepper" role="tablist" aria-label="Program weeks">
+            <div className="weeks-stepper animate" role="tablist" aria-label="Program weeks">
               <button 
                 className={`step-tab ${activeWeek === 0 ? "active" : ""}`}
                 onClick={() => setActiveWeek(0)}
@@ -692,7 +635,7 @@ export default function CyberAwarenessMonthCampaignPage() {
         {/* ================= REGISTER SECTION ================= */}
         <section className="section register-section py-20 bg-white" id="register">
           <div className="container px-6 md:px-12 lg:px-24">
-            <div className="relative max-w-5xl mx-auto bg-white border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.05)] rounded-[24px] overflow-hidden p-0">
+            <div className="relative max-w-5xl mx-auto bg-white border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.05)] rounded-[24px] overflow-hidden p-0 animate">
               <div className="flex flex-col lg:flex-row">
                 
                 {/* Left side panel: Orange background */}
