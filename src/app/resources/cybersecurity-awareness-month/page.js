@@ -1,14 +1,16 @@
 "use client";
 
 import SeoMeta from "@layouts/partials/SeoMeta";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FiArrowRight, FiFileText, FiImage, FiMonitor, FiLayers, FiPlay, FiSmile, FiShield, FiLock, FiAlertTriangle, FiCheck, FiBriefcase, FiX, FiUser, FiMail, FiPhone } from "react-icons/fi";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
+import { gsap } from "@lib/gsap";
 import Link from "next/link";
 import SuccessPopup from "../../../layouts/partials/SuccessPopup";
 import "../../../styles/features/cybersecurity-awareness-month.scss";
 
 export default function CyberAwarenessMonthCampaignPage() {
+  const containerRef = useRef(null);
   // Stepper state
   const [activeWeek, setActiveWeek] = useState(0);
 
@@ -56,6 +58,87 @@ export default function CyberAwarenessMonthCampaignPage() {
       });
     }, 1000);
     return () => clearInterval(interval);
+  }, []);
+
+  // GSAP Entrance and Scroll Trigger reveals
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Hero Entrance Timeline
+      const tl = gsap.timeline();
+      tl.fromTo(
+        ".hero-left > *",
+        { y: 35, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, stagger: 0.15, ease: "power3.out" }
+      );
+
+      // Offerings reveals using ScrollTrigger
+      gsap.fromTo(
+        ".offerings-header > *",
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: ".offerings-section",
+            start: "top 80%",
+            toggleActions: "play none none none"
+          }
+        }
+      );
+
+      gsap.fromTo(
+        ".offerings-grid .offering",
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: ".offerings-grid",
+            start: "top 80%",
+            toggleActions: "play none none none"
+          }
+        }
+      );
+
+      // Journey section reveal
+      gsap.fromTo(
+        ".weeks-heading, .weeks-stepper",
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: ".weeks-section",
+            start: "top 80%",
+            toggleActions: "play none none none"
+          }
+        }
+      );
+
+      // Register section card reveal
+      gsap.fromTo(
+        ".register-section div.relative",
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".register-section",
+            start: "top 80%",
+            toggleActions: "play none none none"
+          }
+        }
+      );
+    }, containerRef);
+    return () => ctx.revert();
   }, []);
 
   // Card Parallax state
@@ -157,7 +240,7 @@ export default function CyberAwarenessMonthCampaignPage() {
     <GSAPWrapper>
       <SeoMeta title="Cyber Champion Quest 2026 | Cybersecurity Awareness Month | Innvikta" description="Join the Cybersecurity Awareness Month 2026 — The Cyber Champion Quest. 5 weeks of immersive, gamified learning designed to transform security habits." />
 
-      <div className="cyber-campaign-page min-h-screen w-full overflow-x-hidden">
+      <div className="cyber-campaign-page min-h-screen w-full overflow-x-hidden" ref={containerRef}>
         
         {/* ================= HERO SECTION ================= */}
         <section className="hero" id="home">
