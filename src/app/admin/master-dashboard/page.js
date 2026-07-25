@@ -1108,7 +1108,7 @@ export default function MasterDashboard() {
                 )}
 
                 {caseContentSource === "manual" && (
-                  <>
+                  <div className="space-y-4">
                     <div>
                   <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Description</label>
                   <ToolbarEditor
@@ -1608,7 +1608,7 @@ export default function MasterDashboard() {
                   </div>
                 </div>
               </div>
-              </>
+              </div>
             )}
 
               <button type="submit" className="bg-[#f15a24] hover:bg-orange-600 !text-white font-bold px-6 py-2.5 rounded-xl text-xs flex items-center gap-2 cursor-pointer shadow-md">
