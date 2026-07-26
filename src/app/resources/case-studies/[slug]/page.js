@@ -24,7 +24,7 @@ export default function CaseStudyDetail() {
         if (found) {
           if (found.pdfUrl) {
             const filename = found.pdfUrl.split("/").pop();
-            window.location.replace(`/api/pdf/${filename}`);
+            window.location.replace(`/resources/case-studies/view-pdf?file=${filename}`);
           } else {
             setData(found);
           }

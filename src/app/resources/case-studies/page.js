@@ -108,7 +108,7 @@ export default function CaseStudies() {
               const getPdfUrl = (url) => {
                 if (!url) return "";
                 const filename = url.split("/").pop();
-                return `/api/pdf/${filename}`;
+                return `/resources/case-studies/view-pdf?file=${filename}`;
               };
               const targetUrl = study.pdfUrl ? getPdfUrl(study.pdfUrl) : `/resources/case-studies/${study.slug || ""}`;
 
