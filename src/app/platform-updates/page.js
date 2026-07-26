@@ -16,7 +16,8 @@ export default function PlatformUpdatesPage() {
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {
-          setUpdatesList(data);
+          const activeUpdates = data.filter(item => !item.archived);
+          setUpdatesList(activeUpdates);
         }
         setLoading(false);
       })

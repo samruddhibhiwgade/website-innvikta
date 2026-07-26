@@ -37,7 +37,7 @@ export const getSinglePage = async (folder) => {
       const res = await fetch(`${backendUrl}/blog_api.php`, { next: { revalidate: 10 } });
       if (res.ok) {
         const data = await res.json();
-        const publishedPages = data.posts.filter((page) => !page.frontmatter.draft && page);
+        const publishedPages = data.posts.filter((page) => !page.frontmatter.draft && !page.frontmatter.archived && page);
         const normalizedPages = publishedPages.map((page) => {
           const title = page.frontmatter.title || "";
           const correctSlug = title
@@ -76,7 +76,7 @@ export const getSinglePage = async (folder) => {
 
   const publishedPages = singlePages.filter(
     (page) =>
-      !page.frontmatter.draft && page.frontmatter.layout !== "404" && page
+      !page.frontmatter.draft && !page.frontmatter.archived && page.frontmatter.layout !== "404" && page
   );
   const filterByDate = publishedPages.filter(
     (page) => new Date(page.frontmatter.date || new Date()) <= new Date()

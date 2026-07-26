@@ -35,8 +35,9 @@ export default function CaseStudies() {
   }, [activeIndustry]);
 
   const filteredCaseStudies = useMemo(() => {
-    if (activeIndustry === "All Industries") return caseStudies;
-    return caseStudies.filter(cs => cs.industry === activeIndustry);
+    const activeCases = caseStudies.filter(cs => !cs.archived);
+    if (activeIndustry === "All Industries") return activeCases;
+    return activeCases.filter(cs => cs.industry === activeIndustry);
   }, [activeIndustry, caseStudies]);
 
   const totalPages = Math.ceil(filteredCaseStudies.length / itemsPerPage);

@@ -23,7 +23,8 @@ import {
   FiPlusCircle,
   FiMapPin,
   FiClock,
-  FiAlertCircle
+  FiAlertCircle,
+  FiArchive
 } from "react-icons/fi";
 
 const INDUSTRIES = ["BFSI", "Healthcare", "Insurance", "IT & Services", "Manufacturing", "Government"];
@@ -548,6 +549,7 @@ export default function MasterDashboard() {
     image: "",
     date: "",
     draft: false,
+    archived: false,
     metaTitle: "",
     metaDescription: "",
   });
@@ -589,7 +591,8 @@ export default function MasterDashboard() {
     ctaButtonText: "Book a Demo",
     ctaButtonUrl: "/book-demo",
     heroImage: "",
-    pdfUrl: ""
+    pdfUrl: "",
+    archived: false
   });
   const [caseContentSource, setCaseContentSource] = useState("manual");
 
@@ -618,7 +621,8 @@ export default function MasterDashboard() {
     date: "",
     desc: "",
     image: "/images/arcade-preview.png",
-    graphicText: ""
+    graphicText: "",
+    archived: false
   });
 
   // Notifications
@@ -713,6 +717,83 @@ export default function MasterDashboard() {
     }
   };
 
+  // ARCHIVE functions
+  const handleToggleArchiveBlog = async (blog) => {
+    const isArchived = !!blog.frontmatter.archived;
+    const action = isArchived ? "unarchive" : "archive";
+    try {
+      const res = await fetch("/api/admin/blogs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          filename: blog.filename,
+          frontmatter: {
+            ...blog.frontmatter,
+            archived: !isArchived
+          },
+          content: blog.content
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        showNotification("success", `Blog post ${action}d successfully!`);
+        fetchData();
+      } else {
+        showNotification("error", data.error || `Failed to ${action} blog post.`);
+      }
+    } catch (err) {
+      showNotification("error", `Error attempting to ${action} blog.`);
+    }
+  };
+
+  const handleToggleArchiveCase = async (study) => {
+    const isArchived = !!study.archived;
+    const action = isArchived ? "unarchive" : "archive";
+    try {
+      const res = await fetch("/api/case-studies", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...study,
+          archived: !isArchived
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        showNotification("success", `Case study ${action}d successfully!`);
+        fetchData();
+      } else {
+        showNotification("error", data.error || `Failed to ${action} case study.`);
+      }
+    } catch (err) {
+      showNotification("error", `Error attempting to ${action} case study.`);
+    }
+  };
+
+  const handleToggleArchiveUpdate = async (update) => {
+    const isArchived = !!update.archived;
+    const action = isArchived ? "unarchive" : "archive";
+    try {
+      const res = await fetch("/api/platform-updates", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...update,
+          archived: !isArchived
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        showNotification("success", `Platform update ${action}d successfully!`);
+        fetchData();
+      } else {
+        showNotification("error", data.error || `Failed to ${action} platform update.`);
+      }
+    } catch (err) {
+      showNotification("error", `Error attempting to ${action} platform update.`);
+    }
+  };
+
   // SAVE functions
   const handleSaveBlog = async (e) => {
     e.preventDefault();
@@ -728,6 +809,7 @@ export default function MasterDashboard() {
             image: blogForm.image,
             author: blogForm.authorName,
             draft: blogForm.draft,
+            archived: blogForm.archived,
             metaTitle: blogForm.metaTitle,
             metaDescription: blogForm.metaDescription,
           },
@@ -831,6 +913,7 @@ export default function MasterDashboard() {
       image: blog.frontmatter.image || "",
       date: blog.frontmatter.date || "",
       draft: blog.frontmatter.draft || false,
+      archived: blog.frontmatter.archived || false,
       metaTitle: blog.frontmatter.metaTitle || "",
       metaDescription: blog.frontmatter.metaDescription || "",
     });
@@ -876,7 +959,8 @@ export default function MasterDashboard() {
       ctaButtonText: study.ctaButtonText || "Book a Demo",
       ctaButtonUrl: study.ctaButtonUrl || "/book-demo",
       heroImage: study.heroImage || "",
-      pdfUrl: study.pdfUrl || ""
+      pdfUrl: study.pdfUrl || "",
+      archived: study.archived || false
     });
     setCaseContentSource(study.pdfUrl ? "pdf" : "manual");
     setEditorMode("edit");
@@ -952,7 +1036,8 @@ export default function MasterDashboard() {
       date: item.date || "",
       desc: item.desc || "",
       image: item.image || "/images/arcade-preview.png",
-      graphicText: item.graphicText || ""
+      graphicText: item.graphicText || "",
+      archived: item.archived || false
     });
     setEditorMode("edit");
   };
@@ -981,6 +1066,7 @@ export default function MasterDashboard() {
                     image: "",
                     date: new Date().toISOString().split("T")[0],
                     draft: false,
+                    archived: false,
                     metaTitle: "",
                     metaDescription: "",
                   });
@@ -1018,7 +1104,8 @@ export default function MasterDashboard() {
                     ctaButtonText: "Book a Demo",
                     ctaButtonUrl: "/book-demo",
                     heroImage: "",
-                    pdfUrl: ""
+                    pdfUrl: "",
+                    archived: false
                   });
                   setCaseContentSource("manual");
                 } else if (activeTab === "newsletters") {
@@ -1047,7 +1134,8 @@ export default function MasterDashboard() {
                     date: new Date().toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' }),
                     desc: "",
                     image: "/images/arcade-preview.png",
-                    graphicText: ""
+                    graphicText: "",
+                    archived: false
                   });
                 }
                 setEditorMode("edit");
@@ -1095,6 +1183,7 @@ export default function MasterDashboard() {
                       <th className="py-4 px-6">Author</th>
                       <th className="py-4 px-6">Date</th>
                       <th className="py-4 px-6">Status</th>
+                      <th className="py-4 px-6">Archived</th>
                       <th className="py-4 px-6 text-right">Actions</th>
                     </tr>
                   </thead>
@@ -1113,7 +1202,13 @@ export default function MasterDashboard() {
                             {blog.frontmatter.draft ? "Draft" : "Published"}
                           </span>
                         </td>
+                        <td className="py-4 px-6">
+                          <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold ${blog.frontmatter.archived ? 'bg-amber-100 text-amber-800' : 'bg-slate-100 text-slate-600'}`}>
+                            {blog.frontmatter.archived ? "Archived" : "No"}
+                          </span>
+                        </td>
                         <td className="py-4 px-6 text-right flex justify-end gap-2">
+                          <button onClick={() => handleToggleArchiveBlog(blog)} className={`p-2 rounded-lg cursor-pointer ${blog.frontmatter.archived ? 'text-amber-600 bg-amber-50 hover:bg-amber-100' : 'text-slate-500 hover:text-amber-600 bg-slate-50'}`} title={blog.frontmatter.archived ? "Unarchive" : "Archive"}><FiArchive /></button>
                           <button onClick={() => openEditBlog(blog)} className="p-2 text-slate-500 hover:text-[#f15a24] bg-slate-50 rounded-lg cursor-pointer"><FiEdit /></button>
                           <button onClick={() => handleDeleteBlog(blog.filename)} className="p-2 text-slate-500 hover:text-rose-600 bg-slate-50 rounded-lg cursor-pointer"><FiTrash2 /></button>
                         </td>
@@ -1132,6 +1227,7 @@ export default function MasterDashboard() {
                       <th className="py-4 px-6">Company / Title</th>
                       <th className="py-4 px-6">Industry</th>
                       <th className="py-4 px-6">Timeline</th>
+                      <th className="py-4 px-6">Archived</th>
                       <th className="py-4 px-6 text-right">Actions</th>
                     </tr>
                   </thead>
@@ -1141,7 +1237,13 @@ export default function MasterDashboard() {
                         <td className="py-4 px-6 font-bold text-slate-900">{study.title}</td>
                         <td className="py-4 px-6">{study.industryLabel}</td>
                         <td className="py-4 px-6">{study.timeline}</td>
+                        <td className="py-4 px-6">
+                          <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold ${study.archived ? 'bg-amber-100 text-amber-800' : 'bg-slate-100 text-slate-600'}`}>
+                            {study.archived ? "Archived" : "No"}
+                          </span>
+                        </td>
                         <td className="py-4 px-6 text-right flex justify-end gap-2">
+                          <button onClick={() => handleToggleArchiveCase(study)} className={`p-2 rounded-lg cursor-pointer ${study.archived ? 'text-amber-600 bg-amber-50 hover:bg-amber-100' : 'text-slate-500 hover:text-amber-600 bg-slate-50'}`} title={study.archived ? "Unarchive" : "Archive"}><FiArchive /></button>
                           <button onClick={() => openEditCase(study)} className="p-2 text-slate-500 hover:text-[#f15a24] bg-slate-50 rounded-lg cursor-pointer"><FiEdit /></button>
                           <button onClick={() => handleDeleteCase(study.id)} className="p-2 text-slate-500 hover:text-rose-600 bg-slate-50 rounded-lg cursor-pointer"><FiTrash2 /></button>
                         </td>
@@ -1187,6 +1289,7 @@ export default function MasterDashboard() {
                       <th className="py-4 px-6">Update Title</th>
                       <th className="py-4 px-6">Category</th>
                       <th className="py-4 px-6">Date</th>
+                      <th className="py-4 px-6">Archived</th>
                       <th className="py-4 px-6 text-right">Actions</th>
                     </tr>
                   </thead>
@@ -1196,7 +1299,13 @@ export default function MasterDashboard() {
                         <td className="py-4 px-6 font-bold text-slate-900">{item.title}</td>
                         <td className="py-4 px-6">{item.category}</td>
                         <td className="py-4 px-6">{item.date}</td>
+                        <td className="py-4 px-6">
+                          <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold ${item.archived ? 'bg-amber-100 text-amber-800' : 'bg-slate-100 text-slate-600'}`}>
+                            {item.archived ? "Archived" : "No"}
+                          </span>
+                        </td>
                         <td className="py-4 px-6 text-right flex justify-end gap-2">
+                          <button onClick={() => handleToggleArchiveUpdate(item)} className={`p-2 rounded-lg cursor-pointer ${item.archived ? 'text-amber-600 bg-amber-50 hover:bg-amber-100' : 'text-slate-500 hover:text-amber-600 bg-slate-50'}`} title={item.archived ? "Unarchive" : "Archive"}><FiArchive /></button>
                           <button onClick={() => openEditUpdate(item)} className="p-2 text-slate-500 hover:text-[#f15a24] bg-slate-50 rounded-lg cursor-pointer"><FiEdit /></button>
                           <button onClick={() => handleDeleteUpdate(item.id)} className="p-2 text-slate-500 hover:text-rose-600 bg-slate-50 rounded-lg cursor-pointer"><FiTrash2 /></button>
                         </td>
@@ -1283,15 +1392,27 @@ export default function MasterDashboard() {
                     rows={12}
                   />
                 </div>
-                <div className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    id="draft"
-                    checked={blogForm.draft}
-                    onChange={(e) => setBlogForm({ ...blogForm, draft: e.target.checked })}
-                    className="w-4 h-4 rounded text-[#f15a24] focus:ring-[#f15a24]"
-                  />
-                  <label htmlFor="draft" className="text-xs font-bold text-slate-600">Save as Draft</label>
+                <div className="flex items-center gap-6">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      id="draft"
+                      checked={blogForm.draft}
+                      onChange={(e) => setBlogForm({ ...blogForm, draft: e.target.checked })}
+                      className="w-4 h-4 rounded text-[#f15a24] focus:ring-[#f15a24]"
+                    />
+                    <label htmlFor="draft" className="text-xs font-bold text-slate-600">Save as Draft</label>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      id="blog_archived"
+                      checked={blogForm.archived}
+                      onChange={(e) => setBlogForm({ ...blogForm, archived: e.target.checked })}
+                      className="w-4 h-4 rounded text-[#f15a24] focus:ring-[#f15a24]"
+                    />
+                    <label htmlFor="blog_archived" className="text-xs font-bold text-slate-600">Archive Post (hides from site)</label>
+                  </div>
                 </div>
                 <button type="submit" className="bg-[#f15a24] hover:bg-orange-600 !text-white font-bold px-6 py-2.5 rounded-xl text-xs flex items-center gap-2 cursor-pointer shadow-md">
                   <FiSave /> Save Blog
@@ -2030,6 +2151,17 @@ export default function MasterDashboard() {
                     </div>
                   </div>
                 </div>
+                
+                <div className="flex items-center gap-2 pt-2">
+                  <input
+                    type="checkbox"
+                    id="case_archived"
+                    checked={caseForm.archived}
+                    onChange={(e) => setCaseForm({ ...caseForm, archived: e.target.checked })}
+                    className="w-4 h-4 rounded text-[#f15a24] focus:ring-[#f15a24]"
+                  />
+                  <label htmlFor="case_archived" className="text-xs font-bold text-slate-600">Archive Case Study (hides from website)</label>
+                </div>
               </div>
             )}
 
@@ -2300,6 +2432,17 @@ export default function MasterDashboard() {
                     onChange={(e) => setUpdateForm({ ...updateForm, desc: e.target.value })}
                     className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-808"
                   />
+                </div>
+                
+                <div className="flex items-center gap-2 pt-2">
+                  <input
+                    type="checkbox"
+                    id="update_archived"
+                    checked={updateForm.archived}
+                    onChange={(e) => setUpdateForm({ ...updateForm, archived: e.target.checked })}
+                    className="w-4 h-4 rounded text-[#f15a24] focus:ring-[#f15a24]"
+                  />
+                  <label htmlFor="update_archived" className="text-xs font-bold text-slate-600">Archive Platform Update (hides from website)</label>
                 </div>
 
                 <button type="submit" className="bg-[#f15a24] hover:bg-orange-600 !text-white font-bold px-6 py-2.5 rounded-xl text-xs flex items-center gap-2 cursor-pointer shadow-md">
