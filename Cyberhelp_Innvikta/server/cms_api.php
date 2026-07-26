@@ -132,32 +132,8 @@ if ($method === 'POST') {
             'ctaButtonUrl' => $data['ctaButtonUrl'] ?? ''
         ];
 
-        $stmt = $db->prepare("
-            INSERT INTO case_studies (
-                id, slug, title, subtitle, industry, industry_label, description, 
-                image, location, timeline, pdf_url, hero_image, archived, metadata_json
-            ) VALUES (
-                :id, :slug, :title, :subtitle, :industry, :industry_label, :description,
-                :image, :location, :timeline, :pdf_url, :hero_image, :archived, :metadata_json
-            ) ON DUPLICATE KEY UPDATE 
-                slug = VALUES(slug),
-                title = VALUES(title),
-                subtitle = VALUES(subtitle),
-                industry = VALUES(industry),
-                industry_label = VALUES(industry_label),
-                description = VALUES(description),
-                image = VALUES(image),
-                location = VALUES(location),
-                timeline = VALUES(timeline),
-                pdf_url = VALUES(pdf_url),
-                hero_image = VALUES(hero_image),
-                archived = VALUES(archived),
-                metadata_json = VALUES(metadata_json)
-        ");
-
         $id = !empty($data['id']) ? (int)$data['id'] : null;
-        $success = $stmt->execute([
-            ':id' => $id,
+        $params = [
             ':slug' => $slug,
             ':title' => $data['title'],
             ':subtitle' => $data['subtitle'] ?? '',
@@ -171,7 +147,40 @@ if ($method === 'POST') {
             ':hero_image' => $data['heroImage'] ?? '',
             ':archived' => isset($data['archived']) ? (int)$data['archived'] : 0,
             ':metadata_json' => json_encode($metaFields)
-        ]);
+        ];
+
+        if ($id) {
+            $stmt = $db->prepare("
+                UPDATE case_studies SET
+                    slug = :slug,
+                    title = :title,
+                    subtitle = :subtitle,
+                    industry = :industry,
+                    industry_label = :industry_label,
+                    description = :description,
+                    image = :image,
+                    location = :location,
+                    timeline = :timeline,
+                    pdf_url = :pdf_url,
+                    hero_image = :hero_image,
+                    archived = :archived,
+                    metadata_json = :metadata_json
+                WHERE id = :id
+            ");
+            $params[':id'] = $id;
+        } else {
+            $stmt = $db->prepare("
+                INSERT INTO case_studies (
+                    slug, title, subtitle, industry, industry_label, description, 
+                    image, location, timeline, pdf_url, hero_image, archived, metadata_json
+                ) VALUES (
+                    :slug, :title, :subtitle, :industry, :industry_label, :description,
+                    :image, :location, :timeline, :pdf_url, :hero_image, :archived, :metadata_json
+                )
+            ");
+        }
+
+        $success = $stmt->execute($params);
 
         if ($success) {
             jsonResponse(['success' => true]);
@@ -186,25 +195,8 @@ if ($method === 'POST') {
         $slug = !empty($data['slug']) ? $data['slug'] : strtolower(preg_replace('/[^a-z0-9]+/', '-', $data['title']));
         $slug = trim($slug, '-');
 
-        $stmt = $db->prepare("
-            INSERT INTO platform_updates (
-                id, slug, title, category, date_text, desc_text, image, graphic_text, archived
-            ) VALUES (
-                :id, :slug, :title, :category, :date_text, :desc_text, :image, :graphic_text, :archived
-            ) ON DUPLICATE KEY UPDATE
-                slug = VALUES(slug),
-                title = VALUES(title),
-                category = VALUES(category),
-                date_text = VALUES(date_text),
-                desc_text = VALUES(desc_text),
-                image = VALUES(image),
-                graphic_text = VALUES(graphic_text),
-                archived = VALUES(archived)
-        ");
-
         $id = !empty($data['id']) ? (int)$data['id'] : null;
-        $success = $stmt->execute([
-            ':id' => $id,
+        $params = [
             ':slug' => $slug,
             ':title' => $data['title'],
             ':category' => $data['category'] ?? 'PRODUCT',
@@ -213,7 +205,33 @@ if ($method === 'POST') {
             ':image' => $data['image'] ?? '',
             ':graphic_text' => $data['graphicText'] ?? '',
             ':archived' => isset($data['archived']) ? (int)$data['archived'] : 0
-        ]);
+        ];
+
+        if ($id) {
+            $stmt = $db->prepare("
+                UPDATE platform_updates SET
+                    slug = :slug,
+                    title = :title,
+                    category = :category,
+                    date_text = :date_text,
+                    desc_text = :desc_text,
+                    image = :image,
+                    graphic_text = :graphic_text,
+                    archived = :archived
+                WHERE id = :id
+            ");
+            $params[':id'] = $id;
+        } else {
+            $stmt = $db->prepare("
+                INSERT INTO platform_updates (
+                    slug, title, category, date_text, desc_text, image, graphic_text, archived
+                ) VALUES (
+                    :slug, :title, :category, :date_text, :desc_text, :image, :graphic_text, :archived
+                )
+            ");
+        }
+
+        $success = $stmt->execute($params);
 
         if ($success) {
             jsonResponse(['success' => true]);
@@ -228,34 +246,8 @@ if ($method === 'POST') {
         $slug = !empty($data['slug']) ? $data['slug'] : strtolower(preg_replace('/[^a-z0-9]+/', '-', $data['title']));
         $slug = trim($slug, '-');
 
-        $stmt = $db->prepare("
-            INSERT INTO newsletters (
-                id, slug, title, description, content, date_text, read_time, author, 
-                category, image, show_cta, cta_title, cta_description, cta_button_text, cta_button_url, archived
-            ) VALUES (
-                :id, :slug, :title, :description, :content, :date_text, :read_time, :author,
-                :category, :image, :show_cta, :cta_title, :cta_description, :cta_button_text, :cta_button_url, :archived
-            ) ON DUPLICATE KEY UPDATE
-                slug = VALUES(slug),
-                title = VALUES(title),
-                description = VALUES(description),
-                content = VALUES(content),
-                date_text = VALUES(date_text),
-                read_time = VALUES(read_time),
-                author = VALUES(author),
-                category = VALUES(category),
-                image = VALUES(image),
-                show_cta = VALUES(show_cta),
-                cta_title = VALUES(cta_title),
-                cta_description = VALUES(cta_description),
-                cta_button_text = VALUES(cta_button_text),
-                cta_button_url = VALUES(cta_button_url),
-                archived = VALUES(archived)
-        ");
-
         $id = !empty($data['id']) ? (int)$data['id'] : null;
-        $success = $stmt->execute([
-            ':id' => $id,
+        $params = [
             ':slug' => $slug,
             ':title' => $data['title'],
             ':description' => $data['description'] ?? '',
@@ -271,7 +263,42 @@ if ($method === 'POST') {
             ':cta_button_text' => $data['ctaButtonText'] ?? '',
             ':cta_button_url' => $data['ctaButtonUrl'] ?? '',
             ':archived' => isset($data['archived']) ? (int)$data['archived'] : 0
-        ]);
+        ];
+
+        if ($id) {
+            $stmt = $db->prepare("
+                UPDATE newsletters SET
+                    slug = :slug,
+                    title = :title,
+                    description = :description,
+                    content = :content,
+                    date_text = :date_text,
+                    read_time = :read_time,
+                    author = :author,
+                    category = :category,
+                    image = :image,
+                    show_cta = :show_cta,
+                    cta_title = :cta_title,
+                    cta_description = :cta_description,
+                    cta_button_text = :cta_button_text,
+                    cta_button_url = :cta_button_url,
+                    archived = :archived
+                WHERE id = :id
+            ");
+            $params[':id'] = $id;
+        } else {
+            $stmt = $db->prepare("
+                INSERT INTO newsletters (
+                    slug, title, description, content, date_text, read_time, author, 
+                    category, image, show_cta, cta_title, cta_description, cta_button_text, cta_button_url, archived
+                ) VALUES (
+                    :slug, :title, :description, :content, :date_text, :read_time, :author,
+                    :category, :image, :show_cta, :cta_title, :cta_description, :cta_button_text, :cta_button_url, :archived
+                )
+            ");
+        }
+
+        $success = $stmt->execute($params);
 
         if ($success) {
             jsonResponse(['success' => true]);
