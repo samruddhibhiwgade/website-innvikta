@@ -177,7 +177,7 @@ export default function AdminCaseStudies() {
       slug,
       industry,
       industryLabel: industryLabel || industry,
-      description: contentSource === "manual" ? description : "PDF Case Study Document",
+      description: description || "PDF Case Study Document",
       image: image || "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&h=600&q=80",
       location,
       timeline,
@@ -392,6 +392,18 @@ export default function AdminCaseStudies() {
                 <div />
               </div>
 
+              <div>
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Short Grid Description *</label>
+                <textarea 
+                  required
+                  rows="3"
+                  placeholder="Provide a brief summary for the main grid page..."
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
+                />
+              </div>
+
               {/* Content Source Selector */}
               <div className="border-t border-slate-100 pt-6 text-left">
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">Case Study Content Source</label>
@@ -446,17 +458,6 @@ export default function AdminCaseStudies() {
 
               {contentSource === "manual" && (
                 <>
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Short Grid Description *</label>
-                    <textarea 
-                      required
-                      rows="3"
-                      placeholder="Provide a brief summary for the main grid page..."
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-medium leading-relaxed"
-                    />
-                  </div>
 
                   <div className="border-t border-slate-100 pt-6">
                     <h3 className="text-base font-bold text-slate-900 mb-4">At a Glance Details (Bullets)</h3>

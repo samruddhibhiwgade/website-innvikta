@@ -19,6 +19,8 @@ const INDUSTRIES = ["All Industries", "BFSI", "Healthcare", "Insurance", "IT & S
 export default function CaseStudies() {
   const [caseStudies, setCaseStudies] = useState([]);
   const [activeIndustry, setActiveIndustry] = useState("All Industries");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
   useEffect(() => {
     fetch("/api/case-studies", { cache: "no-store" })
@@ -27,10 +29,22 @@ export default function CaseStudies() {
       .catch(err => console.error("Failed to fetch case studies", err));
   }, []);
 
+  // Reset to first page on industry filter changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeIndustry]);
+
   const filteredCaseStudies = useMemo(() => {
     if (activeIndustry === "All Industries") return caseStudies;
     return caseStudies.filter(cs => cs.industry === activeIndustry);
   }, [activeIndustry, caseStudies]);
+
+  const totalPages = Math.ceil(filteredCaseStudies.length / itemsPerPage);
+
+  const paginatedCaseStudies = useMemo(() => {
+    const start = (currentPage - 1) * itemsPerPage;
+    return filteredCaseStudies.slice(start, start + itemsPerPage);
+  }, [filteredCaseStudies, currentPage]);
 
   return (
     <GSAPWrapper>
@@ -104,7 +118,7 @@ export default function CaseStudies() {
 
           {/* Case Studies Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {filteredCaseStudies.map((study) => {
+            {paginatedCaseStudies.map((study) => {
               const getPdfUrl = (url) => {
                 if (!url) return "";
                 const filename = url.split("/").pop();
@@ -221,7 +235,7 @@ export default function CaseStudies() {
                         href={targetUrl} 
                         className="bg-[#f15a24] hover:bg-orange-600 !text-white px-5 py-2.5 rounded-lg transition-all duration-300 inline-flex items-center gap-1 whitespace-nowrap font-bold text-sm shadow-md shadow-orange-500/10 cursor-pointer"
                       >
-                        View PDF <FiArrowRight className="text-xs" />
+                        Read More <FiArrowRight className="text-xs" />
                       </a>
                     ) : (
                       <Link 
@@ -236,6 +250,39 @@ export default function CaseStudies() {
               );
             })}
           </div>
+
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center gap-2 mt-16 animate-fade-in">
+              <button
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="px-4 py-2 border border-slate-200 rounded-xl disabled:opacity-40 hover:bg-slate-50 cursor-pointer font-bold text-xs transition-colors"
+              >
+                Previous
+              </button>
+              {Array.from({ length: totalPages }).map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentPage(i + 1)}
+                  className={`w-9 h-9 rounded-xl font-bold text-xs flex items-center justify-center cursor-pointer transition-all ${
+                    currentPage === i + 1
+                      ? "bg-[#f15a24] text-white shadow-md shadow-orange-500/15"
+                      : "border border-slate-200 hover:bg-slate-50 text-slate-700"
+                  }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+              <button
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className="px-4 py-2 border border-slate-200 rounded-xl disabled:opacity-40 hover:bg-slate-50 cursor-pointer font-bold text-xs transition-colors"
+              >
+                Next
+              </button>
+            </div>
+          )}
 
         </div>
       </section>

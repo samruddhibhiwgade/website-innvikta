@@ -328,7 +328,7 @@ export default function MasterDashboard() {
     try {
       const payload = { ...caseForm };
       if (caseContentSource === "pdf") {
-        payload.description = "PDF Case Study Document";
+        payload.description = caseForm.description || "PDF Case Study Document";
         payload.atGlance = [];
         payload.summaryTitle = "";
         payload.summaryParagraphs = [];
@@ -1030,6 +1030,16 @@ export default function MasterDashboard() {
                   )}
                 </div>
 
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase mb-2 font-black">Description Summary *</label>
+                  <ToolbarEditor
+                    value={caseForm.description}
+                    onChange={(val) => setCaseForm({ ...caseForm, description: val })}
+                    placeholder="Enter case study description summary..."
+                    rows={3}
+                  />
+                </div>
+
                 {/* Case Study Content Source Toggle */}
                 <div className="border-t border-slate-100 pt-4 text-left">
                   <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Case Study Content Source</label>
@@ -1070,33 +1080,13 @@ export default function MasterDashboard() {
                         className="flex-1 px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold"
                         placeholder="e.g. /uploads/blog/filename.pdf"
                       />
-                      <label className="bg-slate-800 hover:bg-slate-700 text-white font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 cursor-pointer shadow-md select-none">
-                        <FiFileText />
-                        <span>Upload PDF</span>
+                      <label className="px-4 py-2 bg-[#f15a24] text-white rounded-xl text-xs font-bold hover:bg-orange-600 transition-colors flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap">
+                        <FiImage /> {uploadingPdf ? "Uploading..." : "Upload File"}
                         <input
                           type="file"
                           accept="application/pdf"
-                          onChange={async (e) => {
-                            const file = e.target.files?.[0];
-                            if (!file) return;
-                            const formData = new FormData();
-                            formData.append("file", file);
-                            try {
-                              const res = await fetch("/api/admin/upload", {
-                                method: "POST",
-                                body: formData
-                              });
-                              const data = await res.json();
-                              if (data.success) {
-                                setCaseForm({ ...caseForm, pdfUrl: data.url });
-                                showNotification("success", "PDF uploaded successfully!");
-                              } else {
-                                showNotification("error", data.error || "Failed to upload PDF.");
-                              }
-                            } catch (err) {
-                              showNotification("error", "Error uploading PDF.");
-                            }
-                          }}
+                          onChange={handlePdfUpload}
+                          disabled={uploadingPdf}
                           className="hidden"
                         />
                       </label>
@@ -1111,16 +1101,6 @@ export default function MasterDashboard() {
 
                 {caseContentSource === "manual" && (
                   <div className="space-y-4">
-                    <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Description</label>
-                  <ToolbarEditor
-                    value={caseForm.description}
-                    onChange={(val) => setCaseForm({ ...caseForm, description: val })}
-                    placeholder="Enter case study description summary..."
-                    rows={3}
-                  />
-                </div>
-
                 <div>
                   <label className="block text-xs font-bold text-slate-500 uppercase mb-2">At Glance Highlights (One per line)</label>
                   <textarea

@@ -31,6 +31,13 @@ const BlogPageClient = ({ initialPosts, title }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+
+  // Reset page when filters change
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [activeCategory, searchQuery]);
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -80,22 +87,29 @@ const BlogPageClient = ({ initialPosts, title }) => {
   // Is filtering active?
   const isFiltering = activeCategory !== "All Articles" || searchQuery.trim() !== "";
 
-  // Dynamic layout calculation for default state
+  const totalPages = Math.ceil(filteredPosts.length / itemsPerPage);
+
+  // Dynamic layout calculation for default state on Page 1
   const { leftPosts, featuredPost, bottomPosts } = useMemo(() => {
-    if (isFiltering || initialPosts.length < 3) {
+    if (isFiltering || currentPage > 1 || filteredPosts.length < 3) {
       return { leftPosts: [], featuredPost: null, bottomPosts: [] };
     }
-    // Asymmetric layout: Left column (2 stacked cards), Right column (Featured card)
-    const featured = initialPosts[0];
-    const left = initialPosts.slice(1, 3);
-    const bottom = initialPosts.slice(3);
+    // Asymmetric layout: Page 1 (featured + left stacked + 3 bottom posts = 6 total)
+    const featured = filteredPosts[0];
+    const left = filteredPosts.slice(1, 3);
+    const bottom = filteredPosts.slice(3, 6);
 
     return {
       featuredPost: featured,
       leftPosts: left,
       bottomPosts: bottom,
     };
-  }, [initialPosts, isFiltering]);
+  }, [filteredPosts, isFiltering, currentPage]);
+
+  const paginatedGridPosts = useMemo(() => {
+    const start = (currentPage - 1) * itemsPerPage;
+    return filteredPosts.slice(start, start + itemsPerPage);
+  }, [filteredPosts, currentPage]);
 
   // Rendering a small vertical stacked card
   const renderSmallCard = (post) => {
@@ -302,9 +316,9 @@ const BlogPageClient = ({ initialPosts, title }) => {
         </div>
 
         {/* Dynamic Layout Rendering */}
-        {isFiltering ? (
-          /* Filtered state: display matching items in a clean responsive grid */
-          filteredPosts.length === 0 ? (
+        {(isFiltering || currentPage > 1) ? (
+          /* Grid/Filtered state: display matching items in a clean responsive grid */
+          paginatedGridPosts.length === 0 ? (
             <div className="text-center py-20 bg-slate-50/50 border border-slate-100 rounded-3xl">
               <p className="text-slate-400 text-base font-semibold">
                 No articles found matching your criteria.
@@ -321,11 +335,11 @@ const BlogPageClient = ({ initialPosts, title }) => {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPosts.map((post) => renderStandardCard(post))}
+              {paginatedGridPosts.map((post) => renderStandardCard(post))}
             </div>
           )
         ) : (
-          /* Default state: asymmetric Prismic layout */
+          /* Default state: asymmetric Prismic layout (Page 1 only) */
           <div className="space-y-12">
             {/* Asymmetric Core Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
@@ -404,7 +418,39 @@ const BlogPageClient = ({ initialPosts, title }) => {
                 </div>
               </div>
             )}
+          </div>
+        )}
 
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center gap-2 mt-16">
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className="px-4 py-2 border border-slate-200 rounded-xl disabled:opacity-40 hover:bg-slate-50 cursor-pointer font-bold text-xs transition-colors text-slate-700"
+            >
+              Previous
+            </button>
+            {Array.from({ length: totalPages }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentPage(i + 1)}
+                className={`w-9 h-9 rounded-xl font-bold text-xs flex items-center justify-center cursor-pointer transition-all ${
+                  currentPage === i + 1
+                    ? "bg-[#f15a24] text-white shadow-md shadow-orange-500/15"
+                    : "border border-slate-200 hover:bg-slate-50 text-slate-700"
+                }`}
+              >
+                {i + 1}
+              </button>
+            ))}
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 border border-slate-200 rounded-xl disabled:opacity-40 hover:bg-slate-50 cursor-pointer font-bold text-xs transition-colors text-slate-700"
+            >
+              Next
+            </button>
           </div>
         )}
       </div>
