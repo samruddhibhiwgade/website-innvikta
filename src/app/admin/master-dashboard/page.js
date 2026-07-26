@@ -541,14 +541,6 @@ export default function MasterDashboard() {
   const [focusKeyphrase, setFocusKeyphrase] = useState("");
   const [seoReport, setSeoReport] = useState([]);
 
-  // Image Upload Modal States
-  const [showImageModal, setShowImageModal] = useState(false);
-  const [inlineImageFile, setInlineImageFile] = useState(null);
-  const [inlineImageAlt, setInlineImageAlt] = useState("");
-  const [inlineImageWidth, setInlineImageWidth] = useState("100%");
-  const [inlineImageAlign, setInlineImageAlign] = useState("center");
-  const [isUploadingInline, setIsUploadingInline] = useState(false);
-
   // Editor states
   const [editorMode, setEditorMode] = useState("list"); // "list" or "edit"
   const [editingId, setEditingId] = useState(null);
