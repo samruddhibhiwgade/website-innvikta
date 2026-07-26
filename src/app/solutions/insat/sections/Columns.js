@@ -6,7 +6,7 @@ export default function ColumnsSection() {
       <section className="bg-white">
         <div className="container">
           <div className="section-intro animate" style={{ textAlign: "center" }}>
-            <h2 className="text-52-heading">Build Security Awareness Across Your Organization</h2>
+            <h2 className="text-64-heading">Build Security Awareness Across Your Organization</h2>
           </div>
 
           {/* AI Adaptive Learning */}

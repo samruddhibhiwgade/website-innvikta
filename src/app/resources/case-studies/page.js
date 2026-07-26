@@ -104,128 +104,137 @@ export default function CaseStudies() {
 
           {/* Case Studies Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {filteredCaseStudies.map((study) => (
-              <div 
-                key={study.id} 
-                className="group flex flex-col bg-white rounded-3xl overflow-hidden transition-all duration-300 justify-between"
-              >
-                <div>
-                  {/* Square Image container with Overlay */}
-                  {study.pdfUrl ? (
-                    <a 
-                      href={study.pdfUrl} 
-                      className="block"
-                    >
-                      <div className="relative w-full aspect-square rounded-[2rem] overflow-hidden shadow-sm cursor-pointer">
-                        <img 
-                          src={study.image} 
-                          alt={study.title} 
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                        
-                        {/* Top Overlay: CASE STUDY */}
-                        <div className="absolute top-6 left-6 flex items-center">
-                          <span className="border-l-2 border-[#f15a24] pl-2 text-[11px] font-black uppercase tracking-wider text-white">
-                            Case Study
-                          </span>
-                        </div>
+            {filteredCaseStudies.map((study) => {
+              const getPdfUrl = (url) => {
+                if (!url) return "";
+                const filename = url.split("/").pop();
+                return `/api/pdf/${filename}`;
+              };
+              const targetUrl = study.pdfUrl ? getPdfUrl(study.pdfUrl) : `/resources/case-studies/${study.slug || ""}`;
 
-                        {/* Bottom Overlay: Title */}
-                        <div className="absolute bottom-6 left-6 right-6">
-                          <h4 className="text-lg md:text-xl font-bold font-secondary text-white leading-tight">
-                            {study.imageTitle}
-                          </h4>
-                        </div>
-                      </div>
-                    </a>
-                  ) : (
-                    <Link href={`/resources/case-studies/${study.slug || ""}`} className="block">
-                      <div className="relative w-full aspect-square rounded-[2rem] overflow-hidden shadow-sm cursor-pointer">
-                        <img 
-                          src={study.image} 
-                          alt={study.title} 
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                        
-                        {/* Top Overlay: CASE STUDY */}
-                        <div className="absolute top-6 left-6 flex items-center">
-                          <span className="border-l-2 border-[#f15a24] pl-2 text-[11px] font-black uppercase tracking-wider text-white">
-                            Case Study
-                          </span>
-                        </div>
-
-                        {/* Bottom Overlay: Title */}
-                        <div className="absolute bottom-6 left-6 right-6">
-                          <h4 className="text-lg md:text-xl font-bold font-secondary text-white leading-tight">
-                            {study.imageTitle}
-                          </h4>
-                        </div>
-                      </div>
-                    </Link>
-                  )}
-
-                  {/* Content under the image */}
-                  <div className="pt-6 pb-4 px-2">
-                    {/* Category */}
-                    <span className="block text-xs md:text-sm font-bold text-[#f15a24] uppercase tracking-wide mb-2">
-                      {study.industryLabel}
-                    </span>
-
-                    {/* Title */}
+              return (
+                <div 
+                  key={study.id} 
+                  className="group flex flex-col bg-white rounded-3xl overflow-hidden transition-all duration-300 justify-between"
+                >
+                  <div>
+                    {/* Square Image container with Overlay */}
                     {study.pdfUrl ? (
                       <a 
-                        href={study.pdfUrl} 
+                        href={targetUrl} 
                         className="block"
                       >
-                        <h3 className={`text-2xl font-black mb-3 leading-snug tracking-tight transition-colors cursor-pointer ${
-                          study.industry === "Healthcare" 
-                            ? "text-[#f15a24]" 
-                            : "text-slate-900 group-hover:text-[#f15a24]"
-                        }`}>
-                          {study.subtitle}
-                        </h3>
+                        <div className="relative w-full aspect-square rounded-[2rem] overflow-hidden shadow-sm cursor-pointer">
+                          <img 
+                            src={study.image} 
+                            alt={study.title} 
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                          
+                          {/* Top Overlay: CASE STUDY */}
+                          <div className="absolute top-6 left-6 flex items-center">
+                            <span className="border-l-2 border-[#f15a24] pl-2 text-[11px] font-black uppercase tracking-wider text-white">
+                              Case Study
+                            </span>
+                          </div>
+
+                          {/* Bottom Overlay: Title */}
+                          <div className="absolute bottom-6 left-6 right-6">
+                            <h4 className="text-lg md:text-xl font-bold font-secondary text-white leading-tight">
+                              {study.imageTitle}
+                            </h4>
+                          </div>
+                        </div>
                       </a>
                     ) : (
-                      <Link href={`/resources/case-studies/${study.slug || ""}`} className="block">
-                        <h3 className={`text-2xl font-black mb-3 leading-snug tracking-tight transition-colors cursor-pointer ${
-                          study.industry === "Healthcare" 
-                            ? "text-[#f15a24]" 
-                            : "text-slate-900 group-hover:text-[#f15a24]"
-                        }`}>
-                          {study.subtitle}
-                        </h3>
+                      <Link href={targetUrl} className="block">
+                        <div className="relative w-full aspect-square rounded-[2rem] overflow-hidden shadow-sm cursor-pointer">
+                          <img 
+                            src={study.image} 
+                            alt={study.title} 
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                          
+                          {/* Top Overlay: CASE STUDY */}
+                          <div className="absolute top-6 left-6 flex items-center">
+                            <span className="border-l-2 border-[#f15a24] pl-2 text-[11px] font-black uppercase tracking-wider text-white">
+                              Case Study
+                            </span>
+                          </div>
+
+                          {/* Bottom Overlay: Title */}
+                          <div className="absolute bottom-6 left-6 right-6">
+                            <h4 className="text-lg md:text-xl font-bold font-secondary text-white leading-tight">
+                              {study.imageTitle}
+                            </h4>
+                          </div>
+                        </div>
                       </Link>
                     )}
 
-                    {/* Description */}
-                    <p className="text-sm text-slate-500 font-normal leading-relaxed mb-6">
-                      {study.description}
-                    </p>
+                    {/* Content under the image */}
+                    <div className="pt-6 pb-4 px-2">
+                      {/* Category */}
+                      <span className="block text-xs md:text-sm font-bold text-[#f15a24] uppercase tracking-wide mb-2">
+                        {study.industryLabel}
+                      </span>
+
+                      {/* Title */}
+                      {study.pdfUrl ? (
+                        <a 
+                          href={targetUrl} 
+                          className="block"
+                        >
+                          <h3 className={`text-2xl font-black mb-3 leading-snug tracking-tight transition-colors cursor-pointer ${
+                            study.industry === "Healthcare" 
+                              ? "text-[#f15a24]" 
+                              : "text-slate-900 group-hover:text-[#f15a24]"
+                          }`}>
+                            {study.subtitle}
+                          </h3>
+                        </a>
+                      ) : (
+                        <Link href={targetUrl} className="block">
+                          <h3 className={`text-2xl font-black mb-3 leading-snug tracking-tight transition-colors cursor-pointer ${
+                            study.industry === "Healthcare" 
+                              ? "text-[#f15a24]" 
+                              : "text-slate-900 group-hover:text-[#f15a24]"
+                          }`}>
+                            {study.subtitle}
+                          </h3>
+                        </Link>
+                      )}
+
+                      {/* Description */}
+                      <p className="text-sm text-slate-500 font-normal leading-relaxed mb-6">
+                        {study.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Read More Button */}
+                  <div className="px-2 pb-6">
+                    {study.pdfUrl ? (
+                      <a 
+                        href={targetUrl} 
+                        className="bg-[#f15a24] hover:bg-orange-600 !text-white px-5 py-2.5 rounded-lg transition-all duration-300 inline-flex items-center gap-1 whitespace-nowrap font-bold text-sm shadow-md shadow-orange-500/10 cursor-pointer"
+                      >
+                        View PDF <FiArrowRight className="text-xs" />
+                      </a>
+                    ) : (
+                      <Link 
+                        href={targetUrl} 
+                        className="bg-[#f15a24] hover:bg-orange-600 !text-white px-5 py-2.5 rounded-lg transition-all duration-300 inline-flex items-center gap-1 whitespace-nowrap font-bold text-sm shadow-md shadow-orange-500/10 cursor-pointer"
+                      >
+                        Read More <FiArrowRight className="text-xs" />
+                      </Link>
+                    )}
                   </div>
                 </div>
-
-                {/* Read More Button */}
-                <div className="px-2 pb-6">
-                  {study.pdfUrl ? (
-                    <a 
-                      href={study.pdfUrl} 
-                      className="bg-[#f15a24] hover:bg-orange-600 !text-white px-5 py-2.5 rounded-lg transition-all duration-300 inline-flex items-center gap-1 whitespace-nowrap font-bold text-sm shadow-md shadow-orange-500/10 cursor-pointer"
-                    >
-                      View PDF <FiArrowRight className="text-xs" />
-                    </a>
-                  ) : (
-                    <Link 
-                      href={`/resources/case-studies/${study.slug || ""}`} 
-                      className="bg-[#f15a24] hover:bg-orange-600 !text-white px-5 py-2.5 rounded-lg transition-all duration-300 inline-flex items-center gap-1 whitespace-nowrap font-bold text-sm shadow-md shadow-orange-500/10 cursor-pointer"
-                    >
-                      Read More <FiArrowRight className="text-xs" />
-                    </Link>
-                  )}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
         </div>

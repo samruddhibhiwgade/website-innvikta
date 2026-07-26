@@ -23,7 +23,8 @@ export default function CaseStudyDetail() {
         const found = list.find(item => item.slug === slug);
         if (found) {
           if (found.pdfUrl) {
-            window.location.replace(found.pdfUrl);
+            const filename = found.pdfUrl.split("/").pop();
+            window.location.replace(`/api/pdf/${filename}`);
           } else {
             setData(found);
           }
@@ -42,6 +43,13 @@ export default function CaseStudyDetail() {
       </div>
     );
   }
+
+  const alignClass = 
+    data?.textAlignment === "left" ? "text-left" : 
+    data?.textAlignment === "center" ? "text-center" : 
+    data?.textAlignment === "right" ? "text-right" : 
+    data?.textAlignment === "justify" ? "text-justify" : 
+    "text-justify"; // default
 
   return (
     <GSAPWrapper>
@@ -115,7 +123,7 @@ export default function CaseStudyDetail() {
                      {data.summaryParagraphs.map((para, i) => (
                        <p 
                          key={i} 
-                         className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal max-w-2xl prose prose-slate text-justify"
+                         className={`text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal max-w-2xl prose prose-slate ${alignClass}`}
                          dangerouslySetInnerHTML={{ __html: para }}
                        />
                      ))}
@@ -129,7 +137,7 @@ export default function CaseStudyDetail() {
                      {data.challengeParagraphs.map((para, i) => (
                        <p 
                          key={i} 
-                         className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal max-w-2xl prose prose-slate text-justify"
+                         className={`text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal max-w-2xl prose prose-slate ${alignClass}`}
                          dangerouslySetInnerHTML={{ __html: para }}
                        />
                      ))}
@@ -143,7 +151,7 @@ export default function CaseStudyDetail() {
                      {data.solutionParagraphs.map((para, i) => (
                        <p 
                          key={i} 
-                         className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal max-w-2xl prose prose-slate text-justify"
+                         className={`text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal max-w-2xl prose prose-slate ${alignClass}`}
                          dangerouslySetInnerHTML={{ __html: para }}
                        />
                      ))}
@@ -247,7 +255,7 @@ export default function CaseStudyDetail() {
                     {data.cultureParagraphs.map((para, i) => para.trim() !== "" && (
                       <p 
                         key={i} 
-                        className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal prose prose-slate text-justify"
+                        className={`text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal prose prose-slate ${alignClass}`}
                         dangerouslySetInnerHTML={{ __html: para }}
                       />
                     ))}
@@ -305,7 +313,7 @@ export default function CaseStudyDetail() {
                       {section.paragraphs && section.paragraphs.map((para, pIdx) => (
                         <p 
                           key={pIdx} 
-                          className="text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal prose prose-slate text-justify"
+                          className={`text-[#334155] leading-relaxed text-[15px] md:text-[17px] font-normal prose prose-slate ${alignClass}`}
                           dangerouslySetInnerHTML={{ __html: para }}
                         />
                       ))}

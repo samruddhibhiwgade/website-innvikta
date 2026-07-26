@@ -52,6 +52,7 @@ export default function AdminCaseStudies() {
   const [quoteAuthor, setQuoteAuthor] = useState("");
   const [pdfUrl, setPdfUrl] = useState("");
   const [contentSource, setContentSource] = useState("manual");
+  const [textAlignment, setTextAlignment] = useState("justify");
 
   // Fetch case studies on load
   const fetchCaseStudies = async () => {
@@ -108,6 +109,7 @@ export default function AdminCaseStudies() {
     setQuoteAuthor("");
     setPdfUrl("");
     setContentSource("manual");
+    setTextAlignment("justify");
     setView("form");
   };
 
@@ -137,6 +139,7 @@ export default function AdminCaseStudies() {
     setQuoteAuthor(study.quoteAuthor || "");
     setPdfUrl(study.pdfUrl || "");
     setContentSource(study.pdfUrl ? "pdf" : "manual");
+    setTextAlignment(study.textAlignment || "justify");
     setView("form");
   };
 
@@ -188,7 +191,8 @@ export default function AdminCaseStudies() {
       sidebarDetails: contentSource === "manual" ? sidebarDetails.filter(d => d.label && d.val) : [],
       quoteText: contentSource === "manual" ? quoteText : "",
       quoteAuthor: contentSource === "manual" ? quoteAuthor : "",
-      pdfUrl: contentSource === "pdf" ? pdfUrl : ""
+      pdfUrl: contentSource === "pdf" ? pdfUrl : "",
+      textAlignment: contentSource === "manual" ? textAlignment : "justify"
     };
 
     try {
@@ -486,6 +490,22 @@ export default function AdminCaseStudies() {
                   </div>
 
                   <div className="border-t border-slate-100 pt-6 space-y-6">
+                                        {/* Text Alignment */}
+                    <div className="space-y-2">
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                        Text Alignment (in detail page)
+                      </label>
+                      <select
+                        value={textAlignment}
+                        onChange={(e) => setTextAlignment(e.target.value)}
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:border-orange-500 text-sm font-bold"
+                      >
+                        <option value="justify">Justify</option>
+                        <option value="left">Align Left</option>
+                        <option value="center">Align Center</option>
+                        <option value="right">Align Right</option>
+                      </select>
+                    </div>
                     <h3 className="text-base font-bold text-slate-900 mb-1">Story Content Blocks</h3>
 
                     {/* Summary Block */}

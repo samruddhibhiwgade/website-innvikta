@@ -10,6 +10,7 @@ import HeroSection from "./sections/Hero";
 import StatsSection from "./sections/Stats";
 import AccordionPanelSection from "./sections/AccordionPanel";
 import CampaignBuilderSection from "./sections/CampaignBuilder";
+import ReportButtonSection from "./sections/ReportButton";
 import RefresherSection from "./sections/Refresher";
 import FAQSection from "./sections/Faq";
 import FinalCtaSection from "./sections/FinalCta";
@@ -51,6 +52,7 @@ const PhishingSimulationPage = () => {
           <StatsSection />
           <AccordionPanelSection />
           <CampaignBuilderSection />
+          <ReportButtonSection />
           <RefresherSection />
           <FAQSection />
           <FinalCtaSection />

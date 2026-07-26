@@ -136,6 +136,7 @@ export default function MasterDashboard() {
     timeline: "",
     atGlance: [""],
     summaryTitle: "",
+    textAlignment: "justify",
     summaryParagraphs: [""],
     challengeTitle: "",
     challengeParagraphs: [""],
@@ -422,6 +423,7 @@ export default function MasterDashboard() {
       timeline: study.timeline || "",
       atGlance: study.atGlance || [""],
       summaryTitle: study.summaryTitle || "",
+      textAlignment: study.textAlignment || "justify",
       summaryParagraphs: study.summaryParagraphs || [""],
       challengeTitle: study.challengeTitle || "",
       challengeParagraphs: study.challengeParagraphs || [""],
@@ -1132,6 +1134,19 @@ export default function MasterDashboard() {
                 {/* Summary section */}
                 <div className="border border-slate-150 rounded-xl p-4 bg-slate-50/40 space-y-4">
                   <h4 className="text-xs font-black text-slate-700 uppercase tracking-wider">Summary Section (Outcome Description)</h4>
+                                    <div>
+                    <label className="block text-[10px] font-bold text-slate-500 uppercase mb-2">Text Alignment (in detail page)</label>
+                    <select
+                      value={caseForm.textAlignment || 'justify'}
+                      onChange={(e) => setCaseForm({ ...caseForm, textAlignment: e.target.value })}
+                      className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold"
+                    >
+                      <option value="justify">Justify</option>
+                      <option value="left">Align Left</option>
+                      <option value="center">Align Center</option>
+                      <option value="right">Align Right</option>
+                    </select>
+                  </div>
                   <div>
                     <label className="block text-[10px] font-bold text-slate-500 uppercase mb-2">Summary Section Title</label>
                     <input

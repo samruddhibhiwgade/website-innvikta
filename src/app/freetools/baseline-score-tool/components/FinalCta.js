@@ -23,8 +23,12 @@ export default function FinalCtaSection() {
                 onClick={() => {
                   document.body.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="btn bg-orange-50/50 hover:bg-[#f15a24] border border-[#f15a24]/30 hover:border-[#f15a24] !text-[#f15a24] hover:!text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center font-bold text-sm whitespace-nowrap"
-                style={{ padding: "14px 28px" }}
+                className="btn hover:!bg-[#f15a24] hover:!border-[#f15a24] !text-[#f15a24] hover:!text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center font-bold text-sm whitespace-nowrap"
+                style={{ 
+                  padding: "14px 28px", 
+                  backgroundColor: "rgba(241, 90, 36, 0.05)", 
+                  border: "1px solid rgba(241, 90, 36, 0.3)" 
+                }}
               >
                 Start Free
               </button>
