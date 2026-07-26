@@ -13,6 +13,14 @@ function PDFViewerContent() {
   const file = searchParams.get("file");
 
   useEffect(() => {
+    // Redirect mobile users to open the PDF natively
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobile && file) {
+      const cleanFilename = file.replace(/[^a-zA-Z0-9.\-_]/g, "");
+      window.location.replace(`/api/pdf/${cleanFilename}`);
+      return;
+    }
+
     // Disable right click to protect PDF contents from saving
     const handleContextMenu = (e) => e.preventDefault();
     document.addEventListener("contextmenu", handleContextMenu);
