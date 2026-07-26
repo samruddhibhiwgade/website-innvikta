@@ -6,6 +6,9 @@ const dbPath = path.join(process.cwd(), "content/case-studies.json");
 
 export async function GET() {
   try {
+    if (!fs.existsSync(dbPath)) {
+      fs.writeFileSync(dbPath, "[]", "utf-8");
+    }
     const fileContent = fs.readFileSync(dbPath, "utf-8");
     return NextResponse.json(JSON.parse(fileContent));
   } catch (error) {
@@ -16,6 +19,9 @@ export async function GET() {
 export async function POST(request) {
   try {
     const payload = await request.json();
+    if (!fs.existsSync(dbPath)) {
+      fs.writeFileSync(dbPath, "[]", "utf-8");
+    }
     const fileContent = fs.readFileSync(dbPath, "utf-8");
     const data = JSON.parse(fileContent);
 

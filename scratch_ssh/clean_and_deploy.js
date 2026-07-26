@@ -7,16 +7,20 @@ conn.on('ready', () => {
     # Clean the conflicting files and pull the code cleanly
     cd /home/platform/public_html/Innvikta-Website
     
-    # Back up the database file
+    # Back up the database files
     cp content/case-studies.json /home/platform/public_html/case-studies.json.bak || true
+    cp content/platform-updates.json /home/platform/public_html/platform-updates.json.bak || true
+    cp content/newsletters.json /home/platform/public_html/newsletters.json.bak || true
     
     git stash || true
     git checkout -- . || true
     git clean -fd -e Cyberhelp_Innvikta/server/uploads || true
     git pull https://github.com/samruddhibhiwgade/website-innvikta.git main
     
-    # Restore the database file
+    # Restore the database files
     cp /home/platform/public_html/case-studies.json.bak content/case-studies.json || true
+    cp /home/platform/public_html/platform-updates.json.bak content/platform-updates.json || true
+    cp /home/platform/public_html/newsletters.json.bak content/newsletters.json || true
     
     # Run the build
     . ~/.nvm/nvm.sh
