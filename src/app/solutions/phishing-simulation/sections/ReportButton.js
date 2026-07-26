@@ -75,7 +75,7 @@ export default function ReportButtonSection() {
             <img 
               alt="Phishing Alert Button Mockup" 
               loading="lazy" 
-              src="/images/phish-report-alert.png" 
+              src="/images/Phish-report-alert.png" 
               style={{ width: "100%", height: "auto", display: "block", borderRadius: "1rem" }} 
             />
           </div>
