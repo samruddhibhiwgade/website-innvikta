@@ -17,6 +17,16 @@ import "../../../styles/insat.scss";
 
 const CATEGORIES = ["All Categories", "Insights", "Threat Defense", "Compliance"];
 
+function getExcerpt(text, length = 160) {
+  if (!text) return "";
+  // Strip XML/HTML tags like <FAQ> or <Accordion>
+  let clean = text.replace(/<[^>]*>/g, "");
+  // Replace multiple spaces/newlines
+  clean = clean.replace(/\s+/g, " ").trim();
+  if (clean.length <= length) return clean;
+  return clean.substring(0, length) + "...";
+}
+
 export default function WeeklyNewsletterPage() {
   const [newsletters, setNewsletters] = useState([]);
   const [activeCategory, setActiveCategory] = useState("All Categories");
@@ -198,7 +208,7 @@ export default function WeeklyNewsletterPage() {
 
                     {/* Description */}
                     <p className="text-sm text-slate-600 font-normal leading-relaxed mb-6">
-                      {edition.description}
+                      {getExcerpt(edition.description)}
                     </p>
                   </div>
 

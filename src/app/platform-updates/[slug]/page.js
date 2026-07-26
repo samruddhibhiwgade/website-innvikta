@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { marked } from "marked";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { FiArrowLeft, FiCalendar, FiTag, FiClock, FiShare2, FiCheckCircle, FiInfo } from "react-icons/fi";
@@ -195,7 +196,60 @@ export default function PlatformUpdateDetailPage() {
     }
   };
 
-  const currentUpdate = updatesData[slug];
+  const [updatesList, setUpdatesList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/platform-updates", { cache: "no-store" })
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setUpdatesList(data);
+        }
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching updates list", err);
+        setLoading(false);
+      });
+  }, []);
+
+  // 1. First, check if it's one of the hardcoded updates
+  let currentUpdate = updatesData[slug];
+  
+  // 2. If not hardcoded, check if we have it in our fetched list
+  if (!currentUpdate && !loading) {
+    const dbUpdate = updatesList.find(item => item.slug === slug);
+    if (dbUpdate) {
+      currentUpdate = {
+        slug: dbUpdate.slug,
+        category: dbUpdate.category || "PRODUCT",
+        date: dbUpdate.date || "",
+        readTime: "3 min read",
+        version: "v2.6.0",
+        impact: "Medium",
+        title: dbUpdate.title,
+        desc: dbUpdate.desc,
+        image: dbUpdate.image || "/images/platform-learning.png",
+        graphicText: dbUpdate.graphicText || "PLATFORM UPDATE",
+        content: (
+          <section 
+            className="content text-left text-justify prose prose-slate max-w-none text-[#334155] leading-relaxed" 
+            dangerouslySetInnerHTML={{ __html: marked.parse(dbUpdate.desc || "") }}
+          />
+        )
+      };
+    }
+  }
+
+  if (loading && !updatesData[slug]) {
+    return (
+      <div className="min-h-screen bg-white flex flex-col items-center justify-center text-slate-800" style={{ paddingTop: "8rem" }}>
+        <div className="w-12 h-12 border-4 border-[#f15a24] border-t-transparent rounded-full animate-spin mb-4" />
+        <span className="text-slate-500 font-bold text-sm">Loading Platform Update...</span>
+      </div>
+    );
+  }
 
   if (!currentUpdate) {
     return (
@@ -209,8 +263,19 @@ export default function PlatformUpdateDetailPage() {
     );
   }
 
-  // Get other updates list
-  const otherUpdates = Object.values(updatesData).filter(item => item.slug !== slug);
+  // Get other updates list (combine hardcoded + dynamic)
+  const mergedUpdates = [...Object.values(updatesData)];
+  updatesList.forEach(dbItem => {
+    if (!mergedUpdates.some(x => x.slug === dbItem.slug)) {
+      mergedUpdates.push({
+        slug: dbItem.slug,
+        title: dbItem.title,
+        category: dbItem.category || "PRODUCT",
+        date: dbItem.date || "",
+      });
+    }
+  });
+  const otherUpdates = mergedUpdates.filter(item => item.slug !== slug).slice(0, 3);
 
   return (
     <GSAPWrapper>

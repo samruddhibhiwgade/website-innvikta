@@ -7,6 +7,16 @@ import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
 
+function getExcerpt(text, length = 160) {
+  if (!text) return "";
+  // Strip XML/HTML tags like <FAQ> or <Accordion>
+  let clean = text.replace(/<[^>]*>/g, "");
+  // Replace multiple spaces/newlines
+  clean = clean.replace(/\s+/g, " ").trim();
+  if (clean.length <= length) return clean;
+  return clean.substring(0, length) + "...";
+}
+
 export default function PlatformUpdatesPage() {
   const [updatesList, setUpdatesList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -169,7 +179,7 @@ export default function PlatformUpdatesPage() {
                       </Link>
                     </h3>
                     <p className="text-16-content leading-relaxed text-slate-600">
-                      {update.desc}
+                      {getExcerpt(update.desc)}
                     </p>
                   </div>
 
