@@ -26,6 +26,7 @@ if ($method === 'GET') {
                 ],
                 'date' => $blog['published_at'] ? date('c', strtotime($blog['published_at'])) : null,
                 'draft' => (bool)$blog['draft'],
+                'archived' => (bool)($blog['archived'] ?? false),
                 'categories' => $categories,
                 'metaDescription' => $blog['meta_description'] ?: ""
             ],
@@ -64,15 +65,16 @@ if ($method === 'POST') {
 
     $authorName = !empty($data['authorName']) ? $data['authorName'] : 'Admin';
     $image = !empty($data['image']) ? $data['image'] : '/images/blog/01.jpg';
-    $draft = isset($data['draft']) ? (int)$data['draft'] : 0;
+    $draft = isset($data['draft']) ? (int)$data['draft'] : (isset($data['frontmatter']['draft']) ? (int)$data['frontmatter']['draft'] : 0);
+    $archived = isset($data['archived']) ? (int)$data['archived'] : (isset($data['frontmatter']['archived']) ? (int)$data['frontmatter']['archived'] : 0);
     $metaDescription = $data['metaDescription'] ?? '';
     
     $date = !empty($data['date']) ? $data['date'] : date('Y-m-d H:i:s');
     $publishedAt = date('Y-m-d H:i:s', strtotime($date));
 
     $stmt = $db->prepare("
-        INSERT INTO blogs (filename, title, content, categories, author_name, image, draft, meta_description, published_at)
-        VALUES (:filename, :title, :content, :categories, :author_name, :image, :draft, :meta_description, :published_at)
+        INSERT INTO blogs (filename, title, content, categories, author_name, image, draft, archived, meta_description, published_at)
+        VALUES (:filename, :title, :content, :categories, :author_name, :image, :draft, :archived, :meta_description, :published_at)
         ON DUPLICATE KEY UPDATE 
             title = VALUES(title),
             content = VALUES(content),
@@ -80,6 +82,7 @@ if ($method === 'POST') {
             author_name = VALUES(author_name),
             image = VALUES(image),
             draft = VALUES(draft),
+            archived = VALUES(archived),
             meta_description = VALUES(meta_description),
             published_at = VALUES(published_at)
     ");
@@ -92,6 +95,7 @@ if ($method === 'POST') {
         ':author_name' => $authorName,
         ':image' => $image,
         ':draft' => $draft,
+        ':archived' => $archived,
         ':meta_description' => $metaDescription,
         ':published_at' => $publishedAt
     ]);

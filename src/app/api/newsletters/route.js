@@ -1,69 +1,45 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
 
-const dbPath = path.join(process.cwd(), "content/newsletters.json");
+const backendUrl = process.env.NEXT_PUBLIC_PHP_BACKEND_URL || "https://innvikta.co.in/Innvikta-Website/Cyberhelp_Innvikta/server";
 
 export async function GET() {
   try {
-    if (!fs.existsSync(dbPath)) {
-      fs.writeFileSync(dbPath, "[]", "utf-8");
-    }
-    const fileContent = fs.readFileSync(dbPath, "utf-8");
-    return NextResponse.json(JSON.parse(fileContent));
+    const res = await fetch(`${backendUrl}/cms_api.php?type=newsletters`, { next: { revalidate: 10 } });
+    if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
+    const data = await res.json();
+    return NextResponse.json(data);
   } catch (error) {
-    return NextResponse.json({ error: "Failed to read newsletter database" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to read newsletters: " + error.message }, { status: 500 });
   }
 }
 
 export async function POST(request) {
   try {
     const payload = await request.json();
-    if (!fs.existsSync(dbPath)) {
-      fs.writeFileSync(dbPath, "[]", "utf-8");
-    }
-    const fileContent = fs.readFileSync(dbPath, "utf-8");
-    const data = JSON.parse(fileContent);
-
-    let updatedItem = null;
-
-    if (payload.id) {
-      // Edit existing newsletter
-      const index = data.findIndex(item => item.id === payload.id);
-      if (index !== -1) {
-        data[index] = { ...data[index], ...payload };
-        updatedItem = data[index];
-      } else {
-        return NextResponse.json({ error: "Newsletter not found" }, { status: 404 });
-      }
-    } else {
-      // Create new newsletter
-      const newId = data.length > 0 ? Math.max(...data.map(d => d.id)) + 1 : 1;
-      const slug = payload.slug || payload.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-      updatedItem = {
-        ...payload,
-        id: newId,
-        slug
-      };
-      data.push(updatedItem);
-    }
-
-    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), "utf-8");
-
+    
+    // Save to DB via backend PHP API
+    const res = await fetch(`${backendUrl}/cms_api.php?type=newsletters`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
+    const data = await res.json();
+    
     // Check if we should broadcast emails to subscribers via PHP backend
     let mailStatus = null;
-    if (payload.mailSubscribers && updatedItem) {
+    if (payload.mailSubscribers) {
       try {
-        const backendUrl = process.env.NEXT_PUBLIC_PHP_BACKEND_URL || "https://innvikta.co.in/Innvikta-Website/Cyberhelp_Innvikta/server";
+        const slug = payload.slug || payload.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
         const mailRes = await fetch(`${backendUrl}/newsletter_api.php`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             action: "broadcast",
-            title: updatedItem.title,
-            description: updatedItem.description,
-            slug: updatedItem.slug,
-            content: updatedItem.content
+            title: payload.title,
+            description: payload.description,
+            slug: slug,
+            content: payload.content
           })
         });
         if (mailRes.ok) {
@@ -75,32 +51,24 @@ export async function POST(request) {
         mailStatus = { success: false, error: mailErr.message };
       }
     }
-
+    
     return NextResponse.json({ success: true, data, mailStatus });
   } catch (error) {
-    return NextResponse.json({ error: "Failed to update newsletter database: " + error.message }, { status: 500 });
+    return NextResponse.json({ error: "Failed to update newsletters: " + error.message }, { status: 500 });
   }
 }
 
 export async function DELETE(request) {
   try {
     const { searchParams } = new URL(request.url);
-    const id = parseInt(searchParams.get("id"));
-    if (!id) {
-      return NextResponse.json({ error: "Missing ID parameter" }, { status: 400 });
-    }
-
-    if (!fs.existsSync(dbPath)) {
-      return NextResponse.json({ success: true, data: [] });
-    }
-
-    const fileContent = fs.readFileSync(dbPath, "utf-8");
-    const data = JSON.parse(fileContent);
-
-    const updatedData = data.filter(item => item.id !== id);
-    fs.writeFileSync(dbPath, JSON.stringify(updatedData, null, 2), "utf-8");
-    return NextResponse.json({ success: true, data: updatedData });
+    const id = searchParams.get("id");
+    const res = await fetch(`${backendUrl}/cms_api.php?type=newsletters&id=${id}`, {
+      method: "DELETE"
+    });
+    if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
+    const data = await res.json();
+    return NextResponse.json(data);
   } catch (error) {
-    return NextResponse.json({ error: "Failed to delete newsletter from database" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to delete newsletter: " + error.message }, { status: 500 });
   }
 }
