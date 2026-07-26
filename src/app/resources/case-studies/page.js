@@ -111,39 +111,64 @@ export default function CaseStudies() {
               >
                 <div>
                   {/* Square Image container with Overlay */}
-                  <Link 
-                    href={study.pdfUrl ? study.pdfUrl : `/resources/case-studies/${study.slug || ""}`} 
-                    onClick={(e) => {
-                      if (study.pdfUrl) {
+                  {study.pdfUrl ? (
+                    <a 
+                      href={study.pdfUrl} 
+                      onClick={(e) => {
                         e.preventDefault();
                         window.open(study.pdfUrl, '_blank', 'width=1000,height=900,noopener,noreferrer');
-                      }
-                    }}
-                    className="block"
-                  >
-                    <div className="relative w-full aspect-square rounded-[2rem] overflow-hidden shadow-sm cursor-pointer">
-                      <img 
-                        src={study.image} 
-                        alt={study.title} 
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                      
-                      {/* Top Overlay: CASE STUDY */}
-                      <div className="absolute top-6 left-6 flex items-center">
-                        <span className="border-l-2 border-[#f15a24] pl-2 text-[11px] font-black uppercase tracking-wider text-white">
-                          Case Study
-                        </span>
-                      </div>
+                      }}
+                      className="block"
+                    >
+                      <div className="relative w-full aspect-square rounded-[2rem] overflow-hidden shadow-sm cursor-pointer">
+                        <img 
+                          src={study.image} 
+                          alt={study.title} 
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                        
+                        {/* Top Overlay: CASE STUDY */}
+                        <div className="absolute top-6 left-6 flex items-center">
+                          <span className="border-l-2 border-[#f15a24] pl-2 text-[11px] font-black uppercase tracking-wider text-white">
+                            Case Study
+                          </span>
+                        </div>
 
-                      {/* Bottom Overlay: Title */}
-                      <div className="absolute bottom-6 left-6 right-6">
-                        <h4 className="text-lg md:text-xl font-bold font-secondary text-white leading-tight">
-                          {study.imageTitle}
-                        </h4>
+                        {/* Bottom Overlay: Title */}
+                        <div className="absolute bottom-6 left-6 right-6">
+                          <h4 className="text-lg md:text-xl font-bold font-secondary text-white leading-tight">
+                            {study.imageTitle}
+                          </h4>
+                        </div>
                       </div>
-                    </div>
-                  </Link>
+                    </a>
+                  ) : (
+                    <Link href={`/resources/case-studies/${study.slug || ""}`} className="block">
+                      <div className="relative w-full aspect-square rounded-[2rem] overflow-hidden shadow-sm cursor-pointer">
+                        <img 
+                          src={study.image} 
+                          alt={study.title} 
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                        
+                        {/* Top Overlay: CASE STUDY */}
+                        <div className="absolute top-6 left-6 flex items-center">
+                          <span className="border-l-2 border-[#f15a24] pl-2 text-[11px] font-black uppercase tracking-wider text-white">
+                            Case Study
+                          </span>
+                        </div>
+
+                        {/* Bottom Overlay: Title */}
+                        <div className="absolute bottom-6 left-6 right-6">
+                          <h4 className="text-lg md:text-xl font-bold font-secondary text-white leading-tight">
+                            {study.imageTitle}
+                          </h4>
+                        </div>
+                      </div>
+                    </Link>
+                  )}
 
                   {/* Content under the image */}
                   <div className="pt-6 pb-4 px-2">
@@ -153,24 +178,34 @@ export default function CaseStudies() {
                     </span>
 
                     {/* Title */}
-                    <Link 
-                      href={study.pdfUrl ? study.pdfUrl : `/resources/case-studies/${study.slug || ""}`} 
-                      onClick={(e) => {
-                        if (study.pdfUrl) {
+                    {study.pdfUrl ? (
+                      <a 
+                        href={study.pdfUrl} 
+                        onClick={(e) => {
                           e.preventDefault();
                           window.open(study.pdfUrl, '_blank', 'width=1000,height=900,noopener,noreferrer');
-                        }
-                      }}
-                      className="block"
-                    >
-                      <h3 className={`text-2xl font-black mb-3 leading-snug tracking-tight transition-colors cursor-pointer ${
-                        study.industry === "Healthcare" 
-                          ? "text-[#f15a24]" 
-                          : "text-slate-900 group-hover:text-[#f15a24]"
-                      }`}>
-                        {study.subtitle}
-                      </h3>
-                    </Link>
+                        }}
+                        className="block"
+                      >
+                        <h3 className={`text-2xl font-black mb-3 leading-snug tracking-tight transition-colors cursor-pointer ${
+                          study.industry === "Healthcare" 
+                            ? "text-[#f15a24]" 
+                            : "text-slate-900 group-hover:text-[#f15a24]"
+                        }`}>
+                          {study.subtitle}
+                        </h3>
+                      </a>
+                    ) : (
+                      <Link href={`/resources/case-studies/${study.slug || ""}`} className="block">
+                        <h3 className={`text-2xl font-black mb-3 leading-snug tracking-tight transition-colors cursor-pointer ${
+                          study.industry === "Healthcare" 
+                            ? "text-[#f15a24]" 
+                            : "text-slate-900 group-hover:text-[#f15a24]"
+                        }`}>
+                          {study.subtitle}
+                        </h3>
+                      </Link>
+                    )}
 
                     {/* Description */}
                     <p className="text-sm text-slate-500 font-normal leading-relaxed mb-6">
@@ -181,18 +216,25 @@ export default function CaseStudies() {
 
                 {/* Read More Button */}
                 <div className="px-2 pb-6">
-                  <Link 
-                    href={study.pdfUrl ? study.pdfUrl : `/resources/case-studies/${study.slug || ""}`} 
-                    onClick={(e) => {
-                      if (study.pdfUrl) {
+                  {study.pdfUrl ? (
+                    <a 
+                      href={study.pdfUrl} 
+                      onClick={(e) => {
                         e.preventDefault();
                         window.open(study.pdfUrl, '_blank', 'width=1000,height=900,noopener,noreferrer');
-                      }
-                    }}
-                    className="bg-[#f15a24] hover:bg-orange-600 !text-white px-5 py-2.5 rounded-lg transition-all duration-300 inline-flex items-center gap-1 whitespace-nowrap font-bold text-sm shadow-md shadow-orange-500/10 cursor-pointer"
-                  >
-                    {study.pdfUrl ? "View PDF" : "Read More"} <FiArrowRight className="text-xs" />
-                  </Link>
+                      }}
+                      className="bg-[#f15a24] hover:bg-orange-600 !text-white px-5 py-2.5 rounded-lg transition-all duration-300 inline-flex items-center gap-1 whitespace-nowrap font-bold text-sm shadow-md shadow-orange-500/10 cursor-pointer"
+                    >
+                      View PDF <FiArrowRight className="text-xs" />
+                    </a>
+                  ) : (
+                    <Link 
+                      href={`/resources/case-studies/${study.slug || ""}`} 
+                      className="bg-[#f15a24] hover:bg-orange-600 !text-white px-5 py-2.5 rounded-lg transition-all duration-300 inline-flex items-center gap-1 whitespace-nowrap font-bold text-sm shadow-md shadow-orange-500/10 cursor-pointer"
+                    >
+                      Read More <FiArrowRight className="text-xs" />
+                    </Link>
+                  )}
                 </div>
               </div>
             ))}
