@@ -25,6 +25,7 @@ conn.on('ready', () => {
     # Run the build
     . ~/.nvm/nvm.sh
     echo "8g2A0&jU5h" | sudo -S rm -rf .next
+    echo "8g2A0&jU5h" | sudo -S chown -R platform:platform /home/platform/public_html/Innvikta-Website
     npm run build
     rm -rf /home/platform/public_html/website/_next
     mkdir -p /home/platform/public_html/website/_next
