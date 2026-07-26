@@ -67,7 +67,7 @@ export default function DomainSecurityAnalyzer() {
   return (
     <GSAPWrapper>
       <SeoMeta title="Free Domain Security & SPF/DMARC Analyzer | Innvikta" description="Analyze your domain's SPF, DKIM, and DMARC settings to prevent email spoofing and phishing attacks." />
-      <div className="insat-page" ref={heroRef}>
+      <div className="insat-page insat-page-no-reset" ref={heroRef}>
         <div className="main-content">
           <HeroSection 
             domain={domain}
@@ -133,20 +133,6 @@ export default function DomainSecurityAnalyzer() {
         .insat-page h5,
         .insat-page h6 {
             font-weight: 400 !important;
-        }
-
-        /* Overrides for buttons and inputs that might be reset globally */
-        .insat-page button.btn-primary {
-            background-color: #f15a24 !important;
-            color: #ffffff !important;
-            border: none !important;
-        }
-        .insat-page button.btn-primary:hover {
-            background-color: #d54e1c !important;
-        }
-        .insat-page a[href="/book-demo"] {
-            padding-left: 1.25rem !important;
-            padding-right: 1.25rem !important;
         }
       `}</style>
     </GSAPWrapper>

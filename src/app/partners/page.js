@@ -244,7 +244,7 @@ const PartnersPage = () => {
   return (
     <GSAPWrapper>
       <SeoMeta title="Innvikta Partners Program | MSP & Enterprise Partners" description="Partner with Innvikta to offer leading-edge security awareness training, phishing simulations, and human risk management." />
-      <div ref={containerRef} className="insat-page min-h-screen bg-[#fafafa]">
+      <div ref={containerRef} className="insat-page insat-page-no-reset min-h-screen bg-[#fafafa]">
         
         <section className="partner-hero-section py-20 md:py-28 border-b border-slate-200 relative overflow-hidden">
           
@@ -718,28 +718,7 @@ const PartnersPage = () => {
               }
           }
 
-          /* Restore form layout and inputs by overriding wildcard resets */
-          .insat-page input,
-          .insat-page select,
-          .insat-page textarea {
-              padding: 0.875rem 1.25rem !important; /* matches px-5 py-3.5 */
-              box-sizing: border-box !important;
-          }
-          .insat-page label {
-              margin-bottom: 0.5rem !important;
-              display: inline-block !important;
-          }
-          .insat-page .space-y-5 > * + * {
-              margin-top: 1.25rem !important;
-          }
-          .insat-page .grid-cols-1 > * {
-              margin-top: 0 !important;
-          }
-          .insat-page .gap-5 {
-              gap: 1.25rem !important;
-          }
-
-          .partner-hero-section {
+           .partner-hero-section {
               background-color: #F6F5F8 !important;
               background-image: none !important;
           }
@@ -751,6 +730,15 @@ const PartnersPage = () => {
                   background-position: right center !important;
                   background-repeat: no-repeat !important;
               }
+          }
+
+          /* Restore submit button styling on the page from global resets */
+          .insat-page button[type="submit"] {
+              background-color: #f15a24 !important;
+              color: #ffffff !important;
+          }
+          .insat-page button[type="submit"]:hover {
+              background-color: #d54e1c !important;
           }
         `}</style>
       </div>

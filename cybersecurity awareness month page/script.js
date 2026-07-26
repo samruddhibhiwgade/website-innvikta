@@ -222,18 +222,41 @@
     btnSpinner.style.display = 'inline';
     submitBtn.disabled = true;
 
-    // Simulate network request
-    await new Promise(r => setTimeout(r, 1600));
+    // Retrieve input values
+    const fn = fields.firstName.el.value.trim();
+    const ln = fields.lastName.el.value.trim();
+    const em = fields.workEmail.el.value.trim();
+    const co = fields.company.el.value.trim();
 
-    // Show success
-    successScreen.classList.add('is-active');
-    successScreen.focus?.();
-
-    // Reset
-    form.reset();
-    btnLabel.style.display  = 'inline';
-    btnSpinner.style.display = 'none';
-    submitBtn.disabled = false;
+    try {
+      const res = await fetch("/api/forms", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          form_type: "Cybersecurity Awareness Month Kit",
+          name: `${fn} ${ln}`,
+          email: em,
+          company: co
+        })
+      });
+      
+      const data = await res.json();
+      if (data.success) {
+        // Show success
+        successScreen.classList.add('is-active');
+        successScreen.focus?.();
+        form.reset();
+      } else {
+        alert("Submission failed: " + (data.error || "Please try again."));
+      }
+    } catch (err) {
+      console.error(err);
+      alert("An error occurred. Please try again later.");
+    } finally {
+      btnLabel.style.display  = 'inline';
+      btnSpinner.style.display = 'none';
+      submitBtn.disabled = false;
+    }
   });
 })();
 

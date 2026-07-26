@@ -79,7 +79,7 @@
     scrollbar-gutter: stable;
     -webkit-font-smoothing: antialiased;
 
-    * {
+    &:not(.insat-page-no-reset) * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
