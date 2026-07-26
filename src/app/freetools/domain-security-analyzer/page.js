@@ -116,6 +116,39 @@ export default function DomainSecurityAnalyzer() {
           <FinalCtaSection />
         </div>
       </div>
+
+      <style jsx global>{`
+        .insat-page {
+            --font-heading: var(--font-secondary), sans-serif;
+            --font-body: var(--font-secondary), sans-serif;
+            --color-forest-70: rgba(31, 41, 55, 0.7);
+            --color-black-text: #1F2937;
+            font-family: var(--font-body);
+        }
+        
+        .insat-page h1,
+        .insat-page h2,
+        .insat-page h3,
+        .insat-page h4,
+        .insat-page h5,
+        .insat-page h6 {
+            font-weight: 400 !important;
+        }
+
+        /* Overrides for buttons and inputs that might be reset globally */
+        .insat-page button.btn-primary {
+            background-color: #f15a24 !important;
+            color: #ffffff !important;
+            border: none !important;
+        }
+        .insat-page button.btn-primary:hover {
+            background-color: #d54e1c !important;
+        }
+        .insat-page a[href="/book-demo"] {
+            padding-left: 1.25rem !important;
+            padding-right: 1.25rem !important;
+        }
+      `}</style>
     </GSAPWrapper>
   );
 }

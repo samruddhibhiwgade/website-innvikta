@@ -8,6 +8,7 @@ import { gsap } from "@lib/gsap";
 
 import HeroSection from "./sections/Hero";
 import BentoGridSection from "./sections/BentoGrid";
+import DpdpaBanner from "./sections/DpdpaBanner";
 import JourneySection from "./sections/Journey";
 import RoleBasedSection from "./sections/RoleBased";
 import RefresherSection from "./sections/Refresher";
@@ -120,6 +121,7 @@ const ComplianceTrainingPage = () => {
         <div className="main-content">
           <HeroSection ref={heroRef} />
           <BentoGridSection />
+          <DpdpaBanner />
           <JourneySection ref={journeyRef} />
           <RoleBasedSection />
           <RefresherSection />

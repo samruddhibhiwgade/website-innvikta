@@ -702,7 +702,7 @@ export default function DpdpAtAGlancePage() {
                           }}
                         >
                           <item.icon size={26} strokeWidth={1.2} className="text-[#f15a24] mb-2 shrink-0" />
-                          <span className="text-slate-600 font-bold text-center leading-tight" style={{ fontSize: "10.5px", margin: 0, fontFamily: "var(--font-primary)" }}>
+                          <span className="text-slate-600 font-medium text-center leading-tight" style={{ fontSize: "10.5px", margin: 0, fontFamily: "var(--font-primary)" }}>
                             {item.label}
                           </span>
                         </div>
@@ -722,7 +722,7 @@ export default function DpdpAtAGlancePage() {
                   ].map((val, idx) => (
                     <div key={idx} className="inline-flex items-center gap-2">
                       <CheckCircle2 size={16} strokeWidth={1.5} className="text-[#f15a24] shrink-0" />
-                      <span className="font-bold text-slate-700 leading-none" style={{ margin: 0, padding: 0, position: "relative", top: "-1px" }}>{val}</span>
+                      <span className="font-medium text-slate-700 leading-none" style={{ margin: 0, padding: 0, position: "relative", top: "-1px" }}>{val}</span>
                     </div>
                   ))}
                 </div>

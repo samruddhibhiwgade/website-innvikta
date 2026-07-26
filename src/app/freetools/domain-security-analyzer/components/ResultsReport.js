@@ -123,7 +123,7 @@ export default function ResultsReport({
             </div>
 
             {/* Right Detailed Tabs Panel */}
-            <div className="stats-cards-block animate from-right" style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+            <div className="analyzer-cards-block animate from-right" style={{ display: "flex", flexDirection: "column", gap: "1.5rem", width: "100%", maxWidth: "100%", minWidth: 0 }}>
               
               {/* Tabs Bar */}
               <div className="analyzer-tabs-bar">

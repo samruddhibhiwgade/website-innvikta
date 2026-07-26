@@ -244,23 +244,23 @@ const PartnersPage = () => {
   return (
     <GSAPWrapper>
       <SeoMeta title="Innvikta Partners Program | MSP & Enterprise Partners" description="Partner with Innvikta to offer leading-edge security awareness training, phishing simulations, and human risk management." />
-      <div ref={containerRef} className="min-h-screen bg-[#fafafa]">
+      <div ref={containerRef} className="insat-page min-h-screen bg-[#fafafa]">
         
         <section className="partner-hero-section py-20 md:py-28 border-b border-slate-200 relative overflow-hidden">
           
           <div className="container px-6 md:px-12 lg:px-24">
             <div className="max-w-3xl hero-content">
-              <span className="text-subheading text-[#1F2937B3] !mb-5 inline-block">INNVIKTA PARTNER NETWORK</span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight leading-tight text-slate-900 font-secondary mb-6">
-                Partner With Innvikta<br />
-                to Build <span className="text-[#f15a24]">Safer Workforces</span>
+              <span className="text-subheading">INNVIKTA PARTNER NETWORK</span>
+              <h1 className="text-96-heading hero-title-custom">
+                Partner With Innvikta to<br />
+                Build <span className="text-[#f15a24]">Safer Workforces</span>
               </h1>
-              <p className="mt-6 text-lg md:text-xl text-slate-600 mb-10 max-w-2xl leading-relaxed font-medium">
+              <p className="text-20-content hero-paragraph max-w-2xl">
                 Join us in helping organizations make security awareness<br className="hidden md:inline" />
                 practical, engaging, measurable, and ready for<br className="hidden md:inline" />
                 real-world risk.
               </p>
-              <div className="flex flex-wrap items-center gap-4">
+              <div className="hero-actions-row">
                 <a 
                   href="#form" 
                   onClick={scrollToForm}
@@ -290,8 +290,8 @@ const PartnersPage = () => {
               
               {/* Left Column: Heading and Description */}
               <div className="lg:col-span-5">
-                <span className="text-subheading text-[#1F2937B3] !mb-5 inline-block">PARTNER WITH INNVIKTA</span>
-                <h2 className="text-3xl md:text-5xl lg:text-[3.25rem] font-secondary font-medium leading-[1.1] tracking-[-0.02em] text-slate-900 mb-5">
+                <span className="text-subheading">PARTNER WITH INNVIKTA</span>
+                <h2 className="text-52-heading mb-5">
                   Grow With a Modern <span className="text-[#f15a24]">Human Risk Platform</span>
                 </h2>
                 <p className="text-20-content text-slate-600 leading-relaxed">
@@ -315,9 +315,9 @@ const PartnersPage = () => {
                             <div className="w-10 h-10 rounded-xl bg-orange-50/50 text-[#f15a24] flex items-center justify-center group-hover:bg-[#f15a24] group-hover:!text-white group-hover:scale-110 transition-all duration-300 shadow-sm shrink-0">
                               <Icon className="text-lg" />
                             </div>
-                            <h3 className="text-xl md:text-2xl font-medium text-dark font-secondary group-hover:text-[#f15a24] transition-colors duration-300 leading-snug">{benefit.title}</h3>
+                            <h3 className="text-22-heading text-dark group-hover:text-[#f15a24] transition-colors duration-300">{benefit.title}</h3>
                           </div>
-                          <p className="text-slate-500 text-base md:text-lg leading-relaxed">{benefit.desc}</p>
+                          <p className="text-16-content text-slate-500 leading-relaxed">{benefit.desc}</p>
                         </div>
                       </div>
                     );
@@ -333,8 +333,8 @@ const PartnersPage = () => {
         <section id="reseller" className="py-20 bg-white border-b border-slate-100">
           <div className="container px-6 md:px-12 lg:px-24">
             <div className="max-w-3xl mx-auto text-center mb-16">
-              <span className="text-subheading text-[#1F2937B3] !mb-5 inline-block">CHANNEL & RESELLER PARTNERS</span>
-              <h2 className="text-3xl md:text-5xl lg:text-[3.25rem] font-secondary font-medium leading-[1.1] tracking-[-0.02em] text-slate-900 mb-5">
+              <span className="text-subheading">CHANNEL & RESELLER PARTNERS</span>
+              <h2 className="text-52-heading mb-5">
                 Offer Innvikta to Clients Who Need <span className="text-[#f15a24]">Better Awareness Outcomes</span>
               </h2>
               <p className="text-20-content text-slate-600 leading-relaxed">
@@ -350,8 +350,8 @@ const PartnersPage = () => {
                     <div className="text-3xl text-[#f15a24] mb-5 flex justify-center">
                       <Icon />
                     </div>
-                    <h3 className="font-medium text-dark text-xl md:text-2xl mb-3 leading-snug font-secondary min-h-[56px]">{partner.title}</h3>
-                    <p className="text-slate-500 text-base md:text-lg leading-relaxed">{partner.desc}</p>
+                    <h3 className="text-22-heading text-dark mb-3 min-h-[56px]">{partner.title}</h3>
+                    <p className="text-16-content text-slate-500 leading-relaxed">{partner.desc}</p>
                   </div>
                 );
               })}
@@ -365,8 +365,8 @@ const PartnersPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               
               <div>
-                <span className="text-subheading text-[#1F2937B3] !mb-5 inline-block">PARTNER SUPPORT</span>
-                <h2 className="text-3xl md:text-5xl lg:text-[3.25rem] font-secondary font-medium leading-[1.1] tracking-[-0.02em] text-slate-900 mb-6">
+                <span className="text-subheading">PARTNER SUPPORT</span>
+                <h2 className="text-52-heading mb-6">
                   Support That Helps You <span className="text-[#f15a24]">Sell and Deliver Better</span>
                 </h2>
                 <p className="text-20-content text-slate-600 mb-10 leading-relaxed">
@@ -379,7 +379,7 @@ const PartnersPage = () => {
                     return (
                       <div key={i} className="flex items-center gap-3.5">
                         <Icon className="text-2xl text-[#f15a24] shrink-0" />
-                        <span className="text-base md:text-lg font-medium text-slate-700">{support.text}</span>
+                        <span className="text-16-content text-slate-700">{support.text}</span>
                       </div>
                     );
                   })}
@@ -410,8 +410,8 @@ const PartnersPage = () => {
                           {step.step}
                         </div>
                         <div className={`transition-all duration-500 ${isActive ? 'translate-x-2' : ''}`}>
-                          <h4 className={`font-medium font-secondary text-xl md:text-2xl mb-1.5 transition-colors duration-500 ${isActive ? 'text-[#f15a24]' : 'text-slate-700'}`}>{step.title}</h4>
-                          <p className={`text-slate-500 text-base md:text-lg leading-relaxed transition-all duration-500 ${isActive ? 'text-slate-700' : ''}`}>{step.desc}</p>
+                          <h4 className={`text-22-heading mb-1.5 transition-colors duration-500 ${isActive ? 'text-[#f15a24]' : 'text-slate-700'}`}>{step.title}</h4>
+                          <p className={`text-16-content leading-relaxed transition-all duration-500 ${isActive ? 'text-slate-700' : 'text-slate-500'}`}>{step.desc}</p>
                         </div>
                       </div>
                     );
@@ -434,10 +434,10 @@ const PartnersPage = () => {
                   <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
                   
                   <div className="relative z-10">
-                    <h2 className="font-secondary font-medium tracking-tight text-3xl md:text-4xl text-white mb-6 leading-tight">
+                    <h2 className="text-32-heading text-white mb-6">
                       Become an Innvikta Partner
                     </h2>
-                    <p className="text-white/90 text-sm md:text-base leading-relaxed mb-8">
+                    <p className="text-16-content text-white/90 leading-relaxed mb-8">
                       Tell us a little about your organization and how you would like to partner with us.
                     </p>
                   </div>
@@ -624,6 +624,121 @@ const PartnersPage = () => {
           message="Thank you for reaching out. Our partnerships team will review your details and contact you shortly." 
         />
         <style jsx global>{`
+          .insat-page {
+              --font-heading: var(--font-secondary), sans-serif;
+              --font-body: var(--font-secondary), sans-serif;
+              --color-forest-70: rgba(31, 41, 55, 0.7);
+              --color-black-text: #1F2937;
+              font-family: var(--font-body);
+          }
+          
+          .insat-page h1,
+          .insat-page h2,
+          .insat-page h3,
+          .insat-page h4,
+          .insat-page h5,
+          .insat-page h6 {
+              font-weight: 400 !important;
+          }
+
+          /* Force Typography Class Sizes to override global styles */
+          .insat-page .text-96-heading {
+              font-size: clamp(2.5rem, 6vw, 5.5rem) !important;
+              line-height: 0.95 !important;
+              font-weight: 400 !important;
+              letter-spacing: -0.02em !important;
+              font-family: var(--font-heading) !important;
+          }
+
+          .insat-page .hero-title-custom {
+              font-size: clamp(2.9rem, 4.8vw, 4.6rem) !important;
+              line-height: 1.0 !important;
+              margin-bottom: 1.25rem !important;
+              font-weight: 400 !important;
+              letter-spacing: -0.02em !important;
+          }
+
+          .insat-page .text-52-heading {
+              font-size: clamp(2rem, 4vw, 3.25rem) !important;
+              line-height: 1.1 !important;
+              font-weight: 400 !important;
+              letter-spacing: -0.02em !important;
+              font-family: var(--font-heading) !important;
+          }
+
+          .insat-page .text-32-heading {
+              font-size: clamp(1.5rem, 2.5vw, 2rem) !important;
+              line-height: 1.2 !important;
+              font-weight: 400 !important;
+              letter-spacing: -0.01em !important;
+              font-family: var(--font-heading) !important;
+          }
+
+          .insat-page .text-22-heading {
+              font-size: clamp(1.2rem, 1.5vw, 1.375rem) !important;
+              line-height: 1.3 !important;
+              font-weight: 400 !important;
+              font-family: var(--font-heading) !important;
+          }
+
+          .insat-page .text-subheading {
+              font-size: 1.125rem !important;
+              font-weight: 600 !important;
+              text-transform: uppercase !important;
+              letter-spacing: 0.06em !important;
+              color: var(--color-forest-70) !important;
+              margin-bottom: 1.25rem !important;
+              display: inline-block !important;
+          }
+
+          .insat-page .text-20-content {
+              font-size: clamp(1.2rem, 1.65vw, 1.35rem) !important;
+              line-height: 1.5 !important;
+              opacity: 0.8 !important;
+          }
+
+          .insat-page .text-16-content {
+              font-size: 1.125rem !important;
+              line-height: 1.5 !important;
+          }
+
+          .insat-page .hero-actions-row {
+              margin-top: 1.25rem !important;
+              display: flex !important;
+              align-items: center !important;
+              justify-content: flex-start !important;
+              flex-wrap: wrap !important;
+              gap: 1.25rem !important;
+          }
+          @media (max-width: 767px) {
+              .insat-page .hero-actions-row {
+                  margin-top: 1.25rem !important;
+                  justify-content: flex-start !important;
+                  gap: 1rem !important;
+              }
+          }
+
+          /* Restore form layout and inputs by overriding wildcard resets */
+          .insat-page input,
+          .insat-page select,
+          .insat-page textarea {
+              padding: 0.875rem 1.25rem !important; /* matches px-5 py-3.5 */
+              box-sizing: border-box !important;
+          }
+          .insat-page label {
+              margin-bottom: 0.5rem !important;
+              display: inline-block !important;
+          }
+          .insat-page .space-y-5 > * + * {
+              margin-top: 1.25rem !important;
+          }
+          .insat-page .grid-cols-1 > * {
+              margin-top: 0 !important;
+          }
+          .insat-page .gap-5 {
+              gap: 1.25rem !important;
+          }
+
           .partner-hero-section {
               background-color: #F6F5F8 !important;
               background-image: none !important;
