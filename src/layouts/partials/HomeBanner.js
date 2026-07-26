@@ -198,7 +198,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
         <div className="row overflow-hidden rounded-2xl will-change-transform">
           <div className="col-12">
             <div className="row relative justify-start pb-6 md:pb-10">
-              <div className="banner-content col-12 px-6 md:col-8 md:px-12 pb-0 pt-16 md:pt-36 text-left will-change-transform">
+              <div className="banner-content col-12 px-6 md:col-8 md:px-12 pb-0 pt-4 md:pt-20 text-left will-change-transform">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={isHookActive ? "gamified" : "original"}
