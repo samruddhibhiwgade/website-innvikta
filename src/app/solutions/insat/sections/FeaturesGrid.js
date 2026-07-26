@@ -13,7 +13,7 @@ export default function FeaturesGridSection() {
           
           <div className="feature-card animate">
             <div className="feature-visual">
-              <img alt="Security Awareness Training" loading="lazy" src="/insat/images/phishing-new.png" />
+              <img alt="Security Awareness Training" loading="lazy" src="/insat/images/Awareness_Training.png" />
             </div>
             <div className="feature-content">
               <h3 className="feature-title">Security Awareness Training</h3>
@@ -28,7 +28,7 @@ export default function FeaturesGridSection() {
           <div className="feature-card animate">
             <div className="feature-visual bg-grey-30">
               <img alt="Phishing simulations mockup" loading="lazy"
-                src="/insat/images/sat-new.png" />
+                src="/insat/images/Phiahsing_Simulation.png" />
             </div>
             <div className="feature-content">
               <h3 className="feature-title">Phishing Simulations</h3>
@@ -43,7 +43,7 @@ export default function FeaturesGridSection() {
           <div className="feature-card animate">
             <div className="feature-visual bg-aquamarine">
               <img alt="Microlearning modules mockup" loading="lazy"
-                src="/insat/images/microlearning-new.png" />
+                src="/insat/images/Micro_Learning.png" />
             </div>
             <div className="feature-content">
               <h3 className="feature-title">Microlearning</h3>
