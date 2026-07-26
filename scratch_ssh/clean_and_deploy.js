@@ -6,10 +6,17 @@ conn.on('ready', () => {
   const cmd = `
     # Clean the conflicting files and pull the code cleanly
     cd /home/platform/public_html/Innvikta-Website
+    
+    # Back up the database file
+    cp content/case-studies.json /home/platform/public_html/case-studies.json.bak || true
+    
     git stash || true
     git checkout -- . || true
     git clean -fd -e Cyberhelp_Innvikta/server/uploads || true
     git pull https://github.com/samruddhibhiwgade/website-innvikta.git main
+    
+    # Restore the database file
+    cp /home/platform/public_html/case-studies.json.bak content/case-studies.json || true
     
     # Run the build
     . ~/.nvm/nvm.sh

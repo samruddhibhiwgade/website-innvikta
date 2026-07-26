@@ -29,73 +29,501 @@ import {
 const INDUSTRIES = ["BFSI", "Healthcare", "Insurance", "IT & Services", "Manufacturing", "Government"];
 const CATEGORIES = ["Insights", "Threat Defense", "Compliance"];
 
-// Reusable Word-style Rich Text Editor Toolbar Component
-function ToolbarEditor({ value, onChange, placeholder, rows = 8 }) {
-  const ref = useRef(null);
+// HTML to Markdown converter
+const convertHtmlToMarkdown = (htmlString) => {
+  if (typeof window === "undefined") return htmlString;
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, "text/html");
+  const body = doc.body;
+
+  const traverse = (node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      return node.textContent;
+    }
+    if (node.nodeType !== Node.ELEMENT_NODE) {
+      return "";
+    }
+
+    let childrenContent = "";
+    node.childNodes.forEach((child) => {
+      childrenContent += traverse(child);
+    });
+
+    const tagName = node.tagName.toLowerCase();
+
+    switch (tagName) {
+      case "h1": return `\n# ${childrenContent.trim()}\n`;
+      case "h2": return `\n## ${childrenContent.trim()}\n`;
+      case "h3": return `\n### ${childrenContent.trim()}\n`;
+      case "h4": return `\n#### ${childrenContent.trim()}\n`;
+      case "h5": return `\n##### ${childrenContent.trim()}\n`;
+      case "h6": return `\n###### ${childrenContent.trim()}\n`;
+      case "p": return `\n${childrenContent.trim()}\n`;
+      case "br": return `\n`;
+      case "b":
+      case "strong":
+        return `**${childrenContent.trim()}**`;
+      case "i":
+      case "em":
+        return `*${childrenContent.trim()}*`;
+      case "a":
+        const href = node.getAttribute("href") || "#";
+        return `[${childrenContent.trim()}](${href})`;
+      case "li":
+        return `\n- ${childrenContent.trim()}`;
+      case "ul":
+        return `\n${childrenContent.trim()}\n`;
+      case "ol": {
+        let items = "";
+        let count = 1;
+        node.childNodes.forEach((child) => {
+          if (child.tagName && child.tagName.toLowerCase() === "li") {
+            items += `\n${count++}. ${traverse(child).replace(/^\n-\s*/, "").trim()}`;
+          }
+        });
+        return `\n${items}\n`;
+      }
+      case "table": {
+        let mdTable = "\n";
+        const rows = Array.from(node.querySelectorAll("tr"));
+        if (rows.length === 0) return "";
+        const headers = Array.from(rows[0].querySelectorAll("th, td")).map(el => el.textContent.trim());
+        mdTable += `| ${headers.join(" | ")} |\n`;
+        mdTable += `| ${headers.map(() => "---").join(" | ")} |\n`;
+        for (let i = 1; i < rows.length; i++) {
+          const cells = Array.from(rows[i].querySelectorAll("td, th")).map(el => el.textContent.trim());
+          mdTable += `| ${cells.join(" | ")} |\n`;
+        }
+        return mdTable + "\n";
+      }
+      default:
+        return childrenContent;
+    }
+  };
+
+  return traverse(body)
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+};
+
+// Upgraded Reusable Rich Text Editor Component
+function ToolbarEditor({ 
+  value, 
+  onChange, 
+  placeholder, 
+  rows = 8, 
+  onInsertImage, 
+  onInsertVideo, 
+  onInsertFaq, 
+  onInsertTakeaways,
+  textareaRef
+}) {
+  const localRef = useRef(null);
+  const activeRef = textareaRef || localRef;
 
   const applyFormatting = (syntax) => {
-    const textarea = ref.current;
+    const textarea = activeRef.current;
     if (!textarea) return;
 
     const startPos = textarea.selectionStart;
     const endPos = textarea.selectionEnd;
     const originalText = textarea.value;
-    const selectedText = originalText.substring(startPos, endPos) || "text";
+    const selectedText = originalText.substring(startPos, endPos) || "";
 
     let replacement = "";
     switch (syntax) {
-      case "bold": replacement = `**${selectedText}**`; break;
-      case "italic": replacement = `*${selectedText}*`; break;
-      case "h1": replacement = `\n# ${selectedText}\n`; break;
-      case "h2": replacement = `\n## ${selectedText}\n`; break;
-      case "h3": replacement = `\n### ${selectedText}\n`; break;
-      case "list": replacement = `\n- ${selectedText}`; break;
-      case "link": replacement = `[${selectedText}](url)`; break;
-      case "quote": replacement = `\n> ${selectedText}\n`; break;
-      case "table": replacement = `\n| Header 1 | Header 2 |\n| --- | --- |\n| Cell 1 | Cell 2 |\n`; break;
+      case "bold": replacement = `**${selectedText || "text"}**`; break;
+      case "italic": replacement = `*${selectedText || "text"}*`; break;
+      case "h1": replacement = `\n# ${selectedText || "Heading 1"}\n`; break;
+      case "h2": replacement = `\n## ${selectedText || "Heading 2"}\n`; break;
+      case "h3": replacement = `\n### ${selectedText || "Heading 3"}\n`; break;
+      case "list": replacement = `\n- ${selectedText || "item"}`; break;
+      case "link": {
+        const url = prompt("Enter URL:", "https://");
+        if (url === null) return;
+        replacement = `[${selectedText || "link text"}](${url})`;
+        break;
+      }
+      case "quote": replacement = `\n<Blockquote name="Author Name">\n${selectedText || "Enter quote here..."}\n</Blockquote>\n`; break;
+      case "table": replacement = `\n| Feature | Innvikta InSAT | Others |\n| :--- | :---: | :---: |\n| **Gamified Learning** | Yes | No |\n| **Phishing Simulations** | Yes | Basic |\n`; break;
+      case "demo": replacement = `\n<BookDemo />\n`; break;
     }
 
-    const newText = originalText.substring(0, startPos) + replacement + originalText.substring(endPos);
-    onChange(newText);
+    if (replacement) {
+      const newText = originalText.substring(0, startPos) + replacement + originalText.substring(endPos);
+      onChange(newText);
+      setTimeout(() => {
+        textarea.focus();
+        textarea.setSelectionRange(startPos + replacement.length, startPos + replacement.length);
+      }, 50);
+    }
+  };
 
-    setTimeout(() => {
-      textarea.focus();
-      textarea.setSelectionRange(startPos + replacement.length, startPos + replacement.length);
-    }, 50);
+  const handlePaste = (e) => {
+    const html = e.clipboardData.getData("text/html");
+    if (html) {
+      e.preventDefault();
+      const markdown = convertHtmlToMarkdown(html);
+      
+      const textarea = activeRef.current;
+      if (textarea) {
+        const startPos = textarea.selectionStart;
+        const endPos = textarea.selectionEnd;
+        const originalText = textarea.value;
+        const newText = originalText.substring(0, startPos) + markdown + originalText.substring(endPos);
+        onChange(newText);
+        
+        setTimeout(() => {
+          textarea.focus();
+          textarea.setSelectionRange(startPos + markdown.length, startPos + markdown.length);
+        }, 50);
+      }
+    }
   };
 
   return (
     <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm bg-white">
-      {/* Word-style formatting toolbar */}
+      {/* Rich formatting toolbar */}
       <div className="bg-slate-50 border-b border-slate-200 px-3 py-2 flex flex-wrap items-center gap-1.5">
-        <button type="button" onClick={() => applyFormatting("bold")} className="px-2.5 py-1 hover:bg-slate-200 text-slate-700 rounded cursor-pointer font-bold text-xs" title="Bold">B</button>
-        <button type="button" onClick={() => applyFormatting("italic")} className="px-2.5 py-1 hover:bg-slate-200 text-slate-700 rounded cursor-pointer italic text-xs" title="Italic">I</button>
+        <button type="button" onClick={() => applyFormatting("bold")} className="px-2 py-0.5 hover:bg-slate-200 text-slate-700 rounded font-bold text-xs" title="Bold">B</button>
+        <button type="button" onClick={() => applyFormatting("italic")} className="px-2 py-0.5 hover:bg-slate-200 text-slate-700 rounded italic text-xs" title="Italic">I</button>
         <div className="w-px h-4 bg-slate-300 mx-1"></div>
-        <button type="button" onClick={() => applyFormatting("h1")} className="px-2 py-0.5 hover:bg-slate-200 text-slate-700 rounded cursor-pointer text-[10px] font-bold" title="Heading 1">H1</button>
-        <button type="button" onClick={() => applyFormatting("h2")} className="px-2 py-0.5 hover:bg-slate-200 text-slate-700 rounded cursor-pointer text-[10px] font-bold" title="Heading 2">H2</button>
-        <button type="button" onClick={() => applyFormatting("h3")} className="px-2 py-0.5 hover:bg-slate-200 text-slate-700 rounded cursor-pointer text-[10px] font-bold" title="Heading 3">H3</button>
+        <button type="button" onClick={() => applyFormatting("h1")} className="px-2 py-0.5 hover:bg-slate-200 text-slate-700 rounded text-[10px] font-bold" title="Heading 1">H1</button>
+        <button type="button" onClick={() => applyFormatting("h2")} className="px-2 py-0.5 hover:bg-slate-200 text-slate-700 rounded text-[10px] font-bold" title="Heading 2">H2</button>
+        <button type="button" onClick={() => applyFormatting("h3")} className="px-2 py-0.5 hover:bg-slate-200 text-slate-700 rounded text-[10px] font-bold" title="Heading 3">H3</button>
         <div className="w-px h-4 bg-slate-300 mx-1"></div>
-        <button type="button" onClick={() => applyFormatting("list")} className="px-2 py-1 hover:bg-slate-200 text-slate-700 rounded cursor-pointer text-xs font-bold" title="Bullet List">List</button>
-        <button type="button" onClick={() => applyFormatting("link")} className="px-2 py-1 hover:bg-slate-200 text-slate-700 rounded cursor-pointer text-xs font-bold" title="Link">Link</button>
-        <button type="button" onClick={() => applyFormatting("quote")} className="px-2 py-1 hover:bg-slate-200 text-slate-700 rounded cursor-pointer text-xs font-bold" title="Blockquote">Quote</button>
-        <button type="button" onClick={() => applyFormatting("table")} className="px-2 py-1 hover:bg-slate-200 text-slate-700 rounded cursor-pointer text-xs font-bold" title="Table">Table</button>
+        <button type="button" onClick={() => applyFormatting("list")} className="px-2 py-0.5 hover:bg-slate-200 text-slate-700 rounded text-xs font-bold" title="Bullet List">List</button>
+        <button type="button" onClick={() => applyFormatting("link")} className="px-2 py-0.5 hover:bg-slate-200 text-slate-700 rounded text-xs font-bold" title="Link">Link</button>
+        <button type="button" onClick={() => applyFormatting("quote")} className="px-2 py-0.5 hover:bg-slate-200 text-slate-700 rounded text-xs font-bold" title="Blockquote">Quote</button>
+        <button type="button" onClick={() => applyFormatting("table")} className="px-2 py-0.5 hover:bg-slate-200 text-slate-700 rounded text-xs font-bold" title="Table">Table</button>
+        
+        {/* Advanced buttons */}
+        <div className="w-px h-4 bg-slate-300 mx-1"></div>
+        {onInsertImage && (
+          <button type="button" onClick={onInsertImage} className="px-2 py-0.5 hover:bg-slate-200 text-[#f15a24] rounded text-xs font-bold flex items-center gap-0.5" title="Insert Image">
+            <FiImage size={11} /> Image
+          </button>
+        )}
+        {onInsertVideo && (
+          <button type="button" onClick={onInsertVideo} className="px-2 py-0.5 hover:bg-slate-200 text-[#f15a24] rounded text-xs font-bold flex items-center gap-0.5" title="Insert Video">
+            <FiVideo size={11} /> Video
+          </button>
+        )}
+        {onInsertFaq && (
+          <button type="button" onClick={onInsertFaq} className="px-2 py-0.5 hover:bg-slate-200 text-[#f15a24] rounded text-xs font-bold" title="Insert FAQ Accordion">
+            FAQ
+          </button>
+        )}
+        {onInsertTakeaways && (
+          <button type="button" onClick={onInsertTakeaways} className="px-2 py-0.5 hover:bg-slate-200 text-[#f15a24] rounded text-xs font-bold" title="Insert Takeaways Box">
+            Takeaways
+          </button>
+        )}
+        <button type="button" onClick={() => applyFormatting("demo")} className="px-2 py-0.5 hover:bg-slate-200 text-[#f15a24] rounded text-xs font-bold" title="Insert Book a Demo Button">
+          CTA Button
+        </button>
       </div>
       <textarea
-        ref={ref}
+        ref={activeRef}
         rows={rows}
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        onPaste={handlePaste}
         placeholder={placeholder}
         className="w-full px-4 py-3 text-xs font-mono text-slate-800 focus:outline-none focus:bg-slate-50/20"
       />
     </div>
   );
 }
+// Simple Markdown Parser to render Preview HTML using safe RegExp strings
+const parseMarkdownToHtml = (markdown) => {
+  if (!markdown) return "";
+  let html = markdown;
+
+  // Escaping HTML characters
+  html = html
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
+  // Parse tables to HTML
+  const tableRegex = new RegExp('^\\|([^\\n]+)\\n\\|([^\\n]+)\\n((?:\\|[^\\n]+\\n*)+)', 'gm');
+  html = html.replace(tableRegex, (match, headerLine, alignLine, rowsBlock) => {
+    const headers = headerLine.split("|").slice(1, -1).map(h => h.trim());
+    const alignments = alignLine.split("|").slice(1, -1).map(a => {
+      if (a.includes(":") && a.endsWith(":")) return "center";
+      if (a.endsWith(":")) return "right";
+      return "left";
+    });
+    const rows = rowsBlock.trim().split("\n").map(r => r.split("|").slice(1, -1).map(c => c.trim()));
+    
+    let tableHtml = `<div class="my-6 overflow-x-auto"><table class="w-full border-collapse border border-slate-100 text-slate-700 text-sm">`;
+    tableHtml += `<thead><tr class="bg-slate-50/80 border-b border-slate-100">`;
+    headers.forEach((h, idx) => {
+      const align = alignments[idx] || "left";
+      tableHtml += `<th class="px-4 py-3 text-xs font-semibold text-slate-800 uppercase tracking-wider text-${align} border-r border-slate-100/50">${h}</th>`;
+    });
+    tableHtml += `</tr></thead><tbody>`;
+    rows.forEach(row => {
+      tableHtml += `<tr class="border-b border-slate-150 hover:bg-slate-50/30 transition-colors">`;
+      row.forEach((cell, idx) => {
+        const align = alignments[idx] || "left";
+        let cleanedCell = cell;
+        if (cleanedCell.startsWith("**") && cleanedCell.endsWith("**")) {
+          cleanedCell = `<span class="font-medium text-slate-800">${cleanedCell.slice(2, -2)}</span>`;
+        }
+        tableHtml += `<td class="px-4 py-2.5 text-xs text-${align} border-r border-slate-100/50">${cleanedCell}</td>`;
+      });
+      tableHtml += `</tr>`;
+    });
+    tableHtml += `</tbody></table></div>`;
+    return tableHtml;
+  });
+
+  // Headings
+  html = html.replace(new RegExp('^######\\s+(.+)$', 'gm'), '<h6 class="text-xs font-bold text-slate-850 mt-3 mb-1.5">$1</h6>');
+  html = html.replace(new RegExp('^#####\\s+(.+)$', 'gm'), '<h5 class="text-sm font-bold text-slate-850 mt-3 mb-1.5">$1</h5>');
+  html = html.replace(new RegExp('^####\\s+(.+)$', 'gm'), '<h4 class="text-base font-bold text-slate-900 mt-3.5 mb-2">$1</h4>');
+  html = html.replace(new RegExp('^###\\s+(.+)$', 'gm'), '<h3 class="text-lg font-bold text-slate-900 mt-4 mb-2.5">$1</h3>');
+  html = html.replace(new RegExp('^##\\s+(.+)$', 'gm'), '<h2 class="text-2xl font-extrabold text-slate-955 mt-5 mb-3 border-b border-slate-100 pb-2">$1</h2>');
+  html = html.replace(new RegExp('^#\\s+(.+)$', 'gm'), '<h1 class="text-3xl font-extrabold text-slate-955 mt-6 mb-4">$1</h1>');
+
+  // Helper to parse attributes from JSX tags
+  const parseAttributes = (attrString) => {
+    const attrs = {};
+    const regex = new RegExp('(\\w+)=["\']([^"\']*)["\']', 'g');
+    let match;
+    while ((match = regex.exec(attrString)) !== null) {
+      attrs[match[1]] = match[2];
+    }
+    return attrs;
+  };
+
+  // Parse <BlogImage ... />
+  html = html.replace(new RegExp('&lt;BlogImage\\s+([^&]+)\\s*\\/?&gt;', 'g'), (match, attrStr) => {
+    const attrs = parseAttributes(attrStr);
+    const src = attrs.src || "";
+    const alt = attrs.alt || attrs.title || "";
+    const width = attrs.width || "100%";
+    const align = attrs.align || "center";
+    
+    let wrapperClass = "my-6 clear-both";
+    let imgClass = "rounded-2xl shadow-md";
+    if (align === "left") {
+      wrapperClass = "float-left mr-6 mb-4 clear-none";
+    } else if (align === "right") {
+      wrapperClass = "float-right ml-6 mb-4 clear-none";
+    } else {
+      wrapperClass = "flex flex-col items-center my-6 clear-both mx-auto";
+      imgClass += " mx-auto";
+    }
+    return `<div class="${wrapperClass}" style="width: ${width}; max-width: 100%;">
+      <img src="${src}" alt="${alt}" class="${imgClass}" style="width: 100%; height: auto;" />
+      ${alt ? `<span class="block text-center text-xs text-slate-400 mt-2 font-medium">${alt}</span>` : ""}
+    </div>`;
+  });
+
+  // Parse <Video ... />
+  html = html.replace(new RegExp('&lt;Video\\s+([^&]+)\\s*\\/?&gt;', 'g'), (match, attrStr) => {
+    const attrs = parseAttributes(attrStr);
+    const src = attrs.src || "";
+    const title = attrs.title || "";
+    const width = attrs.width || "100%";
+    const align = attrs.align || "center";
+    const height = attrs.height || "auto";
+    
+    let wrapperClass = "my-6 clear-both";
+    let videoClass = "overflow-hidden rounded-xl shadow-md";
+    if (align === "left") {
+      wrapperClass = "float-left mr-6 mb-4 clear-none";
+    } else if (align === "right") {
+      wrapperClass = "float-right ml-6 mb-4 clear-none";
+    } else {
+      wrapperClass = "flex flex-col items-center my-6 clear-both mx-auto";
+      videoClass += " mx-auto";
+    }
+    const videoSrc = src.startsWith("http") ? src : `/videos/${src}`;
+    return `<div class="${wrapperClass}" style="width: ${width}; max-width: 100%;">
+      <video src="${videoSrc}" controls class="${videoClass}" style="width: 100%; height: ${height};"></video>
+      ${title ? `<span class="block text-center text-xs text-slate-400 mt-2 font-medium">${title}</span>` : ""}
+    </div>`;
+  });
+
+  // Standard markdown images
+  html = html.replace(new RegExp('!\\[([^\\]]*)\\]\\(([^)]+)\\)', 'g'), '<div class="my-6"><img src="$2" alt="$1" class="w-full h-auto rounded-2xl shadow-md" /><span class="block text-center text-xs text-slate-400 mt-2">$1</span></div>');
+
+  // Hyperlinks
+  html = html.replace(new RegExp('\\[([^\\]]+)\\]\\(([^)]+)\\)', 'g'), '<a href="$2" class="text-[#f15a24] hover:underline font-bold" target="_blank">$1</a>');
+
+  // Bold & Italic
+  html = html.replace(new RegExp('\\*\\*([^*]+)\\*\\*', 'g'), "<strong>$1</strong>");
+  html = html.replace(new RegExp('\\*([^*]+)\\*', 'g'), "<em>$1</em>");
+
+  // Bullet Lists
+  html = html.replace(new RegExp('^\\-\\s+(.+)$', 'gm'), '<li class="ml-5 list-disc mb-1">$1</li>');
+
+  // Paragraphs
+  html = html.split(/\n\n+/).map(p => {
+    if (p.trim().startsWith('<h') || p.trim().startsWith('<div') || p.trim().startsWith('<li') || p.trim().startsWith('<ul')) {
+      return p;
+    }
+    return `<p class="text-slate-700 leading-relaxed text-sm mb-4">${p.replace(/\n/g, "<br/>")}</p>`;
+  }).join("");
+
+  // BookDemo shortcode
+  html = html.replace(new RegExp('&lt;BookDemo\\s*\\/?&gt;', 'g'), `
+    <div class="my-8 bg-white border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.05)] rounded-[24px] overflow-hidden max-w-4xl mx-auto flex flex-col md:flex-row text-left">
+      <div class="md:w-[40%] bg-gradient-to-br from-[#f15a24] to-[#c2410c] text-white p-6 md:p-8 flex flex-col justify-between shrink-0">
+        <div>
+          <div class="inline-block px-3 py-1 mb-6 text-[10px] font-bold tracking-wider bg-white/10 rounded-full uppercase border border-white/15">HUMAN RISK MANAGEMENT</div>
+          <h4 class="text-2xl font-extrabold text-white leading-tight mb-4">See Innvikta InSAT in Action</h4>
+          <p class="text-xs text-white/90 leading-relaxed font-medium">Explore how our interactive games and phishing simulations reduce cyber risk.</p>
+        </div>
+        <div class="mt-8 text-[10px] text-white/70 font-semibold tracking-wider uppercase">© INNVIKTA SECURITY</div>
+      </div>
+      <div class="md:w-[60%] p-6 md:p-8 bg-white flex-1">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">YOUR DETAILS</span>
+          <div class="h-px bg-slate-100 flex-1"></div>
+        </div>
+        <div class="space-y-4">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">FULL NAME</label>
+              <input type="text" disabled placeholder="Jane Smith" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 opacity-75 text-sm font-medium" />
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">CORPORATE EMAIL</label>
+              <input type="email" disabled placeholder="jane@yourcompany.com" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 opacity-75 text-sm font-medium" />
+            </div>
+          </div>
+          <div class="pt-4 flex justify-start">
+            <button type="button" disabled class="px-10 py-3.5 bg-[#f15a24] !text-white font-bold rounded-full shadow-lg text-xs uppercase tracking-wider cursor-not-allowed flex items-center gap-2">
+              <span>Book a Demo</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `);
+
+  // FAQ/Accordion/Blockquote
+  html = html.replace(new RegExp('&lt;FAQ\\s+title="([^"]+)"\\s+subtitle="([^"]+)"&gt;([\\s\\S]*?)&lt;\\/FAQ&gt;', 'g'), `
+    <div class="my-8 p-6 md:p-8 bg-transparent border border-slate-100/80 rounded-[20px] shadow-sm max-w-3xl mx-auto text-left">
+      <div class="mb-6">
+        <h3 class="text-xl md:text-2xl font-extrabold text-slate-900 m-0 leading-tight">$1</h3>
+        <p class="text-xs md:text-sm text-slate-500 mt-2 m-0 leading-relaxed">$2</p>
+      </div>
+      <div class="flex flex-col gap-3">$3</div>
+    </div>
+  `);
+  html = html.replace(new RegExp('&lt;FAQ\\s+title="([^"]+)"\\s*&gt;([\\s\\S]*?)&lt;\\/FAQ&gt;', 'g'), `
+    <div class="my-8 p-6 md:p-8 bg-transparent border border-slate-100/80 rounded-[20px] shadow-sm max-w-3xl mx-auto text-left">
+      <div class="mb-6">
+        <h3 class="text-xl md:text-2xl font-extrabold text-slate-900 m-0 leading-tight">$1</h3>
+      </div>
+      <div class="flex flex-col gap-3">$2</div>
+    </div>
+  `);
+  html = html.replace(new RegExp('&lt;Accordion\\s+title="([^"]+)"&gt;([\\s\\S]*?)&lt;\\/Accordion&gt;', 'g'), `
+    <div class="mb-4 overflow-hidden rounded-xl border border-slate-100 bg-[#f8fafc] text-left">
+      <div class="px-5 py-4 flex items-center justify-between gap-4 font-bold text-slate-800 text-sm md:text-base">
+        <span>$1</span>
+        <div class="w-7 h-7 rounded-full bg-[#f15a24]/10 text-[#f15a24] flex items-center justify-center font-bold text-base">+</div>
+      </div>
+      <div class="px-5 py-3 text-xs md:text-sm text-slate-600 border-t border-slate-200/80">$2</div>
+    </div>
+  `);
+  html = html.replace(new RegExp('&lt;Blockquote\\s+name="([^"]+)"&gt;([\\s\\S]*?)&lt;\\/Blockquote&gt;', 'g'), `
+    <blockquote class="my-6 relative border-l-[5px] border-l-[#f15a24] bg-slate-50/70 p-6 md:p-8 rounded-r-2xl text-left not-italic">
+      <div class="text-slate-700 font-medium leading-relaxed text-sm md:text-base mb-4 italic">$2</div>
+      <cite class="block border-t border-slate-200/60 pt-3 text-xs md:text-sm font-bold uppercase tracking-wider text-slate-500 not-italic">— $1</cite>
+    </blockquote>
+  `);
+
+  // KeyTakeaways
+  html = html.replace(new RegExp('&lt;KeyTakeaways\\s+title="([^"]+)"\\s+type="([^"]+)"&gt;([\\s\\S]*?)&lt;\\/KeyTakeaways&gt;', 'g'), `
+    <div class="my-8 p-6 bg-[#f8fafc] border border-slate-100 rounded-2xl shadow-sm max-w-3xl mx-auto text-left">
+      <h4 class="text-base font-extrabold text-slate-900 m-0 uppercase tracking-wide mb-4">$1</h4>
+      <div class="prose prose-slate text-slate-700 text-sm">$3</div>
+    </div>
+  `);
+  html = html.replace(new RegExp('&lt;KeyTakeaways\\s+title="([^"]+)"\\s*&gt;([\\s\\S]*?)&lt;\\/KeyTakeaways&gt;', 'g'), `
+    <div class="my-8 p-6 bg-[#f8fafc] border border-slate-100 rounded-2xl shadow-sm max-w-3xl mx-auto text-left">
+      <h4 class="text-base font-extrabold text-slate-900 m-0 uppercase tracking-wide mb-4">$1</h4>
+      <div class="prose prose-slate text-slate-700 text-sm">$2</div>
+    </div>
+  `);
+
+  return html;
+};
 
 export default function MasterDashboard() {
   const [activeTab, setActiveTab] = useState("blogs"); // "blogs", "cases", "newsletters", "updates"
   const [loading, setLoading] = useState(true);
   const [toast, setToast] = useState({ show: false, message: "", type: "success" });
+
+  // Custom states for uploading & alt text
+  const [isUploadingCover, setIsUploadingCover] = useState(false);
+  const [showImageModal, setShowImageModal] = useState(false);
+  const [inlineImageFile, setInlineImageFile] = useState(null);
+  const [inlineImageAlt, setInlineImageAlt] = useState("");
+  const [inlineImageWidth, setInlineImageWidth] = useState("100%");
+  const [inlineImageAlign, setInlineImageAlign] = useState("center");
+  const [isUploadingInline, setIsUploadingInline] = useState(false);
+
+  // Custom Video Modal States
+  const [showVideoModal, setShowVideoModal] = useState(false);
+  const [videoFile, setVideoFile] = useState(null);
+  const [videoSrcUrl, setVideoSrcUrl] = useState("");
+  const [videoWidth, setVideoWidth] = useState("100%");
+  const [videoHeight, setVideoHeight] = useState("auto");
+  const [videoAlign, setVideoAlign] = useState("center");
+  const [videoTitle, setVideoTitle] = useState("");
+  const [isUploadingVideo, setIsUploadingVideo] = useState(false);
+
+  // FAQ Modal States
+  const [showFaqModal, setShowFaqModal] = useState(false);
+  const [faqPasteText, setFaqPasteText] = useState("");
+  const [faqTitle, setFaqTitle] = useState("Frequently Asked Questions");
+  const [faqSubtitle, setFaqSubtitle] = useState("");
+
+  // Key Takeaways Modal States
+  const [showTakeawaysModal, setShowTakeawaysModal] = useState(false);
+  const [takeawaysTitle, setTakeawaysTitle] = useState("Key Takeaways");
+  const [takeawaysPasteText, setTakeawaysPasteText] = useState("");
+  const [takeawaysType, setTakeawaysType] = useState("bullet"); // bullet, number, roman
+
+  const activeTextareaRef = useRef(null);
+  const [uploadingPdf, setUploadingPdf] = useState(false);
+
+  const handlePdfUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    const formData = new FormData();
+    formData.append("file", file);
+    
+    try {
+      setUploadingPdf(true);
+      showNotification("success", "Uploading PDF...");
+      const res = await fetch("/api/admin/upload", {
+        method: "POST",
+        body: formData
+      });
+      const data = await res.json();
+      if (data.success) {
+        setCaseForm(prev => ({ ...prev, pdfUrl: data.url }));
+        showNotification("success", "PDF uploaded successfully!");
+      } else {
+        showNotification("error", "Upload failed: " + (data.error || "Unknown error"));
+      }
+    } catch (err) {
+      showNotification("error", "Upload failed due to connection error");
+    } finally {
+      setUploadingPdf(false);
+    }
+  };
 
   // Data lists
   const [blogsList, setBlogsList] = useState([]);
