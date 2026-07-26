@@ -9,8 +9,14 @@ export default function FAQSection({ activeFaq, setActiveFaq }) {
       <div className="container faq-grid">
         <div className="faq-title-col animate from-left">
           <h2 className="text-40-heading">Frequently Asked Questions</h2>
-          <Link href="/book-demo" style={{ marginTop: "1.25rem" }} className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap px-5 h-12 font-bold shadow-md shadow-orange-500/10">
-            Book a Demo <FiArrowRight className="text-xs" />
+          <Link className="arrow-link" href="/book-demo" style={{ marginTop: "1.25rem" }}>
+            <div className="arrow-circle">
+              <span className="arrow-circle-bg"></span>
+              <svg width="6" height="8" viewBox="0 0 6 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor" d="M3.86426 4.00028L0.818237 0.954267L1.68853 0.0839844L5.60481 4.00028L1.68853 7.91652L0.818237 7.04625L3.86426 4.00028Z" />
+              </svg>
+            </div>
+            <span>Still have questions? Contact us</span>
           </Link>
         </div>
 
