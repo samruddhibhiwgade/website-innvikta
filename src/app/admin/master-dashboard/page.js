@@ -535,6 +535,20 @@ export default function MasterDashboard() {
   // Search filter
   const [searchQuery, setSearchQuery] = useState("");
 
+  const textareaRef = useRef(null);
+
+  // Yoast SEO Auditor states
+  const [focusKeyphrase, setFocusKeyphrase] = useState("");
+  const [seoReport, setSeoReport] = useState([]);
+
+  // Image Upload Modal States
+  const [showImageModal, setShowImageModal] = useState(false);
+  const [inlineImageFile, setInlineImageFile] = useState(null);
+  const [inlineImageAlt, setInlineImageAlt] = useState("");
+  const [inlineImageWidth, setInlineImageWidth] = useState("100%");
+  const [inlineImageAlign, setInlineImageAlign] = useState("center");
+  const [isUploadingInline, setIsUploadingInline] = useState(false);
+
   // Editor states
   const [editorMode, setEditorMode] = useState("list"); // "list" or "edit"
   const [editingId, setEditingId] = useState(null);
@@ -665,6 +679,304 @@ export default function MasterDashboard() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const updateActiveContent = (newText) => {
+    if (activeTab === "blogs") {
+      setBlogForm((prev) => ({ ...prev, content: newText }));
+    } else if (activeTab === "updates") {
+      setUpdateForm((prev) => ({ ...prev, desc: newText }));
+    } else if (activeTab === "newsletters") {
+      setNewsletterForm((prev) => ({ ...prev, content: newText }));
+    }
+  };
+
+  const getActiveContent = () => {
+    if (activeTab === "blogs") return blogForm.content || "";
+    if (activeTab === "updates") return updateForm.desc || "";
+    if (activeTab === "newsletters") return newsletterForm.content || "";
+    return "";
+  };
+
+  // Yoast SEO Auditor logic
+  const runSeoAudit = () => {
+    const checks = [];
+    const content = getActiveContent();
+    let title = "";
+    if (activeTab === "blogs") title = blogForm.title || "";
+    else if (activeTab === "updates") title = updateForm.title || "";
+    else if (activeTab === "newsletters") title = newsletterForm.title || "";
+
+    const keyphrase = focusKeyphrase.trim().toLowerCase();
+    const wordCount = content.split(/\s+/).filter(Boolean).length;
+
+    if (wordCount === 0) {
+      checks.push({ id: "wc", label: "Content length: Write some content to begin analysis.", status: "error" });
+    } else if (wordCount < 300) {
+      checks.push({ id: "wc", label: `Word count: ${wordCount} words (Under 300 words recommendation).`, status: "warning" });
+    } else {
+      checks.push({ id: "wc", label: `Word count: ${wordCount} words. Excellent!`, status: "success" });
+    }
+
+    if (!keyphrase) {
+      checks.push({ id: "kp", label: "Focus Keyphrase: Enter a keyphrase to enable full SEO optimization checks.", status: "info" });
+      setSeoReport(checks);
+      return;
+    }
+
+    // Keyphrase in Title
+    if (title.toLowerCase().includes(keyphrase)) {
+      checks.push({ id: "title", label: "Focus keyphrase in title: Yes, keyphrase is present.", status: "success" });
+    } else {
+      checks.push({ id: "title", label: "Focus keyphrase in title: Keyphrase not found. Try including it.", status: "error" });
+    }
+
+    // Keyphrase in Introduction (First 100 words)
+    const introText = content.split(/\s+/).slice(0, 100).join(" ").toLowerCase();
+    if (introText.includes(keyphrase)) {
+      checks.push({ id: "intro", label: "Introduction match: Keyphrase appears in the first paragraph.", status: "success" });
+    } else {
+      checks.push({ id: "intro", label: "Introduction match: Keyphrase is missing in the opening paragraph.", status: "warning" });
+    }
+
+    // Density Check
+    const occurrences = (content.toLowerCase().match(new RegExp(keyphrase.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g')) || []).length;
+    const density = wordCount > 0 ? ((occurrences / wordCount) * 100).toFixed(1) : 0;
+    if (occurrences === 0) {
+      checks.push({ id: "density", label: "Keyphrase density: The focus keyphrase was found 0 times.", status: "error" });
+    } else if (density < 0.5) {
+      checks.push({ id: "density", label: `Keyphrase density: Found ${occurrences} times (${density}%). A bit low.`, status: "warning" });
+    } else if (density > 2.5) {
+      checks.push({ id: "density", label: `Keyphrase density: Found ${occurrences} times (${density}%). Beware of keyword stuffing!`, status: "warning" });
+    } else {
+      checks.push({ id: "density", label: `Keyphrase density: Found ${occurrences} times (${density}%). Ideal density.`, status: "success" });
+    }
+
+    // Image Alt Tag Checks
+    const hasImages = content.includes("![");
+    if (hasImages) {
+      checks.push({ id: "images", label: "Image Alt Tags: Found media links inside the post.", status: "success" });
+    } else {
+      checks.push({ id: "images", label: "Image Alt Tags: No images added. Consider inserting supportive media.", status: "info" });
+    }
+
+    // Link check
+    const hasLinks = content.includes("](") && !content.includes("![");
+    if (hasLinks) {
+      checks.push({ id: "links", label: "Outbound/Internal Links: Great job linking references.", status: "success" });
+    } else {
+      checks.push({ id: "links", label: "Links: No hyperlinks found. Consider adding context links.", status: "warning" });
+    }
+
+    setSeoReport(checks);
+  };
+
+  // Run SEO audit when fields change
+  useEffect(() => {
+    runSeoAudit();
+  }, [
+    blogForm.content, blogForm.title, blogForm.metaDescription,
+    updateForm.desc, updateForm.title,
+    newsletterForm.content, newsletterForm.title, newsletterForm.description,
+    focusKeyphrase, activeTab
+  ]);
+
+  const handleInsertInlineImage = async (e) => {
+    e.preventDefault();
+    if (!inlineImageSrcUrl.trim() && !inlineImageFile) {
+      showNotification("error", "Please select an image file or paste an image URL.");
+      return;
+    }
+    setIsUploadingInline(true);
+    try {
+      let finalUrl = inlineImageSrcUrl.trim();
+      if (inlineImageFile) {
+        const uploadData = new FormData();
+        uploadData.append("file", inlineImageFile);
+        const res = await fetch("/api/admin/upload", { method: "POST", body: uploadData });
+        const data = await res.json();
+        if (data.success) {
+          finalUrl = data.url;
+        } else {
+          showNotification("error", data.error || "Failed to upload image.");
+          setIsUploadingInline(false);
+          return;
+        }
+      }
+      const alignmentStyle = inlineImageAlign === "center" ? "mx-auto block" : (inlineImageAlign === "right" ? "float-right ml-4" : "float-left mr-4");
+      const imgMarkdown = `\n<img src="${finalUrl}" alt="${inlineImageAlt || 'Image'}" width="${inlineImageWidth}" class="${alignmentStyle}" />\n`;
+      
+      const textarea = textareaRef.current;
+      if (textarea) {
+        const startPos = textarea.selectionStart;
+        const endPos = textarea.selectionEnd;
+        const originalText = textarea.value;
+        const newText = originalText.substring(0, startPos) + imgMarkdown + originalText.substring(endPos);
+        updateActiveContent(newText);
+        setTimeout(() => {
+          textarea.focus();
+          textarea.setSelectionRange(startPos + imgMarkdown.length, startPos + imgMarkdown.length);
+        }, 50);
+      }
+      setShowImageModal(false);
+      setInlineImageFile(null);
+      setInlineImageSrcUrl("");
+      setInlineImageAlt("");
+      setInlineImageWidth("100%");
+      setInlineImageAlign("center");
+      showNotification("success", "Image inserted successfully!");
+    } catch (err) {
+      showNotification("error", "Error uploading image.");
+    } finally {
+      setIsUploadingInline(false);
+    }
+  };
+
+  const handleInsertVideo = async (e) => {
+    e.preventDefault();
+    let finalVideoUrl = videoSrcUrl.trim();
+    if (!finalVideoUrl && !videoFile) {
+      showNotification("error", "Please select a video file or paste a video URL.");
+      return;
+    }
+    setIsUploadingVideo(true);
+    try {
+      if (videoFile) {
+        const uploadData = new FormData();
+        uploadData.append("file", videoFile);
+        const res = await fetch("/api/admin/upload", { method: "POST", body: uploadData });
+        const data = await res.json();
+        if (data.success) {
+          finalVideoUrl = data.url;
+        } else {
+          showNotification("error", data.error || "Failed to upload video.");
+          setIsUploadingVideo(false);
+          return;
+        }
+      }
+      const videoMarkdown = `\n<Video src="${finalVideoUrl}" title="${videoTitle || 'Embedded Video'}" width="${videoWidth}" height="${videoHeight}" align="${videoAlign}" />\n`;
+      const textarea = textareaRef.current;
+      if (textarea) {
+        const startPos = textarea.selectionStart;
+        const endPos = textarea.selectionEnd;
+        const originalText = textarea.value;
+        const newText = originalText.substring(0, startPos) + videoMarkdown + originalText.substring(endPos);
+        updateActiveContent(newText);
+        setTimeout(() => {
+          textarea.focus();
+          textarea.setSelectionRange(startPos + videoMarkdown.length, startPos + videoMarkdown.length);
+        }, 50);
+      }
+      setShowVideoModal(false);
+      setVideoFile(null);
+      setVideoSrcUrl("");
+      setVideoTitle("");
+      setVideoWidth("100%");
+      setVideoHeight("auto");
+      setVideoAlign("center");
+      showNotification("success", "Video inserted successfully!");
+    } catch (err) {
+      showNotification("error", "Error inserting video.");
+    } finally {
+      setIsUploadingVideo(false);
+    }
+  };
+
+  const handleInsertParsedFaq = () => {
+    if (!faqPasteText.trim()) return;
+    const lines = faqPasteText.split("\n");
+    const items = [];
+    let currentQuestion = "";
+    let currentAnswerLines = [];
+    const saveCurrentItem = () => {
+      if (currentQuestion.trim()) {
+        items.push({
+          question: currentQuestion.trim(),
+          answer: currentAnswerLines.join("\n").trim()
+        });
+      }
+    };
+    for (let line of lines) {
+      const trimmed = line.trim();
+      if (!trimmed) continue;
+      const isQuestionMarker = /^(?:Q|q|Question|question)\s*[:\.]/i.test(trimmed) || 
+                               /^\d+[\.\)]\s+/i.test(trimmed) || 
+                               trimmed.endsWith("?");
+      if (isQuestionMarker) {
+        saveCurrentItem();
+        let cleanQuestion = trimmed
+          .replace(/^(?:Q|q|Question|question)\s*[:\.]\s*/i, "")
+          .replace(/^\d+[\.\)]\s*/i, "");
+        currentQuestion = cleanQuestion;
+        currentAnswerLines = [];
+      } else {
+        if (currentQuestion) {
+          let cleanAnswer = trimmed.replace(/^(?:A|a|Answer|answer)\s*[:\.]\s*/i, "");
+          currentAnswerLines.push(cleanAnswer);
+        } else {
+          currentQuestion = trimmed;
+        }
+      }
+    }
+    saveCurrentItem();
+
+    let mdx = `\n<FAQ title="${faqTitle}"${faqSubtitle ? ` subtitle="${faqSubtitle}"` : ""}>\n`;
+    items.forEach(item => {
+      mdx += `  <Accordion title="${item.question}">\n    ${item.answer.replace(/\n/g, "\n    ")}\n  </Accordion>\n`;
+    });
+    mdx += `</FAQ>\n`;
+
+    const textarea = textareaRef.current;
+    if (textarea) {
+      const startPos = textarea.selectionStart;
+      const endPos = textarea.selectionEnd;
+      const originalText = textarea.value;
+      const newText = originalText.substring(0, startPos) + mdx + originalText.substring(endPos);
+      updateActiveContent(newText);
+      setTimeout(() => {
+        textarea.focus();
+        textarea.setSelectionRange(startPos + mdx.length, startPos + mdx.length);
+      }, 50);
+    }
+    setFaqPasteText("");
+    setShowFaqModal(false);
+    showNotification("success", "FAQ inserted successfully!");
+  };
+
+  const handleInsertParsedTakeaways = () => {
+    if (!takeawaysPasteText.trim()) return;
+    const lines = takeawaysPasteText.split("\n");
+    const points = [];
+    for (let line of lines) {
+      let trimmed = line.trim();
+      if (trimmed) {
+        trimmed = trimmed.replace(/^[\s\-\*\d\.\)\(]+/g, "");
+        points.push(trimmed);
+      }
+    }
+    let mdx = `\n<KeyTakeaways title="${takeawaysTitle}" type="${takeawaysType}">\n`;
+    points.forEach(point => {
+      mdx += `  - ${point}\n`;
+    });
+    mdx += `</KeyTakeaways>\n`;
+
+    const textarea = textareaRef.current;
+    if (textarea) {
+      const startPos = textarea.selectionStart;
+      const endPos = textarea.selectionEnd;
+      const originalText = textarea.value;
+      const newText = originalText.substring(0, startPos) + mdx + originalText.substring(endPos);
+      updateActiveContent(newText);
+      setTimeout(() => {
+        textarea.focus();
+        textarea.setSelectionRange(startPos + mdx.length, startPos + mdx.length);
+      }, 50);
+    }
+    setTakeawaysTitle("Key Takeaways");
+    setTakeawaysPasteText("");
+    setTakeawaysType("bullet");
+    setShowTakeawaysModal(false);
+    showNotification("success", "Key Takeaways inserted successfully!");
+  };
 
   // --- CRUD Handlers ---
 
@@ -1350,9 +1662,12 @@ export default function MasterDashboard() {
               </button>
             </div>
 
-            {/* Blogs editor */}
-            {activeTab === "blogs" && editorTab === "edit" && (
-              <form onSubmit={handleSaveBlog} className="space-y-4">
+            <div className={`grid grid-cols-1 ${editorTab === 'edit' && activeTab !== 'cases' ? 'lg:grid-cols-3' : ''} gap-8`}>
+              <div className={editorTab === 'edit' && activeTab !== 'cases' ? 'lg:col-span-2' : ''}>
+
+                {/* Blogs editor */}
+                {activeTab === "blogs" && editorTab === "edit" && (
+                  <form onSubmit={handleSaveBlog} className="space-y-4">
                 <div>
                   <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Title</label>
                   <input
@@ -1390,6 +1705,11 @@ export default function MasterDashboard() {
                     onChange={(val) => setBlogForm({ ...blogForm, content: val })}
                     placeholder="Write article content..."
                     rows={12}
+                    textareaRef={textareaRef}
+                    onInsertImage={() => setShowImageModal(true)}
+                    onInsertVideo={() => setShowVideoModal(true)}
+                    onInsertFaq={() => setShowFaqModal(true)}
+                    onInsertTakeaways={() => setShowTakeawaysModal(true)}
                   />
                 </div>
                 <div className="flex items-center gap-6">
@@ -2220,6 +2540,11 @@ export default function MasterDashboard() {
                     onChange={(val) => setNewsletterForm({ ...newsletterForm, content: val })}
                     placeholder="Write newsletter HTML content..."
                     rows={12}
+                    textareaRef={textareaRef}
+                    onInsertImage={() => setShowImageModal(true)}
+                    onInsertVideo={() => setShowVideoModal(true)}
+                    onInsertFaq={() => setShowFaqModal(true)}
+                    onInsertTakeaways={() => setShowTakeawaysModal(true)}
                   />
                 </div>
 
@@ -2425,12 +2750,16 @@ export default function MasterDashboard() {
 
                 <div>
                   <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Short Description</label>
-                  <textarea
-                    rows={3}
-                    required
+                  <ToolbarEditor
                     value={updateForm.desc}
-                    onChange={(e) => setUpdateForm({ ...updateForm, desc: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-808"
+                    onChange={(val) => setUpdateForm({ ...updateForm, desc: val })}
+                    placeholder="Write platform update description..."
+                    rows={8}
+                    textareaRef={textareaRef}
+                    onInsertImage={() => setShowImageModal(true)}
+                    onInsertVideo={() => setShowVideoModal(true)}
+                    onInsertFaq={() => setShowFaqModal(true)}
+                    onInsertTakeaways={() => setShowTakeawaysModal(true)}
                   />
                 </div>
                 
@@ -2450,6 +2779,89 @@ export default function MasterDashboard() {
                 </button>
               </form>
             )}
+              </div>
+              
+              {editorTab === 'edit' && activeTab !== 'cases' && (
+                <div className="space-y-6">
+                  {/* Focus Keyphrase */}
+                  <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 text-left">
+                    <div className="flex items-center gap-2 mb-3 pb-2 border-b border-slate-200/60">
+                      <FiTrendingUp className="text-[#f15a24] text-base" />
+                      <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">SEO Focus Keyphrase</h4>
+                    </div>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        value={focusKeyphrase}
+                        onChange={(e) => setFocusKeyphrase(e.target.value)}
+                        placeholder="e.g. security awareness training"
+                        className="w-full pl-9 pr-4 py-2 bg-white border border-slate-200 rounded-xl text-slate-750 text-xs focus:outline-none focus:border-[#f15a24] font-semibold"
+                      />
+                      <FiSearch className="absolute left-3.5 top-3 text-slate-400 text-xs" />
+                    </div>
+                  </div>
+
+                  {/* Yoast Checklist */}
+                  <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 text-left">
+                    <div className="flex items-center gap-2 mb-3 pb-2 border-b border-slate-200/60">
+                      <FiTrendingUp className="text-[#f15a24] text-base" />
+                      <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">SEO Audit Checklist</h4>
+                    </div>
+                    <div className="space-y-2.5">
+                      {seoReport.map((audit, idx) => (
+                        <div key={idx} className="flex items-start gap-2">
+                          <span className={`w-3.5 h-3.5 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${
+                            audit.status === "success" ? "bg-emerald-500 text-white" :
+                            audit.status === "warning" ? "bg-amber-500 text-white" :
+                            audit.status === "info" ? "bg-blue-500 text-white" :
+                            "bg-rose-500 text-white"
+                          }`} style={{ fontSize: "7px" }}>
+                            {audit.status === "success" && <FiCheck />}
+                          </span>
+                          <span className="text-[11px] font-semibold leading-relaxed text-slate-605">
+                            {audit.label}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Document settings card */}
+                  <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 text-left">
+                    <div className="flex items-center gap-2 mb-3 pb-2 border-b border-slate-200/60">
+                      <FiFileText className="text-[#f15a24] text-base" />
+                      <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Document Settings</h4>
+                    </div>
+                    <div className="space-y-3">
+                      <div>
+                        <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Editor Tab</span>
+                        <span className="text-xs font-bold text-slate-700 uppercase">{editorTab} mode</span>
+                      </div>
+                      <div>
+                        <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Status</span>
+                        <span className="text-xs font-bold text-slate-700">
+                          {activeTab === 'blogs' ? (blogForm.draft ? 'Draft' : 'Published') : 'Published'}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Visible on Site</span>
+                        <span className={`text-xs font-bold ${
+                          activeTab === 'blogs' ? (blogForm.archived ? 'text-amber-600' : 'text-emerald-600') :
+                          activeTab === 'updates' ? (updateForm.archived ? 'text-amber-600' : 'text-emerald-600') :
+                          activeTab === 'newsletters' ? (newsletterForm.archived ? 'text-amber-600' : 'text-emerald-600') :
+                          'text-emerald-600'
+                        }`}>
+                          {activeTab === 'blogs' ? (blogForm.archived ? 'Hidden (Archived)' : 'Visible') :
+                           activeTab === 'updates' ? (updateForm.archived ? 'Hidden (Archived)' : 'Visible') :
+                           activeTab === 'newsletters' ? (newsletterForm.archived ? 'Hidden (Archived)' : 'Visible') :
+                           'Visible'}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
             {/* Live Preview Tabs */}
             {editorTab === "preview" && (
               <div className="space-y-8 bg-slate-50/50 p-6 rounded-2xl border border-slate-200 max-h-[85vh] overflow-y-auto">
@@ -2625,6 +3037,403 @@ export default function MasterDashboard() {
                 )}
               </div>
             )}
+          </div>
+        )}
+
+        {/* Inline Image Modal */}
+        {showImageModal && (
+          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl w-full max-w-md p-6 text-left shadow-2xl border border-slate-100">
+              <div className="flex justify-between items-center border-b border-slate-100 pb-3 mb-4">
+                <h4 className="text-base font-bold text-slate-900">Upload & Insert Image</h4>
+                <button 
+                  onClick={() => {
+                    setShowImageModal(false);
+                    setInlineImageFile(null);
+                    setInlineImageSrcUrl("");
+                  }}
+                  className="text-slate-400 hover:text-slate-600 cursor-pointer"
+                >
+                  <FiX className="text-lg" />
+                </button>
+              </div>
+
+              <form onSubmit={handleInsertInlineImage} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Upload Image File</label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      if (e.target.files?.[0]) {
+                        setInlineImageFile(e.target.files[0]);
+                        setInlineImageSrcUrl("");
+                      }
+                    }}
+                    className="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200"
+                  />
+                  {inlineImageFile && <p className="text-[10px] text-emerald-600 font-bold mt-1">✓ Selected: {inlineImageFile.name}</p>}
+                </div>
+
+                <div className="relative flex py-2 items-center">
+                  <div className="flex-grow border-t border-slate-150"></div>
+                  <span className="flex-shrink mx-4 text-slate-400 text-[10px] font-bold uppercase tracking-wider">OR</span>
+                  <div className="flex-grow border-t border-slate-150"></div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Paste Image URL</label>
+                  <input
+                    type="text"
+                    value={inlineImageSrcUrl}
+                    onChange={(e) => {
+                      setInlineImageSrcUrl(e.target.value);
+                      if (e.target.value) setInlineImageFile(null);
+                    }}
+                    placeholder="https://example.com/image.jpg"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Alt Text (SEO)</label>
+                  <input
+                    type="text"
+                    value={inlineImageAlt}
+                    onChange={(e) => setInlineImageAlt(e.target.value)}
+                    placeholder="Describe the image..."
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Width</label>
+                    <input
+                      type="text"
+                      value={inlineImageWidth}
+                      onChange={(e) => setInlineImageWidth(e.target.value)}
+                      placeholder="e.g. 100%, 300px"
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Alignment</label>
+                    <select
+                      value={inlineImageAlign}
+                      onChange={(e) => setInlineImageAlign(e.target.value)}
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-805 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                    >
+                      <option value="center">Center</option>
+                      <option value="left">Left Align</option>
+                      <option value="right">Right Align</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 pt-3 border-t border-slate-100">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowImageModal(false);
+                      setInlineImageFile(null);
+                      setInlineImageSrcUrl("");
+                    }}
+                    className="flex-1 border border-slate-200 text-slate-600 py-2 rounded-xl text-xs font-bold hover:bg-slate-50 cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isUploadingInline}
+                    className="flex-1 bg-[#f15a24] hover:bg-orange-600 disabled:bg-slate-300 text-white py-2 rounded-xl text-xs font-bold shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 cursor-pointer"
+                  >
+                    {isUploadingInline ? "Uploading..." : "Insert Image"}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {/* Video Insert Modal */}
+        {showVideoModal && (
+          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl w-full max-w-md p-6 text-left shadow-2xl border border-slate-100">
+              <div className="flex justify-between items-center border-b border-slate-100 pb-3 mb-4">
+                <h4 className="text-base font-bold text-slate-900">Upload & Insert Video</h4>
+                <button 
+                  onClick={() => {
+                    setShowVideoModal(false);
+                    setVideoFile(null);
+                    setVideoSrcUrl("");
+                  }}
+                  className="text-slate-400 hover:text-slate-600 cursor-pointer"
+                >
+                  <FiX className="text-lg" />
+                </button>
+              </div>
+
+              <form onSubmit={handleInsertVideo} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Upload Video File</label>
+                  <input
+                    type="file"
+                    accept="video/*"
+                    onChange={(e) => {
+                      if (e.target.files?.[0]) {
+                        setVideoFile(e.target.files[0]);
+                        setVideoSrcUrl("");
+                      }
+                    }}
+                    className="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200"
+                  />
+                  {videoFile && <p className="text-[10px] text-emerald-600 font-bold mt-1">✓ Selected: {videoFile.name}</p>}
+                </div>
+
+                <div className="relative flex py-2 items-center">
+                  <div className="flex-grow border-t border-slate-150"></div>
+                  <span className="flex-shrink mx-4 text-slate-400 text-[10px] font-bold uppercase tracking-wider">OR</span>
+                  <div className="flex-grow border-t border-slate-150"></div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Paste Video Direct URL</label>
+                  <input
+                    type="text"
+                    value={videoSrcUrl}
+                    onChange={(e) => {
+                      setVideoSrcUrl(e.target.value);
+                      if (e.target.value) setVideoFile(null);
+                    }}
+                    placeholder="https://example.com/video.mp4"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-805 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Video Title (Screen readers)</label>
+                  <input
+                    type="text"
+                    value={videoTitle}
+                    onChange={(e) => setVideoTitle(e.target.value)}
+                    placeholder="Embedded video description..."
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-805 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                  />
+                </div>
+
+                <div className="grid grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Width</label>
+                    <input
+                      type="text"
+                      value={videoWidth}
+                      onChange={(e) => setVideoWidth(e.target.value)}
+                      placeholder="100%"
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-805 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Height</label>
+                    <input
+                      type="text"
+                      value={videoHeight}
+                      onChange={(e) => setVideoHeight(e.target.value)}
+                      placeholder="auto"
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-805 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Alignment</label>
+                    <select
+                      value={videoAlign}
+                      onChange={(e) => setVideoAlign(e.target.value)}
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-805 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                    >
+                      <option value="center">Center</option>
+                      <option value="left">Left</option>
+                      <option value="right">Right</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 pt-3 border-t border-slate-100">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowVideoModal(false);
+                      setVideoFile(null);
+                      setVideoSrcUrl("");
+                    }}
+                    className="flex-1 border border-slate-200 text-slate-600 py-2 rounded-xl text-xs font-bold hover:bg-slate-50 cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isUploadingVideo}
+                    className="flex-1 bg-[#f15a24] hover:bg-orange-600 disabled:bg-slate-300 text-white py-2 rounded-xl text-xs font-bold shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 cursor-pointer"
+                  >
+                    {isUploadingVideo ? "Uploading..." : "Insert Video"}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {/* FAQ Parser Modal */}
+        {showFaqModal && (
+          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl w-full max-w-lg p-6 text-left shadow-2xl border border-slate-100">
+              <div className="flex justify-between items-center border-b border-slate-100 pb-3 mb-4">
+                <h4 className="text-base font-bold text-slate-900">Bulk Convert & Insert FAQ</h4>
+                <button 
+                  onClick={() => {
+                    setShowFaqModal(false);
+                    setFaqPasteText("");
+                  }}
+                  className="text-slate-400 hover:text-slate-600 cursor-pointer"
+                >
+                  <FiX className="text-lg" />
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">FAQ Main Title</label>
+                  <input
+                    type="text"
+                    value={faqTitle}
+                    onChange={(e) => setFaqTitle(e.target.value)}
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-805 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">FAQ Subtitle (Optional)</label>
+                  <input
+                    type="text"
+                    value={faqSubtitle}
+                    onChange={(e) => setFaqSubtitle(e.target.value)}
+                    placeholder="Find answers to common questions..."
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-805 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Paste FAQ (Q&A List)</label>
+                  <textarea
+                    rows="8"
+                    value={faqPasteText}
+                    onChange={(e) => setFaqPasteText(e.target.value)}
+                    placeholder={`Paste text list of questions and answers here. For example:\n\nQ: What is social engineering?\nA: Social engineering is a manipulation technique that exploits human error.\n\nQ: How often is simulation updated?\nA: New simulated templates are rolled out weekly.`}
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-850 placeholder-slate-400 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-mono leading-relaxed"
+                  />
+                  <p className="text-[10px] text-slate-400 mt-1.5">The parser automatically detects question/answer tokens and converts them into interactive accordions.</p>
+                </div>
+
+                <div className="flex gap-3 pt-3 border-t border-slate-100">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowFaqModal(false);
+                      setFaqPasteText("");
+                    }}
+                    className="flex-1 border border-slate-200 text-slate-600 py-2 rounded-xl text-xs font-bold hover:bg-slate-50 cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleInsertParsedFaq}
+                    className="flex-1 bg-[#f15a24] hover:bg-orange-600 text-white py-2 rounded-xl text-xs font-bold shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 cursor-pointer"
+                  >
+                    Convert & Insert
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Key Takeaways Modal */}
+        {showTakeawaysModal && (
+          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl w-full max-w-lg p-6 text-left shadow-2xl border border-slate-100">
+              <div className="flex justify-between items-center border-b border-slate-100 pb-3 mb-4">
+                <h4 className="text-base font-bold text-slate-900">Bulk Insert Key Takeaways Card</h4>
+                <button 
+                  onClick={() => {
+                    setShowTakeawaysModal(false);
+                    setTakeawaysPasteText("");
+                  }}
+                  className="text-slate-400 hover:text-slate-600 cursor-pointer"
+                >
+                  <FiX className="text-lg" />
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Card Title</label>
+                  <input
+                    type="text"
+                    value={takeawaysTitle}
+                    onChange={(e) => setTakeawaysTitle(e.target.value)}
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-805 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">List Style</label>
+                  <select
+                    value={takeawaysType}
+                    onChange={(e) => setTakeawaysType(e.target.value)}
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-805 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-semibold"
+                  >
+                    <option value="bullet">Bullets (-)</option>
+                    <option value="number">Numbered List (1, 2, 3)</option>
+                    <option value="roman">Roman Numerals (I, II, III)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Paste Key Takeaway Points (One per line)</label>
+                  <textarea
+                    rows="8"
+                    value={takeawaysPasteText}
+                    onChange={(e) => setTakeawaysPasteText(e.target.value)}
+                    placeholder={`Paste points here. For example:\n\n- Regular security awareness training reduces breaches by up to 80%.\n- MFA must be enforced on all employee credentials.`}
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-850 placeholder-slate-400 text-xs focus:outline-none focus:border-[#f15a24] focus:bg-white font-mono leading-relaxed"
+                  />
+                  <p className="text-[10px] text-slate-400 mt-1.5">Each line will be converted into a styled bullet point inside the takeaway card.</p>
+                </div>
+
+                <div className="flex gap-3 pt-3 border-t border-slate-100">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowTakeawaysModal(false);
+                      setTakeawaysPasteText("");
+                    }}
+                    className="flex-1 border border-slate-200 text-slate-600 py-2 rounded-xl text-xs font-bold hover:bg-slate-50 cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleInsertParsedTakeaways}
+                    className="flex-1 bg-[#f15a24] hover:bg-orange-600 text-white py-2 rounded-xl text-xs font-bold shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 cursor-pointer"
+                  >
+                    Convert & Insert
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
