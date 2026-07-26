@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FiArrowLeft, FiShield } from "react-icons/fi";
 import Link from "next/link";
 import SeoMeta from "@layouts/partials/SeoMeta";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
 
-export default function PDFViewerPage() {
+function PDFViewerContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const file = searchParams.get("file");
@@ -95,5 +95,17 @@ export default function PDFViewerPage() {
         </main>
       </div>
     </GSAPWrapper>
+  );
+}
+
+export default function PDFViewerPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-slate-900 text-white flex items-center justify-center">
+        <div className="w-12 h-12 border-4 border-[#f15a24] border-t-transparent rounded-full animate-spin" />
+      </div>
+    }>
+      <PDFViewerContent />
+    </Suspense>
   );
 }
