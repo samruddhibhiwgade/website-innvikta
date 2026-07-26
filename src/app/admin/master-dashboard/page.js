@@ -24,7 +24,8 @@ import {
   FiMapPin,
   FiClock,
   FiAlertCircle,
-  FiArchive
+  FiArchive,
+  FiTrendingUp
 } from "react-icons/fi";
 
 const INDUSTRIES = ["BFSI", "Healthcare", "Insurance", "IT & Services", "Manufacturing", "Government"];
