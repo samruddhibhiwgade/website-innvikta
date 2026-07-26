@@ -237,10 +237,10 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
       </div>
       
       {/* End-to-end full page width image with increased size and responsive aspect scaling */}
-      <div className="w-full max-w-7xl mx-auto relative -mt-12 md:-mt-28 px-4 md:px-8">
+      <div className="w-full max-w-7xl mx-auto relative mt-6 md:mt-10 px-4 md:px-8">
         <div className="banner-img relative w-full overflow-hidden group">
           <ImageFallback
-            src="/images/home page dashboard.png"
+            src={bannerData.image || "/images/hero-section-homepage.png"}
             className="w-full h-auto object-contain relative z-0 transition-all duration-700 border-none"
             width={1920}
             height={1080}
