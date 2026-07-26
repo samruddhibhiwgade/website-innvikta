@@ -43,3 +43,6 @@ yarn-error.log*
 build-test/
 /scratch/
 scratch_ssh/node_modules/
+
+# User uploads
+/Cyberhelp_Innvikta/server/uploads/

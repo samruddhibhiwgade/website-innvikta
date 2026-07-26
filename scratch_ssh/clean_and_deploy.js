@@ -8,7 +8,7 @@ conn.on('ready', () => {
     cd /home/platform/public_html/Innvikta-Website
     git stash || true
     git checkout -- . || true
-    git clean -fd || true
+    git clean -fd -e Cyberhelp_Innvikta/server/uploads || true
     git pull https://github.com/samruddhibhiwgade/website-innvikta.git main
     
     # Run the build
