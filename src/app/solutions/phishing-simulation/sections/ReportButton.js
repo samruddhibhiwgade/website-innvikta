@@ -71,11 +71,11 @@ export default function ReportButtonSection() {
           </div>
 
           {/* Visual Block */}
-          <div className="two-col-visual-block bg-white animate from-right" style={{ padding: "1rem", borderRadius: "1.5rem" }}>
+          <div className="two-col-visual-block bg-white animate from-right shadow-md border border-slate-105" style={{ padding: "1rem", borderRadius: "1.5rem", width: "100%", maxWidth: "600px", margin: "0 auto" }}>
             <img 
               alt="Phishing Alert Button Mockup" 
               loading="lazy" 
-              src="/images/phishing_report_button.png" 
+              src="/images/phish-report-alert.png" 
               style={{ width: "100%", height: "auto", display: "block", borderRadius: "1rem" }} 
             />
           </div>
