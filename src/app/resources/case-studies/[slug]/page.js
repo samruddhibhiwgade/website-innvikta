@@ -17,7 +17,7 @@ export default function CaseStudyDetail() {
 
   useEffect(() => {
     if (!slug) return;
-    fetch("/api/case-studies")
+    fetch("/api/case-studies", { cache: "no-store" })
       .then(res => res.json())
       .then(list => {
         const found = list.find(item => item.slug === slug);

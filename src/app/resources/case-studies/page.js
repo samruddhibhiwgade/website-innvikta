@@ -21,7 +21,7 @@ export default function CaseStudies() {
   const [activeIndustry, setActiveIndustry] = useState("All Industries");
 
   useEffect(() => {
-    fetch("/api/case-studies")
+    fetch("/api/case-studies", { cache: "no-store" })
       .then(res => res.json())
       .then(data => setCaseStudies(data))
       .catch(err => console.error("Failed to fetch case studies", err));
@@ -114,10 +114,6 @@ export default function CaseStudies() {
                   {study.pdfUrl ? (
                     <a 
                       href={study.pdfUrl} 
-                      onClick={(e) => {
-                        e.preventDefault();
-                        window.open(study.pdfUrl, '_blank', 'width=1000,height=900,noopener,noreferrer');
-                      }}
                       className="block"
                     >
                       <div className="relative w-full aspect-square rounded-[2rem] overflow-hidden shadow-sm cursor-pointer">
@@ -181,10 +177,6 @@ export default function CaseStudies() {
                     {study.pdfUrl ? (
                       <a 
                         href={study.pdfUrl} 
-                        onClick={(e) => {
-                          e.preventDefault();
-                          window.open(study.pdfUrl, '_blank', 'width=1000,height=900,noopener,noreferrer');
-                        }}
                         className="block"
                       >
                         <h3 className={`text-2xl font-black mb-3 leading-snug tracking-tight transition-colors cursor-pointer ${
@@ -219,10 +211,6 @@ export default function CaseStudies() {
                   {study.pdfUrl ? (
                     <a 
                       href={study.pdfUrl} 
-                      onClick={(e) => {
-                        e.preventDefault();
-                        window.open(study.pdfUrl, '_blank', 'width=1000,height=900,noopener,noreferrer');
-                      }}
                       className="bg-[#f15a24] hover:bg-orange-600 !text-white px-5 py-2.5 rounded-lg transition-all duration-300 inline-flex items-center gap-1 whitespace-nowrap font-bold text-sm shadow-md shadow-orange-500/10 cursor-pointer"
                     >
                       View PDF <FiArrowRight className="text-xs" />
