@@ -189,8 +189,8 @@ function smtpSend($to, $subject, $htmlBody) {
             if (strpos($r, '220') === false) {
                 throw new Exception('STARTTLS rejected: ' . $r);
             }
-            if (!stream_socket_enable_crypto($sock, true, STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT)) {
-                if (!stream_socket_enable_crypto($sock, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
+            if (!@stream_socket_enable_crypto($sock, true, STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT)) {
+                if (!@stream_socket_enable_crypto($sock, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
                     throw new Exception('TLS upgrade failed');
                 }
             }
