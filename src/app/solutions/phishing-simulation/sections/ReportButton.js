@@ -71,7 +71,7 @@ export default function ReportButtonSection() {
           </div>
 
           {/* Visual Block */}
-          <div className="two-col-visual-block bg-white animate from-right shadow-md border border-slate-105" style={{ padding: "1rem", borderRadius: "1.5rem", width: "100%", maxWidth: "600px", margin: "0 auto" }}>
+          <div className="two-col-visual-block animate from-right" style={{ width: "100%", maxWidth: "600px", margin: "0 auto" }}>
             <img 
               alt="Phishing Alert Button Mockup" 
               loading="lazy" 
