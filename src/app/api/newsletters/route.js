@@ -2,9 +2,11 @@ import { NextResponse } from "next/server";
 
 const backendUrl = process.env.NEXT_PUBLIC_PHP_BACKEND_URL || "https://innvikta.co.in/Innvikta-Website/Cyberhelp_Innvikta/server";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
-    const res = await fetch(`${backendUrl}/cms_api.php?type=newsletters`, { next: { revalidate: 10 } });
+    const res = await fetch(`${backendUrl}/cms_api.php?type=newsletters`, { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
     const data = await res.json();
     return NextResponse.json(data);
