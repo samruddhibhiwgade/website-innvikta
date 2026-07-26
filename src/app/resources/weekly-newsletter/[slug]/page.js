@@ -116,6 +116,11 @@ export default function NewsletterDetailPage() {
       });
   }, []);
 
+  const cleanContent = (text) => {
+    if (!text) return "";
+    return text.split("\n").map(line => line.trim()).join("\n");
+  };
+
   const edition = newsletters.find(item => item.slug === slug) || newsletters[0];
 
   useEffect(() => {
@@ -303,7 +308,7 @@ export default function NewsletterDetailPage() {
                 {/* Newsletter content block */}
                 <section 
                   className="content text-left text-justify prose prose-slate max-w-none text-[#334155] leading-relaxed" 
-                  dangerouslySetInnerHTML={{ __html: marked.parse(edition.content || "") }}
+                  dangerouslySetInnerHTML={{ __html: marked.parse(cleanContent(edition.content || "")) }}
                 />
 
                 {/* Subscription Card at bottom of article */}

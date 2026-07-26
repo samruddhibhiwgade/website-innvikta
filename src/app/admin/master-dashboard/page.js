@@ -2527,11 +2527,11 @@ export default function MasterDashboard() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Content (HTML body)</label>
+                  <label className="block text-xs font-bold text-slate-500 uppercase mb-2">Content (Markdown body)</label>
                   <ToolbarEditor
                     value={newsletterForm.content}
                     onChange={(val) => setNewsletterForm({ ...newsletterForm, content: val })}
-                    placeholder="Write newsletter HTML content..."
+                    placeholder="Write newsletter markdown content..."
                     rows={12}
                     textareaRef={textareaRef}
                     onInsertImage={() => setShowImageModal(true)}
