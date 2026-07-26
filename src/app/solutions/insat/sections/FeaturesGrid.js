@@ -28,7 +28,7 @@ export default function FeaturesGridSection() {
           <div className="feature-card animate">
             <div className="feature-visual bg-grey-30">
               <img alt="Phishing simulations mockup" loading="lazy"
-                src="/insat/images/Phiahsing_Simulation.png" />
+                src="/insat/images/phishing-simulation.png" />
             </div>
             <div className="feature-content">
               <h3 className="feature-title">Phishing Simulations</h3>
