@@ -181,7 +181,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
     <section className="section banner pt-0 relative overflow-hidden" id="hero-banner">
       <div className="bg-theme banner-bg absolute left-0 top-0 w-full h-full overflow-hidden z-0">
         <ImageFallback 
-          src="/images/Heroimg_homepage.png" 
+          src="/images/hero-section-homepage.png" 
           width={1920}
           height={1080}
           priority 
@@ -240,7 +240,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
       <div className="w-full max-w-7xl mx-auto relative mt-6 md:mt-10 px-4 md:px-8">
         <div className="banner-img relative w-full overflow-hidden group">
           <ImageFallback
-            src={bannerData.image || "/images/hero-section-homepage.png"}
+            src="/images/home page dashboard.png"
             className="w-full h-auto object-contain relative z-0 transition-all duration-700 border-none"
             width={1920}
             height={1080}
