@@ -21,7 +21,15 @@ export default function CaseStudyDetail() {
       .then(res => res.json())
       .then(list => {
         const found = list.find(item => item.slug === slug);
-        setData(found || list[0]);
+        if (found) {
+          if (found.pdfUrl) {
+            window.location.replace(found.pdfUrl);
+          } else {
+            setData(found);
+          }
+        } else {
+          setData(list[0]);
+        }
       })
       .catch(err => console.error("Error fetching case study details", err));
   }, [slug]);

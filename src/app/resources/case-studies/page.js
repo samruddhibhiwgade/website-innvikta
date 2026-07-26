@@ -111,7 +111,16 @@ export default function CaseStudies() {
               >
                 <div>
                   {/* Square Image container with Overlay */}
-                  <Link href={`/resources/case-studies/${study.slug || ""}`} className="block">
+                  <Link 
+                    href={study.pdfUrl ? study.pdfUrl : `/resources/case-studies/${study.slug || ""}`} 
+                    onClick={(e) => {
+                      if (study.pdfUrl) {
+                        e.preventDefault();
+                        window.open(study.pdfUrl, '_blank', 'width=1000,height=900,noopener,noreferrer');
+                      }
+                    }}
+                    className="block"
+                  >
                     <div className="relative w-full aspect-square rounded-[2rem] overflow-hidden shadow-sm cursor-pointer">
                       <img 
                         src={study.image} 
@@ -144,7 +153,16 @@ export default function CaseStudies() {
                     </span>
 
                     {/* Title */}
-                    <Link href={`/resources/case-studies/${study.slug || ""}`} className="block">
+                    <Link 
+                      href={study.pdfUrl ? study.pdfUrl : `/resources/case-studies/${study.slug || ""}`} 
+                      onClick={(e) => {
+                        if (study.pdfUrl) {
+                          e.preventDefault();
+                          window.open(study.pdfUrl, '_blank', 'width=1000,height=900,noopener,noreferrer');
+                        }
+                      }}
+                      className="block"
+                    >
                       <h3 className={`text-2xl font-black mb-3 leading-snug tracking-tight transition-colors cursor-pointer ${
                         study.industry === "Healthcare" 
                           ? "text-[#f15a24]" 
@@ -164,10 +182,16 @@ export default function CaseStudies() {
                 {/* Read More Button */}
                 <div className="px-2 pb-6">
                   <Link 
-                    href={`/resources/case-studies/${study.slug || ""}`} 
+                    href={study.pdfUrl ? study.pdfUrl : `/resources/case-studies/${study.slug || ""}`} 
+                    onClick={(e) => {
+                      if (study.pdfUrl) {
+                        e.preventDefault();
+                        window.open(study.pdfUrl, '_blank', 'width=1000,height=900,noopener,noreferrer');
+                      }
+                    }}
                     className="bg-[#f15a24] hover:bg-orange-600 !text-white px-5 py-2.5 rounded-lg transition-all duration-300 inline-flex items-center gap-1 whitespace-nowrap font-bold text-sm shadow-md shadow-orange-500/10 cursor-pointer"
                   >
-                    Read More <FiArrowRight className="text-xs" />
+                    {study.pdfUrl ? "View PDF" : "Read More"} <FiArrowRight className="text-xs" />
                   </Link>
                 </div>
               </div>
