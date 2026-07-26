@@ -185,7 +185,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
           width={1920}
           height={1080}
           priority 
-          className="w-full h-full object-cover object-center md:object-top opacity-100 will-change-transform" 
+          className="hidden md:block w-full h-full object-cover object-center md:object-top opacity-100 will-change-transform" 
           alt="hero background"
         />
         {/* NetworkBackground removed */}
@@ -198,7 +198,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
         <div className="row overflow-hidden rounded-2xl will-change-transform">
           <div className="col-12">
             <div className="row relative justify-start pb-6 md:pb-10">
-              <div className="banner-content col-12 px-6 md:col-8 md:px-12 pb-0 pt-4 md:pt-20 text-left will-change-transform">
+              <div className="banner-content col-12 px-6 md:col-8 md:px-12 pb-0 pt-4 md:pt-20 text-center md:text-left will-change-transform">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={isHookActive ? "gamified" : "original"}
@@ -214,14 +214,14 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                       "h1",
                       "mb-4 md:mb-6 banner-title font-black text-slate-900 text-[32px] leading-tight sm:text-5xl md:text-6xl lg:text-7xl"
                     )}
-                    <p className="banner-desc text-slate-600 text-[15px] leading-relaxed md:text-lg max-w-xl mr-auto mb-6 md:mb-8 font-medium px-2 md:px-0">
+                    <p className="banner-desc text-slate-600 text-[15px] leading-relaxed md:text-lg max-w-xl mx-auto md:ml-0 md:mr-auto mb-6 md:mb-8 font-medium px-2 md:px-0">
                       {isHookActive 
                         ? "Innvikta transforms complex cybersecurity training into engaging, gamified experiences. Level up your team's defense with interactive simulations and real-world threat scenarios."
                         : bannerData.description}
                     </p>
                   </motion.div>
                 </AnimatePresence>
-                <div className="flex justify-start items-center gap-4 mt-8 banner-btn">
+                <div className="flex justify-center md:justify-start items-center gap-4 mt-8 banner-btn">
                   <Link 
                     href="/book-demo" 
                     className="btn bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10 text-sm md:text-base"
