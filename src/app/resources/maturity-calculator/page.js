@@ -10,6 +10,7 @@ import HeroSection from "./components/Hero";
 import AssessmentForm from "./components/AssessmentForm";
 import ResultsDashboard from "./components/ResultsDashboard";
 import FAQSection from "./components/Faq";
+import MaturityDetails from "./components/MaturityDetails";
 
 export default function MaturityCalculator() {
   const [step, setStep] = useState("hero"); // hero, assessment, results
@@ -74,7 +75,10 @@ export default function MaturityCalculator() {
       <div className="insat-page" style={{ background: "#FFFFFF", color: "#1F1F1F" }}>
         <div className="main-content">
           {step === "hero" && (
-            <HeroSection setStep={setStep} />
+            <>
+              <HeroSection setStep={setStep} />
+              <MaturityDetails />
+            </>
           )}
 
           {step === "assessment" && (
