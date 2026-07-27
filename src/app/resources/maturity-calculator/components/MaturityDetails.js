@@ -1,5 +1,5 @@
 import React from "react";
-import { FiCheckCircle, FiShield, FiTrendingUp, FiZap } from "react-icons/fi";
+import { FiCheckCircle } from "react-icons/fi";
 
 export default function MaturityDetails() {
   const maturityStages = [
@@ -8,36 +8,28 @@ export default function MaturityDetails() {
       name: "Reactive (Ad-Hoc)",
       status: "Compliance Focused",
       desc: "Training is treated as a periodic compliance checkbox. Organizations run basic once-a-year sessions with generic modules. Suspicious message reporting is non-existent or completely manual.",
-      risk: "High Risk of Breach",
-      color: "#EF4444",
-      bgLight: "#FEF2F2",
+      risk: "High Risk of Breach"
     },
     {
       level: "Level 2",
       name: "Baseline (Formal)",
       status: "Awareness Focused",
       desc: "Training is formal and scheduled. Regular simulated email phishing campaigns are executed, and failure metrics are tracked. The organization has basic security guidelines but lacks personalization.",
-      risk: "Moderate Risk",
-      color: "#F59E0B",
-      bgLight: "#FFFBEB",
+      risk: "Moderate Risk"
     },
     {
       level: "Level 3",
       name: "Proactive (Managed)",
       status: "Behavioral Focused",
       desc: "Awareness programs are customized by department and job role. Security simulation templates extend beyond email to SMS and voice. One-click phishing alert buttons enable instant user reporting.",
-      risk: "Low Risk",
-      color: "#3B82F6",
-      bgLight: "#EFF6FF",
+      risk: "Low Risk"
     },
     {
       level: "Level 4",
       name: "Optimized (HRM)",
       status: "Risk Management Focused",
       desc: "Human Risk Management (HRM) uses dynamic behavioral telemetry to profile every employee. Real-time feedback loops instantly reinforce safe actions. Security culture is measured and continuous.",
-      risk: "Resilient Posture",
-      color: "#10B981",
-      bgLight: "#ECFDF5",
+      risk: "Resilient Posture"
     },
   ];
 
@@ -64,29 +56,29 @@ export default function MaturityDetails() {
     <>
       {/* Section 1: The 4 Stages of Security Awareness Maturity */}
       <section className="bg-grey-5" style={{ padding: "6rem 0", borderTop: "1px solid var(--color-grey)" }}>
-        <div className="container">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-subheading" style={{ color: "#F15A24", fontWeight: "600", marginBottom: "0.5rem", display: "block" }}>
+        <div className="container" style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
+          <div className="max-w-3xl mx-auto mb-16" style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <span className="text-subheading" style={{ color: "#F15A24", fontWeight: "600", marginBottom: "0.5rem", display: "block", textAlign: "center" }}>
               THE MATURITY MODEL
             </span>
-            <h2 className="text-52-heading" style={{ fontSize: "clamp(2rem, 4vw, 2.75rem)", lineHeight: "1.2" }}>
+            <h2 className="text-52-heading" style={{ fontSize: "clamp(2rem, 4vw, 2.75rem)", lineHeight: "1.2", textAlign: "center", width: "100%" }}>
               The Four Stages of <span style={{ color: "#F15A24" }}>Security Awareness</span> Maturity
             </h2>
-            <p className="text-18-content" style={{ opacity: "0.8", marginTop: "1rem" }}>
+            <p className="text-18-content" style={{ opacity: "0.8", marginTop: "1rem", textAlign: "center" }}>
               Where does your organization stand? Identify your current level and discover the path to a resilient human firewall.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-100" style={{ width: "100%" }}>
             {maturityStages.map((stage, idx) => (
               <div 
                 key={idx} 
-                className="bg-white rounded-xl shadow-sm border border-grey transition-all duration-300 hover:shadow-md"
+                className="bg-white rounded-xl border border-grey transition-all duration-300 hover:shadow-sm"
                 style={{ padding: "2.25rem 2rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}
               >
                 <div>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.25rem" }}>
-                    <span style={{ fontSize: "0.85rem", fontWeight: "700", textTransform: "uppercase", color: stage.color, backgroundColor: stage.bgLight, padding: "0.25rem 0.75rem", borderRadius: "50px" }}>
+                    <span style={{ fontSize: "0.8rem", fontWeight: "700", textTransform: "uppercase", color: "#475569", backgroundColor: "#F1F5F9", padding: "0.25rem 0.6rem", borderRadius: "4px" }}>
                       {stage.level}
                     </span>
                     <span style={{ fontSize: "0.8rem", color: "#64748B", fontWeight: "500" }}>
@@ -103,9 +95,9 @@ export default function MaturityDetails() {
                   </p>
                 </div>
 
-                <div style={{ borderTop: "1px solid #F1F5F9", paddingTop: "1rem", marginTop: "auto", display: "flex", alignItems: "center", justifyBetween: "space-between", width: "100%" }}>
+                <div style={{ borderTop: "1px solid #F1F5F9", paddingTop: "1rem", marginTop: "auto", display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
                   <span style={{ fontSize: "0.85rem", fontWeight: "600", color: "#64748B" }}>Risk Status:</span>
-                  <span style={{ fontSize: "0.85rem", fontWeight: "700", color: stage.color, marginLeft: "auto" }}>{stage.risk}</span>
+                  <span style={{ fontSize: "0.85rem", fontWeight: "700", color: "#1F2937" }}>{stage.risk}</span>
                 </div>
               </div>
             ))}
