@@ -24,6 +24,7 @@ conn.on('ready', () => {
     
     # Run the build
     . ~/.nvm/nvm.sh
+    echo "8g2A0&jU5h" | sudo -S npx pm2 stop innvikta || true
     echo "8g2A0&jU5h" | sudo -S rm -rf .next
     echo "8g2A0&jU5h" | sudo -S chown -R platform:platform /home/platform/public_html/Innvikta-Website
     npm run build
@@ -31,7 +32,7 @@ conn.on('ready', () => {
     mkdir -p /home/platform/public_html/website/_next
     cp -R /home/platform/public_html/Innvikta-Website/.next/static /home/platform/public_html/website/_next/
     cp -R /home/platform/public_html/Innvikta-Website/public/* /home/platform/public_html/website/ 2>/dev/null || true
-    echo "8g2A0&jU5h" | sudo -S npx pm2 restart innvikta
+    echo "8g2A0&jU5h" | sudo -S npx pm2 start innvikta || echo "8g2A0&jU5h" | sudo -S npx pm2 restart innvikta
   `;
   
   conn.exec(cmd, (err, stream) => {

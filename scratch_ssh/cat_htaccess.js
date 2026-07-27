@@ -2,11 +2,20 @@ const { Client } = require('ssh2');
 
 const conn = new Client();
 conn.on('ready', () => {
-  conn.exec('cat /home/platform/public_html/website/.htaccess', (err, stream) => {
+  console.log('Client :: ready');
+  const cmd = `
+    echo "=== Website .htaccess ==="
+    cat /home/platform/public_html/website/.htaccess
+  `;
+  
+  conn.exec(cmd, (err, stream) => {
     if (err) throw err;
-    stream.on('close', () => conn.end())
-          .on('data', (data) => console.log('STDOUT: ' + data.toString()))
-          .stderr.on('data', (data) => console.log('STDERR: ' + data.toString()));
+    stream.on('close', (code, signal) => {
+      console.log('Done with code: ' + code);
+      conn.end();
+    })
+    .on('data', (data) => console.log('STDOUT: ' + data.toString()))
+    .stderr.on('data', (data) => console.log('STDERR: ' + data.toString()));
   });
 }).connect({
   host: 'vps.innvikta.com',

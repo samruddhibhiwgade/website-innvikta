@@ -726,7 +726,7 @@ const PartnersPage = () => {
           @media (min-width: 768px) {
               .partner-hero-section {
                   background-image: url('/images/partner-hero.png') !important;
-                  background-size: 85% !important;
+                  background-size: auto 100% !important;
                   background-position: right center !important;
                   background-repeat: no-repeat !important;
               }
