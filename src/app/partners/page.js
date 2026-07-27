@@ -249,50 +249,36 @@ const PartnersPage = () => {
         <section className="partner-hero-section py-20 md:py-28 border-b border-slate-200 relative overflow-hidden">
           
           <div className="container px-6 md:px-12 lg:px-24">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              
-              {/* Left Column: Content */}
-              <div className="lg:col-span-7 hero-content">
-                <span className="text-subheading">INNVIKTA PARTNER NETWORK</span>
-                <h1 className="text-96-heading hero-title-custom mb-6">
-                  Partner With Innvikta to<br />
-                  Build <span className="text-[#f15a24]">Safer Workforces</span>
-                </h1>
-                <p className="text-20-content hero-paragraph max-w-2xl mb-8">
-                  Join us in helping organizations make security awareness<br className="hidden md:inline" />
-                  practical, engaging, measurable, and ready for<br className="hidden md:inline" />
-                  real-world risk.
-                </p>
-                <div className="hero-actions-row">
-                  <a 
-                    href="#form" 
-                    onClick={scrollToForm}
-                    className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10"
-                    style={{ padding: "14px 28px" }}
-                  >
-                    <span>Become a Partner</span>
-                    <FiArrowRight className="text-sm" />
-                  </a>
-                  <a 
-                    href="mailto:sale@innvikta.com" 
-                    className="bg-slate-100 hover:bg-[#f15a24] border border-slate-200 hover:border-[#f15a24] text-slate-800 hover:!text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold"
-                    style={{ padding: "14px 28px" }}
-                  >
-                    <FiMail className="text-sm" />
-                    <span>Talk to Us</span>
-                  </a>
-                </div>
+            <div className="max-w-3xl hero-content">
+              <span className="text-subheading">INNVIKTA PARTNER NETWORK</span>
+              <h1 className="text-96-heading hero-title-custom">
+                Partner With Innvikta to<br />
+                Build <span className="text-[#f15a24]">Safer Workforces</span>
+              </h1>
+              <p className="text-20-content hero-paragraph max-w-2xl">
+                Join us in helping organizations make security awareness<br className="hidden md:inline" />
+                practical, engaging, measurable, and ready for<br className="hidden md:inline" />
+                real-world risk.
+              </p>
+              <div className="hero-actions-row">
+                <a 
+                  href="#form" 
+                  onClick={scrollToForm}
+                  className="bg-[#f15a24] hover:bg-orange-600 !text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold shadow-md shadow-orange-500/10"
+                  style={{ padding: "14px 28px" }}
+                >
+                  <span>Become a Partner</span>
+                  <FiArrowRight className="text-sm" />
+                </a>
+                <a 
+                  href="mailto:sale@innvikta.com" 
+                  className="bg-slate-100 hover:bg-[#f15a24] border border-slate-200 hover:border-[#f15a24] text-slate-800 hover:!text-white rounded-lg transition-all duration-300 inline-flex items-center justify-center gap-1.5 whitespace-nowrap font-bold"
+                  style={{ padding: "14px 28px" }}
+                >
+                  <FiMail className="text-sm" />
+                  <span>Talk to Us</span>
+                </a>
               </div>
-
-              {/* Right Column: Visual Image */}
-              <div className="lg:col-span-5 flex justify-center lg:justify-end">
-                <img 
-                  src="/images/partner-hero.png" 
-                  alt="Innvikta Partners Handshake" 
-                  className="w-full max-w-[500px] h-auto object-contain rounded-2xl shadow-sm"
-                />
-              </div>
-
             </div>
           </div>
         </section>
@@ -734,6 +720,16 @@ const PartnersPage = () => {
 
            .partner-hero-section {
               background-color: #F6F5F8 !important;
+              background-image: none !important;
+          }
+          
+          @media (min-width: 768px) {
+              .partner-hero-section {
+                  background-image: url('/images/partner-hero.png') !important;
+                  background-size: cover !important;
+                  background-position: right center !important;
+                  background-repeat: no-repeat !important;
+              }
           }
 
           /* Restore submit button styling on the page from global resets */
