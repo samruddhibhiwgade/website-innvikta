@@ -14,7 +14,7 @@ export default function ReportButtonSection() {
               One-Click Threat Reporting
             </span>
             <h2 className="text-52-heading">
-              Empower Employees with the Phishing Alert Button (PAB)
+              Empower Employees with the <span style={{ color: "#F15A24" }}>Phishing Alert Button (PAB)</span>
             </h2>
             <div style={{ marginTop: "1.5rem", opacity: "0.8" }}>
               <p className="text-18-content">
