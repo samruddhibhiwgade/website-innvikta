@@ -246,7 +246,7 @@ const PartnersPage = () => {
       <SeoMeta title="Innvikta Partners Program | MSP & Enterprise Partners" description="Partner with Innvikta to offer leading-edge security awareness training, phishing simulations, and human risk management." />
       <div ref={containerRef} className="insat-page insat-page-no-reset min-h-screen bg-[#fafafa]">
         
-        <section className="partner-hero-section py-20 md:py-28 border-b border-slate-200 relative overflow-hidden">
+        <section className="partner-hero-section pt-10 pb-16 md:pt-12 md:pb-20 border-b border-slate-200 relative overflow-hidden">
           
           <div className="container px-6 md:px-12 lg:px-24">
             <div className="max-w-3xl hero-content">
