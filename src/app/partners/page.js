@@ -246,7 +246,7 @@ const PartnersPage = () => {
       <SeoMeta title="Innvikta Partners Program | MSP & Enterprise Partners" description="Partner with Innvikta to offer leading-edge security awareness training, phishing simulations, and human risk management." />
       <div ref={containerRef} className="insat-page insat-page-no-reset min-h-screen bg-[#fafafa]">
         
-        <section className="partner-hero-section pt-10 pb-16 md:pt-12 md:pb-20 border-b border-slate-200 relative overflow-hidden">
+        <section className="partner-hero-section pt-2 md:pt-4 pb-8 md:pb-12 border-b border-slate-200 relative overflow-hidden">
           
           <div className="container px-6 md:px-12 lg:px-24">
             <div className="max-w-3xl hero-content">
@@ -703,7 +703,7 @@ const PartnersPage = () => {
           }
 
           .insat-page .hero-actions-row {
-              margin-top: 1.25rem !important;
+              margin-top: 0.75rem !important;
               display: flex !important;
               align-items: center !important;
               justify-content: flex-start !important;
@@ -718,19 +718,32 @@ const PartnersPage = () => {
               }
           }
 
-           .partner-hero-section {
-              background-color: #F6F5F8 !important;
-              background-image: none !important;
-          }
-          
-          @media (min-width: 768px) {
-              .partner-hero-section {
-                  background-image: url('/images/partner-hero.png') !important;
-                  background-size: cover !important;
-                  background-position: right center !important;
-                  background-repeat: no-repeat !important;
-              }
-          }
+            .partner-hero-section {
+               background-color: #F6F5F8 !important;
+               background-image: none !important;
+               min-height: calc(100vh - 96px) !important;
+               display: flex !important;
+               align-items: center !important;
+               padding-top: 2rem !important;
+               padding-bottom: 2rem !important;
+           }
+           
+           @media (min-width: 768px) {
+               .partner-hero-section {
+                   background-image: url('/images/partner-hero.png') !important;
+                   background-size: cover !important;
+                   background-position: right center !important;
+                   background-repeat: no-repeat !important;
+               }
+           }
+
+           @media (min-width: 1024px) {
+               .partner-hero-section {
+                   min-height: calc(100vh - 120px) !important;
+                   padding-top: 0 !important;
+                   padding-bottom: 0 !important;
+               }
+           }
 
           /* Restore submit button styling on the page from global resets */
           .insat-page button[type="submit"] {
