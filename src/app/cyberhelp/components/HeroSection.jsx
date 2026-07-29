@@ -34,7 +34,7 @@ export default function HeroSection() {
 
     // Only use dynamic news items as requested
     const allItems = newsItems.length > 0 
-        ? newsItems.map(n => `NEWS: ${n.title}`)
+        ? newsItems.slice(0, 3).map(n => `NEWS: ${n.title}`)
         : []
 
     // Duplicate for seamless loop if we have items
@@ -54,7 +54,7 @@ export default function HeroSection() {
                         <a href="tel:1930" className="btn hero-btn-red">
                             <Phone size={18} /> CALL HELPLINE 1930
                         </a>
-                        <Link href="/cyberhelp/register" className="hero-btn-black" style={{ textDecoration: 'none' }}>
+                        <Link href="/cyberhelp/register" className="btn hero-btn-black" style={{ textDecoration: 'none' }}>
                             <Send size={18} /> Cyber Incident Guide
                         </Link>
                     </div>

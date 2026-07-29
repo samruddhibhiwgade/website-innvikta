@@ -46,7 +46,6 @@ const Footer = () => {
       { name: "InSAT (Security Awareness)", url: "/solutions/insat" },
       { name: "Innvikta Arcade", url: "/cyber-arcade" },
       { name: "Phishing Simulations", url: "/solutions/phishing-simulation" },
-      { name: "Human Risk Intelligence", url: "/solutions/human-risk-intelligence" },
       { name: "Compliance Training", url: "/solutions/compliance-training" },
       { name: "Customized Solutions", url: "/solutions/customized-solutions" }
     ],
@@ -64,8 +63,7 @@ const Footer = () => {
       { name: "Blog", url: "/blog" },
       { name: "Innvikta Cyberhelp", url: "/cyberhelp" },
       { name: "Weekly Newsletter", url: "/resources/weekly-newsletter" },
-      { name: "Glossary", url: "/resources/glossary" },
-      { name: "Customer Success Stories", url: "/resources/case-studies" }
+      { name: "Glossary", url: "/resources/glossary" }
     ],
     company: [
       { name: "About Us", url: "/about" },
@@ -166,6 +164,7 @@ const Footer = () => {
                   type="submit" 
                   disabled={isSubmitting}
                   className="btn btn-primary absolute right-1.5 top-1.5 bottom-1.5 !h-auto !rounded-xl py-2 px-6 text-xs font-bold uppercase tracking-wider disabled:opacity-50"
+                  style={{ backgroundColor: '#f15a24', color: '#ffffff' }}
                 >
                   {isSubmitting ? "Subscribing..." : "Subscribe"}
                 </button>

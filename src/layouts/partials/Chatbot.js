@@ -7,7 +7,8 @@ import { FiMessageSquare, FiX, FiSend, FiCalendar, FiArrowRight, FiShield } from
 
 const Chatbot = () => {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const [showHintBubble, setShowHintBubble] = useState(true);
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -160,7 +161,7 @@ const Chatbot = () => {
       setQuickPills(pills);
       setIsTyping(true);
       setMessages([]);
-      setIsOpen(true);
+      setShowHintBubble(true);
 
       const typingTimer = setTimeout(() => {
         setIsTyping(false);
@@ -294,6 +295,45 @@ const Chatbot = () => {
 
     if (lowerText.includes("roi") || lowerText.includes("calc")) {
       return "We have an interactive Security Awareness ROI Calculator that uses industry-specific click-rate benchmarks to calculate cost savings and risk score reductions. Try it now on our [Simulation ROI Calculator page](/resources/simulation-roi)!";
+    }
+
+    if (
+      lowerText.includes("upi") || 
+      lowerText.includes("gpay") || 
+      lowerText.includes("paytm") || 
+      lowerText.includes("phonepe") || 
+      lowerText.includes("wallet") || 
+      lowerText.includes("card") || 
+      lowerText.includes("sim swap") || 
+      lowerText.includes("otp") || 
+      lowerText.includes("bank account")
+    ) {
+      return "For **Financial, Banking, or UPI Fraud**:\n\n1. **Freeze accounts/cards** immediately using your bank's mobile app or helpline.\n2. **Call 1930** immediately to report the transaction. Reporting within the 'Golden Hour' increases the chance of freezing the money in the fraudster's account.\n3. **File a complaint** on the official [cybercrime.gov.in](https://cybercrime.gov.in) portal.\n\nUse our **[Cyberhelp Reporting Guide](/cyberhelp/register)** to select 'UPI Fraud' or 'Debit/Credit Card/SIM Swap' to draft a structured complaint template.";
+    }
+
+    if (
+      lowerText.includes("bullying") || 
+      lowerText.includes("stalking") || 
+      lowerText.includes("sext") || 
+      lowerText.includes("blackmail") || 
+      lowerText.includes("threat") || 
+      lowerText.includes("fake profile") || 
+      lowerText.includes("impersonat") || 
+      lowerText.includes("identity theft")
+    ) {
+      return "For **Cyberbullying, Stalking, Sextortion, or Identity Theft**:\n\n1. **Do not pay or panic**: In blackmail scenarios, paying rarely stops the harasser. Block the user immediately.\n2. **Save Evidence**: Take screenshots of all chats, profile links, transaction details, and messages. Do not delete them.\n3. **Report on Platform**: Report the account directly to the platform (Instagram, Facebook, WhatsApp, etc.).\n4. **Official Complaint**: File an anonymous complaint on [cybercrime.gov.in](https://cybercrime.gov.in) under the 'Women/Children related crime' or 'Other Cyber Crimes' tab.\n\nUse our **[Cyberhelp Portal](/cyberhelp)** to get step-by-step instructions and generate a formal complaint template.";
+    }
+
+    if (
+      lowerText.includes("job") || 
+      lowerText.includes("part time") || 
+      lowerText.includes("telegram task") || 
+      lowerText.includes("investment") || 
+      lowerText.includes("demat") || 
+      lowerText.includes("trading scam") || 
+      lowerText.includes("crypto")
+    ) {
+      return "For **Online Job Scams or Fake Investment/Crypto Scams**:\n\n1. **Stop further deposits**: Scammers often ask for processing fees, taxes, or VIP deposits to unlock earnings. Never pay to withdraw money.\n2. **Save transaction IDs**: Keep records of all UPI IDs, bank accounts, beneficiary names, and chats used by the scammers.\n3. **Report immediately**: File a complaint on [cybercrime.gov.in](https://cybercrime.gov.in) to flag and block the target beneficiary bank accounts.\n\nUse our **[Cyberhelp Portal](/cyberhelp)** to choose 'Online Job Fraud' or 'Cryptocurrency Fraud' and build your formal report draft.";
     }
 
     if (
@@ -624,13 +664,64 @@ const Chatbot = () => {
 
   return (
     <>
+      {/* Small text hint bubble next to chat icon */}
+      {!isOpen && showHintBubble && (
+        <div 
+          onClick={() => {
+            setIsOpen(true);
+            setShowHintBubble(false);
+          }}
+          className="fixed bottom-[22px] right-20 md:bottom-9 md:right-24 bg-white text-slate-800 border border-slate-100 shadow-[0_8px_24px_rgba(0,0,0,0.1)] px-4 py-2.5 rounded-2xl rounded-br-none text-xs font-semibold cursor-pointer z-50 hover:scale-102 hover:border-orange-200 transition-all flex items-center gap-2 max-w-[230px] md:max-w-[280px]"
+        >
+          <span className="w-2 h-2 bg-green-500 rounded-full shrink-0 animate-pulse"></span>
+          <span className="truncate text-slate-700">Hi! Need help? Chat with us.</span>
+          <button 
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowHintBubble(false);
+            }}
+            className="text-slate-400 hover:text-slate-600 ml-1 p-0.5 flex items-center justify-center focus:outline-none"
+          >
+            <FiX className="text-xs" />
+          </button>
+        </div>
+      )}
+
       {/* Floating Chat Bubble - Modernized cybersecurity shield icon */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          setIsOpen(!isOpen);
+          if (!isOpen) {
+            setShowHintBubble(false);
+          }
+        }}
         className="fixed bottom-4 right-4 md:bottom-6 md:right-6 w-12 h-12 md:w-14 md:h-14 bg-[#f15a24] hover:bg-orange-600 !text-white rounded-full shadow-[0_8px_30px_rgb(241,90,36,0.3)] hover:shadow-[0_8px_30px_rgb(241,90,36,0.5)] transition-all duration-300 flex items-center justify-center z-50 cursor-pointer hover:scale-105"
         aria-label="Toggle Chat"
       >
-        {isOpen ? <FiX className="text-xl md:text-2xl" /> : <FiShield className="text-xl md:text-2xl" />}
+        {isOpen ? (
+          <FiX className="text-xl md:text-2xl" />
+        ) : (
+          <svg 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            className="w-6 h-6 md:w-7 md:h-7"
+          >
+            {/* Cybersecurity Shield Head Contour */}
+            <path d="M12 2L3 5v6c0 5.5 3.5 10 9 12 5.5-2 9-6.5 9-12V5l-9-3z" />
+            {/* Visor Bar representing bot eyes/screen */}
+            <rect x="7" y="9" width="10" height="4" rx="1" fill="currentColor" fillOpacity="0.85" />
+            {/* Glowing Visor Sensors */}
+            <circle cx="9.5" cy="11" r="0.75" fill="#fff" />
+            <circle cx="14.5" cy="11" r="0.75" fill="#fff" />
+            {/* Tech grid/mouth detail */}
+            <path d="M9 16h6" />
+            <path d="M12 14v4" />
+          </svg>
+        )}
       </button>
 
       {/* Chat Window - Reduced Size with Smooth Slide & Scale transition */}

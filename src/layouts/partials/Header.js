@@ -1552,33 +1552,53 @@ const Header = () => {
 
             {/* Main Navigation Items */}
             <ul className="hidden xl:flex items-center justify-center gap-x-2 xl:gap-x-4 h-full desktop-nav-menu mx-auto">
-              {Object.keys(menuData).map((menuKey) => (
-                <li
-                  key={menuKey}
-                  className="h-full flex items-center"
-                >
-                  <button 
-                    onClick={() => {
-                      if (activeMegaMenu === menuKey) {
-                        handleMenuLeave();
-                      } else {
-                        handleMenuHover(menuKey);
-                      }
-                    }}
-                    className={`nav-link h-full flex items-center transition-colors focus:outline-none whitespace-nowrap ${
-                      activeMegaMenu === menuKey || isMenuKeyActive(menuKey, pathname) ? "text-[#f15a24]" : "text-slate-900 hover:text-[#f15a24]"
-                    }`}
+              {Object.keys(menuData).map((menuKey) => {
+                const isDropdown = !["partners", "arcade", "company"].includes(menuKey);
+                const hrefMap = {
+                  partners: "/partners",
+                  arcade: "/cyber-arcade",
+                  company: "/about"
+                };
+
+                return (
+                  <li
+                    key={menuKey}
+                    className="h-full flex items-center"
                   >
-                    {menuKey === "arcade" && <IoGameController className="text-lg text-[#f15a24]" />}
-                    {menuData[menuKey].title}
-                    <FiChevronDown className={`text-xs transition-transform duration-200 ${
-                      activeMegaMenu === menuKey ? "rotate-180" : ""
-                    } ${
-                      activeMegaMenu === menuKey || isMenuKeyActive(menuKey, pathname) ? "text-[#f15a24]" : "text-slate-400"
-                    }`} />
-                  </button>
-                </li>
-              ))}
+                    {isDropdown ? (
+                      <button 
+                        onClick={() => {
+                          if (activeMegaMenu === menuKey) {
+                            handleMenuLeave();
+                          } else {
+                            handleMenuHover(menuKey);
+                          }
+                        }}
+                        className={`nav-link h-full flex items-center transition-colors focus:outline-none whitespace-nowrap ${
+                          activeMegaMenu === menuKey || isMenuKeyActive(menuKey, pathname) ? "text-[#f15a24]" : "text-slate-900 hover:text-[#f15a24]"
+                        }`}
+                      >
+                        {menuData[menuKey].title}
+                        <FiChevronDown className={`text-xs transition-transform duration-200 ${
+                          activeMegaMenu === menuKey ? "rotate-180" : ""
+                        } ${
+                          activeMegaMenu === menuKey || isMenuKeyActive(menuKey, pathname) ? "text-[#f15a24]" : "text-slate-400"
+                        }`} />
+                      </button>
+                    ) : (
+                      <Link
+                        href={hrefMap[menuKey]}
+                        className={`nav-link h-full flex items-center transition-colors whitespace-nowrap ${
+                          pathname === hrefMap[menuKey] ? "text-[#f15a24]" : "text-slate-900 hover:text-[#f15a24]"
+                        }`}
+                      >
+                        {menuKey === "arcade" && <IoGameController className="text-lg text-[#f15a24] mr-1" />}
+                        {menuData[menuKey].title}
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
 
             {/* Sticky Conversion Area */}
@@ -1891,169 +1911,187 @@ const Header = () => {
             {Object.keys(menuData).map((menuKey) => {
               const menu = menuData[menuKey];
               const isMenuOpen = mobileActiveMenu === menuKey;
+              const isDropdown = !["partners", "arcade", "company"].includes(menuKey);
+              const hrefMap = {
+                partners: "/partners",
+                arcade: "/cyber-arcade",
+                company: "/about"
+              };
 
               return (
                 <div key={menuKey} className="border-b border-slate-100 pb-2">
-                  <button 
-                    onClick={() => toggleMobileMenu(menuKey)}
-                    className="w-full flex items-center justify-between text-left text-slate-800 text-base font-extrabold py-2 focus:outline-none"
-                  >
-                    <span className={isMenuOpen ? "text-[#f15a24]" : ""}>{menu.title}</span>
-                    <FiChevronDown className={`transform transition-transform duration-300 ${isMenuOpen ? "rotate-180 text-[#f15a24]" : "text-slate-400"}`} />
-                  </button>
+                  {isDropdown ? (
+                    <>
+                      <button 
+                        onClick={() => toggleMobileMenu(menuKey)}
+                        className="w-full flex items-center justify-between text-left text-slate-800 text-base font-extrabold py-2 focus:outline-none"
+                      >
+                        <span className={isMenuOpen ? "text-[#f15a24]" : ""}>{menu.title}</span>
+                        <FiChevronDown className={`transform transition-transform duration-300 ${isMenuOpen ? "rotate-180 text-[#f15a24]" : "text-slate-400"}`} />
+                      </button>
 
-                  <div className={`transition-all duration-300 overflow-hidden ${isMenuOpen ? "max-h-[1200px] opacity-100 mt-2 pl-3 border-l-2 border-[#f15a24]/20" : "max-h-0 opacity-0"}`}>
-                    <div className="space-y-4 py-2">
-                      {menu.tabs.map((tab) => {
-                        const isSubTabOpen = mobileActiveSubTab === tab.id;
-                        return (
-                          <div key={tab.id} className="space-y-2">
-                            <div className="w-full flex items-center justify-between text-left text-[14px] font-bold text-slate-700">
-                              {tab.href ? (
-                                <Link 
-                                  href={tab.href}
-                                  onClick={() => setShowMenu(false)}
-                                  className="flex items-center gap-2 py-2 flex-grow focus:outline-none"
-                                >
-                                  <tab.icon className="text-[#f15a24] text-xs" />
-                                  {tab.label}
-                                </Link>
-                              ) : (
-                                <button
-                                  onClick={() => toggleMobileSubTab(tab.id)}
-                                  className="flex items-center gap-2 py-2 flex-grow focus:outline-none text-left"
-                                >
-                                  <tab.icon className="text-[#f15a24] text-xs" />
-                                  {tab.label}
-                                </button>
-                              )}
-                              <button 
-                                onClick={() => toggleMobileSubTab(tab.id)}
-                                className="p-2 pr-0 pl-4 focus:outline-none flex items-center justify-center"
-                              >
-                                <FiChevronDown className={`transform transition-transform duration-300 text-lg ${isSubTabOpen ? "rotate-180" : ""}`} />
-                              </button>
-                            </div>
+                      <div className={`transition-all duration-300 overflow-hidden ${isMenuOpen ? "max-h-[1200px] opacity-100 mt-2 pl-3 border-l-2 border-[#f15a24]/20" : "max-h-0 opacity-0"}`}>
+                        <div className="space-y-4 py-2">
+                          {menu.tabs.map((tab) => {
+                            const isSubTabOpen = mobileActiveSubTab === tab.id;
+                            return (
+                              <div key={tab.id} className="space-y-2">
+                                <div className="w-full flex items-center justify-between text-left text-[14px] font-bold text-slate-700">
+                                  {tab.href ? (
+                                    <Link 
+                                      href={tab.href}
+                                      onClick={() => setShowMenu(false)}
+                                      className="flex items-center gap-2 py-2 flex-grow focus:outline-none"
+                                    >
+                                      <tab.icon className="text-[#f15a24] text-xs" />
+                                      {tab.label}
+                                    </Link>
+                                  ) : (
+                                    <button
+                                      onClick={() => toggleMobileSubTab(tab.id)}
+                                      className="flex items-center gap-2 py-2 flex-grow focus:outline-none text-left"
+                                    >
+                                      <tab.icon className="text-[#f15a24] text-xs" />
+                                      {tab.label}
+                                    </button>
+                                  )}
+                                  <button 
+                                    onClick={() => toggleMobileSubTab(tab.id)}
+                                    className="p-2 pr-0 pl-4 focus:outline-none flex items-center justify-center"
+                                  >
+                                    <FiChevronDown className={`transform transition-transform duration-300 text-lg ${isSubTabOpen ? "rotate-180" : ""}`} />
+                                  </button>
+                                </div>
 
-                            <div className={`transition-all duration-300 overflow-hidden pl-4 ${isSubTabOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"}`}>
-                              <ul className="space-y-3 py-1 border-l border-slate-100 pl-3">
-                                {tab.groups ? (
-                                  tab.groups.map((group, gIdx) => (
-                                    <div key={gIdx} className="space-y-2 pt-2 first:pt-0">
-                                      <h5 className="text-[11px] font-extrabold text-[#f15a24] uppercase tracking-wider pl-1">
-                                        {group.name}
-                                      </h5>
-                                      <ul className="space-y-3 border-l border-slate-100 pl-3">
-                                        {group.cells.map((cell, idx) => {
-                                          const isCellPlaceholder = !cell.href || cell.href === "#";
-                                          return (
-                                            <li key={idx} className="block py-1">
-                                              {isCellPlaceholder ? (
-                                                <span className="text-slate-700 text-xs font-bold block">
-                                                  {cell.name}
-                                                </span>
-                                              ) : (
-                                                <Link 
-                                                  href={cell.href} 
-                                                  onClick={() => setShowMenu(false)}
-                                                  className="text-[#f15a24] hover:text-orange-600 text-xs font-bold inline-flex items-center gap-1 transition-colors"
-                                                >
-                                                  {cell.name}
-                                                  <FiArrowRight className="text-[10px]" />
-                                                </Link>
-                                              )}
-                                              {cell.desc && (
-                                                isCellPlaceholder ? (
-                                                  <p className="text-[10px] text-slate-400 font-medium leading-tight mt-0.5">
-                                                    {cell.desc}
-                                                  </p>
-                                                ) : (
-                                                  <Link
-                                                    href={cell.href}
-                                                    onClick={() => setShowMenu(false)}
-                                                    className="text-[10px] text-slate-400 font-medium leading-tight block mt-0.5 hover:text-[#f15a24]"
-                                                  >
-                                                    {cell.desc}
-                                                  </Link>
-                                                )
-                                              )}
-                                            </li>
-                                          );
-                                        })}
-                                      </ul>
-                                    </div>
-                                  ))
-                                ) : (
-                                  tab.cells && tab.cells.map((cell, idx) => {
-                                    const isCellPlaceholder = !cell.href || cell.href === "#";
-                                    return (
-                                      <li key={idx} className="block py-1">
-                                        {isCellPlaceholder ? (
-                                          <span className="text-slate-700 text-xs font-bold block">
-                                            {cell.name}
-                                          </span>
-                                        ) : (
-                                          <Link 
-                                            href={cell.href} 
-                                            onClick={() => setShowMenu(false)}
-                                            className="text-[#f15a24] hover:text-orange-600 text-xs font-bold inline-flex items-center gap-1 transition-colors"
-                                          >
-                                            {cell.name}
-                                            <FiArrowRight className="text-[10px]" />
-                                          </Link>
-                                        )}
-                                        
-                                        {cell.desc && (
-                                          isCellPlaceholder ? (
-                                            <p className="text-[10px] text-slate-400 font-medium leading-tight mt-0.5">
-                                              {cell.desc}
-                                            </p>
-                                          ) : (
-                                            <Link
-                                              href={cell.href}
-                                              onClick={() => setShowMenu(false)}
-                                              className="text-[10px] text-slate-400 font-medium leading-tight block mt-0.5 hover:text-[#f15a24]"
-                                            >
-                                              {cell.desc}
-                                            </Link>
-                                          )
-                                        )}
-
-                                        {cell.chips && (
-                                          <div className="mt-2 flex flex-wrap gap-1.5">
-                                            {cell.chips.map((chip, i) => {
-                                              const chipClass = "text-[10.5px] font-bold border rounded bg-slate-50 text-slate-500 border-slate-100 px-1.5 py-0.5";
-                                              if (chip.href) {
-                                                return (
-                                                  <Link 
-                                                    key={i}
-                                                    href={chip.href}
-                                                    onClick={() => setShowMenu(false)}
-                                                    className={chipClass}
-                                                  >
-                                                    {chip.label}
-                                                  </Link>
-                                                );
-                                              }
+                                <div className={`transition-all duration-300 overflow-hidden pl-4 ${isSubTabOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"}`}>
+                                  <ul className="space-y-3 py-1 border-l border-slate-100 pl-3">
+                                    {tab.groups ? (
+                                      tab.groups.map((group, gIdx) => (
+                                        <div key={gIdx} className="space-y-2 pt-2 first:pt-0">
+                                          <h5 className="text-[11px] font-extrabold text-[#f15a24] uppercase tracking-wider pl-1">
+                                            {group.name}
+                                          </h5>
+                                          <ul className="space-y-3 border-l border-slate-100 pl-3">
+                                            {group.cells.map((cell, idx) => {
+                                              const isCellPlaceholder = !cell.href || cell.href === "#";
                                               return (
-                                                <span key={i} className={chipClass}>
-                                                  {chip.label}
-                                                </span>
+                                                <li key={idx} className="block py-1">
+                                                  {isCellPlaceholder ? (
+                                                    <span className="text-slate-700 text-xs font-bold block">
+                                                      {cell.name}
+                                                    </span>
+                                                  ) : (
+                                                    <Link 
+                                                      href={cell.href} 
+                                                      onClick={() => setShowMenu(false)}
+                                                      className="text-[#f15a24] hover:text-orange-600 text-xs font-bold inline-flex items-center gap-1 transition-colors"
+                                                    >
+                                                      {cell.name}
+                                                      <FiArrowRight className="text-[10px]" />
+                                                    </Link>
+                                                  )}
+                                                  {cell.desc && (
+                                                    isCellPlaceholder ? (
+                                                      <p className="text-[10px] text-slate-400 font-medium leading-tight mt-0.5">
+                                                        {cell.desc}
+                                                      </p>
+                                                    ) : (
+                                                      <Link
+                                                        href={cell.href}
+                                                        onClick={() => setShowMenu(false)}
+                                                        className="text-[10px] text-slate-400 font-medium leading-tight block mt-0.5 hover:text-[#f15a24]"
+                                                      >
+                                                        {cell.desc}
+                                                      </Link>
+                                                    )
+                                                  )}
+                                                </li>
                                               );
                                             })}
-                                          </div>
-                                        )}
-                                      </li>
-                                    );
-                                  })
-                                )}
-                              </ul>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
+                                          </ul>
+                                        </div>
+                                      ))
+                                    ) : (
+                                      tab.cells && tab.cells.map((cell, idx) => {
+                                        const isCellPlaceholder = !cell.href || cell.href === "#";
+                                        return (
+                                          <li key={idx} className="block py-1">
+                                            {isCellPlaceholder ? (
+                                              <span className="text-slate-700 text-xs font-bold block">
+                                                {cell.name}
+                                              </span>
+                                            ) : (
+                                              <Link 
+                                                href={cell.href} 
+                                                onClick={() => setShowMenu(false)}
+                                                className="text-[#f15a24] hover:text-orange-600 text-xs font-bold inline-flex items-center gap-1 transition-colors"
+                                              >
+                                                {cell.name}
+                                                <FiArrowRight className="text-[10px]" />
+                                              </Link>
+                                            )}
+                                            
+                                            {cell.desc && (
+                                              isCellPlaceholder ? (
+                                                <p className="text-[10px] text-slate-400 font-medium leading-tight mt-0.5">
+                                                  {cell.desc}
+                                                </p>
+                                              ) : (
+                                                <Link
+                                                  href={cell.href}
+                                                  onClick={() => setShowMenu(false)}
+                                                  className="text-[10px] text-slate-400 font-medium leading-tight block mt-0.5 hover:text-[#f15a24]"
+                                                >
+                                                  {cell.desc}
+                                                </Link>
+                                              )
+                                            )}
+
+                                            {cell.chips && (
+                                              <div className="mt-2 flex flex-wrap gap-1.5">
+                                                {cell.chips.map((chip, i) => {
+                                                  const chipClass = "text-[10.5px] font-bold border rounded bg-slate-50 text-slate-500 border-slate-100 px-1.5 py-0.5";
+                                                  if (chip.href) {
+                                                    return (
+                                                      <Link 
+                                                        key={i}
+                                                        href={chip.href}
+                                                        onClick={() => setShowMenu(false)}
+                                                        className={chipClass}
+                                                      >
+                                                        {chip.label}
+                                                      </Link>
+                                                    );
+                                                  }
+                                                  return (
+                                                    <span key={i} className={chipClass}>
+                                                      {chip.label}
+                                                    </span>
+                                                  );
+                                                })}
+                                              </div>
+                                            )}
+                                          </li>
+                                        );
+                                      })
+                                    )}
+                                  </ul>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <Link
+                      href={hrefMap[menuKey]}
+                      onClick={() => setShowMenu(false)}
+                      className="w-full flex items-center justify-between text-left text-slate-800 text-base font-extrabold py-2 focus:outline-none"
+                    >
+                      <span className={pathname === hrefMap[menuKey] ? "text-[#f15a24]" : ""}>{menu.title}</span>
+                    </Link>
+                  )}
                 </div>
               );
             })}
