@@ -5,6 +5,7 @@
 const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ["swiper"],
+  output: "export",
   images: {
     unoptimized: true,
     remotePatterns: [
