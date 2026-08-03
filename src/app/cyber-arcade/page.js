@@ -8,6 +8,11 @@ export default function CyberArcadePage() {
   const containerRef = useRef(null);
 
   useEffect(() => {
+    // Temporarily fix body overflow issue that breaks position: sticky across modern browsers
+    if (typeof document !== 'undefined') {
+      document.body.classList.remove('overflow-x-hidden');
+    }
+
     let mounted = true;
     let animationFrameId = null;
 
@@ -385,6 +390,9 @@ export default function CyberArcadePage() {
 
     return () => {
       mounted = false;
+      if (typeof document !== 'undefined') {
+        document.body.classList.add('overflow-x-hidden');
+      }
       if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
       }

@@ -268,7 +268,7 @@ const Challenges = ({ challenges }) => {
   };
 
   return (
-    <section className="section bg-body pt-10 pb-16 md:py-32 border-b border-border">
+    <section className="section challenges-section bg-body pt-6 pb-16 md:pt-16 md:pb-32 border-b border-border">
       <div className="container">
         <div className="row items-center">
           <div className="col-12 xl:col-5 mb-8 xl:mb-0 px-4 sm:px-6 md:px-8 xl:px-12">

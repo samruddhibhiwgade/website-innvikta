@@ -4,8 +4,14 @@
 // Trigger compilation refresh for final vector layout update
 
 html {
-  scroll-behavior: smooth;
-  scrollbar-gutter: stable;
+  scroll-behavior: auto;
+  overflow-x: clip !important;
+  overflow-y: auto !important;
+}
+
+body {
+  overflow-x: clip !important;
+  overflow-y: visible !important;
 }
 
 @layer base {

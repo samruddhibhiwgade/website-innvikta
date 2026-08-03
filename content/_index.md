@@ -2,7 +2,7 @@
 banner:
   title: "Turn Human Risk into <br /> <span class='text-primary'>Human Strength</span>"
   description: "Innvikta helps enterprises build safer employee behaviour through phishing simulations, gamified learning, AI-powered training journeys, and human risk visibility for security leaders."
-  image: /images/home-page-dashboard-img.png
+  image: "/images/home page dashboard 6.png"
   link:
     label: Book a Demo
     href: "/book-demo"

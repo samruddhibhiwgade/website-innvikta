@@ -18,14 +18,16 @@ const Home = async () => {
     frontmatter;
   return (
     <GSAPWrapper>
-      <SeoMeta title="Innvikta | Security Awareness Training & Phishing Simulation" />
-      <HomeBanner banner={banner} brands={brands} />
-      <Challenges challenges={challenges} />
-      <ShortIntro intro={intro} />
-      <SpecialFeatures speciality={speciality} />
-      <Testimonial testimonial={testimonial} />
-      {free_tier?.enable && <FreeTierCta data={free_tier} />}
-      <Cta fullWidth={true} />
+      <div className="homepage-wrapper">
+        <SeoMeta title="Innvikta | Security Awareness Training & Phishing Simulation" />
+        <HomeBanner banner={banner} brands={brands} />
+        <Challenges challenges={challenges} />
+        <ShortIntro intro={intro} />
+        <SpecialFeatures speciality={speciality} />
+        <Testimonial testimonial={testimonial} />
+        {free_tier?.enable && <FreeTierCta data={free_tier} />}
+        <Cta fullWidth={true} />
+      </div>
     </GSAPWrapper>
   );
 };

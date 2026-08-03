@@ -11,7 +11,7 @@ function Cta({ fullWidth = false }) {
 
   if (fullWidth) {
     return (
-      <section className="cta section relative overflow-hidden bg-[#fff7f3] py-24 md:py-32 text-center">
+      <section className="cta-section cta section relative overflow-hidden bg-[#fff7f3] py-24 md:py-32 text-center">
         {/* Decorative Circles */}
         <div className="absolute inset-0 w-full h-full pointer-events-none -z-10">
           <Circle
@@ -68,7 +68,7 @@ function Cta({ fullWidth = false }) {
   }
 
   return (
-    <section className="cta section pt-24 md:pt-32">
+    <section className="cta-section cta section pt-24 md:pt-32">
       <div className="container-xl">
         <div className="section relative px-4 text-center">
           <div className="animate">

@@ -161,7 +161,7 @@ const FreeTierCta = ({ data }) => {
   ];
 
   return (
-    <section className="section py-24 md:py-32 relative overflow-hidden bg-[#fafafa]">
+    <section className="section free-tier-section py-24 md:py-32 relative overflow-hidden bg-[#fafafa]">
       {/* Background Decor */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none -z-10">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-orange-500/5 blur-[120px] rounded-full" />

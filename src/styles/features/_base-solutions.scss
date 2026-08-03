@@ -75,8 +75,7 @@
     color: var(--color-black-text);
     background-color: var(--color-white);
     line-height: 1.5;
-    overflow-x: hidden;
-    scrollbar-gutter: stable;
+    overflow: visible;
     -webkit-font-smoothing: antialiased;
 
     * {

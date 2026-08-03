@@ -23,6 +23,7 @@ const Chatbot = () => {
   ]);
   
   const messagesEndRef = useRef(null);
+  const chatContainerRef = useRef(null);
 
   // Synthesize notification sound using Web Audio API
   const playPopSound = () => {
@@ -184,7 +185,9 @@ const Chatbot = () => {
     if (messages.length > 1 && messages[messages.length - 1].sender === "bot") {
       playPopSound();
     }
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
   }, [messages, isTyping, isOpen]);
 
   // Determine if chatbot should be hidden on current page
@@ -749,7 +752,7 @@ const Chatbot = () => {
         </div>
 
         {/* Messages Area */}
-        <div className="flex-1 p-3.5 overflow-y-auto bg-slate-50 space-y-3 no-scrollbar">
+        <div ref={chatContainerRef} className="flex-1 p-3.5 overflow-y-auto bg-slate-50 space-y-3 no-scrollbar">
           {messages.map((msg, index) => (
             <div 
               key={index} 

@@ -40,7 +40,7 @@ export default function PlatformUpdatesPage() {
   return (
     <GSAPWrapper>
       <SeoMeta title="Platform Updates & Changelog | Innvikta" description="Stay up to date with the latest features, enhancements, and security training modules on the Innvikta platform." />
-      <div className="min-h-screen w-full overflow-x-hidden pb-16">
+      <div className="min-h-screen w-full overflow-x-clip pb-16">
         
         {/* ================= HEADER SECTION ================= */}
         <section className="pt-32 pb-24 bg-gradient-to-br from-[#f15a24] to-[#df4b17] relative overflow-hidden border-b border-[#e24e1b] mb-16 text-white">

@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const SpecialFeatures = ({ speciality }) => {
   return (
-    <section className="section pt-20 pb-10 md:py-32 overflow-hidden">
+    <section className="section special-features-section pt-20 pb-10 md:py-32 overflow-hidden">
       <div className="container">
         {/* Main Section Heading - H1, Branded Orange */}
         <div className="row justify-center text-center mb-8 md:mb-10">

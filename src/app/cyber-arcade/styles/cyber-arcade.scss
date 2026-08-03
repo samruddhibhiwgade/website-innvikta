@@ -1,17 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Barlow+Condensed:wght@700;800;900&display=swap');
 
-html:has(.cyber-arcade-scope) {
-  scroll-behavior: auto !important;
-}
+html:has(.cyber-arcade-scope),
 body:has(.cyber-arcade-scope) {
+  scroll-behavior: auto !important;
   background: #0a0a0a !important;
   color: #ffffff !important;
-  overflow-x: hidden !important;
+  
+  /* CRITICAL: Any overflow other than 'visible' on html/body breaks position: sticky! */
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+}
 
-  footer {
-    position: relative !important;
-    z-index: 99 !important;
-  }
+body:has(.cyber-arcade-scope) footer {
+  position: relative !important;
+  z-index: 99 !important;
 }
 
 .cyber-arcade-scope {

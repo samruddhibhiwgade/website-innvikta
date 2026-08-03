@@ -2,12 +2,19 @@
 
 import SeoMeta from "@layouts/partials/SeoMeta";
 import React, { useState, useEffect, useRef } from "react";
-import { FiArrowRight, FiFileText, FiImage, FiMonitor, FiLayers, FiPlay, FiSmile, FiShield, FiLock, FiAlertTriangle, FiCheck, FiBriefcase, FiX, FiUser, FiMail, FiPhone } from "react-icons/fi";
+import { FiArrowRight, FiFileText, FiImage, FiMonitor, FiLayers, FiPlay, FiSmile, FiShield, FiLock, FiAlertTriangle, FiCheck, FiBriefcase, FiX, FiUser, FiMail, FiPhone, FiInfo } from "react-icons/fi";
 import GSAPWrapper from "@layouts/components/GSAPWrapper";
 import { gsap } from "@lib/gsap";
 import Link from "next/link";
 import SuccessPopup from "../../../layouts/partials/SuccessPopup";
 import "../../../styles/features/cybersecurity-awareness-month.scss";
+
+const InfoTooltip = ({ content }) => (
+  <span className="tooltip-wrapper">
+    <FiInfo className="feat-icon icon-info" />
+    <span className="tooltip-content">{content}</span>
+  </span>
+);
 
 export default function CyberAwarenessMonthCampaignPage() {
   const containerRef = useRef(null);
@@ -198,7 +205,7 @@ export default function CyberAwarenessMonthCampaignPage() {
     <GSAPWrapper>
       <SeoMeta title="Cyber Champion Quest 2026 | Cybersecurity Awareness Month | Innvikta" description="Join the Cybersecurity Awareness Month 2026 — The Cyber Champion Quest. 5 weeks of immersive, gamified learning designed to transform security habits." />
 
-      <div className="cyber-campaign-page min-h-screen w-full overflow-x-hidden" ref={containerRef}>
+      <div className="cyber-campaign-page min-h-screen w-full" ref={containerRef}>
         
         {/* ================= HERO SECTION ================= */}
         <section className="hero" id="home">
@@ -218,6 +225,8 @@ export default function CyberAwarenessMonthCampaignPage() {
                 <em>Champion</em> Quest
               </h1>
 
+              <p className="hero-tagline">Turn Awareness Into Action</p>
+
               <p className="hero-body">
                 Five weeks of immersive, gamified learning designed to transform how your team thinks about security. From awareness to action, permanently.
               </p>
@@ -233,7 +242,7 @@ export default function CyberAwarenessMonthCampaignPage() {
             <div 
               className="hero-right animate from-right"
               style={{
-                backgroundImage: "url('/images/cybermonth-heroimage.png')",
+                backgroundImage: "url('/images/cyber-img.png')",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center right",
                 backgroundSize: "contain",
@@ -332,7 +341,7 @@ export default function CyberAwarenessMonthCampaignPage() {
                 <div className="offering-index">02</div>
                 <div className="offering-line"></div>
                 <h3 className="offering-title">Four Gamified Security Challenges</h3>
-                <p className="offering-desc">AI ScamJam, Phish or Real, Inbox Detective, and Escape the Breach. Competitive, scored, and genuinely engaging.</p>
+                <p className="offering-desc">AI Challenge, Phishing Challenge, Inbox Detective, and Escape the Breach. Competitive, scored, and genuinely engaging.</p>
                 <div className="offering-tag">4 games · Competitive</div>
               </div>
 
@@ -539,13 +548,13 @@ export default function CyberAwarenessMonthCampaignPage() {
                     <div className="panel-overline">Week Two</div>
                     <h3 className="panel-title">Play</h3>
                     <p className="panel-tagline">Make learning stick. Outsmart the scammers.</p>
-                    <p className="panel-body">Gamified challenges that turn knowledge into instinct. The AI ScamJam puts your team face-to-face with real AI-generated scam scenarios in real time — building threat-recognition reflexes that passive training never could.</p>
+                    <p className="panel-body">Gamified challenges that turn knowledge into instinct. The AI Challenge puts your team face-to-face with real AI-generated scam scenarios in real time — building threat-recognition reflexes that passive training never could.</p>
                     <a href="#register" className="btn btn--primary">Join the Game</a>
                   </div>
                   <div className="panel-right">
                     <div className="panel-featured panel-featured--green">
                       <div className="featured-eyebrow">Flagship Game</div>
-                      <div className="featured-title">AI ScamJam</div>
+                      <div className="featured-title">AI Challenge</div>
                       <p className="featured-desc">Spot AI-generated scams in real time before they trick your team. Scored, timed, competitive.</p>
                     </div>
                     <div className="deliverables-grid" style={{ marginTop: "16px" }}>
@@ -576,7 +585,7 @@ export default function CyberAwarenessMonthCampaignPage() {
                   <div className="panel-right">
                     <div className="panel-featured panel-featured--purple">
                       <div className="featured-eyebrow">Flagship Game</div>
-                      <div className="featured-title">Phish or Real</div>
+                      <div className="featured-title">Phishing Challenge</div>
                       <p className="featured-desc">Real-time decisions on live-style email scenarios. Zero hints. Just your judgment.</p>
                     </div>
                     <div className="dept-tags">
@@ -623,6 +632,255 @@ export default function CyberAwarenessMonthCampaignPage() {
                 </div>
               </div>
 
+            </div>
+          </div>
+        </section>
+
+        {/* ================= PACKAGES ================= */}
+        <section className="section packages-section" id="packages">
+          <div className="container packages-container">
+            {/* Left Side: Proper Heading & Related Campaign Data */}
+            <div className="packages-left animate">
+              <div className="section-label">Pricing & Packages</div>
+              <h2 className="section-heading" style={{ marginTop: "8px" }}>
+                Choose the Perfect Plan for Your Team
+              </h2>
+              <p className="section-subtitle" style={{ fontSize: "14px", marginTop: "12px", color: "var(--text-secondary)" }}>
+                Select the package that fits your organisation's scale and campaign requirements. Get access to premium resources designed to elevate your security culture.
+              </p>
+
+              {/* Related Data / Trust points */}
+              <div className="packages-trust-info">
+                <div className="trust-item">
+                  <span className="trust-icon">✓</span>
+                  <div>
+                    <h4>Ready-to-Deploy Campaign Kit</h4>
+                    <p>Save time with pre-built calendars, emails, posters, and comics designed to launch instantly.</p>
+                  </div>
+                </div>
+                <div className="trust-item">
+                  <span className="trust-icon">✓</span>
+                  <div>
+                    <h4>Engaging Challenges</h4>
+                    <p>Drive high engagement with interactive AI and Phishing Challenges that test real threat-recognition skills.</p>
+                  </div>
+                </div>
+                <div className="trust-item">
+                  <span className="trust-icon">✓</span>
+                  <div>
+                    <h4>No Platform Setup Required</h4>
+                    <p>Access and download everything immediately to launch your campaign without complex configuration.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Side: Free & Premium Cards */}
+            <div className="packages-right animate">
+              <div className="packages-grid">
+                {/* Free Card */}
+                <div className="package-card package-card--free">
+                  <div className="package-card-body">
+                    <div className="package-card-header">
+                      <div className="package-icon-wrapper">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="#f15a24" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </div>
+                      <h3 className="package-title">Free</h3>
+                      <p className="package-subtitle">Essential resources to kickstart your Cyber Awareness Month.</p>
+                    </div>
+                    
+                    <ul className="package-features">
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>Campaign Calendar</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>Teaser</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>Launch Emailer</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>4 Weekly Mailers</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>InSAT Access (1 Month)</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>10-Min Awareness Module</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>3 Posters</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>3 Comics</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>AI Challenge</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>Phishing Challenge (Department-wise)</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>Support</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>Certificate of Completion</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <a href="#register" className="btn--quote">Register for the Campaign</a>
+                </div>
+                
+                {/* Premium Card */}
+                <div className="package-card package-card--premium">
+                  <div className="package-card-body">
+                    <div className="package-card-header">
+                      <div className="package-icon-wrapper">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M9 2L1 14H8L7 22L15 10H9L9 2Z" fill="#f15a24" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M9 2L1 14H8L7 22L15 10H9L9 2Z" fill="#f15a24" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" transform="translate(6, 0)"/>
+                        </svg>
+                      </div>
+                      <h3 className="package-title">Premium</h3>
+                      <p className="package-subtitle">Advanced content and engagement for maximum impact.</p>
+                    </div>
+                    
+                    <ul className="package-features">
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>Campaign Calendar</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>Teaser</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>Launch Emailer</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>8 Weekly Mailers</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>InSAT Access (1 Month)</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>10-Min Awareness Module</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>3 Posters + Premium Module Posters</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>3 flipbook comics</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>AI Challenge</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>Phishing Challenge (Department-wise)</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>5 Microlearning Videos</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>Arcade Access + 5 Arcade Games</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>Game Analytics</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>Support</span>
+                      </li>
+                      <li className="feature-item">
+                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span>Certificate of Completion</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <a href="#register" className="btn--quote">Register for the Campaign</a>
+                </div>
+              </div>
             </div>
           </div>
         </section>

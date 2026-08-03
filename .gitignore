@@ -46,3 +46,10 @@ scratch_ssh/node_modules/
 
 # User uploads
 /Cyberhelp_Innvikta/server/uploads/
+
+# Temp images and backup files
+temp_images_insat/
+/low poly steam deck copy.glb
+/low poly steam deck vf.zip
+/url_redirects_mapping.json
+/url_redirects_mapping.txt
