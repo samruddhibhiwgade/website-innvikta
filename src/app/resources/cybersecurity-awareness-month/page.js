@@ -641,7 +641,7 @@ export default function CyberAwarenessMonthCampaignPage() {
           <div className="container packages-container">
             {/* Left Side: Proper Heading & Related Campaign Data */}
             <div className="packages-left animate">
-              <div className="section-label">Pricing & Packages (Cyber Awareness Month Only)</div>
+              <div className="section-label">Cyber Awareness Month Pricing & Packages</div>
               <h2 className="section-heading" style={{ marginTop: "8px" }}>
                 Choose the Perfect Plan for Your Team
               </h2>
