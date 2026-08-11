@@ -646,7 +646,7 @@ export default function CyberAwarenessMonthCampaignPage() {
                 Choose the Perfect Plan for Your Team
               </h2>
               <p className="section-subtitle" style={{ fontSize: "14px", marginTop: "12px", color: "var(--text-secondary)" }}>
-                Select the package that fits your organisation's scale and campaign requirements. Get access to premium resources designed to elevate your security culture.
+                Select the package that fits your organisation's scale and campaign requirements. Get access to premium resources designed to elevate your security culture. <strong style={{ color: "#f15a24" }}>(Only for Cyber Awareness Month)</strong>
               </p>
 
               {/* Related Data / Trust points */}
