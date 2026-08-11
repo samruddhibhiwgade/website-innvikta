@@ -1385,8 +1385,8 @@ const Header = () => {
           <div className="container-xl h-full flex items-center justify-between text-[13px] font-bold text-white/90">
             <div className="flex items-center gap-2 flex-nowrap min-w-0">
               <span className="bg-white/20 text-white border border-white/30 font-extrabold px-2 py-0.5 rounded text-[11px] uppercase tracking-wider shrink-0">NEW</span>
-              <Link href="#" className="hover:text-white transition-colors flex items-center gap-1 whitespace-nowrap">
-                InSAT Platform Release 2026: Human Behavior Analytics <FiArrowRight className="text-[12px] shrink-0" />
+              <Link href="/resources/cybersecurity-awareness-month" className="hover:text-white transition-colors flex items-center gap-1 whitespace-nowrap">
+                Get Ready for Cybersecurity Awareness Month 2026 <FiArrowRight className="text-[12px] shrink-0" />
               </Link>
             </div>
 
@@ -1401,32 +1401,6 @@ const Header = () => {
               >
                 <FiSearch className="text-[14px]" /> Search
               </button>
-              <span className="h-3 w-[1px] bg-white/30"></span>
- 
-              <div className="relative">
-                <button 
-                  onClick={() => setLangOpen(!langOpen)}
-                  onBlur={() => setTimeout(() => setLangOpen(false), 200)}
-                  className="hover:text-white transition-colors flex items-center gap-1 focus:outline-none"
-                >
-                  <FiGlobe className="text-[14px]" /> {selectedLang} <FiChevronDown className="text-[11px]" />
-                </button>
-                {langOpen && (
-                  <div className="absolute right-0 top-full mt-1.5 w-[140px] bg-slate-900 border border-slate-800 rounded-lg shadow-xl py-1 z-50 text-slate-400">
-                    {["English (US)", "Deutsch", "Français", "Español", "日本語"].map((lang, idx) => (
-                      <button 
-                        key={idx} 
-                        onClick={() => handleLanguageChange(lang)}
-                        className="w-full text-left px-3 py-1.5 hover:bg-slate-800 hover:text-white text-slate-400 font-semibold block transition-colors text-xs"
-                      >
-                        {lang}
-                      </button>
-                    ))}
-                  </div>
-                )}
-                {/* Global Google Translate Element */}
-                <div id="global_google_translate_element" style={{ position: 'absolute', top: '-9999px', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}></div>
-              </div>
             </div>
           </div>
         </div>
@@ -1485,7 +1459,7 @@ const Header = () => {
                       >
                         {filteredResults.length === 0 ? (
                           <div className="p-8 text-center text-slate-400 font-semibold">
-                            No results found for <span className="text-[#f15a24]">"{searchQuery}"</span>
+                            No results found for <span className="text-[#f15a24]">&quot;{searchQuery}&quot;</span>
                           </div>
                         ) : (
                           <div className="p-4 space-y-4 text-left">

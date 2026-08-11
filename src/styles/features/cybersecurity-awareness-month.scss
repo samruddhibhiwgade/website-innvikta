@@ -1601,9 +1601,9 @@
     .offerings-grid { grid-template-columns: 1fr; }
 
     .countdown-timer {
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       justify-content: center;
-      gap: var(--space-2);
+      gap: 6px;
     }
 
     .form-row { grid-template-columns: 1fr; }
@@ -1616,8 +1616,14 @@
     .hero-actions { flex-direction: column; }
     .hero-actions .btn { width: 100%; justify-content: center; }
     .hero-meta { gap: var(--space-4); }
-    .ctime-block { min-width: 68px; padding: 12px 14px; }
-    .ctime-num { font-size: 28px; }
+    .countdown-timer {
+      flex-wrap: nowrap;
+      gap: 4px;
+    }
+    .ctime-block { min-width: 58px; padding: 10px 8px; }
+    .ctime-num { font-size: 22px; }
+    .ctime-label { font-size: 9px; letter-spacing: 0.05em; }
+    .ctime-colon { font-size: 20px; padding-bottom: 12px; }
     .reg-form { padding: var(--space-5) var(--space-5) var(--space-6); }
   }
 
@@ -1773,28 +1779,53 @@
     color: #e5e7eb;
   }
 
+  .feature-item--free-included {
+    background: rgba(241, 90, 36, 0.12);
+    border: 1px dashed rgba(241, 90, 36, 0.4);
+    padding: 6px 10px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+
+  .package-card--premium .feature-item--free-included span {
+    color: var(--orange) !important;
+  }
+
   /* Card Header */
   .package-card-header {
     margin-bottom: var(--space-3);
     position: relative;
+    display: flex;
+    flex-direction: column;
   }
 
   .package-badge {
     position: absolute;
-    top: -2px;
+    top: 4px;
     right: 0;
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.05em;
-    color: var(--orange);
+    color: var(--white);
+    background-color: var(--orange);
+    padding: 4px 10px;
+    border-radius: 20px;
     text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .package-title-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
   }
 
   .package-icon-wrapper {
-    margin-bottom: var(--space-2);
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 0;
   }
 
   .package-title {
@@ -1802,7 +1833,7 @@
     font-size: 21px;
     font-weight: 800;
     line-height: 1.2;
-    margin-bottom: 2px;
+    margin-bottom: 0;
   }
   
   .package-card--free .package-title {
@@ -1840,6 +1871,13 @@
   .feature-item span {
     color: #374151;
     font-weight: 500;
+  }
+
+  .feature-detail {
+    font-size: 10px;
+    color: #9ca3af;
+    font-weight: 400;
+    margin-left: 4px;
   }
 
   .feature-icon-check {

@@ -682,12 +682,14 @@ export default function CyberAwarenessMonthCampaignPage() {
                 <div className="package-card package-card--free">
                   <div className="package-card-body">
                     <div className="package-card-header">
-                      <div className="package-icon-wrapper">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="#f15a24" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
+                      <div className="package-title-row">
+                        <div className="package-icon-wrapper">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="#f15a24" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </div>
+                        <h3 className="package-title">Free</h3>
                       </div>
-                      <h3 className="package-title">Free</h3>
                       <p className="package-subtitle">Essential resources to kickstart your Cyber Awareness Month.</p>
                     </div>
                     
@@ -738,12 +740,6 @@ export default function CyberAwarenessMonthCampaignPage() {
                         <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
-                        <span>3 Comics</span>
-                      </li>
-                      <li className="feature-item">
-                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
                         <span>AI Challenge</span>
                       </li>
                       <li className="feature-item">
@@ -774,52 +770,30 @@ export default function CyberAwarenessMonthCampaignPage() {
                 <div className="package-card package-card--premium">
                   <div className="package-card-body">
                     <div className="package-card-header">
-                      <div className="package-icon-wrapper">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M9 2L1 14H8L7 22L15 10H9L9 2Z" fill="#f15a24" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                          <path d="M9 2L1 14H8L7 22L15 10H9L9 2Z" fill="#f15a24" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" transform="translate(6, 0)"/>
-                        </svg>
+                      <div className="package-title-row">
+                        <div className="package-icon-wrapper">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 2L1 14H8L7 22L15 10H9L9 2Z" fill="#f15a24" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M9 2L1 14H8L7 22L15 10H9L9 2Z" fill="#f15a24" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" transform="translate(6, 0)"/>
+                          </svg>
+                        </div>
+                        <h3 className="package-title">Premium</h3>
                       </div>
-                      <h3 className="package-title">Premium</h3>
                       <p className="package-subtitle">Advanced content and engagement for maximum impact.</p>
                     </div>
                     
                     <ul className="package-features">
-                      <li className="feature-item">
+                      <li className="feature-item feature-item--free-included">
                         <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
-                        <span>Campaign Calendar</span>
+                        <span><strong>Everything in Free</strong></span>
                       </li>
                       <li className="feature-item">
                         <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
-                        <span>Teaser</span>
-                      </li>
-                      <li className="feature-item">
-                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                        <span>Launch Emailer</span>
-                      </li>
-                      <li className="feature-item">
-                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                        <span>8 Weekly Mailers</span>
-                      </li>
-                      <li className="feature-item">
-                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                        <span>InSAT Access (1 Month)</span>
-                      </li>
-                      <li className="feature-item">
-                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                        <span>10-Min Awareness Module</span>
+                        <span>8 Weekly Mailers <span className="feature-detail">(4 more than Free)</span></span>
                       </li>
                       <li className="feature-item">
                         <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -832,18 +806,6 @@ export default function CyberAwarenessMonthCampaignPage() {
                           <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                         <span>3 flipbook comics</span>
-                      </li>
-                      <li className="feature-item">
-                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                        <span>AI Challenge</span>
-                      </li>
-                      <li className="feature-item">
-                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                        <span>Phishing Challenge (Department-wise)</span>
                       </li>
                       <li className="feature-item">
                         <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -862,18 +824,6 @@ export default function CyberAwarenessMonthCampaignPage() {
                           <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                         <span>Game Analytics</span>
-                      </li>
-                      <li className="feature-item">
-                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                        <span>Support</span>
-                      </li>
-                      <li className="feature-item">
-                        <svg className="feature-icon-check" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                        <span>Certificate of Completion</span>
                       </li>
                     </ul>
                   </div>
